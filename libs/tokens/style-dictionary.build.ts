@@ -25,6 +25,12 @@ const swiftTargets = [
     path: `Sources/GdsColours`,
     resources: ['Resources'],
   },
+  {
+    name: 'GdsTypography',
+    dependencies: [],
+    path: 'Sources/GdsTypography',
+    resources: ['Resources'],
+  },
 ]
 const swiftSourcePath = 'Sources/' + swiftPackageName + '/'
 
@@ -362,6 +368,35 @@ const themes = {
               packageName: ['se.seb.gds.tokens'],
             },
           },
+          {
+            destination: 'Typography/GdsTypography.kt',
+            format: 'compose/typography',
+            filter: 'is-typography',
+            options: {
+              objectType: 'object',
+              className: 'GdsTypographyTokens',
+              import: [
+                'androidx.compose.ui.text.TextStyle',
+                'androidx.compose.ui.text.font.FontWeight',
+                'androidx.compose.ui.unit.sp',
+              ],
+              packageName: ['se.seb.gds.tokens'],
+            },
+          },
+          {
+            destination: 'Typography/GdsFont.kt',
+            format: 'compose/font',
+            filter: 'is-font-weight',
+            options: {
+              import: [
+                'androidx.compose.ui.text.font.Font',
+                'androidx.compose.ui.text.font.FontFamily',
+                'androidx.compose.ui.text.font.FontWeight',
+                'se.seb.gds.components.R',
+              ],
+              packageName: ['se.seb.gds.tokens'],
+            },
+          },
         ],
       },
       jvm: {
@@ -463,7 +498,7 @@ const themes = {
             destination: 'Sources/GdsKit/GdsKit.swift',
             format: 'green/ios-swift-gdskit',
             options: {
-              imports: ['GdsColours'],
+              imports: ['GdsColours', 'GdsTypography'],
             },
           },
           {
@@ -477,7 +512,7 @@ const themes = {
             filter: 'is-typography',
           },
         ],
-        actions: [`color-set-${colorScheme}`],
+        actions: [`color-set-${colorScheme}`, 'copy-ios-assets'],
       },
       figma: {
         buildPath: __dirname + `/../../dist/libs/tokens/${theme}/figma/`,

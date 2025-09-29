@@ -53,6 +53,7 @@ const groupByWeight = (tokens: Token[]) => {
     light: grouped[300],
   }
 }
+
 const validateTokens = (tokens: Token[]) => {
   tokens.forEach((token, idx) => {
     if (
@@ -79,7 +80,13 @@ import SwiftUI
 import UIKit
 
 public enum Typography {
-${allTokens.map((token: any) => `    case ${lowercaseFirstLetter(token.name.replace('sysText', ''))}`).join('\n')}
+${allTokens.map((token: any) => `   case ${lowercaseFirstLetter(token.name.replace('sysText', ''))}`).join('\n')}
+    public enum Weight {
+        case bold
+        case medium
+        case book
+        case regular
+    }
 }
 
 extension Typography {
@@ -91,7 +98,7 @@ ${allTokens.map((token: any) => `            case .${lowercaseFirstLetter(token.
 
     var textStyle: Font.TextStyle {
         switch self {
-${allTokens.map((token: any) => `            case ${lowercaseFirstLetter(token.name.replace('sysText', ''))}: .${token.attributes['ios-text-style']}`).join('\n')}
+${allTokens.map((token: any) => `            case .${lowercaseFirstLetter(token.name.replace('sysText', ''))}: .${token.attributes['ios-text-style']}`).join('\n')}
         }
     }
 
@@ -100,7 +107,7 @@ ${allTokens.map((token: any) => `            case ${lowercaseFirstLetter(token.n
 ${Object.entries(groupByWeight(allTokens))
   .map(([weight, arr]) =>
     arr.length
-      ? `       case ${arr.map((token: any) => lowercaseFirstLetter(token.name.replace('sysText', ''))).join(', ')}:
+      ? `       case ${arr.map((token: any) => `.${lowercaseFirstLetter(token.name.replace('sysText', ''))}`).join(', ')}:
             return .${weight}\n`
       : '',
   )
@@ -109,18 +116,5 @@ ${Object.entries(groupByWeight(allTokens))
 }
 
 extension Typography: CaseIterable {}
-
-#if DEBUG
-#Preview {
-    ScrollView {
-        ForEach(Typography.allCases, id: \.self) {
-            Text("\($0)")
-                .typography($0)
-                .padding(.bottom, 4)
-        }
-        .previewByRegisteringFonts()
-    }
-}
-#endif
 `
 }

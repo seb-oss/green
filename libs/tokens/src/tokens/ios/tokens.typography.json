@@ -337,7 +337,7 @@
           "lineHeight": 72
         },
         "attributes": {
-          "ios-text-style": "extraLargeTitle2"
+          "ios-text-style": "largeTitle"
         }
       },
       "display-l": {
@@ -349,7 +349,7 @@
           "lineHeight": 56
         },
         "attributes": {
-          "ios-text-style": "extraLargeTitle"
+          "ios-text-style": "largeTitle"
         }
       },
       "display-m": {
