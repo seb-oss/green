@@ -1,4 +1,5 @@
 import { localized, msg } from '@lit/localize'
+import { nothing } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
@@ -12,6 +13,7 @@ import {
 } from '../../utils/helpers/custom-element-scoping'
 import { isIOS } from '../../utils/helpers/platform'
 import {
+  withPaddingProps,
   withSizeXProps,
   withSizeYProps,
 } from '../../utils/mixins/declarative-layout-mixins'
@@ -19,7 +21,7 @@ import { GdsButton } from '../button/button.component'
 import { GdsCard } from '../card/card.component'
 import { GdsDiv } from '../div/div.component'
 import { GdsFlex } from '../flex/flex.component'
-import { IconCrossSmall } from '../icon/icons/cross-small.component'
+import { IconCrossLarge } from '../icon/icons/cross-large.component'
 import DialogStyles from './dialog.styles'
 import {
   lockBodyScrolling,
@@ -31,7 +33,6 @@ registerGlobalScrollLockStyles()
 
 /**
  * @element gds-dialog
- * @status beta
  *
  * @event gds-ui-state - Fired when the dialog is opened or closed. Can be cancelled to prevent the dialog from closing.
  * @event gds-close - Fired when the dialog is closed
@@ -40,12 +41,15 @@ registerGlobalScrollLockStyles()
  * @slot - The content of the dialog
  * @slot trigger - The trigger button for the dialog
  * @slot footer - The footer of the dialog
+ * @slot dialog - Complete override of the dialog content, including header and footer
  */
 @gdsCustomElement('gds-dialog', {
-  dependsOn: [GdsButton, GdsCard, GdsDiv, GdsFlex, IconCrossSmall],
+  dependsOn: [GdsButton, GdsCard, GdsDiv, GdsFlex, IconCrossLarge],
 })
 @localized()
-export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
+export class GdsDialog extends withSizeXProps(
+  withSizeYProps(withPaddingProps(GdsElement)),
+) {
   static styles = [DialogStyles]
   static styleExpressionBaseSelector = 'dialog'
 
@@ -75,10 +79,14 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
   placement: 'initial' | 'top' | 'bottom' | 'left' | 'right' = 'initial'
 
   /**
-   * The dialog's padding.
+   * Whether the inner content of the dialog should have scrollable overflow. Scroll will appear if
+   * the content exceeds the dialog's height, which can be controlled using the `height` property.
+   *
+   * This property have no effect if the `dialog` slot is used. In that case, you need to add overflow
+   * styles to the content inside the `dialog` slot.
    */
-  @property()
-  padding?: string = 'l'
+  @property({ type: Boolean })
+  scrollable = false
 
   @query('dialog')
   private _elDialog: HTMLDialogElement | undefined
@@ -87,6 +95,8 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
   private _elTriggerSlot: HTMLSlotElement | undefined
 
   #returnValue: any
+
+  #clickStartedInside = false
 
   /**
    * Opens the dialog.
@@ -119,6 +129,7 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
         this.open,
         () =>
           html`<dialog
+            closedby="closerequest"
             @close=${this.#handleNativeClose}
             class=${classMap({
               [this.variant]: true,
@@ -128,27 +139,34 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
           >
             <gds-card
               class="card"
-              display="flex"
+              padding="xl"
               variant="secondary"
               box-shadow="xl"
-              padding=${ifDefined(this.padding)}
-              gap="l"
-              border-radius="s"
-              min-height="min-content"
+              border-radius="m"
+              max-width="100%"
+              @mousedown=${() => (this.#clickStartedInside = true)}
             >
               <slot name="dialog">
                 <gds-flex justify-content="space-between">
                   <h2 id="heading">${this.heading}</h2>
                   <gds-button
                     id="close-btn"
-                    rank="secondary"
+                    rank="tertiary"
                     size="small"
                     label=${msg('Close')}
                     @click=${() => this.close('btn-close')}
-                    ><gds-icon-cross-small></gds-icon-cross-small
-                  ></gds-button>
+                  >
+                    <gds-icon-cross-large
+                      size="m"
+                      stroke="2"
+                    ></gds-icon-cross-large>
+                  </gds-button>
                 </gds-flex>
-                <gds-div id="content" flex="1">
+                <gds-div
+                  id="content"
+                  flex="1"
+                  overflow=${ifDefined(this.scrollable) ? 'auto' : nothing}
+                >
                   <slot></slot>
                 </gds-div>
                 <gds-flex
@@ -156,6 +174,7 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
                   justify-content="center"
                   gap="s"
                   padding="s 0 0 0"
+                  flex-wrap="wrap"
                 >
                   <slot name="footer">
                     <gds-button
@@ -164,9 +183,9 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
                       rank="secondary"
                       >${msg('Cancel')}</gds-button
                     >
-                    <gds-button value="ok" @click=${() => this.close('btn-ok')}
-                      >Ok</gds-button
-                    >
+                    <gds-button value="ok" @click=${() => this.close('btn-ok')}>
+                      Ok
+                    </gds-button>
                   </slot>
                 </gds-flex>
               </slot>
@@ -183,9 +202,9 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
         this._elDialog?.showModal()
         lockBodyScrolling(this)
 
-        document.removeEventListener('click', this.#handleClickOutside)
+        this.removeEventListener('click', this.#handleClickOutside)
         requestAnimationFrame(() =>
-          document.addEventListener('click', this.#handleClickOutside),
+          this.addEventListener('click', this.#handleClickOutside),
         )
 
         // VoiceOver on iOS fails to move focus to the dialog in some cases.
@@ -205,31 +224,38 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
 
   #handleNativeClose = (e: Event) => {
     const dialog = e.target as HTMLDialogElement
-    const returnValue = dialog.returnValue
+    let returnValue = dialog.returnValue
 
     if (returnValue !== 'prop-change') {
+      returnValue = returnValue || 'native-close'
       if (!this.#dispatchCloseEvent(returnValue)) {
         return
       }
-      this.close(returnValue || 'native-close')
+      this.close(returnValue)
       return
     }
 
-    this.close(returnValue || 'native-close')
+    this.close(returnValue)
   }
 
   #dispatchCloseEvent = (reason?: string) => {
-    this.dispatchCustomEvent('gds-close', {
-      detail: reason,
-    })
-    return this.#dispatchUiStateEvent(reason)
+    if (this.#dispatchUiStateEvent(reason)) {
+      this.dispatchCustomEvent('gds-close', {
+        detail: reason,
+      })
+      return true
+    }
+    return false
   }
 
   #dispatchShowEvent = (reason?: string) => {
-    this.dispatchCustomEvent('gds-show', {
-      detail: reason,
-    })
-    return this.#dispatchUiStateEvent(reason)
+    if (this.#dispatchUiStateEvent(reason)) {
+      this.dispatchCustomEvent('gds-show', {
+        detail: reason,
+      })
+      return true
+    }
+    return false
   }
 
   #dispatchUiStateEvent = (reason?: string) => {
@@ -255,7 +281,7 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
     const dialog = this._elDialog
     const isNotEnterKey = e.clientX > 0 || e.clientY > 0
 
-    if (isNotEnterKey && dialog && this.open) {
+    if (isNotEnterKey && e.target === this && dialog && this.open) {
       const rect = dialog.getBoundingClientRect()
 
       const isInDialog =
@@ -265,9 +291,15 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
         e.clientX <= rect.left + rect.width
 
       const closeReason = 'click-outside'
-      if (!isInDialog && this.#dispatchCloseEvent(closeReason)) {
+      if (
+        !isInDialog &&
+        !this.#clickStartedInside &&
+        this.#dispatchCloseEvent(closeReason)
+      ) {
         this.close(closeReason)
       }
     }
+
+    this.#clickStartedInside = false
   }
 }

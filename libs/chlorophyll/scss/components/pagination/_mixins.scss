@@ -45,12 +45,12 @@
     @include common.add-outline-focus-state();
 
     &:hover {
-      border: 1px solid var(--gds-ref-pallet-base600);
+      border: 1px solid var(--gds-sys-color-base-600);
     }
 
     &[aria-current] {
-      background: var(--gds-ref-pallet-base800);
-      color: var(--gds-ref-pallet-base000);
+      background: var(--gds-sys-color-base-800);
+      color: var(--gds-sys-color-text-inverted);
       font-weight: 500;
     }
 

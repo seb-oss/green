@@ -33,7 +33,7 @@ const style = css`
     }
 
     input[type='text'] {
-      border-radius: var(--gds-sys-space-xs);
+      border-radius: var(--gds-sys-radius-xs);
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       font-size: inherit;
@@ -42,7 +42,7 @@ const style = css`
       outline: none;
       color: var(--gds-sys-color-content-disabled-01);
       border-color: var(--gds-sys-color-border-interactive);
-      border-width: 0 0 var(--gds-sys-space-4xs) 0;
+      border-width: 0 0 var(--gds-sys-space-5xs) 0;
       border-style: solid;
       width: 100%;
       padding: var(--gds-sys-space-m);

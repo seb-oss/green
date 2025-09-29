@@ -5,7 +5,7 @@ import { IconProps } from '../../types/props'
 
 /**
  * @deprecated
- * This component is deprecated. Use `InfoCircle` instead from `@sebgroup/green-react`.
+ * This component is deprecated. Use `gds-icon-info-circle` instead from `@sebgroup/green-core`.
  */
 export const InfoCircle = ({
   focusable = false,

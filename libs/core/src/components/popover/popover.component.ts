@@ -23,7 +23,6 @@ export type UIStateChangeReason = 'show' | 'close' | 'cancel'
 
 /**
  * @element gds-popover
- * @status stable
  *
  * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
  *
@@ -528,7 +527,11 @@ export class GdsPopover extends GdsElement {
   }
 
   #handlePageScroll = () => {
-    if (this.open && this.#dispatchUiStateEvent('close')) {
+    if (
+      this.open &&
+      window.innerWidth > 767 &&
+      this.#dispatchUiStateEvent('close')
+    ) {
       this.open = false
     }
   }

@@ -325,7 +325,7 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
   #renderChevron() {
     if (!this.multiple) {
       return html`
-        <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+        <gds-icon-chevron-bottom slot="action"></gds-icon-chevron-bottom>
       `
     }
   }
@@ -333,7 +333,6 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
 
 /**
  * @element gds-select
- * @status beta
  *
  * `gds-select` is a wrapper component for the native select element.
  *

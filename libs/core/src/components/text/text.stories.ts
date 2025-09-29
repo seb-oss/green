@@ -15,7 +15,6 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
  *
  * Style expression properties apply to the outer element unless otherwise specified.
  *
- * @beta
  */
 const meta: Meta = {
   title: 'Components/Text',
@@ -43,7 +42,7 @@ const DefaultParams: Story = {
  *
  * Example: `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `span`, `em`, `mark`, `strong`, `small` etc.
  *
- * Depending on which tag you use, different default styles will be applied. Style can be overridden using the `font-size`, `font-weight` and other style expression properties.
+ * Depending on which tag you use, different default styles will be applied. Style can be overridden using the `font`, `font-weight` and other style expression properties.
  *
  * The default tag is `span` and the default size is `body-m`
  */
@@ -175,7 +174,7 @@ export const Color: Story = {
           display="flex"
           flex-direction="column"
         >
-          <gds-text level="1" color="neutral-01" font-size="body-s">
+          <gds-text level="1" color="neutral-01" font="body-s">
             Color: Content 01
           </gds-text>
         </gds-flex>
@@ -187,7 +186,7 @@ export const Color: Story = {
           display="flex"
           flex-direction="column"
         >
-          <gds-text level="1" color="neutral-02" font-size="body-m">
+          <gds-text level="1" color="neutral-02" font="body-m">
             Color: Content Secondary
           </gds-text>
         </gds-flex>
@@ -199,7 +198,7 @@ export const Color: Story = {
           display="flex"
           flex-direction="column"
         >
-          <gds-text level="1" color="neutral-03" font-size="body-l">
+          <gds-text level="1" color="neutral-03" font="body-l">
             Color: Content Tertiary
           </gds-text>
         </gds-flex>
@@ -246,16 +245,16 @@ export const Lines: Story = {
     <gds-flex flex-direction="column" gap="2xl">
       <gds-flex flex-direction="column" gap="m">
         <gds-divider></gds-divider>
-        <gds-text font-size="body-s">Lines:2</gds-text>
-        <gds-text font-size="display-s" lines="2">
+        <gds-text font="body-s">Lines:2</gds-text>
+        <gds-text font="display-s" lines="2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </gds-text>
       </gds-flex>
       <gds-flex flex-direction="column" gap="m">
         <gds-divider></gds-divider>
-        <gds-text font-size="body-s">Lines:3</gds-text>
-        <gds-text font-size="display-m" lines="3">
+        <gds-text font="body-s">Lines:3</gds-text>
+        <gds-text font="display-m" lines="3">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
           ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -266,8 +265,8 @@ export const Lines: Story = {
       </gds-flex>
       <gds-flex flex-direction="column" gap="m">
         <gds-divider></gds-divider>
-        <gds-text font-size="body-s">Lines:4</gds-text>
-        <gds-text font-size="display-l" lines="4">
+        <gds-text font="body-s">Lines:4</gds-text>
+        <gds-text font="display-l" lines="4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
           ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -357,7 +356,7 @@ export const OverflowWrap: Story = {
     <gds-flex flex-direction="column" gap="m">
       <gds-flex flex-direction="column">
         <gds-text tag="small" color="secondary">Normal</gds-text>
-        <gds-text overflow-wrap="normal" font-size="heading-xl">
+        <gds-text overflow-wrap="normal" font="heading-xl">
           Most words are short & don't need to break. But
           Antidisestablishmentarianism is long. The width is set to min-content,
           with a max-width of 11em.
@@ -365,7 +364,7 @@ export const OverflowWrap: Story = {
       </gds-flex>
       <gds-flex flex-direction="column">
         <gds-text tag="small" color="secondary">Anywhere</gds-text>
-        <gds-text overflow-wrap="anywhere" font-size="heading-xl">
+        <gds-text overflow-wrap="anywhere" font="heading-xl">
           Most words are short & don't need to break. But
           Antidisestablishmentarianism is long. The width is set to min-content,
           with a max-width of 11em.
@@ -373,7 +372,7 @@ export const OverflowWrap: Story = {
       </gds-flex>
       <gds-flex flex-direction="column">
         <gds-text tag="small" color="secondary">Break Word</gds-text>
-        <gds-text overflow-wrap="break-word" font-size="heading-xl">
+        <gds-text overflow-wrap="break-word" font="heading-xl">
           Most words are short & don't need to break. But
           Antidisestablishmentarianism is long. The width is set to min-content,
           with a max-width of 11em.
@@ -403,7 +402,7 @@ export const WhiteSpace: Story = {
     <gds-flex flex-direction="column" gap="m">
       <gds-flex flex-direction="column">
         <gds-text tag="small" color="secondary">normal</gds-text>
-        <gds-text white-space="normal" font-size="heading-xl">
+        <gds-text white-space="normal" font="heading-xl">
           Most words are short & don't need to break. But
           Antidisestablishmentarianism is long. The width is set to min-content,
           with a max-width of 11em.
@@ -411,7 +410,7 @@ export const WhiteSpace: Story = {
       </gds-flex>
       <gds-flex flex-direction="column">
         <gds-text tag="small" color="secondary">pre</gds-text>
-        <gds-text white-space="pre" font-size="heading-xl">
+        <gds-text white-space="pre" font="heading-xl">
           Most words are short & don't need to break. But
           Antidisestablishmentarianism is long. The width is set to min-content,
           with a max-width of 11em.
@@ -419,7 +418,7 @@ export const WhiteSpace: Story = {
       </gds-flex>
       <gds-flex flex-direction="column">
         <gds-text tag="small" color="secondary">pre-wrap</gds-text>
-        <gds-text white-space="pre" font-size="heading-xl">
+        <gds-text white-space="pre" font="heading-xl">
           Most words are short & don't need to break. But
           Antidisestablishmentarianism is long. The width is set to min-content,
           with a max-width of 11em.
@@ -429,7 +428,7 @@ export const WhiteSpace: Story = {
       <gds-text>Shorthand</gds-text>
       <gds-flex flex-direction="column">
         <gds-text tag="small" color="secondary">wrap</gds-text>
-        <gds-text white-space="wrap" font-size="heading-xl">
+        <gds-text white-space="wrap" font="heading-xl">
           Most words are short & don't need to break. But
           Antidisestablishmentarianism is long. The width is set to min-content,
           with a max-width of 11em.
@@ -437,7 +436,7 @@ export const WhiteSpace: Story = {
       </gds-flex>
       <gds-flex flex-direction="column">
         <gds-text tag="small" color="secondary">collapse</gds-text>
-        <gds-text white-space="collapse" font-size="heading-xl">
+        <gds-text white-space="collapse" font="heading-xl">
           Most words are short & don't need to break. But
           Antidisestablishmentarianism is long. The width is set to min-content,
           with a max-width of 11em.
@@ -445,7 +444,7 @@ export const WhiteSpace: Story = {
       </gds-flex>
       <gds-flex flex-direction="column">
         <gds-text tag="small" color="secondary">preserve nowrap</gds-text>
-        <gds-text white-space="preserve nowrap" font-size="heading-xl">
+        <gds-text white-space="preserve nowrap" font="heading-xl">
           Most words are short & don't need to break. But
           Antidisestablishmentarianism is long. The width is set to min-content,
           with a max-width of 11em.

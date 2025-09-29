@@ -14,6 +14,8 @@ import { Snippet } from '../snippet/snippet'
 
 import './content.css'
 
+import { useRouter } from 'next/navigation'
+
 interface DoItem {
   text: string
 }
@@ -82,6 +84,7 @@ export const RenderColumn = (
   const [copied, setCopied] = useState(false)
   const [snippetKey, setSnippetKey] = useState(0)
   const [showReplay, setShowReplay] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     setOverrideTheme(null)
@@ -170,6 +173,7 @@ export const RenderColumn = (
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             data-column
+            overflow="hidden"
           >
             <Core.GdsTheme color-scheme={currentTheme}>
               <Core.GdsCard
@@ -179,11 +183,13 @@ export const RenderColumn = (
                 min-height={column.plain ? '100%' : '160px'}
                 position="relative"
                 variant={column.plain ? 'secondary' : 'secondary'}
-                border-width={column.plain ? '0' : '4xs'}
+                border-width={column.plain ? '0' : '5xs'}
                 data-plain={column.plain}
                 data-snipet={column.plain ? null : 'true'}
                 data-replay={column.replay}
                 onClick={() => handleReplay()}
+                min-width="100%"
+                overflow="auto"
               >
                 <Snippet slug={column.Snippet || ''} key={snippetKey} />
 
@@ -201,11 +207,7 @@ export const RenderColumn = (
                         : '10px 10px auto auto'
                     }
                   >
-                    <Core.GdsButton
-                      rank="tertiary"
-                      size="xs"
-                      onClick={toggleTheme}
-                    >
+                    <Core.GdsButton rank="tertiary" onClick={toggleTheme}>
                       {currentTheme === 'light' ? (
                         <Core.IconMoon size="s" />
                       ) : (
@@ -215,7 +217,6 @@ export const RenderColumn = (
 
                     <Core.GdsButton
                       rank="tertiary"
-                      size="xs"
                       onClick={() => handleShowCode(column.Snippet || '')}
                     >
                       <Core.IconCodeBrackets size="s" />
@@ -297,16 +298,17 @@ export const RenderColumn = (
 
             {selectedSnippet && snippetCode && (
               <Core.GdsDialog
-                variant="slide-out"
+                // variant="slide-out"
                 onGdsClose={() => {
                   setSelectedSnippet(null)
                   setSnippetCode(null)
                 }}
                 width="100%; s{600px}"
+                height="max-content"
                 heading="Code Preview"
                 open
               >
-                <Core.GdsFlex flex-direction="column" gap="m">
+                <Core.GdsFlex flex-direction="column" gap="m" slot="dialog">
                   <Core.GdsCard
                     padding="l"
                     height="200px"
@@ -314,7 +316,7 @@ export const RenderColumn = (
                     justify-content="center"
                     align-items="center"
                     variant={column.plain ? 'secondary' : 'secondary'}
-                    border-width={column.plain ? '0' : '4xs'}
+                    border-width={column.plain ? '0' : '5xs'}
                     border-color="subtle-01"
                     data-plain={column.plain}
                     data-snipet={column.plain ? null : 'true'}
@@ -322,27 +324,29 @@ export const RenderColumn = (
                     <Snippet slug={selectedSnippet} />
                   </Core.GdsCard>
 
-                  <Core.GdsFlex
-                    flex-direction="column"
-                    gap="s"
-                    align-items="flex-start"
-                  >
-                    <Core.GdsTextarea value={snippetCode} label="Code" />
+                  <Core.GdsFlex gap="s" align-items="flex-start">
+                    <Core.GdsButton
+                      onClick={() =>
+                        router.push(`/studio/compose/${selectedSnippet}`)
+                      }
+                    >
+                      <Core.IconPencilSparkle slot="lead" />
+                      Edit on composer
+                    </Core.GdsButton>
                     <Core.GdsButton
                       rank="secondary"
                       width="max-content"
-                      size="small"
                       onClick={handleCopyCode}
                       variant={copied ? 'positive' : 'neutral'}
                     >
                       {copied ? (
                         <>
-                          <Core.IconCheckmark slot="lead" />
+                          <Core.IconCheckmark slot="lead" size="m" />
                           Copied!
                         </>
                       ) : (
                         <>
-                          <Core.IconCopy slot="lead" />
+                          <Core.IconCopy slot="lead" size="m" />
                           Copy
                         </>
                       )}
@@ -350,7 +354,7 @@ export const RenderColumn = (
                   </Core.GdsFlex>
                 </Core.GdsFlex>
 
-                <Core.GdsButton
+                {/* <Core.GdsButton
                   rank="tertiary"
                   size="small"
                   onClick={() => {
@@ -360,7 +364,7 @@ export const RenderColumn = (
                   slot="footer"
                 >
                   Close
-                </Core.GdsButton>
+                </Core.GdsButton> */}
               </Core.GdsDialog>
             )}
           </Core.GdsFlex>
@@ -390,7 +394,7 @@ export const RenderColumn = (
                 align-items="center"
                 padding="0 0 0 s"
               >
-                <Core.GdsText tag="p" font-size="detail-s" color="secondary">
+                <Core.GdsText tag="p" font="detail-s" color="secondary">
                   {column.caption}
                 </Core.GdsText>
               </Core.GdsFlex>
@@ -415,13 +419,10 @@ export const RenderColumn = (
               aspect-ratio={column.ratio || 'auto'}
               object-fit="cover"
               border-radius="xs"
+              data-fade
             />
             {column.caption && (
-              <Core.GdsText
-                tag="figcaption"
-                font-size="detail-s"
-                color="secondary"
-              >
+              <Core.GdsText tag="figcaption" font="detail-s" color="secondary">
                 {column.caption}
               </Core.GdsText>
             )}

@@ -1,5 +1,32 @@
 # Changelog
 
+## 3.6.24
+
+### Patch Changes
+
+- 3c7eee0: **Typography:** Add 'SEB SansSerif' to font-famliy
+- Updated dependencies [3c7eee0]
+  - @sebgroup/fonts@3.0.0
+
+## 3.6.23
+
+### Patch Changes
+
+- 60d6bed: **Pagination:** Selected color fix
+  **Alert:** Success color fix
+
+## 3.6.22
+
+### Patch Changes
+
+- 7429b8d: Switching to correct css variables.
+
+## 3.6.21
+
+### Patch Changes
+
+- 69c0cd0: **Button:** Adjust font-size on small buttons
+
 ## 3.6.20
 
 ### Patch Changes

@@ -15,7 +15,6 @@ import { GdsDiv } from '../div/div.component'
  * and a shortcut property for specifiying different card variants.
  *
  * @element gds-card
- * @status beta
  *
  */
 @gdsCustomElement('gds-card')
@@ -28,7 +27,7 @@ export class GdsCard extends GdsDiv {
         border-color: var(--_border-color);
         background-color: var(--_background-color);
         color: var(--_color);
-        border-width: var(--gds-sys-space-4xs);
+        border-width: var(--gds-sys-space-5xs);
         border-style: solid;
         display: flex;
         flex-direction: column;
@@ -51,13 +50,13 @@ export class GdsCard extends GdsDiv {
       switch (variant[0]) {
         case 'primary':
           border = 'transparent'
-          background = `var(--gds-sys-color-l${(this as GdsCard).level}-01)`
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-neutral-01)`
           color = 'var(--gds-sys-color-content-neutral-01)'
           break
 
         case 'secondary':
           border = 'var(--gds-sys-color-border-subtle-01)'
-          background = `var(--gds-sys-color-l${(this as GdsCard).level}-02)`
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-neutral-02)`
           color = 'var(--gds-sys-color-content-neutral-01)'
           break
 
@@ -85,7 +84,7 @@ export class GdsCard extends GdsDiv {
 
         default:
           border = 'transparent'
-          background = `var(--gds-sys-color-l${(this as GdsCard).level}-01)`
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-neutral-01)`
           color = 'var(--gds-sys-color-content-neutral-01)'
           break
       }
@@ -101,9 +100,9 @@ export class GdsCard extends GdsDiv {
 
   constructor() {
     super()
-    this.padding = 's;m{l}'
-    this['border-radius'] = 'xs;m{s}'
-    this['gap'] = 's;m{l}'
+    this.padding = 'm;m{l}'
+    this['border-radius'] = 's'
+    this['gap'] = 'm;m{l}'
   }
 
   render() {

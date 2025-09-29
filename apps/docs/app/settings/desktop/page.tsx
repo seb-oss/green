@@ -58,7 +58,7 @@ export default function Download() {
           </GdsFlex>
 
           <GdsFlex flex-direction="column" gap="m" align-items="flex-start">
-            <GdsText font-size="preamble-s" color="secondary">
+            <GdsText font="preamble-s" color="secondary">
               Looking for other versions?
             </GdsText>
             <Link

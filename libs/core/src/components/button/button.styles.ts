@@ -18,7 +18,7 @@ const style = css`
     }
 
     .button {
-      --_block-size: var(--gds-sys-space-3xl);
+      --_block-size: var(--gds-sys-space-4xl);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -28,16 +28,16 @@ const style = css`
       block-size: var(--_block-size);
       background-color: var(--gds-sys-color-l3-neutral-01);
       color: var(--gds-sys-color-content-neutral-03);
-      border-radius: var(--gds-sys-space-max);
+      border-radius: var(--gds-sys-radius-max);
       font-family: inherit;
       font: var(--gds-sys-text-detail-book-m);
-      gap: var(--gds-sys-space-s);
+      gap: var(--gds-sys-space-xs);
       outline-color: transparent;
-      outline-offset: var(--gds-sys-space-3xs);
+      outline-offset: var(--gds-sys-space-4xs);
       outline-style: solid;
-      outline-width: var(--gds-sys-space-3xs);
+      outline-width: var(--gds-sys-space-4xs);
       padding-block: var(--gds-sys-space-s);
-      padding-inline: var(--gds-sys-space-l);
+      padding-inline: var(--gds-sys-space-xl);
       position: relative;
       text-decoration: none;
       transition-property: color, border-colorm, background;
@@ -142,21 +142,25 @@ const style = css`
 
   @layer sizes {
     :host([size='xs']) .button {
-      --_block-size: var(--gds-sys-space-l);
-      font: var(--gds-sys-text-detail-book-s);
-      padding-inline: var(--gds-sys-space-m);
+      --_block-size: var(--gds-sys-space-xl);
+      gap: var(--gds-sys-space-3xs);
+      font: var(--gds-sys-text-detail-book-xs);
+      padding-inline: var(--gds-sys-space-s);
     }
 
     :host([size='small']) .button {
-      --_block-size: var(--gds-sys-space-xl);
+      --_block-size: var(--gds-sys-space-2xl);
       font: var(--gds-sys-text-detail-book-s);
-      padding-block: var(--gds-sys-space-2xs);
+      gap: var(--gds-sys-space-3xs);
+      padding-block: var(--gds-sys-space-3xs);
       padding-inline: var(--gds-sys-space-m);
     }
 
     :host([size='medium']) .button {
-      --_block-size: var(--gds-sys-space-2xl);
+      --_block-size: var(--gds-sys-space-3xl);
+      gap: var(--gds-sys-space-2xs);
       font: var(--gds-sys-text-detail-book-m);
+      padding-inline: var(--gds-sys-space-l);
     }
   }
 

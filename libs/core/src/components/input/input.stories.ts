@@ -19,7 +19,6 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 /**
  * An input lets users enter and edit text or numerical values in forms.
  *
- * @status beta
  */
 const meta: Meta = {
   title: 'Components/Input',

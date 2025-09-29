@@ -53,7 +53,7 @@ export function TemplateLayoutClient({
           </Link>
           <Core.GdsText>{template.title}</Core.GdsText>
         </Core.GdsBreadcrumbs>
-        <Core.GdsText tag="h1" font-size="heading-xl">
+        <Core.GdsText tag="h1" font="heading-xl">
           {template.title}
         </Core.GdsText>
 
@@ -84,7 +84,7 @@ export function TemplateLayoutClient({
 
       {relatedComponents.length > 0 && (
         <Core.GdsFlex flex-direction="column" gap="m">
-          <Core.GdsText tag="h2" font-size="heading-m">
+          <Core.GdsText tag="h2" font="heading-m">
             Built with these components
           </Core.GdsText>
           <Core.GdsGrid columns="1; l{2}" gap="l" max-width="180ch">

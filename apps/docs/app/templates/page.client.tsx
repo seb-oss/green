@@ -40,12 +40,7 @@ export function TemplatesClient() {
   if (!isLoaded) return <div>Loading...</div>
 
   return (
-    <Core.GdsFlex
-      flex-direction="column"
-      gap="2xl"
-      width="100%"
-      font-size="body-s"
-    >
+    <Core.GdsFlex flex-direction="column" gap="2xl" width="100%" font="body-s">
       <Core.GdsFlex
         justify-content="center"
         align-items="flex-start"
@@ -54,13 +49,13 @@ export function TemplatesClient() {
       >
         <Core.GdsFlex flex-direction="column" gap="m" align-items="flex-start">
           <Core.GdsFlex gap="s">
-            <Core.GdsText font-size="display-m">Templates</Core.GdsText>
-            <Core.GdsText font-size="display-m" color="positive">
+            <Core.GdsText font="display-m">Templates</Core.GdsText>
+            <Core.GdsText font="display-m" color="positive">
               ({templates.length})
             </Core.GdsText>
           </Core.GdsFlex>
           <Core.GdsText
-            font-size="preamble-m"
+            font="preamble-m"
             color="secondary"
             max-width="68ch"
             text-align="center"

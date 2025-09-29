@@ -5,6 +5,7 @@ import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import {
   forColorTokens,
+  forRadiusTokens,
   forSpaceTokens,
   GdsColorLevel,
   parseColorValue,
@@ -25,7 +26,6 @@ import DivStyles from './div.styles'
 
 /**
  * @element gds-div
- * @status beta
  *
  * `gds-div` is the base element in the declarative layout system.
  */
@@ -132,7 +132,7 @@ export class GdsDiv extends withSizeXProps(
    * Style Expression Property that controls the `border-radius` property.
    * Only accepts space tokens.
    */
-  @styleExpressionProperty(forSpaceTokens)
+  @styleExpressionProperty(forRadiusTokens)
   'border-radius'?: string
 
   /**

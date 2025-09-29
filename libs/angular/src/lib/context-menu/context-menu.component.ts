@@ -19,6 +19,11 @@ interface MenuItems extends DropdownOption {
   template?: TemplateRef<unknown>
 }
 
+/**
+ * @deprecated
+ * NggContextMenu is deprecated in favor of GdsContextMenu found in the Core package
+ * https://storybook.seb.io/latest/core/?path=/docs/components-context-menu--docs
+ */
 @Component({
   selector: 'ngg-context-menu',
   templateUrl: './context-menu.component.html',

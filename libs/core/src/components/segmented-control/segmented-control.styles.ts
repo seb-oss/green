@@ -5,7 +5,7 @@ const style = css`
     :host {
       background-color: var(--gds-sys-color-l3-neutral-02);
       border: 0.25rem solid transparent;
-      border-radius: var(--gds-sys-space-max);
+      border-radius: var(--gds-sys-radius-max);
       box-sizing: border-box;
       contain: layout;
       display: inline-flex;
@@ -42,7 +42,7 @@ const style = css`
       align-items: center;
       appearance: none;
       aspect-ratio: 1;
-      border-radius: var(--gds-sys-space-max);
+      border-radius: var(--gds-sys-radius-max);
       border-width: 0;
       background-color: var(--gds-sys-color-l3-neutral-02);
       color: var(--gds-sys-color-content-neutral-01);
@@ -97,7 +97,7 @@ const style = css`
 
     #indicator {
       background-color: var(--gds-sys-color-l3-neutral-04);
-      border-radius: var(--gds-sys-space-max);
+      border-radius: var(--gds-sys-radius-max);
       height: 100%;
       left: 0;
       position: absolute;

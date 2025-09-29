@@ -17,6 +17,7 @@ import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconCheckmark } from '../icon/icons/checkmark.component'
 import { IconChevronBottom } from '../icon/icons/chevron-bottom.component'
+import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import { GdsPopover, UIStateChangeReason } from '../popover/popover.component'
 import DropdownStyles from './dropdown.styles'
 
@@ -31,7 +32,6 @@ export * from '../../primitives/listbox/option.component'
  * @element gds-dropdown
  * A dropdown consist of a trigger button and a list of selectable options. It is used to select a single value from a list of options.
  *
- * @status beta
  *
  * @slot - Options for the dropdown. Accepts `gds-option` and `gds-menu-heading` elements.
  * @slot trigger - Custom content for the trigger button can be assigned through this slot.
@@ -53,6 +53,7 @@ export * from '../../primitives/listbox/option.component'
     GdsPopover,
     IconCheckmark,
     IconChevronBottom,
+    IconCrossSmall,
   ],
 })
 @localized()
@@ -91,6 +92,12 @@ export class GdsDropdown<ValueT = any>
    */
   @property({ type: Boolean, reflect: true })
   multiple = false
+
+  /**
+   * Whether the dropdown should be clearable.
+   */
+  @property({ type: Boolean, reflect: true })
+  clearable = false
 
   /**
    * Whether the dropdown should be rendered as a combobox.
@@ -153,7 +160,7 @@ export class GdsDropdown<ValueT = any>
    * Size of the dropdown. Supports `medium` and `small`. There is no `large` size for dropdowns.
    * `medium` is the default size.
    */
-  @property()
+  @property({ reflect: true })
   size: 'medium' | 'small' = 'medium'
 
   /**
@@ -217,17 +224,19 @@ export class GdsDropdown<ValueT = any>
     let displayValue: string | undefined
 
     if (Array.isArray(this.value)) {
-      this.value.length > 2
-        ? (displayValue = msg(str`${this.value.length} selected`))
-        : (displayValue = this.value
-            .reduce(
-              (acc: string, cur: ValueT) =>
-                acc +
-                this.options.find((v) => v.value === cur)?.innerText +
-                ', ',
-              '',
-            )
-            .slice(0, -2))
+      displayValue = this.value
+        // Limit to max 5 displayed
+        .slice(0, 5)
+        // Join with comma
+        .reduce(
+          (acc: string, cur: ValueT) =>
+            acc + this.options.find((v) => v.value === cur)?.innerText + ', ',
+          '',
+        )
+        // Remove trailing comma and space
+        .slice(0, -2)
+        // Truncate with ...
+        .replace(/(.{25})(.*)/, '$1...')
     } else {
       displayValue = this.options.find((v) => v.selected)?.innerText
     }
@@ -321,10 +330,41 @@ export class GdsDropdown<ValueT = any>
           id="field"
         >
           <slot name="lead" slot="lead"></slot>
-          ${this.combobox && !this.multiple
-            ? this.#renderCombobox()
-            : this.#renderTriggerButton()}
-          <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+          ${when(
+            this.value &&
+              this.multiple &&
+              (this.value as Array<unknown>).length > 0,
+            () =>
+              html`<gds-badge
+                rounded
+                size=${this.size === 'small' ? 'small' : 'default'}
+                slot="lead"
+                aria-label=${msg(
+                  str`${(this.value as Array<unknown>).length} options selected`,
+                )}
+              >
+                ${(this.value as Array<unknown>).length}</gds-badge
+              >`,
+          )}
+          ${when(
+            this.clearable && this.value && !this.disabled,
+            () =>
+              html`<gds-button
+                id="clear-btn"
+                rank="tertiary"
+                size=${this.size === 'small' ? 'xs' : 'small'}
+                label="${msg('Clear selection')}"
+                @click=${this.#handleClearButton}
+                slot="action"
+              >
+                <gds-icon-cross-small></gds-icon-cross-small>
+              </gds-button>`,
+          )}
+          ${when(this.combobox && !this.multiple, () => this.#renderCombobox())}
+          ${when(!this.combobox || this.multiple, () =>
+            this.#renderTriggerButton(),
+          )}
+          <gds-icon-chevron-bottom slot="action"></gds-icon-chevron-bottom>
         </gds-field-base>
 
         ${when(
@@ -526,6 +566,12 @@ export class GdsDropdown<ValueT = any>
     if (this.#dispatchUISateEvent(e.detail.open, e.detail.reason)) {
       this.open = e.detail.open
     }
+  }
+
+  #handleClearButton = (e: MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    this.value = undefined
   }
 
   /**

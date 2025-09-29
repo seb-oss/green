@@ -10,9 +10,9 @@ const style = css`
   }
   :host(:focus-visible) {
     outline-color: color-mix(in srgb, currentcolor, #000 100%);
-    outline-offset: var(--gds-sys-space-3xs);
+    outline-offset: var(--gds-sys-space-4xs);
     outline-style: solid;
-    outline-width: var(--gds-sys-space-3xs);
+    outline-width: var(--gds-sys-space-4xs);
   }
 `
 export default style

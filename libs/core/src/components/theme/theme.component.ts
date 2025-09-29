@@ -9,7 +9,6 @@ import { watch } from '../../utils/decorators'
 
 /**
  * @element gds-theme
- * @status beta
  *
  * A component that provides CSS variables for a part of the DOM tree.
  * Every descendant of this component will inherit the CSS variables
@@ -28,6 +27,8 @@ export class GdsTheme extends GdsElement {
     css`
       :host {
         display: contents;
+        color: var(--gds-sys-color-content-neutral-01);
+        font-family: var(--gds-sys-text-family);
       }
     `,
   ]

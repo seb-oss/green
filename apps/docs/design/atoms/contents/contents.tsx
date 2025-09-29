@@ -13,12 +13,13 @@ const SECTION_TITLES = {
   overview: 'Overview',
   'ux-text': 'UX Text',
   accessibility: 'Accessibility',
+  faq: 'FAQ',
   code: 'Code',
 } as const
 
 interface TableOfContentsProps {
   component: ComponentContent
-  section: 'overview' | 'ux-text' | 'accessibility' | 'code'
+  section: 'overview' | 'ux-text' | 'accessibility' | 'code' | 'faq'
   versus?: string
 }
 
@@ -57,16 +58,6 @@ export function TableOfContents({
     ]
 
     if (section === 'overview') {
-      if (component.slug === 'icon') {
-        initialSections.push({
-          id: 'search-icons',
-          title: 'Search Icons',
-        })
-        initialSections.push({
-          id: 'migration',
-          title: 'Migration',
-        })
-      }
       if (component.compare && versus) {
         initialSections.push({
           id: 'component-versus',
@@ -87,6 +78,9 @@ export function TableOfContents({
       'ux-text': Array.isArray(component['ux-text'])
         ? component['ux-text']
         : component['ux-text']?.section || [],
+      faq: Array.isArray(component['faq'])
+        ? component['faq']
+        : component['faq']?.section || [],
       accessibility: Array.isArray(component['accessibility'])
         ? component['accessibility']
         : component['accessibility']?.section || [],
@@ -143,10 +137,14 @@ export function TableOfContents({
     if (sections.length === 0) return
     const hash = window.location.hash.replace('#', '')
     if (hash) {
-      const element = document.getElementById(hash)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
+      setTimeout(() => {
+        setActiveSection(hash)
+        const element = document.getElementById(hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+        // TODO: Find more reliable way to run after content has finished rendering & animating
+      }, 100)
     }
   }, [sections])
 

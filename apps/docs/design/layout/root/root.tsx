@@ -1,6 +1,9 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
+
 import { GdsFlex } from '@sebgroup/green-core/react'
+import { _ } from '../../../hooks/'
 import Command from '../../atoms/command/command'
 import Footer from '../../atoms/footer/footer'
 import Sidebar from '../../atoms/sidebar/sidebar'
@@ -16,30 +19,34 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
     .filter(Boolean)
     .join(' ')
 
+  const PATH = usePathname()
+  const Composer = PATH === '/compose'
+  const Studio = PATH.startsWith('/studio') || PATH.startsWith('/play')
+
   return (
     <div className={classes} {...rest}>
       <GdsFlex
         min-height="100vh"
         flex-direction="column; s{row}"
-        style={{ background: 'var(--gds-sys-color-l1-neutral-01)' }}
         width="100%"
         gap="0"
         color="01"
+        className={_('root-flex', Composer && 'root-composer')}
       >
-        <Sidebar />
+        {!Studio && <Sidebar />}
         <GdsFlex flex-direction="column" width="100%">
-          <Topbar />
+          {!Studio && <Topbar />}
           <GdsFlex
             flex-direction="column"
-            max-width="1200px"
-            padding="m"
-            min-height="100vh"
+            max-width={Composer || Studio ? '100%' : '1200px'}
+            padding={Studio ? '0' : 'm'}
             width="100%"
             margin="0 auto"
+            gap="2xl; l{0}"
             data-content
           >
             <main>{children}</main>
-            <Footer />
+            {!Studio && <Footer />}
           </GdsFlex>
         </GdsFlex>
       </GdsFlex>

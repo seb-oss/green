@@ -5,7 +5,6 @@ import FABStyles from './fab.styles'
 
 /**
  * @element gds-fab
- * @status stable
  *
  * The Floating Action Button is used for functions central to the user experience, such as
  * support and help features that needs to be accessible at all times.

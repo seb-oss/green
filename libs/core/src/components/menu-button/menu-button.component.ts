@@ -14,7 +14,6 @@ import MenuButtonStyles from './menu-button.styles'
 
 /**
  * @element gds-menu-button
- * @status stable
  *
  * @slot - Content to be displayed as the button label.
  * @slot lead - An optional slot that allows a `gds-icon` element to be placed before the label.

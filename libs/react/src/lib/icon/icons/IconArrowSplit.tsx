@@ -1,0 +1,1 @@
+export { IconArrowSplit } from '@sebgroup/green-core/react';

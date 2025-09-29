@@ -22,7 +22,6 @@ import '../icon/icons/circles-three.js'
  * `gds-card` inherits all properties from `gds-div`, but comes with some predefined defaults
  * and a shortcut property for specifiying different card variants.
  *
- * @status beta
  *
  * @extends `gds-div`
  */
@@ -85,7 +84,7 @@ export const Variants: Story = {
         </gds-flex>
       </gds-card>
       <gds-theme color-scheme="dark">
-        <gds-card style="background(var--gds-sys-color-l1-neutral-01)">
+        <gds-card level="1">
           <gds-flex gap="l" flex-direction="column">
             <gds-text tag="h3">Dark mode</gds-text>
             <gds-grid columns="2" gap="l">
@@ -193,7 +192,7 @@ export const CardGrid: Story = {
       <gds-div>
         <gds-card border-radius="xs">
           <gds-flex gap="m" flex-direction="column" align-items="flex-start">
-            <gds-text font-size="l{heading-s} m{heading-s} s{heading-s}">
+            <gds-text font="l{heading-s} m{heading-s} s{heading-s}">
               Sidebar
             </gds-text>
             <gds-text text-wrap="balance">
@@ -212,12 +211,12 @@ export const CardGrid: Story = {
             justify-content="center"
             gap="m"
           >
-            <gds-text font-size="heading-s"> Span Columns: [2 / -1]</gds-text>
+            <gds-text font="heading-s"> Span Columns: [2 / -1]</gds-text>
             <gds-text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </gds-text>
-            <gds-text font-size="body-m">
+            <gds-text font="body-m">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua lorem
               ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -235,7 +234,7 @@ export const CardGrid: Story = {
             justify-content="center"
             gap="m"
           >
-            <gds-text font-size="heading-s">Span all columns [1 / -1]</gds-text>
+            <gds-text font="heading-s">Span all columns [1 / -1]</gds-text>
             <gds-text text-wrap="balance" lines="3">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua lorem

@@ -87,7 +87,7 @@ export default function ShortcutsPage() {
 
       <GdsFlex flex-direction="column" gap="m" max-width="100ch">
         <GdsFlex justify-content="space-between" align-items="center">
-          <GdsText tag="h2" font-size="heading-m">
+          <GdsText tag="h2" font="heading-m">
             Global Shortcuts
           </GdsText>
           <GdsBadge variant="primary" size="small">
@@ -106,7 +106,7 @@ export default function ShortcutsPage() {
                 <GdsFlex flex-direction="column" gap="2xs" flex-grow="1">
                   <GdsText font-weight="book">{shortcut.label}</GdsText>
                   {shortcut.description && (
-                    <GdsText color="secondary" font-size="body-s">
+                    <GdsText color="secondary" font="body-s">
                       {shortcut.description}
                     </GdsText>
                   )}
@@ -125,7 +125,7 @@ export default function ShortcutsPage() {
                         tag="kbd"
                         font-family="monospace"
                         color="primary"
-                        font-size="body-s"
+                        font="body-s"
                       >
                         {key}
                       </GdsText>
@@ -140,7 +140,7 @@ export default function ShortcutsPage() {
 
       <GdsFlex flex-direction="column" gap="m" width="100%">
         <GdsFlex justify-content="space-between" align-items="center">
-          <GdsText tag="h2" font-size="heading-m">
+          <GdsText tag="h2" font="heading-m">
             Page Shortcuts
           </GdsText>
           <GdsBadge variant="primary" size="small">
@@ -159,7 +159,7 @@ export default function ShortcutsPage() {
                 <GdsFlex flex-direction="column" gap="2xs" flex-grow="1">
                   <GdsText font-weight="bold">{shortcut.label}</GdsText>
                   {shortcut.description && (
-                    <GdsText color="secondary" font-size="body-s">
+                    <GdsText color="secondary" font="body-s">
                       {shortcut.description}
                     </GdsText>
                   )}
@@ -169,7 +169,7 @@ export default function ShortcutsPage() {
                     tag="kbd"
                     font-family="monospace"
                     color="primary"
-                    font-size="body-s"
+                    font="body-s"
                   >
                     {shortcutInfo.getFormattedKeys(shortcut.keys)}
                   </GdsText>

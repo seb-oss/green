@@ -17,7 +17,6 @@ import { GdsFormControlElement } from '../form/form-control.ts'
 /**
  * A textarea enables multi-line text input from users.
  *
- * @status beta
  */
 const meta: Meta = {
   title: 'Components/Textarea',

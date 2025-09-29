@@ -1,0 +1,1 @@
+export { IconBackward } from '@sebgroup/green-core/react';

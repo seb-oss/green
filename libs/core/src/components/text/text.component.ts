@@ -10,7 +10,6 @@ import TextStyles from './text.styles'
 
 /**
  * @element gds-text
- * @status beta
  *
  * `gds-text` extends `gds-div` and adds the ability to set an internal tag name, such as `h1`, `h2`, etc. It also adds line clamping and text decoration properties.
  *

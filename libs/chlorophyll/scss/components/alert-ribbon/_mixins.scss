@@ -15,7 +15,7 @@ $variants: (
     ghost-button-type: 'light',
   ),
   'success': (
-    color: var(--gds-ref-pallet-base000),
+    color: var(--gds-sys-color-text-inverted),
     border-color: transparent,
     link-outline-color:
       hsla(var(--sg-intent-success-hsl-contrast), link.$outline-opacity),

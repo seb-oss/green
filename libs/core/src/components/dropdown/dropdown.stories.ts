@@ -215,6 +215,24 @@ export const PlaceholderOptions: Story = {
 }
 
 /**
+ * To make it easy for users to clear a field, an x-icon button can be placed at the end of the field. This is commonly used in search/filter forms.
+ */
+export const Clearable: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-dropdown label="Select tech" value="teleportation" clearable>
+      <gds-option isplaceholder>None</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
+    </gds-dropdown>
+  `,
+}
+
+/**
  * In order to show a search field on the dropdown, set the `searchable` attribute.
  */
 export const Searchable: Story = {
@@ -260,7 +278,7 @@ export const Searchable: Story = {
 export const Multiple: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-dropdown label="Select tech" searchable multiple>
+    <gds-dropdown label="Select tech" searchable multiple clearable>
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>

@@ -1,5 +1,173 @@
 # Changelog
 
+## 2.6.3
+
+### Patch Changes
+
+- 8cdf051: **Grid:** Remove unused storybook style
+- 8cdf051: **Input:** Reflect size so it gets applied, fixing the gap on host for field base host
+
+## 2.6.2
+
+### Patch Changes
+
+- 90751c6: **Button:** Update wording to be `XS` everywhere, spacing and sizes on storybook
+- 5991ecf: Fixing import/exports in /components & /pure
+
+## 2.6.1
+
+### Patch Changes
+
+- a617652: **Checkbox:** Fix tree-shaking issue that sometimes happens with Angular
+
+## 2.6.0
+
+### Minor Changes
+
+- e5f21f0: **Input:** Update size small variables
+
+### Patch Changes
+
+- 69b2ee7: **Dialog:** Only close top-most dialog on click outside. Fixes #2423
+- e5f21f0: **Checkbox:** Small size aligment
+- e5f21f0: **FCH:** Add grouping default spacing variables for small size with fallback
+- e5f21f0: **Button:** Spacing and sizes
+- e5f21f0: **Card:** Update defaults
+- e5f21f0: **Input:** Icon and spacing for smaller size
+- e5f21f0: **Signal:** Use content color mixin for the signal
+- 69b2ee7: **Dialog:** Fix missing reason in `gds-ui-state` event under certain conditions
+- e5f21f0: **Dropdown:** Move chevron to action slot to fix spacing, update cross small icon when clearable
+- 69b2ee7: **Input:** Fix incorrect type declaration of the `autocorrect` property
+- e5f21f0: **Textarea:** Align spacing with textarea for trail and action
+- e5f21f0: **Select:** Chevron move to action slot same as dropdown spacing fix
+- e5f21f0: **Dialog:** Heading block start marin, dialog padding and radius update
+- 69b2ee7: **Dialog:** Only close if a click starts and ends outside
+- e5f21f0: **Radio:** Align spacing and sizes same as checkbox
+- e5f21f0: **Badge:** Inline and block size fixes and padding
+- e5f21f0: **Datepicker:** Add sizing variables for label, support text
+- f0da6d2: **Calendar:** Remove the commented style
+
+## 2.5.3
+
+### Patch Changes
+
+- da0ab9a: **Button:** Explicitly add `click()` method on Button, to allow simulated clicks to work same way on iOS Safari as on other browsers
+- 2ba96f6: **Calendar:** Focus outline distance fix
+
+## 2.5.2
+
+### Patch Changes
+
+- 33b3aa0: **Dialog:** Fix some sizing and overflow issues
+- 33b3aa0: **Dialog:** Correct order of events, so that `gds-close` does not fire if `gds-ui-state` was cancelled to prevent the dialog from closing.
+
+## 2.5.1
+
+### Patch Changes
+
+- 1b85201: **Typography:** Add fallbacks to `font-family`
+
+## 2.5.0
+
+### Minor Changes
+
+- 79fc2dd: **Dialog:** Add `scrollable` prop
+
+### Patch Changes
+
+- bfdb344: **Div:** Chage `border-radius` tokens from spacing to radius.
+
+## 2.4.1
+
+### Patch Changes
+
+- 04734c3: **Dropdown:** Fix small variant font-size and change to rounded counter badge
+
+## 2.4.0
+
+### Minor Changes
+
+- 1969060: **GdsElement:** Add `semanticVersion` debug property
+
+## 2.3.0
+
+### Minor Changes
+
+- 798af05: **Icon:** Add feedback emoji/icons
+
+### Patch Changes
+
+- 3b18c2d: Datepicker: Improved screen reader text for the buttons
+
+## 2.2.0
+
+### Minor Changes
+
+- 0339d24: **Icon:** Add 28 new icons
+
+## 2.1.0
+
+### Minor Changes
+
+- a76694d: **Dropdown:** Add `clearable` option
+- a76694d: **Dropdown:** Add counter badge for multiple select
+
+## 2.0.2
+
+### Patch Changes
+
+- cd905fe: **Context menu:** Button should inherit transitional styles if enabled for the Context menu
+- 61c2bfe: **Icon:** focus svg generated
+
+## 2.0.1
+
+### Patch Changes
+
+- b740210: **Icon:** `gds-icon-focus` update design for solid and regular
+
+## 2.0.0
+
+### Major Changes
+
+- d9b0006: **GdsTheme:** Change the default design-version to '2023'
+- d9b0006: **Everything:** Updated all components to use the new token structure and names
+- d9b0006: **Theme:** `gds-theme` now sets the `color` CSS property by default.
+- d9b0006: **Removd deprecations:** `gds-container` and `gds-spacer`. Use `gds-div` instead.
+- d9b0006: **Everything:** Using new state color tokens and shadow tokens.
+
+  - **Card:** Removed `shadow` prop from `gds-card`, use `box-shadow` prop instead.
+
+### Minor Changes
+
+- d9b0006: **Alert:** Change from triang-exlamation to circle-info in alert warning variant.
+- d9b0006: **RichText:** Added styling for code tag to rich text
+- d9b0006: **Dialog:** Add `dialog` slot that can be used to override header, footer and content of the dialog.
+- d9b0006: **Calendar & Datepicker:** Add correct GDS23 design
+- d9b0006: **Dialog:** Add `placement` property to control placement on the screen.
+- d9b0006: **Theme:** Add 'auto' mode
+- d9b0006: **Filter Chips:** Add `size` prop
+
+### Patch Changes
+
+- d9b0006: **Form Control:** Add server-side check to `requestSubmit` polyfill for SSR compat
+- d9b0006: **Divider:** Use variable to apply the color, fixing the safari issue
+- d9b0006: **Form Summary:** Use standard `negative` variant of Card
+- d9b0006: **Utils:** Platform navigator check when is Server
+- d9b0006: **Blur:** Fix the blurring issue on safari, now wraps the content and set blur on container instead
+
+## 1.90.2
+
+### Patch Changes
+
+- 33e4314: **Icon:** cain-link depricated (use chain-link instead)
+- 7429b8d: **GdsTheme**: fixing import of 2016 tokens
+
+## 1.90.1
+
+### Patch Changes
+
+- d213f1d: **Popover:** Don't close on scroll on small viewports
+
 ## 1.90.0
 
 ### Minor Changes

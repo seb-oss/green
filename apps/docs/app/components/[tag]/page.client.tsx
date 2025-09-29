@@ -26,8 +26,8 @@ export function TagComponentsClient({ tag }: TagComponentsClientProps) {
     <Core.GdsFlex flex-direction="column" gap="2xl" padding="xl">
       <Core.GdsFlex flex-direction="column" gap="m" align-items="flex-start">
         <Core.GdsFlex gap="s">
-          <Core.GdsText font-size="display-m">Tag: {tag}</Core.GdsText>
-          <Core.GdsText font-size="display-m" color="positive">
+          <Core.GdsText font="display-m">Tag: {tag}</Core.GdsText>
+          <Core.GdsText font="display-m" color="positive">
             ({components.length})
           </Core.GdsText>
         </Core.GdsFlex>
@@ -39,7 +39,7 @@ export function TagComponentsClient({ tag }: TagComponentsClientProps) {
             <Link key={component.slug} href={`/component/${component.slug}`}>
               <Core.GdsCard height="100%">
                 <Core.GdsFlex flex-direction="column" gap="s" height="100%">
-                  <Core.GdsText font-size="display-xs">
+                  <Core.GdsText font="display-xs">
                     {component.title}
                   </Core.GdsText>
                   <Core.GdsFlex

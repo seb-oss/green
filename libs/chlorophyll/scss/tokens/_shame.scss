@@ -50,8 +50,8 @@ $font-weight-normal: 400;
 $font-weight-bold: 500;
 $font-weight-bolder: 800;
 
-$font-family-sans-serif: 'SEB SansSerif GDS', 'SEBSansSerif', sans-serif,
-  'Helvetica Neue', Helvetica, Arial !default;
+$font-family-sans-serif: 'SEB SansSerif', 'SEB SansSerif GDS', 'SEBSansSerif',
+  sans-serif, 'Helvetica Neue', Helvetica, Arial !default;
 $root-font-size: 16px !default;
 $base-font-size: 1rem !default; // relative to root element font size (html)
 $font-path: '../fonts' !default;
@@ -171,12 +171,12 @@ $grey: (
 
 $disabled: (
   light: (
-    'background': var(--gds-ref-pallet-base200),
-    'color': var(--gds-ref-pallet-base600),
-    'border': var(--gds-ref-pallet-base500),
-    'primary-background': var(--gds-ref-pallet-base200),
-    'primary-color': var(--gds-ref-pallet-base600),
-    'primary-border': var(--gds-ref-pallet-base500),
+    'background': var(--gds-sys-color-base-200),
+    'color': var(--gds-sys-color-base-600),
+    'border': var(--gds-sys-color-base-500),
+    'primary-background': var(--gds-sys-color-base-200),
+    'primary-color': var(--gds-sys-color-base-600),
+    'primary-border': var(--gds-sys-color-base-500),
   ),
   dark: (
     'background': color.adjust($white, $alpha: -0.98),
@@ -303,14 +303,14 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --gds-comp-chips-bg-color-active: #222222;
   --gds-comp-chips-bg-color-action: #2c2c2c;
   --gds-sys-color-focus-outline: white;
-  --gds-sys-color-font: var(--gds-ref-pallet-base300);
+  --gds-sys-color-font: var(--gds-sys-color-base-300);
 }
 
 @mixin light-mode() {
   --heading-primary-color: #{$black};
   --text-primary-color: #{get($grey, 1000, 'light')};
   --text-secondary-color: #{get($grey, 800, 'light')};
-  --text-disabled-color: var(--gds-ref-pallet-base600);
+  --text-disabled-color: var(--gds-sys-color-base-600);
   --text-primary-disabled-color: #{get($disabled, 'primary-color')};
   --border-color: #{color.adjust($black, $alpha: -0.83)}; // #CECECE against white
   --border-secondary-color: #{color.adjust($black, $alpha: -0.9)};

@@ -12,7 +12,7 @@ export default function NotFound() {
       flex-direction="column"
       gap="l"
     >
-      <Core.GdsText text-align="center" font-size="display-xl">
+      <Core.GdsText text-align="center" font="display-xl">
         404
       </Core.GdsText>
       <Core.GdsFlex flex-direction="column" gap="0">

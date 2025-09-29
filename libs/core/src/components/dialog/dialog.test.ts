@@ -38,7 +38,6 @@ describe('<gds-dialog>', () => {
   })
 
   describe('API', () => {
-    // Add actual API tests here!
     it('should emit events when show() and close() are called with a parameter', async () => {
       const showSpy = sinon.spy()
       const closeSpy = sinon.spy()
@@ -83,12 +82,80 @@ describe('<gds-dialog>', () => {
       expect(closeSpy).to.not.have.been.called
     })
 
+    it('should fire the close event before the gds-ui-state event', async () => {
+      const closeSpy = sinon.spy()
+      const uiStateSpy = sinon.spy()
+      const el = await fixture<GdsDialog>(
+        html`<gds-dialog
+          open
+          heading="Test"
+          @gds-close=${closeSpy}
+          @gds-ui-state=${uiStateSpy}
+        >
+          Content
+        </gds-dialog>`,
+      )
+
+      el.close('test')
+
+      await aTimeout(100)
+
+      expect(uiStateSpy.calledBefore(closeSpy)).to.be.true
+    })
+
+    it('should not fire the close event if the gds-ui-state event is cancelled', async () => {
+      const closeSpy = sinon.spy()
+      const el = await fixture<GdsDialog>(
+        html`<gds-dialog
+          open
+          heading="Test"
+          @gds-close=${closeSpy}
+          @gds-ui-state=${(e: any) => e.preventDefault()}
+        >
+          Content
+        </gds-dialog>`,
+      )
+
+      el.close('test')
+
+      await aTimeout(100)
+
+      expect(closeSpy).to.not.have.been.called
+    })
+
+    it('should not fire the show event if the gds-ui-state event is cancelled', async () => {
+      const showSpy = sinon.spy()
+      const el = await fixture<GdsDialog>(
+        html`<gds-dialog
+          open
+          heading="Test"
+          @gds-show=${showSpy}
+          @gds-ui-state=${(e: any) => e.preventDefault()}
+        >
+          Content
+        </gds-dialog>`,
+      )
+
+      el.show('test')
+
+      await aTimeout(100)
+
+      expect(showSpy).to.not.have.been.called
+    })
+
     it('should set the heading when the heading attribute is set', async () => {
       const el = await fixture<GdsDialog>(
         html`<gds-dialog heading="Test" open>Content</gds-dialog>`,
       )
       const heading = el.shadowRoot?.querySelector('h2')
       expect(heading?.textContent).to.equal('Test')
+    })
+
+    it('should support the `scrollable` prop', async () => {
+      const el = await fixture<GdsDialog>(
+        html`<gds-dialog scrollable heading="Test">Content</gds-dialog>`,
+      )
+      expect(el.scrollable).to.be.true
     })
   })
 
@@ -159,6 +226,22 @@ describe('<gds-dialog>', () => {
 
       await sendKeys({ press: 'Escape' })
       await waitUntil(() => !el.open)
+    })
+
+    it('should emit gds-ui-state with reason `native-close` when closed with ESC', async () => {
+      const uiStateSpy = sinon.spy()
+      const el = await fixture<GdsDialog>(
+        html`<gds-dialog open heading="Test" @gds-ui-state=${uiStateSpy}
+          >Content</gds-dialog
+        >`,
+      )
+
+      await sendKeys({ press: 'Escape' })
+      await waitUntil(() => !el.open)
+
+      expect(uiStateSpy).to.have.been.calledWithMatch({
+        detail: { reason: 'native-close' },
+      })
     })
   })
 })

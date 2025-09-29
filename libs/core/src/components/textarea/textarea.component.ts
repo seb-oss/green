@@ -20,7 +20,7 @@ import {
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsButton } from '../button/button.component'
 import { GdsFormControlElement } from '../form/form-control'
-import { IconCrossLarge } from '../icon/icons/cross-large.component'
+import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import TextareaStyles from './textarea.styles'
 
 @localized()
@@ -455,7 +455,7 @@ class Textarea extends GdsFormControlElement<string> {
           slot="action"
           id="clear-button"
         >
-          <gds-icon-cross-large></gds-icon-cross-large>
+          <gds-icon-cross-small></gds-icon-cross-small>
         </gds-button>
       `
     else return nothing
@@ -468,7 +468,6 @@ class Textarea extends GdsFormControlElement<string> {
 
 /**
  * @summary A custom input element that can be used in forms.
- * @status beta
  *
  * @element gds-textarea
  *.
@@ -484,7 +483,7 @@ class Textarea extends GdsFormControlElement<string> {
     GdsFormControlFooter,
     GdsButton,
     GdsFieldBase,
-    IconCrossLarge,
+    IconCrossSmall,
   ],
 })
 export class GdsTextarea extends withLayoutChildProps(

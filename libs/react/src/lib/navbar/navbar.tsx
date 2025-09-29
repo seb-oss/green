@@ -12,7 +12,9 @@ export interface NavProps extends HTMLAttributes<HTMLElement> {
   children?: ReactNode
 }
 
-//TODO: Add variants
+/**
+ * @deprecated Please use the `gds-menu-button` web component from green-core instead
+ */
 export const Navbar = ({
   children,
   variant,
