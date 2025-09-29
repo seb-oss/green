@@ -8,6 +8,9 @@ import { GdsAlert } from './alert.component'
 import './index.ts'
 import '../card/card.ts'
 import '../button/button.ts'
+import '../rich-text/rich-text.ts'
+
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 
 /**
  * Alert is a message used to inform or update the user about the state of a system, page or function. Icons and color indicate the type and urgency of the information within the message.
@@ -17,37 +20,15 @@ const meta: Meta<GdsAlert> = {
   component: 'gds-alert',
   tags: ['autodocs'],
   argTypes: {
-    variant: {
-      control: 'select',
-      options: ['information', 'notice', 'positive', 'warning', 'negative'],
-    },
-    role: {
-      control: 'select',
-      options: ['alert', 'status'],
-    },
-    timeout: {
-      control: 'number',
-      description:
-        'Time in milliseconds before the alert is automatically dismissed',
-    },
+    ...argTablePropsFor('gds-alert'),
   },
   args: {
     variant: 'information',
     role: 'alert',
     buttonLabel: '',
-    innerHTML: html`<strong>Information</strong> Body text starts on the same
-      row as heading. A link (optional) always ends the message.`,
+    innerHTML:
+      '<strong>Information</strong> Body text starts on the same row as heading. A link (optional) always ends the message.',
   },
-  render: (args) => html`
-    <gds-alert
-      variant="${args.variant}"
-      role="alert"
-      ?dismissible="${args.dismissible}"
-      timeout="${ifDefined(args.timeout)}"
-    >
-      ${args.innerHTML}
-    </gds-alert>
-  `,
 }
 
 export default meta
@@ -68,7 +49,6 @@ export const Default: Story = {
  * Each variant has a specific color and icon to convey the message type.
  */
 export const Variants: Story = {
-  args: {},
   render: () => html`
     <gds-flex flex-direction="column" gap="m">
       <gds-alert variant="information" role="alert">
@@ -97,10 +77,9 @@ export const Variants: Story = {
 export const WithAction: Story = {
   args: {
     variant: 'information',
-    dismissible: false,
     buttonLabel: 'Take Action',
-    innerHTML: html`<strong>Actionable</strong> Alert with a button for quick
-      user interaction.`,
+    innerHTML:
+      '<strong>Actionable</strong> Alert with a button for quick user interaction.',
   },
 }
 
@@ -111,7 +90,7 @@ export const Dismissible: Story = {
   args: {
     variant: 'information',
     dismissible: true,
-    innerHTML: html`<strong>Dismissible</strong> User can dismiss this alert.`,
+    innerHTML: '<strong>Dismissible</strong> User can dismiss this alert.',
   },
 }
 
@@ -122,8 +101,8 @@ export const AutoDismiss: Story = {
   args: {
     variant: 'positive',
     timeout: 6400,
-    innerHTML: html`<strong>Auto Dismiss</strong> This alert disappears
-      automatically after a delay.`,
+    innerHTML:
+      '<strong>Auto Dismiss</strong> This alert disappears automatically after a delay.',
   },
 }
 
@@ -133,12 +112,9 @@ export const AutoDismiss: Story = {
 export const RichContent: Story = {
   args: {
     variant: 'information',
-    role: 'alert',
     dismissible: true,
     buttonLabel: 'Learn More',
-    innerHTML: html`<gds-rich-text
-      ><strong>Rich Content</strong> Includes <a href="#">a link</a>,
-      <em>emphasis</em>, and <code>code</code>.</gds-rich-text
-    >`,
+    innerHTML:
+      '<gds-rich-text><strong>Rich Content</strong> Includes <a href="#">a link</a>, <em>emphasis</em>, and <code>code</code>.</gds-rich-text>',
   },
 }
