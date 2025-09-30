@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.6.4
+
+### Patch Changes
+
+- 1acd6a1: **FAB:** Fix button import bug when generating
+- d72190b: **SEP:** Grid fix to reflect the `auto-column` attribute
+- 1acd6a1: **FAB:** Increase the gap when there is a slotted signal
+
+## 2.6.3
+
+### Patch Changes
+
+- 8cdf051: **Grid:** Remove unused storybook style
+- 8cdf051: **Input:** Reflect size so it gets applied, fixing the gap on host for field base host
+
 ## 2.6.2
 
 ### Patch Changes
