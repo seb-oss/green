@@ -232,7 +232,7 @@ class RadioGroup extends GdsFormControlElement<string> {
       id="radiogroup"
       class=${classMap(classes)}
       aria-labelledby="group-label"
-      aria-describedby="supporting-text extended-supporting-text footer"
+      aria-describedby="footer"
       aria-invalid=${this.invalid}
     >
       ${this.#renderRadioGroupContents()}
