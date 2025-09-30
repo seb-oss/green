@@ -224,6 +224,24 @@ for (const variant of ['default'] as const) {
         el.focus()
         expect(document.activeElement).to.equal(el)
       })
+
+      it('should have an associated error message when in invalid state', async () => {
+        const el = await fixture<GdsInput>(
+          html`<gds-input
+            variant="${variant}"
+            label="My label"
+            error-message="This is an error"
+            .invalid=${true}
+          ></gds-input>`,
+        )
+        await aTimeout(0)
+        const inputEl = el.shadowRoot?.querySelector('input')
+        const errorMessageEl = el.shadowRoot?.querySelector('#message')
+        expect(errorMessageEl).to.exist
+        expect(inputEl?.getAttribute('aria-describedby')).to.contain('message')
+        expect(inputEl?.getAttribute('aria-invalid')).to.equal('true')
+        await expect(el).to.be.accessible()
+      })
     })
   })
 }

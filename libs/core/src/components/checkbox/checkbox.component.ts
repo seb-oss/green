@@ -88,7 +88,6 @@ export class GdsCheckbox extends GdsFormControlElement {
         ?indeterminate=${this.indeterminate}
         aria-invalid=${this.invalid}
         aria-describedby="message supporting-text"
-        aria-errormessage="message"
         id="checkbox-input"
         @change=${() => {
           this.checked = this._elCheckbox.checked
