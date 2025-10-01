@@ -6,7 +6,7 @@ const style = css`
       display: contents;
     }
 
-    li {
+    .list-item {
       display: flex;
       align-items: center;
       justify-content: center;

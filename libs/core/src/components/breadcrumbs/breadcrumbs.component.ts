@@ -16,7 +16,7 @@ import {
 import { IconChevronLeft } from '../icon/icons/chevron-left.component'
 import BreadcrumbStyles from './breadcrumbs.styles'
 
-import type { GdsBreadcrumbsItem } from './breadcrumbs-item/breadcrumbs-item.component'
+import type { GdsBreadcrumb } from './breadcrumb/breadcrumb.component'
 
 /**
  * @element gds-breadcrumbs
@@ -46,10 +46,10 @@ export class GdsBreadcrumbs extends withLayoutChildProps(
   @property({ type: String })
   label: string = msg('Breadcrumbs')
 
-  get breadcrumbItems(): GdsBreadcrumbsItem[] {
+  get breadcrumbItems(): GdsBreadcrumb[] {
     return Array.from(
       this.querySelectorAll('[gds-element=gds-breadcrumbs-item]'),
-    ) as GdsBreadcrumbsItem[]
+    ) as GdsBreadcrumb[]
   }
 
   private handleSlotChange() {
@@ -74,7 +74,7 @@ export class GdsBreadcrumbs extends withLayoutChildProps(
         <div class="mobile-return">
           <gds-icon-chevron-left></gds-icon-chevron-left>
         </div>
-        <div role="list">
+        <div role="list" class="list">
           <slot @slotchange=${this.handleSlotChange}></slot>
         </div>
       </nav>

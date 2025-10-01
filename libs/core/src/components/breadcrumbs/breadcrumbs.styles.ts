@@ -26,7 +26,7 @@ const style = css`
       --_gap: var(--gds-sys-space-xs);
     }
 
-    ol {
+    .list {
       display: flex;
       align-items: center;
       gap: var(--_gap);
@@ -38,6 +38,15 @@ const style = css`
       font-weight: inherit;
       font-size: inherit;
       line-height: inherit;
+    }
+
+    ::slotted(*:not(:last-child))::after {
+      content: '/';
+      display: block;
+    }
+
+    ::slotted(*) {
+      display: contents;
     }
 
     .mobile-return {

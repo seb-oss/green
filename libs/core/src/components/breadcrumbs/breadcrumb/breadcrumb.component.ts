@@ -11,19 +11,19 @@ import {
 import { IconChevronRight } from '../../icon/icons/chevron-right.component'
 import { GdsLink } from '../../link/link.component'
 import { GdsText } from '../../text/text.component'
-import BreadcrumbsItemStyles from './breadcrumbs-item.styles'
+import BreadcrumbStyles from './breadcrumb.styles'
 
 /**
- * @element gds-breadcrumbs-item
- * @summary The `gds-breadcrumbs-item`
+ * @element gds-breadcrumb
+ * @summary The `gds-breadcrumb`
  *
  */
-@gdsCustomElement('gds-breadcrumbs-item', {
+@gdsCustomElement('gds-breadcrumb', {
   dependsOn: [GdsLink, GdsText, IconChevronRight],
 })
 @localized()
-export class GdsBreadcrumbsItem extends GdsElement {
-  static styles = [BreadcrumbsItemStyles]
+export class GdsBreadcrumb extends GdsElement {
+  static styles = [BreadcrumbStyles]
 
   @property()
   href = ''
@@ -51,6 +51,7 @@ export class GdsBreadcrumbsItem extends GdsElement {
     return html`
       <div
         role="listitem"
+        class="list-item"
         aria-current=${ifDefined(!this.href ? 'page' : undefined)}
       >
         ${this.#renderContents()}
@@ -59,7 +60,7 @@ export class GdsBreadcrumbsItem extends GdsElement {
   }
 
   #renderContents() {
-    const elements = [this.#renderMainContent(), this.#renderSeparator()]
+    const elements = [this.#renderMainContent()]
     return elements.map((element) => html`${element}`)
   }
 
@@ -67,11 +68,6 @@ export class GdsBreadcrumbsItem extends GdsElement {
     if (this.overflow) return this.#renderOverflowMenu()
     if (this.href) return this.#renderItem()
     return this.#renderCurrent()
-  }
-
-  #renderSeparator() {
-    if (!this.href && !this.overflow) return nothing
-    return html`<span class="separator" aria-hidden="true">/</span>`
   }
 
   #renderOverflowMenu() {
