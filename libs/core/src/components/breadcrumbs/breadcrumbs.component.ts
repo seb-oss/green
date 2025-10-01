@@ -16,6 +16,8 @@ import {
 import { IconChevronLeft } from '../icon/icons/chevron-left.component'
 import BreadcrumbStyles from './breadcrumbs.styles'
 
+import type { GdsBreadcrumbsItem } from './breadcrumbs-item/breadcrumbs-item.component'
+
 /**
  * @element gds-breadcrumbs
  * @summary The `gds-breadcrumbs` component is a navigation element
@@ -44,6 +46,24 @@ export class GdsBreadcrumbs extends withLayoutChildProps(
   @property({ type: String })
   label: string = msg('Breadcrumbs')
 
+  get breadcrumbItems(): GdsBreadcrumbsItem[] {
+    return Array.from(
+      this.querySelectorAll('[gds-element=gds-breadcrumbs-item]'),
+    ) as GdsBreadcrumbsItem[]
+  }
+
+  private handleSlotChange() {
+    const items = this.breadcrumbItems
+
+    items.forEach((item, index) => {
+      if (index === items.length - 2) {
+        item.setAttribute('show-on-mobile', '')
+      } else {
+        item.removeAttribute('show-on-mobile')
+      }
+    })
+  }
+
   render() {
     return html`
       <nav
@@ -51,8 +71,11 @@ export class GdsBreadcrumbs extends withLayoutChildProps(
         aria-label=${this.label}
         class=${classMap({ 'size-small': this.size === 'small' })}
       >
+        <div class="mobile-return">
+          <gds-icon-chevron-left></gds-icon-chevron-left>
+        </div>
         <ol>
-          <slot></slot>
+          <slot @slotchange=${this.handleSlotChange}></slot>
         </ol>
       </nav>
     `

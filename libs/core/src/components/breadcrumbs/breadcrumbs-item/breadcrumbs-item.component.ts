@@ -4,6 +4,7 @@ import { property } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 
+import { GdsElement } from '../../../gds-element'
 import { forwardAttributes } from '../../../utils/directives'
 import {
   gdsCustomElement,
@@ -23,42 +24,52 @@ import BreadcrumbsItemStyles from './breadcrumbs-item.styles'
   dependsOn: [GdsLink, GdsText, IconChevronRight],
 })
 @localized()
-export class GdsBreadcrumbsItem extends GdsLink {
+export class GdsBreadcrumbsItem extends GdsElement {
   static styles = [BreadcrumbsItemStyles]
-  @property({ type: Boolean, reflect: true })
-  current = false
+
+  @property()
+  href = ''
+
+  @property()
+  target?: '_self' | '_blank' | '_parent' | '_top'
+
+  @property()
+  rel?: string
+
+  @property()
+  label = ''
+
+  @property()
+  download?: string
 
   render() {
-    return html` <li
-      role="listitem"
-      aria-current=${ifDefined(this.current ? 'page' : undefined)}
-    >
+    return html` <li aria-current=${ifDefined(!this.href ? 'page' : undefined)}>
       ${when(
         this.href,
         () => html`
           <gds-link
-            ${forwardAttributes(
-              (attr) =>
-                attr.name.startsWith('gds-') ||
-                ['href', 'target', 'rel', 'download', 'label'].includes(
-                  attr.name,
-                ),
-            )}
+            href=${ifDefined(this.href)}
+            target=${ifDefined(this.target)}
+            rel=${ifDefined(this.rel || this.#defaultRel)}
+            download=${ifDefined(this.download)}
+            aria-label=${this.label || nothing}
           >
             <slot name="lead"></slot>
             <slot></slot>
-            <gds-icon-chevron-right
-              size="s"
-              slot="trail"
-            ></gds-icon-chevron-right>
+            <slot name="trail"></slot>
           </gds-link>
+          <span class="separator" aria-hidden="true">/</span>
         `,
         () => html`
-          <gds-text color="neutral-02">
+          <gds-text color="neutral-02" font-weight="regular">
             <slot></slot>
           </gds-text>
         `,
       )}
     </li>`
+  }
+
+  get #defaultRel() {
+    return this.target === '_blank' ? 'noreferrer noopener' : undefined
   }
 }

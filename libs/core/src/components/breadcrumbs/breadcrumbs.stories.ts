@@ -56,10 +56,12 @@ type Story = StoryObj
 export const Simple: Story = {
   render: () => html`
     <gds-breadcrumbs>
-      <gds-link href="/">Home</gds-link>
-      <gds-link href="/products">Products</gds-link>
-      <gds-link href="/products/category">Category</gds-link>
-      <gds-text>Current page</gds-text>
+      <gds-breadcrumbs-item href="/"> Home </gds-breadcrumbs-item>
+      <gds-breadcrumbs-item href="/products"> Products </gds-breadcrumbs-item>
+      <gds-breadcrumbs-item href="/products/category">
+        Category
+      </gds-breadcrumbs-item>
+      <gds-breadcrumbs-item>Current page</gds-breadcrumbs-item>
     </gds-breadcrumbs>
   `,
 }
@@ -82,22 +84,22 @@ export const Simple: Story = {
 export const WithIcon: Story = {
   render: () => html`
     <gds-breadcrumbs>
-      <gds-link href="/">
+      <gds-breadcrumbs-item href="/">
         <gds-icon-home-open slot="lead"></gds-icon-home-open>
         Home
-      </gds-link>
+      </gds-breadcrumbs-item>
 
-      <gds-link href="/folder">
+      <gds-breadcrumbs-item href="/folder">
         <gds-icon-folder slot="lead"></gds-icon-folder>
         Documents
-      </gds-link>
+      </gds-breadcrumbs-item>
 
-      <gds-link href="/folder/settings">
+      <gds-breadcrumbs-item href="/folder/settings">
         <gds-icon-settings-gear slot="lead"></gds-icon-settings-gear>
         Settings
-      </gds-link>
+      </gds-breadcrumbs-item>
 
-      <gds-text> Current page </gds-text>
+      <gds-breadcrumbs-item> Current page </gds-breadcrumbs-item>
     </gds-breadcrumbs>
   `,
 }
@@ -118,22 +120,22 @@ export const Size: Story = {
           <gds-text width="200px">Default(large)</gds-text>
           <gds-card flex="1" background="neutral-02">
             <gds-breadcrumbs>
-              <gds-link href="/home">
+              <gds-breadcrumbs-item href="/home">
                 <gds-icon-home-open slot="lead"></gds-icon-home-open>
                 Home
-              </gds-link>
+              </gds-breadcrumbs-item>
 
-              <gds-link href="/folder">
+              <gds-breadcrumbs-item href="/folder">
                 <gds-icon-folder slot="lead"></gds-icon-folder>
                 Documents
-              </gds-link>
+              </gds-breadcrumbs-item>
 
-              <gds-link href="/settings">
+              <gds-breadcrumbs-item href="/settings">
                 <gds-icon-settings-gear slot="lead"></gds-icon-settings-gear>
                 Settings
-              </gds-link>
+              </gds-breadcrumbs-item>
 
-              <gds-text> Current page </gds-text>
+              <gds-breadcrumbs-item> Current page </gds-breadcrumbs-item>
             </gds-breadcrumbs>
           </gds-card>
         </gds-flex>
@@ -142,22 +144,22 @@ export const Size: Story = {
           <gds-text width="200px">Small</gds-text>
           <gds-card background="neutral-02" flex="1">
             <gds-breadcrumbs size="small">
-              <gds-link href="/home">
+              <gds-breadcrumbs-item href="/home">
                 <gds-icon-home-open slot="lead"></gds-icon-home-open>
                 Home
-              </gds-link>
+              </gds-breadcrumbs-item>
 
-              <gds-link href="/folder">
+              <gds-breadcrumbs-item href="/folder">
                 <gds-icon-folder slot="lead"></gds-icon-folder>
                 Documents
-              </gds-link>
+              </gds-breadcrumbs-item>
 
-              <gds-link href="/settings">
+              <gds-breadcrumbs-item href="/settings">
                 <gds-icon-settings-gear slot="lead"></gds-icon-settings-gear>
                 Settings
-              </gds-link>
+              </gds-breadcrumbs-item>
 
-              <gds-text> Current page </gds-text>
+              <gds-breadcrumbs-item> Current page </gds-breadcrumbs-item>
             </gds-breadcrumbs>
           </gds-card>
         </gds-flex>
@@ -179,22 +181,22 @@ export const Mobile: Story = {
           <gds-text width="200px">Desktop</gds-text>
           <gds-card flex="1" background="neutral-02">
             <gds-breadcrumbs>
-              <gds-link href="/home">
+              <gds-breadcrumbs-item href="/home">
                 <gds-icon-home-open slot="lead"></gds-icon-home-open>
                 Home
-              </gds-link>
+              </gds-breadcrumbs-item>
 
-              <gds-link href="/folder">
+              <gds-breadcrumbs-item href="/folder">
                 <gds-icon-folder slot="lead"></gds-icon-folder>
                 Documents
-              </gds-link>
+              </gds-breadcrumbs-item>
 
-              <gds-link href="/settings">
+              <gds-breadcrumbs-item href="/settings">
                 <gds-icon-settings-gear slot="lead"></gds-icon-settings-gear>
                 Settings
-              </gds-link>
+              </gds-breadcrumbs-item>
 
-              <gds-text> Current page </gds-text>
+              <gds-breadcrumbs-item> Current page </gds-breadcrumbs-item>
             </gds-breadcrumbs>
           </gds-card>
         </gds-flex>
@@ -203,22 +205,22 @@ export const Mobile: Story = {
           <gds-text width="200px">Mobile</gds-text>
           <gds-card background="neutral-02" width="400px">
             <gds-breadcrumbs>
-              <gds-link href="/home">
+              <gds-breadcrumbs-item href="/home">
                 <gds-icon-home-open slot="lead"></gds-icon-home-open>
                 Home
-              </gds-link>
+              </gds-breadcrumbs-item>
 
-              <gds-link href="/folder">
+              <gds-breadcrumbs-item href="/folder">
                 <gds-icon-folder slot="lead"></gds-icon-folder>
                 Documents
-              </gds-link>
+              </gds-breadcrumbs-item>
 
-              <gds-link href="/settings">
+              <gds-breadcrumbs-item href="/settings">
                 <gds-icon-settings-gear slot="lead"></gds-icon-settings-gear>
                 Settings
-              </gds-link>
+              </gds-breadcrumbs-item>
 
-              <gds-text> Current page </gds-text>
+              <gds-breadcrumbs-item> Current page </gds-breadcrumbs-item>
             </gds-breadcrumbs>
           </gds-card>
         </gds-flex>
@@ -246,26 +248,26 @@ export const Overflow: Story = {
   render: () => html`
     <gds-flex flex-direction="column" gap="4xl">
       <gds-breadcrumbs>
-        <gds-link href="/home">
+        <gds-breadcrumbs-item href="/home">
           <gds-icon-home-open slot="lead"></gds-icon-home-open>
           Home
-        </gds-link>
+        </gds-breadcrumbs-item>
 
-        <gds-link href="/folder">
+        <gds-breadcrumbs-item href="/folder">
           <gds-icon-folder slot="lead"></gds-icon-folder>
           Documents
-        </gds-link>
+        </gds-breadcrumbs-item>
 
         <gds-button rank="tertiary" size="small">
           <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
         </gds-button>
 
-        <gds-link href="/settings">
+        <gds-breadcrumbs-item href="/settings">
           <gds-icon-settings-gear slot="lead"></gds-icon-settings-gear>
           Settings
-        </gds-link>
+        </gds-breadcrumbs-item>
 
-        <gds-text> Current page </gds-text>
+        <gds-breadcrumbs-item> Current page </gds-breadcrumbs-item>
       </gds-breadcrumbs>
     </gds-flex>
   `,
