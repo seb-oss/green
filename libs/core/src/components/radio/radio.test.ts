@@ -201,5 +201,28 @@ describe('Radio Components', () => {
       `)
       await expect(el).to.be.accessible()
     })
+
+    it('should have accessible error message text when invalid', async () => {
+      const el = await fixture<GdsRadioGroup>(html`
+        <gds-radio-group
+          label="Test Group"
+          aria-invalid="true"
+          error-message="This is an error message"
+        >
+          <gds-radio value="1" label="Option 1"></gds-radio>
+          <gds-radio value="2" label="Option 2"></gds-radio>
+        </gds-radio-group>
+      `)
+      await el.updateComplete
+      const radios = el.shadowRoot?.querySelectorAll('gds-radio')
+      radios?.forEach((radio: any) => {
+        const input = radio.shadowRoot?.querySelector('div[role="radio"]')
+        expect(input?.getAttribute('aria-description')).to.contain(
+          'This is an error message',
+        )
+        expect(input).to.be.accessible()
+      })
+      await expect(el).to.be.accessible()
+    })
   })
 })
