@@ -48,7 +48,7 @@ export class GdsBreadcrumbs extends withLayoutChildProps(
 
   get breadcrumbItems(): GdsBreadcrumb[] {
     return Array.from(
-      this.querySelectorAll('[gds-element=gds-breadcrumbs-item]'),
+      this.querySelectorAll('[gds-element=gds-breadcrumb]'),
     ) as GdsBreadcrumb[]
   }
 

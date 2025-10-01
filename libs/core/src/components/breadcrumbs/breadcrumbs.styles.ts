@@ -44,7 +44,7 @@ const style = css`
       display: block;
     }
 
-    ::slotted(*) {
+    ::slotted(*:not([gds-element='gds-breadcrumb'])) {
       display: contents;
     }
 
@@ -57,6 +57,10 @@ const style = css`
     @container (max-width: 400px) {
       .mobile-return {
         display: flex;
+      }
+
+      ::slotted(*[return])::after {
+        display: none;
       }
     }
   }
