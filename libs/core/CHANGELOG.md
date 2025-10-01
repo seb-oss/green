@@ -1,5 +1,23 @@
 # Changelog
 
+## 2.6.5
+
+### Patch Changes
+
+- b3aad88: **Checkbox:** Fix error message association
+- b3aad88: **Radio:** Fix error message association
+- b3aad88: **Dropdown:** Fix selected value being added as part of the label
+- b3aad88: **Checkbox:** Fix issue with programatically moving focus to checkbox
+- b3aad88: **Input:** Fix error message association. Closes #2438
+
+## 2.6.4
+
+### Patch Changes
+
+- 1acd6a1: **FAB:** Fix button import bug when generating
+- d72190b: **SEP:** Grid fix to reflect the `auto-column` attribute
+- 1acd6a1: **FAB:** Increase the gap when there is a slotted signal
+
 ## 2.6.3
 
 ### Patch Changes
