@@ -28,7 +28,6 @@ import '../icon/icons/folder'
  * - Supports both text-only and icon+text navigation links
  * - Responsive design with mobile optimization showing the previous page
  * - Configurable sizes (large/small)
- * - Each breadcrumbs item is a slot that preferably uses `gds-link` component.
  *
  * ## Basic Usage
  *
@@ -37,10 +36,10 @@ import '../icon/icons/folder'
  *
  * ```html
  * <gds-breadcrumbs>
- *   <gds-link href="/">Home</gds-link>
- *   <gds-link href="/products">Products</gds-link>
- *   <gds-link href="/products/category">Category</gds-link>
- *   <gds-text>Current page</gds-text>
+ *   <gds-breadcrumbs-item href="/">Home</gds-breadcrumbs-item>
+ *   <gds-breadcrumbs-item href="/products">Products</gds-breadcrumbs-item>
+ *   <gds-breadcrumbs-item href="/products/category">Category</gds-breadcrumbs-item>
+ *   <gds-breadcrumbs-item>Current page</gds-breadcrumbs-item>
  * </gds-breadcrumbs>
  * ```
  */
@@ -68,15 +67,15 @@ export const Simple: Story = {
 }
 
 /**
- * This example shows how to use icons alongside text in the breadcrumbs links.
- * Icons can be used to enhance the visual representation of the links.
+ * This example shows how to use icons alongside text in the breadcrumbs item.
+ * Icons can be used to enhance the visual representation of the breadcrumbs item.
  *
  * ```html
  * <gds-breadcrumbs>
- *  <gds-link href="/">
+ *  <gds-breadcrumbs-item href="/">
  *   <gds-icon-home-open slot="lead"></gds-icon-home-open>
  *   Home
- *  </gds-link>
+ *  </gds-breadcrumbs-item>
  * </gds-breadcrumbs>
  * ```
  *
@@ -237,11 +236,11 @@ export const Mobile: Story = {
  *
  *```html
  *<gds-breadcrumbs>
- *  <gds-link href="/home">Home</gds-link>
+ *  <gds-breadcrumbs-item href="/home">Home</gds-breadcrumbs-item>
  *  <gds-button rank="tertiary">
  *    <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
  *  </gds-button>
- *  <gds-link href="/current">Current</gds-link>
+ *  <gds-breadcrumbs-item>Current</gds-breadcrumbs-item>
  *</gds-breadcrumbs>
  *```
  */
