@@ -1,4 +1,5 @@
 import { localized, msg, str } from '@lit/localize'
+import { nothing } from 'lit'
 import { property, query, queryAsync } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
@@ -409,7 +410,7 @@ export class GdsDropdown<ValueT = any>
               <gds-icon-triangle-exclamation
                 solid
               ></gds-icon-triangle-exclamation>
-              ${this.errorMessage}
+              ${this.invalid ? this.errorMessage : nothing}
             </slot>
           </gds-form-control-footer>
         `,
@@ -477,7 +478,7 @@ export class GdsDropdown<ValueT = any>
         aria-haspopup="listbox"
         aria-controls="listbox"
         name="trigger"
-        aria-label="${this.label} ${this.displayValue}"
+        aria-label="${this.label}"
         aria-describedby="supporting-text extended-supporting-text sub-label message"
         aria-invalid="${this.invalid}"
         aria-required="${this.required}"
