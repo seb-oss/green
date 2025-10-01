@@ -167,6 +167,14 @@ jobs:
           name: androidtokens
           path: lib/src/main/kotlin/se/seb/gds/tokens/
 
+      - name: Move fonts gds folder
+        run: |
+          src_dir="lib/src/main/kotlin/se/seb/gds/tokens/fonts"
+          dest_dir="lib/src/main/kotlin/se/seb/gds/fonts"
+          if [ -d "$src_dir" ]; then
+            mv "$src_dir" "$dest_dir"
+          fi
+
       - name: Update version
         run: |
           file="gradle.properties"
