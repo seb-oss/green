@@ -42,7 +42,7 @@ export class GdsImg extends withPositioningProps(
    *
    * The above example will apply the aspect ratio of 16/9 for large screens, 4/3 for medium screens, and 1/1 for small screens.
    */
-  @styleExpressionProperty()
+  @styleExpressionProperty({ selector: 'img' })
   'aspect-ratio'?: string
 
   /**
