@@ -139,10 +139,21 @@ export default function StudioBreadcrumbs() {
   }
 
   return (
-    <Core.GdsFlex gap="xs" align-items="center">
-      {links.map((item, index) => (
-        <Core.GdsFlex key={index} align-items="center" gap="xs">
-          <Core.GdsBreadcrumbs>
+    <Core.GdsFlex gap="xs" align-items="center" flex-direction="column">
+      <Core.GdsBreadcrumbs>
+        {links.map((item, index) => (
+          <Core.GdsBreadcrumbsItem
+            key={index}
+            {...(item.href ? { href: item.href } : {})}
+          >
+            {!item.isLast && item.icon && <item.icon slot="lead" size="m" />}
+            {item.label}
+          </Core.GdsBreadcrumbsItem>
+        ))}
+      </Core.GdsBreadcrumbs>
+      <Core.GdsFlex>
+        {links.map((item, index) => (
+          <Core.GdsFlex key={index} align-items="center" gap="xs">
             {item.href ? (
               <Link component="link" href={item.href}>
                 {!item.isLast && item.icon && (
@@ -156,9 +167,9 @@ export default function StudioBreadcrumbs() {
             {index < links.length - 1 && (
               <Core.GdsText color="neutral-02">/</Core.GdsText>
             )}
-          </Core.GdsBreadcrumbs>
-        </Core.GdsFlex>
-      ))}
+          </Core.GdsFlex>
+        ))}
+      </Core.GdsFlex>
     </Core.GdsFlex>
   )
 }

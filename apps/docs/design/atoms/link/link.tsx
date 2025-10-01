@@ -34,12 +34,16 @@ export const Link = React.forwardRef<HTMLElement, CustomLinkProps>(
       | typeof Core.GdsLink
       | typeof Core.GdsMenuButton
       | typeof Core.GdsFab
+      | typeof Core.GdsBreadcrumbsItem
     switch (component) {
       case 'button':
         Component = Core.GdsButton
         break
       case 'fab':
         Component = Core.GdsFab
+        break
+      case 'breadcrumbs-item':
+        Component = Core.GdsBreadcrumbsItem
         break
       case 'menu':
         Component = Core.GdsMenuButton

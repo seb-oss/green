@@ -3,6 +3,7 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './breadcrumbs'
+import './breadcrumbs-item/breadcrumbs-item'
 import '../link'
 import '../flex'
 import '../card'
