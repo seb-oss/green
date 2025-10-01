@@ -1,5 +1,5 @@
 ---
-'@sebgroup/green-tokens': minor
+'@sebgroup/green-tokens': patch
 ---
 
 Add GdsColor enum to Android dist
