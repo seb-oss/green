@@ -321,6 +321,17 @@ await Promise.all(
                   packageName: ['se.seb.gds.tokens'],
                 },
               },
+              {
+                destination: 'Colors/GdsColor.kt',
+                format: 'jvm/enum-class',
+                filter: 'is-color-no-ref',
+                options: {
+                  objectType: 'enum',
+                  className: 'GdsColor',
+                  import: [],
+                  packageName: ['se.seb.gds.tokens'],
+                },
+              },
             ],
           },
           jvm: {
