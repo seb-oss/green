@@ -49,9 +49,12 @@ export class GdsBreadcrumbsItem extends GdsElement {
 
   render() {
     return html`
-      <li aria-current=${ifDefined(!this.href ? 'page' : undefined)}>
+      <div
+        role="listitem"
+        aria-current=${ifDefined(!this.href ? 'page' : undefined)}
+      >
         ${this.#renderContents()}
-      </li>
+      </div>
     `
   }
 

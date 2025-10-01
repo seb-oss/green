@@ -74,9 +74,9 @@ export class GdsBreadcrumbs extends withLayoutChildProps(
         <div class="mobile-return">
           <gds-icon-chevron-left></gds-icon-chevron-left>
         </div>
-        <ol>
+        <div role="list">
           <slot @slotchange=${this.handleSlotChange}></slot>
-        </ol>
+        </div>
       </nav>
     `
   }
