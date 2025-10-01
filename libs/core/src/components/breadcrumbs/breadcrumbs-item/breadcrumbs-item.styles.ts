@@ -21,12 +21,12 @@ const style = css`
     }
 
     @container (max-width: 400px) {
-      :host(:not([show-on-mobile])),
-      :host([show-on-mobile]) .separator {
+      :host(:not([return])),
+      :host([return]) .separator {
         display: none;
       }
 
-      :host([show-on-mobile]) {
+      :host([return]) {
         display: contents;
       }
     }

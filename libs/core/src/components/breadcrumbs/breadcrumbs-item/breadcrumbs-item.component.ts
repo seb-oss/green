@@ -2,10 +2,8 @@ import { localized } from '@lit/localize'
 import { nothing } from 'lit'
 import { property } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
-import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../../gds-element'
-import { forwardAttributes } from '../../../utils/directives'
 import {
   gdsCustomElement,
   html,
@@ -42,34 +40,65 @@ export class GdsBreadcrumbsItem extends GdsElement {
   @property()
   download?: string
 
-  render() {
-    return html` <li aria-current=${ifDefined(!this.href ? 'page' : undefined)}>
-      ${when(
-        this.href,
-        () => html`
-          <gds-link
-            href=${ifDefined(this.href)}
-            target=${ifDefined(this.target)}
-            rel=${ifDefined(this.rel || this.#defaultRel)}
-            download=${ifDefined(this.download)}
-            aria-label=${this.label || nothing}
-          >
-            <slot name="lead"></slot>
-            <slot></slot>
-            <slot name="trail"></slot>
-          </gds-link>
-          <span class="separator" aria-hidden="true">/</span>
-        `,
-        () => html`
-          <gds-text color="neutral-02" font-weight="regular">
-            <slot></slot>
-          </gds-text>
-        `,
-      )}
-    </li>`
-  }
+  @property({ type: Boolean, reflect: true })
+  overflow = false
 
   get #defaultRel() {
     return this.target === '_blank' ? 'noreferrer noopener' : undefined
+  }
+
+  render() {
+    return html`
+      <li
+        role="listitem"
+        aria-current=${ifDefined(!this.href ? 'page' : undefined)}
+      >
+        ${this.#renderContents()}
+      </li>
+    `
+  }
+
+  #renderContents() {
+    const elements = [this.#renderMainContent(), this.#renderSeparator()]
+    return elements.map((element) => html`${element}`)
+  }
+
+  #renderMainContent() {
+    if (this.overflow) return this.#renderOverflowMenu()
+    if (this.href) return this.#renderItem()
+    return this.#renderCurrent()
+  }
+
+  #renderSeparator() {
+    if (!this.href && !this.overflow) return nothing
+    return html`<span class="separator" aria-hidden="true">/</span>`
+  }
+
+  #renderOverflowMenu() {
+    return html`<slot></slot>`
+  }
+
+  #renderItem() {
+    return html`
+      <gds-link
+        href=${ifDefined(this.href)}
+        target=${ifDefined(this.target)}
+        rel=${ifDefined(this.rel || this.#defaultRel)}
+        download=${ifDefined(this.download)}
+        aria-label=${this.label || nothing}
+      >
+        <slot name="lead"></slot>
+        <slot></slot>
+        <slot name="trail"></slot>
+      </gds-link>
+    `
+  }
+
+  #renderCurrent() {
+    return html`
+      <gds-text color="neutral-02" font-weight="regular">
+        <slot></slot>
+      </gds-text>
+    `
   }
 }

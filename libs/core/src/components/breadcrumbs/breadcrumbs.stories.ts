@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './breadcrumbs'
 import './breadcrumbs-item/breadcrumbs-item'
 import '../link'
+import '../context-menu'
 import '../flex'
 import '../card'
 import '../divider'
@@ -258,9 +259,13 @@ export const Overflow: Story = {
           Documents
         </gds-breadcrumbs-item>
 
-        <gds-button rank="tertiary" size="small">
-          <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
-        </gds-button>
+        <gds-breadcrumbs-item overflow>
+          <gds-context-menu>
+            <gds-menu-item>Action 1</gds-menu-item>
+            <gds-menu-item>Action 2</gds-menu-item>
+            <gds-menu-item>Action 3</gds-menu-item>
+          </gds-context-menu>
+        </gds-breadcrumbs-item>
 
         <gds-breadcrumbs-item href="/settings">
           <gds-icon-settings-gear slot="lead"></gds-icon-settings-gear>
@@ -293,12 +298,14 @@ export const Label: Story = {
           <gds-text width="200px">Default label</gds-text>
           <gds-card flex="1" background="neutral-02">
             <gds-breadcrumbs>
-              <gds-link href="/home">
+              <gds-breadcrumbs-item href="/home">
                 <gds-icon-home-open slot="lead"></gds-icon-home-open>
                 Home
-              </gds-link>
-              <gds-link href="/products">Products</gds-link>
-              <gds-text>Current page</gds-text>
+              </gds-breadcrumbs-item>
+              <gds-breadcrumbs-item href="/products">
+                Products
+              </gds-breadcrumbs-item>
+              <gds-breadcrumbs-item>Current page</gds-breadcrumbs-item>
             </gds-breadcrumbs>
           </gds-card>
         </gds-flex>
@@ -307,12 +314,14 @@ export const Label: Story = {
           <gds-text width="200px">Custom label</gds-text>
           <gds-card background="neutral-02" flex="1">
             <gds-breadcrumbs label="Site Navigation">
-              <gds-link href="/home">
+              <gds-breadcrumbs-item href="/home">
                 <gds-icon-home-open slot="lead"></gds-icon-home-open>
                 Home
-              </gds-link>
-              <gds-link href="/products">Products</gds-link>
-              <gds-text>Current page</gds-text>
+              </gds-breadcrumbs-item>
+              <gds-breadcrumbs-item href="/products">
+                Products
+              </gds-breadcrumbs-item>
+              <gds-breadcrumbs-item>Current page</gds-breadcrumbs-item>
             </gds-breadcrumbs>
           </gds-card>
         </gds-flex>

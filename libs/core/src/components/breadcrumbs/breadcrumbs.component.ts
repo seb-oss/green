@@ -57,9 +57,9 @@ export class GdsBreadcrumbs extends withLayoutChildProps(
 
     items.forEach((item, index) => {
       if (index === items.length - 2) {
-        item.setAttribute('show-on-mobile', '')
+        item.setAttribute('return', '')
       } else {
-        item.removeAttribute('show-on-mobile')
+        item.removeAttribute('return')
       }
     })
   }
