@@ -8,19 +8,14 @@ type Target = {
 type Options = {
   platformVersion: string
   targets: Target[]
-}
-
-type File = {
   packageName: string
 }
 
 export default ({
   header,
-  file,
   options,
 }: {
   header: string
-  file: File
   options: Options
 }): string =>
   `// swift-tools-version: 5.10
@@ -30,11 +25,11 @@ ${header}
 import PackageDescription
 
 let package = Package(
-        name: "${file.packageName}",
+        name: "${options.packageName}",
         platforms: [.iOS(.v${options.platformVersion})],
         products: [
             .library(
-                name: "${file.packageName}",
+                name: "${options.packageName}",
                 targets: [
                     ${options.targets.map((target) => `"${target.name}"`).join(',\n                            ')}
                 ]

@@ -502,8 +502,8 @@ const themes = {
           {
             destination: 'Package.swift',
             format: 'green/ios-swift-package',
-            packageName: swiftPackageName,
             options: {
+              packageName: swiftPackageName,
               platformVersion: '15',
               targets: swiftTargets,
             },
