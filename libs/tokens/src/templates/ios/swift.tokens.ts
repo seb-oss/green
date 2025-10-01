@@ -103,7 +103,7 @@ export const uiKitColorReferencePropertyFormatter = (
 
 export const typographyPropertyFormatter = (options) => {
   return function (token, indent) {
-    let value = token.token.value
+    const value = token.token.value
     return (
       indent +
       options.accessControl +

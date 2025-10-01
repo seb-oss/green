@@ -96,5 +96,10 @@ export default {
         }
       })
   },
-  undo: function (dictionary, platform) {},
+  undo: function (dictionary, platform) {
+    const resourcesPath = path.join(buildPath, '/Sources/GdsColours/Resources')
+    if (fs.existsSync(resourcesPath)) {
+      fs.rmSync(resourcesPath, { recursive: true, force: true })
+    }
+  },
 }

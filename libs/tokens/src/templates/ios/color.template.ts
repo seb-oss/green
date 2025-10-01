@@ -22,7 +22,7 @@ public extension UIColor {
 
 	static func gdsColor(named name: String) -> UIColor {
 	guard let c = UIColor(named: name, in: .module, compatibleWith: nil) else {
-			assertionFailure("Missing color asset '\(name)' in GdsColours resources")
+			assertionFailure("Missing color asset 'name' in GdsColours resources")
 			return .clear
 		}
 		return c

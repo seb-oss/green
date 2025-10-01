@@ -15,7 +15,7 @@ const swiftPackageName = 'GdsKit'
 const swiftTargets = [
   {
     name: swiftPackageName,
-    dependencies: ['GdsColours', 'GdsTypography'],
+    dependencies: ['GdsColours', 'GdsTypography', 'GdsDimensions'],
     path: '',
     resources: [],
   },
@@ -30,6 +30,11 @@ const swiftTargets = [
     dependencies: [],
     path: 'Sources/GdsTypography',
     resources: ['Resources'],
+  },
+  {
+    name: 'GdsDimensions',
+    dependencies: [],
+    path: 'Sources/GdsSpacing',
   },
 ]
 const swiftSourcePath = 'Sources/' + swiftPackageName + '/'
