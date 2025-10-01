@@ -5,7 +5,6 @@ const style = css`
   @layer base {
     :host {
       container-type: inline-size;
-      container-name: gds-breadcrumbs;
       --_gap: var(--gds-sys-space-s);
     }
 
@@ -22,7 +21,7 @@ const style = css`
       --_gap: var(--gds-sys-space-xs);
     }
 
-    .size-small ol {
+    .size-small .list {
       --_gap: var(--gds-sys-space-xs);
     }
 

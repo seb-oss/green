@@ -21,8 +21,7 @@ const style = css`
     }
 
     @container (max-width: 400px) {
-      :host(:not([return])),
-      :host([return]) .separator {
+      :host(:not([return])) {
         display: none;
       }
 

@@ -14,7 +14,7 @@ import {
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
 import { IconChevronLeft } from '../icon/icons/chevron-left.component'
-import BreadcrumbStyles from './breadcrumbs.styles'
+import BreadcrumbsStyles from './breadcrumbs.styles'
 
 import type { GdsBreadcrumb } from './breadcrumb/breadcrumb.component'
 
@@ -31,7 +31,7 @@ import type { GdsBreadcrumb } from './breadcrumb/breadcrumb.component'
 export class GdsBreadcrumbs extends withLayoutChildProps(
   withSizeXProps(withMarginProps(GdsElement)),
 ) {
-  static styles = [tokens, BreadcrumbStyles]
+  static styles = [tokens, BreadcrumbsStyles]
 
   /**
    * Controls the font-size and spacing of separators and breadcrumbs items

@@ -8,7 +8,6 @@ import {
   gdsCustomElement,
   html,
 } from '../../../utils/helpers/custom-element-scoping'
-import { IconChevronRight } from '../../icon/icons/chevron-right.component'
 import { GdsLink } from '../../link/link.component'
 import { GdsText } from '../../text/text.component'
 import BreadcrumbStyles from './breadcrumb.styles'
@@ -19,7 +18,7 @@ import BreadcrumbStyles from './breadcrumb.styles'
  *
  */
 @gdsCustomElement('gds-breadcrumb', {
-  dependsOn: [GdsLink, GdsText, IconChevronRight],
+  dependsOn: [GdsLink, GdsText],
 })
 @localized()
 export class GdsBreadcrumb extends GdsElement {
