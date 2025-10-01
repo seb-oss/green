@@ -415,6 +415,17 @@ const themes = {
               packageName: ['se.seb.gds'],
             },
           },
+          {
+            destination: 'GdsTypography.kt',
+            format: 'jvm/enum-class',
+            filter: 'is-typography',
+            options: {
+              objectType: 'enum',
+              className: 'GdsTypography',
+              import: [],
+              packageName: ['se.seb.gds'],
+            },
+          },
         ],
       },
       studio: {
@@ -481,7 +492,6 @@ const themes = {
           'green/color/UIColorSwift',
           'content/swift/literal',
           'asset/swift/literal',
-          'size/pxToRem',
           'size/swift/remToCGFloat',
         ],
         files: [
@@ -495,13 +505,6 @@ const themes = {
             },
           },
           {
-            destination: 'Sources/GdsKit/GdsKit.swift',
-            format: 'green/ios-swift-gdskit',
-            options: {
-              imports: ['GdsColours', 'GdsTypography'],
-            },
-          },
-          {
             destination: 'Sources/GdsColours/GdsColours.swift',
             format: 'green/ios-swift-colours',
             filter: 'is-color-no-ref',
@@ -510,6 +513,17 @@ const themes = {
             destination: 'Sources/GdsTypography/GdsTypography.swift',
             format: 'green/ios-swift-typography',
             filter: 'is-typography',
+          },
+          {
+            destination: 'Sources/GdsDimensions/GdsSpacing.swift',
+            format: 'ios-swift/any.swift',
+            filter: 'is-spacing',
+            options: {
+              className: 'GdsSpacing',
+              import: ['Foundation'],
+              accessControl: 'public',
+              objectType: 'struct',
+            },
           },
         ],
         actions: [`color-set-${colorScheme}`, 'copy-ios-assets'],
