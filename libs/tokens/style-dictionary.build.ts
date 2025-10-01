@@ -15,7 +15,7 @@ const swiftPackageName = 'GdsKit'
 const swiftTargets = [
   {
     name: swiftPackageName,
-    dependencies: [],
+    dependencies: ['GdsColours', 'GdsTypography'],
     path: '',
     resources: [],
   },
@@ -337,8 +337,7 @@ const themes = {
       android: {
         buildPath: __dirname + `/../../dist/libs/tokens/${theme}/android/`,
         transforms: [
-          'attribute/cti',
-          'name/camel',
+          'name/android',
           'green/color/composeColor',
           'size/compose/em',
           'size/compose/remToSp',
@@ -353,7 +352,7 @@ const themes = {
               import: ['androidx.compose.ui.graphics.Color'],
               packageName: ['se.seb.gds.tokens'],
               className: `GdsColorTokens`,
-              variableName: `${colorScheme}ModeColors`,
+              variableName: `${capitalize(colorScheme)}ModeColors`,
               objectType: 'val',
             },
           },
@@ -398,6 +397,7 @@ const themes = {
             },
           },
         ],
+        actions: ['copy-android-assets'],
       },
       jvm: {
         buildPath: __dirname + `/../../dist/libs/tokens/${theme}/jvm/`,
@@ -487,8 +487,7 @@ const themes = {
         buildPath: __dirname + `/../../dist/libs/tokens/${theme}/ios/`,
         sourcePath: swiftSourcePath,
         transforms: [
-          'attribute/cti',
-          'name/camel',
+          'name/ios',
           'green/color/UIColorSwift',
           'content/swift/literal',
           'asset/swift/literal',

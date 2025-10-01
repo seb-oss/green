@@ -7,6 +7,8 @@ export default {
   filter: (token) => token.path.includes('color'),
   transitive: true,
   transform: function (token) {
+    console.log(token)
+
     const value = token.$value || token.value
 
     const alpha = token.alpha
