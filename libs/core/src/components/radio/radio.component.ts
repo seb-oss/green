@@ -53,6 +53,15 @@ export class GdsRadio extends GdsElement {
   @property({ type: Boolean })
   invalid = false
 
+  /**
+   * The accessible error message text for the radio button.
+   *
+   * This text is not visually rendered, but will be announced by
+   * screen readers when the radio button is in an invalid state.
+   */
+  @property({ type: String })
+  errorMessage?: string
+
   @state()
   private _isFocused = false
 
@@ -74,6 +83,10 @@ export class GdsRadio extends GdsElement {
     this.setAttribute('aria-checked', this.checked.toString())
     this.setAttribute('aria-disabled', this.disabled.toString())
     this.setAttribute('tabindex', this.disabled ? '-1' : '0')
+    this.setAttribute(
+      'aria-description',
+      this.errorMessage ? this.errorMessage : '',
+    )
     this.toggleAttribute('aria-invalid', this.invalid)
   }
 

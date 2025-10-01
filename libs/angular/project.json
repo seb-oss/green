@@ -64,7 +64,8 @@
         }
       },
       "dependsOn": [
-        "core:build"
+        "core:build",
+        "core:build-with-types"
       ]
     },
     "build-storybook": {
@@ -89,7 +90,8 @@
         }
       },
       "dependsOn": [
-        "core:build"
+        "core:build",
+        "core:build-with-types"
       ]
     },
     "copy-designlibrary-json": {
