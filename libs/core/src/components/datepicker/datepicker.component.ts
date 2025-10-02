@@ -125,9 +125,9 @@ class Datepicker extends GdsFormControlElement<Date> {
   hideTodayButton = false
 
   /**
-   * Whether to override the default hour set of mid day (12:00) in UTC.
-   * This is to avoid timezone issues as the actual hours does not matter when using the datepicker.
-   * Eg. 10 sets time to UTC 10:00 (which is 11:00 in Sweden).
+   * Controls the time component of dates selected in the calendar popover or spinbuttons in the field.
+   *
+   * The time will be set in UTC.
    */
   @property({ type: Number, attribute: 'utc-hours' })
   get utcHours() {
