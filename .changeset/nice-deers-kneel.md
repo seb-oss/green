@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-**Datepicker**: Impoved mobile view
+**Datepicker**: Updated design for small viewports
