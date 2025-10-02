@@ -141,7 +141,7 @@ const style = css`
           outline-width: var(--gds-sys-space-4xs);
         }
 
-        @media (max-width: 364px), &.small {
+        &.small {
           width: var(--gds-sys-space-xl);
           height: var(--gds-sys-space-xl);
           font: var(--gds-sys-text-body-book-s);

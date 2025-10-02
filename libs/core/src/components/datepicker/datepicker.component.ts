@@ -403,8 +403,8 @@ class Datepicker extends GdsFormControlElement<Date> {
           <gds-flex
             align-items="center"
             justify-content="space-between"
-            gap="xs; 365px { s }"
-            padding="m xs 0 xs; 365px { m m 0 m }"
+            gap="xs; xs { s }"
+            padding="m xs 0 xs; xs { m m 0 m }"
           >
             <gds-button
               @click=${this.#handleDecrementFocusedMonth}
