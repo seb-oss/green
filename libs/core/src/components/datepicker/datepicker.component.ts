@@ -125,6 +125,21 @@ class Datepicker extends GdsFormControlElement<Date> {
   hideTodayButton = false
 
   /**
+   * Controls the time component of dates selected in the calendar popover or spinbuttons in the field.
+   *
+   * The time will be set in UTC.
+   */
+  @property({ type: Number, attribute: 'utc-hours' })
+  get utcHours() {
+    return this.#utcHours
+  }
+  set utcHours(value) {
+    this.#utcHours = value
+    this._internalValue?.setUTCHours(value, 0, 0, 0)
+  }
+  #utcHours = 12
+
+  /**
    * The date format to use. Accepts a string with the characters `y`, `m` and `d` in any order, separated by a delimiter.
    * For example, `y-m-d` or `d/m/y`. All three characters must be present.
    *
@@ -701,7 +716,9 @@ class Datepicker extends GdsFormControlElement<Date> {
 
   #handleCalendarChange = (e: CustomEvent<Date>) => {
     e.stopPropagation()
-    this.value = new Date(e.detail)
+    const date = new Date(e.detail)
+    date.setUTCHours(this.utcHours, 0, 0, 0)
+    this.value = date
     this.open = false
     this.#dispatchChangeEvent()
     this.#dispatchInputEvent()
@@ -827,7 +844,7 @@ class Datepicker extends GdsFormControlElement<Date> {
     newDate.setFullYear(parseInt(this.#spinnerState.year))
     newDate.setMonth(parseInt(this.#spinnerState.month) - 1)
     newDate.setDate(parseInt(this.#spinnerState.day))
-    newDate.setHours(12, 0, 0, 0)
+    newDate.setUTCHours(this.utcHours, 0, 0, 0)
 
     if (newDate.toString() === 'Invalid Date') return
 
