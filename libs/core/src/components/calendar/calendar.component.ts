@@ -405,6 +405,7 @@ export class GdsCalendar extends GdsElement {
       handled = true
     } else if (e.key === 'PageDown') {
       newFocusedDate = addMonths(this.focusedDate, 1)
+
       handled = true
     }
 
