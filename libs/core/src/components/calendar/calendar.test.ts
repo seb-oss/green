@@ -121,7 +121,7 @@ describe('<gds-calendar>', () => {
       await sendKeys({ press: 'Enter' })
       await aTimeout(0)
 
-      await expect(el.value!.getUTCDate()).to.equal(1)
+      await expect(el.value!.getDate()).to.equal(1)
     })
 
     it('should select last day of month when pressing end', async () => {
@@ -136,10 +136,10 @@ describe('<gds-calendar>', () => {
 
       await expect(el.value?.getDate()).to.equal(
         new Date(
-          el.value!.getUTCFullYear(),
-          el.value!.getUTCMonth() + 1,
+          el.value!.getFullYear(),
+          el.value!.getMonth() + 1,
           0,
-        ).getUTCDate(),
+        ).getDate(),
       )
     })
 
