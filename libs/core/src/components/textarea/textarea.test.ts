@@ -217,7 +217,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         )
 
         await textareaEl.updateComplete
-        expect(textareaEl.rows).to.equal(4)
+        expect(parseInt(textareaEl.rows, 10)).to.equal(4)
 
         textareaEl.value = 'Line 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6'
 
@@ -229,7 +229,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
           throw new Error('Native <textarea> was not found in the shadowRoot')
         }
 
-        expect(textareaEl.rows).to.be.greaterThan(4)
+        expect(parseInt(textareaEl.rows, 10)).to.be.greaterThan(4)
         expect(
           parseInt(nativeTextarea.style.getPropertyValue('--_lines'), 10),
         ).to.be.greaterThan(4)
