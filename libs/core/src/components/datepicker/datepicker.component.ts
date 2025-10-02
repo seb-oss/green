@@ -403,8 +403,8 @@ class Datepicker extends GdsFormControlElement<Date> {
           <gds-flex
             align-items="center"
             justify-content="space-between"
-            gap="s"
-            padding="m m 0 m"
+            gap="xs; xs { s }"
+            padding="m xs 0 xs; xs { m m 0 m }"
           >
             <gds-button
               @click=${this.#handleDecrementFocusedMonth}
@@ -508,7 +508,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                   () =>
                     html` <gds-button
                       id="today-button"
-                      rank="primary"
+                      rank="tertiary"
                       size="small"
                       @click=${(e: MouseEvent) => {
                         e.stopPropagation()
