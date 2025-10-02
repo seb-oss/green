@@ -74,6 +74,7 @@ export class GdsCardInteractive extends GdsElement {
       card: true,
       [`type-${this.type}`]: true,
       [`layout-${this.layout}`]: true,
+      media: !!this.src,
       [`media-${this.media}`]: true,
     }
   }
@@ -94,14 +95,25 @@ export class GdsCardInteractive extends GdsElement {
           ${content}
         </a>
       `,
-      Content: () => html`${this.#contentParts}`,
+      Content: () => {
+        const [header, main, footer] = this.#contentParts
+        return html`
+          ${header}
+          <div class="content">${main} ${footer}</div>
+        `
+      },
     },
 
     Standard: {
-      Content: () =>
-        html`<div class=${classMap(this.#classes)}>
-          ${this.#contentParts}
-        </div> `,
+      Content: () => {
+        const [header, main, footer] = this.#contentParts
+        return html`
+          <div class=${classMap(this.#classes)}>
+            ${header}
+            <div class="content">${main} ${footer}</div>
+          </div>
+        `
+      },
     },
   }
 
@@ -118,13 +130,14 @@ export class GdsCardInteractive extends GdsElement {
           ${when(
             this.src && !hasHeaderContent,
             () => html`
-              <img
+              <gds-img
                 src=${ifDefined(this.src)}
                 object-fit="cover"
                 object-position="center"
+                border-radius="s"
                 width="100%"
                 height="100%"
-              ></img>
+              ></gds-img>
             `,
           )}
           <slot name="header"></slot>
@@ -136,11 +149,20 @@ export class GdsCardInteractive extends GdsElement {
       const footerContent = []
       const hasFooterContent = this.querySelector('[slot="footer"]') !== null
 
+      if (
+        (this.type === 'linked' && !this.href) ||
+        (!this.prompt && !hasFooterContent)
+      ) {
+        return nothing
+      }
+
       if (this.type === 'linked' && this.prompt) {
         footerContent.push(html`
           <div class="pseudo-link">
             <gds-icon-chain-link></gds-icon-chain-link>
-            <gds-text class="prompt">${this.prompt}</gds-text>
+            <gds-text font="detail-book-m" class="prompt">
+              ${this.prompt}
+            </gds-text>
           </div>
         `)
       }
@@ -170,11 +192,11 @@ export class GdsCardInteractive extends GdsElement {
 
     Main: () => html`
       <main class="main">
-        <gds-text variant="title">${this.title}</gds-text>
+        <gds-text font="heading-s">${this.title}</gds-text>
         ${when(
           this.excerpt,
           () => html`
-            <gds-text variant="body" lines="3">${this.excerpt}</gds-text>
+            <gds-text font="body-regular-m" lines="3">${this.excerpt}</gds-text>
           `,
         )}
         <slot></slot>

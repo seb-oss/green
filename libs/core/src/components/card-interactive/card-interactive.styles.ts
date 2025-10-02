@@ -21,8 +21,13 @@ const style = css`
       transition: all 264ms;
       color: inherit;
       text-decoration: none;
-      gap: var(--gds-sys-space-m);
       position: relative;
+
+      &:not(.layout-plain) {
+        border-radius: var(--gds-sys-radius-m);
+        padding: var(--gds-sys-space-xs);
+        background: var(--gds-sys-color-l2-neutral-01);
+      }
 
       a {
         color: inherit;
@@ -36,10 +41,6 @@ const style = css`
         width: 100%;
         min-height: 160px;
         height: auto;
-        border-radius: var(--gds-sys-radius-s);
-        overflow: hidden;
-        background-color: var(--gds-sys-color-l2-neutral-03);
-        color: #fff;
 
         img {
           object-fit: cover;
@@ -58,12 +59,16 @@ const style = css`
         }
       }
 
-      &.media-square header {
-        aspect-ratio: 1/1;
+      &:not(.media) header {
+        border-radius: var(--gds-sys-radius-s);
+        background-color: var(--gds-sys-color-l3-neutral-02);
       }
 
-      &.media-portrait header {
-        aspect-ratio: 2/3;
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gds-sys-space-xl);
+        padding: var(--gds-sys-space-m);
       }
 
       main {
@@ -85,26 +90,40 @@ const style = css`
         }
       }
 
+      /* Type: Linked */
       &.type-linked {
-        padding: var(--gds-sys-space-s);
+        outline: solid var(--gds-sys-space-4xs) transparent;
+        outline-offset: var(--gds-sys-space-4xs);
 
-        &::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-color: var(--gds-sys-color-l2-neutral-01);
-          transition: all 420ms;
-          border-radius: var(--gds-sys-radius-l);
-          z-index: -1;
+        &:focus {
+          outline-color: var(--gds-sys-color-content-neutral-01);
+          outline-offset: var(--gds-sys-space-3xs);
+
+          &:not(:focus-visible) {
+            outline-color: transparent;
+          }
         }
 
-        &:hover::after {
-          inset: -4px;
+        &:hover {
+          background-color: red;
         }
 
-        &:hover [gds-element='gds-img'] {
-          scale: 1.2;
-          transion: all 420ms;
+        @media (pointer: fine) {
+          &:hover {
+            background-color: color-mix(
+              in srgb,
+              var(--gds-sys-color-l2-neutral-01),
+              var(--gds-sys-color-state-neutral-03)
+            );
+          }
+        }
+
+        &:active {
+          background-color: color-mix(
+            in srgb,
+            var(--gds-sys-color-l2-neutral-01),
+            var(--gds-sys-color-state-neutral-04)
+          );
         }
       }
     }
