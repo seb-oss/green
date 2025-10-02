@@ -508,7 +508,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                   () =>
                     html` <gds-button
                       id="today-button"
-                      rank="primary"
+                      rank="tertiary"
                       size="small"
                       @click=${(e: MouseEvent) => {
                         e.stopPropagation()
