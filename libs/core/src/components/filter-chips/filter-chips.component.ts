@@ -116,7 +116,8 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
           this.value = [...this.value, clickedChip.value] as ValueT
         }
       } else {
-        this.value = clickedChip.value
+        this.value =
+          clickedChip.value === this.value ? undefined : clickedChip.value
       }
 
       this.dispatchCustomEvent('change', {
@@ -161,8 +162,6 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
 
   @watch('value')
   private _updateSelectedFromValue() {
-    if (!this.value) return
-
     if (this.multiple && !Array.isArray(this.value)) {
       this.value = [this.value] as ValueT
     }
