@@ -134,7 +134,7 @@ export class GdsCardInteractive extends GdsElement {
                 src=${ifDefined(this.src)}
                 object-fit="cover"
                 object-position="center"
-                border-radius="s"
+                border-radius="xs"
                 width="100%"
                 height="100%"
               ></gds-img>

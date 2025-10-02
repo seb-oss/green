@@ -24,7 +24,7 @@ const style = css`
       position: relative;
 
       &:not(.layout-plain) {
-        border-radius: var(--gds-sys-radius-m);
+        border-radius: var(--gds-sys-radius-s);
         padding: var(--gds-sys-space-xs);
         background: var(--gds-sys-color-l2-neutral-01);
       }
