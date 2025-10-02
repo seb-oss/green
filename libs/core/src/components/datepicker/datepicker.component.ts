@@ -473,7 +473,6 @@ class Datepicker extends GdsFormControlElement<Date> {
             .showWeekNumbers=${this.showWeekNumbers}
             .disabledWeekends=${this.disabledWeekends}
             .disabledDates=${this.disabledDates}
-            .utcHours=${this.utcHours}
           ></gds-calendar>
 
           ${when(
@@ -717,7 +716,9 @@ class Datepicker extends GdsFormControlElement<Date> {
 
   #handleCalendarChange = (e: CustomEvent<Date>) => {
     e.stopPropagation()
-    this.value = new Date(e.detail)
+    let date = new Date(e.detail)
+    date.setUTCHours(this.utcHours, 0, 0, 0)
+    this.value = date
     this.open = false
     this.#dispatchChangeEvent()
     this.#dispatchInputEvent()

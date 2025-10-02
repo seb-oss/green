@@ -722,6 +722,26 @@ describe('<gds-datepicker>', () => {
         new Date('2025-07-20T00:00:00Z').toISOString(),
       )
     })
+
+    it('should apply utcHours when picking a date in the popover', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker
+          value="2025-07-23"
+          utc-hours="10"
+          open
+        ></gds-datepicker>`,
+      )
+      await el.updateComplete
+
+      let dateCell = await el.test_getDateCell('10')
+      dateCell.click()
+
+      await el.updateComplete
+
+      await expect(el.value.toISOString()).to.equal(
+        new Date('2025-07-10T10:00:00Z').toISOString(),
+      )
+    })
   })
 
   describe('Accessibility', () => {
