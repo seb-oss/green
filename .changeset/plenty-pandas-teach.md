@@ -1,5 +1,5 @@
 ---
-'@sebgroup/green-core': patch
+'@sebgroup/green-core': minor
 ---
 
-Enable deselecting a previously selected filter chip in single select mode
+**Filter chips:** Enable deselecting a previously selected filter chip in single select mode
