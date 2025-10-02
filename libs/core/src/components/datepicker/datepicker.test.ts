@@ -733,7 +733,7 @@ describe('<gds-datepicker>', () => {
       )
       await el.updateComplete
 
-      let dateCell = await el.test_getDateCell('10')
+      const dateCell = await el.test_getDateCell('10')
       dateCell.click()
 
       await el.updateComplete

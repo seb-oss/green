@@ -716,7 +716,7 @@ class Datepicker extends GdsFormControlElement<Date> {
 
   #handleCalendarChange = (e: CustomEvent<Date>) => {
     e.stopPropagation()
-    let date = new Date(e.detail)
+    const date = new Date(e.detail)
     date.setUTCHours(this.utcHours, 0, 0, 0)
     this.value = date
     this.open = false
