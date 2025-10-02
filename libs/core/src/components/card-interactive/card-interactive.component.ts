@@ -109,6 +109,10 @@ export class GdsCardInteractive extends GdsElement {
     Header: () => {
       const hasHeaderContent = this.querySelector('[slot="header"]') !== null
 
+      if (!this.src && !hasHeaderContent) {
+        return nothing
+      }
+
       return html`
         <header class="header">
           ${when(
@@ -169,7 +173,9 @@ export class GdsCardInteractive extends GdsElement {
         <gds-text variant="title">${this.title}</gds-text>
         ${when(
           this.excerpt,
-          () => html` <gds-text variant="body">${this.excerpt}</gds-text> `,
+          () => html`
+            <gds-text variant="body" lines="3">${this.excerpt}</gds-text>
+          `,
         )}
         <slot></slot>
       </main>

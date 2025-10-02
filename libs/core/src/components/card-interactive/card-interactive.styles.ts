@@ -73,6 +73,10 @@ const style = css`
       }
 
       footer {
+        display: flex;
+        align-items: center;
+        gap: var(--gds-sys-space-s);
+
         .pseudo-link,
         .prompt-link {
           display: flex;

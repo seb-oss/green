@@ -47,7 +47,7 @@ export const CardInteractive: Story = {
 export const Variants: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-grid gap="l" columns="2" width="600px">
+    <gds-grid gap="l" columns="1; xs{2} s{3} l{4}">
       <gds-card-interactive
         type="linked"
         href="#"
@@ -66,6 +66,14 @@ export const Variants: Story = {
         prompt="Read more"
       >
         <span slot="header">hello</span>
+      </gds-card-interactive>
+      <gds-card-interactive
+        type="linked"
+        href="#"
+        title="Title"
+        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        prompt="Read more"
+      >
       </gds-card-interactive>
       <gds-card-interactive
         type="dynamic"
