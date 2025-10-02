@@ -100,7 +100,6 @@ export const Patterns: Story = {
             href="#"
             title="Title"
             excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-            prompt="Read more"
           >
             <span slot="header">Hello</span>
           </gds-card-interactive>
