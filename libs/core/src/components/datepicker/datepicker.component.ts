@@ -56,16 +56,10 @@ class Datepicker extends GdsFormControlElement<Date> {
    */
   @property({ converter: dateConverter })
   get value(): Date | undefined {
-    return this._internalValue
+    return super.value
   }
   set value(value: Date | undefined) {
-    if (!value) {
-      this._internalValue = undefined
-      return
-    }
-    const newDate = new Date(value)
-    newDate.setUTCHours(this.utcHours, 0, 0, 0)
-    this._internalValue = newDate
+    super.value = value
   }
 
   /**

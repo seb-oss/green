@@ -666,7 +666,7 @@ describe('<gds-datepicker>', () => {
       })
       await el.updateComplete
 
-      await expect(monthDropdown.value).to.equal('1')
+      await expect(monthDropdown.value).to.equal('0')
       await expect(yearDropdown.value).to.equal('2024')
     })
 
@@ -715,10 +715,11 @@ describe('<gds-datepicker>', () => {
         new Date('2025-07-23T14:00:00Z').toISOString(),
       )
 
+      // When value property is set, it should not be altered by utc-hours
       el.value = new Date('2025-07-20')
       await el.updateComplete
       await expect(el.value.toISOString()).to.equal(
-        new Date('2025-07-20T14:00:00Z').toISOString(),
+        new Date('2025-07-20T00:00:00Z').toISOString(),
       )
     })
   })
