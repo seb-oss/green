@@ -1,5 +1,6 @@
-import { nothing } from 'lit'
+import { nothing, TemplateResult } from 'lit'
 import { property } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 
@@ -56,71 +57,77 @@ export class GdsCardInteractive extends GdsElement {
   rel?: string
 
   render() {
-    return this.#renderContents()
+    if (this.href) {
+      const content = this.#Variants.Linked.Content()
+      return this.#Variants.Linked.Wrapper(content)
+    }
+
+    return this.#Variants.Standard.Content()
   }
 
   get #defaultRel() {
     return this.target === '_blank' ? 'noreferrer noopener' : undefined
   }
 
-  #renderContents() {
-    return this.href ? this.#renderLinked() : this.#renderSlottable()
-  }
-
-  #renderLinked() {
-    return html`
-      <a
-        href=${ifDefined(this.href)}
-        target=${ifDefined(this.target)}
-        rel=${ifDefined(this.rel || this.#defaultRel)}
-      >
-        <gds-card
-          variant=${this.plain ? 'secondary' : 'primary; hover:secondary'}
-          border=${this.plain ? '5xs solid transparent' : nothing}
-          class="card"
-          padding=${this.src ? 'xs' : nothing}
-          border-radius="m"
+  #Variants = {
+    Linked: {
+      Wrapper: (content: TemplateResult) => html`
+        <a
+          href=${ifDefined(this.href)}
+          target=${ifDefined(this.target)}
+          rel=${ifDefined(this.rel || this.#defaultRel)}
+          class="linked"
         >
-          ${when(
-            this.src,
-            () =>
-              html`<gds-img
-                src=${ifDefined(this.src)}
-                width="100%"
-                height="100%"
-                aspect-ratio=${ifDefined(this['aspect-ratio'])}
-                border-radius="xs"
-                object-fit="cover"
-                object-position="center"
-              ></gds-img>`,
-          )}
+          ${content}
+        </a>
+      `,
+      Content: () => html`
+        ${this.#Parts.Header()} ${this.#Parts.Main()} ${this.#Parts.Footer()}
+      `,
+    },
 
-          <gds-flex
-            flex-direction="column"
-            gap="xl"
-            padding=${this.plain || !this.src ? '0' : 'm'}
-          >
-            <gds-flex flex-direction="column" gap="xs">
-              <gds-text font="heading-s" color="neutral-01">
-                ${this.title}
-              </gds-text>
-              <gds-text font="body-regular-m" lines="3">
-                ${this.excerpt}
-              </gds-text>
-            </gds-flex>
-            <gds-flex gap="xs" align-items="center">
-              <gds-icon-chain-link size="l"></gds-icon-chain-link>
-              <gds-text font="detail-book-m" color="neutral-01"
-                >${this.prompt}</gds-text
-              >
-            </gds-flex>
-          </gds-flex>
-        </gds-card>
-      </a>
-    `
+    Standard: {
+      Content: () => html`
+        ${this.#Parts.Header()} ${this.#Parts.Main()} ${this.#Parts.Footer()}
+      `,
+    },
   }
 
-  #renderSlottable() {
-    return html`<slot></slot>`
+  #Parts = {
+    Footer: () => html`
+      <footer class="footer">
+        ${when(
+          this.prompt,
+          () => html` <gds-text class="prompt">${this.prompt}</gds-text> `,
+        )}
+        <slot name="footer"></slot>
+      </footer>
+    `,
+
+    Header: () => html`
+      <header class="header">
+        ${when(
+          this.src,
+          () => html`
+            <gds-img
+              src=${ifDefined(this.src)}
+              aspect-ratio=${ifDefined(this['aspect-ratio'])}
+            ></gds-img>
+          `,
+        )}
+        <slot name="header"></slot>
+      </header>
+    `,
+
+    Main: () => html`
+      <main class="main">
+        <gds-text variant="title">${this.title}</gds-text>
+        ${when(
+          this.excerpt,
+          () => html` <gds-text variant="body">${this.excerpt}</gds-text> `,
+        )}
+        <slot></slot>
+      </main>
+    `,
   }
 }
