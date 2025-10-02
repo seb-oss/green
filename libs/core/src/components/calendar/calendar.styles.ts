@@ -18,7 +18,7 @@ const style = css`
       border-spacing: var(--gds-sys-space-xs);
       padding: 1ch;
 
-      @media (max-width: 364px), &.small {
+      &.small {
         border-spacing: var(--gds-sys-space-3xs);
 
         thead th {
