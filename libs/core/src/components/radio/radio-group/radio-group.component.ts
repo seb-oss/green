@@ -120,6 +120,7 @@ class RadioGroup extends GdsFormControlElement<string> {
   }
 
   @watch('invalid')
+  @watch('errorMessage')
   private _syncRadioStates() {
     if (!this._isConnected) return
 
@@ -127,6 +128,7 @@ class RadioGroup extends GdsFormControlElement<string> {
       radio.checked = radio.value === this.value
       radio.size = this.size
       radio.invalid = this.invalid
+      radio.errorMessage = this.errorMessage
     })
   }
 

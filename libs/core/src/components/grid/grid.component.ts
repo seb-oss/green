@@ -19,12 +19,7 @@ export class GdsGrid extends GdsDiv {
   static styles = [tokens, GridStyles]
 
   /**
-   * The number of columns for the grid. This can be a single value that applies to all breakpoints, or a string of three space-separated tokens in the format "l:desktop m:tablet s:mobile", each token specifying the number of columns for that device type respectively.
-   * @example
-   * ```html
-   * <gds-grid columns="2"></gds-grid> <!-- applies to all breakpoints -->
-   * <gds-grid columns="l{8} m{4} s{2}"></gds-grid> <!-- different values for each breakpoint -->
-   * ```
+   * The number of columns to divide the space into. Accepts a unitless number. Example: `1; m { 2 }; l { 4 }` to vary number of columns based on viewport size.
    */
   @styleExpressionProperty({
     property: '--_c',
@@ -32,12 +27,7 @@ export class GdsGrid extends GdsDiv {
   columns?: string
 
   /**
-   * Defines the gap size between grid items. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
-   * @example
-   * ```html
-   * <gds-grid gap="m"></gds-grid> <!-- applies to all breakpoints -->
-   * <gds-grid gap="l{m} m{s} s{xs}"></gds-grid> <!-- different values for each breakpoint -->
-   * ```
+   * Defines the gap size between grid items. Uses same format as the CSS gap property, and expects space tokens. This can be a single value that applies to all breakpoints, or a string of three space-separated tokens in the format "l:desktop m:tablet s:mobile", each token specifying the gap size for that device type respectively.
    */
   @styleExpressionProperty({
     ...forSpaceTokens,
@@ -50,14 +40,10 @@ export class GdsGrid extends GdsDiv {
   gap?: string
 
   /**
-   * Defines the minimum column width. If set, the grid adjusts column size based on content and available width, even without other attributes.
-   * @example
-   * ```html
-   * <gds-grid auto-columns="200px"></gds-grid> <!-- applies to all breakpoints -->
-   * <gds-grid auto-columns="l{200px} m{100px} s{80px}"></gds-grid> <!-- different values for each breakpoint -->
-   * ```
+   * Defines the minimum column width. If set, the grid adjusts column size based on content and available width, even without other attributes. Accepts any valid CSS units.
    */
   @styleExpressionProperty({
+    reflect: true,
     property: '--_col-width',
     valueTemplate: (v) => `${isNaN(v as any) ? v : `${v}px`}`,
   })

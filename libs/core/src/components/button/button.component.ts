@@ -77,7 +77,7 @@ class Button extends GdsFormControlElement<any> {
     | 'warning' = 'neutral'
 
   /**
-   * Sets the size of the button. Defaults to "small".
+   * Sets the size of the button. Defaults to "medium".
    */
   @property({ reflect: true })
   size: 'xs' | 'small' | 'medium' | 'large' = 'medium'

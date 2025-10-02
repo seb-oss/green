@@ -59,7 +59,7 @@ const SEBSansSerifGDS = localFont({
   variable: '--gds-font-family',
   adjustFontFallback: false,
   fallback: ['sans-serif'],
-  declarations: [{ prop: 'font-family', value: 'SEB SansSerif GDS' }],
+  declarations: [{ prop: 'font-family', value: 'SEB SansSerif' }],
 })
 export const fontVariable = SEBSansSerifGDS.variable
 export default SEBSansSerifGDS

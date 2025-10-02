@@ -1,15 +1,32 @@
-// app/studio/layout.tsx
-import { Metadata } from 'next'
+// play/layout.tsx
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Studio — Green Design System',
-  description: 'Design tokens and tools',
-}
+import { usePathname } from 'next/navigation'
 
-export default function StudioLayout({
+import { SearchProvider } from '../../design/studio/context/search.context'
+import { getPageBySlug } from '../../design/studio/data/studio.data.hooks'
+import { Studio } from '../../design/studio/layout.studio'
+
+export default function PlayLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
-  return children
+}>) {
+  const PATH = usePathname()
+  const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
+  const ACTIVE = getPageBySlug(MAIN)
+
+  if (!ACTIVE) return null
+
+  return (
+    <SearchProvider>
+      <Studio
+        page={ACTIVE.key}
+        title={ACTIVE.label}
+        description={ACTIVE.description}
+      >
+        {children}
+      </Studio>
+    </SearchProvider>
+  )
 }

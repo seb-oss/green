@@ -38,7 +38,7 @@ const meta: Meta = {
       control: { type: 'select' },
     },
     size: {
-      options: ['small', 'medium', 'large'],
+      options: ['xs', 'small', 'medium', 'large'],
       control: { type: 'select' },
     },
     target: {
@@ -53,7 +53,6 @@ const meta: Meta = {
     },
   },
 }
-
 export default meta
 type Story = StoryObj
 
@@ -220,7 +219,7 @@ export const Sizes: Story = {
           Small
         </gds-button>
         <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
-          X-Small
+          XS
         </gds-button>
       </gds-flex>
       <gds-flex gap="l" align-items="center">
@@ -237,8 +236,8 @@ export const Sizes: Story = {
           Small
         </gds-button>
         <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
-          <gds-icon-credit-card slot="lead" size="s"></gds-icon-credit-card>
-          X-Small
+          <gds-icon-credit-card slot="lead" size="m"></gds-icon-credit-card>
+          XS
         </gds-button>
       </gds-flex>
     </gds-flex>
