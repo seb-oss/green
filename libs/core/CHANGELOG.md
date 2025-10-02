@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.7.0
+
+### Minor Changes
+
+- 24f3d8a: **Filter chips:** Enable deselecting a previously selected filter chip in single select mode
+
+### Patch Changes
+
+- 40ff2e3: **Datepicker**: Updated design for small viewports
+
 ## 2.6.6
 
 ### Patch Changes
