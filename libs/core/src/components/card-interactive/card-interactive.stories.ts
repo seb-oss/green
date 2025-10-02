@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 import './card-interactive'
+import '../button'
 
 const meta: Meta = {
   title: 'Components/Card Interactive',
@@ -46,8 +47,28 @@ export const CardInteractive: Story = {
 export const Variants: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-grid gap="l" columns="2">
+    <gds-grid gap="l" columns="2" width="600px">
       <gds-card-interactive
+        type="linked"
+        href="#"
+        src="https://api.seb.io/assets/launch-hero.jpg"
+        title="Title"
+        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        prompt="Read more"
+        media="square"
+      >
+      </gds-card-interactive>
+      <gds-card-interactive
+        type="linked"
+        href="#"
+        title="Title"
+        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        prompt="Read more"
+      >
+        <span slot="header">hello</span>
+      </gds-card-interactive>
+      <gds-card-interactive
+        type="dynamic"
         href="#"
         src="https://api.seb.io/assets/launch-hero.jpg"
         title="Title"
@@ -55,30 +76,17 @@ export const Variants: Story = {
         prompt="Read more"
       >
       </gds-card-interactive>
+
       <gds-card-interactive
+        type="dynamic"
         href="#"
         src="https://api.seb.io/assets/launch-hero.jpg"
         title="Title"
         excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         prompt="Read more"
-        aspect-ratio="3/2"
-        plain
       >
-      </gds-card-interactive>
-      <gds-card-interactive
-        href="#"
-        title="Title"
-        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        prompt="Read more"
-      >
-      </gds-card-interactive>
-      <gds-card-interactive
-        href="#"
-        title="Title"
-        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        prompt="Read more"
-        plain
-      >
+        <gds-button slot="footer">Primary</gds-button>
+        <gds-button slot="footer" rank="secondary">Secondary</gds-button>
       </gds-card-interactive>
     </gds-grid>
   `,

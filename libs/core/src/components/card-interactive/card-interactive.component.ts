@@ -35,17 +35,17 @@ export class GdsCardInteractive extends GdsElement {
   @property()
   prompt?: string
 
-  @property({ type: Boolean })
-  plain = false
+  @property()
+  type: 'linked' | 'dynamic' = 'linked'
 
   @property()
-  media?: 'image' | 'video' = 'image'
+  layout: 'contained' | 'plain' = 'contained'
+
+  @property()
+  media?: 'square' | 'portrait' | 'landscape' = 'landscape'
 
   @property()
   src?: string
-
-  @property()
-  'aspect-ratio'?: string
 
   @property()
   href?: string
@@ -57,7 +57,7 @@ export class GdsCardInteractive extends GdsElement {
   rel?: string
 
   render() {
-    if (this.href) {
+    if (this.type == 'linked') {
       const content = this.#Variants.Linked.Content()
       return this.#Variants.Linked.Wrapper(content)
     }
@@ -69,6 +69,19 @@ export class GdsCardInteractive extends GdsElement {
     return this.target === '_blank' ? 'noreferrer noopener' : undefined
   }
 
+  get #classes() {
+    return {
+      card: true,
+      [`type-${this.type}`]: true,
+      [`layout-${this.layout}`]: true,
+      [`media-${this.media}`]: true,
+    }
+  }
+
+  get #contentParts() {
+    return [this.#Parts.Header(), this.#Parts.Main(), this.#Parts.Footer()]
+  }
+
   #Variants = {
     Linked: {
       Wrapper: (content: TemplateResult) => html`
@@ -76,48 +89,80 @@ export class GdsCardInteractive extends GdsElement {
           href=${ifDefined(this.href)}
           target=${ifDefined(this.target)}
           rel=${ifDefined(this.rel || this.#defaultRel)}
-          class="linked"
+          class=${classMap(this.#classes)}
         >
           ${content}
         </a>
       `,
-      Content: () => html`
-        ${this.#Parts.Header()} ${this.#Parts.Main()} ${this.#Parts.Footer()}
-      `,
+      Content: () => html`${this.#contentParts}`,
     },
 
     Standard: {
-      Content: () => html`
-        ${this.#Parts.Header()} ${this.#Parts.Main()} ${this.#Parts.Footer()}
-      `,
+      Content: () =>
+        html`<div class=${classMap(this.#classes)}>
+          ${this.#contentParts}
+        </div> `,
     },
   }
 
   #Parts = {
-    Footer: () => html`
-      <footer class="footer">
-        ${when(
-          this.prompt,
-          () => html` <gds-text class="prompt">${this.prompt}</gds-text> `,
-        )}
-        <slot name="footer"></slot>
-      </footer>
-    `,
+    Header: () => {
+      const hasHeaderContent = this.querySelector('[slot="header"]') !== null
 
-    Header: () => html`
-      <header class="header">
-        ${when(
-          this.src,
-          () => html`
-            <gds-img
-              src=${ifDefined(this.src)}
-              aspect-ratio=${ifDefined(this['aspect-ratio'])}
-            ></gds-img>
-          `,
-        )}
-        <slot name="header"></slot>
-      </header>
-    `,
+      return html`
+        <header class="header">
+          ${when(
+            this.src && !hasHeaderContent,
+            () => html`
+              <img
+                src=${ifDefined(this.src)}
+                object-fit="cover"
+                object-position="center"
+                width="100%"
+                height="100%"
+              ></img>
+            `,
+          )}
+          <slot name="header"></slot>
+        </header>
+      `
+    },
+
+    Footer: () => {
+      const footerContent = []
+      const hasFooterContent = this.querySelector('[slot="footer"]') !== null
+
+      if (this.type === 'linked' && this.prompt) {
+        footerContent.push(html`
+          <div class="pseudo-link">
+            <gds-icon-chain-link></gds-icon-chain-link>
+            <gds-text class="prompt">${this.prompt}</gds-text>
+          </div>
+        `)
+      }
+
+      if (this.type === 'dynamic' && this.prompt && !hasFooterContent) {
+        footerContent.push(html`
+          <a
+            href=${ifDefined(this.href)}
+            target=${ifDefined(this.target)}
+            rel=${ifDefined(this.rel || this.#defaultRel)}
+            class="prompt-link"
+          >
+            <gds-icon-chain-link></gds-icon-chain-link>
+            <gds-text class="prompt">${this.prompt}</gds-text>
+          </a>
+        `)
+      }
+
+      if (this.type === 'dynamic' && hasFooterContent) {
+        footerContent.push(html`<slot name="footer"></slot>`)
+      } else {
+        footerContent.push(html`<slot name="footer"></slot>`)
+      }
+
+      return html`<footer class="footer">${footerContent}</footer>`
+    },
 
     Main: () => html`
       <main class="main">
