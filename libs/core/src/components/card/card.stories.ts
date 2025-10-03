@@ -65,9 +65,10 @@ export const Variants: Story = {
       <gds-card variant="secondary">
         <gds-flex gap="l" flex-direction="column">
           <gds-text tag="h3">Light mode</gds-text>
-          <gds-grid columns="2" gap="l">
+          <gds-grid columns="3" gap="l">
             <gds-card variant="primary">Primary</gds-card>
             <gds-card variant="secondary">Secondary</gds-card>
+            <gds-card variant="tertiary">Tertiary</gds-card>
             <gds-card variant="brand-01">Brand-01</gds-card>
             <gds-card variant="brand-02">Brand-02</gds-card>
           </gds-grid>
