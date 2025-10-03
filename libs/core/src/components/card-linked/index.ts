@@ -1,1 +1,1 @@
-export * from './card-interactive'
+export * from './card-linked'
