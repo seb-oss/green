@@ -2,11 +2,10 @@
 'use client'
 
 import {
+  GdsBreadcrumb,
   GdsBreadcrumbs,
   GdsButton,
-  GdsCard,
   GdsFlex,
-  GdsRichText,
   GdsText,
   IconHomeOpen,
   IconSettingsGear,
@@ -24,15 +23,15 @@ export default function ConsentPage() {
   return (
     <GdsFlex flex-direction="column" gap="l" width="100%">
       <GdsBreadcrumbs size="small">
-        <Link component="link" href="/">
+        <Link component="breadcrumb" href="/">
           <IconHomeOpen size="m" slot="lead" />
           Home
         </Link>
-        <Link component="link" href="/settings">
+        <Link component="breadcrumb" href="/settings">
           <IconSettingsGear size="m" slot="lead" />
           Settings
         </Link>
-        <GdsText>Consent</GdsText>
+        <GdsBreadcrumb>Consent</GdsBreadcrumb>
       </GdsBreadcrumbs>
 
       <GdsFlex
