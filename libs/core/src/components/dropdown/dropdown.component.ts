@@ -1,4 +1,5 @@
 import { localized, msg, str } from '@lit/localize'
+import { nothing } from 'lit'
 import { property, query, queryAsync } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
@@ -43,6 +44,7 @@ export * from '../../primitives/listbox/option.component'
  * @event input - Fired when the value of the dropdown is changed through user interaction.
  * @event gds-ui-state - Fired when the dropdown is opened or closed by the user. Can be cancelled to prevent the dropdown from opening or closing.
  * @event gds-filter-input - Fired when the user types in the search field. The event is cancellable, and the consumer is expected to handle filtering and updating the options list if the event is cancelled.
+ * @event gds-input-cleared - Fired when the user clears the input using the clear button.
  */
 @gdsCustomElement('gds-dropdown', {
   dependsOn: [
@@ -408,7 +410,7 @@ export class GdsDropdown<ValueT = any>
               <gds-icon-triangle-exclamation
                 solid
               ></gds-icon-triangle-exclamation>
-              ${this.errorMessage}
+              ${this.invalid ? this.errorMessage : nothing}
             </slot>
           </gds-form-control-footer>
         `,
@@ -476,7 +478,7 @@ export class GdsDropdown<ValueT = any>
         aria-haspopup="listbox"
         aria-controls="listbox"
         name="trigger"
-        aria-label="${this.label} ${this.displayValue}"
+        aria-label="${this.label}"
         aria-describedby="supporting-text extended-supporting-text sub-label message"
         aria-invalid="${this.invalid}"
         aria-required="${this.required}"
@@ -526,9 +528,6 @@ export class GdsDropdown<ValueT = any>
     }
   }
 
-  /**
-   * Called whenever the `value` property changes
-   */
   @watch('value')
   private _handleValueChange() {
     this._elListbox.then((listbox) => {
@@ -571,13 +570,19 @@ export class GdsDropdown<ValueT = any>
   #handleClearButton = (e: MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
+
     this.value = undefined
+
+    this.dispatchCustomEvent('gds-input-cleared', {
+      bubbles: true,
+      composed: true,
+    })
+    this.#dispatchInputEvent()
+    this.#dispatchChangeEvent()
   }
 
   /**
    * Event handler for filtering the options in the dropdown.
-   *
-   * @param e The input event.
    */
   #handleSearchFieldInput = (e: InputEvent) => {
     if (!e.currentTarget) return
@@ -635,11 +640,6 @@ export class GdsDropdown<ValueT = any>
       triggerButton.ariaActiveDescendantElement = e.target as any
   }
 
-  /**
-   * Selects an option in the dropdown.
-   *
-   * @fires change
-   */
   #handleSelectionChange() {
     this._elListbox.then((listbox) => {
       if (this.multiple) this.value = listbox.selection.map((s) => s.value)

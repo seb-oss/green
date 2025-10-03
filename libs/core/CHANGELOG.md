@@ -1,5 +1,32 @@
 # Changelog
 
+## 2.7.0
+
+### Minor Changes
+
+- 24f3d8a: **Filter chips:** Enable deselecting a previously selected filter chip in single select mode
+
+### Patch Changes
+
+- 40ff2e3: **Datepicker**: Updated design for small viewports
+
+## 2.6.6
+
+### Patch Changes
+
+- 16dbb32: **Datepicker:** Add `utcHours` property to specify the time component in UTC time of dates selected in the calendar popover. Fixes #1250
+- 66fe774: **Dropdown:** Add missing event dispatch when control is cleared using clear button
+
+## 2.6.5
+
+### Patch Changes
+
+- b3aad88: **Checkbox:** Fix error message association
+- b3aad88: **Radio:** Fix error message association
+- b3aad88: **Dropdown:** Fix selected value being added as part of the label
+- b3aad88: **Checkbox:** Fix issue with programatically moving focus to checkbox
+- b3aad88: **Input:** Fix error message association. Closes #2438
+
 ## 2.6.4
 
 ### Patch Changes

@@ -127,6 +127,24 @@ describe('<gds-filter-chips>', () => {
       expect(chip2.selected).to.be.false
     })
 
+    it('should deselect a chip when clicked if it is already selected', async () => {
+      const el = await fixture<GdsFilterChips>(
+        html`<gds-filter-chips label="filter">
+          <gds-filter-chip id="chip1" value="1">Chip 1</gds-filter-chip>
+          <gds-filter-chip id="chip2" value="2">Chip 2</gds-filter-chip>
+        </gds-filter-chips>`,
+      )
+      await el.updateComplete
+      const chip1 = el.querySelector('#chip1') as GdsFilterChip
+      const chip2 = el.querySelector('#chip2') as GdsFilterChip
+      await clickOnElement(chip1)
+      expect(chip1.selected).to.be.true
+      expect(chip2.selected).to.be.false
+      await clickOnElement(chip1)
+      expect(chip1.selected).to.be.false
+      expect(chip2.selected).to.be.false
+    })
+
     it('should select a chip when clicked and deselect the other chips if multiple is false', async () => {
       const el = await fixture<GdsFilterChips>(
         html`<gds-filter-chips label="filter">
