@@ -42,9 +42,6 @@ export const Link = React.forwardRef<HTMLElement, CustomLinkProps>(
       case 'fab':
         Component = Core.GdsFab
         break
-      case 'breadcrumbs-item':
-        Component = Core.GdsBreadcrumbsItem
-        break
       case 'menu':
         Component = Core.GdsMenuButton
         break
