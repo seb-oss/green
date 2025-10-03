@@ -221,6 +221,7 @@ export class GdsCalendar extends GdsElement {
       class="${classMap({
         small: Boolean(this.size === 'small'),
         indicators: Boolean(this.customizedDates),
+        'show-week-numbers': Boolean(this.showWeekNumbers),
       })}"
     >
       ${when(
@@ -405,6 +406,7 @@ export class GdsCalendar extends GdsElement {
       handled = true
     } else if (e.key === 'PageDown') {
       newFocusedDate = addMonths(this.focusedDate, 1)
+
       handled = true
     }
 
