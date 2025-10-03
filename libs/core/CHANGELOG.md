@@ -1,5 +1,54 @@
 # Changelog
 
+## 2.7.0
+
+### Minor Changes
+
+- 24f3d8a: **Filter chips:** Enable deselecting a previously selected filter chip in single select mode
+
+### Patch Changes
+
+- 40ff2e3: **Datepicker**: Updated design for small viewports
+
+## 2.6.6
+
+### Patch Changes
+
+- 16dbb32: **Datepicker:** Add `utcHours` property to specify the time component in UTC time of dates selected in the calendar popover. Fixes #1250
+- 66fe774: **Dropdown:** Add missing event dispatch when control is cleared using clear button
+
+## 2.6.5
+
+### Patch Changes
+
+- b3aad88: **Checkbox:** Fix error message association
+- b3aad88: **Radio:** Fix error message association
+- b3aad88: **Dropdown:** Fix selected value being added as part of the label
+- b3aad88: **Checkbox:** Fix issue with programatically moving focus to checkbox
+- b3aad88: **Input:** Fix error message association. Closes #2438
+
+## 2.6.4
+
+### Patch Changes
+
+- 1acd6a1: **FAB:** Fix button import bug when generating
+- d72190b: **SEP:** Grid fix to reflect the `auto-column` attribute
+- 1acd6a1: **FAB:** Increase the gap when there is a slotted signal
+
+## 2.6.3
+
+### Patch Changes
+
+- 8cdf051: **Grid:** Remove unused storybook style
+- 8cdf051: **Input:** Reflect size so it gets applied, fixing the gap on host for field base host
+
+## 2.6.2
+
+### Patch Changes
+
+- 90751c6: **Button:** Update wording to be `XS` everywhere, spacing and sizes on storybook
+- 5991ecf: Fixing import/exports in /components & /pure
+
 ## 2.6.1
 
 ### Patch Changes

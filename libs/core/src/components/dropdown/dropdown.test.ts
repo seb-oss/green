@@ -489,6 +489,40 @@ describe('<gds-dropdown> interactions', () => {
     await waitUntil(() => el.value === undefined)
   })
 
+  it('should emit `gds-input-cleared`, `change` and `input` events when clear button is clicked', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown clearable value="v2">
+        <gds-option isplaceholder>None</gds-option>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option id="option2" value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    await aTimeout(0)
+
+    const clearHandler = sinon.spy()
+    const changeHandler = sinon.spy()
+    const inputHandler = sinon.spy()
+    el.addEventListener('gds-input-cleared', clearHandler)
+    el.addEventListener('change', changeHandler)
+    el.addEventListener('input', inputHandler)
+
+    const clearButton =
+      el.shadowRoot!.querySelector<HTMLElement>('[id="clear-btn"]')!
+    await clickOnElement(clearButton)
+
+    await waitUntil(() => clearHandler.calledOnce)
+    await waitUntil(() => changeHandler.calledOnce)
+    await waitUntil(() => inputHandler.calledOnce)
+
+    expect(clearHandler).to.have.been.calledOnce
+    expect(changeHandler).to.have.been.calledOnce
+    expect(inputHandler).to.have.been.calledOnce
+    await expect(changeHandler.firstCall.args[0].detail.value).to.equal(
+      undefined,
+    )
+  })
+
   // Disabled because this test is unreliable. "sendMouse" does not produce a correct PointerEvent event.
   // it('should close on click outside', async () => {
   //   const el = await fixture<GdsDropdown>(html`

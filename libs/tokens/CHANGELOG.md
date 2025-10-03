@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.2.0
+
+### Minor Changes
+
+- 8cdf051: **Studio:** Studio tokens
+- 8cdf051: **Tokens:** Viewport tokens match the style expression bp
+
 ## 2.1.0
 
 ### Minor Changes

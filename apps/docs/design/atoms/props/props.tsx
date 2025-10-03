@@ -9,6 +9,7 @@ import { getComponentDocs } from '../../../hooks/args'
 
 interface ArgsTableProps {
   componentName: string
+  plain?: boolean
 }
 
 type ItemType = 'properties' | 'events'
@@ -28,7 +29,7 @@ const fuseOptions = {
   ignoreLocation: true,
 }
 
-export function ArgsTable({ componentName }: ArgsTableProps) {
+export function ArgsTable({ componentName, plain }: ArgsTableProps) {
   const [search, setSearch] = useState('')
   const [view, setView] = useState<ItemType>('properties')
   const docs = getComponentDocs(`gds-${componentName}`)
@@ -88,33 +89,39 @@ export function ArgsTable({ componentName }: ArgsTableProps) {
       width="100%"
       flex-direction="column"
       gap="xl"
-      margin="4xl 0 0 0"
+      margin={plain ? '0' : '4xl 0 0 0'}
     >
-      <Core.GdsFlex flex-direction="column" gap="s">
-        <Core.GdsText tag="h2">{`Properties`}</Core.GdsText>
-        <Core.GdsText tag="p">
-          {`This table lists all public attributes, properties, methods, events
+      {!plain && (
+        <Core.GdsFlex flex-direction="column" gap="s">
+          <Core.GdsText tag="h2">{`Properties`}</Core.GdsText>
+          <Core.GdsText tag="p">
+            {`This table lists all public attributes, properties, methods, events
           and slots of the component.`}
-        </Core.GdsText>
-        <Core.GdsAlert variant="warning">
-          {`Note: JS properties and DOM attributes have different naming
+          </Core.GdsText>
+          <Core.GdsAlert variant="warning">
+            {`Note: JS properties and DOM attributes have different naming
           conventions in Green Core (camelCase vs snake-case), so some of them
           will show up under both sections, even though they refer to the same
           underlying property.`}
-        </Core.GdsAlert>
-      </Core.GdsFlex>
-      <Core.GdsFlex gap="m" align-items="center">
+          </Core.GdsAlert>
+        </Core.GdsFlex>
+      )}
+      <Core.GdsFlex flex-direction="row" gap="m" align-items="center">
         <Core.GdsInput
           value={search}
+          size="small"
           onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
           plain
+          flex="1"
           clearable
         >
           <Core.IconMagnifyingGlass slot="lead" />
         </Core.GdsInput>
 
         <Core.GdsSegmentedControl
-          width="420px"
+          width="max-content"
+          flex="1"
+          size="small"
           value={view}
           onchange={(e) =>
             setView((e.target as HTMLSelectElement).value as ItemType)
