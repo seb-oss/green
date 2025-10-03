@@ -14,9 +14,14 @@ import BreadcrumbStyles from './breadcrumb.styles'
 
 /**
  * @element gds-breadcrumb
- * @summary The `gds-breadcrumb`
+ * @summary The `gds-breadcrumb` component represents a single item within a breadcrumb navigation.
+ * It can be rendered as a link, current page indicator, or overflow menu depending on its properties.
  *
+ * @slot - Default slot for the breadcrumb content
+ * @slot lead - Optional slot for leading content (usually icons)
+ * @slot trail - Optional slot for trailing content
  */
+
 @gdsCustomElement('gds-breadcrumb', {
   dependsOn: [GdsLink, GdsText],
 })
@@ -24,27 +29,41 @@ import BreadcrumbStyles from './breadcrumb.styles'
 export class GdsBreadcrumb extends GdsElement {
   static styles = [BreadcrumbStyles]
 
+  /**
+   * The URL that the breadcrumb item points to.
+   */
   @property()
   href = ''
 
+  /**
+   * Where to display the linked breadcrumb URL. Only used when href is present.
+   */
   @property()
   target?: '_self' | '_blank' | '_parent' | '_top'
 
+  /**
+   * The relationship of the linked breadcrumb URL. Defaults to "noreferrer noopener" when target is "_blank".
+   */
   @property()
   rel?: string
 
+  /**
+   * Accessible label for the breadcrumb item. Use when visual text needs a different description.
+   */
   @property()
   label = ''
 
+  /**
+   * Causes the browser to treat the linked breadcrumb URL as a download. Can be used with or without a value.
+   */
   @property()
   download?: string
 
+  /**
+   * When true, the breadcrumb item will render as an overflow menu instead of a regular link.
+   */
   @property({ type: Boolean, reflect: true })
   overflow = false
-
-  get #defaultRel() {
-    return this.target === '_blank' ? 'noreferrer noopener' : undefined
-  }
 
   render() {
     return html`
@@ -56,6 +75,10 @@ export class GdsBreadcrumb extends GdsElement {
         ${this.#renderContents()}
       </div>
     `
+  }
+
+  get #defaultRel() {
+    return this.target === '_blank' ? 'noreferrer noopener' : undefined
   }
 
   #renderContents() {
