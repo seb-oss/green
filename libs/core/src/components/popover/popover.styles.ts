@@ -14,7 +14,6 @@ const style = css`
     :host([open]) dialog {
       opacity: 1;
       box-sizing: border-box;
-      /*transform: translate3d(0, 0, 0);*/
       visibility: visible;
     }
 
@@ -48,7 +47,6 @@ const style = css`
         bottom: 0;
         left: 0;
 
-        max-height: 50svh;
         padding-bottom: 0;
 
         transform: translateY(0);
