@@ -10,6 +10,9 @@ import type {
   ColorTokens,
   IconGroup,
   IconPage,
+  TemplateGroup,
+  TemplateItem,
+  TemplatePage,
   TokenGroup,
   TokenPage,
 } from './studio.data.types'
@@ -23,6 +26,29 @@ export function useStudioPage(slug: string) {
       .find((page) => page.slug === slug)
 
     if (!basePage || !isLoaded) return basePage
+
+    // Handle templates
+    if (basePage.type === 'templates' && basePage.key === 'templates') {
+      const templates = actions.getTemplates()
+
+      const templateGroups: TemplateGroup[] = [
+        {
+          key: 'templates',
+          title: 'Templates',
+          items: templates.map((template) => ({
+            key: template.slug,
+            name: template.title,
+            slug: template.slug,
+            related_components: template.related_components,
+          })),
+        },
+      ]
+
+      return {
+        ...basePage,
+        templates: templateGroups,
+      } as TemplatePage
+    }
 
     // Handle icons
     if (basePage.type === 'asset' && basePage.key === 'icons') {

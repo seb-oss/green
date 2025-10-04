@@ -68,7 +68,7 @@ export const studioData: StudioCategory[] = [
       },
       {
         key: 'templates',
-        type: 'tool',
+        type: 'templates',
         slug: '/studio/templates',
         label: 'Templates',
         title: 'Templates',

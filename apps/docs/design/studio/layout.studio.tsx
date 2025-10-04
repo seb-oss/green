@@ -5,12 +5,14 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../hooks'
+import { useContent } from '../../settings/content'
 import { useSearch } from './context/search.context'
 import { useSearchContent } from './data/studio.data.hooks'
 import {
   IconGroup,
   IconPage,
   StudioPage,
+  TemplatePage,
   TokenGroup,
   TokenItem,
   TokenPage,
@@ -21,6 +23,7 @@ import * as Part from './parts'
 import { Preview } from './parts/preview'
 import { PreviewType } from './parts/preview/part.preview.types'
 import * as Tool from './tools'
+import { Template } from './tools/templates/template.single'
 
 import './layout.studio.css'
 
@@ -35,7 +38,7 @@ interface StudioProps {
 const COMPONENTS = {
   Compose: Tool.Compose,
   Playground: Tool.Playground,
-  Templates: Tool.Templates,
+  // Templates: Tool.Templates,
   Main: Part.Main,
   Migration: Interactive.Migration,
   Radius: Interactive.Radius,
@@ -176,6 +179,7 @@ const CONTENT = (
   path: string,
   previewText: string,
 ) => {
+  const { actions } = useContent()
   // const CONTENT = (page: StudioPage, router: NextRouter, path: string) => {
   const ACTIVE = path.split('/')[3]
 
@@ -375,6 +379,61 @@ const CONTENT = (
       )
     }
 
+    case 'templates': {
+      const templatePage = page as TemplatePage
+      if (!templatePage.templates) return null
+
+      // if (ACTIVE) {
+      //   const template = actions.getTemplate(ACTIVE)
+      //   if (template) {
+      //     return <Template template={template.slug} />
+      //   }
+      //   return null
+      // }
+
+      if (ACTIVE) {
+        return <Template template={ACTIVE} />
+      }
+
+      // Tokens View
+      return (
+        <Core.GdsFlex flex-direction="column" gap="6xl">
+          {templatePage.templates.map((group) => (
+            <Core.GdsGrid columns="3" key={group.key} gap="l">
+              {group.items.map((template) => (
+                <Core.GdsCard
+                  key={template.slug}
+                  padding="l"
+                  onClick={() =>
+                    router.push(`/studio/templates/${template.slug}`)
+                  }
+                  variant="secondary"
+                  border-radius="m"
+                  className="linked-card"
+                  role="link"
+                >
+                  <Core.GdsFlex flex-direction="column" gap="m">
+                    <Core.GdsText font="heading-s">
+                      {template.name}
+                    </Core.GdsText>
+                    {template.related_components && (
+                      <Core.GdsFlex gap="xs" flex-wrap="wrap">
+                        {template.related_components.map((component) => (
+                          <Core.GdsBadge key={component} size="small">
+                            {component}
+                          </Core.GdsBadge>
+                        ))}
+                      </Core.GdsFlex>
+                    )}
+                  </Core.GdsFlex>
+                </Core.GdsCard>
+              ))}
+            </Core.GdsGrid>
+          ))}
+        </Core.GdsFlex>
+      )
+    }
+
     default:
       return null
   }
@@ -409,6 +468,8 @@ export function Studio({
   // Then derive filteredPage
   const filteredPage = PAGE ? searchContent : null
   const isInteractivePage = PAGE?.pages?.some((p) => p.slug === PATH)
+  const TEMPLATE = PATH.includes('/templates/') && PART.length > 3
+
   const isDetailView =
     PART.length > 4 ||
     (PART.length > 3 &&
@@ -427,13 +488,12 @@ export function Studio({
 
   const NARROW =
     !isInteractivePage &&
+    !TEMPLATE &&
     PATH.split('/')[3] &&
     !PATH.includes('compose') &&
     PAGE &&
     LEVEL &&
     isDetailView
-
-  // const { setQuery, setCategory } = useSearch()
 
   // Clear search when main page changes
   useEffect(() => {
@@ -507,9 +567,13 @@ export function Studio({
               children
             )}
           </Core.GdsCard>
-          {ITEM && PAGE && !isInteractivePage && !PATH?.includes('compose') && (
-            <Part.Aside KEY={ITEM} page={PAGE} level={LEVEL} />
-          )}
+          {ITEM &&
+            PAGE &&
+            !isInteractivePage &&
+            !TEMPLATE &&
+            !PATH?.includes('compose') && (
+              <Part.Aside KEY={ITEM} page={PAGE} level={LEVEL} />
+            )}
         </Core.GdsGrid>
       </Core.GdsFlex>
     </Core.GdsGrid>

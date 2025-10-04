@@ -15,7 +15,7 @@ export interface Interactive {
 // Base page interface
 export interface BasePage {
   key: string
-  type: 'landing' | 'tool' | 'asset' | 'token'
+  type: 'landing' | 'tool' | 'asset' | 'token' | 'templates'
   slug: string
   label: string
   title: string
@@ -76,8 +76,18 @@ export interface LandingPage extends BasePage {
   type: 'landing'
 }
 
+export interface TemplatePage extends BasePage {
+  type: 'templates'
+  templates?: TemplateGroup[]
+}
+
 // Combined types
-export type StudioPage = TokenPage | IconPage | ToolPage | LandingPage
+export type StudioPage =
+  | TokenPage
+  | IconPage
+  | ToolPage
+  | LandingPage
+  | TemplatePage
 
 export interface StudioCategory {
   key: string
@@ -152,4 +162,21 @@ export interface ShadowsTokens {
 
 export interface TypographyTokens {
   typography: Record<string, BaseToken>
+}
+
+// Tempaltes
+
+// studio.data.types.ts
+
+export interface TemplateGroup {
+  key: string
+  title: string
+  items: TemplateItem[]
+}
+
+export interface TemplateItem {
+  key: string
+  name: string
+  slug: string
+  related_components?: string[]
 }
