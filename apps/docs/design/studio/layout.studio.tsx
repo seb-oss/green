@@ -23,7 +23,7 @@ import * as Part from './parts'
 import { Preview } from './parts/preview'
 import { PreviewType } from './parts/preview/part.preview.types'
 import * as Tool from './tools'
-import { Template } from './tools/templates/template.single'
+import Template from './tools/templates/template.single'
 
 import './layout.studio.css'
 

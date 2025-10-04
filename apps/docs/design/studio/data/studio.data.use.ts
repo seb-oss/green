@@ -38,6 +38,7 @@ export function useStudioPage(slug: string) {
           items: templates.map((template) => ({
             key: template.slug,
             name: template.title,
+            category: 'pages',
             slug: template.slug,
             related_components: template.related_components,
           })),
