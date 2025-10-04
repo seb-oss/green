@@ -55,7 +55,12 @@ export default function Template({ template }: { template: string }) {
           </Core.GdsFlex>
         </Core.GdsFlex>
       </Core.GdsFlex>
-      <Core.GdsCard min-width="100%" variant="secondary" border-radius="m">
+      <Core.GdsCard
+        min-width="100%"
+        variant="primary"
+        border-radius="m"
+        overflow="auto"
+      >
         <Tabs content={CONTENT} />
       </Core.GdsCard>
     </Core.GdsFlex>
