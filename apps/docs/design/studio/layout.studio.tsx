@@ -56,15 +56,6 @@ const Token = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false)
   const router = useRouter()
-  // const [localText, setLocalText] = useState<string>(previewText || item.token)
-  // useEffect(() => {
-  //   if (type === 'typography') {
-  //     if (previewText !== undefined) {
-  //       setLocalText(previewText || item.token)
-  //     }
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [previewText, type, item.token])
 
   const getTokenPath = (
     type: PreviewType,

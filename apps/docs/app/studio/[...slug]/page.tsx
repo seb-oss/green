@@ -28,6 +28,17 @@ async function fetchIconList() {
   }
 }
 
+async function fetchTemplatesList() {
+  try {
+    const response = await fetch('https://api.seb.io/templates/templates.json')
+    const templates = await response.json()
+    return templates.templates // Returns array of template summaries
+  } catch (error) {
+    console.error('Failed to fetch templates list:', error)
+    return []
+  }
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -56,6 +67,7 @@ export async function generateStaticParams() {
   const SHADOWS = Tokens.Shadows as ShadowsTokens
   const MOTION = Tokens.Motion as MotionTokens
   const TYPOGRAPHY = Tokens.Typography as TypographyTokens
+  const TEMPLATES = await fetchTemplatesList()
 
   paths.push({
     slug: ['compose'],
@@ -81,6 +93,14 @@ export async function generateStaticParams() {
       paths.push({
         slug: [page.slug.replace('/studio/', '')],
       })
+
+      if (page.key === 'templates') {
+        TEMPLATES.forEach((template: { slug: string }) => {
+          paths.push({
+            slug: ['templates', template.slug],
+          })
+        })
+      }
 
       // Interactive pages
       if (page.pages) {
