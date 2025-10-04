@@ -10,11 +10,17 @@ import {
   getNodeContent,
 } from '../../compose/studio.compose.hooks'
 
-interface PreviewProps {
-  content: Template
+interface ViewportInfo {
+  token: string
+  value: string
 }
 
-export default function Preview({ content }: PreviewProps) {
+interface PreviewProps {
+  content: Template
+  viewports?: ViewportInfo[]
+}
+
+export default function Preview({ content, viewports = [] }: PreviewProps) {
   const [error, setError] = useState<string | null>(null)
   const [componentsReady, setComponentsReady] = useState(false)
 
@@ -99,57 +105,80 @@ export default function Preview({ content }: PreviewProps) {
 
   return (
     <Core.GdsFlex flex-direction="column" gap="l">
-      <Core.GdsText tag="h1">{content.title}</Core.GdsText>
-      {content.related_components && (
-        <Core.GdsFlex gap="xs" flex-wrap="wrap">
-          {content.related_components.map((component) => (
-            <Core.GdsBadge key={component} size="small">
-              {component}
-            </Core.GdsBadge>
-          ))}
-        </Core.GdsFlex>
+      {false && (
+        <>
+          <Core.GdsText tag="h1">{content.title}</Core.GdsText>
+          {/* {content.related_components && (
+            <Core.GdsFlex gap="xs" flex-wrap="wrap">
+              {content.related_components.map((component) => (
+                <Core.GdsBadge key={component} size="small">
+                  {component}
+                </Core.GdsBadge>
+              ))}
+            </Core.GdsFlex>
+          )} */}
+        </>
       )}
 
-      <Core.GdsCard variant="secondary" padding="0" border-radius="l" gap="0">
-        <Core.GdsFlex
-          flex-direction="row"
-          align-items="center"
-          padding="m l"
-          gap="l"
-          border-width="0 0 4xs 0"
-        >
-          <Core.GdsFlex gap="2xs">
-            <Core.GdsDiv
-              level="3"
-              background="negative-03"
-              width="s"
-              height="s"
-              border-radius="max"
-            />
-            <Core.GdsDiv
-              level="3"
-              background="warning-03"
-              width="s"
-              height="s"
-              border-radius="max"
-            />
-            <Core.GdsDiv
-              level="3"
-              background="positive-03"
-              width="s"
-              height="s"
-              border-radius="max"
-            />
-          </Core.GdsFlex>
-          <Core.GdsFlex flex-direction="row" gap="s" align-items="center">
-            <Core.GdsText font="detail-book-m">{content.title}</Core.GdsText>
-            <Core.GdsText color="neutral-02">·</Core.GdsText>
-            <Core.GdsText color="neutral-02">1200px</Core.GdsText>
-          </Core.GdsFlex>
-        </Core.GdsFlex>
-        <Core.GdsFlex padding="m">{PREVIEW()}</Core.GdsFlex>
-      </Core.GdsCard>
+      <Core.GdsFlex width="max-content" overflow="auto" gap="xl" padding="l">
+        {viewports.length > 0 ? (
+          viewports.map(({ token, value }) => (
+            <Core.GdsCard
+              key={token}
+              variant="secondary"
+              padding="0"
+              border-radius="l"
+              gap="0"
+              width={value}
+              className="studio-page"
+            >
+              <Core.GdsFlex
+                flex-direction="row"
+                align-items="center"
+                justify-content="space-between"
+                padding="m l"
+                gap="xs"
+                border-width="0 0 4xs 0"
+                border-color="subtle-02"
+              >
+                <Core.GdsFlex flex-direction="row" align-items="center" gap="s">
+                  <Core.IconDevices />
+                  <Core.GdsText font="detail-book-s">
+                    {content.title}
+                  </Core.GdsText>
+                </Core.GdsFlex>
 
+                <Core.GdsFlex align-items="center" gap="s">
+                  <Core.GdsText font="detail-regular-xs" color="neutral-02">
+                    {value}
+                  </Core.GdsText>
+                  <Core.GdsText color="neutral-02">·</Core.GdsText>
+                  <Core.GdsText
+                    font="detail-regular-xs"
+                    color="neutral-02"
+                    text-transform="uppercase"
+                  >
+                    {token}
+                  </Core.GdsText>
+                </Core.GdsFlex>
+              </Core.GdsFlex>
+              <Core.GdsFlex padding="m" width="100%">
+                {PREVIEW()}
+              </Core.GdsFlex>
+            </Core.GdsCard>
+          ))
+        ) : (
+          // Default preview when no viewport is selected
+          <Core.GdsCard
+            variant="secondary"
+            padding="0"
+            border-radius="l"
+            gap="0"
+          >
+            Please at least one screen size.
+          </Core.GdsCard>
+        )}
+      </Core.GdsFlex>
       {error && (
         <Core.GdsCard variant="negative" padding="l">
           <Core.GdsFlex flex-direction="column" gap="s">
