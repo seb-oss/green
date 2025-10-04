@@ -48,7 +48,7 @@ export default function Settings() {
   return (
     <GdsFlex flex-direction="column" gap="l" width="100%">
       <GdsBreadcrumbs size="small">
-        <Link component="link" href="/">
+        <Link component="breadcrumb" href="/">
           <IconHomeOpen size="m" slot="lead" />
           Home
         </Link>

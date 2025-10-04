@@ -1,6 +1,7 @@
 'use client'
 
 import {
+  GdsBreadcrumb,
   GdsBreadcrumbs,
   GdsButton,
   GdsCard,
@@ -16,15 +17,15 @@ export default function Download() {
   return (
     <GdsFlex flex-direction="column" gap="l" width="100%">
       <GdsBreadcrumbs size="small">
-        <Link component="link" href="/">
+        <Link component="breadcrumb" href="/">
           <IconHomeOpen size="m" slot="lead" />
           Home
         </Link>
-        <Link component="link" href="/settings">
+        <Link component="breadcrumb" href="/settings">
           <IconSettingsGear size="m" slot="lead" />
           Settings
         </Link>
-        <GdsText>Desktop</GdsText>
+        <GdsBreadcrumb>Desktop</GdsBreadcrumb>
       </GdsBreadcrumbs>
       <GdsFlex
         flex-direction="column"

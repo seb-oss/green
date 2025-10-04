@@ -191,7 +191,7 @@ export const Color: Story = {
   },
   render: (args) => html`
     <gds-flex height="300px">
-      <gds-fab inset="auto 48px 48px auto" rank="primary">
+      <gds-fab inset="auto 48px 48px auto" rank="secondary" variant="positive">
         Secondary
         <gds-signal slot="trail" level="3" color="positive-01"></gds-signal>
       </gds-fab>

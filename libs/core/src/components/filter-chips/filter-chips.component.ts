@@ -116,7 +116,8 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
           this.value = [...this.value, clickedChip.value] as ValueT
         }
       } else {
-        this.value = clickedChip.value
+        this.value =
+          clickedChip.value === this.value ? undefined : clickedChip.value
       }
 
       this.dispatchCustomEvent('change', {
@@ -153,16 +154,27 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
   }
 
   #handleSlotChange() {
-    const selChipValue = this.chips.find((s) => s.selected)?.value
-    if (selChipValue) {
-      this.value = selChipValue
+    if (this.value === undefined) {
+      if (!this.multiple) {
+        const selChipValue = this.chips.find((s) => s.selected)?.value
+        if (selChipValue) {
+          this.value = selChipValue
+        }
+      } else {
+        const selChipValues = this.chips
+          .filter((s) => s.selected)
+          .map((s) => s.value)
+        if (selChipValues.length) {
+          this.value = selChipValues as ValueT
+        }
+      }
+    } else {
+      this._updateSelectedFromValue()
     }
   }
 
   @watch('value')
   private _updateSelectedFromValue() {
-    if (!this.value) return
-
     if (this.multiple && !Array.isArray(this.value)) {
       this.value = [this.value] as ValueT
     }

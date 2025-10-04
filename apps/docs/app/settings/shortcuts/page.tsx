@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 import {
   GdsBadge,
+  GdsBreadcrumb,
   GdsBreadcrumbs,
   GdsCard,
   GdsFlex,
@@ -54,15 +55,15 @@ export default function ShortcutsPage() {
   return (
     <GdsFlex flex-direction="column" gap="l" width="100%">
       <GdsBreadcrumbs size="small">
-        <Link component="link" href="/">
+        <Link component="breadcrumb" href="/">
           <IconHomeOpen slot="lead" size="m" />
           Home
         </Link>
-        <Link component="link" href="/settings">
+        <Link component="breadcrumb" href="/settings">
           <IconSettingsGear slot="lead" />
           Settings
         </Link>
-        <GdsText>Shortcuts</GdsText>
+        <GdsBreadcrumb>Shortcuts</GdsBreadcrumb>
       </GdsBreadcrumbs>
       <GdsFlex
         flex-direction="column"

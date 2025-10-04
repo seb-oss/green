@@ -1,5 +1,53 @@
 # Changelog
 
+## 2.8.0
+
+### Minor Changes
+
+- be2744e: **Card:** Add tertiary variant and update to `xl` the default padding on medium size screens
+- 48cfa84: **Breadcrumbs:** Add `breadcrumb` as slottable component, change the method how items are populated and separator is set.
+- 35fec52: **Theme:** Add support for `gds-theme="auto"` on root node
+
+### Patch Changes
+
+- 6ba44e5: **Filter chips:** Fix initial state issue when multiple mode is used
+- 35fec52: **Theme:** Revert default scheme to `light`, as `auto` should be opt-in.
+
+## 2.7.0
+
+### Minor Changes
+
+- 24f3d8a: **Filter chips:** Enable deselecting a previously selected filter chip in single select mode
+
+### Patch Changes
+
+- 40ff2e3: **Datepicker**: Updated design for small viewports
+
+## 2.6.6
+
+### Patch Changes
+
+- 16dbb32: **Datepicker:** Add `utcHours` property to specify the time component in UTC time of dates selected in the calendar popover. Fixes #1250
+- 66fe774: **Dropdown:** Add missing event dispatch when control is cleared using clear button
+
+## 2.6.5
+
+### Patch Changes
+
+- b3aad88: **Checkbox:** Fix error message association
+- b3aad88: **Radio:** Fix error message association
+- b3aad88: **Dropdown:** Fix selected value being added as part of the label
+- b3aad88: **Checkbox:** Fix issue with programatically moving focus to checkbox
+- b3aad88: **Input:** Fix error message association. Closes #2438
+
+## 2.6.4
+
+### Patch Changes
+
+- 1acd6a1: **FAB:** Fix button import bug when generating
+- d72190b: **SEP:** Grid fix to reflect the `auto-column` attribute
+- 1acd6a1: **FAB:** Increase the gap when there is a slotted signal
+
 ## 2.6.3
 
 ### Patch Changes

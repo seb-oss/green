@@ -25,5 +25,9 @@ const style = css`
     height: 0;
     pointer-events: none;
   }
+
+  #message {
+    display: none;
+  }
 `
 export default style

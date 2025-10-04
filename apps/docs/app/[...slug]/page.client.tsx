@@ -2,6 +2,7 @@
 'use client'
 
 import {
+  GdsBreadcrumb,
   GdsBreadcrumbs,
   GdsFlex,
   GdsText,
@@ -28,11 +29,11 @@ export function DynamicPageClient({ slug }: DynamicPageClientProps) {
   return (
     <GdsFlex flex-direction="column" gap="2xl" width="100%">
       <GdsBreadcrumbs size="small">
-        <Link component="link" href="/">
+        <Link component="breadcrumb" href="/">
           <IconHomeOpen size="m" slot="lead" />
           Home
         </Link>
-        <GdsText>{CONTENT?.title}</GdsText>
+        <GdsBreadcrumb>{CONTENT?.title}</GdsBreadcrumb>
       </GdsBreadcrumbs>
       <GdsFlex flex-direction="column" gap="xl">
         <GdsFlex flex-direction="column" gap="s" text-align="center">
