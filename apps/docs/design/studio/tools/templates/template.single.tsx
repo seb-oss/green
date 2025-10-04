@@ -8,7 +8,7 @@ import * as Tab from './template'
 const TABS = {
   preview: Tab.Preview,
   inspect: Tab.Inspect,
-  code: Tab.Code,
+  // code: Tab.Code,
 } as const
 
 export default function Template({ template }: { template: string }) {
@@ -41,12 +41,6 @@ export default function Template({ template }: { template: string }) {
             <Core.GdsFlex align-items="center" gap="xs">
               <Core.IconCursor size="m" />
               <Core.GdsText font="detail-book-s">Inspect</Core.GdsText>
-            </Core.GdsFlex>
-          </Core.GdsSegment>
-          <Core.GdsSegment value="code">
-            <Core.GdsFlex align-items="center" gap="xs">
-              <Core.IconCodeBrackets size="m" />
-              <Core.GdsText font="detail-book-s">Code</Core.GdsText>
             </Core.GdsFlex>
           </Core.GdsSegment>
         </Core.GdsSegmentedControl>

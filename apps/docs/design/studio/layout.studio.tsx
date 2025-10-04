@@ -263,7 +263,7 @@ const CONTENT = (
                     border-radius="m"
                     className="icon-card linked-card"
                     role="link"
-                    tabindex="0"
+                    tabIndex={0}
                   >
                     {item.component && (
                       <Core.GdsFlex
@@ -383,19 +383,21 @@ const CONTENT = (
       const templatePage = page as TemplatePage
       if (!templatePage.templates) return null
 
-      // if (ACTIVE) {
-      //   const template = actions.getTemplate(ACTIVE)
-      //   if (template) {
-      //     return <Template template={template.slug} />
-      //   }
-      //   return null
-      // }
-
       if (ACTIVE) {
         return <Template template={ACTIVE} />
       }
 
-      // Tokens View
+      const GO = (slug: string) => {
+        router.push(`/studio/templates/${slug}`)
+      }
+
+      const ENTER = (e: React.KeyboardEvent, slug: string) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          GO(slug)
+        }
+      }
+
       return (
         <Core.GdsFlex flex-direction="column" gap="6xl">
           {templatePage.templates.map((group) => (
@@ -404,12 +406,12 @@ const CONTENT = (
                 <Core.GdsCard
                   key={template.slug}
                   padding="l"
-                  onClick={() =>
-                    router.push(`/studio/templates/${template.slug}`)
-                  }
+                  onClick={() => GO(template.slug)}
+                  onKeyDown={(e) => ENTER(e, template.slug)}
                   variant="secondary"
                   border-radius="m"
                   className="linked-card"
+                  tabIndex={0}
                   role="link"
                 >
                   <Core.GdsFlex flex-direction="column" gap="m">
