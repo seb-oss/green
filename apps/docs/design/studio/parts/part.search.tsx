@@ -32,7 +32,11 @@ export default function StudioSearch({ page }: { page?: string }) {
     }
   }
 
-  if (pathName?.includes('compose') || pathName?.includes('playground'))
+  if (
+    pathName?.includes('compose') ||
+    (pathName.includes('/templates/') && pathName.length > 3) ||
+    pathName?.includes('playground')
+  )
     return null
 
   return (

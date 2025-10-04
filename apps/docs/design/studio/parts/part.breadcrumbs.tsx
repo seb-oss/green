@@ -133,6 +133,17 @@ export default function StudioBreadcrumbs() {
               })
             }
           }
+        } else if (currentPage.key === 'templates') {
+          // Handle templates
+          const templateSlug = segments[2]
+          const template = actions.getTemplate(templateSlug)
+
+          if (template) {
+            links.push({
+              label: template.title,
+              isLast: true,
+            })
+          }
         }
       }
     }
