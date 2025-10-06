@@ -62,7 +62,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   const getCategories = (pageType: string) => {
     switch (pageType) {
       case 'colors':
-        return ['L1', 'L2', 'L3', 'content', 'border', 'state']
+        return ['l1', 'l2', 'l3', 'content', 'border', 'state']
       case 'motion':
         return ['easing', 'duration']
       case 'typography':

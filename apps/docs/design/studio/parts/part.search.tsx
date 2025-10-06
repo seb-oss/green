@@ -31,14 +31,20 @@ export default function StudioSearch({ page }: { page?: string }) {
 
   return (
     <Core.GdsFlex
-      align-items="center"
+      flex-direction="column; m{row}"
+      align-items="flex-start; m{center}"
       justify-content="space-between"
       className="studio-search"
       gap="xl"
     >
-      <Core.GdsFlex align-items="center" width="100%" gap="s">
+      <Core.GdsFlex
+        flex-direction="column; m{row}"
+        align-items="flex-start; m{center}"
+        width="100%"
+        gap="s"
+      >
         <Core.GdsInput
-          width="400px"
+          width="100%; m{400px}"
           plain
           value={query}
           onInput={(e) => handleSearch((e.target as HTMLInputElement).value)}
@@ -47,7 +53,7 @@ export default function StudioSearch({ page }: { page?: string }) {
           <Core.IconMagnifyingGlass slot="lead" size="m" />
         </Core.GdsInput>
         {categories.length > 0 && (
-          <Core.GdsFlex width="160px">
+          <Core.GdsFlex width="100%; m{160px}">
             <Core.GdsDropdown
               plain
               value={category}

@@ -490,11 +490,10 @@ export function Studio({
 
   return (
     <Core.GdsGrid
-      columns="24"
+      columns="1; m{24}"
       gap="2xl"
       width="100%"
-      padding={takeover ? '0' : 'm'}
-      max-width="100%"
+      padding={takeover ? '0' : '0; m{m}'}
       box-sizing="border-box"
       className="studio"
     >
@@ -502,8 +501,8 @@ export function Studio({
       <Core.GdsFlex
         flex-direction="column"
         gap={PATH?.includes('compose') ? 'm' : '4xl'}
-        grid-column={takeover ? '1 / 25' : '6 / 25'}
-        padding={takeover ? 'xs' : 'l l 0 0'}
+        grid-column={takeover ? '1 / 25' : '1; m{6 / 25}'}
+        padding={takeover ? 'xs' : 'l; m{l l 0 0}'}
       >
         {!takeover && (
           <Part.Header title={title} description={description} page={page} />
