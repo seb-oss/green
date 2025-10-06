@@ -148,6 +148,7 @@ const Token = ({
           {item.dark && (
             <Preview
               type={type}
+              theme="dark"
               token={{
                 token: item.token,
                 variable: item.variable,
@@ -267,7 +268,7 @@ const CONTENT = (
                     border-radius="m"
                     className="icon-card linked-card"
                     role="link"
-                    tabindex="0"
+                    tabIndex={0}
                   >
                     {item.component && (
                       <Core.GdsFlex

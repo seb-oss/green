@@ -1,7 +1,7 @@
 import * as Component from './index'
 import { PreviewProps } from './part.preview.types'
 
-export default function Preview({ type, token }: PreviewProps) {
+export default function Preview({ type, token, theme }: PreviewProps) {
   const Previews = {
     colors: Component.Colors,
     spacing: Component.Spacing,
@@ -14,5 +14,5 @@ export default function Preview({ type, token }: PreviewProps) {
 
   if (!Previews) return null
 
-  return <Previews token={token} />
+  return <Previews token={token} theme={theme} />
 }
