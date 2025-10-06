@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.8.1
+
+### Patch Changes
+
+- 52eb344: **Breadcrumb:** Fix the failing test issue move aria current to the current item
+
 ## 2.8.0
 
 ### Minor Changes
