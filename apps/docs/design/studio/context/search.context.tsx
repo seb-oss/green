@@ -33,7 +33,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   const [previewText, setPreviewText] = useState('')
   const [takeover, setTakeover] = useState(false)
   const [solid, setSolid] = useState(false)
-  const [iconSize, setIconSize] = useState('XL')
+  const [iconSize, setIconSize] = useState('xl')
 
   // Handle keyboard shortcut
   useEffect(() => {

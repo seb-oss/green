@@ -14,9 +14,11 @@ export default function StudioSearch({ page }: { page?: string }) {
     previewText,
     setPreviewText,
     solid,
+    iconSize,
     setSolid,
     setIconSize,
   } = useSearch()
+
   const categories = page ? getCategories(page) : []
 
   const handleSearch = (value: string) => {
@@ -25,6 +27,14 @@ export default function StudioSearch({ page }: { page?: string }) {
 
   if (pathName?.includes('compose') || pathName?.includes('playground'))
     return null
+
+  interface GdsCheckboxEvent extends CustomEvent {
+    target: HTMLInputElement
+  }
+
+  interface GdsDropdownEvent extends CustomEvent {
+    target: HTMLSelectElement
+  }
 
   return (
     <Core.GdsFlex
@@ -58,16 +68,24 @@ export default function StudioSearch({ page }: { page?: string }) {
       </Core.GdsFlex>
       <Core.GdsFlex>
         {page === 'icons' && (
-          <Core.GdsFlex align-items="center" gap="s">
+          <Core.GdsFlex align-items="center" gap="2xl">
             <Core.GdsCheckbox
               label="Solid"
               checked={solid}
-              onChange={(e) => setSolid(e.target.checked)}
+              // onChange={(e) => setSolid(e.target.checked)}
+              onInput={(e: React.FormEvent<HTMLElement>) => {
+                const customElement = e.target as HTMLElement & {
+                  checked: boolean
+                }
+                setSolid(customElement.checked)
+              }}
             />
 
             <Core.GdsFlex width="100px">
               <Core.GdsDropdown
                 plain
+                size="small"
+                value={iconSize}
                 onchange={(e: Event) => {
                   const target = e.target as HTMLSelectElement
                   setIconSize(target.value)
@@ -77,6 +95,8 @@ export default function StudioSearch({ page }: { page?: string }) {
                 <Core.GdsOption value="m">M</Core.GdsOption>
                 <Core.GdsOption value="l">L</Core.GdsOption>
                 <Core.GdsOption value="xl">XL</Core.GdsOption>
+                <Core.GdsOption value="2xl">2XL</Core.GdsOption>
+                <Core.GdsOption value="3xl">3XL</Core.GdsOption>
               </Core.GdsDropdown>
             </Core.GdsFlex>
           </Core.GdsFlex>
