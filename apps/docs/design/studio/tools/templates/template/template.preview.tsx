@@ -122,15 +122,16 @@ export default function Preview({ content, viewports = [] }: PreviewProps) {
 
       <Core.GdsFlex width="max-content" overflow="auto" gap="xl" padding="l">
         {viewports.length > 0 ? (
-          viewports.map(({ token, value }) => (
+          viewports.map(({ token, value }, index) => (
             <Core.GdsCard
-              key={token}
+              // key={token}
+              key={`viewport-${token}-${index}`}
               variant="secondary"
               padding="0"
               border-radius="l"
               gap="0"
               width={value}
-              className="studio-page"
+              className="template-viewport"
             >
               <Core.GdsFlex
                 flex-direction="row"

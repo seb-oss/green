@@ -1,0 +1,9 @@
+.template-viewport {
+  transition: var(--s);
+  transition-delay: 120ms;
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 10px;
+  }
+}

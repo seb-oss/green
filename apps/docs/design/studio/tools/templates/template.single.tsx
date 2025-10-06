@@ -3,8 +3,11 @@ import { useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
 import { useContent } from '../../../../settings/content'
+import { useSearch } from '../../context/search.context'
 import * as Tokens from '../../data/studio.data.tokens'
 import * as Tab from './template'
+
+import './template.single.css'
 
 const TABS = {
   preview: Tab.Preview,
@@ -17,12 +20,13 @@ const DEFAULT_VIEWPORTS = ['s', 'm', 'l']
 export default function Template({ template }: { template: string }) {
   const { actions } = useContent()
   const CONTENT = actions.getTemplate(template)
+  const { setTakeover, takeover } = useSearch()
   const [TAB, SET_TAB] = useState<keyof typeof TABS>('preview')
   const [selectedViewports, setSelectedViewports] =
     useState<string[]>(DEFAULT_VIEWPORTS)
 
   const viewportTokens = Object.entries(Tokens.Viewport.viewport)
-    .filter(([key]) => key !== '0') // Remove '0' from the list
+    .filter(([key]) => key !== '0')
     .map(([key, value]) => ({
       token: key,
       value: value.value,
@@ -40,16 +44,28 @@ export default function Template({ template }: { template: string }) {
 
   const handleViewportChange = (e: Event) => {
     const customEvent = e as CustomEvent<{ value: string | string[] }>
-    const newValue = customEvent.detail.value
+
+    // Check if it's a clear event
+    if (e.type === 'gds-input-cleared') {
+      setSelectedViewports(DEFAULT_VIEWPORTS)
+      return
+    }
+
+    // For regular change events
+    const newValue = customEvent.detail?.value
+
+    // If value is undefined (cleared), set to defaults
+    if (newValue === undefined) {
+      setSelectedViewports(DEFAULT_VIEWPORTS)
+      return
+    }
 
     if (Array.isArray(newValue)) {
       // Handle "Select All" option
       if (newValue.includes('all')) {
         if (selectedViewports.length === allViewportTokens.length) {
-          // If all were selected, deselect all
-          setSelectedViewports([])
+          setSelectedViewports(DEFAULT_VIEWPORTS)
         } else {
-          // Select all viewports
           setSelectedViewports(allViewportTokens)
         }
       } else {
@@ -86,7 +102,16 @@ export default function Template({ template }: { template: string }) {
           </Core.GdsSegment>
         </Core.GdsSegmentedControl>
         <Core.GdsFlex gap="s">
-          <Core.GdsButton size="small" rank="tertiary">
+          {/* <Core.GdsButton size="small" rank="tertiary">
+            <Core.IconFullscreen size="m" />
+          </Core.GdsButton> */}
+          <Core.GdsButton
+            rank="tertiary"
+            size="small"
+            onClick={() => {
+              setTakeover(!takeover)
+            }}
+          >
             <Core.IconFullscreen size="m" />
           </Core.GdsButton>
           <Core.GdsFlex width="200px">
@@ -94,11 +119,13 @@ export default function Template({ template }: { template: string }) {
               multiple
               plain
               searchable
+              clearable
               size="small"
               value={selectedViewports}
               onchange={handleViewportChange}
+              on-gds-input-cleared={handleViewportChange}
             >
-              <Core.GdsOption value="all">
+              <Core.GdsOption value="all" key="viewport-all">
                 {selectedViewports.length === allViewportTokens.length
                   ? 'Deselect All'
                   : 'Select All'}
