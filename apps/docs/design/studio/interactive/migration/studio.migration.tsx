@@ -78,7 +78,7 @@ export default function DeprecatedIcons({
               key={icon.old}
               width="100%"
             >
-              <Core.GdsGrid columns="4" gap="l" width="100%">
+              <Core.GdsGrid columns="1; m{4}" gap="l" width="100%">
                 <Core.GdsFlex
                   align-items="center"
                   gap="s"
@@ -115,7 +115,9 @@ export default function DeprecatedIcons({
                   </Core.GdsCard>
                   <Core.GdsText>{icon.new}</Core.GdsText>
                 </Core.GdsFlex>
-                <div>{``}</div>
+                <Core.GdsFlex display="none; m{flex}">
+                  <div>{``}</div>
+                </Core.GdsFlex>
                 <Copy name={icon.new} />
               </Core.GdsGrid>
             </Core.GdsFlex>
