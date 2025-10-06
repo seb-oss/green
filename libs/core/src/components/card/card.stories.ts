@@ -133,7 +133,7 @@ export const Cardshadow: Story = {
   name: 'Box shadow',
   render: (args) =>
     html`<gds-grid
-      columns="1; m{3}"
+      columns="1; s{6}"
       gap="2xl"
       padding="2xl"
       width="100%"
@@ -146,6 +146,7 @@ export const Cardshadow: Story = {
         variant="secondary"
         height="100px"
         justify-content="center"
+        border-width="0"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           XS
@@ -158,6 +159,7 @@ export const Cardshadow: Story = {
         variant="secondary"
         height="100px"
         justify-content="center"
+        border-width="0"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           S
@@ -170,6 +172,7 @@ export const Cardshadow: Story = {
         variant="secondary"
         height="100px"
         justify-content="center"
+        border-width="0"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           M
@@ -182,6 +185,7 @@ export const Cardshadow: Story = {
         variant="secondary"
         height="100px"
         justify-content="center"
+        border-width="0"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           L
@@ -194,6 +198,7 @@ export const Cardshadow: Story = {
         variant="secondary"
         height="100px"
         justify-content="center"
+        border-width="0"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           XL
@@ -206,6 +211,7 @@ export const Cardshadow: Story = {
         variant="secondary"
         height="100px"
         justify-content="center"
+        border-width="0"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           2XL
