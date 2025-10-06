@@ -171,11 +171,22 @@ export default function Preview({ content, viewports = [] }: PreviewProps) {
           // Default preview when no viewport is selected
           <Core.GdsCard
             variant="secondary"
-            padding="0"
+            padding="2xl"
             border-radius="l"
             gap="0"
+            width="100%"
           >
-            Please at least one screen size.
+            <Core.GdsFlex
+              flex-direction="column"
+              gap="s"
+              align-items="center"
+              justify-content="center"
+            >
+              <Core.IconDevices size="xl" color="neutral-02" />
+              <Core.GdsText color="neutral-02" font="detail-book-m">
+                Please select at least one viewport size.
+              </Core.GdsText>
+            </Core.GdsFlex>
           </Core.GdsCard>
         )}
       </Core.GdsFlex>

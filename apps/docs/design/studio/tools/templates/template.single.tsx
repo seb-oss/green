@@ -21,12 +21,14 @@ export default function Template({ template }: { template: string }) {
   const [selectedViewports, setSelectedViewports] =
     useState<string[]>(DEFAULT_VIEWPORTS)
 
-  const viewportTokens = Object.entries(Tokens.Viewport.viewport).map(
-    ([key, value]) => ({
+  const viewportTokens = Object.entries(Tokens.Viewport.viewport)
+    .filter(([key]) => key !== '0') // Remove '0' from the list
+    .map(([key, value]) => ({
       token: key,
       value: value.value,
-    }),
-  )
+    }))
+
+  const allViewportTokens = viewportTokens.map((vt) => vt.token)
 
   const selectedViewportValues = selectedViewports.map((token) => {
     const viewport = viewportTokens.find((vt) => vt.token === token)
@@ -39,7 +41,23 @@ export default function Template({ template }: { template: string }) {
   const handleViewportChange = (e: Event) => {
     const customEvent = e as CustomEvent<{ value: string | string[] }>
     const newValue = customEvent.detail.value
-    setSelectedViewports(Array.isArray(newValue) ? newValue : [newValue])
+
+    if (Array.isArray(newValue)) {
+      // Handle "Select All" option
+      if (newValue.includes('all')) {
+        if (selectedViewports.length === allViewportTokens.length) {
+          // If all were selected, deselect all
+          setSelectedViewports([])
+        } else {
+          // Select all viewports
+          setSelectedViewports(allViewportTokens)
+        }
+      } else {
+        setSelectedViewports(newValue)
+      }
+    } else {
+      setSelectedViewports([newValue])
+    }
   }
 
   return (
@@ -80,6 +98,11 @@ export default function Template({ template }: { template: string }) {
               value={selectedViewports}
               onchange={handleViewportChange}
             >
+              <Core.GdsOption value="all">
+                {selectedViewports.length === allViewportTokens.length
+                  ? 'Deselect All'
+                  : 'Select All'}
+              </Core.GdsOption>
               {viewportTokens.map((token) => (
                 <Core.GdsOption key={token.token} value={token.token}>
                   {token.token}
