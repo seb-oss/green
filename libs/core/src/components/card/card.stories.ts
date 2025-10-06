@@ -132,12 +132,20 @@ export const Cardshadow: Story = {
   ...DefaultParams,
   name: 'Box shadow',
   render: (args) =>
-    html`<gds-grid columns="4" gap="l">
+    html`<gds-grid
+      columns="1; m{3}"
+      gap="2xl"
+      padding="2xl"
+      width="100%"
+      box-sizing="border-box"
+    >
       <gds-card
         padding="s{xs} m{l} l{l}"
         box-shadow="xs"
         border-radius="xs"
         variant="secondary"
+        height="100px"
+        justify-content="center"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           XS
@@ -148,6 +156,8 @@ export const Cardshadow: Story = {
         box-shadow="s"
         border-radius="xs"
         variant="secondary"
+        height="100px"
+        justify-content="center"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           S
@@ -158,6 +168,8 @@ export const Cardshadow: Story = {
         box-shadow="m"
         border-radius="xs"
         variant="secondary"
+        height="100px"
+        justify-content="center"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           M
@@ -168,6 +180,8 @@ export const Cardshadow: Story = {
         box-shadow="l"
         border-radius="xs"
         variant="secondary"
+        height="100px"
+        justify-content="center"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           L
@@ -178,6 +192,8 @@ export const Cardshadow: Story = {
         box-shadow="xl"
         border-radius="xs"
         variant="secondary"
+        height="100px"
+        justify-content="center"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           XL
@@ -188,6 +204,8 @@ export const Cardshadow: Story = {
         box-shadow="2xl"
         border-radius="xs"
         variant="secondary"
+        height="100px"
+        justify-content="center"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           2XL
