@@ -18,6 +18,11 @@ interface SearchContextType {
   setPreviewText: (query: string) => void
   setCategory: (category: string) => void
   getCategories: (pageType: string) => string[]
+  // Icons
+  solid: boolean
+  iconSize: string
+  setSolid: (solid: boolean) => void
+  setIconSize: (size: string) => void
 }
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined)
@@ -27,6 +32,8 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   const [category, setCategory] = useState('')
   const [previewText, setPreviewText] = useState('')
   const [takeover, setTakeover] = useState(false)
+  const [solid, setSolid] = useState(false)
+  const [iconSize, setIconSize] = useState('xl')
 
   // Handle keyboard shortcut
   useEffect(() => {
@@ -55,11 +62,27 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   const getCategories = (pageType: string) => {
     switch (pageType) {
       case 'colors':
-        return ['L1', 'L2', 'L3', 'content', 'border', 'state']
+        return ['l1', 'l2', 'l3', 'content', 'border', 'state']
       case 'motion':
         return ['easing', 'duration']
       case 'typography':
         return ['heading', 'body', 'detail']
+      case 'icons':
+        return [
+          'Arrows',
+          'Brands',
+          'Code',
+          'Communication',
+          'Date',
+          'Devices',
+          'Finance',
+          'General',
+          'Media',
+          'People',
+          'Things',
+          'Utilities',
+          'Weather',
+        ]
       default:
         return []
     }
@@ -77,6 +100,11 @@ export function SearchProvider({ children }: { children: ReactNode }) {
         setQuery,
         setCategory,
         getCategories,
+        // Icons
+        solid,
+        iconSize,
+        setSolid,
+        setIconSize,
       }}
     >
       {children}
