@@ -18,6 +18,11 @@ interface SearchContextType {
   setPreviewText: (query: string) => void
   setCategory: (category: string) => void
   getCategories: (pageType: string) => string[]
+  // Icons
+  solid: boolean
+  iconSize: string
+  setSolid: (solid: boolean) => void
+  setIconSize: (size: string) => void
 }
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined)
@@ -27,6 +32,8 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   const [category, setCategory] = useState('')
   const [previewText, setPreviewText] = useState('')
   const [takeover, setTakeover] = useState(false)
+  const [solid, setSolid] = useState(false)
+  const [iconSize, setIconSize] = useState('XL')
 
   // Handle keyboard shortcut
   useEffect(() => {
@@ -77,6 +84,11 @@ export function SearchProvider({ children }: { children: ReactNode }) {
         setQuery,
         setCategory,
         getCategories,
+        // Icons
+        solid,
+        iconSize,
+        setSolid,
+        setIconSize,
       }}
     >
       {children}

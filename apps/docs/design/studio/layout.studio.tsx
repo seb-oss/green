@@ -183,6 +183,8 @@ const CONTENT = (
   router: any,
   path: string,
   previewText: string,
+  solid: boolean,
+  size: string,
 ) => {
   // const CONTENT = (page: StudioPage, router: NextRouter, path: string) => {
   const ACTIVE = path.split('/')[3]
@@ -267,7 +269,7 @@ const CONTENT = (
                     border-radius="m"
                     className="icon-card linked-card"
                     role="link"
-                    tabindex="0"
+                    tabIndex={0}
                   >
                     {item.component && (
                       <Core.GdsFlex
@@ -277,7 +279,11 @@ const CONTENT = (
                         align-items="center"
                         className="icon-preview"
                       >
-                        <Icon name={item.component} size="xl" />
+                        <Icon
+                          name={item.component}
+                          size={size.toLowerCase()}
+                          solid={solid}
+                        />
                       </Core.GdsFlex>
                     )}
                     <Core.GdsText
@@ -402,7 +408,12 @@ export function Studio({
     takeover,
     previewText,
     setPreviewText,
+    solid,
+    setSolid,
+    iconSize,
+    setIconSize,
   } = useSearch()
+
   const PATH = usePathname()
   const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
   const PAGE = useStudioPage(MAIN)
@@ -510,7 +521,7 @@ export function Studio({
             {query && !hasResults ? (
               <NoResults />
             ) : filteredPage ? (
-              CONTENT(filteredPage, ROUT, PATH, previewText)
+              CONTENT(filteredPage, ROUT, PATH, previewText, solid, iconSize)
             ) : (
               children
             )}

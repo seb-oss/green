@@ -5,31 +5,22 @@ import * as Core from '@sebgroup/green-core/react'
 import { useSearch } from '../context/search.context'
 
 export default function StudioSearch({ page }: { page?: string }) {
-  const router = useRouter()
   const pathName = usePathname()
   const {
     query,
     category,
     setQuery,
-    setCategory,
     getCategories,
     previewText,
     setPreviewText,
+    solid,
+    setSolid,
+    setIconSize,
   } = useSearch()
   const categories = page ? getCategories(page) : []
 
   const handleSearch = (value: string) => {
     setQuery(value)
-  }
-
-  const handleCategoryChange = (e: Event) => {
-    const target = e.target as HTMLSelectElement
-    setCategory(target.value)
-    if (target.value) {
-      router.push(`/studio/${page}/${target.value.toLowerCase()}`)
-    } else {
-      router.push(`/studio/${page}`)
-    }
   }
 
   if (pathName?.includes('compose') || pathName?.includes('playground'))
@@ -40,6 +31,7 @@ export default function StudioSearch({ page }: { page?: string }) {
       align-items="center"
       justify-content="space-between"
       className="studio-search"
+      gap="xl"
     >
       <Core.GdsFlex align-items="center" width="100%" gap="s">
         <Core.GdsInput
@@ -51,6 +43,45 @@ export default function StudioSearch({ page }: { page?: string }) {
         >
           <Core.IconMagnifyingGlass slot="lead" size="m" />
         </Core.GdsInput>
+        {categories.length > 0 && (
+          <Core.GdsFlex width="160px">
+            <Core.GdsDropdown plain value={category}>
+              <Core.GdsOption value="">All Categories</Core.GdsOption>
+              {categories.map((cat) => (
+                <Core.GdsOption key={cat} value={cat}>
+                  {cat}
+                </Core.GdsOption>
+              ))}
+            </Core.GdsDropdown>
+          </Core.GdsFlex>
+        )}
+      </Core.GdsFlex>
+      <Core.GdsFlex>
+        {page === 'icons' && (
+          <Core.GdsFlex align-items="center" gap="s">
+            <Core.GdsCheckbox
+              label="Solid"
+              checked={solid}
+              onChange={(e) => setSolid(e.target.checked)}
+            />
+
+            <Core.GdsFlex width="100px">
+              <Core.GdsDropdown
+                plain
+                onchange={(e: Event) => {
+                  const target = e.target as HTMLSelectElement
+                  setIconSize(target.value)
+                }}
+              >
+                <Core.GdsOption value="s">S</Core.GdsOption>
+                <Core.GdsOption value="m">M</Core.GdsOption>
+                <Core.GdsOption value="l">L</Core.GdsOption>
+                <Core.GdsOption value="xl">XL</Core.GdsOption>
+              </Core.GdsDropdown>
+            </Core.GdsFlex>
+          </Core.GdsFlex>
+        )}
+
         {page === 'typography' && (
           <Core.GdsInput
             width="100%"
@@ -64,22 +95,6 @@ export default function StudioSearch({ page }: { page?: string }) {
             <Core.IconPencilWave slot="lead" size="m" />
           </Core.GdsInput>
         )}
-        {/* {categories.length > 0 && (
-          <Core.GdsFlex width="160px">
-            <Core.GdsDropdown
-              plain
-              value={category}
-              onchange={handleCategoryChange}
-            >
-              <Core.GdsOption value="">All Categories</Core.GdsOption>
-              {categories.map((cat) => (
-                <Core.GdsOption key={cat} value={cat}>
-                  {cat}
-                </Core.GdsOption>
-              ))}
-            </Core.GdsDropdown>
-          </Core.GdsFlex>
-        )} */}
       </Core.GdsFlex>
     </Core.GdsFlex>
   )
