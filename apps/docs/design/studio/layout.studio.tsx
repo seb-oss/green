@@ -251,7 +251,10 @@ const CONTENT = (
                   )}
                 </Core.GdsFlex>
               )}
-              <Core.GdsGrid columns={ACTIVE ? '4' : '5'} gap="l">
+              <Core.GdsGrid
+                columns={ACTIVE ? '2; s{2} m{3} l{4}' : '2; s{3} m{5}'}
+                gap="l"
+              >
                 {group.items.map((item) => (
                   <Core.GdsCard
                     padding="l"
@@ -507,15 +510,20 @@ export function Studio({
         {!takeover && (
           <Part.Header title={title} description={description} page={page} />
         )}
-        <Core.GdsGrid columns="12" align-items="flex-start">
+        <Core.GdsGrid
+          columns="1; s{12}"
+          align-items="flex-start"
+          flex-direction="row-reverse"
+        >
           <Core.GdsCard
             flex-direction="column"
-            grid-column={NARROW ? '1 / 10' : '1 / 13'}
+            grid-column={NARROW ? '1; s{1 / 8} m{1 / 10}' : '1; s{1 / 13}'}
             variant="secondary"
             className="studio-page"
             padding="0"
             border="none"
             background="none"
+            order="2; s{0}"
           >
             {query && !hasResults ? (
               <NoResults />
