@@ -20,20 +20,20 @@ import { GdsFlex } from '../flex/flex.component'
 import { IconChainLink } from '../icon/icons/chain-link'
 import { GdsImg } from '../img/img.component'
 import { GdsText } from '../text/text.component'
-import CardLinkedStyles from './card-linked.styles'
+import CardLinkedStyles from './card-dynamic.styles'
 
 /**
- * @element gds-card-linked
+ * @element gds-card-dynamic
  */
-@gdsCustomElement('gds-card-linked', {
+@gdsCustomElement('gds-card-dynamic', {
   dependsOn: [GdsCard, GdsImg, GdsText, GdsFlex, IconChainLink],
 })
-export class GdsCardLinked extends withSizeXProps(
+export class GdsCardDynamic extends withSizeXProps(
   withMarginProps(withLayoutChildProps(GdsElement)),
 ) {
   static styles = [tokens, CardLinkedStyles]
 
   render() {
-    return html`Link`
+    return html`Dynamic`
   }
 }
