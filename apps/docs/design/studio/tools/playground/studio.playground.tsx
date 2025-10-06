@@ -41,7 +41,7 @@ export default function Playground() {
 
   return (
     <Core.GdsFlex flex-direction="column" gap="xl" className="studio-page">
-      <Core.GdsGrid columns="2" gap="l">
+      <Core.GdsGrid columns="1; m{2}" gap="l">
         <Core.GdsCard
           justify-content="center"
           align-items="center"
@@ -49,9 +49,9 @@ export default function Playground() {
           background="none"
           variant="secondary"
           border-radius="l"
-          height="60vh"
-          position="sticky"
-          inset="40px 0 0 0"
+          height="40vh; m{60vh}"
+          position="relative; m{sticky}"
+          inset="0; m{40px 0 0 0}"
         >
           <Core.GdsButton
             size={buttonConfig.size}

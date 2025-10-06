@@ -25,40 +25,6 @@ export function useStudioPage(slug: string) {
     if (!basePage || !isLoaded) return basePage
 
     // Handle icons
-    // if (basePage.type === 'asset' && basePage.key === 'icons') {
-    //   const iconComponent = actions.getComponent('icon')
-    //   const icons = iconComponent?.icons || {}
-
-    //   const iconGroups: IconGroup[] = Array.from(
-    //     new Set(
-    //       Object.values(icons)
-    //         .map((icon) => icon.meta.categories)
-    //         .flat(),
-    //     ),
-    //   )
-    //     .sort()
-    //     .map((category) => ({
-    //       key: category,
-    //       // title: category.charAt(0).toUpperCase() + category.slice(1),
-    //       title: category,
-    //       items: Object.values(icons)
-    //         .filter((icon) => icon.meta.categories.includes(category))
-    //         .map((icon) => ({
-    //           key: icon.id,
-    //           name: icon.displayName,
-    //           component: icon.reactName,
-    //           value: icon.variants.regular,
-    //         }))
-    //         .sort((a, b) => a.name.localeCompare(b.name)),
-    //     }))
-
-    //   return {
-    //     ...basePage,
-    //     icons: iconGroups,
-    //   } as IconPage
-    // }
-
-    // Handle icons
     if (basePage.type === 'asset' && basePage.key === 'icons') {
       const icons = actions.getIcons()
 

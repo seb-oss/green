@@ -8,6 +8,7 @@ import * as Core from '@sebgroup/green-core/react'
 import * as Part from '..'
 import { Icon } from '../../../../hooks'
 import { useContent } from '../../../../settings/content'
+import { useSearch } from '../../context/search.context'
 import { IconItem, IconPage } from '../../data/studio.data.types'
 
 interface IconAsideProps {
@@ -115,6 +116,7 @@ export function IconAside({
   allItems,
 }: IconAsideProps) {
   const router = useRouter()
+  const { solid, iconSize } = useSearch()
   const [activeTab, setActiveTab] = useState<'code' | 'download'>('code')
   const { actions } = useContent()
 
@@ -176,7 +178,7 @@ export function IconAside({
             <Core.IconCrossSmall />
           </Core.GdsButton>
         </Core.GdsFlex>
-        <Icon name={currentItem.component} size="xl" />
+        <Icon name={currentItem.component} size={iconSize} solid={solid} />
       </Core.GdsCard>
 
       {/* Info and Navigation */}

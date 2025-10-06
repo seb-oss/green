@@ -89,7 +89,6 @@ export class GdsBreadcrumb extends GdsElement {
         target=${ifDefined(this.target)}
         rel=${ifDefined(this.rel || this.#defaultRel)}
         aria-label=${this.label || nothing}
-        aria-current=${ifDefined(!this.href ? 'page' : undefined)}
       >
         <slot name="lead"></slot>
         <slot></slot>
@@ -100,7 +99,11 @@ export class GdsBreadcrumb extends GdsElement {
 
   #renderCurrent() {
     return html`
-      <gds-text color="neutral-02" font-weight="regular">
+      <gds-text
+        color="neutral-02"
+        font-weight="regular"
+        aria-current=${ifDefined(!this.href ? 'page' : undefined)}
+      >
         <slot></slot>
       </gds-text>
     `

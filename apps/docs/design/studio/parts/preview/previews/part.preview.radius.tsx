@@ -10,6 +10,7 @@ export default function Radius({ token }: ColorPreviewProps) {
       border-width="2xs 0 0 2xs"
       padding="0"
       variant="secondary"
+      background="none"
       border-color="subtle-01"
       border-radius={`${token.token} 0 0 0`}
     />
