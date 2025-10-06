@@ -135,6 +135,16 @@ export const Cardshadow: Story = {
     html`<gds-grid columns="4" gap="l">
       <gds-card
         padding="s{xs} m{l} l{l}"
+        box-shadow="xs"
+        border-radius="xs"
+        variant="secondary"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          XS
+        </gds-flex>
+      </gds-card>
+      <gds-card
+        padding="s{xs} m{l} l{l}"
         box-shadow="s"
         border-radius="xs"
         variant="secondary"
@@ -170,7 +180,17 @@ export const Cardshadow: Story = {
         variant="secondary"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
-          xl
+          XL
+        </gds-flex>
+      </gds-card>
+      <gds-card
+        padding="s{xs} m{l} l{l}"
+        box-shadow="2xl"
+        border-radius="xs"
+        variant="secondary"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          2XL
         </gds-flex>
       </gds-card>
     </gds-grid>`,
