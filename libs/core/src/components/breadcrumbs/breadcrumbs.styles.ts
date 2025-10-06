@@ -5,29 +5,30 @@ const style = css`
   @layer base {
     :host {
       container-type: inline-size;
+      --_gap: var(--gds-sys-space-s);
     }
 
     nav {
       display: flex;
       align-items: center;
       width: max-content;
-      gap: var(--gds-sys-space-s);
+      gap: var(--_gap);
       font: var(--gds-sys-text-detail-book-m);
     }
 
     .size-small {
       font: var(--gds-sys-text-detail-book-s);
-      gap: var(--gds-sys-space-xs);
+      --_gap: var(--gds-sys-space-xs);
     }
 
-    .size-small ol {
-      gap: var(--gds-sys-space-xs);
+    .size-small .list {
+      --_gap: var(--gds-sys-space-xs);
     }
 
-    ol {
+    .list {
       display: flex;
       align-items: center;
-      gap: var(--gds-sys-space-s);
+      gap: var(--_gap);
       list-style: none;
       margin-block-start: 0;
       margin-block-end: 0;
@@ -38,27 +39,13 @@ const style = css`
       line-height: inherit;
     }
 
-    li {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      list-style: none;
-      margin: unset;
-      padding: unset;
-      height: max-content;
-      font-weight: inherit;
-      font-size: inherit;
-      line-height: inherit;
+    ::slotted(*:not(:last-child))::after {
+      content: '/';
+      display: block;
     }
 
-    li:last-child {
-      color: var(--gds-sys-color-content-neutral-02);
-    }
-
-    .separator {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    ::slotted(*:not([gds-element='gds-breadcrumb'])) {
+      display: contents;
     }
 
     .mobile-return {
@@ -72,15 +59,7 @@ const style = css`
         display: flex;
       }
 
-      li {
-        display: none;
-      }
-
-      .show-on-mobile {
-        display: flex;
-      }
-
-      .separator {
+      ::slotted(*[return])::after {
         display: none;
       }
     }

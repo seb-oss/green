@@ -154,9 +154,22 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
   }
 
   #handleSlotChange() {
-    const selChipValue = this.chips.find((s) => s.selected)?.value
-    if (selChipValue) {
-      this.value = selChipValue
+    if (this.value === undefined) {
+      if (!this.multiple) {
+        const selChipValue = this.chips.find((s) => s.selected)?.value
+        if (selChipValue) {
+          this.value = selChipValue
+        }
+      } else {
+        const selChipValues = this.chips
+          .filter((s) => s.selected)
+          .map((s) => s.value)
+        if (selChipValues.length) {
+          this.value = selChipValues as ValueT
+        }
+      }
+    } else {
+      this._updateSelectedFromValue()
     }
   }
 

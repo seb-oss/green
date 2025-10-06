@@ -20,7 +20,7 @@ interface BreadcrumbsProps {
 }
 
 const BreadcrumbLink = ({ item }: { item: BreadcrumbItem }) => (
-  <Link href={item.href!}>
+  <Link href={item.href!} component="breadcrumb">
     {item.iconName && <Icon size="m" name={item.iconName} slot="lead" />}
     {item.label}
   </Link>
@@ -41,7 +41,7 @@ const LastItem = ({
     overview: null,
   }[section]
 
-  return <Core.GdsText color="secondary">{sectionText}</Core.GdsText>
+  return <Core.GdsBreadcrumb>{sectionText}</Core.GdsBreadcrumb>
 }
 
 export default function Breadcrumbs({
