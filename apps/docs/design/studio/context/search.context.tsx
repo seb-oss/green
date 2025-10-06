@@ -67,6 +67,22 @@ export function SearchProvider({ children }: { children: ReactNode }) {
         return ['easing', 'duration']
       case 'typography':
         return ['heading', 'body', 'detail']
+      case 'icons':
+        return [
+          'Arrows',
+          'Brands',
+          'Code',
+          'Communication',
+          'Date',
+          'Devices',
+          'Finance',
+          'General',
+          'Media',
+          'People',
+          'Things',
+          'Utilities',
+          'Weather',
+        ]
       default:
         return []
     }

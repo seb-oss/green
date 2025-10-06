@@ -17,6 +17,7 @@ export default function StudioSearch({ page }: { page?: string }) {
     iconSize,
     setSolid,
     setIconSize,
+    setCategory,
   } = useSearch()
 
   const categories = page ? getCategories(page) : []
@@ -27,14 +28,6 @@ export default function StudioSearch({ page }: { page?: string }) {
 
   if (pathName?.includes('compose') || pathName?.includes('playground'))
     return null
-
-  interface GdsCheckboxEvent extends CustomEvent {
-    target: HTMLInputElement
-  }
-
-  interface GdsDropdownEvent extends CustomEvent {
-    target: HTMLSelectElement
-  }
 
   return (
     <Core.GdsFlex
@@ -55,7 +48,16 @@ export default function StudioSearch({ page }: { page?: string }) {
         </Core.GdsInput>
         {categories.length > 0 && (
           <Core.GdsFlex width="160px">
-            <Core.GdsDropdown plain value={category}>
+            <Core.GdsDropdown
+              plain
+              value={category}
+              onChange={(e: React.FormEvent<HTMLElement>) => {
+                const customElement = e.target as HTMLElement & {
+                  value: string
+                }
+                setCategory(customElement.value)
+              }}
+            >
               <Core.GdsOption value="">All Categories</Core.GdsOption>
               {categories.map((cat) => (
                 <Core.GdsOption key={cat} value={cat}>

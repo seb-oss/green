@@ -267,7 +267,7 @@ const CONTENT = (
                     align-items="center"
                     variant={ACTIVE === item.key ? 'primary' : 'secondary'}
                     border-radius="m"
-                    className="icon-card linked-card"
+                    className="linked-card"
                     role="link"
                     tabIndex={0}
                   >
