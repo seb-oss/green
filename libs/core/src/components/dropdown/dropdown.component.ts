@@ -95,7 +95,7 @@ class Dropdown extends GdsFormControlElement implements OptionsContainer {
    * ```
    */
   @property()
-  compareWith: (a: ValueT, b: ValueT) => boolean = (a, b) => a === b
+  compareWith: (a: unknown, b: unknown) => boolean = (a, b) => a === b
 
   /**
    * Delegate function for customizing the search filtering.
@@ -204,7 +204,7 @@ class Dropdown extends GdsFormControlElement implements OptionsContainer {
         .slice(0, 5)
         // Join with comma
         .reduce(
-          (acc: string, cur: ValueT) =>
+          (acc: string, cur: unknown) =>
             acc + this.options.find((v) => v.value === cur)?.innerText + ', ',
           '',
         )
@@ -492,9 +492,8 @@ class Dropdown extends GdsFormControlElement implements OptionsContainer {
     else if (
       !this.combobox &&
       !this.placeholder &&
-      this.options.find((o) =>
-        this.compareWith(o.value, this.value as ValueT),
-      ) === undefined
+      this.options.find((o) => this.compareWith(o.value, this.value)) ===
+        undefined
     ) {
       this.options[0] && (this.options[0].selected = true)
       this.value = this.options[0]?.value
