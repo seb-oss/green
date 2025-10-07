@@ -9,6 +9,7 @@ const style = css`
     grid-template-columns: var(--_grid-col);
     grid-column-gap: var(--_gap-column, 0px);
     grid-row-gap: var(--_gap-row, 0px);
+    box-sizing: border-box;
   }
 
   :host([auto-columns]) {
