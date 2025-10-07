@@ -57,6 +57,8 @@ export class GdsCardLinked extends withSizeXProps(
   src?: string
 
   render() {
+    if (!this.href) return this.#Parts.Core()
+
     return html`
       <a
         href=${ifDefined(this.href)}
@@ -80,71 +82,87 @@ export class GdsCardLinked extends withSizeXProps(
     }
   }
 
+  get #slot() {
+    return (slot: string) => this.querySelector(`[slot="${slot}"]`) !== null
+  }
+
+  get #render() {
+    return {
+      Single: (part: any) => part.render(),
+      Group: (parts: any[]) => parts.map((part) => part.render()),
+    }
+  }
+
   #Parts = {
-    Header: () => {
-      const Slot = this.querySelector('[slot="header"]') !== null
-      const Image = !!this.src && !Slot
+    Header: {
+      Image: () => html`
+        <gds-img
+          src=${ifDefined(this.src)}
+          width="100%"
+          height="100%"
+          object-fit="cover"
+          object-position="center"
+          border-radius="xs"
+        ></gds-img>
+      `,
 
-      if (!Image && !Slot) return nothing
+      Slot: () => this.#slot('header') && html`<slot name="header"></slot>`,
 
-      return html`
-        <header class="header">
-          ${Image
-            ? html`
-                <figure>
-                  <gds-img
-                    src=${ifDefined(this.src)}
-                    width="100%"
-                    height="100%"
-                    object-fit="cover"
-                    object-position="center"
-                    border-radius="xs"
-                  ></gds-img>
-                </figure>
-              `
-            : html`<slot name="header"></slot>`}
-        </header>
-      `
-    },
+      Element: (content: TemplateResult[]) => html`
+        <header class="header">${content}</header>
+      `,
 
-    Article: () => {
-      if (!this.title && !this.excerpt) return nothing
-      return html`
-        <article class="article">
-          ${this.title &&
-          html`
-            <h2 class="title">
-              <gds-text font="heading-s">${this.title}</gds-text>
-            </h2>
-          `}
-          ${this.excerpt &&
-          html`
-            <div class="excerpt">
-              <gds-text font="body-regular-m" lines="3"
-                >${this.excerpt}</gds-text
-              >
-            </div>
-          `}
-        </article>
-      `
-    },
-
-    Footer: () => {
-      const SLOT = this.querySelector('[slot="footer"]') !== null
-
-      if (!SLOT && !this.href) {
+      render: () => {
+        const { Image, Slot, Element } = this.#Parts.Header
+        if (Slot()) return Element(Slot())
+        if (this.src) return Element(Image())
         return nothing
-      }
+      },
+    },
 
-      return html`
-        <footer class="footer" inert>
+    Article: {
+      Title: () =>
+        this.title &&
+        html` <gds-text tag="h2" font="heading-s">${this.title}</gds-text> `,
+
+      Excerpt: () =>
+        this.excerpt &&
+        html`
+          <gds-text font="body-regular-m" lines="3">${this.excerpt}</gds-text>
+        `,
+
+      Element: (content: TemplateResult | TemplateResult[]) => html`
+        <article class="article">${content}</article>
+      `,
+
+      render: () => {
+        const { Title, Excerpt, Element } = this.#Parts.Article
+        if (!this.title && !this.excerpt) return nothing
+        return Element([Title(), Excerpt()])
+      },
+    },
+
+    Footer: {
+      Link: () =>
+        this.label &&
+        html`
           <gds-link href="#">
             <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
             ${this.label}
           </gds-link>
-          <slot name="footer"></slot>
-        </footer>
-      `
+        `,
+
+      Slot: () => this.#slot('footer') && html`<slot name="footer"></slot>`,
+
+      Element: (content: TemplateResult | TemplateResult[]) => html`
+        <footer class="footer" inert>${content}</footer>
+      `,
+
+      render: () => {
+        const { Link, Slot, Element } = this.#Parts.Footer
+        const content = [Link(), Slot()].filter(Boolean)
+        return content.length ? Element(content) : nothing
+      },
     },
 
     Main: (parts: TemplateResult[]) => html`
@@ -153,7 +171,8 @@ export class GdsCardLinked extends withSizeXProps(
 
     Core: () => {
       const { Header, Article, Footer, Main } = this.#Parts
-      return [Header(), Main([Article(), Footer()])]
+      const { Single, Group } = this.#render
+      return [Single(Header), Main(Group([Article, Footer]))]
     },
   }
 }

@@ -35,11 +35,17 @@ export const CardLinked: Story = {
   ...DefaultParams,
   args: {
     href: '#',
-    src: 'https://api.seb.io/assets/launch-hero.jpg',
-    title: 'Title',
     label: 'Read more',
     excerpt:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-    innerHTML: 'Card content',
   },
+}
+
+export const Header: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-card-linked href="#" label="Read more">
+      <div slot="header">Header</div>
+    </gds-card-linked>
+  `,
 }
