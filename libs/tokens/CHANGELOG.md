@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.0
+
+### Minor Changes
+
+- 1854fdf: **Background L3:** Add Neutral 05, Neutral 06 and fix Studio dark mode preview
+
 ## 2.2.0
 
 ### Minor Changes
