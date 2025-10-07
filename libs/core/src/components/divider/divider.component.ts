@@ -9,6 +9,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { withSizeXProps } from '../../utils/mixins/declarative-layout-mixins'
 import DividerStyles from './divider.styles'
 
 /**
@@ -17,7 +18,7 @@ import DividerStyles from './divider.styles'
  * The `gds-divider` component is a horizontal rule that separates content in a layout. It is equivalent to the `<hr>` element in HTML, and provides the same semantic meaning.
  */
 @gdsCustomElement('gds-divider')
-export class GdsDivider extends GdsElement {
+export class GdsDivider extends withSizeXProps(GdsElement) {
   static styles = [tokens, DividerStyles]
 
   /**
