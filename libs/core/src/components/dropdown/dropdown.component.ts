@@ -15,6 +15,11 @@ import formControlHostStyle from '../../shared-styles/form-control-host.style'
 import { tokens } from '../../tokens.style'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import { watch } from '../../utils/decorators/watch'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconCheckmark } from '../icon/icons/checkmark.component'
 import { IconChevronBottom } from '../icon/icons/chevron-bottom.component'
@@ -29,37 +34,8 @@ import type {
 
 export * from '../../primitives/listbox/option.component'
 
-/**
- * @element gds-dropdown
- * A dropdown consist of a trigger button and a list of selectable options. It is used to select a single value from a list of options.
- *
- *
- * @slot - Options for the dropdown. Accepts `gds-option` and `gds-menu-heading` elements.
- * @slot trigger - Custom content for the trigger button can be assigned through this slot.
- * @slot extended-supporting-text - A longer supporting text can be placed here. It will be displayed in a panel when the user clicks the info button.
- * @slot message - ***(deprecated - use `errorMessage` property instead)*** Error message to show below the input field whem there is a validation error.
- * @slot sub-label - ***(deprecated - use `supporting-text` property instead)*** Renders between the label and the trigger button.
- *
- * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
- * @event input - Fired when the value of the dropdown is changed through user interaction.
- * @event gds-ui-state - Fired when the dropdown is opened or closed by the user. Can be cancelled to prevent the dropdown from opening or closing.
- * @event gds-filter-input - Fired when the user types in the search field. The event is cancellable, and the consumer is expected to handle filtering and updating the options list if the event is cancelled.
- * @event gds-input-cleared - Fired when the user clears the input using the clear button.
- */
-@gdsCustomElement('gds-dropdown', {
-  dependsOn: [
-    GdsFormControlHeader,
-    GdsFormControlFooter,
-    GdsFieldBase,
-    GdsListbox,
-    GdsPopover,
-    IconCheckmark,
-    IconChevronBottom,
-    IconCrossSmall,
-  ],
-})
 @localized()
-export class GdsDropdown<ValueT = any>
+class Dropdown<ValueT = any>
   extends GdsFormControlElement<ValueT | ValueT[]>
   implements OptionsContainer
 {
@@ -737,3 +713,36 @@ export class GdsDropdown<ValueT = any>
     }
   }
 }
+
+/**
+ * @element gds-dropdown
+ * A dropdown consist of a trigger button and a list of selectable options. It is used to select a single value from a list of options.
+ *
+ *
+ * @slot - Options for the dropdown. Accepts `gds-option` and `gds-menu-heading` elements.
+ * @slot trigger - Custom content for the trigger button can be assigned through this slot.
+ * @slot extended-supporting-text - A longer supporting text can be placed here. It will be displayed in a panel when the user clicks the info button.
+ * @slot message - ***(deprecated - use `errorMessage` property instead)*** Error message to show below the input field whem there is a validation error.
+ * @slot sub-label - ***(deprecated - use `supporting-text` property instead)*** Renders between the label and the trigger button.
+ *
+ * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
+ * @event input - Fired when the value of the dropdown is changed through user interaction.
+ * @event gds-ui-state - Fired when the dropdown is opened or closed by the user. Can be cancelled to prevent the dropdown from opening or closing.
+ * @event gds-filter-input - Fired when the user types in the search field. The event is cancellable, and the consumer is expected to handle filtering and updating the options list if the event is cancelled.
+ * @event gds-input-cleared - Fired when the user clears the input using the clear button.
+ */
+@gdsCustomElement('gds-dropdown', {
+  dependsOn: [
+    GdsFormControlHeader,
+    GdsFormControlFooter,
+    GdsFieldBase,
+    GdsListbox,
+    GdsPopover,
+    IconCheckmark,
+    IconChevronBottom,
+    IconCrossSmall,
+  ],
+})
+export class GdsDropdown extends withSizeXProps(
+  withMarginProps(withLayoutChildProps(Dropdown)),
+) {}
