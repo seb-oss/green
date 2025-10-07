@@ -78,6 +78,7 @@ export const MonacoEditor = dynamic<MonacoEditorProps>(
                   scrollbar: {
                     vertical: 'visible', // Always show vertical scrollbar
                     horizontalSlidePosition: 'visible',
+                    alwaysConsumeMouseWheel: false,
                   },
                 })
 
@@ -116,17 +117,27 @@ export const MonacoEditor = dynamic<MonacoEditorProps>(
 
             return (
               <div
-                ref={editorRef}
                 style={{
                   height: '100%',
                   width: '100%',
-                  position: 'absolute',
-                  top: 20,
-                  left: 10,
-                  right: 10,
-                  bottom: 10,
+                  overflow: 'hidden',
+                  position: 'relative',
                 }}
-              />
+              >
+                <div
+                  ref={editorRef}
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    position: 'absolute',
+                    top: 20,
+                    left: 10,
+                    right: 10,
+                    bottom: 10,
+                    overscrollBehavior: 'scroll',
+                  }}
+                />
+              </div>
             )
           }
 

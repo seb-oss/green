@@ -115,7 +115,7 @@ const Token = ({
                 <Core.GdsFlex
                   gap="s; m{xl}"
                   width="100%"
-                  flex-direction="column"
+                  flex-direction="column; m{row}"
                 >
                   <Core.GdsText color="neutral-02" font="detail-book-xs">
                     Font size: {fontSize}
@@ -148,6 +148,7 @@ const Token = ({
           {item.dark && (
             <Preview
               type={type}
+              theme="dark"
               token={{
                 token: item.token,
                 variable: item.variable,
