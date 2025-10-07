@@ -35,7 +35,9 @@ export const CardLinked: Story = {
   ...DefaultParams,
   args: {
     href: '#',
+    src: 'https://api.seb.io/assets/launch-hero.jpg',
     title: 'Title',
+    label: 'Read more',
     excerpt:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
     innerHTML: 'Card content',

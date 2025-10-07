@@ -40,7 +40,7 @@ export class GdsCardLinked extends withSizeXProps(
   excerpt = ''
 
   @property()
-  excerpt = ''
+  label = ''
 
   @property()
   href?: string
@@ -51,9 +51,12 @@ export class GdsCardLinked extends withSizeXProps(
   @property()
   rel?: string
 
-  render() {
-    // const [header, main, footer] = this.#Part
+  // Image
 
+  @property()
+  src?: string
+
+  render() {
     return html`
       <a
         href=${ifDefined(this.href)}
@@ -61,7 +64,7 @@ export class GdsCardLinked extends withSizeXProps(
         rel=${ifDefined(this.rel || this.#defaultRel)}
         class=${classMap(this.#classes)}
       >
-        ${this.#Content}
+        ${this.#Parts.Core()}
       </a>
     `
   }
@@ -77,38 +80,80 @@ export class GdsCardLinked extends withSizeXProps(
     }
   }
 
-  get #Content() {
-    return [this.#Parts.Header(), this.#Parts.Main(), this.#Parts.Footer()]
-  }
-
   #Parts = {
     Header: () => {
+      const Slot = this.querySelector('[slot="header"]') !== null
+      const Image = !!this.src && !Slot
+
+      if (!Image && !Slot) return nothing
+
       return html`
         <header class="header">
-          <slot name="header"></slot>
+          ${Image
+            ? html`
+                <figure>
+                  <gds-img
+                    src=${ifDefined(this.src)}
+                    width="100%"
+                    height="100%"
+                    object-fit="cover"
+                    object-position="center"
+                    border-radius="xs"
+                  ></gds-img>
+                </figure>
+              `
+            : html`<slot name="header"></slot>`}
         </header>
       `
     },
 
-    Main: () => {
+    Article: () => {
+      if (!this.title && !this.excerpt) return nothing
       return html`
-        <main class="main">
-          <gds-text font="heading-s">${this.title}</gds-text>
-          <gds-text font="body-regular-m" lines="3">${this.excerpt}</gds-text>
-        </main>
+        <article class="article">
+          ${this.title &&
+          html`
+            <h2 class="title">
+              <gds-text font="heading-s">${this.title}</gds-text>
+            </h2>
+          `}
+          ${this.excerpt &&
+          html`
+            <div class="excerpt">
+              <gds-text font="body-regular-m" lines="3"
+                >${this.excerpt}</gds-text
+              >
+            </div>
+          `}
+        </article>
       `
     },
 
     Footer: () => {
+      const SLOT = this.querySelector('[slot="footer"]') !== null
+
+      if (!SLOT && !this.href) {
+        return nothing
+      }
+
       return html`
         <footer class="footer" inert>
           <gds-link href="#">
             <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
-            Read more
+            ${this.label}
           </gds-link>
           <slot name="footer"></slot>
         </footer>
       `
+    },
+
+    Main: (parts: TemplateResult[]) => html`
+      <main class="main">${parts}</main>
+    `,
+
+    Core: () => {
+      const { Header, Article, Footer, Main } = this.#Parts
+      return [Header(), Main([Article(), Footer()])]
     },
   }
 }

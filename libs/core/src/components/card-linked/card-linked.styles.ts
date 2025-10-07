@@ -53,6 +53,19 @@ const style = css`
         );
       }
 
+      .main {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gds-sys-space-m);
+        padding: var(--gds-sys-space-m);
+      }
+
+      .article {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gds-sys-space-xs);
+      }
+
       .footer {
         pointer-events: none;
       }
