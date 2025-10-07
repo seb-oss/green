@@ -1,4 +1,5 @@
 import { property } from 'lit/decorators.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
@@ -8,6 +9,7 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import {
+  withMarginProps,
   withPositioningProps,
   withSizeXProps,
   withSizeYProps,
@@ -21,7 +23,7 @@ import IMGStyles from './img.styles'
  */
 @gdsCustomElement('gds-img')
 export class GdsImg extends withPositioningProps(
-  withSizeXProps(withSizeYProps(GdsElement)),
+  withMarginProps(withSizeXProps(withSizeYProps(GdsElement))),
 ) {
   static styles = [tokens, IMGStyles]
 
@@ -109,6 +111,9 @@ export class GdsImg extends withPositioningProps(
   alt?: string
 
   render() {
-    return html`<img src="${this.src}" alt="${this.alt}" />`
+    return html`<img
+      src="${ifDefined(this.src)}"
+      alt="${ifDefined(this.alt)}"
+    />`
   }
 }
