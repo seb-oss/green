@@ -73,9 +73,6 @@
         "neutral-05": {
           "$value": "{ref.color.green.27}"
         },
-        "neutral-06": {
-          "$value": "{ref.color.white}"
-        },
         "positive-01": {
           "$value": "{ref.color.green.24}"
         },
