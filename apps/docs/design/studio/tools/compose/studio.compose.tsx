@@ -196,7 +196,7 @@ export default function Compose() {
         min-width="100%"
         padding="0"
         border-radius={takeover ? '0' : 'l'}
-        order="1"
+        order="1; s{0}"
       >
         <Core.GdsFlex
           align-items="center"
