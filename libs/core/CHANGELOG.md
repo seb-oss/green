@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.8.2
+
+### Patch Changes
+
+- 1854fdf: **Dialog:** Remove border to avoid blurry edges
+
 ## 2.8.1
 
 ### Patch Changes
