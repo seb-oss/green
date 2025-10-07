@@ -35,10 +35,7 @@ import type {
 export * from '../../primitives/listbox/option.component'
 
 @localized()
-class Dropdown<ValueT = any>
-  extends GdsFormControlElement<ValueT | ValueT[]>
-  implements OptionsContainer
-{
+class Dropdown extends GdsFormControlElement implements OptionsContainer {
   static styles = [tokens, formControlHostStyle, DropdownStyles]
 
   get type() {
@@ -718,6 +715,7 @@ class Dropdown<ValueT = any>
  * @element gds-dropdown
  * A dropdown consist of a trigger button and a list of selectable options. It is used to select a single value from a list of options.
  *
+ * The type parameter `ValueT` is deprecated and no longer used.
  *
  * @slot - Options for the dropdown. Accepts `gds-option` and `gds-menu-heading` elements.
  * @slot trigger - Custom content for the trigger button can be assigned through this slot.
@@ -743,6 +741,6 @@ class Dropdown<ValueT = any>
     IconCrossSmall,
   ],
 })
-export class GdsDropdown extends withSizeXProps(
+export class GdsDropdown<ValueT = any> extends withSizeXProps(
   withMarginProps(withLayoutChildProps(Dropdown)),
 ) {}
