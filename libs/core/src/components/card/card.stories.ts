@@ -132,12 +132,34 @@ export const Cardshadow: Story = {
   ...DefaultParams,
   name: 'Box shadow',
   render: (args) =>
-    html`<gds-grid columns="4" gap="l">
+    html`<gds-grid
+      columns="1; s{6}"
+      gap="2xl"
+      padding="2xl"
+      width="100%"
+      box-sizing="border-box"
+    >
+      <gds-card
+        padding="s{xs} m{l} l{l}"
+        box-shadow="xs"
+        border-radius="xs"
+        variant="secondary"
+        height="100px"
+        justify-content="center"
+        border-width="0"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          XS
+        </gds-flex>
+      </gds-card>
       <gds-card
         padding="s{xs} m{l} l{l}"
         box-shadow="s"
         border-radius="xs"
         variant="secondary"
+        height="100px"
+        justify-content="center"
+        border-width="0"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           S
@@ -148,6 +170,9 @@ export const Cardshadow: Story = {
         box-shadow="m"
         border-radius="xs"
         variant="secondary"
+        height="100px"
+        justify-content="center"
+        border-width="0"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           M
@@ -158,6 +183,9 @@ export const Cardshadow: Story = {
         box-shadow="l"
         border-radius="xs"
         variant="secondary"
+        height="100px"
+        justify-content="center"
+        border-width="0"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
           L
@@ -168,9 +196,25 @@ export const Cardshadow: Story = {
         box-shadow="xl"
         border-radius="xs"
         variant="secondary"
+        height="100px"
+        justify-content="center"
+        border-width="0"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
-          xl
+          XL
+        </gds-flex>
+      </gds-card>
+      <gds-card
+        padding="s{xs} m{l} l{l}"
+        box-shadow="2xl"
+        border-radius="xs"
+        variant="secondary"
+        height="100px"
+        justify-content="center"
+        border-width="0"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          2XL
         </gds-flex>
       </gds-card>
     </gds-grid>`,

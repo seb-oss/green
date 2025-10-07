@@ -84,7 +84,6 @@
   outline: 2px solid transparent;
   outline-offset: 8px;
   border-radius: 2px;
-  transition: all 240ms;
 }
 
 .linked-card {

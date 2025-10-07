@@ -115,7 +115,7 @@ export default function StudioSidebar({ current }: { current?: string }) {
         padding="0"
         border-radius="0; m{m}"
         position="relative; m{sticky}"
-        inset="0; m{32px 0 0 0}"
+        inset="0; m{16px 0 0 0}"
         height="max-content"
         className="studio-sidebar"
         overflow="auto"
