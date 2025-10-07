@@ -11,6 +11,7 @@ import { GdsFormControlHeader } from '../../primitives/form-control-header/form-
 import { gdsCustomElement, html } from '../../scoping'
 import formControlHostStyles from '../../shared-styles/form-control-host.style'
 import { tokens } from '../../tokens.style'
+import { watch } from '../../utils/decorators/watch'
 import {
   withLayoutChildProps,
   withMarginProps,
@@ -21,6 +22,8 @@ import { GdsFlex } from '../flex/flex.component'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import InputStyles from './input.styles'
+
+import type { GdsBadge } from '../pure'
 
 @localized()
 class Input extends GdsFormControlElement<string> {
@@ -159,6 +162,26 @@ class Input extends GdsFormControlElement<string> {
     | 'email'
     | 'url'
 
+  /**
+   * This callback allows for customization of the character counter. It should return a tuple
+   * with the first value being the number of remaining characters, and the second value being
+   * the variant of the badge. If the variant is not provided, it will be calculated based on
+   * the number of remaining characters.
+   */
+  @property({ attribute: false })
+  charCounterCallback: (
+    self: GdsInput,
+  ) => [number, GdsBadge['variant'] | false] = (self) => {
+    const badgeType: GdsBadge['variant'] =
+      (self.value?.length || 0) >= self.maxlength ? 'negative' : 'positive'
+
+    return [
+      self.maxlength - (self.value?.length || 0),
+      self.maxlength < Number.MAX_SAFE_INTEGER && badgeType,
+    ]
+  }
+  #charCounterComputed = this.charCounterCallback(this)
+
   @queryAsync('input')
   private elInputAsync!: Promise<HTMLInputElement>
 
@@ -222,13 +245,16 @@ class Input extends GdsFormControlElement<string> {
           html` <gds-form-control-footer
             id="message"
             class="size-${this.size}"
-            .charCounter=${this.#shouldShowRemainingChars
-              ? this.maxlength - (this.value?.length || 0)
-              : undefined}
+            .charCounter=${this.#charCounterComputed}
             .errorMessage=${this.invalid ? this.errorMessage : undefined}
           ></gds-form-control-footer>`,
       )}
     `
+  }
+
+  @watch('value')
+  private _handleValueChange() {
+    this.#charCounterComputed = this.charCounterCallback(this)
   }
 
   #shouldShowFooter() {
@@ -242,6 +268,7 @@ class Input extends GdsFormControlElement<string> {
   #handleOnInput = (e: Event) => {
     const element = e.target as HTMLInputElement
     this.value = element.value
+    this._handleValueChange()
   }
 
   #handleOnChange = (e: Event) => {
@@ -336,7 +363,7 @@ class Input extends GdsFormControlElement<string> {
   }
 
   get #shouldShowRemainingChars() {
-    return this.maxlength < Number.MAX_SAFE_INTEGER
+    return this.#charCounterComputed[1] !== false
   }
 }
 

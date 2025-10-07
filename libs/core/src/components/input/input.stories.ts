@@ -15,6 +15,7 @@ import '../icon/icons/magnifying-glass.ts'
 import '../icon/icons/people-profile.ts'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
+import { GdsBadge } from '../badge'
 
 /**
  * An input lets users enter and edit text or numerical values in forms.
@@ -128,8 +129,6 @@ export const Size: Story = {
 }
 
 /**
- *
- *
  * **@slot lead** - Slot for an icon or other content to be placed at the beginning of the input field.
  *
  * ```html
@@ -447,6 +446,46 @@ export const Disabled: Story = {
         supporting-text="Support text"
         value="Disabled with value"
         clearable
+      >
+        <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+      </gds-input>
+    </gds-flex>
+  `,
+}
+
+/**
+ * The `charCounterCallback` property can be used to customize the character counter badge.
+ */
+export const CustomCounterBadge: Story = {
+  ...DefaultParams,
+  name: 'Custom counter badge',
+  render: () => html`
+      <gds-input
+        label="Label"
+        maxlength="100"
+        .charCounterCallback=${(inp: GdsInput) => {
+          let badgeType: GdsBadge['variant'] = 'positive'
+          if (inp.value) {
+            switch (inp.value.length % 5) {
+              case 0:
+                badgeType = 'positive'
+                break
+              case 1:
+                badgeType = 'negative'
+                break
+              case 2:
+                badgeType = 'notice'
+                break
+              case 3:
+                badgeType = 'warning'
+                break
+              case 4:
+                badgeType = 'information'
+                break
+            }
+          }
+          return [inp.value!.length, badgeType]
+        }}
       >
         <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
       </gds-input>

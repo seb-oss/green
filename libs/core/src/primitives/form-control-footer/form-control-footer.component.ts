@@ -1,3 +1,4 @@
+import { nothing } from 'lit'
 import { property } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
@@ -20,8 +21,8 @@ import FormControlFooterStyles from './form-control-footer.styles'
 export class GdsFormControlFooter extends GdsElement {
   static styles = [FormControlFooterStyles]
 
-  @property({ type: Number })
-  charCounter?: number
+  @property({ type: Array })
+  charCounter?: [number, GdsBadge['variant'] | boolean]
 
   @property()
   errorMessage?: string
@@ -56,22 +57,24 @@ export class GdsFormControlFooter extends GdsElement {
         >
       </div>
       <div class="char-counter" aria-hidden="true">
-        ${when(Number.isInteger(this.charCounter), () =>
-          this.#renderRemainingCharsBadge(this.charCounter!),
-        )}
+        ${this.#renderRemainingCharsBadge()}
       </div>
     </div>`
   }
 
-  #renderRemainingCharsBadge(remaining: number) {
-    let variant
-    if (remaining < 0) {
-      variant = 'negative'
-    } else if (remaining < 20) {
-      variant = 'warning'
-    } else {
-      variant = 'positive'
-    }
-    return html`<gds-badge variant="${variant}">${remaining}</gds-badge>`
+  #renderRemainingCharsBadge() {
+    if (!this.charCounter || this.charCounter[1] === false) return nothing
+
+    const [remaining, variant] = this.charCounter
+
+    let calc_variant = variant
+    if (!variant)
+      if (remaining < 0) {
+        calc_variant = 'negative'
+      } else {
+        calc_variant = 'positive'
+      }
+
+    return html`<gds-badge variant="${calc_variant}">${remaining}</gds-badge>`
   }
 }
