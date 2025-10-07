@@ -34,14 +34,10 @@ const DefaultParams: Story = {
 export const CardLinked: Story = {
   ...DefaultParams,
   args: {
+    href: '#',
+    title: 'Title',
+    excerpt:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
     innerHTML: 'Card content',
   },
-}
-
-/**
- * Examples of different color variants
- */
-export const Patterns: Story = {
-  ...DefaultParams,
-  render: (args) => html` <gds-flex gap="4xs"> </gds-flex> `,
 }

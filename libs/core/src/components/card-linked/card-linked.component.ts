@@ -33,7 +33,82 @@ export class GdsCardLinked extends withSizeXProps(
 ) {
   static styles = [tokens, CardLinkedStyles]
 
+  @property()
+  title = ''
+
+  @property()
+  excerpt = ''
+
+  @property()
+  excerpt = ''
+
+  @property()
+  href?: string
+
+  @property()
+  target?: '_self' | '_blank' | '_parent' | '_top'
+
+  @property()
+  rel?: string
+
   render() {
-    return html`Link`
+    // const [header, main, footer] = this.#Part
+
+    return html`
+      <a
+        href=${ifDefined(this.href)}
+        target=${ifDefined(this.target)}
+        rel=${ifDefined(this.rel || this.#defaultRel)}
+        class=${classMap(this.#classes)}
+      >
+        ${this.#Content}
+      </a>
+    `
+  }
+
+  get #defaultRel() {
+    return this.target === '_blank' ? 'noreferrer noopener' : undefined
+  }
+
+  get #classes() {
+    return {
+      card: true,
+      'has-excerpt': !!this.excerpt,
+    }
+  }
+
+  get #Content() {
+    return [this.#Parts.Header(), this.#Parts.Main(), this.#Parts.Footer()]
+  }
+
+  #Parts = {
+    Header: () => {
+      return html`
+        <header class="header">
+          <slot name="header"></slot>
+        </header>
+      `
+    },
+
+    Main: () => {
+      return html`
+        <main class="main">
+          <gds-text font="heading-s">${this.title}</gds-text>
+          <gds-text font="body-regular-m" lines="3">${this.excerpt}</gds-text>
+        </main>
+      `
+    },
+
+    Footer: () => {
+      return html`
+        <footer class="footer" inert>
+          <gds-link href="#">
+            <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
+            Read more
+          </gds-link>
+          <slot name="footer"></slot>
+        </footer>
+      `
+    },
   }
 }
