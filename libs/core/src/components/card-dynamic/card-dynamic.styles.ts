@@ -29,6 +29,11 @@ const style = css`
       }
     }
 
+    .part-header {
+      overflow: hidden;
+      height: max-content;
+    }
+
     .part-main {
       display: flex;
       flex-direction: column;
