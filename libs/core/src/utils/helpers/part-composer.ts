@@ -94,9 +94,6 @@ export const createComposer = (host: HTMLElement) => {
 
     // Always wrap if there's className, regardless of wrap flag
     if (config.className || config.wrap) {
-      // For debugging
-      console.log('Classes:', config.className)
-
       const classes = {
         ...(typeof config.className === 'function'
           ? config.className()
