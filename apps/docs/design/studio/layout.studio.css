@@ -52,32 +52,6 @@
   }
 }
 
-.studio-cta,
-.icon-card {
-  transition: var(--s);
-  transition-delay: 240ms;
-
-  @starting-style {
-    opacity: 0;
-    translate: 0 4px;
-  }
-}
-
-.icon-card {
-  cursor: pointer;
-}
-
-/* .studio-cta {
-  transition: var(--s);
-  position: absolute;
-  right: -20px;
-
-  @starting-style {
-    opacity: 0;
-    translate: -10px 0;
-  }
-} */
-
 .token-typography {
   position: relative;
   z-index: 1;
@@ -110,26 +84,15 @@
   outline: 2px solid transparent;
   outline-offset: 8px;
   border-radius: 2px;
-  transition: all 240ms;
-
-  /* &:focus-visible {
-    outline-color: currentColor;
-  }
-
-  &:hover:not(:focus-visible) {
-    outline-color: color-mix(in srgb, currentColor, transparent 90%);
-  }
-
-  &:empty {
-    outline-color: currentColor;
-  } */
 }
 
 .linked-card {
   cursor: pointer;
   outline: 2px solid transparent;
   outline-offset: 0px;
-  transition: all 240ms;
+  transition:
+    opacity 240ms,
+    transform 240ms;
 
   &:focus-visible {
     outline-color: currentColor;

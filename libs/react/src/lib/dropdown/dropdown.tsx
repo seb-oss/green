@@ -125,7 +125,7 @@ export const Dropdown = ({
   }
 
   // These adapter functions are used to maintain backwards compatibility with the old interface
-  const compareWithAdapter = (o1: DropdownOption, o2: DropdownOption) => {
+  const compareWithAdapter = (o1: unknown, o2: unknown) => {
     const compareFn = compareWith || ((a, b) => a === b)
     return compareFn(o1, o2)
   }

@@ -60,6 +60,12 @@ export class GdsCard extends GdsDiv {
           color = 'var(--gds-sys-color-content-neutral-01)'
           break
 
+        case 'tertiary':
+          border = 'transparent'
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-neutral-02)`
+          color = 'var(--gds-sys-color-content-neutral-01)'
+          break
+
         case 'brand-01':
           border = 'transparent'
           background = `var(--gds-sys-color-l${(this as GdsCard).level}-brand-01)`
@@ -100,7 +106,7 @@ export class GdsCard extends GdsDiv {
 
   constructor() {
     super()
-    this.padding = 'm;m{l}'
+    this.padding = 'm;m{xl}'
     this['border-radius'] = 's'
     this['gap'] = 'm;m{l}'
   }
