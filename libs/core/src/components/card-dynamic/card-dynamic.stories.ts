@@ -43,9 +43,9 @@ export const CardDynamic: Story = {
 }
 
 /**
- * Examples of different color variants
+ *
  */
-export const Patterns: Story = {
+export const Ranks: Story = {
   ...DefaultParams,
   render: (args) => html`
     <gds-grid columns="3" gap="xl">
@@ -53,43 +53,103 @@ export const Patterns: Story = {
         href="#"
         title="This is a heading"
         excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
-        label="footer label instead"
+        label="Link text"
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
-        <gds-button slot="footer">Primary</gds-button>
-        <gds-link href="#" slot="footer" size="medium">
-          <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
-          Link
-        </gds-link>
       </gds-card-dynamic>
       <gds-card-dynamic
         href="#"
         rank="outlined"
-        label="footer label instead"
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        label="Link text"
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
       </gds-card-dynamic>
       <gds-card-dynamic
         href="#"
         rank="plain"
-        label="footer label instead"
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        label="Link text"
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
       </gds-card-dynamic>
-      <!-- 
+    </gds-grid>
+  `,
+}
+
+/**
+ * Footer slot
+ */
+export const Actions: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-grid columns="3" gap="xl">
+      <!-- Combined -->
       <gds-card-dynamic
-        href="#"
-        label="footer label instead"
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
-        <span slot="header">header slot</span>
-
         <gds-button slot="footer">Primary</gds-button>
-        <gds-link href="#" slot="footer">
+        <gds-link href="#" slot="footer" size="medium">
           <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
-          Link
+          This is a link
         </gds-link>
-      </gds-card-dynamic> -->
+      </gds-card-dynamic>
+      <gds-card-dynamic
+        rank="outlined"
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+        <gds-button slot="footer">Primary</gds-button>
+        <gds-link href="#" slot="footer" size="medium">
+          <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
+          This is a link
+        </gds-link>
+      </gds-card-dynamic>
+      <gds-card-dynamic
+        rank="plain"
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+        <gds-button slot="footer">Primary</gds-button>
+        <gds-link href="#" slot="footer" size="medium">
+          <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
+          This is a link
+        </gds-link>
+      </gds-card-dynamic>
+
+      <!-- Buttons only -->
+      <gds-card-dynamic
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+        <gds-button slot="footer">Primary</gds-button>
+        <gds-button slot="footer" rank="tertiary">Tertiary</gds-button>
+      </gds-card-dynamic>
+      <gds-card-dynamic
+        rank="outlined"
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+        <gds-button slot="footer">Primary</gds-button>
+        <gds-button slot="footer" rank="tertiary">Tertiary</gds-button>
+      </gds-card-dynamic>
+      <gds-card-dynamic
+        rank="plain"
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+        <gds-button slot="footer">Primary</gds-button>
+        <gds-button slot="footer" rank="tertiary">Tertiary</gds-button>
+      </gds-card-dynamic>
     </gds-grid>
   `,
 }
