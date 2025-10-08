@@ -23,6 +23,8 @@ import { GdsFormControlElement } from '../form/form-control'
 import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import TextareaStyles from './textarea.styles'
 
+import type { GdsBadge } from '../pure'
+
 @localized()
 class Textarea extends GdsFormControlElement<string> {
   static styles = [tokens, formControlHostStyle, TextareaStyles]
@@ -154,6 +156,25 @@ class Textarea extends GdsFormControlElement<string> {
     | 'email'
     | 'url'
 
+  /**
+   * This callback allows for customization of the character counter. It should return a tuple
+   * with the first value being the number of remaining characters, and the second value being
+   * the variant of the badge. If the second value is `false`, no badge will be shown.
+   */
+  @property({ attribute: false })
+  charCounterCallback: (
+    self: GdsTextarea,
+  ) => [number, GdsBadge['variant'] | false] = (self) => {
+    const badgeType: GdsBadge['variant'] =
+      (self.value?.length || 0) >= self.maxlength ? 'negative' : 'positive'
+
+    return [
+      self.maxlength - (self.value?.length || 0),
+      self.maxlength < Number.MAX_SAFE_INTEGER && badgeType,
+    ]
+  }
+  #charCounterComputed = this.charCounterCallback(this)
+
   @queryAsync('textarea')
   private elTextareaAsync!: Promise<HTMLTextAreaElement>
 
@@ -271,13 +292,16 @@ class Textarea extends GdsFormControlElement<string> {
           html`<gds-form-control-footer
             id="footer"
             class="size-${this.size}"
-            .charCounter=${this.#shouldShowRemainingChars
-              ? this.maxlength - (this.value?.length || 0)
-              : undefined}
+            .charCounter=${this.#charCounterComputed}
             .errorMessage=${this.invalid ? this.errorMessage : undefined}
           ></gds-form-control-footer>`,
       )}
     `
+  }
+
+  @watch('value')
+  private _handleValueChange() {
+    this.#charCounterComputed = this.charCounterCallback(this)
   }
 
   #shouldShowFooter() {
@@ -462,7 +486,7 @@ class Textarea extends GdsFormControlElement<string> {
   }
 
   get #shouldShowRemainingChars() {
-    return this.maxlength < Number.MAX_SAFE_INTEGER
+    return this.#charCounterComputed[1] !== false
   }
 }
 

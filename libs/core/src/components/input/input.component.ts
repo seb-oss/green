@@ -165,8 +165,7 @@ class Input extends GdsFormControlElement<string> {
   /**
    * This callback allows for customization of the character counter. It should return a tuple
    * with the first value being the number of remaining characters, and the second value being
-   * the variant of the badge. If the variant is not provided, it will be calculated based on
-   * the number of remaining characters.
+   * the variant of the badge. If the second value is `false`, no badge will be displayed.
    */
   @property({ attribute: false })
   charCounterCallback: (

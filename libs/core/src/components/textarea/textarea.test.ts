@@ -132,6 +132,43 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         expect(textareaEl?.getAttribute('autofocus')).to.equal('')
         expect(textareaEl?.getAttribute('enterkeyhint')).to.equal('enter')
       })
+
+      it('should support customized character counter badge', async () => {
+        const charCounterCallback = (input: GdsTextarea) => {
+          const remaining = input.maxlength - input.value.length
+          return [remaining, remaining < 0 ? 'negative' : 'positive'] as const
+        }
+
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea
+            variant="${variant}"
+            maxlength="10"
+          ></gds-textarea>`,
+        )
+        el.charCounterCallback = charCounterCallback
+        el.value = '12345'
+        await el.updateComplete
+
+        const footer = el.shadowRoot?.querySelector(
+          '[gds-element=gds-form-control-footer]',
+        )
+        const remainingCharactersBadgeEl = footer.shadowRoot?.querySelector(
+          '[gds-element=gds-badge]',
+        )
+
+        expect(remainingCharactersBadgeEl).to.exist
+        expect(remainingCharactersBadgeEl?.textContent).to.equal('5')
+        expect(remainingCharactersBadgeEl?.getAttribute('variant')).to.equal(
+          'positive',
+        )
+
+        el.value = '12345678901'
+        await el.updateComplete
+        expect(remainingCharactersBadgeEl?.textContent).to.equal('-1')
+        expect(remainingCharactersBadgeEl?.getAttribute('variant')).to.equal(
+          'negative',
+        )
+      })
     })
 
     describe('Interactions', async () => {
