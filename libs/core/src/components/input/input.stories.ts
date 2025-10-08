@@ -486,7 +486,7 @@ export const CustomCounterBadge: Story = {
                 break
             }
           }
-          return [inp.value!.length, badgeType]
+          return [inp.value!.length, badgeType] as const
         }}
       >
         <gds-icon-credit-card slot="lead"></gds-icon-credit-card>

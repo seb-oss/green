@@ -268,7 +268,6 @@ class Input extends GdsFormControlElement<string> {
   #handleOnInput = (e: Event) => {
     const element = e.target as HTMLInputElement
     this.value = element.value
-    this._handleValueChange()
   }
 
   #handleOnChange = (e: Event) => {
