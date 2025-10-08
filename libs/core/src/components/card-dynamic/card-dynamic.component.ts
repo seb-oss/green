@@ -35,6 +35,12 @@ export class GdsCardDynamic extends withSizeXProps(
   static styles = [tokens, CardLinkedStyles]
   #Compose = createComposer(this)
 
+  /**
+   * The rank of the card. Defaults to "primary".
+   */
+  @property({ reflect: true })
+  rank: 'neutral' | 'outlined' | 'plain' = 'neutral'
+
   @property()
   title = ''
 
@@ -60,12 +66,13 @@ export class GdsCardDynamic extends withSizeXProps(
     return {
       card: true,
       'card-dynamic': true,
+      [`rank-${this.rank}`]: true,
     }
   }
 
   #Parts = {
     Root: this.#Compose.Part({
-      className: this.#classes,
+      className: () => this.#classes,
       parts: {
         Header: this.#Compose.Part({
           slot: 'header',
@@ -81,7 +88,7 @@ export class GdsCardDynamic extends withSizeXProps(
                 height="100%"
                 object-fit="cover"
                 object-position="center"
-                border-radius="xs"
+                border-radius="3xs"
               ></gds-img>
             `,
           },
@@ -97,9 +104,14 @@ export class GdsCardDynamic extends withSizeXProps(
                 Excerpt: () => !!this.excerpt,
               },
               templates: {
-                Title: () => html`<gds-text tag="h2">${this.title}</gds-text>`,
-                Excerpt: () =>
-                  html`<gds-text lines="3">${this.excerpt}</gds-text>`,
+                Title: () => html`
+                  <gds-text tag="h2" font="heading-s"> ${this.title} </gds-text>
+                `,
+                Excerpt: () => html`
+                  <gds-text tag="p" lines="3" font="body-regular-m">
+                    ${this.excerpt}
+                  </gds-text>
+                `,
               },
             }),
 
@@ -111,7 +123,7 @@ export class GdsCardDynamic extends withSizeXProps(
               },
               templates: {
                 Label: () => html`
-                  <gds-link href="#">
+                  <gds-link href=${ifDefined(this.href)}>
                     <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
                     ${this.label}
                   </gds-link>
@@ -121,7 +133,6 @@ export class GdsCardDynamic extends withSizeXProps(
           },
         }),
       },
-      // wrapper: (content) => html`<div class="card">${content}</div>`,
     }),
   }
 
