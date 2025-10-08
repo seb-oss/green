@@ -33,7 +33,7 @@ export class GdsCardDynamic extends withSizeXProps(
   withMarginProps(withLayoutChildProps(GdsElement)),
 ) {
   static styles = [tokens, CardLinkedStyles]
-  #compose = createComposer(this)
+  #Compose = createComposer(this)
 
   @property()
   title = ''
@@ -53,77 +53,82 @@ export class GdsCardDynamic extends withSizeXProps(
   @property()
   rel?: string
 
-  // Image
-
   @property()
   src?: string
 
-  render() {
-    const content = this.#compose.Core(this.#Parts)
-
-    if (content === nothing) return nothing
-
-    return html`
-      <a href=${ifDefined(this.href)} target=${ifDefined(this.target)}>
-        ${content}
-      </a>
-    `
+  get #classes() {
+    return {
+      card: true,
+      'card-dynamic': true,
+    }
   }
 
   #Parts = {
-    Header: this.#compose.createPart({
-      slot: 'header',
-      conditions: {
-        Image: () => !!this.src,
-      },
-      templates: {
-        Image: () => html`
-          <gds-img
-            src=${ifDefined(this.src)}
-            width="100%"
-            height="100%"
-            object-fit="cover"
-            object-position="center"
-            border-radius="xs"
-          ></gds-img>
-        `,
-      },
-      wrapper: (content) => html`<header class="header">${content}</header>`,
-    }),
+    Root: this.#Compose.Part({
+      parts: {
+        Header: this.#Compose.Part({
+          slot: 'header',
+          conditions: {
+            Image: () => !!this.src,
+          },
+          templates: {
+            Image: () => html`
+              <gds-img
+                src=${ifDefined(this.src)}
+                width="100%"
+                height="100%"
+                object-fit="cover"
+                object-position="center"
+                border-radius="xs"
+              ></gds-img>
+            `,
+          },
+          wrapper: (content) =>
+            html`<header class="header">${content}</header>`,
+        }),
 
-    Article: this.#compose.createPart({
-      conditions: {
-        Title: () => !!this.title,
-        Excerpt: () => !!this.excerpt,
-      },
-      templates: {
-        Title: () =>
-          html`<gds-text tag="h2" font="heading-s">${this.title}</gds-text>`,
-        Excerpt: () =>
-          html`<gds-text font="body-regular-m" lines="3"
-            >${this.excerpt}</gds-text
-          >`,
-      },
-      wrapper: (content) => html`
-        <article class="article">${content}</article>
-      `,
-    }),
+        Main: this.#Compose.Part({
+          parts: {
+            Article: this.#Compose.Part({
+              conditions: {
+                Title: () => !!this.title,
+                Excerpt: () => !!this.excerpt,
+              },
+              templates: {
+                Title: () => html`<gds-text tag="h2">${this.title}</gds-text>`,
+                Excerpt: () =>
+                  html`<gds-text lines="3">${this.excerpt}</gds-text>`,
+              },
+              wrapper: (content) =>
+                html`<article class="article">${content}</article>`,
+            }),
 
-    Footer: this.#compose.createPart({
-      slot: 'footer',
-      conditions: {
-        Label: () => !!this.label,
+            Footer: this.#Compose.Part({
+              slot: 'footer',
+              conditions: {
+                Label: () => !!this.label,
+              },
+              templates: {
+                Label: () => html`
+                  <gds-link href="#">
+                    <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
+                    ${this.label}
+                  </gds-link>
+                `,
+              },
+              wrapper: (content) =>
+                html`<footer class="footer">${content}</footer>`,
+            }),
+          },
+          wrapper: (content) => html`<main class="main">${content}</main>`,
+        }),
       },
-      templates: {
-        Label: () => html`
-          <footer class="footer" inert>
-            <gds-link href="#">
-              <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
-              ${this.label}
-            </gds-link>
-          </footer>
-        `,
-      },
+      wrapper: (content) =>
+        html`<div class=${classMap(this.#classes)}>${content}</div>`,
     }),
+  }
+
+  render() {
+    return this.#Parts.Root.render()
   }
 }

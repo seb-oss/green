@@ -48,6 +48,11 @@ export const CardDynamic: Story = {
 export const Patterns: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-card-dynamic href="#" label="footer label instead"> </gds-card-dynamic>
+    <gds-card-dynamic
+      href="#"
+      label="footer label instead"
+      src="https://api.seb.io/assets/launch-hero.jpg"
+    >
+    </gds-card-dynamic>
   `,
 }

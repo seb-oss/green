@@ -1,11 +1,15 @@
 // utils/helpers/part-composer.ts
 import { html, nothing, TemplateResult } from 'lit'
+import { unsafeHTML } from 'lit/directives/unsafe-html.js'
+
+import { stripWhitespace } from './strip-white-space'
 
 type PartConfig = {
   slot?: string
   conditions?: Record<string, () => boolean>
   templates?: Record<string, () => TemplateResult>
   wrapper?: (content: TemplateResult) => TemplateResult
+  parts?: Record<string, Part>
 }
 
 type PartReturn =
@@ -17,12 +21,13 @@ type Part = {
   render: () => PartReturn
 }
 
-export const createComposer = (host: HTMLElement) => {
-  const createPart = (config: PartConfig): Part => ({
-    render: () => {
-      const { conditions, templates, wrapper } = config
+const strippedHTML = stripWhitespace(html)
 
-      // Handle templates with conditions
+export const createComposer = (host: HTMLElement) => {
+  const Part = (config: PartConfig): Part => ({
+    render: () => {
+      const { conditions, templates, wrapper, parts } = config
+
       if (conditions && templates) {
         const validContent = Object.keys(conditions)
           .filter((key) => conditions[key]?.())
@@ -30,14 +35,27 @@ export const createComposer = (host: HTMLElement) => {
           .filter(Boolean)
 
         if (validContent.length) {
-          return wrapper ? wrapper(html`${validContent}`) : validContent
+          return wrapper
+            ? wrapper(strippedHTML`${validContent}`)
+            : strippedHTML`${validContent}`
         }
       }
 
-      // Handle slot
       if (config.slot && host.querySelector(`[slot="${config.slot}"]`)) {
-        const slotContent = html`<slot name="${config.slot}"></slot>`
+        const slotContent = strippedHTML`<slot name="${config.slot}"></slot>`
         return wrapper ? wrapper(slotContent) : slotContent
+      }
+
+      if (parts) {
+        const renderedParts = Object.values(parts)
+          .map((part) => part.render())
+          .filter((content) => content !== nothing)
+
+        if (renderedParts.length) {
+          return wrapper
+            ? wrapper(strippedHTML`${renderedParts}`)
+            : strippedHTML`${renderedParts}`
+        }
       }
 
       return nothing
@@ -49,8 +67,8 @@ export const createComposer = (host: HTMLElement) => {
       .map((part) => part.render())
       .filter((content) => content !== nothing)
 
-    return rendered.length ? html`${rendered}` : nothing
+    return rendered.length ? strippedHTML`${rendered}` : nothing
   }
 
-  return { createPart, Core }
+  return { Part, Core }
 }
