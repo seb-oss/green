@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.9.0
+
+### Minor Changes
+
+- 4c85a71: **Dropdown:** Add mixing support for space and child
+- 4c85a71: **Divider:** Add DL mixin support for inline size
+- 4c85a71: **IMG:** Add margin mixin
+
+### Patch Changes
+
+- 4c85a71: **IMG:** Wrap prop with IfDefined directive
+
 ## 2.8.2
 
 ### Patch Changes
