@@ -35,9 +35,10 @@ export const CardDynamic: Story = {
   ...DefaultParams,
   args: {
     href: '#',
-    title: 'test',
-    excerpt: 'test',
-    label: 'test',
+    title: 'Card title',
+    excerpt:
+      'Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both.',
+    label: 'This is a link',
     src: 'https://api.seb.io/assets/launch-hero.jpg',
   },
 }
@@ -92,7 +93,6 @@ export const Actions: Story = {
         excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
-        <gds-button slot="footer">Primary</gds-button>
         <gds-link href="#" slot="footer" size="medium">
           <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
           This is a link
@@ -104,7 +104,6 @@ export const Actions: Story = {
         excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
-        <gds-button slot="footer">Primary</gds-button>
         <gds-link href="#" slot="footer" size="medium">
           <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
           This is a link
@@ -116,7 +115,6 @@ export const Actions: Story = {
         excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
-        <gds-button slot="footer">Primary</gds-button>
         <gds-link href="#" slot="footer" size="medium">
           <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
           This is a link
@@ -130,7 +128,7 @@ export const Actions: Story = {
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
         <gds-button slot="footer">Primary</gds-button>
-        <gds-button slot="footer" rank="tertiary">Tertiary</gds-button>
+        <gds-button slot="footer" rank="secondary">Secondary</gds-button>
       </gds-card-dynamic>
       <gds-card-dynamic
         rank="outlined"
@@ -139,7 +137,7 @@ export const Actions: Story = {
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
         <gds-button slot="footer">Primary</gds-button>
-        <gds-button slot="footer" rank="tertiary">Tertiary</gds-button>
+        <gds-button slot="footer" rank="secondary">Secondary</gds-button>
       </gds-card-dynamic>
       <gds-card-dynamic
         rank="plain"
@@ -148,7 +146,42 @@ export const Actions: Story = {
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
         <gds-button slot="footer">Primary</gds-button>
-        <gds-button slot="footer" rank="tertiary">Tertiary</gds-button>
+        <gds-button slot="footer" rank="secondary">Secondary</gds-button>
+      </gds-card-dynamic>
+    </gds-grid>
+  `,
+}
+
+/**
+ * Footer slot
+ */
+export const Media: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-grid columns="3" gap="xl">
+      <!-- Combined -->
+      <gds-card-dynamic
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+        <gds-button slot="footer">Primary</gds-button>
+        <gds-link href="#" slot="footer" size="medium">
+          <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
+          This is a link
+        </gds-link>
+      </gds-card-dynamic>
+      <gds-card-dynamic
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+        media="square"
+      >
+        <gds-button slot="footer">Primary</gds-button>
+        <gds-link href="#" slot="footer" size="medium">
+          <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
+          This is a link
+        </gds-link>
       </gds-card-dynamic>
     </gds-grid>
   `,

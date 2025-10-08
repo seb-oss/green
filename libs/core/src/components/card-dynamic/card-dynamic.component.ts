@@ -59,14 +59,20 @@ export class GdsCardDynamic extends withSizeXProps(
   @property()
   rel?: string
 
+  // Media
+
   @property()
   src?: string
+
+  @property({ reflect: false })
+  media: 'landscape' | 'square' = 'landscape'
 
   get #classes() {
     return {
       card: true,
       'card-dynamic': true,
       [`rank-${this.rank}`]: true,
+      [`media-${this.media}`]: true,
     }
   }
 
@@ -89,6 +95,7 @@ export class GdsCardDynamic extends withSizeXProps(
                 object-fit="cover"
                 object-position="center"
                 border-radius="3xs"
+                aspect-ratio=${this.media === 'square' ? '1/1' : '16/9'}
               ></gds-img>
             `,
           },
