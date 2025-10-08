@@ -455,6 +455,8 @@ export const Disabled: Story = {
 
 /**
  * The `charCounterCallback` property can be used to customize the character counter badge.
+ *
+ * Check the [story source](https://github.com/seb-oss/green/blob/main/libs/core/src/components/input/input.stories.ts) to see the full code for this example, as Storybook strips away property assignments in the code examples.
  */
 export const CustomCounterBadge: Story = {
   ...DefaultParams,
