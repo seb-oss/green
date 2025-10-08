@@ -65,9 +65,11 @@ export class GdsCardDynamic extends withSizeXProps(
 
   #Parts = {
     Root: this.#Compose.Part({
+      className: this.#classes,
       parts: {
         Header: this.#Compose.Part({
           slot: 'header',
+          wrap: true,
           conditions: {
             Image: () => !!this.src,
           },
@@ -83,13 +85,13 @@ export class GdsCardDynamic extends withSizeXProps(
               ></gds-img>
             `,
           },
-          wrapper: (content) =>
-            html`<header class="header">${content}</header>`,
         }),
 
         Main: this.#Compose.Part({
+          wrap: true,
           parts: {
             Article: this.#Compose.Part({
+              wrap: true,
               conditions: {
                 Title: () => !!this.title,
                 Excerpt: () => !!this.excerpt,
@@ -99,12 +101,11 @@ export class GdsCardDynamic extends withSizeXProps(
                 Excerpt: () =>
                   html`<gds-text lines="3">${this.excerpt}</gds-text>`,
               },
-              wrapper: (content) =>
-                html`<article class="article">${content}</article>`,
             }),
 
             Footer: this.#Compose.Part({
               slot: 'footer',
+              wrap: true,
               conditions: {
                 Label: () => !!this.label,
               },
@@ -116,15 +117,11 @@ export class GdsCardDynamic extends withSizeXProps(
                   </gds-link>
                 `,
               },
-              wrapper: (content) =>
-                html`<footer class="footer">${content}</footer>`,
             }),
           },
-          wrapper: (content) => html`<main class="main">${content}</main>`,
         }),
       },
-      wrapper: (content) =>
-        html`<div class=${classMap(this.#classes)}>${content}</div>`,
+      // wrapper: (content) => html`<div class="card">${content}</div>`,
     }),
   }
 
