@@ -64,6 +64,12 @@ export class GdsCardDynamic extends withSizeXProps(
   @property()
   src?: string
 
+  @property()
+  srcset?: string
+
+  @property()
+  sizes?: string
+
   @property({ reflect: false })
   media: 'landscape' | 'square' = 'landscape'
 
@@ -90,6 +96,8 @@ export class GdsCardDynamic extends withSizeXProps(
             Image: () => html`
               <gds-img
                 src=${ifDefined(this.src)}
+                srcset=${ifDefined(this.srcset)}
+                sizes=${ifDefined(this.sizes)}
                 width="100%"
                 height="100%"
                 object-fit="cover"

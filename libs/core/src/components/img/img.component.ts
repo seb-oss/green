@@ -103,6 +103,18 @@ export class GdsImg extends withPositioningProps(
   src?: string
 
   /**
+   * The srcset attribute for responsive images
+   */
+  @property()
+  srcset?: string
+
+  /**
+   * The sizes attribute for responsive images
+   */
+  @property()
+  sizes?: string
+
+  /**
    * The image alt text.
    *
    * @property alt
@@ -114,6 +126,8 @@ export class GdsImg extends withPositioningProps(
     return html`<img
       src="${ifDefined(this.src)}"
       alt="${ifDefined(this.alt)}"
+      srcset=${ifDefined(this.srcset)}
+      sizes=${ifDefined(this.sizes)}
     />`
   }
 }

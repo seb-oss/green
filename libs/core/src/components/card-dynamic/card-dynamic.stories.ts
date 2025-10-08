@@ -158,7 +158,7 @@ export const Actions: Story = {
 export const Media: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-grid columns="3" gap="xl">
+    <gds-grid columns="1; m{3}" gap="xl" width="100%">
       <!-- Combined -->
       <gds-card-dynamic
         title="This is a heading"
@@ -176,6 +176,20 @@ export const Media: Story = {
         excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
         src="https://api.seb.io/assets/launch-hero.jpg"
         media="square"
+      >
+        <gds-button slot="footer">Primary</gds-button>
+        <gds-link href="#" slot="footer" size="medium">
+          <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
+          This is a link
+        </gds-link>
+      </gds-card-dynamic>
+      <gds-card-dynamic
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        media="square"
+        src="https://api.seb.io/assets/launch-hero.jpg"
+        srcset="https://api.seb.io/assets/launch-hero.jpg 300w, https://api.seb.io/assets/primitives_hero.png 900w"
+        sizes="(max-width: 600px) 300px, 900px"
       >
         <gds-button slot="footer">Primary</gds-button>
         <gds-link href="#" slot="footer" size="medium">
