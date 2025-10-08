@@ -67,14 +67,6 @@ export class GdsFormControlFooter extends GdsElement {
 
     const [remaining, variant] = this.charCounter
 
-    let calc_variant = variant
-    if (!variant)
-      if (remaining < 0) {
-        calc_variant = 'negative'
-      } else {
-        calc_variant = 'positive'
-      }
-
-    return html`<gds-badge variant="${calc_variant}">${remaining}</gds-badge>`
+    return html`<gds-badge variant="${variant}">${remaining}</gds-badge>`
   }
 }
