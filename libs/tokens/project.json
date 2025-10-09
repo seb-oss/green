@@ -5,6 +5,15 @@
   "sourceRoot": "libs/tokens/src",
   "tags": [],
   "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/tokens"],
+      "options": {
+        "jestConfig": "libs/tokens/jest.config.ts",
+        "passWithNoTests": false,
+        "experimentalVmModule": true
+      }
+    },
     "build": {
       "executor": "nx:run-commands",
       "options": {
