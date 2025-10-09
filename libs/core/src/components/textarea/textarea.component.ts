@@ -127,6 +127,10 @@ class Textarea extends GdsFormControlElement<string> {
   })
   spellcheck = true
 
+  /**
+   * Indicates how the control should wrap the value for form submission. Refer to
+   * [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea#wrap) for available values.
+   */
   @property()
   wrap!: 'hard' | 'soft'
 
