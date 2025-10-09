@@ -21,6 +21,7 @@ import { GdsButton } from '../button/button.component'
 import { GdsFlex } from '../flex/flex.component'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconCrossSmall } from '../icon/icons/cross-small.component'
+import { charCounterCallbackDefault } from '../textarea/textarea.component'
 import InputStyles from './input.styles'
 
 import type { GdsBadge } from '../pure'
@@ -168,17 +169,7 @@ class Input extends GdsFormControlElement<string> {
    * the variant of the badge. If the second value is `false`, no badge will be displayed.
    */
   @property({ attribute: false })
-  charCounterCallback: (
-    self: GdsInput,
-  ) => [number, GdsBadge['variant'] | false] = (self) => {
-    const badgeType: GdsBadge['variant'] =
-      (self.value?.length || 0) >= self.maxlength ? 'negative' : 'positive'
-
-    return [
-      self.maxlength - (self.value?.length || 0),
-      self.maxlength < Number.MAX_SAFE_INTEGER && badgeType,
-    ]
-  }
+  charCounterCallback = charCounterCallbackDefault
   #charCounterComputed = this.charCounterCallback(this)
 
   @queryAsync('input')

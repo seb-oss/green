@@ -162,17 +162,7 @@ class Textarea extends GdsFormControlElement<string> {
    * the variant of the badge. If the second value is `false`, no badge will be shown.
    */
   @property({ attribute: false })
-  charCounterCallback: (
-    self: GdsTextarea,
-  ) => [number, GdsBadge['variant'] | false] = (self) => {
-    const badgeType: GdsBadge['variant'] =
-      (self.value?.length || 0) >= self.maxlength ? 'negative' : 'positive'
-
-    return [
-      self.maxlength - (self.value?.length || 0),
-      self.maxlength < Number.MAX_SAFE_INTEGER && badgeType,
-    ]
-  }
+  charCounterCallback = charCounterCallbackDefault
   #charCounterComputed = this.charCounterCallback(this)
 
   @queryAsync('textarea')
@@ -513,3 +503,19 @@ class Textarea extends GdsFormControlElement<string> {
 export class GdsTextarea extends withLayoutChildProps(
   withSizeXProps(withMarginProps(Textarea)),
 ) {}
+
+/**
+ * Default character counter callback function.
+ * Returns the number of remaining characters and the badge variant based on the current value length and maxlength.
+ */
+export const charCounterCallbackDefault = (
+  self: GdsFormControlElement<string>,
+) => {
+  const badgeType: GdsBadge['variant'] =
+    (self.value?.length || 0) >= self.maxlength ? 'negative' : 'positive'
+
+  return [
+    self.maxlength - (self.value?.length || 0),
+    self.maxlength < Number.MAX_SAFE_INTEGER && badgeType,
+  ]
+}
