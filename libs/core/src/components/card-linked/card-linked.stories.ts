@@ -6,6 +6,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 import './card-linked'
 import '../button'
+import '../icon/icons/chevron-right.component'
 import '../text'
 import '../link'
 import '../divider'
@@ -87,12 +88,18 @@ export const Footer: Story = {
     <gds-grid columns="3" gap="xl">
       <!-- Combined -->
       <gds-card-linked
+        href="#"
         title="This is a heading"
         excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
+        <gds-button rank="secondary" slot="footer">
+          <gds-icon-chevron-right></gds-icon-chevron-right>
+        </gds-button>
       </gds-card-linked>
       <gds-card-linked
+        herf="#"
+        label="Link text"
         rank="outlined"
         title="This is a heading"
         excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
@@ -100,28 +107,8 @@ export const Footer: Story = {
       >
       </gds-card-linked>
       <gds-card-linked
-        rank="plain"
-        title="This is a heading"
-        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
-        src="https://api.seb.io/assets/launch-hero.jpg"
-      >
-      </gds-card-linked>
-
-      <!-- Buttons only -->
-      <gds-card-linked
-        title="This is a heading"
-        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
-        src="https://api.seb.io/assets/launch-hero.jpg"
-      >
-      </gds-card-linked>
-      <gds-card-linked
-        rank="outlined"
-        title="This is a heading"
-        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
-        src="https://api.seb.io/assets/launch-hero.jpg"
-      >
-      </gds-card-linked>
-      <gds-card-linked
+        herf="#"
+        label="Link text"
         rank="plain"
         title="This is a heading"
         excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."

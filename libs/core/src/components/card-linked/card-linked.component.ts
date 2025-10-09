@@ -112,11 +112,11 @@ export class GdsCardLinked extends withSizeXProps(
               slot: 'footer',
               wrap: true,
               conditions: {
-                Link: () => !!this.label && !!this.href,
+                Link: () => !!this.label,
               },
               templates: {
                 Link: () => html`
-                  <gds-link href=${ifDefined(this.href)}>
+                  <gds-link inert>
                     <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
                     ${this.label}
                   </gds-link>
