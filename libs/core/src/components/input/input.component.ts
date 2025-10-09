@@ -24,8 +24,6 @@ import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import { charCounterCallbackDefault } from '../textarea/textarea.component'
 import InputStyles from './input.styles'
 
-import type { GdsBadge } from '../pure'
-
 @localized()
 class Input extends GdsFormControlElement<string> {
   static styles = [tokens, formControlHostStyles, InputStyles]
@@ -339,7 +337,7 @@ class Input extends GdsFormControlElement<string> {
       return html`<gds-button
         size="${this.size === 'small' ? 'xs' : 'small'}"
         rank="tertiary"
-        variant="${this.invalid ? 'negative' : ''}"
+        variant="${ifDefined(this.invalid ? 'negative' : undefined)}"
         ?disabled="${this.disabled}"
         label="${msg('Clear input')}"
         @click=${this.#handleClearBtnClick}

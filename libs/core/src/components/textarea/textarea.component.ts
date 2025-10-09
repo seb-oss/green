@@ -102,8 +102,8 @@ class Textarea extends GdsFormControlElement<string> {
     'off'
 
   /** Indicates whether the browser's autocorrect feature is on or off. */
-  @property()
-  autocorrect?: 'off' | 'on'
+  @property({ type: Boolean })
+  autocorrect = false
 
   /**
    * Specifies what permission the browser has to provide assistance in filling out form field values. Refer to
@@ -462,7 +462,7 @@ class Textarea extends GdsFormControlElement<string> {
         <gds-button
           size="small"
           rank="tertiary"
-          variant="${this.invalid ? 'negative' : ''}"
+          variant="${ifDefined(this.invalid ? 'negative' : undefined)}"
           ?disabled="${this.disabled}"
           label="${msg('Clear input')}"
           @click=${this.#handleClearBtnClick}
@@ -509,7 +509,7 @@ export class GdsTextarea extends withLayoutChildProps(
  * Returns the number of remaining characters and the badge variant based on the current value length and maxlength.
  */
 export const charCounterCallbackDefault = (
-  self: GdsFormControlElement<string>,
+  self: GdsFormControlElement<string> & { maxlength: number },
 ) => {
   const badgeType: GdsBadge['variant'] =
     (self.value?.length || 0) >= self.maxlength ? 'negative' : 'positive'
@@ -517,5 +517,5 @@ export const charCounterCallbackDefault = (
   return [
     self.maxlength - (self.value?.length || 0),
     self.maxlength < Number.MAX_SAFE_INTEGER && badgeType,
-  ]
+  ] as const
 }
