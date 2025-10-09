@@ -1,8 +1,7 @@
+// Image Props
 import { property } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
-
-// image-behavior.ts
 
 type Constructor<T = GdsElement> = new (...args: any[]) => T
 

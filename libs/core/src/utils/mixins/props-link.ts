@@ -1,4 +1,5 @@
-import { property, state } from 'lit/decorators.js'
+// Link Props
+import { property } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
 

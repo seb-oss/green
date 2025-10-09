@@ -15,8 +15,9 @@ import {
   withMarginProps,
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import { withImageProps } from '../../utils/mixins/image-props'
-import { withLinkProps } from '../../utils/mixins/link-props'
+import { withCardProps } from '../../utils/mixins/props-card'
+import { withImageProps } from '../../utils/mixins/props-image'
+import { withLinkProps } from '../../utils/mixins/props-link'
 import { GdsCard } from '../card/card.component'
 import { GdsFlex } from '../flex/flex.component'
 import { IconChainLink } from '../icon/icons/chain-link'
@@ -31,35 +32,13 @@ import { GdsText } from '../text/text.component'
 })
 export class GdsCardLinked extends withSizeXProps(
   withMarginProps(
-    withLayoutChildProps(withLinkProps(withImageProps(GdsElement))),
+    withLayoutChildProps(
+      withLinkProps(withImageProps(withCardProps(GdsElement))),
+    ),
   ),
 ) {
   static styles = [tokens, BaseCardStyles]
   #Compose = createComposer(this)
-
-  @property()
-  title = ''
-
-  @property()
-  excerpt = ''
-
-  @property()
-  label = ''
-
-  @property({ reflect: true })
-  rank: 'neutral' | 'outlined' | 'plain' = 'neutral'
-
-  @property({ reflect: false })
-  media: 'landscape' | 'square' = 'landscape'
-
-  get #classes() {
-    return {
-      card: true,
-      'card-linked': true,
-      [`rank-${this.rank}`]: true,
-      [`media-${this.media}`]: true,
-    }
-  }
 
   #Parts = {
     Root: this.#Compose.Part({
@@ -133,7 +112,7 @@ export class GdsCardLinked extends withSizeXProps(
           href=${ifDefined(this.href)}
           target=${ifDefined(this.target)}
           rel=${ifDefined(this.rel)}
-          class=${classMap(this.#classes)}
+          class=${classMap(this.classes('linked'))}
         >
           ${content}
         </a>`,
