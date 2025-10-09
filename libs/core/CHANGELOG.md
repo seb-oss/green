@@ -1,5 +1,42 @@
 # Changelog
 
+## 2.9.0
+
+### Minor Changes
+
+- 4c85a71: **Dropdown:** Add mixing support for space and child
+- 4c85a71: **Divider:** Add DL mixin support for inline size
+- 4c85a71: **IMG:** Add margin mixin
+
+### Patch Changes
+
+- 4c85a71: **IMG:** Wrap prop with IfDefined directive
+
+## 2.8.2
+
+### Patch Changes
+
+- 1854fdf: **Dialog:** Remove border to avoid blurry edges
+
+## 2.8.1
+
+### Patch Changes
+
+- 52eb344: **Breadcrumb:** Fix the failing test issue move aria current to the current item
+
+## 2.8.0
+
+### Minor Changes
+
+- be2744e: **Card:** Add tertiary variant and update to `xl` the default padding on medium size screens
+- 48cfa84: **Breadcrumbs:** Add `breadcrumb` as slottable component, change the method how items are populated and separator is set.
+- 35fec52: **Theme:** Add support for `gds-theme="auto"` on root node
+
+### Patch Changes
+
+- 6ba44e5: **Filter chips:** Fix initial state issue when multiple mode is used
+- 35fec52: **Theme:** Revert default scheme to `light`, as `auto` should be opt-in.
+
 ## 2.7.0
 
 ### Minor Changes

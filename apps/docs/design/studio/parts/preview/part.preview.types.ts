@@ -12,12 +12,14 @@ export type PreviewType =
 
 export interface PreviewProps {
   type: PreviewType
+  theme?: 'dark' | 'light'
   token: TokenItem
 }
 
 // Optional: Specific token type interfaces for stricter typing
 export interface ColorPreviewProps {
   token: TokenItem & { level?: string }
+  theme?: 'dark' | 'light'
   darkValue?: string
 }
 

@@ -43,15 +43,15 @@ export function TemplateLayoutClient({
     <Core.GdsFlex flex-direction="column" gap="2xl" width="100%">
       <Core.GdsFlex flex-direction="column" gap="m" padding="0">
         <Core.GdsBreadcrumbs size="small">
-          <Link component="link" href="/">
+          <Link component="breadcrumb" href="/">
             <Core.IconHomeOpen size="m" slot="lead" />
             Home
           </Link>
-          <Link component="link" href="/templates">
+          <Link component="breadcrumb" href="/templates">
             <Core.IconDevices size="m" slot="lead" />
             Templates
           </Link>
-          <Core.GdsText>{template.title}</Core.GdsText>
+          <Core.GdsBreadcrumb>{template.title}</Core.GdsBreadcrumb>
         </Core.GdsBreadcrumbs>
         <Core.GdsText tag="h1" font="heading-xl">
           {template.title}

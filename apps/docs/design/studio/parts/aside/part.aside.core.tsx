@@ -104,11 +104,11 @@ export default function Aside({ page, KEY, level }: AsideProps) {
   return (
     <Core.GdsFlex
       flex-direction="column"
-      grid-column="10 / 13"
+      grid-column="1; s{8 / 13} m{10 / 13}"
       className="studio-aside"
-      position="sticky"
-      inset="40px auto auto auto"
-      margin="4xl 0 0 0"
+      position="relative; s{sticky}"
+      inset="0; s{40px auto auto auto}"
+      margin="0; s{4xl 0 0 0}"
     >
       {page.type === 'asset' && (
         <IconAside

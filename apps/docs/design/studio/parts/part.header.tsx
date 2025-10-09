@@ -14,11 +14,21 @@ export default function StudioHeader({ title, description, page }: Types) {
   return (
     <Core.GdsFlex flex-direction="column" gap="l" className="studio-header">
       <Part.Meta title={title} description={description} />
-      <Core.GdsFlex justify-content="space-between" height="xl">
+      <Core.GdsFlex
+        flex-direction="column; m{row}"
+        justify-content="space-between"
+        height="max-content; m{xl}"
+        gap="xl; m{0}"
+      >
         <Part.Breadcrumbs key={page} />
+        <Core.GdsDiv display="block; m{none}">
+          <Core.GdsDivider color="subtle-01" />
+        </Core.GdsDiv>
         <Part.Actions />
       </Core.GdsFlex>
-      <Core.GdsDivider color="subtle-01" />
+      <Core.GdsDiv display="none; m{block}">
+        <Core.GdsDivider color="subtle-01" />
+      </Core.GdsDiv>
       <Part.Search page={page} />
     </Core.GdsFlex>
   )

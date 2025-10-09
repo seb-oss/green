@@ -144,6 +144,7 @@ export class GdsDialog extends withSizeXProps(
               box-shadow="xl"
               border-radius="m"
               max-width="100%"
+              border-width="0"
               @mousedown=${() => (this.#clickStartedInside = true)}
             >
               <slot name="dialog">
