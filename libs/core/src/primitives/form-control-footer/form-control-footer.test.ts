@@ -26,6 +26,7 @@ describe('<gds-form-control-footer>', () => {
       const el = await fixture<GdsFormControlFooter>(
         html`<gds-form-control-footer
           .validationMessage=${'hello'}
+          .charCounter=${[10, 'positive']}
         ></gds-form-control-footer>`,
       )
       await el.updateComplete
@@ -36,6 +37,7 @@ describe('<gds-form-control-footer>', () => {
       const el = await fixture<GdsFormControlFooter>(
         html`<gds-form-control-footer
           .validationMessage=${'hello'}
+          .charCounter=${[10, 'positive']}
         ></gds-form-control-footer>`,
       )
       await el.updateComplete
