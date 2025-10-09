@@ -41,11 +41,127 @@ export const CardLinked: Story = {
   },
 }
 
-export const Header: Story = {
+/**
+ *
+ */
+export const Ranks: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-card-linked href="#" label="Read more">
-      <div slot="header">Header</div>
-    </gds-card-linked>
+    <gds-grid columns="3" gap="xl">
+      <gds-card-linked
+        href="#"
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        label="Link text"
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+      </gds-card-linked>
+      <gds-card-linked
+        href="#"
+        rank="outlined"
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        label="Link text"
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+      </gds-card-linked>
+      <gds-card-linked
+        href="#"
+        rank="plain"
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        label="Link text"
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+      </gds-card-linked>
+    </gds-grid>
+  `,
+}
+
+/**
+ * Footer slot
+ */
+export const Footer: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-grid columns="3" gap="xl">
+      <!-- Combined -->
+      <gds-card-linked
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+      </gds-card-linked>
+      <gds-card-linked
+        rank="outlined"
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+      </gds-card-linked>
+      <gds-card-linked
+        rank="plain"
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+      </gds-card-linked>
+
+      <!-- Buttons only -->
+      <gds-card-linked
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+      </gds-card-linked>
+      <gds-card-linked
+        rank="outlined"
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+      </gds-card-linked>
+      <gds-card-linked
+        rank="plain"
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+      </gds-card-linked>
+    </gds-grid>
+  `,
+}
+
+/**
+ * Footer slot
+ */
+export const Media: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-grid columns="1; m{3}" gap="xl" width="100%">
+      <!-- Combined -->
+      <gds-card-linked
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+      </gds-card-linked>
+      <gds-card-linked
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+        media="square"
+      >
+      </gds-card-linked>
+      <gds-card-linked
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        media="square"
+        src="https://api.seb.io/assets/launch-hero.jpg"
+        srcset="https://api.seb.io/assets/launch-hero.jpg 300w, https://api.seb.io/assets/primitives_hero.png 900w"
+        sizes="(max-width: 600px) 300px, 900px"
+      >
+      </gds-card-linked>
+    </gds-grid>
   `,
 }

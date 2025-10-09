@@ -1,27 +1,27 @@
-import { nothing, TemplateResult } from 'lit'
 import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
-import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
+import BaseCardStyles from '../../shared-styles/base-card.style'
 import { tokens } from '../../tokens.style'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { createComposer } from '../../utils/helpers/part-composer'
 import {
   withLayoutChildProps,
   withMarginProps,
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
+import { withImageProps } from '../../utils/mixins/image-props'
 import { withLinkProps } from '../../utils/mixins/link-props'
 import { GdsCard } from '../card/card.component'
 import { GdsFlex } from '../flex/flex.component'
 import { IconChainLink } from '../icon/icons/chain-link'
 import { GdsImg } from '../img/img.component'
 import { GdsText } from '../text/text.component'
-import CardLinkedStyles from './card-linked.styles'
 
 /**
  * @element gds-card-linked
@@ -30,9 +30,12 @@ import CardLinkedStyles from './card-linked.styles'
   dependsOn: [GdsCard, GdsImg, GdsText, GdsFlex, IconChainLink],
 })
 export class GdsCardLinked extends withSizeXProps(
-  withMarginProps(withLayoutChildProps(withLinkProps(GdsElement))),
+  withMarginProps(
+    withLayoutChildProps(withLinkProps(withImageProps(GdsElement))),
+  ),
 ) {
-  static styles = [tokens, CardLinkedStyles]
+  static styles = [tokens, BaseCardStyles]
+  #Compose = createComposer(this)
 
   @property()
   title = ''
@@ -43,137 +46,101 @@ export class GdsCardLinked extends withSizeXProps(
   @property()
   label = ''
 
-  // @property()
-  // href?: string
+  @property({ reflect: true })
+  rank: 'neutral' | 'outlined' | 'plain' = 'neutral'
 
-  // @property()
-  // target?: '_self' | '_blank' | '_parent' | '_top'
-
-  // @property()
-  // rel?: string
-
-  // Image
-
-  @property()
-  src?: string
-
-  render() {
-    if (!this.href) return this.#Parts.Core()
-
-    return html`
-      <a
-        href=${ifDefined(this.href)}
-        target=${ifDefined(this.target)}
-        rel=${ifDefined(this.rel || this.#defaultRel)}
-        class=${classMap(this.#classes)}
-      >
-        ${this.#Parts.Core()}
-      </a>
-    `
-  }
-
-  get #defaultRel() {
-    return this.target === '_blank' ? 'noreferrer noopener' : undefined
-  }
+  @property({ reflect: false })
+  media: 'landscape' | 'square' = 'landscape'
 
   get #classes() {
     return {
       card: true,
-      'has-excerpt': !!this.excerpt,
-    }
-  }
-
-  get #slot() {
-    return (slot: string) => this.querySelector(`[slot="${slot}"]`) !== null
-  }
-
-  get #render() {
-    return {
-      Single: (part: any) => part.render(),
-      Group: (parts: any[]) => parts.map((part) => part.render()),
+      'card-linked': true,
+      [`rank-${this.rank}`]: true,
+      [`media-${this.media}`]: true,
     }
   }
 
   #Parts = {
-    Header: {
-      Image: () => html`
-        <gds-img
-          src=${ifDefined(this.src)}
-          width="100%"
-          height="100%"
-          object-fit="cover"
-          object-position="center"
-          border-radius="xs"
-        ></gds-img>
-      `,
+    Root: this.#Compose.Part({
+      parts: {
+        Header: this.#Compose.Part({
+          slot: 'header',
+          wrap: true,
+          conditions: {
+            Image: () => !!this.src,
+          },
+          templates: {
+            Image: () => html`
+              <gds-img
+                src=${ifDefined(this.src)}
+                srcset=${ifDefined(this.srcset)}
+                sizes=${ifDefined(this.sizes)}
+                width="100%"
+                height="100%"
+                object-fit="cover"
+                object-position="center"
+                border-radius="3xs"
+                aspect-ratio=${this.media === 'square' ? '1/1' : '16/9'}
+              ></gds-img>
+            `,
+          },
+        }),
 
-      Slot: () => this.#slot('header') && html`<slot name="header"></slot>`,
+        Main: this.#Compose.Part({
+          wrap: true,
+          parts: {
+            Article: this.#Compose.Part({
+              wrap: true,
+              conditions: {
+                Title: () => !!this.title,
+                Excerpt: () => !!this.excerpt,
+              },
+              templates: {
+                Title: () => html`
+                  <gds-text tag="h2" font="heading-s"> ${this.title} </gds-text>
+                `,
+                Excerpt: () => html`
+                  <gds-text tag="p" lines="3" font="body-regular-m">
+                    ${this.excerpt}
+                  </gds-text>
+                `,
+              },
+            }),
 
-      Element: (content: TemplateResult[]) => html`
-        <header class="header">${content}</header>
-      `,
-
-      render: () => {
-        const { Image, Slot, Element } = this.#Parts.Header
-        if (Slot()) return Element(Slot())
-        if (this.src) return Element(Image())
-        return nothing
+            Footer: this.#Compose.Part({
+              slot: 'footer',
+              wrap: true,
+              conditions: {
+                Link: () => !!this.label && !!this.href,
+              },
+              templates: {
+                Link: () => html`
+                  <gds-link href=${ifDefined(this.href)}>
+                    <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
+                    ${this.label}
+                  </gds-link>
+                `,
+              },
+              wrapper: (content) =>
+                html`<footer class="part-footer" inert>${content}</footer>`,
+            }),
+          },
+        }),
       },
-    },
+      wrapper: (content) =>
+        html`<a
+          href=${ifDefined(this.href)}
+          target=${ifDefined(this.target)}
+          rel=${ifDefined(this.rel)}
+          class=${classMap(this.#classes)}
+        >
+          ${content}
+        </a>`,
+    }),
+  }
 
-    Article: {
-      Title: () =>
-        this.title &&
-        html` <gds-text tag="h2" font="heading-s">${this.title}</gds-text> `,
-
-      Excerpt: () =>
-        this.excerpt &&
-        html`
-          <gds-text font="body-regular-m" lines="3">${this.excerpt}</gds-text>
-        `,
-
-      Element: (content: TemplateResult | TemplateResult[]) => html`
-        <article class="article">${content}</article>
-      `,
-
-      render: () => {
-        const { Title, Excerpt, Element } = this.#Parts.Article
-        if (!this.title && !this.excerpt) return nothing
-        return Element([Title(), Excerpt()])
-      },
-    },
-
-    Footer: {
-      Link: () =>
-        this.label &&
-        html`
-          <gds-link href="#">
-            <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
-            ${this.label}
-          </gds-link>
-        `,
-
-      Slot: () => this.#slot('footer') && html`<slot name="footer"></slot>`,
-
-      Element: (content: TemplateResult | TemplateResult[]) => html`
-        <footer class="footer" inert>${content}</footer>
-      `,
-
-      render: () => {
-        const { Link, Slot, Element } = this.#Parts.Footer
-        const content = [Link(), Slot()].filter(Boolean)
-        return content.length ? Element(content) : nothing
-      },
-    },
-
-    Main: (parts: TemplateResult[]) => html`
-      <main class="main">${parts}</main>
-    `,
-
-    Core: () => {
-      const { Header, Article, Footer, Main } = this.#Parts
-      const { Single, Group } = this.#render
-      return [Single(Header), Main(Group([Article, Footer]))]
-    },
+  render() {
+    return this.#Parts.Root.render()
   }
 }

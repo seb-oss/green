@@ -1,10 +1,8 @@
-import { nothing, TemplateResult } from 'lit'
 import { property } from 'lit/decorators.js'
-import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
-import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
+import BaseCardSyles from '../../shared-styles/base-card.style'
 import { tokens } from '../../tokens.style'
 import {
   gdsCustomElement,
@@ -16,13 +14,13 @@ import {
   withMarginProps,
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
+import { withImageProps } from '../../utils/mixins/image-props'
 import { withLinkProps } from '../../utils/mixins/link-props'
 import { GdsCard } from '../card/card.component'
 import { GdsFlex } from '../flex/flex.component'
 import { IconChainLink } from '../icon/icons/chain-link'
 import { GdsImg } from '../img/img.component'
 import { GdsText } from '../text/text.component'
-import CardLinkedStyles from './card-dynamic.styles'
 
 /**
  * @element gds-card-dynamic
@@ -31,16 +29,12 @@ import CardLinkedStyles from './card-dynamic.styles'
   dependsOn: [GdsCard, GdsImg, GdsText, GdsFlex, IconChainLink],
 })
 export class GdsCardDynamic extends withSizeXProps(
-  withMarginProps(withLayoutChildProps(withLinkProps(GdsElement))),
+  withMarginProps(
+    withLayoutChildProps(withLinkProps(withImageProps(GdsElement))),
+  ),
 ) {
-  static styles = [tokens, CardLinkedStyles]
+  static styles = [tokens, BaseCardSyles]
   #Compose = createComposer(this)
-
-  /**
-   * The rank of the card. Defaults to "primary".
-   */
-  @property({ reflect: true })
-  rank: 'neutral' | 'outlined' | 'plain' = 'neutral'
 
   @property()
   title = ''
@@ -51,25 +45,8 @@ export class GdsCardDynamic extends withSizeXProps(
   @property()
   label = ''
 
-  // @property()
-  // href?: string
-
-  // @property()
-  // target?: '_self' | '_blank' | '_parent' | '_top'
-
-  // @property()
-  // rel?: string
-
-  // Media
-
-  @property()
-  src?: string
-
-  @property()
-  srcset?: string
-
-  @property()
-  sizes?: string
+  @property({ reflect: true })
+  rank: 'neutral' | 'outlined' | 'plain' = 'neutral'
 
   @property({ reflect: false })
   media: 'landscape' | 'square' = 'landscape'

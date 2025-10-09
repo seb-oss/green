@@ -26,8 +26,8 @@ export function withLinkProps<T extends Constructor<GdsElement>>(
     /**
      * URL that the link points to
      */
-    // @property()
-    // href?: string
+    @property()
+    href?: string
 
     /**
      * Specifies where to open the linked document
@@ -39,7 +39,18 @@ export function withLinkProps<T extends Constructor<GdsElement>>(
      * Specifies the relationship between the current document and the linked document
      */
     @property()
-    rel?: string
+    get rel(): string | undefined {
+      // If rel is explicitly set, use that value
+      if (this._rel) {
+        return this._rel
+      }
+      // Otherwise, add security attributes for target="_blank"
+      return this.target === '_blank' ? 'noreferrer noopener' : undefined
+    }
+    set rel(value: string | undefined) {
+      this._rel = value
+    }
+    private _rel?: string
 
     /**
      * When present, indicates that the linked resource should be downloaded
