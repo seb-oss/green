@@ -145,8 +145,6 @@ export const Media: Story = {
         excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
         media="square"
         src="https://api.seb.io/assets/launch-hero.jpg"
-        srcset="https://api.seb.io/assets/launch-hero.jpg 300w, https://api.seb.io/assets/primitives_hero.png 900w"
-        sizes="(max-width: 600px) 300px, 900px"
       >
       </gds-card-linked>
     </gds-grid>
