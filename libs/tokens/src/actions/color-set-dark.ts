@@ -53,12 +53,15 @@ export default {
         return (
           !token.path.includes('ref') &&
           token.path.includes('color') &&
-          token.version !== '2016'
+          token.version !== '2016' &&
+          token.filePath.includes('dark')
         )
       })
       .forEach((token) => {
         const colorsetPath = `${assetPath}/${token.name.replace('sysColor', '')}.colorset`
         const contentsJsonPath = path.join(colorsetPath, 'Contents.json')
+
+        console.log(token)
 
         const originalValue = resolveReferences(
           token.original['$value'],

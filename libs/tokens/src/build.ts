@@ -15,7 +15,7 @@ const swiftPackageName: string = 'GdsKit'
 const swiftTargets = [
   {
     name: swiftPackageName,
-    dependencies: ['GdsColours', 'GdsTypography', 'GdsDimensions'],
+    dependencies: ['GdsColours', 'GdsTypography'],
     path: '',
     resources: [],
   },
@@ -30,11 +30,6 @@ const swiftTargets = [
     dependencies: [],
     path: 'Sources/GdsTypography',
     resources: ['Resources'],
-  },
-  {
-    name: 'GdsDimensions',
-    dependencies: [],
-    path: 'Sources/GdsSpacing',
   },
 ]
 const swiftSourcePath = 'Sources/' + swiftPackageName + '/'
@@ -169,7 +164,7 @@ const themes = {
         ],
       },
     }),
-    source: [],
+    getSource: () => [],
   },
   2023: {
     baseTheme: 2023,
@@ -400,6 +395,17 @@ const themes = {
               packageName: ['se.seb.gds.tokens'],
             },
           },
+          {
+            destination: 'Colors/GdsColor.kt',
+            format: 'jvm/enum-class',
+            filter: 'is-color-no-ref',
+            options: {
+              objectType: 'enum',
+              className: 'GdsColor',
+              import: [],
+              packageName: ['se.seb.gds'],
+            },
+          },
         ],
         actions: ['copy-android-assets'],
       },
@@ -482,7 +488,7 @@ const themes = {
         ],
       },
     }),
-    source: [],
+    getSource: () => [],
   },
   ios: {
     baseTheme: 2023,
@@ -508,6 +514,13 @@ const themes = {
             },
           },
           {
+            destination: 'Sources/GdsKit/GdsKit.swift',
+            format: 'green/ios-swift-gdskit',
+            options: {
+              imports: ['GdsColours', 'GdsTypography'],
+            },
+          },
+          {
             destination: 'Sources/GdsColours/GdsColours.swift',
             format: 'green/ios-swift-colours',
             filter: 'is-color-no-ref',
@@ -517,17 +530,19 @@ const themes = {
             format: 'green/ios-swift-typography',
             filter: 'is-typography',
           },
-          {
-            destination: 'Sources/GdsDimensions/GdsSpacing.swift',
-            format: 'ios-swift/any.swift',
-            filter: 'is-spacing',
-            options: {
-              className: 'GdsSpacing',
-              import: ['Foundation'],
-              accessControl: 'public',
-              objectType: 'struct',
-            },
-          },
+          // We don't currently have the correct format for spacing tokens
+          // but leaving this here for when we do
+          // {
+          //   destination: 'Sources/GdsDimensions/GdsSpacing.swift',
+          //   format: 'ios-swift/any.swift',
+          //   filter: 'is-spacing',
+          //   options: {
+          //     className: 'GdsSpacing',
+          //     import: ['Foundation'],
+          //     accessControl: 'public',
+          //     objectType: 'struct',
+          //   },
+          // },
         ],
         actions: [`color-set-${colorScheme}`, 'copy-ios-assets'],
       },
@@ -558,7 +573,10 @@ const themes = {
         ],
       },
     }),
-    source: [dirname + `/tokens/ios/**/*.json`],
+    getSource: ({ theme, colorScheme }): Array<string> => [
+      dirname + `/tokens/ios/**/*.typography.json`,
+      dirname + `/tokens/ios/**/*.${colorScheme}.json`,
+    ],
   },
 }
 const colorSchemes = ['light', 'dark']
@@ -578,7 +596,7 @@ const buildTokens = async () => {
               dirname +
                 `/tokens/${themeConfig.baseTheme}/**/*.${colorScheme}.json`,
             ],
-            source: themeConfig.source,
+            source: themeConfig.getSource({ theme, colorScheme }),
             log: {
               verbosity: 'verbose',
             },

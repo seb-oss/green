@@ -53,7 +53,8 @@ export default {
         return (
           !token.path.includes('ref') &&
           token.path.includes('color') &&
-          token.version !== '2016'
+          token.version !== '2016' &&
+          token.filePath.includes('light')
         )
       })
       .forEach((token) => {

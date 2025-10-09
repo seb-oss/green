@@ -25,7 +25,6 @@ const formats = {
   'green/ios-swift-typography': greenIosSwiftTypography,
   'compose/class': composeClass,
   'compose/font': composeFont,
-  'compose/typography': composeClass,
   'compose/typography': composeTypography,
   'compose/color-scheme': composeColorScheme,
   'jvm/enum-class': enumClass,

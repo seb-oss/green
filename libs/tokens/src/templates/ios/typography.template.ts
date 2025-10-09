@@ -81,12 +81,6 @@ import UIKit
 
 public enum Typography {
 ${allTokens.map((token: any) => `   case ${lowercaseFirstLetter(token.name.replace('sysText', ''))}`).join('\n')}
-    public enum Weight {
-        case bold
-        case medium
-        case book
-        case regular
-    }
 }
 
 extension Typography {
