@@ -15,6 +15,7 @@ import {
   withMarginProps,
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
+import { withLinkProps } from '../../utils/mixins/link-props'
 import { GdsCard } from '../card/card.component'
 import { GdsFlex } from '../flex/flex.component'
 import { IconChainLink } from '../icon/icons/chain-link'
@@ -29,7 +30,7 @@ import CardLinkedStyles from './card-linked.styles'
   dependsOn: [GdsCard, GdsImg, GdsText, GdsFlex, IconChainLink],
 })
 export class GdsCardLinked extends withSizeXProps(
-  withMarginProps(withLayoutChildProps(GdsElement)),
+  withMarginProps(withLayoutChildProps(withLinkProps(GdsElement))),
 ) {
   static styles = [tokens, CardLinkedStyles]
 
@@ -42,14 +43,14 @@ export class GdsCardLinked extends withSizeXProps(
   @property()
   label = ''
 
-  @property()
-  href?: string
+  // @property()
+  // href?: string
 
-  @property()
-  target?: '_self' | '_blank' | '_parent' | '_top'
+  // @property()
+  // target?: '_self' | '_blank' | '_parent' | '_top'
 
-  @property()
-  rel?: string
+  // @property()
+  // rel?: string
 
   // Image
 
