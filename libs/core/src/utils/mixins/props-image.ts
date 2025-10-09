@@ -1,4 +1,4 @@
-// Image Props
+// utils/mixins/props-image.ts
 import { property } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'

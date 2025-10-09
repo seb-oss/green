@@ -1,5 +1,4 @@
-// Card Props
-
+// utils/mixins/props-card.ts
 import { property } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'

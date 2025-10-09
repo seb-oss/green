@@ -1,5 +1,4 @@
-// link-behavior.ts
-
+// utils/mixins/props-link.ts
 import { property } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
