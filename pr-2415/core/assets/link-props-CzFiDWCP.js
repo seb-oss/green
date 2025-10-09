@@ -1,1 +1,0 @@
-import{n as p}from"./Reflect-DJ7r0WLU.js";var a=Object.defineProperty,i=(e,r,o,f)=>{for(var t=void 0,n=e.length-1,s;n>=0;n--)(s=e[n])&&(t=s(r,o,t)||t);return t&&a(r,o,t),t};function l(e){class r extends e{}return i([p()],r.prototype,"target"),i([p()],r.prototype,"rel"),i([p()],r.prototype,"download"),r}export{l as w};
