@@ -126,7 +126,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         const textareaEl = el.shadowRoot?.querySelector('textarea')
         expect(textareaEl?.getAttribute('autocapitalize')).to.equal('on')
         expect(textareaEl?.getAttribute('autocomplete')).to.equal('on')
-        expect(textareaEl?.getAttribute('autocorrect')).to.equal('on')
+        expect(textareaEl?.getAttribute('autocorrect')).to.equal(true)
         expect(textareaEl?.getAttribute('spellcheck')).to.equal('true')
         expect(textareaEl?.getAttribute('inputmode')).to.equal('numeric')
         expect(textareaEl?.getAttribute('autofocus')).to.equal('')
