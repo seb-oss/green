@@ -4,6 +4,7 @@ import {
   GdsButton,
   GdsCard,
   GdsFlex,
+  GdsGrid,
   GdsLink,
   GdsText,
   GdsTheme,
@@ -15,7 +16,12 @@ import {
 export default function Welcome() {
   return (
     <GdsTheme designVersion="2023">
-      <GdsFlex flex-direction="column" min-height="90vh">
+      <GdsFlex
+        flex-direction="column"
+        align-items="center"
+        justify-content="center"
+        min-height="80vh"
+      >
         <GdsFlex
           padding="0 l"
           align-items="center"
@@ -62,35 +68,56 @@ export default function Welcome() {
               <GdsText>Built by:</GdsText>
               <IconBrandSeb size="m"></IconBrandSeb>
             </GdsFlex>
-            <GdsCard
-              variant="primary"
-              flex-direction="column"
-              align-items="flex-start"
-              padding="l"
-              width="70%"
-              max-width="800px"
-              min-width="320px"
-              gap="m"
-              margin="xl 0 0 0"
-              border-radius="m"
-            >
-              <GdsFlex flex-direction="column">
-                <GdsText font="heading-s" font-weight="regular">
-                  Guidelines & Foundation
-                </GdsText>
-                <GdsText max-width="100%" opacity="0.6" text-wrap="pretty">
-                  For comprehensive design guidelines and implementation
-                  details, visit:
-                </GdsText>
-              </GdsFlex>
-              <GdsLink href="https://seb.io" target="_blank">
-                <IconSquareArrowTopRight
-                  slot="trail"
-                  size="s"
-                ></IconSquareArrowTopRight>
-                seb.io
-              </GdsLink>
-            </GdsCard>
+            <GdsGrid columns="1; m{2}" gap="l" padding="l; m{4xl}">
+              <GdsCard
+                variant="primary"
+                flex-direction="column"
+                align-items="flex-start"
+                padding="xl"
+                flex="1"
+                min-width="320px"
+                gap="m"
+                border-radius="m"
+              >
+                <GdsFlex flex-direction="column" gap="m">
+                  <GdsText font="heading-s" font-weight="regular">
+                    Documentation
+                  </GdsText>
+                  <GdsText max-width="100%" opacity="0.8">
+                    Explore our comprehensive guidelines, components
+                    documentation, and implementation details.
+                  </GdsText>
+                </GdsFlex>
+                <GdsLink href="https://seb.io" target="_blank">
+                  <IconSquareArrowTopRight slot="trail" size="s" />
+                  View Documentation
+                </GdsLink>
+              </GdsCard>
+              <GdsCard
+                variant="primary"
+                flex-direction="column"
+                align-items="flex-start"
+                padding="xl"
+                flex="1"
+                min-width="320px"
+                gap="m"
+                border-radius="m"
+              >
+                <GdsFlex flex-direction="column" gap="m">
+                  <GdsText font="heading-s" font-weight="regular">
+                    Green Studio
+                  </GdsText>
+                  <GdsText max-width="100%" opacity="0.8">
+                    Access our design tools, including icons library, component
+                    playground, and design tokens.
+                  </GdsText>
+                </GdsFlex>
+                <GdsLink href="https://seb.io/studio" target="_blank">
+                  <IconSquareArrowTopRight slot="trail" size="s" />
+                  Open Studio
+                </GdsLink>
+              </GdsCard>
+            </GdsGrid>
           </GdsFlex>
         </GdsFlex>
       </GdsFlex>
