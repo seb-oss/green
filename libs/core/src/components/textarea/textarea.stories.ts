@@ -553,3 +553,45 @@ export const Disabled: Story = {
     </gds-flex>
   `,
 }
+
+/**
+ * The `charCounterCallback` property can be used to customize the character counter badge.
+ *
+ * Check the [story source](https://github.com/seb-oss/green/blob/main/libs/core/src/components/textarea/textarea.stories.ts) to see the full code for this example, as Storybook strips away property assignments in the code examples.
+ */
+export const CustomCounterBadge: Story = {
+  ...DefaultParams,
+  name: 'Custom counter badge',
+  render: () => html`
+      <gds-textarea
+        label="Label"
+        maxlength="100"
+        .charCounterCallback=${(inp: GdsTextarea) => {
+          let badgeType: GdsBadge['variant'] = 'positive'
+          if (inp.value) {
+            switch (inp.value.length % 5) {
+              case 0:
+                badgeType = 'positive'
+                break
+              case 1:
+                badgeType = 'negative'
+                break
+              case 2:
+                badgeType = 'notice'
+                break
+              case 3:
+                badgeType = 'warning'
+                break
+              case 4:
+                badgeType = 'information'
+                break
+            }
+          }
+          return [inp.value!.length, badgeType] as const
+        }}
+      >
+        <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+      </gds-textarea>
+    </gds-flex>
+  `,
+}
