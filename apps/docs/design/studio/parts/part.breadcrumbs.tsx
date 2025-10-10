@@ -150,19 +150,17 @@ export default function StudioBreadcrumbs() {
   }
 
   return (
-    <div>
-      <Core.GdsBreadcrumbs>
-        {links.map((item, index) => (
-          <Link
-            component="breadcrumb"
-            key={index}
-            {...(item.href ? { href: item.href } : {})}
-          >
-            {!item.isLast && item.icon && <item.icon slot="lead" size="m" />}
-            {item.label}
-          </Link>
-        ))}
-      </Core.GdsBreadcrumbs>
-    </div>
+    <Core.GdsBreadcrumbs flex="1">
+      {links.map((item, index) => (
+        <Link
+          component="breadcrumb"
+          key={index}
+          {...(item.href ? { href: item.href } : {})}
+        >
+          {!item.isLast && item.icon && <item.icon slot="lead" size="m" />}
+          {item.label}
+        </Link>
+      ))}
+    </Core.GdsBreadcrumbs>
   )
 }
