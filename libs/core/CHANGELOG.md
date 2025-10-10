@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.10.0
+
+### Minor Changes
+
+- 15410ee: **Input & Textarea:** Add support for customizable counter badge
+
+### Patch Changes
+
+- 15410ee: **Textarea:** Fix type issue with `autocorrect` property
+
 ## 2.9.0
 
 ### Minor Changes
