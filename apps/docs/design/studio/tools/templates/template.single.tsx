@@ -79,28 +79,34 @@ export default function Template({ template }: { template: string }) {
   return (
     <Core.GdsFlex flex-direction="column" gap="s" width="100%">
       <Core.GdsFlex justify-content="space-between" align-items="center">
-        <Core.GdsSegmentedControl
-          width="max-content"
-          value={TAB}
-          size="small"
-          onchange={(e: Event) => {
-            const target = e.target as HTMLSelectElement
-            SET_TAB(target.value as 'preview' | 'inspect')
-          }}
-        >
-          <Core.GdsSegment value="preview">
-            <Core.GdsFlex align-items="center" gap="xs">
-              <Core.IconEyeOpen size="m" />
-              <Core.GdsText font="detail-book-s">Preview</Core.GdsText>
-            </Core.GdsFlex>
-          </Core.GdsSegment>
-          <Core.GdsSegment value="inspect">
-            <Core.GdsFlex align-items="center" gap="xs">
-              <Core.IconCursor size="m" />
-              <Core.GdsText font="detail-book-s">Inspect</Core.GdsText>
-            </Core.GdsFlex>
-          </Core.GdsSegment>
-        </Core.GdsSegmentedControl>
+        <Core.GdsFlex align-items="center" gap="s">
+          <Core.GdsSegmentedControl
+            width="max-content"
+            value={TAB}
+            size="small"
+            onchange={(e: Event) => {
+              const target = e.target as HTMLSelectElement
+              SET_TAB(target.value as 'preview' | 'inspect')
+            }}
+          >
+            <Core.GdsSegment value="preview">
+              <Core.GdsFlex align-items="center" gap="xs">
+                <Core.IconEyeOpen size="m" />
+                <Core.GdsText font="detail-book-s">Preview</Core.GdsText>
+              </Core.GdsFlex>
+            </Core.GdsSegment>
+            <Core.GdsSegment value="inspect">
+              <Core.GdsFlex align-items="center" gap="xs">
+                <Core.IconCursor size="m" />
+                <Core.GdsText font="detail-book-s">Inspect</Core.GdsText>
+              </Core.GdsFlex>
+            </Core.GdsSegment>
+          </Core.GdsSegmentedControl>
+          <Core.GdsButton rank="tertiary" size="small">
+            <Core.IconCopy slot="lead" size="m" />
+            Code
+          </Core.GdsButton>
+        </Core.GdsFlex>
         <Core.GdsFlex gap="s">
           {/* <Core.GdsButton size="small" rank="tertiary">
             <Core.IconFullscreen size="m" />
