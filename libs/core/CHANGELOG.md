@@ -1,5 +1,29 @@
 # Changelog
 
+## 2.9.0
+
+### Minor Changes
+
+- 4c85a71: **Dropdown:** Add mixing support for space and child
+- 4c85a71: **Divider:** Add DL mixin support for inline size
+- 4c85a71: **IMG:** Add margin mixin
+
+### Patch Changes
+
+- 4c85a71: **IMG:** Wrap prop with IfDefined directive
+
+## 2.8.2
+
+### Patch Changes
+
+- 1854fdf: **Dialog:** Remove border to avoid blurry edges
+
+## 2.8.1
+
+### Patch Changes
+
+- 52eb344: **Breadcrumb:** Fix the failing test issue move aria current to the current item
+
 ## 2.8.0
 
 ### Minor Changes

@@ -55,6 +55,8 @@ export interface IconGroup {
   title: string
   description?: string
   items: IconItem[]
+  size?: string
+  solid?: boolean
 }
 
 // Page type interfaces

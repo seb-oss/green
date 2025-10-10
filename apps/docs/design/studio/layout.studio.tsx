@@ -82,17 +82,19 @@ const Token = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       border-style="solid"
-      border-width="0 0 5xs 0"
+      border-width="0 ; m{0 0 5xs 0}"
       border-color="subtle-01"
-      padding={type === 'typography' ? '0' : '0 0 0 xl'}
+      padding={type === 'typography' ? '0' : '0; m{0 0 0 xl}'}
       className={type === 'typography' ? 'token-typography' : ''}
+      background="neutral-01; m{none}"
+      border-radius="m; m{0}"
     >
       {type === 'typography' ? (
         <Core.GdsFlex
           width="100%"
           flex-direction="column"
           gap="s"
-          padding="s 0 s 0"
+          padding="l; m{s 0 s 0}"
         >
           <Core.GdsText font={item.token} width="100%">
             <span
@@ -100,12 +102,7 @@ const Token = ({
               suppressContentEditableWarning
               className="editable"
               spellCheck="false"
-              // onInput={(e) => {
-              //   const v = (e.target as HTMLSpanElement).textContent || ''
-              //   setLocalText(v)
-              // }}
             >
-              {/* {item.token} */}
               {previewText ? previewText : item.token}
             </span>
           </Core.GdsText>
@@ -113,10 +110,17 @@ const Token = ({
             const [fontSize, lineHeight, fontWeight] = item.value.split('/')
             return (
               <Core.GdsFlex
+                flex-direction="column; m{row}"
                 justify-content="space-between"
-                align-items="center"
+                align-items="flex-start; m{center}"
+                width="100%"
+                gap="s; m{0}"
               >
-                <Core.GdsFlex gap="xl">
+                <Core.GdsFlex
+                  gap="s; m{xl}"
+                  width="100%"
+                  flex-direction="column; m{row}"
+                >
                   <Core.GdsText color="neutral-02" font="detail-book-xs">
                     Font size: {fontSize}
                   </Core.GdsText>
@@ -127,7 +131,7 @@ const Token = ({
                     Weight: {fontWeight}
                   </Core.GdsText>
                 </Core.GdsFlex>
-                <Core.GdsFlex width="280px">
+                <Core.GdsFlex width="100%; m{280px}">
                   <Part.Copy token={item.token} />
                 </Core.GdsFlex>
               </Core.GdsFlex>
@@ -135,7 +139,12 @@ const Token = ({
           })()}
         </Core.GdsFlex>
       ) : (
-        <Core.GdsGrid columns="4" gap="s" align-items="center" padding="s 0">
+        <Core.GdsGrid
+          columns="1; m{4}"
+          gap="s"
+          align-items="center"
+          padding="l; m{s 0}"
+        >
           <Core.GdsText>{item.token}</Core.GdsText>
           {type !== 'colors' && type !== 'shadows' && item.value}
           {type !== 'viewport' && <Preview type={type} token={item} />}
@@ -143,6 +152,7 @@ const Token = ({
           {item.dark && (
             <Preview
               type={type}
+              theme="dark"
               token={{
                 token: item.token,
                 variable: item.variable,
@@ -152,8 +162,8 @@ const Token = ({
           )}
           <Core.GdsFlex align-items="center" gap="s">
             <Part.Copy token={item.token} />
-            <Core.GdsFlex width="3xl">
-              {false && isHovered && (
+            {false && isHovered && (
+              <Core.GdsFlex width="3xl">
                 <Core.GdsButton
                   onClick={() =>
                     router.push(getTokenPath(type, pageSlug, item, group))
@@ -164,8 +174,8 @@ const Token = ({
                 >
                   <Core.IconChevronRight />
                 </Core.GdsButton>
-              )}
-            </Core.GdsFlex>
+              </Core.GdsFlex>
+            )}
           </Core.GdsFlex>
         </Core.GdsGrid>
       )}
@@ -178,6 +188,8 @@ const CONTENT = (
   router: any,
   path: string,
   previewText: string,
+  solid: boolean,
+  size: string,
 ) => {
   const { actions } = useContent()
   // const CONTENT = (page: StudioPage, router: NextRouter, path: string) => {
@@ -245,7 +257,10 @@ const CONTENT = (
                   )}
                 </Core.GdsFlex>
               )}
-              <Core.GdsGrid columns={ACTIVE ? '4' : '5'} gap="l">
+              <Core.GdsGrid
+                columns={ACTIVE ? '2; s{2} m{3} l{4}' : '2; s{3} m{5}'}
+                gap="l"
+              >
                 {group.items.map((item) => (
                   <Core.GdsCard
                     padding="l"
@@ -261,7 +276,7 @@ const CONTENT = (
                     align-items="center"
                     variant={ACTIVE === item.key ? 'primary' : 'secondary'}
                     border-radius="m"
-                    className="icon-card linked-card"
+                    className="linked-card"
                     role="link"
                     tabIndex={0}
                   >
@@ -273,7 +288,11 @@ const CONTENT = (
                         align-items="center"
                         className="icon-preview"
                       >
-                        <Icon name={item.component} size="xl" />
+                        <Icon
+                          name={item.component}
+                          size={size.toLowerCase()}
+                          solid={solid}
+                        />
                       </Core.GdsFlex>
                     )}
                     <Core.GdsText
@@ -340,10 +359,10 @@ const CONTENT = (
               </Core.GdsFlex>
               <Core.GdsFlex
                 flex-direction="column"
-                gap={page.key === 'typography' ? 'l' : '0'}
+                gap={page.key === 'typography' ? 'l' : 'xl; m{0}'}
               >
                 {page.key !== 'typography' && (
-                  <Core.GdsCard>
+                  <Core.GdsCard display="none; m{flex}">
                     {page.key === 'colors' ? (
                       <Core.GdsGrid columns="4" gap="s">
                         <Core.GdsText>Token</Core.GdsText>
@@ -455,7 +474,12 @@ export function Studio({
     takeover,
     previewText,
     setPreviewText,
+    solid,
+    setSolid,
+    iconSize,
+    setIconSize,
   } = useSearch()
+
   const PATH = usePathname()
   const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
   const PAGE = useStudioPage(MAIN)
@@ -533,11 +557,10 @@ export function Studio({
 
   return (
     <Core.GdsGrid
-      columns="24"
+      columns="1; m{24}"
       gap="2xl"
       width="100%"
-      padding={takeover ? '0' : 'm'}
-      max-width="100%"
+      padding={takeover ? '0' : '0; m{m}'}
       box-sizing="border-box"
       className="studio"
     >
@@ -545,26 +568,31 @@ export function Studio({
       <Core.GdsFlex
         flex-direction="column"
         gap={PATH?.includes('compose') ? 'm' : '4xl'}
-        grid-column={takeover ? '1 / 25' : '6 / 25'}
-        padding={takeover ? 'xs' : 'l l 0 0'}
+        grid-column={takeover ? '1 / 25' : '1; m{6 / 25}'}
+        padding={takeover ? 'xs' : 'l; m{l l 0 0}'}
       >
         {!takeover && (
           <Part.Header title={title} description={description} page={page} />
         )}
-        <Core.GdsGrid columns="12" align-items="flex-start">
+        <Core.GdsGrid
+          columns="1; s{12}"
+          align-items="flex-start"
+          flex-direction="row-reverse"
+        >
           <Core.GdsCard
             flex-direction="column"
-            grid-column={NARROW ? '1 / 10' : '1 / 13'}
+            grid-column={NARROW ? '1; s{1 / 8} m{1 / 10}' : '1; s{1 / 13}'}
             variant="secondary"
             className="studio-page"
             padding="0"
             border="none"
             background="none"
+            order="2; s{0}"
           >
             {query && !hasResults ? (
               <NoResults />
             ) : filteredPage ? (
-              CONTENT(filteredPage, ROUT, PATH, previewText)
+              CONTENT(filteredPage, ROUT, PATH, previewText, solid, iconSize)
             ) : (
               children
             )}
