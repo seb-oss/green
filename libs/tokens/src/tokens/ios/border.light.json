@@ -1,0 +1,13 @@
+{
+  "sys": {
+    "color": {
+      "border": {
+        "$type": "color",
+        "separator-01": {
+          "$value": "{ref.color.grey.21}",
+          "alpha": 0.35
+        }
+      }
+    }
+  }
+}

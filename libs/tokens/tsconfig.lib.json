@@ -4,7 +4,11 @@
     "sourceMap": false,
     "outDir": "../../dist/out-tsc",
     "allowJs": true,
-    "types": ["node"]
+    "types": [],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "esModuleInterop": true,
+    "strict": true
   },
   "include": ["src/**/*.ts", "src/**/*.js", "style-dictionary.config.ts"]
 }
