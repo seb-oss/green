@@ -26,7 +26,40 @@ import { GdsText } from '../text/text.component'
 
 /**
  * @element gds-card-linked
+ *
+ * @summary A card component that acts as a clickable link, ideal for navigation and content previews.
+ *
+ * @description
+ * The linked card component combines the visual structure of a card with the behavior of a link.
+ * It supports different visual ranks, media layouts, and can include a title, excerpt, and footer.
+ * The entire card is clickable while maintaining proper accessibility.
+ *
+ * @property {string} href - The URL that the card links to
+ * @property {string} title - The main heading of the card
+ * @property {string} excerpt - A brief description or preview text
+ * @property {string} label - Text for the footer link (optional)
+ * @property {'primary' | 'outlined' | 'plain'} rank - Visual style of the card
+ * @property {'default' | 'square'} media - Aspect ratio for the media content
+ * @property {string} src - URL for the card's image
+ * @property {string} srcset - Responsive image srcset
+ * @property {string} sizes - Responsive image sizes
+ * @property {string} target - Link target (_blank, _self, etc.)
+ * @property {string} rel - Link relationship attributes
+ *
+ * @slot footer - Optional footer content that is inert and only presentational only (buttons, additional links, etc.)
+ *
+ * @example
+ * <gds-card-linked
+ *   href="/article"
+ *   title="Article Title"
+ *   excerpt="Brief description of the article"
+ *   label="Read more"
+ *   src="image.jpg"
+ *   rank="primary"
+ * >
+ * </gds-card-linked>
  */
+
 @gdsCustomElement('gds-card-linked', {
   dependsOn: [GdsCard, GdsImg, GdsText, GdsFlex, IconChainLink],
 })
@@ -95,7 +128,7 @@ export class GdsCardLinked extends withSizeXProps(
               },
               templates: {
                 Link: () => html`
-                  <gds-link inert>
+                  <gds-link tabindex="-1" aria-hidden="true" inert>
                     <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
                     ${this.label}
                   </gds-link>
