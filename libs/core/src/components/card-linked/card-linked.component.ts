@@ -102,7 +102,14 @@ export class GdsCardLinked extends withSizeXProps(
                 `,
               },
               wrapper: (content) =>
-                html`<footer class="part-footer" inert>${content}</footer>`,
+                html`<footer
+                  class="part-footer"
+                  tabindex="-1"
+                  aria-hidden="true"
+                  inert
+                >
+                  ${content}
+                </footer>`,
             }),
           },
         }),
@@ -113,6 +120,8 @@ export class GdsCardLinked extends withSizeXProps(
           target=${ifDefined(this.target)}
           rel=${ifDefined(this.rel)}
           class=${classMap(this.classes('linked'))}
+          tabindex="0"
+          aria-label=${ifDefined(this.title || this.label)}
         >
           ${content}
         </a>`,

@@ -81,6 +81,11 @@ export default css`
             var(--gds-sys-color-state-neutral-04)
           );
         }
+
+        .part-footer {
+          pointer-events: none;
+          user-select: none;
+        }
       }
     }
 

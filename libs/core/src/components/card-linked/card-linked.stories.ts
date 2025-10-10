@@ -6,7 +6,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 import './card-linked'
 import '../button'
-import '../icon/icons/chevron-right.component'
+import '../icon/icons/chevron-right'
 import '../text'
 import '../link'
 import '../divider'
