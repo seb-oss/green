@@ -69,8 +69,6 @@ export const uiKitColorReferencePropertyFormatter = (
       '.' +
       token.name
 
-    console.log(path)
-
     return (
       indent +
       options.accessControl +

@@ -2,9 +2,7 @@ import crypto from 'crypto'
 import fs from 'fs'
 import path from 'path'
 
-import buildTokens from './build'
-
-const distRoot = path.resolve(__dirname, '../../dist/libs/tokens')
+const distRoot = path.resolve('./dist/libs/tokens')
 
 /**
  * Recursively collect all file paths inside distRoot.
@@ -27,9 +25,12 @@ function collectFiles(root: string): string[] {
 /**
  * Produce a manifest (stable order) with hash + size to snapshot.
  */
-function buildManifest() {
-  const files = collectFiles(distRoot).sort()
-  console.log(files)
+function buildManifest(
+  pathFromDist: string,
+): Array<{ path: string; size: number; hash: string }> {
+  console.log(distRoot + pathFromDist)
+
+  const files = collectFiles(distRoot + pathFromDist).sort()
 
   return files.map((f) => {
     const rel = path.relative(distRoot, f)
@@ -43,56 +44,92 @@ function buildManifest() {
   })
 }
 
-/**
- * Allow focusing on a deterministic subset (example core files).
- */
-function subset(manifest: ReturnType<typeof buildManifest>) {
-  const wanted = [
-    '2023/css/variables.base.css',
-    '2023/css/variables.light.css',
-    '2023/css/variables.dark.css',
-    '2016/css/variables.base.css',
-    'ios/ios/Package.swift',
-  ]
-  return manifest.filter((e) => wanted.includes(e.path))
-}
+describe('test internal output', () => {
+  const manifest: Array<{ path: string; size: number; hash: string }> =
+    buildManifest('/2023/internal')
 
-describe('tokens build', () => {
-  beforeAll(async () => {
-    jest.setTimeout(120000)
-    // Clean previous build to avoid stale files in snapshot
-    if (fs.existsSync(distRoot))
-      fs.rmSync(distRoot, { recursive: true, force: true })
-    await buildTokens()
+  it('produced the correct amount of files for internal', () => {
+    expect(manifest.length).toBe(5)
   })
 
-  it('produces output directory', () => {
-    expect(fs.existsSync(distRoot)).toBe(true)
+  manifest.forEach((m) => {
+    it(`matches the contents in snapshot for ${m.path}`, () => {
+      const filePath = path.join(distRoot, m.path)
+      const content = fs.readFileSync(filePath, 'utf-8')
+      const snapshotName = `tokens-internal-${m.path.replace(/[^a-z0-9]/gi, '-')}`
+      expect(content).toMatchSnapshot(snapshotName)
+    })
+  })
+})
+
+describe('test css output', () => {
+  const manifest: Array<{ path: string; size: number; hash: string }> =
+    buildManifest('/2023/css')
+
+  it('produced the correct amount of files for css', () => {
+    expect(manifest.length).toBe(5)
   })
 
-  it('snapshots full manifest (paths + size + hash)', () => {
-    const manifest = buildManifest()
-    // Basic smoke expectation (avoid empty accidental success)
-    expect(manifest.length).toBeGreaterThan(30)
-    expect(manifest).toMatchSnapshot('tokens-manifest')
+  manifest.forEach((m) => {
+    it(`matches the contents in snapshot for ${m.path}`, () => {
+      const filePath = path.join(distRoot, m.path)
+      const content = fs.readFileSync(filePath, 'utf-8')
+      const snapshotName = `tokens-internal-${m.path.replace(/[^a-z0-9]/gi, '-')}`
+      expect(content).toMatchSnapshot(snapshotName)
+    })
+  })
+})
+
+describe('test scss output', () => {
+  const manifest: Array<{ path: string; size: number; hash: string }> =
+    buildManifest('/2023/scss')
+
+  it('produced the correct amount of files for scss', () => {
+    expect(manifest.length).toBe(8)
   })
 
-  it('snapshots core subset (stable contract)', () => {
-    const core = subset(buildManifest())
-    // Ensure all expected core files exist
-    expect(core.map((c) => c.path)).toHaveLength(5)
-    expect(core).toMatchSnapshot('tokens-core-subset')
+  manifest.forEach((m) => {
+    it(`matches the contents in snapshot for ${m.path}`, () => {
+      const filePath = path.join(distRoot, m.path)
+      const content = fs.readFileSync(filePath, 'utf-8')
+      const snapshotName = `tokens-scss-${m.path.replace(/[^a-z0-9]/gi, '-')}`
+      expect(content).toMatchSnapshot(snapshotName)
+    })
+  })
+})
+
+describe('test figma output', () => {
+  const manifest: Array<{ path: string; size: number; hash: string }> =
+    buildManifest('/2023/figma')
+
+  it('produced the correct amount of files for figma', () => {
+    expect(manifest.length).toBe(5)
   })
 
-  it('snapshots directory tree only (structure no content)', () => {
-    const tree = collectFiles(distRoot)
-      .map((f) => path.relative(distRoot, f))
-      .sort()
-    expect(tree).toMatchSnapshot('tokens-tree')
+  manifest.forEach((m) => {
+    it(`matches the contents in snapshot for ${m.path}`, () => {
+      const filePath = path.join(distRoot, m.path)
+      const content = fs.readFileSync(filePath, 'utf-8')
+      const snapshotName = `tokens-figma-${m.path.replace(/[^a-z0-9]/gi, '-')}`
+      expect(content).toMatchSnapshot(snapshotName)
+    })
+  })
+})
+
+describe('test studio output', () => {
+  const manifest: Array<{ path: string; size: number; hash: string }> =
+    buildManifest('/studio')
+
+  it('produced the correct amount of files for studio', () => {
+    expect(manifest.length).toBe(8)
   })
 
-  it('validates no empty files (content smoke)', () => {
-    const empties = buildManifest().filter((f) => f.size === 0)
-    expect(empties).toEqual([])
+  manifest.forEach((m) => {
+    it(`matches the contents in snapshot for ${m.path}`, () => {
+      const filePath = path.join(distRoot, m.path)
+      const content = fs.readFileSync(filePath, 'utf-8')
+      const snapshotName = `tokens-studio-${m.path.replace(/[^a-z0-9]/gi, '-')}`
+      expect(content).toMatchSnapshot(snapshotName)
+    })
   })
 })

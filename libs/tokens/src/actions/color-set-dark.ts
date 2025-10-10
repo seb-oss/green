@@ -61,8 +61,6 @@ export default {
         const colorsetPath = `${assetPath}/${token.name.replace('sysColor', '')}.colorset`
         const contentsJsonPath = path.join(colorsetPath, 'Contents.json')
 
-        console.log(token)
-
         const originalValue = resolveReferences(
           token.original['$value'],
           dictionary.tokens,

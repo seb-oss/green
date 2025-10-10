@@ -61,7 +61,7 @@ const themes = {
           'shadow/css/shorthand',
           'font/css',
         ],
-        buildPath: distPath + `/libs/tokens/${theme}/css/`,
+        buildPath: distPath + `/${theme}/css/`,
         prefix: 'gds-',
         files: [
           {
@@ -102,7 +102,7 @@ const themes = {
           'shadow/css/shorthand',
           'font/css',
         ],
-        buildPath: distPath + `/libs/tokens/${theme}/scss/`,
+        buildPath: distPath + `/${theme}/scss/`,
         prefix: 'gds-',
         files: [
           {
@@ -138,7 +138,7 @@ const themes = {
         ],
       },
       figma: {
-        buildPath: distPath + `/libs/tokens/${theme}/figma/`,
+        buildPath: distPath + `/${theme}/figma/`,
         transforms: ['name/figma', 'color/alpha'],
         files: [
           {
@@ -174,14 +174,14 @@ const themes = {
           'attribute/cti',
           'time/seconds',
           'html/icon',
-          'size/px',
+          'size/rem',
           'color/css',
           'name/kebab',
           'color/mix-blend',
           'shadow/css/shorthand',
           'font/css',
         ],
-        buildPath: distPath + `/libs/tokens/${theme}/internal/`,
+        buildPath: distPath + `/${theme}/internal/`,
         prefix: 'gds-',
         files: [
           {
@@ -218,6 +218,7 @@ const themes = {
             },
           },
         ],
+        basePxFontSize: 16,
       },
       css: {
         transforms: [
@@ -231,7 +232,7 @@ const themes = {
           'shadow/css/shorthand',
           'font/css',
         ],
-        buildPath: distPath + `/libs/tokens/${theme}/css/`,
+        buildPath: distPath + `/${theme}/css/`,
         prefix: 'gds-',
         files: [
           {
@@ -272,7 +273,7 @@ const themes = {
           'shadow/css/shorthand',
           'font/css',
         ],
-        buildPath: distPath + `/libs/tokens/${theme}/scss/`,
+        buildPath: distPath + `/${theme}/scss/`,
         prefix: 'gds-',
         files: [
           {
@@ -308,7 +309,7 @@ const themes = {
         ],
       },
       figma: {
-        buildPath: distPath + `/libs/tokens/${theme}/figma/`,
+        buildPath: distPath + `/${theme}/figma/`,
         transforms: ['name/figma', 'color/alpha'],
         files: [
           {
@@ -334,7 +335,7 @@ const themes = {
         ],
       },
       android: {
-        buildPath: distPath + `/libs/tokens/${theme}/android/`,
+        buildPath: distPath + `/${theme}/android/`,
         transforms: [
           'name/android',
           'green/color/composeColor',
@@ -410,7 +411,7 @@ const themes = {
         actions: ['copy-android-assets'],
       },
       jvm: {
-        buildPath: distPath + `/libs/tokens/${theme}/jvm/`,
+        buildPath: distPath + `/${theme}/jvm/`,
         sourcePath: swiftSourcePath,
         transformGroup: 'compose',
         files: [
@@ -439,7 +440,7 @@ const themes = {
         ],
       },
       studio: {
-        buildPath: distPath + `/libs/tokens/studio/`,
+        buildPath: distPath + `/studio/`,
         transforms: ['name/studio', 'color/alpha', 'size/px'],
         source: [
           dirname + `/tokens/2023/**/*.ref.json`,
@@ -494,7 +495,7 @@ const themes = {
     baseTheme: 2023,
     getPlatforms: ({ theme, colorScheme }): Record<string, PlatformConfig> => ({
       ios: {
-        buildPath: distPath + `/libs/tokens/${theme}/ios/`,
+        buildPath: distPath + `/${theme}/ios/`,
         sourcePath: swiftSourcePath,
         transforms: [
           'name/ios',
@@ -547,7 +548,7 @@ const themes = {
         actions: [`color-set-${colorScheme}`, 'copy-ios-assets'],
       },
       figma: {
-        buildPath: distPath + `/libs/tokens/${theme}/figma/`,
+        buildPath: distPath + `/${theme}/figma/`,
         transforms: ['name/figma', 'color/alpha'],
         files: [
           {
