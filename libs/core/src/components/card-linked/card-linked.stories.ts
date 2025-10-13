@@ -12,7 +12,7 @@ import '../link'
 import '../divider'
 
 const meta: Meta = {
-  title: 'Components/Card Linked',
+  title: 'Patterns/Card Linked',
   component: 'gds-card-linked',
   tags: ['autodocs'],
   argTypes: {

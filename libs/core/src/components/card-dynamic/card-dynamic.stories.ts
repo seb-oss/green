@@ -11,7 +11,7 @@ import '../link'
 import '../divider'
 
 const meta: Meta = {
-  title: 'Components/Card Dynamic',
+  title: 'Patterns/Card Dynamic',
   component: 'gds-card-dynamic',
   tags: ['autodocs'],
   argTypes: {
