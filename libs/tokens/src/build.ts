@@ -174,7 +174,7 @@ const themes = {
           'attribute/cti',
           'time/seconds',
           'html/icon',
-          'size/rem',
+          'size/px',
           'color/css',
           'name/kebab',
           'color/mix-blend',
