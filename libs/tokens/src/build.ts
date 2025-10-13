@@ -10,7 +10,7 @@ import filters from './filters/index.ts'
 import formats from './formats/index.ts'
 import transforms from './transforms/index.ts'
 
-const swiftPackageName: string = 'GdsKit'
+const swiftPackageName = 'GdsKit'
 
 const swiftTargets = [
   {
