@@ -1,13 +1,13 @@
 import { fileHeader } from 'style-dictionary/utils'
 
-import template from '../templates/ios/package.template.ts'
+import template from '../templates/ios/gdskit.template.ts'
 
-const greenIosSwiftPackage = {
-  name: 'green/ios-swift-package',
+const greenIosGdsKit = {
+  name: 'green/ios-swift-gdskit',
   format: async ({ options, file }) => {
     const header = await fileHeader({ file })
     return template({ file, options, header })
   },
 }
 
-export default greenIosSwiftPackage
+export default greenIosGdsKit
