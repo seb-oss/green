@@ -24,6 +24,36 @@ import { GdsText } from '../text/text.component'
 
 /**
  * @element gds-card-dynamic
+ *
+ * @summary A flexible card component that supports both linked and non-linked states with dynamic content rendering.
+ *
+ * @description
+ * The dynamic card component provides a versatile card layout that can adapt based on its content.
+ * Unlike the linked card, it maintains separate clickable elements and supports more flexible content structures.
+ * It features conditional rendering of header image, title, excerpt, and footer link.
+ *
+ * @property {string} href - Optional URL for the footer link
+ * @property {string} title - The main heading of the card
+ * @property {string} excerpt - A brief description or preview text
+ * @property {string} label - Text for the footer link (only shown when href is provided)
+ * @property {'neutral' | 'outlined' | 'plain'} rank - Visual style of the card
+ * @property {'landscape' | 'square'} media - Aspect ratio for the media content
+ * @property {string} src - URL for the card's image
+ * @property {string} srcset - Responsive image srcset
+ * @property {string} sizes - Responsive image sizes
+ *
+ * @example
+ * ```html
+ * <gds-card-dynamic
+ *   title="Article Title"
+ *   excerpt="Brief description of the article"
+ *   src="image.jpg"
+ *   rank="neutral"
+ * >
+ *    <gds-button slot="footer">Primary</gds-button>
+ *    <gds-button slot="footer" rank="secondary">Secondary</gds-button>
+ * </gds-card-dynamic>
+ * ```
  */
 @gdsCustomElement('gds-card-dynamic', {
   dependsOn: [GdsCard, GdsImg, GdsText, GdsFlex, IconChainLink],
