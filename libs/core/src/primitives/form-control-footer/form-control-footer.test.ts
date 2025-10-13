@@ -25,8 +25,8 @@ describe('<gds-form-control-footer>', () => {
     it('is accessible', async () => {
       const el = await fixture<GdsFormControlFooter>(
         html`<gds-form-control-footer
-          .charCounter=${10}
           .validationMessage=${'hello'}
+          .charCounter=${[10, 'positive']}
         ></gds-form-control-footer>`,
       )
       await el.updateComplete
@@ -36,8 +36,8 @@ describe('<gds-form-control-footer>', () => {
     it('is a polite live region', async () => {
       const el = await fixture<GdsFormControlFooter>(
         html`<gds-form-control-footer
-          .charCounter=${10}
           .validationMessage=${'hello'}
+          .charCounter=${[10, 'positive']}
         ></gds-form-control-footer>`,
       )
       await el.updateComplete

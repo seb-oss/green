@@ -23,6 +23,8 @@ import { GdsFormControlElement } from '../form/form-control'
 import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import TextareaStyles from './textarea.styles'
 
+import type { GdsBadge } from '../pure'
+
 @localized()
 class Textarea extends GdsFormControlElement<string> {
   static styles = [tokens, formControlHostStyle, TextareaStyles]
@@ -100,8 +102,8 @@ class Textarea extends GdsFormControlElement<string> {
     'off'
 
   /** Indicates whether the browser's autocorrect feature is on or off. */
-  @property()
-  autocorrect?: 'off' | 'on'
+  @property({ type: Boolean })
+  autocorrect = false
 
   /**
    * Specifies what permission the browser has to provide assistance in filling out form field values. Refer to
@@ -125,6 +127,10 @@ class Textarea extends GdsFormControlElement<string> {
   })
   spellcheck = true
 
+  /**
+   * Indicates how the control should wrap the value for form submission. Refer to
+   * [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea#wrap) for available values.
+   */
   @property()
   wrap!: 'hard' | 'soft'
 
@@ -153,6 +159,15 @@ class Textarea extends GdsFormControlElement<string> {
     | 'search'
     | 'email'
     | 'url'
+
+  /**
+   * This callback allows for customization of the character counter. It should return a tuple
+   * with the first value being the number of remaining characters, and the second value being
+   * the variant of the badge. If the second value is `false`, no badge will be shown.
+   */
+  @property({ attribute: false })
+  charCounterCallback = charCounterCallbackDefault
+  #charCounterComputed = this.charCounterCallback(this)
 
   @queryAsync('textarea')
   private elTextareaAsync!: Promise<HTMLTextAreaElement>
@@ -271,13 +286,16 @@ class Textarea extends GdsFormControlElement<string> {
           html`<gds-form-control-footer
             id="footer"
             class="size-${this.size}"
-            .charCounter=${this.#shouldShowRemainingChars
-              ? this.maxlength - (this.value?.length || 0)
-              : undefined}
+            .charCounter=${this.#charCounterComputed}
             .errorMessage=${this.invalid ? this.errorMessage : undefined}
           ></gds-form-control-footer>`,
       )}
     `
+  }
+
+  @watch('value')
+  private _handleValueChange() {
+    this.#charCounterComputed = this.charCounterCallback(this)
   }
 
   #shouldShowFooter() {
@@ -448,7 +466,7 @@ class Textarea extends GdsFormControlElement<string> {
         <gds-button
           size="small"
           rank="tertiary"
-          variant="${this.invalid ? 'negative' : ''}"
+          variant="${ifDefined(this.invalid ? 'negative' : undefined)}"
           ?disabled="${this.disabled}"
           label="${msg('Clear input')}"
           @click=${this.#handleClearBtnClick}
@@ -462,7 +480,7 @@ class Textarea extends GdsFormControlElement<string> {
   }
 
   get #shouldShowRemainingChars() {
-    return this.maxlength < Number.MAX_SAFE_INTEGER
+    return this.#charCounterComputed[1] !== false
   }
 }
 
@@ -489,3 +507,19 @@ class Textarea extends GdsFormControlElement<string> {
 export class GdsTextarea extends withLayoutChildProps(
   withSizeXProps(withMarginProps(Textarea)),
 ) {}
+
+/**
+ * Default character counter callback function.
+ * Returns the number of remaining characters and the badge variant based on the current value length and maxlength.
+ */
+export const charCounterCallbackDefault = (
+  self: GdsFormControlElement<string> & { maxlength: number },
+) => {
+  const badgeType: GdsBadge['variant'] =
+    (self.value?.length || 0) >= self.maxlength ? 'negative' : 'positive'
+
+  return [
+    self.maxlength - (self.value?.length || 0),
+    self.maxlength < Number.MAX_SAFE_INTEGER && badgeType,
+  ] as const
+}
