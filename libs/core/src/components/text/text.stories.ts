@@ -38,6 +38,22 @@ const DefaultParams: Story = {
 }
 
 /**
+ * The `font` property controls the font style based on design tokens.
+ *
+ * For all available font tokens, check out the [Studio on seb.io](https://seb.io/studio/typography)
+ */
+export const Font: Story = {
+  ...DefaultParams,
+  name: 'Font',
+  render: (args) =>
+    html`<gds-flex flex-direction="column" gap="m">
+      <gds-text font="display-l">display-l</gds-text>
+      <gds-text font="body-regular-m">body-regular-m</gds-text>
+      <gds-text font="detail-regular-s">detail-regular-s</gds-text>
+    </gds-flex>`,
+}
+
+/**
  * The `tag` property controls the inner element tag name.
  *
  * Example: `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `span`, `em`, `mark`, `strong`, `small` etc.
@@ -71,19 +87,6 @@ export const Tags: Story = {
     </gds-flex>`,
 }
 
-export const Weight: Story = {
-  ...DefaultParams,
-  name: 'Weight',
-  render: (args) =>
-    html`<gds-flex flex-direction="column" gap="m">
-      <gds-text font-weight="bold">Bold (700)</gds-text>
-      <gds-text font-weight="medium">Medium (500)</gds-text>
-      <gds-text font-weight="book">Book (450)</gds-text>
-      <gds-text font-weight="regular">Regular (400)</gds-text>
-      <gds-text font-weight="light">Light (300)</gds-text>
-    </gds-flex>`,
-}
-
 /**
  * > Headings in the `gds-text` component come with predefined sizes based on design tokens, and the `tag` property is used to define the heading level.
  * > For example, using `tag="h1"` will automatically apply the `heading-xl` size, so specifying the `size` property is not necessary.
@@ -100,55 +103,6 @@ export const Heading: Story = {
       <gds-text tag="h3">H3: heading-m</gds-text>
       <gds-text tag="h2">H2: heading-l</gds-text>
       <gds-text tag="h1">H1: heading-xl</gds-text>
-    </gds-flex>
-  `,
-}
-
-export const Detail: Story = {
-  name: 'Detail',
-  render: (args) => html`
-    <gds-flex flex-direction="column" gap="m">
-      <gds-text font="detail-regular-xs">detail-regular-xs</gds-text>
-      <gds-text font="detail-regular-s">detail-regular-s</gds-text>
-      <gds-text font="detail-regular-m">detail-regular-m</gds-text>
-    </gds-flex>
-  `,
-}
-
-export const Body: Story = {
-  name: 'Body',
-  render: (args) => html`
-    <gds-flex flex-direction="column" gap="m">
-      <gds-text font="body-regular-s">body-s</gds-text>
-      <gds-text font="body-regular-m">body-m</gds-text>
-      <gds-text font="body-regular-l">body-l</gds-text>
-    </gds-flex>
-  `,
-}
-
-export const Display: Story = {
-  name: 'Display',
-  render: (args) => html`
-    <gds-flex flex-direction="column" gap="m">
-      <gds-text font="display-s">display-s</gds-text>
-      <gds-text font="display-m">display-m</gds-text>
-      <gds-text font="display-l">display-l</gds-text>
-      <gds-text font="display-xl">display-xl</gds-text>
-      <gds-text font="display-2xl">display-2xl</gds-text>
-    </gds-flex>
-  `,
-}
-
-export const Preamble: Story = {
-  name: 'Preamble',
-  render: (args) => html`
-    <gds-flex flex-direction="column" gap="m">
-      <gds-text font="preamble-xs">preamble-xs</gds-text>
-      <gds-text font="preamble-s">preamble-s</gds-text>
-      <gds-text font="preamble-m">preamble-m</gds-text>
-      <gds-text font="preamble-l">preamble-l</gds-text>
-      <gds-text font="preamble-xl">preamble-xl</gds-text>
-      <gds-text font="preamble-2xl">preamble-2xl</gds-text>
     </gds-flex>
   `,
 }
