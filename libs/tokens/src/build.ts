@@ -404,7 +404,7 @@ const themes = {
               objectType: 'enum',
               className: 'GdsColor',
               import: [],
-              packageName: ['se.seb.gds'],
+              packageName: ['se.seb.gds.tokens'],
             },
           },
         ],
