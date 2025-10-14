@@ -24,12 +24,17 @@ export interface CardProps {
   /**
    * Visual style variant of the card
    */
-  rank?: 'neutral' | 'outlined' | 'plain'
+  appearance?: 'neutral' | 'outlined' | 'plain'
 
   /**
    * Aspect ratio/format of the card's media section
    */
-  media?: 'landscape' | 'square'
+  aspectRatio?: 'landscape' | 'square'
+
+  /**
+   * Spacing like padding on the card content
+   */
+  size?: 'small' | 'large'
 
   /**
    * Card classes in a orgnaised way if used as default
@@ -70,15 +75,24 @@ export function withCardProps<T extends Constructor<GdsElement>>(
      * - plain: Minimal card style
      */
     @property({ reflect: false })
-    rank: 'neutral' | 'outlined' | 'plain' = 'neutral'
+    appearance: 'neutral' | 'outlined' | 'plain' = 'neutral'
+
+    /**
+     * Visual style variant of the card
+     * - neutral: Default card style
+     * - outlined: Card with outline/border
+     * - plain: Minimal card style
+     */
+    @property({ reflect: false })
+    size: 'small' | 'large' = 'large'
 
     /**
      * Aspect ratio/format of the card's media section
      * - landscape: 16:9 or similar horizontal format
      * - square: 1:1 square format
      */
-    @property({ reflect: false })
-    media: 'landscape' | 'square' = 'landscape'
+    @property({ reflect: false, attribute: 'aspect-ratio' })
+    aspectRatio: 'landscape' | 'square' = 'landscape'
 
     /**
      * Protected method to get base card classes
@@ -88,8 +102,9 @@ export function withCardProps<T extends Constructor<GdsElement>>(
       return {
         card: true,
         [`card-${type || 'base'}`]: !!type,
-        [`rank-${this.rank}`]: true,
-        [`media-${this.media}`]: true,
+        [`appearance-${this.appearance}`]: true,
+        [`aspect-ratio-${this.aspectRatio}`]: true,
+        [`size-${this.size}`]: true,
       }
     }
   }

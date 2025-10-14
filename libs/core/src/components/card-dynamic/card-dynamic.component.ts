@@ -88,8 +88,8 @@ export class GdsCardDynamic extends withSizeXProps(
                 height="100%"
                 object-fit="cover"
                 object-position="center"
-                border-radius="3xs"
-                aspect-ratio=${this.media === 'square' ? '1/1' : '16/9'}
+                border-radius="xs"
+                aspect-ratio=${this.aspectRatio === 'square' ? '1/1' : '16/9'}
               ></gds-img>
             `,
           },

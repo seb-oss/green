@@ -27,7 +27,7 @@ export default css`
       transition-duration: var(--gds-sys-motion-duration-fastest);
       transition-timing-function: var(--gds-sys-motion-easing-ease-in);
       padding: var(--gds-sys-space-xs);
-      border-radius: var(--gds-sys-radius-s);
+      border-radius: var(--gds-sys-radius-m);
       border-width: var(--gds-sys-space-5xs);
       border-style: solid;
       border-color: transparent;
@@ -36,16 +36,16 @@ export default css`
         opacity: 0;
       }
 
-      &.rank-neutral {
+      &.appearance-neutral {
         background-color: var(--gds-sys-color-l2-neutral-01);
       }
 
-      &.rank-outlined {
+      &.appearance-outlined {
         background-color: var(--gds-sys-color-l2-neutral-02);
         border-color: var(--gds-sys-color-border-subtle-01);
       }
 
-      &.rank-plain {
+      &.appearance-plain {
         background-color: var(--gds-sys-color-l2-neutral-02);
       }
 
@@ -68,7 +68,7 @@ export default css`
           &:hover {
             background-color: color-mix(
               in srgb,
-              var(--gds-sys-color-l2-neutral-01),
+              var(--gds-sys-color-l2-neutral-02),
               var(--gds-sys-color-state-neutral-03)
             );
           }
@@ -77,7 +77,7 @@ export default css`
         &:active {
           background-color: color-mix(
             in srgb,
-            var(--gds-sys-color-l2-neutral-01),
+            var(--gds-sys-color-l2-neutral-02),
             var(--gds-sys-color-state-neutral-04)
           );
         }

@@ -18,14 +18,13 @@ import {
 import { withCardProps } from '../../utils/mixins/props-card'
 import { withImageProps } from '../../utils/mixins/props-image'
 import { withLinkProps } from '../../utils/mixins/props-link'
-import { GdsCard } from '../card/card.component'
 import { GdsFlex } from '../flex/flex.component'
 import { IconChainLink } from '../icon/icons/chain-link'
 import { GdsImg } from '../img/img.component'
 import { GdsText } from '../text/text.component'
 
 /**
- * @element gds-card-linked
+ * @element gds-card-pattern-01
  *
  * @summary A card component that acts as a clickable link, ideal for navigation and content previews.
  *
@@ -38,8 +37,8 @@ import { GdsText } from '../text/text.component'
  * @property {string} title - The main heading of the card
  * @property {string} excerpt - A brief description or preview text
  * @property {string} label - Text for the footer link (optional)
- * @property {'primary' | 'outlined' | 'plain'} rank - Visual style of the card
- * @property {'default' | 'square'} media - Aspect ratio for the media content
+ * @property {'primary' | 'outlined' | 'plain'} appearance - Visual style of the card
+ * @property {'default' | 'square'} 'aspect-ratio' - Aspect ratio for the media content
  * @property {string} src - URL for the card's image
  * @property {string} srcset - Responsive image srcset
  * @property {string} sizes - Responsive image sizes
@@ -49,7 +48,7 @@ import { GdsText } from '../text/text.component'
  * @slot footer - Optional footer content that is inert and only presentational only (buttons, additional links, etc.)
  *
  * @example
- * <gds-card-linked
+ * <gds-card-pattern-01
  *   href="/article"
  *   title="Article Title"
  *   excerpt="Brief description of the article"
@@ -57,13 +56,13 @@ import { GdsText } from '../text/text.component'
  *   src="image.jpg"
  *   rank="primary"
  * >
- * </gds-card-linked>
+ * </gds-card-pattern-01>
  */
 
-@gdsCustomElement('gds-card-linked', {
-  dependsOn: [GdsCard, GdsImg, GdsText, GdsFlex, IconChainLink],
+@gdsCustomElement('gds-card-pattern-01', {
+  dependsOn: [GdsImg, GdsText, GdsFlex, IconChainLink],
 })
-export class GdsCardLinked extends withSizeXProps(
+export class GdsCardPattern01 extends withSizeXProps(
   withMarginProps(
     withLayoutChildProps(
       withLinkProps(withImageProps(withCardProps(GdsElement))),
@@ -92,8 +91,8 @@ export class GdsCardLinked extends withSizeXProps(
                 height="100%"
                 object-fit="cover"
                 object-position="center"
-                border-radius="3xs"
-                aspect-ratio=${this.media === 'square' ? '1/1' : '16/9'}
+                border-radius="xs"
+                aspect-ratio=${this.aspectRatio === 'square' ? '1/1' : '16/9'}
               ></gds-img>
             `,
           },
