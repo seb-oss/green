@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.10.1
+
+### Patch Changes
+
+- 96e6e2c: **Typography**: Set default paragraph font-weight to 'book'
+
 ## 2.10.0
 
 ### Minor Changes

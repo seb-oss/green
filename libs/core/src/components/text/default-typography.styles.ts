@@ -38,12 +38,11 @@ export const defaultStyles = css`
 
     p,
     li {
-      font: var(--gds-sys-text-body-book-m);
+      font: var(--gds-sys-text-body-regular-m);
     }
 
     strong {
-      font: var(--gds-sys-text-body-book-m);
-      font-weight: var(--gds-sys-text-weight-medium);
+      font: var(--gds-sys-text-body-medium-m);
     }
   }
 `
