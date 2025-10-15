@@ -176,7 +176,7 @@ export const Header: Story = {
 
 export const Media: Story = {
   render: () => html`
-    <gds-grid columns="1; m{2}" gap="xl">
+    <gds-grid columns="1; m{3}" gap="xl">
       <gds-card-pattern-01
         title="Landscape Media"
         excerpt="16:9 aspect ratio"
@@ -423,7 +423,7 @@ export const Appearance: Story = {
 
 export const Sizes: Story = {
   render: () => html`
-    <gds-grid columns="1; m{2}" gap="xl">
+    <gds-grid columns="1; m{3}" gap="xl">
       <gds-card-pattern-01
         size="large"
         title="Large Size"
@@ -469,16 +469,10 @@ export const Sizes: Story = {
 
 export const Theme: Story = {
   render: () => html`
-    <gds-grid columns="1; m{2}" gap="0">
+    <gds-grid columns="1; m{2}" gap="">
       <gds-theme color-scheme="light">
-        <gds-flex
-          flex-direction="column"
-          gap="xl"
-          background="neutral-01"
-          padding="4xl"
-        >
+        <gds-flex flex-direction="column" gap="xl" padding="4xl">
           <gds-text>Light</gds-text>
-          <gds-divider color="subtle-01"></gds-divider>
           <gds-card-pattern-01
             title="Light mode"
             excerpt="Card on light mode"
@@ -496,9 +490,9 @@ export const Theme: Story = {
           gap="xl"
           background="neutral-01"
           padding="4xl"
+          border-radius="s"
         >
           <gds-text>Dark</gds-text>
-          <gds-divider color="subtle-01"></gds-divider>
           <gds-card-pattern-01
             title="Dark mode"
             appearance="outlined"
