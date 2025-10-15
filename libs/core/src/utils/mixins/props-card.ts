@@ -77,12 +77,6 @@ export function withCardProps<T extends Constructor<GdsElement>>(
     @property({ reflect: false })
     appearance: 'neutral' | 'outlined' | 'plain' = 'neutral'
 
-    /**
-     * Visual style variant of the card
-     * - neutral: Default card style
-     * - outlined: Card with outline/border
-     * - plain: Minimal card style
-     */
     @property({ reflect: false })
     size: 'small' | 'large' = 'large'
 
