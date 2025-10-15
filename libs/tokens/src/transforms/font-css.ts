@@ -1,10 +1,5 @@
-const formatWithUnit = (props) => {
-  if (typeof props === 'string' || typeof props === 'number') {
-    return `${props}px`
-  }
-  if (typeof props === 'object' && props.value && props.unit) {
-    return `${props.value}${props.unit}`
-  }
+const toRem = (fontSize: number) => {
+  return `${fontSize / 16}rem`
 }
 
 export default {
@@ -18,10 +13,12 @@ export default {
     if (!tokenValue) return
     // font: font-style font-variant font-weight font-size/line-height font-family;
 
+    console.log(tokenValue)
+
     return [
       tokenValue.fontStyle,
       tokenValue.fontWeight,
-      `${formatWithUnit(tokenValue.fontSize)}${tokenValue.lineHeight ? '/' + formatWithUnit(tokenValue.lineHeight) : ''}`,
+      `${toRem(tokenValue.fontSize)}${tokenValue.lineHeight ? '/' + toRem(tokenValue.lineHeight) : ''}`,
       tokenValue.fontFamily,
     ]
       .filter(Boolean)

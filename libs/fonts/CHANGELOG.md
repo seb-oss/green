@@ -1,5 +1,11 @@
 # @sebgroup/fonts
 
+## 3.0.1
+
+### Patch Changes
+
+- 2d649da: Adding ttf files to support android and ios dependency
+
 ## 3.0.0
 
 ### Major Changes
