@@ -1,0 +1,17 @@
+{
+  "sys": {
+    "color": {
+      "state": {
+        "$type": "color",
+        "on-press": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.08
+        },
+        "on-press-inverted": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.1
+        }
+      }
+    }
+  }
+}

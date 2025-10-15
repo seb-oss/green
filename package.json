@@ -62,6 +62,7 @@
     "billboard.js": "^3.15.1",
     "body-scroll-lock": "^3.1.5",
     "browserslist": "^4.20.2",
+    "change-case": "^5.4.4",
     "classnames": "^2.3.2",
     "core-js": "3.36.1",
     "date-fns": "^4.1.0",
