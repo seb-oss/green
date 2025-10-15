@@ -76,7 +76,7 @@ export const Link: Story = {
 export const Linked: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-grid columns="1; m{2}" gap="xl" width="100%">
+    <gds-grid columns="1; m{3}" gap="xl" width="100%">
       <gds-card-pattern-01
         title="This is a heading"
         href="#"

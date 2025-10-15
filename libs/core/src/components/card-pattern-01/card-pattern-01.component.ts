@@ -91,10 +91,10 @@ export class GdsCardPattern01 extends withSizeXProps(
   }
 
   #renderLinkedCard() {
+    // class=${classMap(this.#cardClasses)}
     return html`
       <gds-card-linked
         padding="xs"
-        class=${classMap(this.#cardClasses)}
         gap="0"
         href=${ifDefined(this.href)}
         target=${ifDefined(this.target)}
@@ -132,15 +132,15 @@ export class GdsCardPattern01 extends withSizeXProps(
   #renderStaticCard() {
     return html`
       <gds-card padding="xs" class=${classMap(this.#cardClasses)} gap="0">
-        <header class="part-header">${this.#renderImage()}</header>
-        <main class="part-main">
-          <article class="part-article">
+        <gds-flex>${this.#renderImage()}</gds-flex>
+        <gds-flex flex-direction="column" gap="xl" padding="m">
+          <gds-flex flex-direction="column" gap="xs">
             ${this.#renderTitle()} ${this.#renderExcerpt()}
-          </article>
-          <footer class="part-footer">
+          </gds-flex>
+          <gds-flex align-items="center" gap="s">
             <slot name="footer"></slot>
-          </footer>
-        </main>
+          </gds-flex>
+        </gds-flex>
       </gds-card>
     `
   }
