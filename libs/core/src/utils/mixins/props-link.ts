@@ -33,7 +33,7 @@ export interface LinkProps {
    * When present, indicates that the linked resource should be downloaded
    * @property {string | ''} [download] - Can be empty string (use browser-detected filename) or a suggested filename
    */
-  download?: string | ''
+  download?: string | boolean
 }
 
 /**
@@ -82,12 +82,10 @@ export function withLinkProps<T extends Constructor<GdsElement>>(
 
     /**
      * When present, indicates that the linked resource should be downloaded
-     * rather than navigated to
-     *
-     * @property {string | ''}
+     * @property {string | boolean}
      */
-    @property()
-    download?: string | ''
+    @property({ type: String })
+    download?: string | boolean
   }
 
   return LinkPropsMixin as Constructor<LinkProps> & T

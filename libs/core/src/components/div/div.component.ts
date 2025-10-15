@@ -310,6 +310,13 @@ export class GdsDiv extends withSizeXProps(
   @styleExpressionProperty()
   cursor?: string
 
+  /**
+   * Style Expression Property that controls the `pointer-events` property.
+   * Supports all valid CSS `pointer-events` values.
+   */
+  @styleExpressionProperty()
+  'pointer-events'?: string
+
   render() {
     return html`<slot></slot>`
   }
