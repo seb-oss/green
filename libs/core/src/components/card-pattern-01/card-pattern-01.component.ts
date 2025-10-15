@@ -1,3 +1,4 @@
+import { css } from 'lit'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 
@@ -21,6 +22,7 @@ import { GdsFlex } from '../flex/flex.component'
 import { IconChainLink } from '../icon/icons/chain-link'
 import { GdsImg } from '../img/img.component'
 import { GdsText } from '../text/text.component'
+import CardPattern01Styles from './card-pattern-01.styles'
 
 /**
  * @element gds-card-pattern-01
@@ -57,7 +59,7 @@ export class GdsCardPattern01 extends withSizeXProps(
     ),
   ),
 ) {
-  static styles = [tokens]
+  static styles = [tokens, CardPattern01Styles]
 
   #hasHeaderContent() {
     return this.src || this.querySelector('[slot="header"]')
@@ -77,6 +79,7 @@ export class GdsCardPattern01 extends withSizeXProps(
         rel=${ifDefined(this.rel)}
         variant=${this.appearance === 'neutral' ? 'neutral-01' : 'secondary'}
         border-width=${this.appearance === 'plain' ? '0' : '5xs'}
+        class="card"
       >
         ${when(
           this.#hasHeaderContent(),
@@ -135,7 +138,7 @@ export class GdsCardPattern01 extends withSizeXProps(
             () => html`
               <gds-flex
                 align-items="center"
-                gap="s"
+                gap="m"
                 pointer-events="none"
                 aria-hidden="true"
                 inert
@@ -222,7 +225,7 @@ export class GdsCardPattern01 extends withSizeXProps(
           ${when(
             this.#hasFooterContent(),
             () => html`
-              <gds-flex align-items="center" gap="s">
+              <gds-flex align-items="center" gap="m">
                 <slot name="footer"></slot>
               </gds-flex>
             `,

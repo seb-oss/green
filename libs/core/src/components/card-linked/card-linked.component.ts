@@ -13,6 +13,7 @@ import CardLinkedStyles from './card-linked.styles'
 
 /**
  * @element gds-card-linked
+ * @status beta
  */
 @gdsCustomElement('gds-card-linked')
 export class GdsCardLinked extends withLinkProps(GdsCard) {

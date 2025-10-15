@@ -65,50 +65,38 @@ const meta: Meta = {
 export default meta
 type Story = StoryObj
 
-const DefaultParams: Story = {
+export const Default: Story = {
+  args: {
+    href: '#',
+    title: 'Card Title',
+    excerpt: 'Card description with label in footer.',
+    label: 'Read more',
+    src: 'https://api.seb.io/assets/launch-hero.jpg',
+    'max-width': '320px',
+  },
   parameters: {
     docs: {
       description: {
-        story: 'Default card implementation showcasing basic usage.',
+        story: '',
+      },
+      source: {
+        code: `
+<gds-card-pattern-01
+  href="/path"
+  title="Card Title"
+  excerpt="Card description with label in footer."
+  label="Read more"
+  src="https://api.seb.io/assets/launch-hero.jpg"
+></gds-card-pattern-01>
+        `,
+        language: 'html',
+        type: 'code',
       },
     },
   },
 }
 
-/**
- * Media Variations
- * Shows different media aspect ratios and responsive image handling
- */
-export const Media: Story = {
-  render: () => html`
-    <gds-grid columns="1; m{2}" gap="xl">
-      <gds-card-pattern-01
-        title="Landscape Media"
-        excerpt="16:9 aspect ratio"
-        src="https://api.seb.io/assets/launch-hero.jpg"
-        aspect-ratio="landscape"
-        srcset="https://api.seb.io/assets/launch-hero.jpg 800w, https://api.seb.io/assets/launch-hero.jpg 1200w"
-        sizes="(max-width: 800px) 100vw, 800px"
-      ></gds-card-pattern-01>
-
-      <gds-card-pattern-01
-        title="Square Media"
-        excerpt="1:1 aspect ratio"
-        src="https://api.seb.io/assets/launch-hero.jpg"
-        aspect-ratio="square"
-      ></gds-card-pattern-01>
-    </gds-grid>
-  `,
-}
-
-/**
- * Header Variations
- * Demonstrates different header configurations:
- * - No header
- * - With media
- * - Custom header content
- */
-export const Headers: Story = {
+export const Header: Story = {
   render: () => html`
     <gds-grid columns="1; m{3}" gap="xl">
       <!-- Text Only -->
@@ -147,11 +135,94 @@ export const Headers: Story = {
       </gds-card-pattern-01>
     </gds-grid>
   `,
+  parameters: {
+    docs: {
+      source: {
+        code: `
+<!-- Text only -->
+<gds-card-pattern-01
+  title="Text Only"
+  excerpt="No header content"
+  href="#"
+  label="Learn More"
+></gds-card-pattern-01>
+
+<!-- With media -->
+<gds-card-pattern-01
+  title="With Media"
+  excerpt="Default media header"
+  src="image.jpg"
+  href="#"
+  label="Learn More"
+></gds-card-pattern-01>
+
+<!-- Custom header content -->
+<gds-card-pattern-01 title="Custom Header" excerpt="Using header slot">
+  <gds-card
+    slot="header"
+    justify-content="center"
+    variant="primary"
+    aspect-ratio="16/9"
+  >
+    Custom Content
+  </gds-card>
+</gds-card-pattern-01>`,
+        language: 'html',
+        type: 'code',
+      },
+    },
+  },
 }
 
-// Footer Variations for Linked Cards
-export const LinkedCardFooters: Story = {
-  ...DefaultParams,
+export const Media: Story = {
+  render: () => html`
+    <gds-grid columns="1; m{2}" gap="xl">
+      <gds-card-pattern-01
+        title="Landscape Media"
+        excerpt="16:9 aspect ratio"
+        src="https://api.seb.io/assets/launch-hero.jpg"
+        aspect-ratio="landscape"
+        srcset="https://api.seb.io/assets/launch-hero.jpg 800w, https://api.seb.io/assets/launch-hero.jpg 1200w"
+        sizes="(max-width: 800px) 100vw, 800px"
+      ></gds-card-pattern-01>
+
+      <gds-card-pattern-01
+        title="Square Media"
+        excerpt="1:1 aspect ratio"
+        src="https://api.seb.io/assets/launch-hero.jpg"
+        aspect-ratio="square"
+      ></gds-card-pattern-01>
+    </gds-grid>
+  `,
+  parameters: {
+    docs: {
+      source: {
+        code: `
+<!-- Landscape with responsive images -->
+<gds-card-pattern-01
+  title="Landscape Media"
+  excerpt="16:9 aspect ratio"
+  src="image.jpg"
+  aspect-ratio="landscape"
+  srcset="image-800.jpg 800w, image-1200.jpg 1200w"
+  sizes="(max-width: 800px) 100vw, 800px"
+></gds-card-pattern-01>
+
+<!-- Square aspect ratio -->
+<gds-card-pattern-01
+  title="Square Media"
+  excerpt="1:1 aspect ratio"
+  src="image.jpg"
+  aspect-ratio="square"
+></gds-card-pattern-01>`,
+        language: 'html',
+        type: 'code',
+      },
+    },
+  },
+}
+
+export const Footer: Story = {
   render: () => html`
     <gds-grid columns="1; m{3}" gap="xl">
       <!-- Default Link Footer -->
@@ -165,13 +236,13 @@ export const LinkedCardFooters: Story = {
 
       <!-- Button with Icon -->
       <gds-card-pattern-01
-        title="Icon Button"
+        title="Icon button"
         excerpt="Card with icon button in footer."
         href="#"
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
-        <gds-button rank="secondary" slot="footer">
-          <gds-icon-chevron-right></gds-icon-chevron-right>
+        <gds-button rank="secondary" slot="footer" size="small">
+          <gds-icon-chevron-right size="m"></gds-icon-chevron-right>
         </gds-button>
       </gds-card-pattern-01>
 
@@ -186,17 +257,37 @@ export const LinkedCardFooters: Story = {
   `,
   parameters: {
     docs: {
-      description: {
-        story:
-          'Linked card variations showing different footer configurations.',
+      source: {
+        code: `
+<!-- Default footer link -->
+<gds-card-pattern-01
+  title="Default Footer"
+  excerpt="Uses label prop for footer link"
+  href="#"
+  label="Read More"
+></gds-card-pattern-01>
+
+<!-- Custom button in footer -->
+<gds-card-pattern-01 title="Icon Button" excerpt="Custom footer button">
+  <gds-button rank="secondary" slot="footer" size="small">
+    <gds-icon-chevron-right></gds-icon-chevron-right>
+  </gds-button>
+</gds-card-pattern-01>
+
+<!-- No footer -->
+<gds-card-pattern-01
+  title="No Footer"
+  excerpt="Card without footer content"
+  href="#"
+></gds-card-pattern-01>`,
+        language: 'html',
+        type: 'code',
       },
     },
   },
 }
 
-// Non-Linked Card with Custom Footer
-export const NonLinkedCustomFooter: Story = {
-  ...DefaultParams,
+export const Actions: Story = {
   render: () => html`
     <gds-grid columns="1; m{3}" gap="xl">
       <!-- Custom Button -->
@@ -237,16 +328,38 @@ export const NonLinkedCustomFooter: Story = {
   `,
   parameters: {
     docs: {
-      description: {
-        story: 'Non-linked cards with custom footer content.',
+      source: {
+        code: `
+<!-- Multiple buttons -->
+<gds-card-pattern-01 title="Custom Buttons">
+  <gds-button slot="footer">Primary</gds-button>
+  <gds-button slot="footer" rank="secondary">Secondary</gds-button>
+</gds-card-pattern-01>
+
+<!-- Custom link with icon -->
+<gds-card-pattern-01 title="Custom Link">
+  <gds-link href="#" slot="footer" size="medium">
+    Custom Link
+    <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+  </gds-link>
+</gds-card-pattern-01>
+
+<!-- Combined actions -->
+<gds-card-pattern-01 title="Mixed Actions">
+  <gds-button slot="footer">Button</gds-button>
+  <gds-link href="#" slot="footer">
+    <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
+    Link
+  </gds-link>
+</gds-card-pattern-01>`,
+        language: 'html',
+        type: 'code',
       },
     },
   },
 }
 
-// Visual Variants
-export const Appearances: Story = {
-  ...DefaultParams,
+export const Appearance: Story = {
   render: () => html`
     <gds-grid columns="1; m{3}" gap="xl">
       <gds-card-pattern-01
@@ -279,16 +392,36 @@ export const Appearances: Story = {
   `,
   parameters: {
     docs: {
-      description: {
-        story: 'Different visual appearances of the card.',
+      source: {
+        code: `
+<!-- Neutral (default) -->
+<gds-card-pattern-01
+  appearance="neutral"
+  title="Neutral"
+  excerpt="Default style"
+></gds-card-pattern-01>
+
+<!-- Outlined -->
+<gds-card-pattern-01
+  appearance="outlined"
+  title="Outlined"
+  excerpt="With border"
+></gds-card-pattern-01>
+
+<!-- Plain -->
+<gds-card-pattern-01
+  appearance="plain"
+  title="Plain"
+  excerpt="No border"
+></gds-card-pattern-01>`,
+        language: 'html',
+        type: 'code',
       },
     },
   },
 }
 
-// Content Size Variants
 export const Sizes: Story = {
-  ...DefaultParams,
   render: () => html`
     <gds-grid columns="1; m{2}" gap="xl">
       <gds-card-pattern-01
@@ -312,15 +445,29 @@ export const Sizes: Story = {
   `,
   parameters: {
     docs: {
-      description: {
-        story: 'Different content padding sizes.',
+      source: {
+        code: `
+<!-- Large (default) -->
+<gds-card-pattern-01
+  size="large"
+  title="Large Size"
+  excerpt="Default content padding"
+></gds-card-pattern-01>
+
+<!-- Small -->
+<gds-card-pattern-01
+  size="small"
+  title="Small Size"
+  excerpt="Reduced content padding"
+></gds-card-pattern-01>`,
+        language: 'html',
+        type: 'code',
       },
     },
   },
 }
 
 export const Theme: Story = {
-  ...DefaultParams,
   render: () => html`
     <gds-grid columns="1; m{2}" gap="0">
       <gds-theme color-scheme="light">
@@ -364,4 +511,38 @@ export const Theme: Story = {
       </gds-theme>
     </gds-grid>
   `,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Cards automatically adapt to light and dark themes when wrapped in `gds-theme` provider.',
+      },
+      source: {
+        code: `
+<!-- Light theme -->
+<gds-theme color-scheme="light">
+  <gds-card-pattern-01
+    title="Light mode"
+    excerpt="Card on light mode"
+    appearance="outlined"
+    href="#"
+    label="Learn More"
+  ></gds-card-pattern-01>
+</gds-theme>
+
+<!-- Dark theme -->
+<gds-theme color-scheme="dark">
+  <gds-card-pattern-01
+    title="Dark mode"
+    excerpt="Card on dark mode"
+    appearance="outlined"
+    href="#"
+    label="Learn More"
+  ></gds-card-pattern-01>
+</gds-theme>`,
+        language: 'html',
+        type: 'code',
+      },
+    },
+  },
 }
