@@ -25,6 +25,7 @@ export class GdsCardLinked extends withLinkProps(GdsCard) {
       target=${ifDefined(this.target)}
       rel=${ifDefined(this.rel)}
       download=${ifDefined(this.download)}
+      tabindex="0"
     >
       <slot></slot>
     </a>`

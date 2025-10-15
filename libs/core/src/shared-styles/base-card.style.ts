@@ -20,22 +20,6 @@ export default css`
     }
 
     .card {
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      transition-property: all;
-      transition-duration: var(--gds-sys-motion-duration-fastest);
-      transition-timing-function: var(--gds-sys-motion-easing-ease-in);
-      padding: var(--gds-sys-space-xs);
-      border-radius: var(--gds-sys-radius-m);
-      border-width: var(--gds-sys-space-5xs);
-      border-style: solid;
-      border-color: transparent;
-
-      @starting-style {
-        opacity: 0;
-      }
-
       &.appearance-neutral {
         background-color: var(--gds-sys-color-l2-neutral-01);
       }
@@ -50,38 +34,6 @@ export default css`
       }
 
       &.card-linked {
-        text-decoration: none;
-        cursor: pointer;
-        outline: solid var(--gds-sys-space-4xs) transparent;
-        outline-offset: var(--gds-sys-space-4xs);
-
-        &:focus {
-          outline-color: var(--gds-sys-color-content-neutral-01);
-          outline-offset: var(--gds-sys-space-3xs);
-
-          &:not(:focus-visible) {
-            outline-color: transparent;
-          }
-        }
-
-        @media (pointer: fine) {
-          &:hover {
-            background-color: color-mix(
-              in srgb,
-              var(--gds-sys-color-l2-neutral-02),
-              var(--gds-sys-color-state-neutral-03)
-            );
-          }
-        }
-
-        &:active {
-          background-color: color-mix(
-            in srgb,
-            var(--gds-sys-color-l2-neutral-02),
-            var(--gds-sys-color-state-neutral-04)
-          );
-        }
-
         .part-footer {
           pointer-events: none;
           user-select: none;

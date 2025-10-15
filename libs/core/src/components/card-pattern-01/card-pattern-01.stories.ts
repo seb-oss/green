@@ -52,6 +52,7 @@ const DefaultParams: Story = {
 export const Default: Story = {
   args: {
     title: 'Card Title',
+    href: '#',
     excerpt: 'This is a brief description of the card content.',
     label: 'Read more',
     src: 'https://api.seb.io/assets/launch-hero.jpg',
@@ -67,4 +68,33 @@ export const Link: Story = {
     excerpt:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
   },
+}
+
+/**
+ * Footer slot
+ */
+export const Linked: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-grid columns="1; m{2}" gap="xl" width="100%">
+      <gds-card-pattern-01
+        title="This is a heading"
+        href="#"
+        label="Read more"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+      </gds-card-pattern-01>
+      <gds-card-pattern-01
+        title="This is a heading"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+        <gds-link href="#" slot="footer" size="medium">
+          <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
+          This is a link
+        </gds-link>
+      </gds-card-pattern-01>
+    </gds-grid>
+  `,
 }
