@@ -72,8 +72,16 @@ export class GdsCardPattern01 extends withSizeXProps(
   static styles = [tokens, BaseCardStyles]
   #Compose = createComposer(this)
 
+  get #cardClasses() {
+    return {
+      ...this.classes('pattern-01'),
+      'card-linked': !!this.href,
+    }
+  }
+
   #Parts = {
     Root: this.#Compose.Part({
+      className: () => (this.href ? {} : this.#cardClasses),
       parts: {
         Header: this.#Compose.Part({
           slot: 'header',
@@ -123,11 +131,16 @@ export class GdsCardPattern01 extends withSizeXProps(
               slot: 'footer',
               wrap: true,
               conditions: {
-                Link: () => !!this.label,
+                Link: () => !!this.href,
               },
               templates: {
                 Link: () => html`
-                  <gds-link tabindex="-1" aria-hidden="true" inert>
+                  <gds-link
+                    href=${ifDefined(this.href)}
+                    tabindex=${this.href ? '-1' : '0'}
+                    aria-hidden=${this.href ? 'true' : 'false'}
+                    ?inert=${this.href}
+                  >
                     <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
                     ${this.label}
                   </gds-link>
@@ -136,9 +149,9 @@ export class GdsCardPattern01 extends withSizeXProps(
               wrapper: (content) =>
                 html`<footer
                   class="part-footer"
-                  tabindex="-1"
-                  aria-hidden="true"
-                  inert
+                  tabindex=${this.href ? '-1' : '0'}
+                  aria-hidden=${this.href ? 'true' : 'false'}
+                  ?inert=${this.href}
                 >
                   ${content}
                 </footer>`,
@@ -146,17 +159,20 @@ export class GdsCardPattern01 extends withSizeXProps(
           },
         }),
       },
-      wrapper: (content) =>
-        html`<a
-          href=${ifDefined(this.href)}
-          target=${ifDefined(this.target)}
-          rel=${ifDefined(this.rel)}
-          class=${classMap(this.classes('linked'))}
-          tabindex="0"
-          aria-label=${ifDefined(this.title || this.label)}
-        >
-          ${content}
-        </a>`,
+      wrapper: this.href
+        ? (content) => html`
+            <a
+              href=${ifDefined(this.href)}
+              target=${ifDefined(this.target)}
+              rel=${ifDefined(this.rel)}
+              class=${classMap(this.#cardClasses)}
+              tabindex="0"
+              aria-label=${ifDefined(this.title || this.label)}
+            >
+              ${content}
+            </a>
+          `
+        : undefined,
     }),
   }
 
