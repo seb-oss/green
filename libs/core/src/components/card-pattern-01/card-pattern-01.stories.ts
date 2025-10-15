@@ -7,6 +7,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 import './card-pattern-01'
 import '../button'
 import '../div'
+import '../flex'
 import '../icon/icons/chevron-right'
 import '../icon/icons/arrow-right'
 import '../text'
@@ -316,4 +317,51 @@ export const Sizes: Story = {
       },
     },
   },
+}
+
+export const Theme: Story = {
+  ...DefaultParams,
+  render: () => html`
+    <gds-grid columns="1; m{2}" gap="0">
+      <gds-theme color-scheme="light">
+        <gds-flex
+          flex-direction="column"
+          gap="xl"
+          background="neutral-01"
+          padding="4xl"
+        >
+          <gds-text>Light</gds-text>
+          <gds-divider color="subtle-01"></gds-divider>
+          <gds-card-pattern-01
+            title="Light mode"
+            excerpt="Card on light mode"
+            appearance="outlined"
+            href="#"
+            label="Learn More"
+            src="https://api.seb.io/assets/launch-hero.jpg"
+          ></gds-card-pattern-01>
+        </gds-flex>
+      </gds-theme>
+
+      <gds-theme color-scheme="dark">
+        <gds-flex
+          flex-direction="column"
+          gap="xl"
+          background="neutral-01"
+          padding="4xl"
+        >
+          <gds-text>Dark</gds-text>
+          <gds-divider color="subtle-01"></gds-divider>
+          <gds-card-pattern-01
+            title="Dark mode"
+            appearance="outlined"
+            excerpt="Card on dark mode"
+            href="#"
+            label="Learn More"
+            src="https://api.seb.io/assets/launch-hero.jpg"
+          ></gds-card-pattern-01>
+        </gds-flex>
+      </gds-theme>
+    </gds-grid>
+  `,
 }
