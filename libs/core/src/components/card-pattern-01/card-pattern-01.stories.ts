@@ -8,9 +8,25 @@ import './card-pattern-01'
 import '../button'
 import '../div'
 import '../icon/icons/chevron-right'
+import '../icon/icons/arrow-right'
 import '../text'
 import '../link'
 import '../divider'
+
+/**
+ *
+ * Features:
+ * - Linked and non-linked variants
+ * - Header with media or custom content
+ * - Configurable media aspect ratio
+ * - Optional footer with actions
+ * - Three appearance styles
+ * - Two content size options
+ *
+ * Slots:
+ * - header: Custom header content
+ * - footer: Action items (buttons, links)
+ */
 
 const meta: Meta = {
   title: 'Patterns/Card Pattern 01',
@@ -58,65 +74,78 @@ const DefaultParams: Story = {
   },
 }
 
-// Header Variations
-export const HeaderVariations: Story = {
-  ...DefaultParams,
+/**
+ * Media Variations
+ * Shows different media aspect ratios and responsive image handling
+ */
+export const Media: Story = {
   render: () => html`
-    <gds-grid columns="1; m{3}" gap="xl">
-      <!-- No Header -->
+    <gds-grid columns="1; m{2}" gap="xl">
       <gds-card-pattern-01
-        title="No Header"
-        excerpt="Card without any header or image content."
-        href="#"
-        label="Learn More"
-      ></gds-card-pattern-01>
-
-      <!-- Landscape Image -->
-      <gds-card-pattern-01
-        title="Landscape Image"
-        excerpt="Card with landscape aspect ratio image."
-        href="#"
-        label="Learn More"
+        title="Landscape Media"
+        excerpt="16:9 aspect ratio"
         src="https://api.seb.io/assets/launch-hero.jpg"
         aspect-ratio="landscape"
+        srcset="https://api.seb.io/assets/launch-hero.jpg 800w, https://api.seb.io/assets/launch-hero.jpg 1200w"
+        sizes="(max-width: 800px) 100vw, 800px"
       ></gds-card-pattern-01>
 
-      <!-- Square Image -->
       <gds-card-pattern-01
-        title="Square Image"
-        excerpt="Card with square aspect ratio image."
-        href="#"
-        label="Learn More"
+        title="Square Media"
+        excerpt="1:1 aspect ratio"
         src="https://api.seb.io/assets/launch-hero.jpg"
         aspect-ratio="square"
       ></gds-card-pattern-01>
+    </gds-grid>
+  `,
+}
 
-      <!-- Slotted header -->
+/**
+ * Header Variations
+ * Demonstrates different header configurations:
+ * - No header
+ * - With media
+ * - Custom header content
+ */
+export const Headers: Story = {
+  render: () => html`
+    <gds-grid columns="1; m{3}" gap="xl">
+      <!-- Text Only -->
       <gds-card-pattern-01
-        title="Square Image"
-        excerpt="Card with square aspect ratio image."
+        title="Text Only"
+        excerpt="No header content"
         href="#"
         label="Learn More"
+      ></gds-card-pattern-01>
+
+      <!-- With Media -->
+      <gds-card-pattern-01
+        title="With Media"
+        excerpt="Default media header"
+        src="https://api.seb.io/assets/launch-hero.jpg"
+        href="#"
+        label="Learn More"
+      ></gds-card-pattern-01>
+
+      <!-- Custom Header -->
+      <gds-card-pattern-01
+        href="#"
+        title="Custom Header"
+        excerpt="Using header slot"
+        appearance="plain"
       >
         <gds-card
           slot="header"
           justify-content="center"
           align-items="center"
           variant="primary"
+          aspect-ratio="16/9"
         >
-          Content
+          Custom Content
         </gds-card>
       </gds-card-pattern-01>
     </gds-grid>
   `,
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Different header configurations showing no header, landscape, and square images.',
-      },
-    },
-  },
 }
 
 // Footer Variations for Linked Cards
@@ -168,14 +197,15 @@ export const LinkedCardFooters: Story = {
 export const NonLinkedCustomFooter: Story = {
   ...DefaultParams,
   render: () => html`
-    <gds-grid columns="1; m{2}" gap="xl">
+    <gds-grid columns="1; m{3}" gap="xl">
       <!-- Custom Button -->
       <gds-card-pattern-01
         title="Custom Button"
         excerpt="Non-linked card with custom button."
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
-        <gds-button slot="footer"> Primary Action </gds-button>
+        <gds-button slot="footer"> Primary </gds-button>
+        <gds-button slot="footer" rank="secondary"> Secondary </gds-button>
       </gds-card-pattern-01>
 
       <!-- Custom Link -->
@@ -185,8 +215,21 @@ export const NonLinkedCustomFooter: Story = {
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
         <gds-link href="#" slot="footer" size="medium">
-          <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
           Custom Link
+          <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+        </gds-link>
+      </gds-card-pattern-01>
+
+      <!-- Combined -->
+      <gds-card-pattern-01
+        title="Combined Link and button"
+        excerpt="Non-linked card with custom link."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+        <gds-button slot="footer"> Button </gds-button>
+        <gds-link href="#" slot="footer" size="medium">
+          <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
+          Custom link
         </gds-link>
       </gds-card-pattern-01>
     </gds-grid>

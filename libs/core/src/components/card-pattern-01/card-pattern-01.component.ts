@@ -24,9 +24,27 @@ import { GdsText } from '../text/text.component'
 
 /**
  * @element gds-card-pattern-01
+ * @status beta
  *
- * @example
- * <gds-card-pattern-01></gds-card-pattern-01>
+ * @slot header - Custom header content
+ * @slot footer - Action items (buttons, links)
+ *
+ * @property {string} href - Makes card clickable
+ * @property {string} title - Card title
+ * @property {string} excerpt - Card description
+ * @property {string} label - Footer link text
+ * @property {'neutral' | 'outlined' | 'plain'} appearance - Visual style
+ * @property {'landscape' | 'square'} aspectRatio - Media ratio
+ * @property {'small' | 'large'} size - Content padding
+ *
+ * Media Properties:
+ * @property {string} src - Image source
+ * @property {string} srcset - Responsive images
+ * @property {string} sizes - Responsive sizes
+ *
+ * Link Properties:
+ * @property {string} target - Link target
+ * @property {string} rel - Link relationship
  */
 
 @gdsCustomElement('gds-card-pattern-01', {
