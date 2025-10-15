@@ -53,19 +53,19 @@ export function withCardProps<T extends Constructor<GdsElement>>(
     /**
      * The main title of the card
      */
-    @property()
+    @property({ reflect: false })
     title = ''
 
     /**
      * A brief description or summary text
      */
-    @property()
+    @property({ reflect: false })
     excerpt = ''
 
     /**
      * Optional label text (e.g., category, tag, or status)
      */
-    @property()
+    @property({ reflect: false })
     label = ''
 
     /**

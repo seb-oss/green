@@ -87,6 +87,16 @@ export const Linked: Story = {
       </gds-card-pattern-01>
       <gds-card-pattern-01
         title="This is a heading"
+        href="#"
+        excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      >
+        <gds-button rank="secondary" slot="footer">
+          <gds-icon-chevron-right></gds-icon-chevron-right>
+        </gds-button>
+      </gds-card-pattern-01>
+      <gds-card-pattern-01
+        title="This is a heading"
         excerpt="Regular card – multiple click areas if needed. You can use a button when that suites the context, a separate link or both."
         src="https://api.seb.io/assets/launch-hero.jpg"
       >

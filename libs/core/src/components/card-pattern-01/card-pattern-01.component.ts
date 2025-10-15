@@ -1,16 +1,14 @@
-import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
-import BaseCardStyles from '../../shared-styles/base-card.style'
+// import BaseCardStyles from '../../shared-styles/base-card.style'
 import { tokens } from '../../tokens.style'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { createComposer } from '../../utils/helpers/part-composer'
 import {
   withLayoutChildProps,
   withMarginProps,
@@ -44,7 +42,7 @@ export class GdsCardPattern01 extends withSizeXProps(
     ),
   ),
 ) {
-  static styles = [tokens, BaseCardStyles]
+  static styles = [tokens]
 
   get #cardClasses() {
     return {
@@ -102,15 +100,21 @@ export class GdsCardPattern01 extends withSizeXProps(
         target=${ifDefined(this.target)}
         rel=${ifDefined(this.rel)}
       >
-        <header class="part-header">${this.#renderImage()}</header>
-        <main class="part-main">
-          <article class="part-article">
+        <gds-flex>${this.#renderImage()}</gds-flex>
+        <gds-flex flex-direction="column" gap="xl" padding="m">
+          <gds-flex flex-direction="column" gap="xs">
             ${this.#renderTitle()} ${this.#renderExcerpt()}
-          </article>
-          <footer class="part-footer" aria-hidden="true" inert>
+          </gds-flex>
+          <gds-flex
+            align-items="center"
+            gap="s"
+            pointer-events="none"
+            aria-hidden="true"
+            inert
+          >
             <slot name="footer">
               ${when(
-                this.label,
+                this.href && this.label,
                 () => html`
                   <gds-link href=${ifDefined(this.href)}>
                     <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
@@ -119,8 +123,8 @@ export class GdsCardPattern01 extends withSizeXProps(
                 `,
               )}
             </slot>
-          </footer>
-        </main>
+          </gds-flex>
+        </gds-flex>
       </gds-card-linked>
     `
   }
