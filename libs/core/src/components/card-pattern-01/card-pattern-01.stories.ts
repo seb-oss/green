@@ -359,6 +359,52 @@ export const Actions: Story = {
   },
 }
 
+export const Size: Story = {
+  render: () => html`
+    <gds-grid columns="1; m{3}" gap="xl">
+      <gds-card-pattern-01
+        size="large"
+        title="Large Size"
+        excerpt="Default content padding"
+        href="#"
+        label="Learn More"
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      ></gds-card-pattern-01>
+
+      <gds-card-pattern-01
+        size="small"
+        title="Small Size"
+        excerpt="Reduced content padding"
+        href="#"
+        label="Learn More"
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      ></gds-card-pattern-01>
+    </gds-grid>
+  `,
+  parameters: {
+    docs: {
+      source: {
+        code: `
+<!-- Large (default) -->
+<gds-card-pattern-01
+  size="large"
+  title="Large Size"
+  excerpt="Default content padding"
+></gds-card-pattern-01>
+
+<!-- Small -->
+<gds-card-pattern-01
+  size="small"
+  title="Small Size"
+  excerpt="Reduced content padding"
+></gds-card-pattern-01>`,
+        language: 'html',
+        type: 'code',
+      },
+    },
+  },
+}
+
 export const Appearance: Story = {
   render: () => html`
     <gds-grid columns="1; m{3}" gap="xl">
@@ -413,52 +459,6 @@ export const Appearance: Story = {
   appearance="plain"
   title="Plain"
   excerpt="No border"
-></gds-card-pattern-01>`,
-        language: 'html',
-        type: 'code',
-      },
-    },
-  },
-}
-
-export const Sizes: Story = {
-  render: () => html`
-    <gds-grid columns="1; m{3}" gap="xl">
-      <gds-card-pattern-01
-        size="large"
-        title="Large Size"
-        excerpt="Default content padding"
-        href="#"
-        label="Learn More"
-        src="https://api.seb.io/assets/launch-hero.jpg"
-      ></gds-card-pattern-01>
-
-      <gds-card-pattern-01
-        size="small"
-        title="Small Size"
-        excerpt="Reduced content padding"
-        href="#"
-        label="Learn More"
-        src="https://api.seb.io/assets/launch-hero.jpg"
-      ></gds-card-pattern-01>
-    </gds-grid>
-  `,
-  parameters: {
-    docs: {
-      source: {
-        code: `
-<!-- Large (default) -->
-<gds-card-pattern-01
-  size="large"
-  title="Large Size"
-  excerpt="Default content padding"
-></gds-card-pattern-01>
-
-<!-- Small -->
-<gds-card-pattern-01
-  size="small"
-  title="Small Size"
-  excerpt="Reduced content padding"
 ></gds-card-pattern-01>`,
         language: 'html',
         type: 'code',

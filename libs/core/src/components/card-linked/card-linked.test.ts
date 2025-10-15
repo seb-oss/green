@@ -8,7 +8,7 @@ import '@sebgroup/green-core/components/card-linked'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
-describe('GdsCardLinked', () => {
+describe('<gds-card-linked>', () => {
   let element: GdsCardLinked
 
   beforeEach(async () => {

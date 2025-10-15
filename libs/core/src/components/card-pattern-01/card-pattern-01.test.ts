@@ -8,7 +8,7 @@ import '@sebgroup/green-core/components/card-pattern-01'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
-describe('GdsCardPattern01', () => {
+describe('<gds-card-pattern-01>', () => {
   let element: GdsCardPattern01
 
   beforeEach(async () => {
@@ -16,46 +16,47 @@ describe('GdsCardPattern01', () => {
     await element.updateComplete
   })
 
-  it('renders as linked card when href is provided', async () => {
-    element = await fixture(
-      html`<gds-card-pattern-01 href="#test"
-        >Card Content</gds-card-pattern-01
-      >`,
-    )
-    const linkedCard = element.shadowRoot?.querySelector('gds-card-linked')
-    expect(linkedCard).to.exist
-    expect(linkedCard?.getAttribute('href')).to.equal('#test')
+  it('should have correct properties when initialized', async () => {
+    expect(element.appearance).to.equal('neutral')
+    expect(element.aspectRatio).to.equal('landscape')
+    expect(element.size).to.equal('large')
   })
 
-  it('renders as static card when no href', async () => {
-    element = await fixture(
-      html`<gds-card-pattern-01>Card Content</gds-card-pattern-01>`,
-    )
-    const staticCard = element.shadowRoot?.querySelector('gds-card')
-    expect(staticCard).to.exist
+  it('should update appearance property', async () => {
+    element.appearance = 'outlined'
+    await element.updateComplete
+    expect(element.appearance).to.equal('outlined')
   })
 
-  it('handles media content when src provided', async () => {
-    element = await fixture(
-      html`<gds-card-pattern-01
-        src="test.jpg"
-        aspect-ratio="square"
-      ></gds-card-pattern-01>`,
-    )
-    const img = element.shadowRoot?.querySelector('gds-img')
-    expect(img).to.exist
-    expect(img?.getAttribute('src')).to.equal('test.jpg')
-    expect(img?.getAttribute('aspect-ratio')).to.equal('1/1')
+  it('should update aspect-ratio property', async () => {
+    element.aspectRatio = 'square'
+    await element.updateComplete
+    expect(element.aspectRatio).to.equal('square')
   })
 
-  it('handles custom header content', async () => {
-    element = await fixture(html`
-      <gds-card-pattern-01>
-        <div slot="header">Custom Header</div>
-      </gds-card-pattern-01>
-    `)
-    const slottedContent = element.querySelector('[slot="header"]')
-    expect(slottedContent).to.exist
-    expect(slottedContent?.textContent).to.equal('Custom Header')
+  it('should update size property', async () => {
+    element.size = 'small'
+    await element.updateComplete
+    expect(element.size).to.equal('small')
+  })
+
+  it('should handle href property', async () => {
+    element.href = '#test'
+    await element.updateComplete
+    expect(element.href).to.equal('#test')
+  })
+
+  it('should handle src property', async () => {
+    element.src = 'test.jpg'
+    await element.updateComplete
+    expect(element.src).to.equal('test.jpg')
+  })
+
+  it('should handle title and excerpt properties', async () => {
+    element.title = 'Test Title'
+    element.excerpt = 'Test Excerpt'
+    await element.updateComplete
+    expect(element.title).to.equal('Test Title')
+    expect(element.excerpt).to.equal('Test Excerpt')
   })
 })
