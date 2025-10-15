@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.11.0
+
+### Minor Changes
+
+- 2d649da: **Core:** font-size values are now in rem instead of px
+
 ## 2.10.1
 
 ### Patch Changes
