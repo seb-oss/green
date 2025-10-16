@@ -119,15 +119,15 @@ export const Header: Story = {
       ></gds-card-pattern-01>
 
       <!-- Custom Header -->
-      <gds-card-pattern-01
-        href="#"
-        title="Custom Header"
-        excerpt="Using header slot"
-        appearance="plain"
-      >
-        <gds-flex padding="l 0 0 l" slot="header">
+      <gds-card-pattern-01 href="#" title="Custom Header">
+        <gds-card
+          slot="header"
+          height="200px"
+          justify-content="center"
+          align-items="center"
+        >
           <gds-icon-cloudy-sun size="xl"></gds-icon-cloudy-sun>
-        </gds-flex>
+        </gds-card>
       </gds-card-pattern-01>
     </gds-grid>
   `,
