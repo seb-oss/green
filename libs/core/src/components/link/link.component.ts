@@ -12,6 +12,7 @@ import {
   withMarginProps,
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
+import { withLinkProps } from '../../utils/mixins/props-link'
 import LinkStyles from './link.styles'
 
 /**
@@ -26,7 +27,7 @@ import LinkStyles from './link.styles'
  */
 @gdsCustomElement('gds-link')
 export class GdsLink extends withMarginProps(
-  withSizeXProps(withLayoutChildProps(GdsElement)),
+  withSizeXProps(withLayoutChildProps(withLinkProps(GdsElement))),
 ) {
   static styles = [tokens, unsafeCSS(LinkStyles)]
 
@@ -34,24 +35,6 @@ export class GdsLink extends withMarginProps(
     mode: 'open',
     delegatesFocus: true,
   }
-
-  /**
-   * When set, the underlying button will be rendered as an anchor element.
-   */
-  @property()
-  href = ''
-
-  /**
-   * Where to display the linked URL. Only used when href is present.
-   */
-  @property()
-  target?: '_self' | '_blank' | '_parent' | '_top'
-
-  /**
-   * The relationship of the linked URL as space-separated link types. Only used when href is present. Defaults to "noreferrer noopener" for security reasons when target is set.
-   */
-  @property()
-  rel?: string
 
   /**
    * Provides an accessible name for the link that will be read by screen readers.
@@ -73,12 +56,6 @@ export class GdsLink extends withMarginProps(
    */
   @property()
   label = ''
-
-  /**
-   * Causes the browser to treat the linked URL as a download. Can be used with or without a filename value. Only used when href is present.
-   */
-  @property()
-  download?: string
 
   /**
    * Controls the text-decoration property of the link.

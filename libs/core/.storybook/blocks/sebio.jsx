@@ -16,11 +16,13 @@ export const SEBIO = () => {
 
   const componentName = context.story.title
     .replace('Components/', '')
+    .replace('Patterns/', '')
     .trim()
     .toLowerCase()
 
   const slug = context.story.componentId
     .replace('components-', '')
+    .replace('patterns-', '')
     .toLowerCase()
     .replace(/\s+/g, '-')
     .replace(/[^a-z0-9-]/g, '')

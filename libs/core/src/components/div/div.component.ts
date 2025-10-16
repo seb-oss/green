@@ -296,6 +296,27 @@ export class GdsDiv extends withSizeXProps(
   @styleExpressionProperty()
   'place-content'?: string
 
+  /**
+   * Style Expression Property that controls the `aspect-ratio` property.
+   * Supports all valid CSS `aspect-ratio` values.
+   */
+  @styleExpressionProperty()
+  'aspect-ratio'?: string
+
+  /**
+   * Style Expression Property that controls the `cursor` property.
+   * Supports all valid CSS `cursor` values.
+   */
+  @styleExpressionProperty()
+  cursor?: string
+
+  /**
+   * Style Expression Property that controls the `pointer-events` property.
+   * Supports all valid CSS `pointer-events` values.
+   */
+  @styleExpressionProperty()
+  'pointer-events'?: string
+
   render() {
     return html`<slot></slot>`
   }
