@@ -35,9 +35,9 @@ import CardPattern01Styles from './card-pattern-01.styles'
  * @property {string} title - Card title
  * @property {string} excerpt - Card description
  * @property {string} label - Footer link text
- * @property {'neutral' | 'outlined' | 'plain'} appearance - Visual style
- * @property {'landscape' | 'square'} aspectRatio - Media ratio
- * @property {'small' | 'large'} size - Content padding
+ * @property {boolean} outlined - Adds border for the neutral 02
+ * @property {'neutral-01' | 'neutral-02'} appearance - Visual style
+ * @property {'landscape' | 'square'} ratio - Media ratio
  *
  * Media Properties:
  * @property {string} src - Image source
@@ -69,6 +69,16 @@ export class GdsCardPattern01 extends withSizeXProps(
     return (isLinked && this.label) || this.querySelector('[slot="footer"]')
   }
 
+  #getVariant() {
+    switch (this.variant) {
+      case 'neutral-02':
+        return this.outlined ? 'secondary' : 'tertiary'
+      case 'neutral-01':
+      default:
+        return 'primary'
+    }
+  }
+
   #renderLinkedCard() {
     return html`
       <gds-card-linked
@@ -77,8 +87,7 @@ export class GdsCardPattern01 extends withSizeXProps(
         href=${ifDefined(this.href)}
         target=${ifDefined(this.target)}
         rel=${ifDefined(this.rel)}
-        variant=${this.appearance === 'neutral' ? 'neutral-01' : 'secondary'}
-        border-width=${this.appearance === 'plain' ? '0' : '5xs'}
+        variant=${this.#getVariant()}
         class="card"
       >
         ${when(
@@ -97,9 +106,7 @@ export class GdsCardPattern01 extends withSizeXProps(
                     object-fit="cover"
                     object-position="center"
                     border-radius="xs"
-                    aspect-ratio=${this.aspectRatio === 'square'
-                      ? '1/1'
-                      : '16/9'}
+                    aspect-ratio=${this.ratio === 'square' ? '1/1' : '16/9'}
                   ></gds-img>
                 `,
               )}
@@ -107,11 +114,7 @@ export class GdsCardPattern01 extends withSizeXProps(
           `,
         )}
 
-        <gds-flex
-          flex-direction="column"
-          gap="xl"
-          padding=${this.size === 'small' ? 's' : 'm'}
-        >
+        <gds-flex flex-direction="column" gap="xl" padding="m">
           ${when(
             this.title || this.excerpt,
             () => html`
@@ -164,12 +167,7 @@ export class GdsCardPattern01 extends withSizeXProps(
 
   #renderStaticCard() {
     return html`
-      <gds-card
-        padding="xs"
-        gap="0"
-        variant=${this.appearance === 'neutral' ? 'neutral-01' : 'secondary'}
-        border-width=${this.appearance === 'plain' ? '0' : '5xs'}
-      >
+      <gds-card padding="xs" gap="0" variant=${this.#getVariant()}>
         ${when(
           this.#hasHeaderContent(),
           () => html`
@@ -186,9 +184,7 @@ export class GdsCardPattern01 extends withSizeXProps(
                     object-fit="cover"
                     object-position="center"
                     border-radius="xs"
-                    aspect-ratio=${this.aspectRatio === 'square'
-                      ? '1/1'
-                      : '16/9'}
+                    aspect-ratio=${this.ratio === 'square' ? '1/1' : '16/9'}
                   ></gds-img>
                 `,
               )}
@@ -196,11 +192,7 @@ export class GdsCardPattern01 extends withSizeXProps(
           `,
         )}
 
-        <gds-flex
-          flex-direction="column"
-          gap="xl"
-          padding=${this.size === 'small' ? 's' : 'm'}
-        >
+        <gds-flex flex-direction="column" gap="xl" padding="m">
           ${when(
             this.title || this.excerpt,
             () => html`

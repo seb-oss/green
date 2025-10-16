@@ -17,27 +17,14 @@ describe('<gds-card-pattern-01>', () => {
   })
 
   it('should have correct properties when initialized', async () => {
-    expect(element.appearance).to.equal('neutral')
-    expect(element.aspectRatio).to.equal('landscape')
-    expect(element.size).to.equal('large')
-  })
-
-  it('should update appearance property', async () => {
-    element.appearance = 'outlined'
-    await element.updateComplete
-    expect(element.appearance).to.equal('outlined')
+    expect(element.variant).to.equal('neutral-01')
+    expect(element.ratio).to.equal('landscape')
   })
 
   it('should update aspect-ratio property', async () => {
-    element.aspectRatio = 'square'
+    element.ratio = 'square'
     await element.updateComplete
-    expect(element.aspectRatio).to.equal('square')
-  })
-
-  it('should update size property', async () => {
-    element.size = 'small'
-    await element.updateComplete
-    expect(element.size).to.equal('small')
+    expect(element.ratio).to.equal('square')
   })
 
   it('should handle href property', async () => {

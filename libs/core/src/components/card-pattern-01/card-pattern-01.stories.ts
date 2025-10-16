@@ -8,8 +8,10 @@ import './card-pattern-01'
 import '../button'
 import '../div'
 import '../flex'
+import '../badge'
 import '../icon/icons/chevron-right'
 import '../icon/icons/arrow-right'
+import '../icon/icons/cloudy-sun'
 import '../text'
 import '../link'
 import '../divider'
@@ -123,15 +125,9 @@ export const Header: Story = {
         excerpt="Using header slot"
         appearance="plain"
       >
-        <gds-card
-          slot="header"
-          justify-content="center"
-          align-items="center"
-          variant="primary"
-          aspect-ratio="16/9"
-        >
-          Custom Content
-        </gds-card>
+        <gds-flex padding="l 0 0 l" slot="header">
+          <gds-icon-cloudy-sun size="xl"></gds-icon-cloudy-sun>
+        </gds-flex>
       </gds-card-pattern-01>
     </gds-grid>
   `,
@@ -359,58 +355,11 @@ export const Actions: Story = {
   },
 }
 
-export const Size: Story = {
+export const Variant: Story = {
   render: () => html`
     <gds-grid columns="1; m{3}" gap="xl">
       <gds-card-pattern-01
-        size="large"
-        title="Large Size"
-        excerpt="Default content padding"
-        href="#"
-        label="Learn More"
-        src="https://api.seb.io/assets/launch-hero.jpg"
-      ></gds-card-pattern-01>
-
-      <gds-card-pattern-01
-        size="small"
-        title="Small Size"
-        excerpt="Reduced content padding"
-        href="#"
-        label="Learn More"
-        src="https://api.seb.io/assets/launch-hero.jpg"
-      ></gds-card-pattern-01>
-    </gds-grid>
-  `,
-  parameters: {
-    docs: {
-      source: {
-        code: `
-<!-- Large (default) -->
-<gds-card-pattern-01
-  size="large"
-  title="Large Size"
-  excerpt="Default content padding"
-></gds-card-pattern-01>
-
-<!-- Small -->
-<gds-card-pattern-01
-  size="small"
-  title="Small Size"
-  excerpt="Reduced content padding"
-></gds-card-pattern-01>`,
-        language: 'html',
-        type: 'code',
-      },
-    },
-  },
-}
-
-export const Appearance: Story = {
-  render: () => html`
-    <gds-grid columns="1; m{3}" gap="xl">
-      <gds-card-pattern-01
-        appearance="neutral"
-        title="Neutral"
+        title="Neutral 01"
         excerpt="Default card appearance"
         href="#"
         label="Learn More"
@@ -418,8 +367,8 @@ export const Appearance: Story = {
       ></gds-card-pattern-01>
 
       <gds-card-pattern-01
-        appearance="outlined"
-        title="Outlined"
+        variant="neutral-02"
+        title="Neutral 02"
         excerpt="Secondary variant"
         href="#"
         label="Learn More"
@@ -427,8 +376,9 @@ export const Appearance: Story = {
       ></gds-card-pattern-01>
 
       <gds-card-pattern-01
-        appearance="plain"
-        title="Plain"
+        variant="neutral-02"
+        outlined
+        title="Neutral 02 · Outlined"
         excerpt="Secondary variant without border"
         href="#"
         label="Learn More"
@@ -440,23 +390,23 @@ export const Appearance: Story = {
     docs: {
       source: {
         code: `
-<!-- Neutral (default) -->
+<!-- Neutral 01 (default) -->
 <gds-card-pattern-01
-  appearance="neutral"
   title="Neutral"
   excerpt="Default style"
 ></gds-card-pattern-01>
 
-<!-- Outlined -->
+<!-- Neutral 02 -->
 <gds-card-pattern-01
-  appearance="outlined"
+  variant="neutral-02"
   title="Outlined"
   excerpt="With border"
 ></gds-card-pattern-01>
 
-<!-- Plain -->
+<!-- Neutral 02 · Outlined -->
 <gds-card-pattern-01
-  appearance="plain"
+  variant="neutral-02"
+  outlined
   title="Plain"
   excerpt="No border"
 ></gds-card-pattern-01>`,
@@ -472,7 +422,7 @@ export const Theme: Story = {
     <gds-grid columns="1; m{2}" gap="">
       <gds-theme color-scheme="light">
         <gds-flex flex-direction="column" gap="xl" padding="4xl">
-          <gds-text>Light</gds-text>
+          <gds-badge width="max-content">Light</gds-badge>
           <gds-card-pattern-01
             title="Light mode"
             excerpt="Card on light mode"
@@ -486,13 +436,14 @@ export const Theme: Story = {
 
       <gds-theme color-scheme="dark">
         <gds-flex
+          level="1"
           flex-direction="column"
           gap="xl"
           background="neutral-01"
           padding="4xl"
           border-radius="s"
         >
-          <gds-text>Dark</gds-text>
+          <gds-badge width="max-content">Dark</gds-badge>
           <gds-card-pattern-01
             title="Dark mode"
             appearance="outlined"

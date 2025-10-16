@@ -23,18 +23,26 @@ export interface CardProps {
 
   /**
    * Visual style variant of the card
+   * - neutral-01: Default solid background
+   * - neutral-02: Alternative background color
    */
-  appearance?: 'neutral' | 'outlined' | 'plain'
+  variant?: 'neutral-01' | 'neutral-02'
+
+  /**
+   * Controls the card's border style
+   * @example
+   * // As boolean (uses default border)
+   * <gds-card outlined></gds-card>
+   *
+   * // With specific variant
+   * <gds-card outlined variant="neutral-02"></gds-card>
+   */
+  outlined?: boolean
 
   /**
    * Aspect ratio/format of the card's media section
    */
-  aspectRatio?: 'landscape' | 'square'
-
-  /**
-   * Spacing like padding on the card content
-   */
-  size?: 'small' | 'large'
+  ratio?: 'landscape' | 'square'
 
   /**
    * Card classes in a orgnaised way if used as default
@@ -69,16 +77,19 @@ export function withCardProps<T extends Constructor<GdsElement>>(
     label = ''
 
     /**
-     * Visual style variant of the card
-     * - neutral: Default card style
-     * - outlined: Card with outline/border
-     * - plain: Minimal card style
+     * Card background variant
+     * @default 'neutral-01'
      */
     @property({ reflect: false })
-    appearance: 'neutral' | 'outlined' | 'plain' = 'neutral'
+    variant: 'neutral-01' | 'neutral-02' = 'neutral-01'
 
-    @property({ reflect: false })
-    size: 'small' | 'large' = 'large'
+    /**
+     * Enables border styling
+     * Designed to work with neutral-02 variant
+     * @default false
+     */
+    @property({ type: Boolean, reflect: false })
+    outlined = false
 
     /**
      * Aspect ratio/format of the card's media section
@@ -86,7 +97,7 @@ export function withCardProps<T extends Constructor<GdsElement>>(
      * - square: 1:1 square format
      */
     @property({ reflect: false, attribute: 'aspect-ratio' })
-    aspectRatio: 'landscape' | 'square' = 'landscape'
+    ratio: 'landscape' | 'square' = 'landscape'
 
     /**
      * Protected method to get base card classes
@@ -95,10 +106,10 @@ export function withCardProps<T extends Constructor<GdsElement>>(
     classes(type?: string): Record<string, boolean> {
       return {
         card: true,
+        outlined: true,
         [`card-${type || 'base'}`]: !!type,
-        [`appearance-${this.appearance}`]: true,
-        [`aspect-ratio-${this.aspectRatio}`]: true,
-        [`size-${this.size}`]: true,
+        [`variant-${this.variant}`]: true,
+        [`ratio-${this.ratio}`]: true,
       }
     }
   }
