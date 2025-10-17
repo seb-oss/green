@@ -93,72 +93,75 @@ export class GdsContextMenu extends withMarginProps(
   @property()
   placement: Placement = 'bottom-start'
 
-  @queryAsync('#trigger')
-  private elTriggerBtn!: Promise<HTMLButtonElement>
+  #elTriggerBtn?: HTMLElement
 
   @queryAsync('slot[name="icon"]')
-  private elIconSlot!: Promise<HTMLSlotElement>
+  private _elIconSlot!: Promise<HTMLSlotElement>
+
+  @query('slot[name="trigger"]')
+  private _elTriggerSlot!: HTMLSlotElement
 
   connectedCallback() {
     super.connectedCallback()
 
     TransitionalStyles.instance.apply(this, 'gds-context-menu')
 
-    this.#handleSlotChange()
-
-    this.addEventListener('keydown', (e) => {
-      if (this.open && e.key == 'Tab') {
-        e.preventDefault()
-        this.open = false
-        this.elTriggerBtn.then((el) => el.focus())
-      }
-    })
+    this.updateComplete.then(this.#handleTriggerSlotChange)
   }
 
   render() {
-    return html`<gds-button
-        .rank=${'secondary'}
-        id="trigger"
-        aria-haspopup="menu"
-        aria-controls="menu"
-        aria-expanded=${this.open}
-        label=${this.buttonLabel}
-        @click=${() => (this.open = true)}
-      >
-        ${this.showLabel
-          ? html`<slot
-                name="icon"
-                slot="lead"
-                @slotchange=${this.#handleSlotChange}
-              ></slot
-              >${this.buttonLabel}`
-          : html`<slot
-              name="icon"
-              @slotchange=${this.#handleSlotChange}
-            ></slot>`}
-      </gds-button>
+    return html`<slot
+        name="trigger"
+        @slotchange=${this.#handleTriggerSlotChange}
+        ><gds-button .rank=${'secondary'} id="trigger">
+          ${this.showLabel
+            ? html`<slot name="icon" slot="lead"
+                  ><gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal></slot
+                >${this.buttonLabel}`
+            : html`<slot name="icon"
+                ><gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal
+              ></slot>`}
+        </gds-button>
+      </slot>
       ${when(this.open, this.#renderPopover)}`
   }
 
-  #handleSlotChange() {
-    this.elIconSlot.then((el) => {
-      if (
-        !el.assignedNodes({ flatten: true }).some((node) => {
-          return (
-            node instanceof Element &&
-            node.tagName.toLowerCase().startsWith('gds-icon')
-          )
-        })
-      ) {
-        const defaultIcon = document.createElement(
-          getScopedTagName('gds-icon-dot-grid-one-horizontal'),
-        )
+  #setupButton = () => {
+    if (!this.#elTriggerBtn)
+      this.#elTriggerBtn =
+        this.shadowRoot?.querySelector('#trigger') ?? undefined
 
-        el.appendChild(defaultIcon as HTMLElement)
+    const btn = this.#elTriggerBtn
+    if (btn && !btn.hasAttribute('data-gds-context-menu-trigger')) {
+      btn.setAttribute('data-gds-context-menu-trigger', 'true')
 
-        this.requestUpdate()
-      }
-    })
+      btn.setAttribute('aria-haspopup', 'true')
+      btn.setAttribute('aria-expanded', String(this.open))
+
+      btn.setAttribute('aria-controls', 'menu')
+      btn.setAttribute('aria-label', this.buttonLabel)
+      btn.addEventListener('click', () => {
+        this.open = !this.open
+      })
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          this.open = true
+        }
+      })
+    }
+  }
+
+  #handleTriggerSlotChange = () => {
+    const triggerBtn = this._elTriggerSlot
+      .assignedNodes({ flatten: true })
+      .find((node) => {
+        return node instanceof HTMLElement
+      })
+    if (triggerBtn) {
+      this.#elTriggerBtn = triggerBtn
+    }
+    this.#setupButton()
   }
 
   #renderPopover = () => {
@@ -166,8 +169,8 @@ export class GdsContextMenu extends withMarginProps(
       id="menu"
       autofocus
       .open=${this.open}
-      .triggerRef=${this.elTriggerBtn}
-      .anchorRef=${this.elTriggerBtn}
+      .triggerRef=${Promise.resolve(this.#elTriggerBtn)}
+      .anchorRef=${Promise.resolve(this.#elTriggerBtn)}
       .label=${this.label}
       .placement=${this.placement}
       @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
