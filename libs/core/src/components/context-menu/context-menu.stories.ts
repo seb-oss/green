@@ -9,6 +9,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 import { registerTransitionalStyles } from '../../transitional-styles.ts'
 
 import '../icon/icons/arrow-up.js'
+import '../icon/icons/dot-grid-one-horizontal.js'
 
 registerTransitionalStyles()
 
@@ -90,6 +91,28 @@ export const Usage: Story = {
       >
         Action 3
       </gds-menu-item>
+    </gds-context-menu>
+  `,
+}
+
+/**
+ * You can provide a custom trigger for the context menu by adding an element to the `trigger` slot.
+ * The trigger element should be focusable, preferably a `gds-button` element. Appropriate ARIA attributes will be added
+ * to the trigger element automatically, but misuse of this slot can still result in an inaccessible component.
+ */
+export const CustomTrigger: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-context-menu>
+      <gds-button slot="trigger" rank="tertiary">
+        Custom trigger
+        <gds-icon-dot-grid-one-horizontal
+          slot="trail"
+        ></gds-icon-dot-grid-one-horizontal>
+      </gds-button>
+      <gds-menu-item>Action 1</gds-menu-item>
+      <gds-menu-item>Action 2</gds-menu-item>
+      <gds-menu-item>Action 3</gds-menu-item>
     </gds-context-menu>
   `,
 }
