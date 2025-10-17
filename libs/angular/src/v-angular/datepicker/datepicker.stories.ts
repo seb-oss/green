@@ -87,6 +87,11 @@ export default {
         type: 'boolean',
       },
     },
+    closeOnScroll: {
+      control: {
+        type: 'boolean',
+      },
+    },
     dateLocale: {
       options: ['sv-SE', 'en-GB', 'da-DK'],
       control: {
