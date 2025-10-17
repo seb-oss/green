@@ -69,6 +69,7 @@ const TableStory: StoryFn<TableComponent<ColumnData>> = (args) => ({
   template: /*html*/ `
     <nggv-table
       [selectable]="selectable"
+      [hiddenCheckboxRowIds]="hiddenCheckboxRowIds"
       [tableColumns]="tableColumns"
       [tableData]="tableData"
       [allowLocalSort]="allowLocalSort"
@@ -210,6 +211,7 @@ export const Selectable = TableStory.bind({})
 Selectable.args = {
   ...Primary.args,
   selectable: true,
+  hiddenCheckboxRowIds: ['1', '2', '4'],
   trThookFn: (row: any) => {
     console.log('Using custom thook function')
     return `id_${row.id}_${row.currency}`

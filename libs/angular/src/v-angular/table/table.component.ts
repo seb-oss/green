@@ -190,6 +190,11 @@ export class TableComponent<T extends TableRow>
   @Input() selectable = true
 
   /**
+   * Array of row id's (as defined by rowId property) that should not have a checkbox even if selectable is true.
+   */
+  @Input() hiddenCheckboxRowIds: string[] = []
+
+  /**
    * Used to enable/disable expandable rows.
    * Defaults to false.
    */
@@ -202,8 +207,8 @@ export class TableComponent<T extends TableRow>
   @Input() expandedByDefault = true
 
   /**
-  * Property name used to describe the subItems in the data table.
-  */
+   * Property name used to describe the subItems in the data table.
+   */
   @Input() subItemsProp = 'subItems'
 
   /**
@@ -497,10 +502,10 @@ export class TableComponent<T extends TableRow>
    * Emits row data for what row was clicked if defaultEmit is allowed.
    */
   propagateItemClick(item: any, preventDefaultEmit?: boolean) {
-    if (!preventDefaultEmit) this.ngvRowClick.emit(item);
+    if (!preventDefaultEmit) this.ngvRowClick.emit(item)
 
     if (this.expandable && item[this.subItemsProp]) {
-      this.toggleRowToExpand(item[this.rowId]);
+      this.toggleRowToExpand(item[this.rowId])
     }
   }
 
