@@ -650,6 +650,7 @@ const defaultArgs = {
   description: 'This. Is. A. Description.',
   ngModel: 'opt2',
   size: 'large',
+  closeOnScroll: false,
   options,
 } as StoryArgs
 
