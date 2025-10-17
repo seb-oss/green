@@ -144,6 +144,7 @@ const PrimaryTemplate: StoryFn<DateStoryArgs & any> = (args) => {
       [size]="size"
       [displayDisabledAsLocked]="displayDisabledAsLocked"
       [closeCalendarOnEscape]="closeCalendarOnEscape"
+      [closeOnScroll]="closeOnScroll"
       >
     </nggv-dateinput>
     `,
@@ -598,6 +599,7 @@ export const DoNotCloseCalendarOnEscClick = PrimaryTemplate.bind({})
 DoNotCloseCalendarOnEscClick.args = {
   ...Primary.args,
   closeCalendarOnEscape: false,
+  closeOnScroll: false
 }
 
 export const DynamicPosition = LargeBodyTemplate.bind({})
