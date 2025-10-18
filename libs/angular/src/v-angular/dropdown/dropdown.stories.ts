@@ -659,7 +659,6 @@ const defaultArgs = {
   size: 'large',
   closeOnScroll: false,
   options,
-  closeOnScroll: false,
 } as StoryArgs
 
 export const Primary = Template.bind({}) as any
