@@ -613,7 +613,6 @@ export const DoNotCloseCalendarOnEscClick = PrimaryTemplate.bind({})
 DoNotCloseCalendarOnEscClick.args = {
   ...Primary.args,
   closeCalendarOnEscape: false,
-  closeOnScroll: false
 }
 
 export const DynamicPosition = LargeBodyTemplate.bind({})
