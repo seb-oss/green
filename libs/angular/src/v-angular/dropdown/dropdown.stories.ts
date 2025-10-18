@@ -134,6 +134,7 @@ const Template: StoryFn<NggvDropdownComponent> = (args: any) => {
           [formControl]="formControl"
           [locked]="locked"
           [size]="size"
+          [closeOnScroll]="closeOnScroll"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Custom Label</ng-template>
           <ng-template let-option #optionTpl>{{option.label | transloco}} {{option.accountNumber}}</ng-template>
@@ -164,6 +165,7 @@ const DisabledTemplate: StoryFn<StoryArgs> = (args: any) => {
       [disabled]="disabled"
       [error]="error"
       [size]="size"
+      [closeOnScroll]="closeOnScroll"
       [formControl]="formControl">
 
       <ng-template #labelTpl>Custom Label</ng-template>
@@ -206,7 +208,8 @@ const AltTemplate: StoryFn<StoryArgs> = (args: any) => {
           [placeholder]="placeholder"
           [options]="options"
           [required]="required"
-        [size]="size"
+          [closeOnScroll]="closeOnScroll"
+          [size]="size"
           [formControl]="formControl">
 
           <ng-template #labelTpl>Custom Label</ng-template>
@@ -280,6 +283,7 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
         [formControl]="formControl"
         [locked]="locked"
         [size]="size"
+        [closeOnScroll]="closeOnScroll"
         [displayDisabledAsLocked]="displayDisabledAsLocked">
 
         <ng-template let-item #groupLabelTpl>
@@ -452,6 +456,7 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
         [unselectLabel]="unselectLabel"
         [emptyOptionLabel]="emptyOptionLabel"
         [size]="size"
+        [closeOnScroll]="closeOnScroll"
         (filterPhraseChange)="handlefilterPhraseChange($event)">
 
         <ng-template let-selected #selectedTpl>
@@ -574,6 +579,7 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
           [required]="required"
           [invalid]="invalid"
           [size]="size"
+          [closeOnScroll]="closeOnScroll"
           error="This is a permanent error"
           [formControl]="formControl">
         </nggv-dropdown>
@@ -594,6 +600,7 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
           [required]="required"
           [invalid]="invalid"
           [size]="size"
+          [closeOnScroll]="closeOnScroll"
           error="This is a permanent error"
           [formControl]="formControl">
         </nggv-dropdown>
@@ -650,6 +657,7 @@ const defaultArgs = {
   description: 'This. Is. A. Description.',
   ngModel: 'opt2',
   size: 'large',
+  closeOnScroll: false,
   options,
 } as StoryArgs
 
@@ -666,6 +674,7 @@ Disabled.args = {
 export const CloseOnScroll = CloseOnScrollTemplate.bind({}) as any
 CloseOnScroll.args = {
   ...defaultArgs,
+  closeOnScroll: true
 }
 export const WithError = Template.bind({}) as any
 WithError.args = {
@@ -732,7 +741,7 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: any) => {
           [required]="required"
           [invalid]="invalid"
           [error]="error"
-        
+          [closeOnScroll]="closeOnScroll"
           #dropdownElement
           [options]="options"
           [allowUnselect]="allowUnselect"
