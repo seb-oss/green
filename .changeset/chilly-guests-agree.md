@@ -2,4 +2,5 @@
 '@sebgroup/green-angular': patch
 ---
 
-**V-Angular:** Date input, Dropdown: Close on scroll toggled via input
+Dateinput (v-angular): Close on scroll toggled via input
+Dropdown (v-angular):: Close on scroll toggled via input
