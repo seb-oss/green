@@ -93,6 +93,8 @@ export class DateInputComponent
   @Input() firstDayOfWeek: WeekDay = WeekDay.Monday
   /** If set to true, it will allow to close the calendar on escape button click. */
   @Input() closeCalendarOnEscape = true
+  /** If the date-input should close when scrolling the viewport. Default: false*/
+  @Input() closeOnScroll = false
 
   /**
    * Sets the displayed size of the date input field.
@@ -207,13 +209,15 @@ export class DateInputComponent
     // if shown is set to true, reset unsubscribe variable
     this.datepickerClosed$.next(false)
 
-    // start listen to scroll
-    this.documentScroll$.pipe(takeUntil(this.datepickerClosed$)).subscribe({
-      next: () => {
-        // if document starts scrolling, close datepicker
-        return this.setShown(false)
-      },
-    })
+    // start listen to scroll if closeOnScroll is enabled
+    if (this.closeOnScroll) {
+      this.documentScroll$.pipe(takeUntil(this.datepickerClosed$)).subscribe({
+        next: () => {
+          // if document starts scrolling, close datepicker
+          return this.setShown(false)
+        },
+      })
+    }
 
     // start listening for clicks outside the component
     this.documentClick$.pipe(takeUntil(this.datepickerClosed$)).subscribe({
