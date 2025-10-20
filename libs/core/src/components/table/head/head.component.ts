@@ -21,12 +21,13 @@ export class GdsTableHead extends GdsElement {
         box-sizing: border-box;
       }
 
-      /* Responsive styles */
+      /* Responsive styles 
       @media (max-width: 768px) {
         .header-cell {
-          display: none; /* Hide headers on mobile */
+          display: none;
         }
       }
+      */
     `,
   ]
 

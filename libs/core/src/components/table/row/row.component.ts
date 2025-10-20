@@ -15,6 +15,7 @@ export class GdsTableRow extends GdsElement {
       :host {
         display: block;
       }
+
       .row {
         display: flex;
         flex-wrap: wrap;

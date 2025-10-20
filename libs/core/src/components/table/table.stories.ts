@@ -1,4 +1,3 @@
-// table.stories.ts
 import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
@@ -7,8 +6,8 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 import './table'
 import './head/head'
-import './cell/cell'
 import './row/row'
+import './cell/cell'
 
 const meta: Meta = {
   title: 'Components/Table',
@@ -22,7 +21,6 @@ const meta: Meta = {
 export default meta
 type Story = StoryObj
 
-// Sample data for the table
 const sampleData = [
   { name: 'John Doe', email: 'john@example.com', role: 'Developer' },
   { name: 'Jane Smith', email: 'jane@example.com', role: 'Designer' },
@@ -31,7 +29,7 @@ const sampleData = [
 
 export const Default: Story = {
   render: () => html`
-    <gds-table>
+    <gds-table responsive>
       <div slot="header">
         <gds-table-row>
           <gds-table-head>Name</gds-table-head>
