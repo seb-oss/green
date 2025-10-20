@@ -1,5 +1,8 @@
 // utils/mixins/props-card.ts
 import { property } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
+
+import type { ClassInfo } from 'lit/directives/class-map.js'
 
 import { GdsElement } from '../../gds-element'
 
@@ -45,9 +48,10 @@ export interface CardProps {
   ratio?: 'landscape' | 'square'
 
   /**
-   * Card classes in a orgnaised way if used as default
+   * Returns classMap directive ready for use in templates
+   * @param type - Optional card type identifier
    */
-  classes: (type?: string) => Record<string, boolean>
+  classes(type?: 'linked' | 'static'): ReturnType<typeof classMap>
 }
 
 /**
@@ -103,14 +107,15 @@ export function withCardProps<T extends Constructor<GdsElement>>(
      * Protected method to get base card classes
      * Can be extended or overridden by implementing classes
      */
-    classes(type?: string): Record<string, boolean> {
-      return {
+    classes(type?: 'linked' | 'static') {
+      const classes: ClassInfo = {
         card: true,
-        outlined: true,
-        [`card-${type || 'base'}`]: !!type,
+        [`card-${type}`]: !!type,
+        outlined: this.outlined,
         [`variant-${this.variant}`]: true,
         [`ratio-${this.ratio}`]: true,
       }
+      return classMap(classes)
     }
   }
 

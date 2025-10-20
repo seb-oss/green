@@ -1,3 +1,4 @@
+import { classMap } from 'lit/directives/class-map'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 
@@ -89,7 +90,7 @@ export class GdsCardPattern01 extends withSizeXProps(
         target=${ifDefined(this.target)}
         rel=${ifDefined(this.rel)}
         variant=${this.#getVariant()}
-        class="card"
+        class=${this.classes('linked')}
       >
         ${this.#renderCardContent()}
       </gds-card-linked>
@@ -133,7 +134,12 @@ export class GdsCardPattern01 extends withSizeXProps(
    */
   #renderStaticCard() {
     return html`
-      <gds-card padding="0" gap="0" variant=${this.#getVariant()}>
+      <gds-card
+        padding="0"
+        gap="0"
+        variant=${this.#getVariant()}
+        class=${this.classes('static')}
+      >
         ${this.#renderCardContent()}
       </gds-card>
     `
@@ -175,6 +181,7 @@ export class GdsCardPattern01 extends withSizeXProps(
               object-position="center"
               border-radius="xs"
               aspect-ratio=${this.ratio === 'square' ? '1/1' : '16/9'}
+              class="card-media"
             ></gds-img>
           </gds-flex>
         `,

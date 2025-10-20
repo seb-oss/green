@@ -132,7 +132,6 @@ export const Header: Story = {
     docs: {
       description: {
         story: `
-### Header Variations
 - Basic: Text-only layout for simple content
 - Media: Image-based presentation
 - Custom: Slotted content when no media present
