@@ -35,13 +35,13 @@
   @if not $target == '' {
     #{$target} {
       transition:
-        all tokens.$transition-time,
+        border tokens.$transition-time,
         outline-offset 0s,
         outline-width 0s; // TODO: append transition rule...
     }
   } @else {
     transition:
-      all tokens.$transition-time,
+      border tokens.$transition-time,
       outline-offset 0s,
       outline-width 0s; // TODO: append transition rule...
   }
