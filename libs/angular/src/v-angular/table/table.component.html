@@ -102,7 +102,10 @@
         [attr.data-hasrowspan]="hasRowSpan(item)"
       >
         <!-- Checkbox column for row -->
-        <td *ngIf="selectable" class="column__check">
+        <td
+          *ngIf="selectable && !hiddenCheckboxRowIds.includes(item[rowId])"
+          class="column__check"
+        >
           <div class="gds-field-checkbox-wrap">
             <label
               [attr.for]="'cb_row__' + initId + '_' + i"
