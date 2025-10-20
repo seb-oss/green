@@ -1,7 +1,5 @@
 import { localized, msg } from '@lit/localize'
-import { nothing } from 'lit'
-import { property, query, queryAsync } from 'lit/decorators.js'
-import { classMap } from 'lit/directives/class-map.js'
+import { property, query } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { Placement } from '@floating-ui/dom'
 
@@ -12,7 +10,6 @@ import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import {
   gdsCustomElement,
-  getScopedTagName,
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import {
