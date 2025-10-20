@@ -79,7 +79,7 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: '',
+        story: 'Linked card with media, title, excerpt, and footer label.',
       },
       source: {
         code: `
@@ -101,18 +101,18 @@ export const Default: Story = {
 export const Header: Story = {
   render: () => html`
     <gds-grid columns="1; m{3}" gap="xl">
-      <!-- Text Only -->
+      <!-- Basic Card -->
       <gds-card-pattern-01
-        title="Text Only"
-        excerpt="No header content"
+        title="Basic Layout"
+        excerpt="Simple card with title and description for text-focused content"
         href="#"
         label="Learn More"
       ></gds-card-pattern-01>
 
-      <!-- With Media -->
+      <!-- Media Card -->
       <gds-card-pattern-01
-        title="With Media"
-        excerpt="Default media header"
+        title="Media Content"
+        excerpt="Enhanced visual presentation with featured image"
         src="https://api.seb.io/assets/launch-hero.jpg"
         href="#"
         label="Learn More"
@@ -122,7 +122,7 @@ export const Header: Story = {
       <gds-card-pattern-01
         href="#"
         title="Custom Header"
-        excerpt="Header is slottable with content other than image"
+        excerpt="Flexible header slot for custom content when no media is present"
       >
         <gds-icon-cloudy-sun size="xl" slot="header"></gds-icon-cloudy-sun>
       </gds-card-pattern-01>
@@ -130,35 +130,39 @@ export const Header: Story = {
   `,
   parameters: {
     docs: {
+      description: {
+        story: `
+### Header Variations
+- Basic: Text-only layout for simple content
+- Media: Image-based presentation
+- Custom: Slotted content when no media present
+        `,
+      },
       source: {
         code: `
-<!-- Text only -->
+<!-- Basic Layout -->
 <gds-card-pattern-01
-  title="Text Only"
-  excerpt="No header content"
+  title="Basic Layout"
+  excerpt="Simple card with title and description"
   href="#"
   label="Learn More"
 ></gds-card-pattern-01>
 
-<!-- With media -->
+<!-- Media Content -->
 <gds-card-pattern-01
-  title="With Media"
-  excerpt="Default media header"
+  title="Media Content"
+  excerpt="Enhanced with featured image"
   src="image.jpg"
   href="#"
   label="Learn More"
 ></gds-card-pattern-01>
 
-<!-- Custom header content -->
-<gds-card-pattern-01 title="Custom Header" excerpt="Using header slot">
-  <gds-card
-    slot="header"
-    justify-content="center"
-    variant="primary"
-    aspect-ratio="16/9"
-  >
-    Custom Content
-  </gds-card>
+<!-- Custom Header -->
+<gds-card-pattern-01
+  title="Custom Header"
+  excerpt="Flexible header slot for custom content"
+>
+  <gds-icon-cloudy-sun size="xl" slot="header"></gds-icon-cloudy-sun>
 </gds-card-pattern-01>`,
         language: 'html',
         type: 'code',

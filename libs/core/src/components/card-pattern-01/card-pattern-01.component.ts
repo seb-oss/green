@@ -35,7 +35,7 @@ import CardPattern01Styles from './card-pattern-01.styles'
  * @property {string} excerpt - Card description
  * @property {string} label - Footer link text
  * @property {boolean} outlined - Adds border for the neutral 02
- * @property {'neutral-01' | 'neutral-02'} appearance - Visual style
+ * @property {'neutral-01' | 'neutral-02'} variant - Visual style
  * @property {'landscape' | 'square'} 'aspect-ratio' - Media ratio
  *
  */
@@ -52,10 +52,20 @@ export class GdsCardPattern01 extends withSizeXProps(
 ) {
   static styles = [tokens, CardPattern01Styles]
 
+  /**
+   * Checks if footer content exists
+   * @param isLinked - Determines if label should be considered for linked cards
+   */
   #hasFooterContent(isLinked = false) {
     return (isLinked && this.label) || this.querySelector('[slot="footer"]')
   }
 
+  /**
+   * Determines card variant based on neutral-01/02 and outlined state
+   * neutral-01 → primary
+   * neutral-02 + outlined → secondary
+   * neutral-02 → tertiary
+   */
   #getVariant() {
     switch (this.variant) {
       case 'neutral-02':
@@ -66,14 +76,10 @@ export class GdsCardPattern01 extends withSizeXProps(
     }
   }
 
-  render() {
-    return when(
-      this.href,
-      () => this.#renderLinkedCard(),
-      () => this.#renderStaticCard(),
-    )
-  }
-
+  /**
+   * Renders linked version of the card
+   * Includes href, target, and rel attributes
+   */
   #renderLinkedCard() {
     return html`
       <gds-card-linked
@@ -90,6 +96,10 @@ export class GdsCardPattern01 extends withSizeXProps(
     `
   }
 
+  /**
+   * Renders footer for linked cards
+   * Includes accessibility attributes and default link
+   */
   #renderLinkedFooter() {
     return when(
       this.#hasFooterContent(true),
@@ -117,6 +127,10 @@ export class GdsCardPattern01 extends withSizeXProps(
     )
   }
 
+  /**
+   * Renders static version of the card
+   * Used when no href is provided
+   */
   #renderStaticCard() {
     return html`
       <gds-card padding="0" gap="0" variant=${this.#getVariant()}>
@@ -125,6 +139,10 @@ export class GdsCardPattern01 extends withSizeXProps(
     `
   }
 
+  /**
+   * Renders footer for static cards
+   * Simple slot without accessibility restrictions
+   */
   #renderStaticFooter() {
     return when(
       this.#hasFooterContent(),
@@ -136,6 +154,11 @@ export class GdsCardPattern01 extends withSizeXProps(
     )
   }
 
+  /**
+   * Renders card content structure
+   * Includes media, header slot, title/excerpt, and footer
+   * Header slot only shows when no media is present
+   */
   #renderCardContent() {
     return html`
       ${when(
@@ -186,5 +209,13 @@ export class GdsCardPattern01 extends withSizeXProps(
         )}
       </gds-flex>
     `
+  }
+
+  render() {
+    return when(
+      this.href,
+      () => this.#renderLinkedCard(),
+      () => this.#renderStaticCard(),
+    )
   }
 }
