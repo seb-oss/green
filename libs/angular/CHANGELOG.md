@@ -1,5 +1,15 @@
 # Changelog
 
+## 6.6.0
+
+### Minor Changes
+
+- 244e286: Dateinput (v-angular): Close on scroll toggled via input
+
+  Dropdown (v-angular): Close on scroll toggled via input
+
+- 385777b: Adding new input hiddenCheckboxRowIds to nggv-table component
+
 ## 6.5.0
 
 ### Minor Changes
