@@ -1,5 +1,5 @@
 ---
-'@sebgroup/green-angular': patch
+'@sebgroup/green-angular': minor
 ---
 
 Dateinput (v-angular): Close on scroll toggled via input
