@@ -1,4 +1,3 @@
-import { css } from 'lit'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 
@@ -37,16 +36,8 @@ import CardPattern01Styles from './card-pattern-01.styles'
  * @property {string} label - Footer link text
  * @property {boolean} outlined - Adds border for the neutral 02
  * @property {'neutral-01' | 'neutral-02'} appearance - Visual style
- * @property {'landscape' | 'square'} ratio - Media ratio
+ * @property {'landscape' | 'square'} 'aspect-ratio' - Media ratio
  *
- * Media Properties:
- * @property {string} src - Image source
- * @property {string} srcset - Responsive images
- * @property {string} sizes - Responsive sizes
- *
- * Link Properties:
- * @property {string} target - Link target
- * @property {string} rel - Link relationship
  */
 
 @gdsCustomElement('gds-card-pattern-01', {
@@ -60,10 +51,6 @@ export class GdsCardPattern01 extends withSizeXProps(
   ),
 ) {
   static styles = [tokens, CardPattern01Styles]
-
-  #hasHeaderContent() {
-    return this.src || this.querySelector('[slot="header"]')
-  }
 
   #hasFooterContent(isLinked = false) {
     return (isLinked && this.label) || this.querySelector('[slot="footer"]')
@@ -79,6 +66,14 @@ export class GdsCardPattern01 extends withSizeXProps(
     }
   }
 
+  render() {
+    return when(
+      this.href,
+      () => this.#renderLinkedCard(),
+      () => this.#renderStaticCard(),
+    )
+  }
+
   #renderLinkedCard() {
     return html`
       <gds-card-linked
@@ -90,151 +85,106 @@ export class GdsCardPattern01 extends withSizeXProps(
         variant=${this.#getVariant()}
         class="card"
       >
-        ${when(
-          this.#hasHeaderContent(),
-          () => html`
-            <!-- <slot name="header"> -->
-            ${when(
-              this.src,
-              () => html`
-                <gds-flex padding="xs xs 0 xs">
-                  <gds-img
-                    src=${ifDefined(this.src)}
-                    srcset=${ifDefined(this.srcset)}
-                    sizes=${ifDefined(this.sizes)}
-                    width="100%"
-                    height="100%"
-                    object-fit="cover"
-                    object-position="center"
-                    border-radius="xs"
-                    aspect-ratio=${this.ratio === 'square' ? '1/1' : '16/9'}
-                  ></gds-img>
-                </gds-flex>
-              `,
-            )}
-            <!-- </slot> -->
-          `,
-        )}
-
-        <gds-flex flex-direction="column" gap="xl" padding="xl">
-          <slot name="header"></slot>
-          ${when(
-            this.title || this.excerpt,
-            () => html`
-              <gds-flex flex-direction="column" gap="xs">
-                ${when(
-                  this.title,
-                  () => html`
-                    <gds-text tag="h2" font="heading-s">${this.title}</gds-text>
-                  `,
-                )}
-                ${when(
-                  this.excerpt,
-                  () => html`
-                    <gds-text tag="p" lines="3" font="body-regular-m">
-                      ${this.excerpt}
-                    </gds-text>
-                  `,
-                )}
-              </gds-flex>
-            `,
-          )}
-          ${when(
-            this.#hasFooterContent(true),
-            () => html`
-              <gds-flex
-                align-items="center"
-                gap="m"
-                pointer-events="none"
-                aria-hidden="true"
-                inert
-              >
-                <slot name="footer">
-                  ${when(
-                    this.label,
-                    () => html`
-                      <gds-link href=${ifDefined(this.href)}>
-                        <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
-                        ${this.label}
-                      </gds-link>
-                    `,
-                  )}
-                </slot>
-              </gds-flex>
-            `,
-          )}
-        </gds-flex>
+        ${this.#renderCardContent()}
       </gds-card-linked>
     `
   }
 
+  #renderLinkedFooter() {
+    return when(
+      this.#hasFooterContent(true),
+      () => html`
+        <gds-flex
+          align-items="center"
+          gap="m"
+          pointer-events="none"
+          aria-hidden="true"
+          inert
+        >
+          <slot name="footer">
+            ${when(
+              this.label,
+              () => html`
+                <gds-link href=${ifDefined(this.href)}>
+                  <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
+                  ${this.label}
+                </gds-link>
+              `,
+            )}
+          </slot>
+        </gds-flex>
+      `,
+    )
+  }
+
   #renderStaticCard() {
     return html`
-      <gds-card padding="xs" gap="0" variant=${this.#getVariant()}>
-        ${when(
-          this.#hasHeaderContent(),
-          () => html`
-            <slot name="header">
-              ${when(
-                this.src,
-                () => html`
-                  <gds-img
-                    src=${ifDefined(this.src)}
-                    srcset=${ifDefined(this.srcset)}
-                    sizes=${ifDefined(this.sizes)}
-                    width="100%"
-                    height="100%"
-                    object-fit="cover"
-                    object-position="center"
-                    border-radius="xs"
-                    aspect-ratio=${this.ratio === 'square' ? '1/1' : '16/9'}
-                  ></gds-img>
-                `,
-              )}
-            </slot>
-          `,
-        )}
-
-        <gds-flex flex-direction="column" gap="xl" padding="m">
-          ${when(
-            this.title || this.excerpt,
-            () => html`
-              <gds-flex flex-direction="column" gap="xs">
-                ${when(
-                  this.title,
-                  () => html`
-                    <gds-text tag="h2" font="heading-s">${this.title}</gds-text>
-                  `,
-                )}
-                ${when(
-                  this.excerpt,
-                  () => html`
-                    <gds-text tag="p" lines="3" font="body-regular-m">
-                      ${this.excerpt}
-                    </gds-text>
-                  `,
-                )}
-              </gds-flex>
-            `,
-          )}
-          ${when(
-            this.#hasFooterContent(),
-            () => html`
-              <gds-flex align-items="center" gap="m">
-                <slot name="footer"></slot>
-              </gds-flex>
-            `,
-          )}
-        </gds-flex>
+      <gds-card padding="0" gap="0" variant=${this.#getVariant()}>
+        ${this.#renderCardContent()}
       </gds-card>
     `
   }
 
-  render() {
+  #renderStaticFooter() {
     return when(
-      this.href,
-      () => this.#renderLinkedCard(),
-      () => this.#renderStaticCard(),
+      this.#hasFooterContent(),
+      () => html`
+        <gds-flex align-items="center" gap="m">
+          <slot name="footer"></slot>
+        </gds-flex>
+      `,
     )
+  }
+
+  #renderCardContent() {
+    return html`
+      ${when(
+        this.src,
+        () => html`
+          <gds-flex padding="xs xs 0 xs">
+            <gds-img
+              src=${ifDefined(this.src)}
+              srcset=${ifDefined(this.srcset)}
+              sizes=${ifDefined(this.sizes)}
+              width="100%"
+              height="100%"
+              object-fit="cover"
+              object-position="center"
+              border-radius="xs"
+              aspect-ratio=${this.ratio === 'square' ? '1/1' : '16/9'}
+            ></gds-img>
+          </gds-flex>
+        `,
+      )}
+      <gds-flex flex-direction="column" gap="xl" padding="xl">
+        ${when(!this.src, () => html`<slot name="header"></slot>`)}
+        ${when(
+          this.title || this.excerpt,
+          () => html`
+            <gds-flex flex-direction="column" gap="xs">
+              ${when(
+                this.title,
+                () => html`
+                  <gds-text tag="h2" font="heading-s">${this.title}</gds-text>
+                `,
+              )}
+              ${when(
+                this.excerpt,
+                () => html`
+                  <gds-text tag="p" lines="3" font="body-regular-m">
+                    ${this.excerpt}
+                  </gds-text>
+                `,
+              )}
+            </gds-flex>
+          `,
+        )}
+        ${when(
+          this.href,
+          () => this.#renderLinkedFooter(),
+          () => this.#renderStaticFooter(),
+        )}
+      </gds-flex>
+    `
   }
 }
