@@ -8,6 +8,7 @@ import { GdsMenuItem } from '../../primitives/menu/menu-item.component'
 import { GdsMenu } from '../../primitives/menu/menu.component'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
+import { watch } from '../../utils/decorators/watch.js'
 import {
   gdsCustomElement,
   html,
@@ -101,6 +102,12 @@ export class GdsContextMenu extends withMarginProps(
     TransitionalStyles.instance.apply(this, 'gds-context-menu')
 
     this.updateComplete.then(this.#handleTriggerSlotChange)
+    this.addEventListener('keydown', (e) => {
+      if (this.open && e.key == 'Tab') {
+        this.open = false
+        e.preventDefault()
+      }
+    })
   }
 
   render() {
@@ -179,5 +186,12 @@ export class GdsContextMenu extends withMarginProps(
 
   #handleItemClick() {
     this.open = false
+  }
+
+  @watch('open', { waitUntilFirstUpdate: true })
+  private _handleOpenChange() {
+    if (!this.open) {
+      requestAnimationFrame(() => this.#elTriggerBtn?.focus())
+    }
   }
 }
