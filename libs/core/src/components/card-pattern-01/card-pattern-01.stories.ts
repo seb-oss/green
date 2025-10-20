@@ -174,7 +174,7 @@ export const Media: Story = {
   render: () => html`
     <gds-grid columns="1; m{3}" gap="xl">
       <gds-card-pattern-01
-        title="Landscape Media"
+        title="Landscape media"
         excerpt="16:9 aspect ratio"
         src="https://api.seb.io/assets/launch-hero.jpg"
         aspect-ratio="landscape"
@@ -464,14 +464,19 @@ export const Variant: Story = {
 
 export const Theme: Story = {
   render: () => html`
-    <gds-grid columns="1; m{2}" gap="">
+    <gds-grid columns="1; m{2}" padding="xl">
       <gds-theme color-scheme="light">
-        <gds-flex flex-direction="column" gap="xl" padding="4xl">
+        <gds-flex
+          level="1"
+          flex-direction="column"
+          gap="xl"
+          padding="4xl"
+          background="neutral-01"
+        >
           <gds-badge width="max-content">Light</gds-badge>
           <gds-card-pattern-01
             title="Light mode"
             excerpt="Card on light mode"
-            appearance="outlined"
             href="#"
             label="Learn More"
             src="https://api.seb.io/assets/launch-hero.jpg"
@@ -491,7 +496,6 @@ export const Theme: Story = {
           <gds-badge width="max-content">Dark</gds-badge>
           <gds-card-pattern-01
             title="Dark mode"
-            appearance="outlined"
             excerpt="Card on dark mode"
             href="#"
             label="Learn More"
