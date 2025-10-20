@@ -95,9 +95,6 @@ export class GdsContextMenu extends withMarginProps(
 
   #elTriggerBtn?: HTMLElement
 
-  @queryAsync('slot[name="icon"]')
-  private _elIconSlot!: Promise<HTMLSlotElement>
-
   @query('slot[name="trigger"]')
   private _elTriggerSlot!: HTMLSlotElement
 
@@ -113,7 +110,11 @@ export class GdsContextMenu extends withMarginProps(
     return html`<slot
         name="trigger"
         @slotchange=${this.#handleTriggerSlotChange}
-        ><gds-button .rank=${'secondary'} id="trigger">
+        ><gds-button
+          .rank=${'secondary'}
+          id="trigger"
+          label=${this.buttonLabel}
+        >
           ${this.showLabel
             ? html`<slot name="icon" slot="lead"
                   ><gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal></slot
@@ -134,12 +135,6 @@ export class GdsContextMenu extends withMarginProps(
     const btn = this.#elTriggerBtn
     if (btn && !btn.hasAttribute('data-gds-context-menu-trigger')) {
       btn.setAttribute('data-gds-context-menu-trigger', 'true')
-
-      btn.setAttribute('aria-haspopup', 'true')
-      btn.setAttribute('aria-expanded', String(this.open))
-
-      btn.setAttribute('aria-controls', 'menu')
-      btn.setAttribute('aria-label', this.buttonLabel)
       btn.addEventListener('click', () => {
         this.open = !this.open
       })
@@ -173,6 +168,7 @@ export class GdsContextMenu extends withMarginProps(
       .anchorRef=${Promise.resolve(this.#elTriggerBtn)}
       .label=${this.label}
       .placement=${this.placement}
+      .popupRole=${'menu'}
       @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
     >
       <gds-menu
