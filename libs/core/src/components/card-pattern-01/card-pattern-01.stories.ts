@@ -192,6 +192,12 @@ export const Media: Story = {
   `,
   parameters: {
     docs: {
+      description: {
+        story: `
+- Landscape (16:9): Default for featured content
+- Square (1:1): Alternative for specific layouts
+        `,
+      },
       source: {
         code: `
 <!-- Landscape with responsive images -->
@@ -223,29 +229,29 @@ export const Footer: Story = {
     <gds-grid columns="1; m{3}" gap="xl">
       <!-- Default Link Footer -->
       <gds-card-pattern-01
-        title="Default Footer"
-        excerpt="Card with default link in footer."
+        title="Linked Card"
+        excerpt="Entire card acts as a single clickable element, footer link is visual only"
         href="#"
-        label="Read More"
+        label="Learn more"
         src="https://api.seb.io/assets/launch-hero.jpg"
       ></gds-card-pattern-01>
 
-      <!-- Button with Icon -->
+      <!-- Decorative Button -->
       <gds-card-pattern-01
-        title="Icon button"
-        excerpt="Card with icon button in footer."
+        title="Visual Indicator"
+        excerpt="Demonstrates non-interactive button in footer when card is linked"
         href="#"
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
-        <gds-button rank="secondary" slot="footer" size="small">
+        <gds-button rank="secondary" slot="footer" size="small" inert>
           <gds-icon-chevron-right size="m"></gds-icon-chevron-right>
         </gds-button>
       </gds-card-pattern-01>
 
       <!-- No Footer -->
       <gds-card-pattern-01
-        title="No Footer"
-        excerpt="Card without any footer content."
+        title="Minimal Linked Card"
+        excerpt="Linked card without footer elements for clean presentation"
         href="#"
         src="https://api.seb.io/assets/launch-hero.jpg"
       ></gds-card-pattern-01>
@@ -253,29 +259,46 @@ export const Footer: Story = {
   `,
   parameters: {
     docs: {
+      description: {
+        story: `
+- Default: Non-interactive link indicator
+- Decorative: Visual elements without interaction
+- Clean: No footer elements
+
+> Note: When href is present, all footer content is inert as the entire card becomes clickable
+        `,
+      },
       source: {
         code: `
-<!-- Default footer link -->
+<!-- Default Link Footer -->
 <gds-card-pattern-01
-  title="Default Footer"
-  excerpt="Uses label prop for footer link"
+  title="Linked Card"
+  excerpt="Entire card acts as a single clickable element, footer link is visual only"
   href="#"
-  label="Read More"
+  label="Learn more"
+  src="https://api.seb.io/assets/launch-hero.jpg"
 ></gds-card-pattern-01>
 
-<!-- Custom button in footer -->
-<gds-card-pattern-01 title="Icon Button" excerpt="Custom footer button">
-  <gds-button rank="secondary" slot="footer" size="small">
-    <gds-icon-chevron-right></gds-icon-chevron-right>
+<!-- Decorative Button -->
+<gds-card-pattern-01
+  title="Visual Indicator"
+  excerpt="Demonstrates non-interactive button in footer when card is linked"
+  href="#"
+  src="https://api.seb.io/assets/launch-hero.jpg"
+>
+  <gds-button rank="secondary" slot="footer" size="small" inert>
+    <gds-icon-chevron-right size="m"></gds-icon-chevron-right>
   </gds-button>
 </gds-card-pattern-01>
 
-<!-- No footer -->
+<!-- No Footer -->
 <gds-card-pattern-01
-  title="No Footer"
-  excerpt="Card without footer content"
+  title="Minimal Linked Card"
+  excerpt="Linked card without footer elements for clean presentation"
   href="#"
-></gds-card-pattern-01>`,
+  src="https://api.seb.io/assets/launch-hero.jpg"
+></gds-card-pattern-01>
+        `,
         language: 'html',
         type: 'code',
       },
@@ -286,68 +309,90 @@ export const Footer: Story = {
 export const Actions: Story = {
   render: () => html`
     <gds-grid columns="1; m{3}" gap="xl">
-      <!-- Custom Button -->
+      <!-- Multiple Actions -->
       <gds-card-pattern-01
-        title="Custom Button"
-        excerpt="Non-linked card with custom button."
+        title="Multiple actions"
+        excerpt="Card with two interactive buttons for primary and secondary actions"
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
-        <gds-button slot="footer"> Primary </gds-button>
-        <gds-button slot="footer" rank="secondary"> Secondary </gds-button>
+        <gds-button slot="footer">Primary</gds-button>
+        <gds-button slot="footer" rank="secondary">Secondary</gds-button>
       </gds-card-pattern-01>
 
-      <!-- Custom Link -->
+      <!-- Mixed Actions -->
       <gds-card-pattern-01
-        title="Custom Link"
-        excerpt="Non-linked card with custom link."
+        title="Combined actions"
+        excerpt="Card showing both button and link interactions in footer"
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
+        <gds-button slot="footer">Action</gds-button>
         <gds-link href="#" slot="footer" size="medium">
-          Custom Link
-          <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
+          Navigate
         </gds-link>
       </gds-card-pattern-01>
 
-      <!-- Combined -->
+      <!-- Single Action -->
       <gds-card-pattern-01
-        title="Combined Link and button"
-        excerpt="Non-linked card with custom link."
+        title="Single link"
+        excerpt="Card with one interactive link in footer for navigation"
         src="https://api.seb.io/assets/launch-hero.jpg"
       >
-        <gds-button slot="footer"> Button </gds-button>
         <gds-link href="#" slot="footer" size="medium">
-          <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
-          Custom link
+          Navigate
+          <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
         </gds-link>
       </gds-card-pattern-01>
     </gds-grid>
   `,
   parameters: {
     docs: {
+      description: {
+        story: `
+- Multiple Buttons: For separate clickable actions
+- Single link: For standalone navigation
+- Combined: Mix of button and link interactions
+
+> Note: Without href, each footer element is independently interactive
+        `,
+      },
       source: {
         code: `
-<!-- Multiple buttons -->
-<gds-card-pattern-01 title="Custom Buttons">
+<!-- Multiple Actions -->
+<gds-card-pattern-01
+  title="Multiple actions"
+  excerpt="Card with two interactive buttons for primary and secondary actions"
+  src="https://api.seb.io/assets/launch-hero.jpg"
+>
   <gds-button slot="footer">Primary</gds-button>
   <gds-button slot="footer" rank="secondary">Secondary</gds-button>
 </gds-card-pattern-01>
 
-<!-- Custom link with icon -->
-<gds-card-pattern-01 title="Custom Link">
+<!-- Mixed Actions -->
+<gds-card-pattern-01
+  title="Combined actions"
+  excerpt="Card showing both button and link interactions in footer"
+  src="https://api.seb.io/assets/launch-hero.jpg"
+>
+  <gds-button slot="footer">Action</gds-button>
   <gds-link href="#" slot="footer" size="medium">
-    Custom Link
-    <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+    <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
+    Navigate
   </gds-link>
 </gds-card-pattern-01>
 
-<!-- Combined actions -->
-<gds-card-pattern-01 title="Mixed Actions">
-  <gds-button slot="footer">Button</gds-button>
-  <gds-link href="#" slot="footer">
-    <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
-    Link
+<!-- Single Action -->
+<gds-card-pattern-01
+  title="Single link"
+  excerpt="Card with one interactive link in footer for navigation"
+  src="https://api.seb.io/assets/launch-hero.jpg"
+>
+  <gds-link href="#" slot="footer" size="medium">
+    Navigate
+    <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
   </gds-link>
-</gds-card-pattern-01>`,
+</gds-card-pattern-01>
+        `,
         language: 'html',
         type: 'code',
       },
