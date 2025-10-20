@@ -17,7 +17,7 @@ import './card-linked'
  * @extends GdsCard
  */
 const meta: Meta = {
-  title: 'Components/Card Linked',
+  title: 'Components/Card/Card Linked',
   component: 'gds-card-linked',
   tags: ['autodocs'],
   argTypes: {

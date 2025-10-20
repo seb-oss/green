@@ -82,7 +82,7 @@ export class GdsCardPattern01 extends withSizeXProps(
   #renderLinkedCard() {
     return html`
       <gds-card-linked
-        padding="xs"
+        padding="0"
         gap="0"
         href=${ifDefined(this.href)}
         target=${ifDefined(this.target)}
@@ -93,10 +93,11 @@ export class GdsCardPattern01 extends withSizeXProps(
         ${when(
           this.#hasHeaderContent(),
           () => html`
-            <slot name="header">
-              ${when(
-                this.src,
-                () => html`
+            <!-- <slot name="header"> -->
+            ${when(
+              this.src,
+              () => html`
+                <gds-flex padding="xs xs 0 xs">
                   <gds-img
                     src=${ifDefined(this.src)}
                     srcset=${ifDefined(this.srcset)}
@@ -108,13 +109,15 @@ export class GdsCardPattern01 extends withSizeXProps(
                     border-radius="xs"
                     aspect-ratio=${this.ratio === 'square' ? '1/1' : '16/9'}
                   ></gds-img>
-                `,
-              )}
-            </slot>
+                </gds-flex>
+              `,
+            )}
+            <!-- </slot> -->
           `,
         )}
 
-        <gds-flex flex-direction="column" gap="xl" padding="m">
+        <gds-flex flex-direction="column" gap="xl" padding="xl">
+          <slot name="header"></slot>
           ${when(
             this.title || this.excerpt,
             () => html`

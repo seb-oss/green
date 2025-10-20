@@ -119,15 +119,12 @@ export const Header: Story = {
       ></gds-card-pattern-01>
 
       <!-- Custom Header -->
-      <gds-card-pattern-01 href="#" title="Custom Header">
-        <gds-card
-          slot="header"
-          height="200px"
-          justify-content="center"
-          align-items="center"
-        >
-          <gds-icon-cloudy-sun size="xl"></gds-icon-cloudy-sun>
-        </gds-card>
+      <gds-card-pattern-01
+        href="#"
+        title="Custom Header"
+        excerpt="Header is slottable with content other than image"
+      >
+        <gds-icon-cloudy-sun size="xl" slot="header"></gds-icon-cloudy-sun>
       </gds-card-pattern-01>
     </gds-grid>
   `,
