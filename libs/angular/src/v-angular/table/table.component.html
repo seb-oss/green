@@ -131,9 +131,7 @@
           [value]="item[column.property]"
           (click)="propagateItemClick(item, column.preventDefaultClickEvent)"
         >
-          <ng-container
-            *ngIf="expandable && i === 0; else nonExpandableTemplate"
-          >
+        <ng-container *ngIf="expandable && i === 0; else nonExpandableTemplate">
             <div
               class="gds-item-field-wrap"
               [ngClass]="{ 'no-sub-items': item.subItems.length === 0 }"
@@ -146,10 +144,7 @@
                 [attr.aria-expanded]="rowSelectors.get(item[rowId])?.value"
               >
                 <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
+                  width="20" height="20" viewBox="0 0 24 24" fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
@@ -162,11 +157,8 @@
                 </svg>
               </span>
               <span class="gds-item-field-text">
-                {{ item[column.property] }} ({{ item.subItems.length }})
-                <div
-                  *ngIf="column.columnLabel"
-                  class="gds-item-field-extra-label"
-                >
+               {{ item[column.property] }} ({{ item.subItems.length }})
+                <div *ngIf="column.columnLabel" class="gds-item-field-extra-label">
                   {{ item[column.columnLabel] }}
                 </div>
               </span>
@@ -174,15 +166,8 @@
           </ng-container>
 
           <ng-template #nonExpandableTemplate>
-            <ng-container
-              *ngIf="
-                customRowTemplates.get(column.property) as tdTemplate;
-                else defaultTdTemplate
-              "
-            >
-              <ng-template
-                *ngTemplateOutlet="tdTemplate; context: { $implicit: item }"
-              >
+            <ng-container *ngIf="customRowTemplates.get(column.property) as tdTemplate; else defaultTdTemplate">
+              <ng-template *ngTemplateOutlet="tdTemplate; context: { $implicit: item }">
               </ng-template>
             </ng-container>
             <ng-template #defaultTdTemplate>
@@ -200,19 +185,10 @@
             class="web-view"
             [columnType]="column.valueType"
             [value]="subItem[column.property]"
-            (click)="
-              propagateItemClick(subItem, column.preventDefaultClickEvent)
-            "
+            (click)="propagateItemClick(subItem, column.preventDefaultClickEvent)"
           >
-            <ng-container
-              *ngIf="
-                customRowTemplates.get(column.property) as tdTemplate;
-                else defaultTdTemplate
-              "
-            >
-              <ng-template
-                *ngTemplateOutlet="tdTemplate; context: { $implicit: subItem }"
-              >
+            <ng-container *ngIf="customRowTemplates.get(column.property) as tdTemplate; else defaultTdTemplate">
+              <ng-template *ngTemplateOutlet="tdTemplate; context: { $implicit: subItem }">
               </ng-template>
             </ng-container>
             <ng-template #defaultTdTemplate>
@@ -238,25 +214,9 @@
                       {{ t(column.label ?? '') }}
                     </ng-container>
                   </dt>
-                  <dd
-                    [ngStyle]="
-                      column.boldTextOnMobile
-                        ? { 'font-weight': '500' }
-                        : { 'font-weight': '400' }
-                    "
-                  >
-                    <ng-container
-                      *ngIf="
-                        customRowTemplates.get(column.property) as tdTemplate;
-                        else defaultTdTemplate
-                      "
-                    >
-                      <ng-template
-                        *ngTemplateOutlet="
-                          tdTemplate;
-                          context: { $implicit: subItem }
-                        "
-                      ></ng-template>
+                  <dd [ngStyle]="column.boldTextOnMobile ? { 'font-weight': '500' } : {'font-weight': '400'}">
+                    <ng-container *ngIf="customRowTemplates.get(column.property) as tdTemplate; else defaultTdTemplate">
+                      <ng-template *ngTemplateOutlet="tdTemplate; context: { $implicit: subItem }"></ng-template>
                     </ng-container>
                     <ng-template #defaultTdTemplate>
                       {{ subItem[column.property] }}
@@ -273,10 +233,7 @@
               [attr.aria-expanded]="rowSelectors.get(item[rowId])?.value"
             >
               <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
+                width="20" height="20" viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
