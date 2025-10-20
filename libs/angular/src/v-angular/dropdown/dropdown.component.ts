@@ -81,6 +81,8 @@ export class NggvDropdownComponent<
   @Input() placeholder?: string
   /** Specific value for aria-label. If not provided, label/labelTpl will be used. */
   @Input() ariaLabel?: string
+  /** If the dropdown should close when scrolling the viewport. Default: false */
+  @Input() closeOnScroll = false
   /** List of {@link Option} and {@link OptionGroup} listed when dropdown is expanded. */
   @Input() set options(value: OptionBase<T>[]) {
     // update options
@@ -293,7 +295,9 @@ export class NggvDropdownComponent<
     this.expandedChange.emit(this.expanded)
     if (this.expanded) {
       this.subscribeToOutsideClickEvent()
-      this.subscribeToOutsideScrollEvent()
+      if (this.closeOnScroll) {
+        this.subscribeToOutsideScrollEvent()
+      }
     }
     if (!this.expanded) this.onTouched()
   }
