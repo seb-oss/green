@@ -2,6 +2,12 @@ import { classMap } from 'lit/directives/class-map'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 
+import { GdsCardLinked } from '../../components/card-linked/card-linked.component'
+import { GdsCard } from '../../components/card/card.component'
+import { GdsFlex } from '../../components/flex/flex.component'
+import { IconChainLink } from '../../components/icon/icons/chain-link'
+import { GdsImg } from '../../components/img/img.component'
+import { GdsText } from '../../components/text/text.component'
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import {
@@ -16,12 +22,6 @@ import {
 import { withCardProps } from '../../utils/mixins/props-card'
 import { withImageProps } from '../../utils/mixins/props-image'
 import { withLinkProps } from '../../utils/mixins/props-link'
-import { GdsCardLinked } from '../card-linked/card-linked.component'
-import { GdsCard } from '../card/card.component'
-import { GdsFlex } from '../flex/flex.component'
-import { IconChainLink } from '../icon/icons/chain-link'
-import { GdsImg } from '../img/img.component'
-import { GdsText } from '../text/text.component'
 import CardPattern01Styles from './card-pattern-01.styles'
 
 /**

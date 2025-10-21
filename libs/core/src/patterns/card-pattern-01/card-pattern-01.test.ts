@@ -4,7 +4,7 @@ import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
 import type { GdsCardPattern01 } from './card-pattern-01'
 
-import '@sebgroup/green-core/components/card-pattern-01'
+import '@sebgroup/green-core/patterns/card-pattern-01'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

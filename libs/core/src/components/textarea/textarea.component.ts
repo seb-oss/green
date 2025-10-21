@@ -23,7 +23,7 @@ import { GdsFormControlElement } from '../form/form-control'
 import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import TextareaStyles from './textarea.styles'
 
-import type { GdsBadge } from '../pure'
+import type { GdsBadge } from '../../pure'
 
 @localized()
 class Textarea extends GdsFormControlElement<string> {
