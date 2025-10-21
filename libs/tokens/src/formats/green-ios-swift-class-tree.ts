@@ -22,17 +22,19 @@ const greenIosSwiftClassTree = {
 
     let propertyformat
 
-    if (options.colorType == 'uiKitDynamicProvider') {
+    if (options.outputType == 'uiKitDynamicProvider') {
       propertyformat = swift.uiKitColorReferencePropertyFormatter(
         options.lightModeObjectName,
         options.darkModeObjectName,
         options,
       )
-    } else if (options.colorType == 'swiftUiReferenceToUiKit') {
+    } else if (options.outputType == 'swiftUiReferenceToUiKit') {
       propertyformat = swift.swiftUiColorReferencePropertyFormatter(
         options.uiKitObjectName,
         options,
       )
+    } else if (options.outputType == 'typography') {
+      propertyformat = swift.typographyPropertyFormatter(options)
     } else {
       const valueformat = createPropertyFormatter({
         outputReferences,

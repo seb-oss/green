@@ -1,0 +1,4214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test css output matches the contents in snapshot for 2023/css/colors.ref.css: tokens-internal-2023-css-colors-ref-css 1`] = `
+"/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --gds-ref-color-blue-1: #fafdff;
+  --gds-ref-color-blue-2: #f5faff;
+  --gds-ref-color-blue-3: #f0f8ff;
+  --gds-ref-color-blue-4: #ebf5ff;
+  --gds-ref-color-blue-5: #e6f3ff;
+  --gds-ref-color-blue-6: #cce7ff;
+  --gds-ref-color-blue-7: #b3dbff;
+  --gds-ref-color-blue-8: #99cfff;
+  --gds-ref-color-blue-9: #80c3ff;
+  --gds-ref-color-blue-10: #66b8ff;
+  --gds-ref-color-blue-11: #4dacff;
+  --gds-ref-color-blue-12: #33a0ff;
+  --gds-ref-color-blue-13: #138fff;
+  --gds-ref-color-blue-14: #0088ff;
+  --gds-ref-color-blue-15: #007ae6;
+  --gds-ref-color-blue-16: #006dcc;
+  --gds-ref-color-blue-17: #005fb3;
+  --gds-ref-color-blue-18: #005299;
+  --gds-ref-color-blue-19: #004480;
+  --gds-ref-color-blue-20: #003666;
+  --gds-ref-color-blue-21: #00294d;
+  --gds-ref-color-blue-22: #001b33;
+  --gds-ref-color-blue-23: #000e1a;
+  --gds-ref-color-copper-1: #fdfdfc;
+  --gds-ref-color-copper-2: #fcfbf8;
+  --gds-ref-color-copper-3: #faf8f5;
+  --gds-ref-color-copper-4: #f8f6f1;
+  --gds-ref-color-copper-5: #f7f4ee;
+  --gds-ref-color-copper-6: #efe9dc;
+  --gds-ref-color-copper-7: #e7ddcb;
+  --gds-ref-color-copper-8: #ded2ba;
+  --gds-ref-color-copper-9: #d6c7a8;
+  --gds-ref-color-copper-10: #cebc97;
+  --gds-ref-color-copper-11: #c6b086;
+  --gds-ref-color-copper-12: #bea574;
+  --gds-ref-color-copper-13: #b69a63;
+  --gds-ref-color-copper-14: #ad8f52;
+  --gds-ref-color-copper-15: #a1844b;
+  --gds-ref-color-copper-16: #8b7241;
+  --gds-ref-color-copper-17: #796439;
+  --gds-ref-color-copper-18: #685631;
+  --gds-ref-color-copper-19: #574729;
+  --gds-ref-color-copper-20: #453921;
+  --gds-ref-color-copper-21: #342b18;
+  --gds-ref-color-copper-22: #231d10;
+  --gds-ref-color-copper-23: #110e08;
+  --gds-ref-color-green-1: #fbfdfb;
+  --gds-ref-color-green-2: #f8fcf8;
+  --gds-ref-color-green-3: #f4faf4;
+  --gds-ref-color-green-4: #f1f9f1;
+  --gds-ref-color-green-5: #eaf6ea;
+  --gds-ref-color-green-6: #dcefdc;
+  --gds-ref-color-green-7: #cceacc;
+  --gds-ref-color-green-8: #c3eac3;
+  --gds-ref-color-green-9: #b2e5b2;
+  --gds-ref-color-green-10: #9de79d;
+  --gds-ref-color-green-11: #8ae58d;
+  --gds-ref-color-green-12: #74e780;
+  --gds-ref-color-green-13: #63e378;
+  --gds-ref-color-green-14: #52e073;
+  --gds-ref-color-green-15: #38dc63;
+  --gds-ref-color-green-16: #26d95c;
+  --gds-ref-color-green-17: #17d350;
+  --gds-ref-color-green-18: #0bcb4b;
+  --gds-ref-color-green-19: #00bd49;
+  --gds-ref-color-green-20: #00ad43;
+  --gds-ref-color-green-21: #02a23f;
+  --gds-ref-color-green-22: #018d39;
+  --gds-ref-color-green-23: #027839;
+  --gds-ref-color-green-24: #026436;
+  --gds-ref-color-green-25: #015130;
+  --gds-ref-color-green-26: #003d26;
+  --gds-ref-color-green-27: #003824;
+  --gds-ref-color-green-28: #00291b;
+  --gds-ref-color-green-29: #00140d;
+  --gds-ref-color-green-30: #004f33;
+  --gds-ref-color-black: #000000;
+  --gds-ref-color-white: #ffffff;
+  --gds-ref-color-grey-1: #fcfdfc;
+  --gds-ref-color-grey-2: #fafafa;
+  --gds-ref-color-grey-3: #f7f8f7;
+  --gds-ref-color-grey-4: #f4f5f5;
+  --gds-ref-color-grey-5: #eff0f0;
+  --gds-ref-color-grey-6: #eaebeb;
+  --gds-ref-color-grey-7: #dfe1e1;
+  --gds-ref-color-grey-8: #d5d7d7;
+  --gds-ref-color-grey-9: #cacecc;
+  --gds-ref-color-grey-10: #c0c4c2;
+  --gds-ref-color-grey-11: #b5bab8;
+  --gds-ref-color-grey-12: #abb0ae;
+  --gds-ref-color-grey-13: #a0a6a4;
+  --gds-ref-color-grey-14: #969c9a;
+  --gds-ref-color-grey-15: #8b9290;
+  --gds-ref-color-grey-16: #818886;
+  --gds-ref-color-grey-17: #777e7c;
+  --gds-ref-color-grey-18: #6d7471;
+  --gds-ref-color-grey-19: #636967;
+  --gds-ref-color-grey-20: #595f5d;
+  --gds-ref-color-grey-21: #4f5452;
+  --gds-ref-color-grey-22: #454a48;
+  --gds-ref-color-grey-23: #3b3f3e;
+  --gds-ref-color-grey-24: #313533;
+  --gds-ref-color-grey-25: #282a29;
+  --gds-ref-color-grey-26: #1e201f;
+  --gds-ref-color-grey-27: #191a1a;
+  --gds-ref-color-grey-28: #141515;
+  --gds-ref-color-grey-29: #0f1010;
+  --gds-ref-color-grey-30: #0a0b0b;
+  --gds-ref-color-orange-1: #fffdfa;
+  --gds-ref-color-orange-2: #fefaf5;
+  --gds-ref-color-orange-3: #fef8f1;
+  --gds-ref-color-orange-4: #fef6ec;
+  --gds-ref-color-orange-5: #fdf3e7;
+  --gds-ref-color-orange-6: #fce8cf;
+  --gds-ref-color-orange-7: #fadcb7;
+  --gds-ref-color-orange-8: #f8d0a0;
+  --gds-ref-color-orange-9: #f7c588;
+  --gds-ref-color-orange-10: #f5b970;
+  --gds-ref-color-orange-11: #f3ae58;
+  --gds-ref-color-orange-12: #f19e38;
+  --gds-ref-color-orange-13: #f09628;
+  --gds-ref-color-orange-14: #ee8b11;
+  --gds-ref-color-orange-15: #D77DOF;
+  --gds-ref-color-orange-16: #BF6FOD;
+  --gds-ref-color-orange-17: #a7610c;
+  --gds-ref-color-orange-18: #8f530a;
+  --gds-ref-color-orange-19: #774508;
+  --gds-ref-color-orange-20: #5f3707;
+  --gds-ref-color-orange-21: #482a05;
+  --gds-ref-color-orange-22: #301c03;
+  --gds-ref-color-orange-23: #180e02;
+  --gds-ref-color-red-1: #fffbfa;
+  --gds-ref-color-red-2: #fef7f6;
+  --gds-ref-color-red-3: #fef3f1;
+  --gds-ref-color-red-4: #fdefed;
+  --gds-ref-color-red-5: #fdebe8;
+  --gds-ref-color-red-6: #fad8d1;
+  --gds-ref-color-red-7: #f8c4ba;
+  --gds-ref-color-red-8: #f5b0a3;
+  --gds-ref-color-red-9: #f39d8c;
+  --gds-ref-color-red-10: #f08975;
+  --gds-ref-color-red-11: #ee765d;
+  --gds-ref-color-red-12: #eb583c;
+  --gds-ref-color-red-13: #e94e2f;
+  --gds-ref-color-red-14: #e73b18;
+  --gds-ref-color-red-15: #d03516;
+  --gds-ref-color-red-16: #b92f13;
+  --gds-ref-color-red-17: #a22911;
+  --gds-ref-color-red-18: #8a230f;
+  --gds-ref-color-red-19: #731d0c;
+  --gds-ref-color-red-20: #5c170a;
+  --gds-ref-color-red-21: #451207;
+  --gds-ref-color-red-22: #2e0c05;
+  --gds-ref-color-red-23: #170602;
+  --gds-ref-color-yellow-1: #fffefa;
+  --gds-ref-color-yellow-2: #fffdf5;
+  --gds-ref-color-yellow-3: #fffbf0;
+  --gds-ref-color-yellow-4: #fffaeb;
+  --gds-ref-color-yellow-5: #fff9e6;
+  --gds-ref-color-yellow-6: #fff3cc;
+  --gds-ref-color-yellow-7: #ffedb3;
+  --gds-ref-color-yellow-8: #ffe799;
+  --gds-ref-color-yellow-9: #ffe180;
+  --gds-ref-color-yellow-10: #ffdb66;
+  --gds-ref-color-yellow-11: #ffd54d;
+  --gds-ref-color-yellow-12: #ffcf33;
+  --gds-ref-color-yellow-13: #ffc91a;
+  --gds-ref-color-yellow-14: #fec200;
+  --gds-ref-color-yellow-15: #e6b000;
+  --gds-ref-color-yellow-16: #cc9c00;
+  --gds-ref-color-yellow-17: #b38900;
+  --gds-ref-color-yellow-18: #997500;
+  --gds-ref-color-yellow-19: #806200;
+  --gds-ref-color-yellow-20: #664e00;
+  --gds-ref-color-yellow-21: #4d3b00;
+  --gds-ref-color-yellow-22: #332700;
+  --gds-ref-color-yellow-23: #1a1400;
+}
+"
+`;
+
+exports[`test css output matches the contents in snapshot for 2023/css/variables.base.css: tokens-internal-2023-css-variables-base-css 1`] = `
+"/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --gds-sys-state-hover-state-layer-opacity: 0.1;
+  --gds-sys-motion-easing-ease-in: 0.64, 0, 0.78, 0;
+  --gds-sys-motion-easing-ease-in-out: 0.83, 0, 0.17, 1;
+  --gds-sys-motion-easing-ease-out: 0.22, 1, 0.36, 1;
+  --gds-sys-motion-easing-linear: 0, 0, 1, 1;
+  --gds-sys-motion-duration-fastest: .2s;
+  --gds-sys-motion-duration-fast: .4s;
+  --gds-sys-motion-duration-default: .5s;
+  --gds-sys-motion-duration-slow: 1s;
+  --gds-sys-motion-duration-slowest: 1.5s;
+  --gds-sys-viewport-0: 0;
+  --gds-sys-viewport-2xs: 320;
+  --gds-sys-viewport-xs: 425;
+  --gds-sys-viewport-s: 768;
+  --gds-sys-viewport-m: 1024;
+  --gds-sys-viewport-l: 1280;
+  --gds-sys-viewport-xl: 1440;
+  --gds-sys-viewport-2xl: 2560;
+  --gds-sys-viewport-3xl: 3840;
+  --gds-sys-viewport-4xl: 4320;
+  --gds-sys-viewport-5xl: 6016;
+  --gds-sys-viewport-6xl: 7680;
+  --gds-sys-text-family: SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-weight-light: 300;
+  --gds-sys-text-weight-regular: 400;
+  --gds-sys-text-weight-book: 450;
+  --gds-sys-text-weight-medium: 500;
+  --gds-sys-text-weight-bold: 700;
+  --gds-sys-text-heading-xl: 450 2rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-heading-l: 450 1.75rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-heading-m: 450 1.5rem/2rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-heading-s: 450 1.25rem/1.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-heading-xs: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-heading-2xs: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-book-m: 450 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-book-xs: 450 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-regular-m: 400 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-regular-xs: 400 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-book-l: 450 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-book-m: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-regular-l: 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-regular-m: 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-italic-l: italic 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-italic-m: italic 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-italic-s: italic 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-2xl: 450 5.125rem/5.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-xl: 450 4rem/4.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-l: 450 3rem/3.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-m: 450 2.25rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-s: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-preamble-2xl: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-preamble-xl: 450 1.75rem/2.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-preamble-l: 450 1.5rem/2rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-preamble-m: 450 1.25rem/1.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-preamble-s: 450 1.125rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-preamble-xs: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-space-0: 0px;
+  --gds-sys-space-5xs: 1px;
+  --gds-sys-space-4xs: 2px;
+  --gds-sys-space-3xs: 4px;
+  --gds-sys-space-2xs: 6px;
+  --gds-sys-space-xs: 8px;
+  --gds-sys-space-s: 12px;
+  --gds-sys-space-m: 16px;
+  --gds-sys-space-l: 20px;
+  --gds-sys-space-xl: 24px;
+  --gds-sys-space-2xl: 32px;
+  --gds-sys-space-3xl: 40px;
+  --gds-sys-space-4xl: 48px;
+  --gds-sys-space-5xl: 64px;
+  --gds-sys-space-6xl: 80px;
+  --gds-sys-space-7xl: 96px;
+  --gds-sys-space-8xl: 112px;
+  --gds-sys-space-9xl: 120px;
+  --gds-sys-space-max: 999px;
+  --gds-sys-radius-0: 0px;
+  --gds-sys-radius-none: 0px;
+  --gds-sys-radius-5xs: 1px;
+  --gds-sys-radius-4xs: 2px;
+  --gds-sys-radius-3xs: 4px;
+  --gds-sys-radius-2xs: 6px;
+  --gds-sys-radius-xs: 8px;
+  --gds-sys-radius-s: 12px;
+  --gds-sys-radius-m: 16px;
+  --gds-sys-radius-l: 20px;
+  --gds-sys-radius-xl: 24px;
+  --gds-sys-radius-2xl: 32px;
+  --gds-sys-radius-3xl: 40px;
+  --gds-sys-radius-4xl: 48px;
+  --gds-sys-radius-5xl: 64px;
+  --gds-sys-radius-max: 999px;
+}
+"
+`;
+
+exports[`test css output matches the contents in snapshot for 2023/css/variables.dark.css: tokens-internal-2023-css-variables-dark-css 1`] = `
+"/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --gds-sys-color-l1-neutral-01: #0a0b0b;
+  --gds-sys-color-l1-neutral-02: #282a29;
+  --gds-sys-color-l1-brand-01: #003824;
+  --gds-sys-color-l1-inversed: #ffffff;
+  --gds-sys-color-l2-neutral-01: #191a1a;
+  --gds-sys-color-l2-neutral-02: #191a1a;
+  --gds-sys-color-l2-neutral-03: #3b3f3e;
+  --gds-sys-color-l2-brand-01: #003824;
+  --gds-sys-color-l2-brand-02: #231d10;
+  --gds-sys-color-l2-positive-01: #003d26;
+  --gds-sys-color-l2-negative-01: #451207;
+  --gds-sys-color-l2-warning-01: #482a05;
+  --gds-sys-color-l2-information-01: #1e201f;
+  --gds-sys-color-l2-notice-01: #00294d;
+  --gds-sys-color-l3-brand-01: #d5d7d7;
+  --gds-sys-color-l3-brand-02: #efe9dc;
+  --gds-sys-color-l3-brand-03: #e7ddcb;
+  --gds-sys-color-l3-neutral-01: #d5d7d7;
+  --gds-sys-color-l3-neutral-02: #282a29;
+  --gds-sys-color-l3-neutral-03: #3b3f3e;
+  --gds-sys-color-l3-neutral-04: #3b3f3e;
+  --gds-sys-color-l3-neutral-05: #003824;
+  --gds-sys-color-l3-positive-01: #026436;
+  --gds-sys-color-l3-positive-02: #015130;
+  --gds-sys-color-l3-positive-03: #003d26;
+  --gds-sys-color-l3-negative-01: #a22911;
+  --gds-sys-color-l3-negative-02: #731d0c;
+  --gds-sys-color-l3-negative-03: #5c170a;
+  --gds-sys-color-l3-notice-01: #005fb3;
+  --gds-sys-color-l3-notice-02: #004480;
+  --gds-sys-color-l3-notice-03: #003666;
+  --gds-sys-color-l3-warning-01: #f19e38;
+  --gds-sys-color-l3-warning-02: #774508;
+  --gds-sys-color-l3-warning-03: #5f3707;
+  --gds-sys-color-l3-information-01: #d5d7d7;
+  --gds-sys-color-l3-information-02: #313533;
+  --gds-sys-color-l3-information-03: #595f5d;
+  --gds-sys-color-l3-disabled-01: #595f5d;
+  --gds-sys-color-l3-disabled-02: #595f5d;
+  --gds-sys-color-l3-disabled-03: #818886;
+  --gds-sys-color-border-interactive: #a0a6a4;
+  --gds-sys-color-border-subtle-01: #595f5d;
+  --gds-sys-color-border-subtle-02: #777e7c;
+  --gds-sys-color-border-strong: #f7f8f7;
+  --gds-sys-color-border-inverse: #ffffff;
+  --gds-sys-color-border-information-01: #636967;
+  --gds-sys-color-border-positive-01: #8ae58d;
+  --gds-sys-color-border-negative-01: #f08975;
+  --gds-sys-color-border-warning-01: #f5b970;
+  --gds-sys-color-border-notice-01: #66b8ff;
+  --gds-sys-color-border-information-02: rgba(99, 105, 103, 0.4);
+  --gds-sys-color-border-positive-02: rgba(138, 229, 141, 0.4);
+  --gds-sys-color-border-negative-02: rgba(240, 137, 117, 0.4);
+  --gds-sys-color-border-warning-02: rgba(245, 185, 112, 0.4);
+  --gds-sys-color-border-notice-02: rgba(102, 184, 255, 0.4);
+  --gds-sys-color-content-neutral-01: #f7f8f7;
+  --gds-sys-color-content-neutral-02: #abb0ae;
+  --gds-sys-color-content-neutral-03: #0a0b0b;
+  --gds-sys-color-content-neutral-04: #595f5d;
+  --gds-sys-color-content-inversed: #f7f8f7;
+  --gds-sys-color-content-brand-01: #003824;
+  --gds-sys-color-content-brand-02: #d6c7a8;
+  --gds-sys-color-content-positive-01: #8ae58d;
+  --gds-sys-color-content-positive-02: #027839;
+  --gds-sys-color-content-positive-03: #8ae58d;
+  --gds-sys-color-content-negative-01: #f08975;
+  --gds-sys-color-content-negative-02: #f5b0a3;
+  --gds-sys-color-content-warning-01: #f5b970;
+  --gds-sys-color-content-warning-02: #fce8cf;
+  --gds-sys-color-content-notice-01: #66b8ff;
+  --gds-sys-color-content-notice-02: #99cfff;
+  --gds-sys-color-content-disabled-01: #cacecc;
+  --gds-sys-color-content-disabled-02: #cacecc;
+  --gds-sys-color-state-brand-01: rgba(0, 0, 0, 0.2);
+  --gds-sys-color-state-brand-02: rgba(0, 0, 0, 0.3);
+  --gds-sys-color-state-brand-03: rgba(0, 56, 36, 0.3);
+  --gds-sys-color-state-brand-04: rgba(0, 56, 36, 0.7);
+  --gds-sys-color-state-brand-05: rgba(0, 56, 36, 0.5);
+  --gds-sys-color-state-brand-06: rgba(0, 56, 36, 0.9);
+  --gds-sys-color-state-neutral-01: rgba(0, 0, 0, 0.2);
+  --gds-sys-color-state-neutral-02: rgba(0, 0, 0, 0.35);
+  --gds-sys-color-state-neutral-03: rgba(255, 255, 255, 0.2);
+  --gds-sys-color-state-neutral-04: rgba(255, 255, 255, 0.3);
+  --gds-sys-color-state-neutral-05: rgba(255, 255, 255, 0.12);
+  --gds-sys-color-state-neutral-06: rgba(255, 255, 255, 0.25);
+  --gds-sys-color-state-positive-01: rgba(0, 0, 0, 0.12);
+  --gds-sys-color-state-positive-02: rgba(0, 0, 0, 0.23);
+  --gds-sys-color-state-positive-03: rgba(255, 255, 255, 0.08);
+  --gds-sys-color-state-positive-04: rgba(255, 255, 255, 0.14);
+  --gds-sys-color-state-positive-05: rgba(2, 120, 57, 0.3);
+  --gds-sys-color-state-positive-06: rgba(2, 120, 57, 0.5);
+  --gds-sys-color-state-negative-01: rgba(0, 0, 0, 0.15);
+  --gds-sys-color-state-negative-02: rgba(0, 0, 0, 0.3);
+  --gds-sys-color-state-negative-03: rgba(255, 255, 255, 0.08);
+  --gds-sys-color-state-negative-04: rgba(255, 255, 255, 0.14);
+  --gds-sys-color-state-negative-05: rgba(185, 47, 19, 0.3);
+  --gds-sys-color-state-negative-06: rgba(185, 47, 19, 0.45);
+  --gds-sys-color-state-notice-01: rgba(0, 0, 0, 0.12);
+  --gds-sys-color-state-notice-02: rgba(0, 0, 0, 0.2);
+  --gds-sys-color-state-notice-03: rgba(255, 255, 255, 0.06);
+  --gds-sys-color-state-notice-04: rgba(255, 255, 255, 0.1);
+  --gds-sys-color-state-notice-05: rgba(0, 95, 179, 0.4);
+  --gds-sys-color-state-notice-06: rgba(0, 95, 179, 0.6);
+  --gds-sys-color-state-warning-01: rgba(0, 0, 0, 0.06);
+  --gds-sys-color-state-warning-02: rgba(0, 0, 0, 0.14);
+  --gds-sys-color-state-warning-03: rgba(255, 255, 255, 0.08);
+  --gds-sys-color-state-warning-04: rgba(255, 255, 255, 0.14);
+  --gds-sys-color-state-warning-05: rgba(241, 158, 56, 0.12);
+  --gds-sys-color-state-warning-06: rgba(241, 158, 56, 0.2);
+}
+"
+`;
+
+exports[`test css output matches the contents in snapshot for 2023/css/variables.light.css: tokens-internal-2023-css-variables-light-css 1`] = `
+"/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --gds-sys-color-l1-neutral-01: #ffffff;
+  --gds-sys-color-l1-neutral-02: #eaebeb;
+  --gds-sys-color-l1-brand-01: #003824;
+  --gds-sys-color-l1-inversed: #0a0b0b;
+  --gds-sys-color-l2-neutral-01: #f7f8f7;
+  --gds-sys-color-l2-neutral-02: #ffffff;
+  --gds-sys-color-l2-neutral-03: #0a0b0b;
+  --gds-sys-color-l2-brand-01: #003824;
+  --gds-sys-color-l2-brand-02: #f8f6f1;
+  --gds-sys-color-l2-positive-01: #f1f9f1;
+  --gds-sys-color-l2-negative-01: #fef7f6;
+  --gds-sys-color-l2-warning-01: #fef8f1;
+  --gds-sys-color-l2-information-01: #f7f8f7;
+  --gds-sys-color-l2-notice-01: #f5faff;
+  --gds-sys-color-l3-brand-01: #003824;
+  --gds-sys-color-l3-brand-02: #efe9dc;
+  --gds-sys-color-l3-brand-03: #e7ddcb;
+  --gds-sys-color-l3-neutral-01: #0a0b0b;
+  --gds-sys-color-l3-neutral-02: #eaebeb;
+  --gds-sys-color-l3-neutral-03: #d5d7d7;
+  --gds-sys-color-l3-neutral-04: #ffffff;
+  --gds-sys-color-l3-neutral-05: #ffffff;
+  --gds-sys-color-l3-positive-01: #027839;
+  --gds-sys-color-l3-positive-02: #dcefdc;
+  --gds-sys-color-l3-positive-03: #cceacc;
+  --gds-sys-color-l3-negative-01: #b92f13;
+  --gds-sys-color-l3-negative-02: #fdebe8;
+  --gds-sys-color-l3-negative-03: #fad8d1;
+  --gds-sys-color-l3-notice-01: #005fb3;
+  --gds-sys-color-l3-notice-02: #e6f3ff;
+  --gds-sys-color-l3-notice-03: #cce7ff;
+  --gds-sys-color-l3-warning-01: #8f530a;
+  --gds-sys-color-l3-warning-02: #fce8cf;
+  --gds-sys-color-l3-warning-03: #fadcb7;
+  --gds-sys-color-l3-information-01: #0a0b0b;
+  --gds-sys-color-l3-information-02: #eaebeb;
+  --gds-sys-color-l3-information-03: #dfe1e1;
+  --gds-sys-color-l3-disabled-01: #eff0f0;
+  --gds-sys-color-l3-disabled-02: #a0a6a4;
+  --gds-sys-color-l3-disabled-03: #eff0f0;
+  --gds-sys-color-border-interactive: #777e7c;
+  --gds-sys-color-border-subtle-01: #dfe1e1;
+  --gds-sys-color-border-subtle-02: #eff0f0;
+  --gds-sys-color-border-strong: #0a0b0b;
+  --gds-sys-color-border-inverse: #ffffff;
+  --gds-sys-color-border-information-01: #0a0b0b;
+  --gds-sys-color-border-positive-01: #027839;
+  --gds-sys-color-border-negative-01: #b92f13;
+  --gds-sys-color-border-warning-01: #8f530a;
+  --gds-sys-color-border-notice-01: #005fb3;
+  --gds-sys-color-border-information-02: rgba(10, 11, 11, 0.4);
+  --gds-sys-color-border-positive-02: rgba(2, 120, 57, 0.4);
+  --gds-sys-color-border-negative-02: rgba(185, 47, 19, 0.4);
+  --gds-sys-color-border-warning-02: rgba(143, 83, 10, 0.4);
+  --gds-sys-color-border-notice-02: rgba(0, 95, 179, 0.4);
+  --gds-sys-color-content-neutral-01: #0a0b0b;
+  --gds-sys-color-content-neutral-02: #636967;
+  --gds-sys-color-content-neutral-03: #ffffff;
+  --gds-sys-color-content-neutral-04: #a0a6a4;
+  --gds-sys-color-content-inversed: #ffffff;
+  --gds-sys-color-content-brand-01: #003824;
+  --gds-sys-color-content-brand-02: #685631;
+  --gds-sys-color-content-positive-01: #027839;
+  --gds-sys-color-content-positive-02: #eaf6ea;
+  --gds-sys-color-content-positive-03: #026436;
+  --gds-sys-color-content-negative-01: #b92f13;
+  --gds-sys-color-content-negative-02: #fdebe8;
+  --gds-sys-color-content-warning-01: #8f530a;
+  --gds-sys-color-content-warning-02: #fce8cf;
+  --gds-sys-color-content-notice-01: #005fb3;
+  --gds-sys-color-content-notice-02: #e6f3ff;
+  --gds-sys-color-content-disabled-01: #a0a6a4;
+  --gds-sys-color-content-disabled-02: #f7f8f7;
+  --gds-sys-color-state-brand-01: rgba(255, 255, 255, 0.2);
+  --gds-sys-color-state-brand-02: rgba(255, 255, 255, 0.35);
+  --gds-sys-color-state-brand-03: rgba(0, 56, 36, 0.06);
+  --gds-sys-color-state-brand-04: rgba(0, 56, 36, 0.14);
+  --gds-sys-color-state-brand-05: rgba(0, 56, 36, 0.06);
+  --gds-sys-color-state-brand-06: rgba(0, 56, 36, 0.14);
+  --gds-sys-color-state-neutral-01: rgba(255, 255, 255, 0.2);
+  --gds-sys-color-state-neutral-02: rgba(255, 255, 255, 0.35);
+  --gds-sys-color-state-neutral-03: rgba(0, 0, 0, 0.06);
+  --gds-sys-color-state-neutral-04: rgba(0, 0, 0, 0.14);
+  --gds-sys-color-state-neutral-05: rgba(0, 0, 0, 0.06);
+  --gds-sys-color-state-neutral-06: rgba(0, 0, 0, 0.14);
+  --gds-sys-color-state-positive-01: rgba(255, 255, 255, 0.12);
+  --gds-sys-color-state-positive-02: rgba(255, 255, 255, 0.23);
+  --gds-sys-color-state-positive-03: rgba(2, 120, 57, 0.08);
+  --gds-sys-color-state-positive-04: rgba(2, 120, 57, 0.16);
+  --gds-sys-color-state-positive-05: rgba(2, 120, 57, 0.08);
+  --gds-sys-color-state-positive-06: rgba(2, 120, 57, 0.16);
+  --gds-sys-color-state-negative-01: rgba(255, 255, 255, 0.08);
+  --gds-sys-color-state-negative-02: rgba(255, 255, 255, 0.16);
+  --gds-sys-color-state-negative-03: rgba(185, 47, 19, 0.08);
+  --gds-sys-color-state-negative-04: rgba(185, 47, 19, 0.16);
+  --gds-sys-color-state-negative-05: rgba(185, 47, 19, 0.08);
+  --gds-sys-color-state-negative-06: rgba(185, 47, 19, 0.16);
+  --gds-sys-color-state-notice-01: rgba(255, 255, 255, 0.2);
+  --gds-sys-color-state-notice-02: rgba(255, 255, 255, 0.35);
+  --gds-sys-color-state-notice-03: rgba(0, 95, 179, 0.08);
+  --gds-sys-color-state-notice-04: rgba(0, 95, 179, 0.16);
+  --gds-sys-color-state-notice-05: rgba(0, 95, 179, 0.08);
+  --gds-sys-color-state-notice-06: rgba(0, 95, 179, 0.16);
+  --gds-sys-color-state-warning-01: rgba(255, 255, 255, 0.2);
+  --gds-sys-color-state-warning-02: rgba(255, 255, 255, 0.35);
+  --gds-sys-color-state-warning-03: rgba(143, 83, 10, 0.08);
+  --gds-sys-color-state-warning-04: rgba(143, 83, 10, 0.16);
+  --gds-sys-color-state-warning-05: rgba(143, 83, 10, 0.08);
+  --gds-sys-color-state-warning-06: rgba(143, 83, 10, 0.16);
+}
+"
+`;
+
+exports[`test css output matches the contents in snapshot for 2023/css/variables.shadows.css: tokens-internal-2023-css-variables-shadows-css 1`] = `
+"/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --gds-sys-shadow-xs-01: 0px 1px 2px 0px rgba(10, 11, 10, 0.05);
+  --gds-sys-shadow-xs-02: 0px 0px 0px 0px transparent;
+  --gds-sys-shadow-s-01: 0px 1px 2px 0px rgba(10, 11, 10, 0.10);
+  --gds-sys-shadow-s-02: 0px 1px 3px 0px rgba(10, 11, 10, 0.06);
+  --gds-sys-shadow-m-01: 0px 2px 4px -2px rgba(10, 11, 10, 0.10);
+  --gds-sys-shadow-m-02: 0px 4px 8px -2px rgba(10, 11, 10, 0.06);
+  --gds-sys-shadow-l-01: 0px 4px 6px -2px rgba(10, 11, 10, 0.08);
+  --gds-sys-shadow-l-02: 0px 12px 16px -4px rgba(10, 11, 10, 0.03);
+  --gds-sys-shadow-xl-01: 0px 20px 24px -4px rgba(10, 11, 10, 0.08);
+  --gds-sys-shadow-xl-02: 0px 0px 0px 0px rgba(10, 11, 10, 0.08);
+  --gds-sys-shadow-2xl-01: 0px 24px 48px -12px rgba(10, 11, 10, 0.18);
+  --gds-sys-shadow-2xl-02: 0px 0px 0px 0px transparent;
+}
+"
+`;
+
+exports[`test figma output matches the contents in snapshot for 2023/figma/figma.shadows.json: tokens-figma-2023-figma-figma-shadows-json 1`] = `
+"[
+  {"name":"shadow/xs-01-color","value":"rgba(10, 11, 10, 0.05)","type":"color"},
+  {"name":"shadow/xs-01-offsetX","value":"0px","type":"float"},
+  {"name":"shadow/xs-01-offsetY","value":"1px","type":"float"},
+  {"name":"shadow/xs-01-blur","value":"2px","type":"float"},
+  {"name":"shadow/xs-01-spread","value":"0px","type":"float"},
+  {"name":"shadow/xs-02-color","value":"transparent","type":"color"},
+  {"name":"shadow/xs-02-offsetX","value":"0px","type":"float"},
+  {"name":"shadow/xs-02-offsetY","value":"0px","type":"float"},
+  {"name":"shadow/xs-02-blur","value":"0px","type":"float"},
+  {"name":"shadow/xs-02-spread","value":"0px","type":"float"},
+  {"name":"shadow/s-01-color","value":"rgba(10, 11, 10, 0.10)","type":"color"},
+  {"name":"shadow/s-01-offsetX","value":"0px","type":"float"},
+  {"name":"shadow/s-01-offsetY","value":"1px","type":"float"},
+  {"name":"shadow/s-01-blur","value":"2px","type":"float"},
+  {"name":"shadow/s-01-spread","value":"0px","type":"float"},
+  {"name":"shadow/s-02-color","value":"rgba(10, 11, 10, 0.06)","type":"color"},
+  {"name":"shadow/s-02-offsetX","value":"0px","type":"float"},
+  {"name":"shadow/s-02-offsetY","value":"1px","type":"float"},
+  {"name":"shadow/s-02-blur","value":"3px","type":"float"},
+  {"name":"shadow/s-02-spread","value":"0px","type":"float"},
+  {"name":"shadow/m-01-color","value":"rgba(10, 11, 10, 0.10)","type":"color"},
+  {"name":"shadow/m-01-offsetX","value":"0px","type":"float"},
+  {"name":"shadow/m-01-offsetY","value":"2px","type":"float"},
+  {"name":"shadow/m-01-blur","value":"4px","type":"float"},
+  {"name":"shadow/m-01-spread","value":"-2px","type":"float"},
+  {"name":"shadow/m-02-color","value":"rgba(10, 11, 10, 0.06)","type":"color"},
+  {"name":"shadow/m-02-offsetX","value":"0px","type":"float"},
+  {"name":"shadow/m-02-offsetY","value":"4px","type":"float"},
+  {"name":"shadow/m-02-blur","value":"8px","type":"float"},
+  {"name":"shadow/m-02-spread","value":"-2px","type":"float"},
+  {"name":"shadow/l-01-color","value":"rgba(10, 11, 10, 0.08)","type":"color"},
+  {"name":"shadow/l-01-offsetX","value":"0px","type":"float"},
+  {"name":"shadow/l-01-offsetY","value":"4px","type":"float"},
+  {"name":"shadow/l-01-blur","value":"6px","type":"float"},
+  {"name":"shadow/l-01-spread","value":"-2px","type":"float"},
+  {"name":"shadow/l-02-color","value":"rgba(10, 11, 10, 0.03)","type":"color"},
+  {"name":"shadow/l-02-offsetX","value":"0px","type":"float"},
+  {"name":"shadow/l-02-offsetY","value":"12px","type":"float"},
+  {"name":"shadow/l-02-blur","value":"16px","type":"float"},
+  {"name":"shadow/l-02-spread","value":"-4px","type":"float"},
+  {"name":"shadow/xl-01-color","value":"rgba(10, 11, 10, 0.08)","type":"color"},
+  {"name":"shadow/xl-01-offsetX","value":"0px","type":"float"},
+  {"name":"shadow/xl-01-offsetY","value":"20px","type":"float"},
+  {"name":"shadow/xl-01-blur","value":"24px","type":"float"},
+  {"name":"shadow/xl-01-spread","value":"-4px","type":"float"},
+  {"name":"shadow/xl-02-color","value":"rgba(10, 11, 10, 0.08)","type":"color"},
+  {"name":"shadow/xl-02-offsetX","value":"0px","type":"float"},
+  {"name":"shadow/xl-02-offsetY","value":"0px","type":"float"},
+  {"name":"shadow/xl-02-blur","value":"0px","type":"float"},
+  {"name":"shadow/xl-02-spread","value":"0px","type":"float"},
+  {"name":"shadow/2xl-01-color","value":"rgba(10, 11, 10, 0.18)","type":"color"},
+  {"name":"shadow/2xl-01-offsetX","value":"0px","type":"float"},
+  {"name":"shadow/2xl-01-offsetY","value":"24px","type":"float"},
+  {"name":"shadow/2xl-01-blur","value":"48px","type":"float"},
+  {"name":"shadow/2xl-01-spread","value":"-12px","type":"float"},
+  {"name":"shadow/2xl-02-color","value":"transparent","type":"color"},
+  {"name":"shadow/2xl-02-offsetX","value":"0px","type":"float"},
+  {"name":"shadow/2xl-02-offsetY","value":"0px","type":"float"},
+  {"name":"shadow/2xl-02-blur","value":"0px","type":"float"},
+  {"name":"shadow/2xl-02-spread","value":"0px","type":"float"}
+]
+"
+`;
+
+exports[`test figma output matches the contents in snapshot for 2023/figma/figma.size.json: tokens-figma-2023-figma-figma-size-json 1`] = `
+"[
+  {"name":"space/0","value":0,"type":"FLOAT"},
+  {"name":"space/5xs","value":1,"type":"FLOAT"},
+  {"name":"space/4xs","value":2,"type":"FLOAT"},
+  {"name":"space/3xs","value":4,"type":"FLOAT"},
+  {"name":"space/2xs","value":6,"type":"FLOAT"},
+  {"name":"space/xs","value":8,"type":"FLOAT"},
+  {"name":"space/s","value":12,"type":"FLOAT"},
+  {"name":"space/m","value":16,"type":"FLOAT"},
+  {"name":"space/l","value":20,"type":"FLOAT"},
+  {"name":"space/xl","value":24,"type":"FLOAT"},
+  {"name":"space/2xl","value":32,"type":"FLOAT"},
+  {"name":"space/3xl","value":40,"type":"FLOAT"},
+  {"name":"space/4xl","value":48,"type":"FLOAT"},
+  {"name":"space/5xl","value":64,"type":"FLOAT"},
+  {"name":"space/6xl","value":80,"type":"FLOAT"},
+  {"name":"space/7xl","value":96,"type":"FLOAT"},
+  {"name":"space/8xl","value":112,"type":"FLOAT"},
+  {"name":"space/9xl","value":120,"type":"FLOAT"},
+  {"name":"space/max","value":999,"type":"FLOAT"},
+  {"name":"radius/0","value":0,"type":"FLOAT"},
+  {"name":"radius/none","value":0,"type":"FLOAT"},
+  {"name":"radius/5xs","value":1,"type":"FLOAT"},
+  {"name":"radius/4xs","value":2,"type":"FLOAT"},
+  {"name":"radius/3xs","value":4,"type":"FLOAT"},
+  {"name":"radius/2xs","value":6,"type":"FLOAT"},
+  {"name":"radius/xs","value":8,"type":"FLOAT"},
+  {"name":"radius/s","value":12,"type":"FLOAT"},
+  {"name":"radius/m","value":16,"type":"FLOAT"},
+  {"name":"radius/l","value":20,"type":"FLOAT"},
+  {"name":"radius/xl","value":24,"type":"FLOAT"},
+  {"name":"radius/2xl","value":32,"type":"FLOAT"},
+  {"name":"radius/3xl","value":40,"type":"FLOAT"},
+  {"name":"radius/4xl","value":48,"type":"FLOAT"},
+  {"name":"radius/5xl","value":64,"type":"FLOAT"},
+  {"name":"radius/max","value":999,"type":"FLOAT"}
+]
+"
+`;
+
+exports[`test figma output matches the contents in snapshot for 2023/figma/figma.typography.json: tokens-figma-2023-figma-figma-typography-json 1`] = `
+"[
+  {"name":"text/heading-xl-fontWeight","value":450,"type":"float"},
+  {"name":"text/heading-xl-fontSize","value":32,"type":"float"},
+  {"name":"text/heading-xl-lineHeight","value":44,"type":"float"},
+  {"name":"text/heading-l-fontWeight","value":450,"type":"float"},
+  {"name":"text/heading-l-fontSize","value":28,"type":"float"},
+  {"name":"text/heading-l-lineHeight","value":40,"type":"float"},
+  {"name":"text/heading-m-fontWeight","value":450,"type":"float"},
+  {"name":"text/heading-m-fontSize","value":24,"type":"float"},
+  {"name":"text/heading-m-lineHeight","value":32,"type":"float"},
+  {"name":"text/heading-s-fontWeight","value":450,"type":"float"},
+  {"name":"text/heading-s-fontSize","value":20,"type":"float"},
+  {"name":"text/heading-s-lineHeight","value":28,"type":"float"},
+  {"name":"text/heading-xs-fontWeight","value":450,"type":"float"},
+  {"name":"text/heading-xs-fontSize","value":16,"type":"float"},
+  {"name":"text/heading-xs-lineHeight","value":24,"type":"float"},
+  {"name":"text/heading-2xs-fontWeight","value":450,"type":"float"},
+  {"name":"text/heading-2xs-fontSize","value":14,"type":"float"},
+  {"name":"text/heading-2xs-lineHeight","value":20,"type":"float"},
+  {"name":"text/detail-book-m-fontWeight","value":450,"type":"float"},
+  {"name":"text/detail-book-m-fontSize","value":16,"type":"float"},
+  {"name":"text/detail-book-m-lineHeight","value":20,"type":"float"},
+  {"name":"text/detail-book-s-fontWeight","value":450,"type":"float"},
+  {"name":"text/detail-book-s-fontSize","value":14,"type":"float"},
+  {"name":"text/detail-book-s-lineHeight","value":20,"type":"float"},
+  {"name":"text/detail-book-xs-fontWeight","value":450,"type":"float"},
+  {"name":"text/detail-book-xs-fontSize","value":12,"type":"float"},
+  {"name":"text/detail-book-xs-lineHeight","value":16,"type":"float"},
+  {"name":"text/detail-regular-m-fontWeight","value":400,"type":"float"},
+  {"name":"text/detail-regular-m-fontSize","value":16,"type":"float"},
+  {"name":"text/detail-regular-m-lineHeight","value":20,"type":"float"},
+  {"name":"text/detail-regular-s-fontWeight","value":400,"type":"float"},
+  {"name":"text/detail-regular-s-fontSize","value":14,"type":"float"},
+  {"name":"text/detail-regular-s-lineHeight","value":20,"type":"float"},
+  {"name":"text/detail-regular-xs-fontWeight","value":400,"type":"float"},
+  {"name":"text/detail-regular-xs-fontSize","value":12,"type":"float"},
+  {"name":"text/detail-regular-xs-lineHeight","value":16,"type":"float"},
+  {"name":"text/body-book-l-fontWeight","value":450,"type":"float"},
+  {"name":"text/body-book-l-fontSize","value":20,"type":"float"},
+  {"name":"text/body-book-l-lineHeight","value":26,"type":"float"},
+  {"name":"text/body-book-m-fontWeight","value":450,"type":"float"},
+  {"name":"text/body-book-m-fontSize","value":16,"type":"float"},
+  {"name":"text/body-book-m-lineHeight","value":24,"type":"float"},
+  {"name":"text/body-book-s-fontWeight","value":450,"type":"float"},
+  {"name":"text/body-book-s-fontSize","value":14,"type":"float"},
+  {"name":"text/body-book-s-lineHeight","value":20,"type":"float"},
+  {"name":"text/body-regular-l-fontWeight","value":400,"type":"float"},
+  {"name":"text/body-regular-l-fontSize","value":20,"type":"float"},
+  {"name":"text/body-regular-l-lineHeight","value":26,"type":"float"},
+  {"name":"text/body-regular-m-fontWeight","value":400,"type":"float"},
+  {"name":"text/body-regular-m-fontSize","value":16,"type":"float"},
+  {"name":"text/body-regular-m-lineHeight","value":24,"type":"float"},
+  {"name":"text/body-regular-s-fontWeight","value":400,"type":"float"},
+  {"name":"text/body-regular-s-fontSize","value":14,"type":"float"},
+  {"name":"text/body-regular-s-lineHeight","value":20,"type":"float"},
+  {"name":"text/body-italic-l-fontWeight","value":400,"type":"float"},
+  {"name":"text/body-italic-l-fontStyle","value":"italic","type":"string"},
+  {"name":"text/body-italic-l-fontSize","value":20,"type":"float"},
+  {"name":"text/body-italic-l-lineHeight","value":26,"type":"float"},
+  {"name":"text/body-italic-m-fontWeight","value":400,"type":"float"},
+  {"name":"text/body-italic-m-fontStyle","value":"italic","type":"string"},
+  {"name":"text/body-italic-m-fontSize","value":16,"type":"float"},
+  {"name":"text/body-italic-m-lineHeight","value":24,"type":"float"},
+  {"name":"text/body-italic-s-fontWeight","value":400,"type":"float"},
+  {"name":"text/body-italic-s-fontStyle","value":"italic","type":"string"},
+  {"name":"text/body-italic-s-fontSize","value":14,"type":"float"},
+  {"name":"text/body-italic-s-lineHeight","value":20,"type":"float"},
+  {"name":"text/display-2xl-fontWeight","value":450,"type":"float"},
+  {"name":"text/display-2xl-fontSize","value":82,"type":"float"},
+  {"name":"text/display-2xl-lineHeight","value":90,"type":"float"},
+  {"name":"text/display-xl-fontWeight","value":450,"type":"float"},
+  {"name":"text/display-xl-fontSize","value":64,"type":"float"},
+  {"name":"text/display-xl-lineHeight","value":72,"type":"float"},
+  {"name":"text/display-l-fontWeight","value":450,"type":"float"},
+  {"name":"text/display-l-fontSize","value":48,"type":"float"},
+  {"name":"text/display-l-lineHeight","value":56,"type":"float"},
+  {"name":"text/display-m-fontWeight","value":450,"type":"float"},
+  {"name":"text/display-m-fontSize","value":36,"type":"float"},
+  {"name":"text/display-m-lineHeight","value":44,"type":"float"},
+  {"name":"text/display-s-fontWeight","value":450,"type":"float"},
+  {"name":"text/display-s-fontSize","value":32,"type":"float"},
+  {"name":"text/display-s-lineHeight","value":40,"type":"float"},
+  {"name":"text/preamble-2xl-fontWeight","value":450,"type":"float"},
+  {"name":"text/preamble-2xl-fontSize","value":32,"type":"float"},
+  {"name":"text/preamble-2xl-lineHeight","value":40,"type":"float"},
+  {"name":"text/preamble-xl-fontWeight","value":450,"type":"float"},
+  {"name":"text/preamble-xl-fontSize","value":28,"type":"float"},
+  {"name":"text/preamble-xl-lineHeight","value":36,"type":"float"},
+  {"name":"text/preamble-l-fontWeight","value":450,"type":"float"},
+  {"name":"text/preamble-l-fontSize","value":24,"type":"float"},
+  {"name":"text/preamble-l-lineHeight","value":32,"type":"float"},
+  {"name":"text/preamble-m-fontWeight","value":450,"type":"float"},
+  {"name":"text/preamble-m-fontSize","value":20,"type":"float"},
+  {"name":"text/preamble-m-lineHeight","value":28,"type":"float"},
+  {"name":"text/preamble-s-fontWeight","value":450,"type":"float"},
+  {"name":"text/preamble-s-fontSize","value":18,"type":"float"},
+  {"name":"text/preamble-s-lineHeight","value":26,"type":"float"},
+  {"name":"text/preamble-xs-fontWeight","value":450,"type":"float"},
+  {"name":"text/preamble-xs-fontSize","value":16,"type":"float"},
+  {"name":"text/preamble-xs-lineHeight","value":24,"type":"float"}
+]
+"
+`;
+
+exports[`test figma output matches the contents in snapshot for 2023/figma/figma-colours.dark.json: tokens-figma-2023-figma-figma-colours-dark-json 1`] = `
+"[
+  {"name":"L1/neutral-01","value":"#0A0B0B","type":"color"},
+  {"name":"L1/neutral-02","value":"#282A29","type":"color"},
+  {"name":"L1/brand-01","value":"#003824","type":"color"},
+  {"name":"L1/inversed","value":"#FFFFFF","type":"color"},
+  {"name":"L2/neutral-01","value":"#191A1A","type":"color"},
+  {"name":"L2/neutral-02","value":"#191A1A","type":"color"},
+  {"name":"L2/neutral-03","value":"#3B3F3E","type":"color"},
+  {"name":"L2/brand-01","value":"#003824","type":"color"},
+  {"name":"L2/brand-02","value":"#231D10","type":"color"},
+  {"name":"L2/positive-01","value":"#003D26","type":"color"},
+  {"name":"L2/negative-01","value":"#451207","type":"color"},
+  {"name":"L2/warning-01","value":"#482A05","type":"color"},
+  {"name":"L2/information-01","value":"#1E201F","type":"color"},
+  {"name":"L2/notice-01","value":"#00294D","type":"color"},
+  {"name":"L3/brand-01","value":"#D5D7D7","type":"color"},
+  {"name":"L3/brand-02","value":"#EFE9DC","type":"color"},
+  {"name":"L3/brand-03","value":"#E7DDCB","type":"color"},
+  {"name":"L3/neutral-01","value":"#D5D7D7","type":"color"},
+  {"name":"L3/neutral-02","value":"#282A29","type":"color"},
+  {"name":"L3/neutral-03","value":"#3B3F3E","type":"color"},
+  {"name":"L3/neutral-04","value":"#3B3F3E","type":"color"},
+  {"name":"L3/neutral-05","value":"#003824","type":"color"},
+  {"name":"L3/positive-01","value":"#026436","type":"color"},
+  {"name":"L3/positive-02","value":"#015130","type":"color"},
+  {"name":"L3/positive-03","value":"#003D26","type":"color"},
+  {"name":"L3/negative-01","value":"#A22911","type":"color"},
+  {"name":"L3/negative-02","value":"#731D0C","type":"color"},
+  {"name":"L3/negative-03","value":"#5C170A","type":"color"},
+  {"name":"L3/notice-01","value":"#005FB3","type":"color"},
+  {"name":"L3/notice-02","value":"#004480","type":"color"},
+  {"name":"L3/notice-03","value":"#003666","type":"color"},
+  {"name":"L3/warning-01","value":"#F19E38","type":"color"},
+  {"name":"L3/warning-02","value":"#774508","type":"color"},
+  {"name":"L3/warning-03","value":"#5F3707","type":"color"},
+  {"name":"L3/information-01","value":"#D5D7D7","type":"color"},
+  {"name":"L3/information-02","value":"#313533","type":"color"},
+  {"name":"L3/information-03","value":"#595F5D","type":"color"},
+  {"name":"L3/disabled-01","value":"#595F5D","type":"color"},
+  {"name":"L3/disabled-02","value":"#595F5D","type":"color"},
+  {"name":"L3/disabled-03","value":"#818886","type":"color"},
+  {"name":"border/interactive","value":"#A0A6A4","type":"color"},
+  {"name":"border/subtle-01","value":"#595F5D","type":"color"},
+  {"name":"border/subtle-02","value":"#777E7C","type":"color"},
+  {"name":"border/strong","value":"#F7F8F7","type":"color"},
+  {"name":"border/inverse","value":"#FFFFFF","type":"color"},
+  {"name":"border/information-01","value":"#636967","type":"color"},
+  {"name":"border/positive-01","value":"#8AE58D","type":"color"},
+  {"name":"border/negative-01","value":"#F08975","type":"color"},
+  {"name":"border/warning-01","value":"#F5B970","type":"color"},
+  {"name":"border/notice-01","value":"#66B8FF","type":"color"},
+  {"name":"border/information-02","value":"rgba(99, 105, 103, 0.4)","type":"color"},
+  {"name":"border/positive-02","value":"rgba(138, 229, 141, 0.4)","type":"color"},
+  {"name":"border/negative-02","value":"rgba(240, 137, 117, 0.4)","type":"color"},
+  {"name":"border/warning-02","value":"rgba(245, 185, 112, 0.4)","type":"color"},
+  {"name":"border/notice-02","value":"rgba(102, 184, 255, 0.4)","type":"color"},
+  {"name":"content/neutral-01","value":"#F7F8F7","type":"color"},
+  {"name":"content/neutral-02","value":"#ABB0AE","type":"color"},
+  {"name":"content/neutral-03","value":"#0A0B0B","type":"color"},
+  {"name":"content/neutral-04","value":"#595F5D","type":"color"},
+  {"name":"content/inversed","value":"#F7F8F7","type":"color"},
+  {"name":"content/brand-01","value":"#003824","type":"color"},
+  {"name":"content/brand-02","value":"#D6C7A8","type":"color"},
+  {"name":"content/positive-01","value":"#8AE58D","type":"color"},
+  {"name":"content/positive-02","value":"#027839","type":"color"},
+  {"name":"content/positive-03","value":"#8AE58D","type":"color"},
+  {"name":"content/negative-01","value":"#F08975","type":"color"},
+  {"name":"content/negative-02","value":"#F5B0A3","type":"color"},
+  {"name":"content/warning-01","value":"#F5B970","type":"color"},
+  {"name":"content/warning-02","value":"#FCE8CF","type":"color"},
+  {"name":"content/notice-01","value":"#66B8FF","type":"color"},
+  {"name":"content/notice-02","value":"#99CFFF","type":"color"},
+  {"name":"content/disabled-01","value":"#CACECC","type":"color"},
+  {"name":"content/disabled-02","value":"#CACECC","type":"color"},
+  {"name":"state/brand-01","value":"rgba(0, 0, 0, 0.2)","type":"color"},
+  {"name":"state/brand-02","value":"rgba(0, 0, 0, 0.3)","type":"color"},
+  {"name":"state/brand-03","value":"rgba(0, 56, 36, 0.3)","type":"color"},
+  {"name":"state/brand-04","value":"rgba(0, 56, 36, 0.7)","type":"color"},
+  {"name":"state/brand-05","value":"rgba(0, 56, 36, 0.5)","type":"color"},
+  {"name":"state/brand-06","value":"rgba(0, 56, 36, 0.9)","type":"color"},
+  {"name":"state/neutral-01","value":"rgba(0, 0, 0, 0.2)","type":"color"},
+  {"name":"state/neutral-02","value":"rgba(0, 0, 0, 0.35)","type":"color"},
+  {"name":"state/neutral-03","value":"rgba(255, 255, 255, 0.2)","type":"color"},
+  {"name":"state/neutral-04","value":"rgba(255, 255, 255, 0.3)","type":"color"},
+  {"name":"state/neutral-05","value":"rgba(255, 255, 255, 0.12)","type":"color"},
+  {"name":"state/neutral-06","value":"rgba(255, 255, 255, 0.25)","type":"color"},
+  {"name":"state/positive-01","value":"rgba(0, 0, 0, 0.12)","type":"color"},
+  {"name":"state/positive-02","value":"rgba(0, 0, 0, 0.23)","type":"color"},
+  {"name":"state/positive-03","value":"rgba(255, 255, 255, 0.08)","type":"color"},
+  {"name":"state/positive-04","value":"rgba(255, 255, 255, 0.14)","type":"color"},
+  {"name":"state/positive-05","value":"rgba(2, 120, 57, 0.3)","type":"color"},
+  {"name":"state/positive-06","value":"rgba(2, 120, 57, 0.5)","type":"color"},
+  {"name":"state/negative-01","value":"rgba(0, 0, 0, 0.15)","type":"color"},
+  {"name":"state/negative-02","value":"rgba(0, 0, 0, 0.3)","type":"color"},
+  {"name":"state/negative-03","value":"rgba(255, 255, 255, 0.08)","type":"color"},
+  {"name":"state/negative-04","value":"rgba(255, 255, 255, 0.14)","type":"color"},
+  {"name":"state/negative-05","value":"rgba(185, 47, 19, 0.3)","type":"color"},
+  {"name":"state/negative-06","value":"rgba(185, 47, 19, 0.45)","type":"color"},
+  {"name":"state/notice-01","value":"rgba(0, 0, 0, 0.12)","type":"color"},
+  {"name":"state/notice-02","value":"rgba(0, 0, 0, 0.2)","type":"color"},
+  {"name":"state/notice-03","value":"rgba(255, 255, 255, 0.06)","type":"color"},
+  {"name":"state/notice-04","value":"rgba(255, 255, 255, 0.1)","type":"color"},
+  {"name":"state/notice-05","value":"rgba(0, 95, 179, 0.4)","type":"color"},
+  {"name":"state/notice-06","value":"rgba(0, 95, 179, 0.6)","type":"color"},
+  {"name":"state/warning-01","value":"rgba(0, 0, 0, 0.06)","type":"color"},
+  {"name":"state/warning-02","value":"rgba(0, 0, 0, 0.14)","type":"color"},
+  {"name":"state/warning-03","value":"rgba(255, 255, 255, 0.08)","type":"color"},
+  {"name":"state/warning-04","value":"rgba(255, 255, 255, 0.14)","type":"color"},
+  {"name":"state/warning-05","value":"rgba(241, 158, 56, 0.12)","type":"color"},
+  {"name":"state/warning-06","value":"rgba(241, 158, 56, 0.2)","type":"color"}
+]
+"
+`;
+
+exports[`test figma output matches the contents in snapshot for 2023/figma/figma-colours.light.json: tokens-figma-2023-figma-figma-colours-light-json 1`] = `
+"[
+  {"name":"L1/neutral-01","value":"#FFFFFF","type":"color"},
+  {"name":"L1/neutral-02","value":"#EAEBEB","type":"color"},
+  {"name":"L1/brand-01","value":"#003824","type":"color"},
+  {"name":"L1/inversed","value":"#0A0B0B","type":"color"},
+  {"name":"L2/neutral-01","value":"#F7F8F7","type":"color"},
+  {"name":"L2/neutral-02","value":"#FFFFFF","type":"color"},
+  {"name":"L2/neutral-03","value":"#0A0B0B","type":"color"},
+  {"name":"L2/brand-01","value":"#003824","type":"color"},
+  {"name":"L2/brand-02","value":"#F8F6F1","type":"color"},
+  {"name":"L2/positive-01","value":"#F1F9F1","type":"color"},
+  {"name":"L2/negative-01","value":"#FEF7F6","type":"color"},
+  {"name":"L2/warning-01","value":"#FEF8F1","type":"color"},
+  {"name":"L2/information-01","value":"#F7F8F7","type":"color"},
+  {"name":"L2/notice-01","value":"#F5FAFF","type":"color"},
+  {"name":"L3/brand-01","value":"#003824","type":"color"},
+  {"name":"L3/brand-02","value":"#EFE9DC","type":"color"},
+  {"name":"L3/brand-03","value":"#E7DDCB","type":"color"},
+  {"name":"L3/neutral-01","value":"#0A0B0B","type":"color"},
+  {"name":"L3/neutral-02","value":"#EAEBEB","type":"color"},
+  {"name":"L3/neutral-03","value":"#D5D7D7","type":"color"},
+  {"name":"L3/neutral-04","value":"#FFFFFF","type":"color"},
+  {"name":"L3/neutral-05","value":"#FFFFFF","type":"color"},
+  {"name":"L3/positive-01","value":"#027839","type":"color"},
+  {"name":"L3/positive-02","value":"#DCEFDC","type":"color"},
+  {"name":"L3/positive-03","value":"#CCEACC","type":"color"},
+  {"name":"L3/negative-01","value":"#B92F13","type":"color"},
+  {"name":"L3/negative-02","value":"#FDEBE8","type":"color"},
+  {"name":"L3/negative-03","value":"#FAD8D1","type":"color"},
+  {"name":"L3/notice-01","value":"#005FB3","type":"color"},
+  {"name":"L3/notice-02","value":"#E6F3FF","type":"color"},
+  {"name":"L3/notice-03","value":"#CCE7FF","type":"color"},
+  {"name":"L3/warning-01","value":"#8F530A","type":"color"},
+  {"name":"L3/warning-02","value":"#FCE8CF","type":"color"},
+  {"name":"L3/warning-03","value":"#FADCB7","type":"color"},
+  {"name":"L3/information-01","value":"#0A0B0B","type":"color"},
+  {"name":"L3/information-02","value":"#EAEBEB","type":"color"},
+  {"name":"L3/information-03","value":"#DFE1E1","type":"color"},
+  {"name":"L3/disabled-01","value":"#EFF0F0","type":"color"},
+  {"name":"L3/disabled-02","value":"#A0A6A4","type":"color"},
+  {"name":"L3/disabled-03","value":"#EFF0F0","type":"color"},
+  {"name":"border/interactive","value":"#777E7C","type":"color"},
+  {"name":"border/subtle-01","value":"#DFE1E1","type":"color"},
+  {"name":"border/subtle-02","value":"#EFF0F0","type":"color"},
+  {"name":"border/strong","value":"#0A0B0B","type":"color"},
+  {"name":"border/inverse","value":"#FFFFFF","type":"color"},
+  {"name":"border/information-01","value":"#0A0B0B","type":"color"},
+  {"name":"border/positive-01","value":"#027839","type":"color"},
+  {"name":"border/negative-01","value":"#B92F13","type":"color"},
+  {"name":"border/warning-01","value":"#8F530A","type":"color"},
+  {"name":"border/notice-01","value":"#005FB3","type":"color"},
+  {"name":"border/information-02","value":"rgba(10, 11, 11, 0.4)","type":"color"},
+  {"name":"border/positive-02","value":"rgba(2, 120, 57, 0.4)","type":"color"},
+  {"name":"border/negative-02","value":"rgba(185, 47, 19, 0.4)","type":"color"},
+  {"name":"border/warning-02","value":"rgba(143, 83, 10, 0.4)","type":"color"},
+  {"name":"border/notice-02","value":"rgba(0, 95, 179, 0.4)","type":"color"},
+  {"name":"content/neutral-01","value":"#0A0B0B","type":"color"},
+  {"name":"content/neutral-02","value":"#636967","type":"color"},
+  {"name":"content/neutral-03","value":"#FFFFFF","type":"color"},
+  {"name":"content/neutral-04","value":"#A0A6A4","type":"color"},
+  {"name":"content/inversed","value":"#FFFFFF","type":"color"},
+  {"name":"content/brand-01","value":"#003824","type":"color"},
+  {"name":"content/brand-02","value":"#685631","type":"color"},
+  {"name":"content/positive-01","value":"#027839","type":"color"},
+  {"name":"content/positive-02","value":"#EAF6EA","type":"color"},
+  {"name":"content/positive-03","value":"#026436","type":"color"},
+  {"name":"content/negative-01","value":"#B92F13","type":"color"},
+  {"name":"content/negative-02","value":"#FDEBE8","type":"color"},
+  {"name":"content/warning-01","value":"#8F530A","type":"color"},
+  {"name":"content/warning-02","value":"#FCE8CF","type":"color"},
+  {"name":"content/notice-01","value":"#005FB3","type":"color"},
+  {"name":"content/notice-02","value":"#E6F3FF","type":"color"},
+  {"name":"content/disabled-01","value":"#A0A6A4","type":"color"},
+  {"name":"content/disabled-02","value":"#F7F8F7","type":"color"},
+  {"name":"state/brand-01","value":"rgba(255, 255, 255, 0.2)","type":"color"},
+  {"name":"state/brand-02","value":"rgba(255, 255, 255, 0.35)","type":"color"},
+  {"name":"state/brand-03","value":"rgba(0, 56, 36, 0.06)","type":"color"},
+  {"name":"state/brand-04","value":"rgba(0, 56, 36, 0.14)","type":"color"},
+  {"name":"state/brand-05","value":"rgba(0, 56, 36, 0.06)","type":"color"},
+  {"name":"state/brand-06","value":"rgba(0, 56, 36, 0.14)","type":"color"},
+  {"name":"state/neutral-01","value":"rgba(255, 255, 255, 0.2)","type":"color"},
+  {"name":"state/neutral-02","value":"rgba(255, 255, 255, 0.35)","type":"color"},
+  {"name":"state/neutral-03","value":"rgba(0, 0, 0, 0.06)","type":"color"},
+  {"name":"state/neutral-04","value":"rgba(0, 0, 0, 0.14)","type":"color"},
+  {"name":"state/neutral-05","value":"rgba(0, 0, 0, 0.06)","type":"color"},
+  {"name":"state/neutral-06","value":"rgba(0, 0, 0, 0.14)","type":"color"},
+  {"name":"state/positive-01","value":"rgba(255, 255, 255, 0.12)","type":"color"},
+  {"name":"state/positive-02","value":"rgba(255, 255, 255, 0.23)","type":"color"},
+  {"name":"state/positive-03","value":"rgba(2, 120, 57, 0.08)","type":"color"},
+  {"name":"state/positive-04","value":"rgba(2, 120, 57, 0.16)","type":"color"},
+  {"name":"state/positive-05","value":"rgba(2, 120, 57, 0.08)","type":"color"},
+  {"name":"state/positive-06","value":"rgba(2, 120, 57, 0.16)","type":"color"},
+  {"name":"state/negative-01","value":"rgba(255, 255, 255, 0.08)","type":"color"},
+  {"name":"state/negative-02","value":"rgba(255, 255, 255, 0.16)","type":"color"},
+  {"name":"state/negative-03","value":"rgba(185, 47, 19, 0.08)","type":"color"},
+  {"name":"state/negative-04","value":"rgba(185, 47, 19, 0.16)","type":"color"},
+  {"name":"state/negative-05","value":"rgba(185, 47, 19, 0.08)","type":"color"},
+  {"name":"state/negative-06","value":"rgba(185, 47, 19, 0.16)","type":"color"},
+  {"name":"state/notice-01","value":"rgba(255, 255, 255, 0.2)","type":"color"},
+  {"name":"state/notice-02","value":"rgba(255, 255, 255, 0.35)","type":"color"},
+  {"name":"state/notice-03","value":"rgba(0, 95, 179, 0.08)","type":"color"},
+  {"name":"state/notice-04","value":"rgba(0, 95, 179, 0.16)","type":"color"},
+  {"name":"state/notice-05","value":"rgba(0, 95, 179, 0.08)","type":"color"},
+  {"name":"state/notice-06","value":"rgba(0, 95, 179, 0.16)","type":"color"},
+  {"name":"state/warning-01","value":"rgba(255, 255, 255, 0.2)","type":"color"},
+  {"name":"state/warning-02","value":"rgba(255, 255, 255, 0.35)","type":"color"},
+  {"name":"state/warning-03","value":"rgba(143, 83, 10, 0.08)","type":"color"},
+  {"name":"state/warning-04","value":"rgba(143, 83, 10, 0.16)","type":"color"},
+  {"name":"state/warning-05","value":"rgba(143, 83, 10, 0.08)","type":"color"},
+  {"name":"state/warning-06","value":"rgba(143, 83, 10, 0.16)","type":"color"}
+]
+"
+`;
+
+exports[`test internal output matches the contents in snapshot for 2023/internal/variables.base.css: tokens-internal-2023-internal-variables-base-css 1`] = `
+"/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+  --gds-sys-state-hover-state-layer-opacity: 0.1;
+  --gds-sys-motion-easing-ease-in: 0.64, 0, 0.78, 0;
+  --gds-sys-motion-easing-ease-in-out: 0.83, 0, 0.17, 1;
+  --gds-sys-motion-easing-ease-out: 0.22, 1, 0.36, 1;
+  --gds-sys-motion-easing-linear: 0, 0, 1, 1;
+  --gds-sys-motion-duration-fastest: .2s;
+  --gds-sys-motion-duration-fast: .4s;
+  --gds-sys-motion-duration-default: .5s;
+  --gds-sys-motion-duration-slow: 1s;
+  --gds-sys-motion-duration-slowest: 1.5s;
+  --gds-sys-viewport-0: 0;
+  --gds-sys-viewport-2xs: 320;
+  --gds-sys-viewport-xs: 425;
+  --gds-sys-viewport-s: 768;
+  --gds-sys-viewport-m: 1024;
+  --gds-sys-viewport-l: 1280;
+  --gds-sys-viewport-xl: 1440;
+  --gds-sys-viewport-2xl: 2560;
+  --gds-sys-viewport-3xl: 3840;
+  --gds-sys-viewport-4xl: 4320;
+  --gds-sys-viewport-5xl: 6016;
+  --gds-sys-viewport-6xl: 7680;
+  --gds-sys-text-family: SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-weight-light: 300;
+  --gds-sys-text-weight-regular: 400;
+  --gds-sys-text-weight-book: 450;
+  --gds-sys-text-weight-medium: 500;
+  --gds-sys-text-weight-bold: 700;
+  --gds-sys-text-heading-xl: 450 2rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-heading-l: 450 1.75rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-heading-m: 450 1.5rem/2rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-heading-s: 450 1.25rem/1.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-heading-xs: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-heading-2xs: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-book-m: 450 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-book-xs: 450 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-regular-m: 400 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-regular-xs: 400 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-book-l: 450 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-book-m: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-regular-l: 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-regular-m: 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-italic-l: italic 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-italic-m: italic 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-italic-s: italic 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-2xl: 450 5.125rem/5.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-xl: 450 4rem/4.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-l: 450 3rem/3.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-m: 450 2.25rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-s: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-preamble-2xl: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-preamble-xl: 450 1.75rem/2.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-preamble-l: 450 1.5rem/2rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-preamble-m: 450 1.25rem/1.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-preamble-s: 450 1.125rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-preamble-xs: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-space-0: 0px;
+  --gds-sys-space-5xs: 1px;
+  --gds-sys-space-4xs: 2px;
+  --gds-sys-space-3xs: 4px;
+  --gds-sys-space-2xs: 6px;
+  --gds-sys-space-xs: 8px;
+  --gds-sys-space-s: 12px;
+  --gds-sys-space-m: 16px;
+  --gds-sys-space-l: 20px;
+  --gds-sys-space-xl: 24px;
+  --gds-sys-space-2xl: 32px;
+  --gds-sys-space-3xl: 40px;
+  --gds-sys-space-4xl: 48px;
+  --gds-sys-space-5xl: 64px;
+  --gds-sys-space-6xl: 80px;
+  --gds-sys-space-7xl: 96px;
+  --gds-sys-space-8xl: 112px;
+  --gds-sys-space-9xl: 120px;
+  --gds-sys-space-max: 999px;
+  --gds-sys-radius-0: 0px;
+  --gds-sys-radius-none: 0px;
+  --gds-sys-radius-5xs: 1px;
+  --gds-sys-radius-4xs: 2px;
+  --gds-sys-radius-3xs: 4px;
+  --gds-sys-radius-2xs: 6px;
+  --gds-sys-radius-xs: 8px;
+  --gds-sys-radius-s: 12px;
+  --gds-sys-radius-m: 16px;
+  --gds-sys-radius-l: 20px;
+  --gds-sys-radius-xl: 24px;
+  --gds-sys-radius-2xl: 32px;
+  --gds-sys-radius-3xl: 40px;
+  --gds-sys-radius-4xl: 48px;
+  --gds-sys-radius-5xl: 64px;
+  --gds-sys-radius-max: 999px;"
+`;
+
+exports[`test internal output matches the contents in snapshot for 2023/internal/variables.dark.css: tokens-internal-2023-internal-variables-dark-css 1`] = `
+"/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+
+  color-scheme: dark;
+  --gds-sys-color-l1-neutral-01: #0a0b0b;
+  --gds-sys-color-l1-neutral-02: #282a29;
+  --gds-sys-color-l1-brand-01: #003824;
+  --gds-sys-color-l1-inversed: #ffffff;
+  --gds-sys-color-l2-neutral-01: #191a1a;
+  --gds-sys-color-l2-neutral-02: #191a1a;
+  --gds-sys-color-l2-neutral-03: #3b3f3e;
+  --gds-sys-color-l2-brand-01: #003824;
+  --gds-sys-color-l2-brand-02: #231d10;
+  --gds-sys-color-l2-positive-01: #003d26;
+  --gds-sys-color-l2-negative-01: #451207;
+  --gds-sys-color-l2-warning-01: #482a05;
+  --gds-sys-color-l2-information-01: #1e201f;
+  --gds-sys-color-l2-notice-01: #00294d;
+  --gds-sys-color-l3-brand-01: #d5d7d7;
+  --gds-sys-color-l3-brand-02: #efe9dc;
+  --gds-sys-color-l3-brand-03: #e7ddcb;
+  --gds-sys-color-l3-neutral-01: #d5d7d7;
+  --gds-sys-color-l3-neutral-02: #282a29;
+  --gds-sys-color-l3-neutral-03: #3b3f3e;
+  --gds-sys-color-l3-neutral-04: #3b3f3e;
+  --gds-sys-color-l3-neutral-05: #003824;
+  --gds-sys-color-l3-positive-01: #026436;
+  --gds-sys-color-l3-positive-02: #015130;
+  --gds-sys-color-l3-positive-03: #003d26;
+  --gds-sys-color-l3-negative-01: #a22911;
+  --gds-sys-color-l3-negative-02: #731d0c;
+  --gds-sys-color-l3-negative-03: #5c170a;
+  --gds-sys-color-l3-notice-01: #005fb3;
+  --gds-sys-color-l3-notice-02: #004480;
+  --gds-sys-color-l3-notice-03: #003666;
+  --gds-sys-color-l3-warning-01: #f19e38;
+  --gds-sys-color-l3-warning-02: #774508;
+  --gds-sys-color-l3-warning-03: #5f3707;
+  --gds-sys-color-l3-information-01: #d5d7d7;
+  --gds-sys-color-l3-information-02: #313533;
+  --gds-sys-color-l3-information-03: #595f5d;
+  --gds-sys-color-l3-disabled-01: #595f5d;
+  --gds-sys-color-l3-disabled-02: #595f5d;
+  --gds-sys-color-l3-disabled-03: #818886;
+  --gds-sys-color-border-interactive: #a0a6a4;
+  --gds-sys-color-border-subtle-01: #595f5d;
+  --gds-sys-color-border-subtle-02: #777e7c;
+  --gds-sys-color-border-strong: #f7f8f7;
+  --gds-sys-color-border-inverse: #ffffff;
+  --gds-sys-color-border-information-01: #636967;
+  --gds-sys-color-border-positive-01: #8ae58d;
+  --gds-sys-color-border-negative-01: #f08975;
+  --gds-sys-color-border-warning-01: #f5b970;
+  --gds-sys-color-border-notice-01: #66b8ff;
+  --gds-sys-color-border-information-02: rgba(99, 105, 103, 0.4);
+  --gds-sys-color-border-positive-02: rgba(138, 229, 141, 0.4);
+  --gds-sys-color-border-negative-02: rgba(240, 137, 117, 0.4);
+  --gds-sys-color-border-warning-02: rgba(245, 185, 112, 0.4);
+  --gds-sys-color-border-notice-02: rgba(102, 184, 255, 0.4);
+  --gds-sys-color-content-neutral-01: #f7f8f7;
+  --gds-sys-color-content-neutral-02: #abb0ae;
+  --gds-sys-color-content-neutral-03: #0a0b0b;
+  --gds-sys-color-content-neutral-04: #595f5d;
+  --gds-sys-color-content-inversed: #f7f8f7;
+  --gds-sys-color-content-brand-01: #003824;
+  --gds-sys-color-content-brand-02: #d6c7a8;
+  --gds-sys-color-content-positive-01: #8ae58d;
+  --gds-sys-color-content-positive-02: #027839;
+  --gds-sys-color-content-positive-03: #8ae58d;
+  --gds-sys-color-content-negative-01: #f08975;
+  --gds-sys-color-content-negative-02: #f5b0a3;
+  --gds-sys-color-content-warning-01: #f5b970;
+  --gds-sys-color-content-warning-02: #fce8cf;
+  --gds-sys-color-content-notice-01: #66b8ff;
+  --gds-sys-color-content-notice-02: #99cfff;
+  --gds-sys-color-content-disabled-01: #cacecc;
+  --gds-sys-color-content-disabled-02: #cacecc;
+  --gds-sys-color-state-brand-01: #000000 20%;
+  --gds-sys-color-state-brand-02: #000000 30%;
+  --gds-sys-color-state-brand-03: #003824 30%;
+  --gds-sys-color-state-brand-04: #003824 70%;
+  --gds-sys-color-state-brand-05: #003824 50%;
+  --gds-sys-color-state-brand-06: #003824 90%;
+  --gds-sys-color-state-neutral-01: #000000 20%;
+  --gds-sys-color-state-neutral-02: #000000 35%;
+  --gds-sys-color-state-neutral-03: #ffffff 20%;
+  --gds-sys-color-state-neutral-04: #ffffff 30%;
+  --gds-sys-color-state-neutral-05: #ffffff 12%;
+  --gds-sys-color-state-neutral-06: #ffffff 25%;
+  --gds-sys-color-state-positive-01: #000000 12%;
+  --gds-sys-color-state-positive-02: #000000 23%;
+  --gds-sys-color-state-positive-03: #ffffff 8%;
+  --gds-sys-color-state-positive-04: #ffffff 14%;
+  --gds-sys-color-state-positive-05: #027839 30%;
+  --gds-sys-color-state-positive-06: #027839 50%;
+  --gds-sys-color-state-negative-01: #000000 15%;
+  --gds-sys-color-state-negative-02: #000000 30%;
+  --gds-sys-color-state-negative-03: #ffffff 8%;
+  --gds-sys-color-state-negative-04: #ffffff 14%;
+  --gds-sys-color-state-negative-05: #b92f13 30%;
+  --gds-sys-color-state-negative-06: #b92f13 45%;
+  --gds-sys-color-state-notice-01: #000000 12%;
+  --gds-sys-color-state-notice-02: #000000 20%;
+  --gds-sys-color-state-notice-03: #ffffff 6%;
+  --gds-sys-color-state-notice-04: #ffffff 10%;
+  --gds-sys-color-state-notice-05: #005fb3 40%;
+  --gds-sys-color-state-notice-06: #005fb3 60%;
+  --gds-sys-color-state-warning-01: #000000 6%;
+  --gds-sys-color-state-warning-02: #000000 14%;
+  --gds-sys-color-state-warning-03: #ffffff 8%;
+  --gds-sys-color-state-warning-04: #ffffff 14%;
+  --gds-sys-color-state-warning-05: #f19e38 12%;
+  --gds-sys-color-state-warning-06: #f19e38 20%;"
+`;
+
+exports[`test internal output matches the contents in snapshot for 2023/internal/variables.light.css: tokens-internal-2023-internal-variables-light-css 1`] = `
+"/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+
+  color-scheme: light;
+  --gds-sys-color-l1-neutral-01: #ffffff;
+  --gds-sys-color-l1-neutral-02: #eaebeb;
+  --gds-sys-color-l1-brand-01: #003824;
+  --gds-sys-color-l1-inversed: #0a0b0b;
+  --gds-sys-color-l2-neutral-01: #f7f8f7;
+  --gds-sys-color-l2-neutral-02: #ffffff;
+  --gds-sys-color-l2-neutral-03: #0a0b0b;
+  --gds-sys-color-l2-brand-01: #003824;
+  --gds-sys-color-l2-brand-02: #f8f6f1;
+  --gds-sys-color-l2-positive-01: #f1f9f1;
+  --gds-sys-color-l2-negative-01: #fef7f6;
+  --gds-sys-color-l2-warning-01: #fef8f1;
+  --gds-sys-color-l2-information-01: #f7f8f7;
+  --gds-sys-color-l2-notice-01: #f5faff;
+  --gds-sys-color-l3-brand-01: #003824;
+  --gds-sys-color-l3-brand-02: #efe9dc;
+  --gds-sys-color-l3-brand-03: #e7ddcb;
+  --gds-sys-color-l3-neutral-01: #0a0b0b;
+  --gds-sys-color-l3-neutral-02: #eaebeb;
+  --gds-sys-color-l3-neutral-03: #d5d7d7;
+  --gds-sys-color-l3-neutral-04: #ffffff;
+  --gds-sys-color-l3-neutral-05: #ffffff;
+  --gds-sys-color-l3-positive-01: #027839;
+  --gds-sys-color-l3-positive-02: #dcefdc;
+  --gds-sys-color-l3-positive-03: #cceacc;
+  --gds-sys-color-l3-negative-01: #b92f13;
+  --gds-sys-color-l3-negative-02: #fdebe8;
+  --gds-sys-color-l3-negative-03: #fad8d1;
+  --gds-sys-color-l3-notice-01: #005fb3;
+  --gds-sys-color-l3-notice-02: #e6f3ff;
+  --gds-sys-color-l3-notice-03: #cce7ff;
+  --gds-sys-color-l3-warning-01: #8f530a;
+  --gds-sys-color-l3-warning-02: #fce8cf;
+  --gds-sys-color-l3-warning-03: #fadcb7;
+  --gds-sys-color-l3-information-01: #0a0b0b;
+  --gds-sys-color-l3-information-02: #eaebeb;
+  --gds-sys-color-l3-information-03: #dfe1e1;
+  --gds-sys-color-l3-disabled-01: #eff0f0;
+  --gds-sys-color-l3-disabled-02: #a0a6a4;
+  --gds-sys-color-l3-disabled-03: #eff0f0;
+  --gds-sys-color-border-interactive: #777e7c;
+  --gds-sys-color-border-subtle-01: #dfe1e1;
+  --gds-sys-color-border-subtle-02: #eff0f0;
+  --gds-sys-color-border-strong: #0a0b0b;
+  --gds-sys-color-border-inverse: #ffffff;
+  --gds-sys-color-border-information-01: #0a0b0b;
+  --gds-sys-color-border-positive-01: #027839;
+  --gds-sys-color-border-negative-01: #b92f13;
+  --gds-sys-color-border-warning-01: #8f530a;
+  --gds-sys-color-border-notice-01: #005fb3;
+  --gds-sys-color-border-information-02: rgba(10, 11, 11, 0.4);
+  --gds-sys-color-border-positive-02: rgba(2, 120, 57, 0.4);
+  --gds-sys-color-border-negative-02: rgba(185, 47, 19, 0.4);
+  --gds-sys-color-border-warning-02: rgba(143, 83, 10, 0.4);
+  --gds-sys-color-border-notice-02: rgba(0, 95, 179, 0.4);
+  --gds-sys-color-content-neutral-01: #0a0b0b;
+  --gds-sys-color-content-neutral-02: #636967;
+  --gds-sys-color-content-neutral-03: #ffffff;
+  --gds-sys-color-content-neutral-04: #a0a6a4;
+  --gds-sys-color-content-inversed: #ffffff;
+  --gds-sys-color-content-brand-01: #003824;
+  --gds-sys-color-content-brand-02: #685631;
+  --gds-sys-color-content-positive-01: #027839;
+  --gds-sys-color-content-positive-02: #eaf6ea;
+  --gds-sys-color-content-positive-03: #026436;
+  --gds-sys-color-content-negative-01: #b92f13;
+  --gds-sys-color-content-negative-02: #fdebe8;
+  --gds-sys-color-content-warning-01: #8f530a;
+  --gds-sys-color-content-warning-02: #fce8cf;
+  --gds-sys-color-content-notice-01: #005fb3;
+  --gds-sys-color-content-notice-02: #e6f3ff;
+  --gds-sys-color-content-disabled-01: #a0a6a4;
+  --gds-sys-color-content-disabled-02: #f7f8f7;
+  --gds-sys-color-state-brand-01: #ffffff 20%;
+  --gds-sys-color-state-brand-02: #ffffff 35%;
+  --gds-sys-color-state-brand-03: #003824 6%;
+  --gds-sys-color-state-brand-04: #003824 14%;
+  --gds-sys-color-state-brand-05: #003824 6%;
+  --gds-sys-color-state-brand-06: #003824 14%;
+  --gds-sys-color-state-neutral-01: #ffffff 20%;
+  --gds-sys-color-state-neutral-02: #ffffff 35%;
+  --gds-sys-color-state-neutral-03: #000000 6%;
+  --gds-sys-color-state-neutral-04: #000000 14%;
+  --gds-sys-color-state-neutral-05: #000000 6%;
+  --gds-sys-color-state-neutral-06: #000000 14%;
+  --gds-sys-color-state-positive-01: #ffffff 12%;
+  --gds-sys-color-state-positive-02: #ffffff 23%;
+  --gds-sys-color-state-positive-03: #027839 8%;
+  --gds-sys-color-state-positive-04: #027839 16%;
+  --gds-sys-color-state-positive-05: #027839 8%;
+  --gds-sys-color-state-positive-06: #027839 16%;
+  --gds-sys-color-state-negative-01: #ffffff 8%;
+  --gds-sys-color-state-negative-02: #ffffff 16%;
+  --gds-sys-color-state-negative-03: #b92f13 8%;
+  --gds-sys-color-state-negative-04: #b92f13 16%;
+  --gds-sys-color-state-negative-05: #b92f13 8%;
+  --gds-sys-color-state-negative-06: #b92f13 16%;
+  --gds-sys-color-state-notice-01: #ffffff 20%;
+  --gds-sys-color-state-notice-02: #ffffff 35%;
+  --gds-sys-color-state-notice-03: #005fb3 8%;
+  --gds-sys-color-state-notice-04: #005fb3 16%;
+  --gds-sys-color-state-notice-05: #005fb3 8%;
+  --gds-sys-color-state-notice-06: #005fb3 16%;
+  --gds-sys-color-state-warning-01: #ffffff 20%;
+  --gds-sys-color-state-warning-02: #ffffff 35%;
+  --gds-sys-color-state-warning-03: #8f530a 8%;
+  --gds-sys-color-state-warning-04: #8f530a 16%;
+  --gds-sys-color-state-warning-05: #8f530a 8%;
+  --gds-sys-color-state-warning-06: #8f530a 16%;"
+`;
+
+exports[`test internal output matches the contents in snapshot for 2023/internal/variables.ref.css: tokens-internal-2023-internal-variables-ref-css 1`] = `
+"/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+  --gds-ref-color-blue-1: #fafdff;
+  --gds-ref-color-blue-2: #f5faff;
+  --gds-ref-color-blue-3: #f0f8ff;
+  --gds-ref-color-blue-4: #ebf5ff;
+  --gds-ref-color-blue-5: #e6f3ff;
+  --gds-ref-color-blue-6: #cce7ff;
+  --gds-ref-color-blue-7: #b3dbff;
+  --gds-ref-color-blue-8: #99cfff;
+  --gds-ref-color-blue-9: #80c3ff;
+  --gds-ref-color-blue-10: #66b8ff;
+  --gds-ref-color-blue-11: #4dacff;
+  --gds-ref-color-blue-12: #33a0ff;
+  --gds-ref-color-blue-13: #138fff;
+  --gds-ref-color-blue-14: #0088ff;
+  --gds-ref-color-blue-15: #007ae6;
+  --gds-ref-color-blue-16: #006dcc;
+  --gds-ref-color-blue-17: #005fb3;
+  --gds-ref-color-blue-18: #005299;
+  --gds-ref-color-blue-19: #004480;
+  --gds-ref-color-blue-20: #003666;
+  --gds-ref-color-blue-21: #00294d;
+  --gds-ref-color-blue-22: #001b33;
+  --gds-ref-color-blue-23: #000e1a;
+  --gds-ref-color-copper-1: #fdfdfc;
+  --gds-ref-color-copper-2: #fcfbf8;
+  --gds-ref-color-copper-3: #faf8f5;
+  --gds-ref-color-copper-4: #f8f6f1;
+  --gds-ref-color-copper-5: #f7f4ee;
+  --gds-ref-color-copper-6: #efe9dc;
+  --gds-ref-color-copper-7: #e7ddcb;
+  --gds-ref-color-copper-8: #ded2ba;
+  --gds-ref-color-copper-9: #d6c7a8;
+  --gds-ref-color-copper-10: #cebc97;
+  --gds-ref-color-copper-11: #c6b086;
+  --gds-ref-color-copper-12: #bea574;
+  --gds-ref-color-copper-13: #b69a63;
+  --gds-ref-color-copper-14: #ad8f52;
+  --gds-ref-color-copper-15: #a1844b;
+  --gds-ref-color-copper-16: #8b7241;
+  --gds-ref-color-copper-17: #796439;
+  --gds-ref-color-copper-18: #685631;
+  --gds-ref-color-copper-19: #574729;
+  --gds-ref-color-copper-20: #453921;
+  --gds-ref-color-copper-21: #342b18;
+  --gds-ref-color-copper-22: #231d10;
+  --gds-ref-color-copper-23: #110e08;
+  --gds-ref-color-green-1: #fbfdfb;
+  --gds-ref-color-green-2: #f8fcf8;
+  --gds-ref-color-green-3: #f4faf4;
+  --gds-ref-color-green-4: #f1f9f1;
+  --gds-ref-color-green-5: #eaf6ea;
+  --gds-ref-color-green-6: #dcefdc;
+  --gds-ref-color-green-7: #cceacc;
+  --gds-ref-color-green-8: #c3eac3;
+  --gds-ref-color-green-9: #b2e5b2;
+  --gds-ref-color-green-10: #9de79d;
+  --gds-ref-color-green-11: #8ae58d;
+  --gds-ref-color-green-12: #74e780;
+  --gds-ref-color-green-13: #63e378;
+  --gds-ref-color-green-14: #52e073;
+  --gds-ref-color-green-15: #38dc63;
+  --gds-ref-color-green-16: #26d95c;
+  --gds-ref-color-green-17: #17d350;
+  --gds-ref-color-green-18: #0bcb4b;
+  --gds-ref-color-green-19: #00bd49;
+  --gds-ref-color-green-20: #00ad43;
+  --gds-ref-color-green-21: #02a23f;
+  --gds-ref-color-green-22: #018d39;
+  --gds-ref-color-green-23: #027839;
+  --gds-ref-color-green-24: #026436;
+  --gds-ref-color-green-25: #015130;
+  --gds-ref-color-green-26: #003d26;
+  --gds-ref-color-green-27: #003824;
+  --gds-ref-color-green-28: #00291b;
+  --gds-ref-color-green-29: #00140d;
+  --gds-ref-color-green-30: #004f33;
+  --gds-ref-color-black: #000000;
+  --gds-ref-color-white: #ffffff;
+  --gds-ref-color-grey-1: #fcfdfc;
+  --gds-ref-color-grey-2: #fafafa;
+  --gds-ref-color-grey-3: #f7f8f7;
+  --gds-ref-color-grey-4: #f4f5f5;
+  --gds-ref-color-grey-5: #eff0f0;
+  --gds-ref-color-grey-6: #eaebeb;
+  --gds-ref-color-grey-7: #dfe1e1;
+  --gds-ref-color-grey-8: #d5d7d7;
+  --gds-ref-color-grey-9: #cacecc;
+  --gds-ref-color-grey-10: #c0c4c2;
+  --gds-ref-color-grey-11: #b5bab8;
+  --gds-ref-color-grey-12: #abb0ae;
+  --gds-ref-color-grey-13: #a0a6a4;
+  --gds-ref-color-grey-14: #969c9a;
+  --gds-ref-color-grey-15: #8b9290;
+  --gds-ref-color-grey-16: #818886;
+  --gds-ref-color-grey-17: #777e7c;
+  --gds-ref-color-grey-18: #6d7471;
+  --gds-ref-color-grey-19: #636967;
+  --gds-ref-color-grey-20: #595f5d;
+  --gds-ref-color-grey-21: #4f5452;
+  --gds-ref-color-grey-22: #454a48;
+  --gds-ref-color-grey-23: #3b3f3e;
+  --gds-ref-color-grey-24: #313533;
+  --gds-ref-color-grey-25: #282a29;
+  --gds-ref-color-grey-26: #1e201f;
+  --gds-ref-color-grey-27: #191a1a;
+  --gds-ref-color-grey-28: #141515;
+  --gds-ref-color-grey-29: #0f1010;
+  --gds-ref-color-grey-30: #0a0b0b;
+  --gds-ref-color-orange-1: #fffdfa;
+  --gds-ref-color-orange-2: #fefaf5;
+  --gds-ref-color-orange-3: #fef8f1;
+  --gds-ref-color-orange-4: #fef6ec;
+  --gds-ref-color-orange-5: #fdf3e7;
+  --gds-ref-color-orange-6: #fce8cf;
+  --gds-ref-color-orange-7: #fadcb7;
+  --gds-ref-color-orange-8: #f8d0a0;
+  --gds-ref-color-orange-9: #f7c588;
+  --gds-ref-color-orange-10: #f5b970;
+  --gds-ref-color-orange-11: #f3ae58;
+  --gds-ref-color-orange-12: #f19e38;
+  --gds-ref-color-orange-13: #f09628;
+  --gds-ref-color-orange-14: #ee8b11;
+  --gds-ref-color-orange-15: #D77DOF;
+  --gds-ref-color-orange-16: #BF6FOD;
+  --gds-ref-color-orange-17: #a7610c;
+  --gds-ref-color-orange-18: #8f530a;
+  --gds-ref-color-orange-19: #774508;
+  --gds-ref-color-orange-20: #5f3707;
+  --gds-ref-color-orange-21: #482a05;
+  --gds-ref-color-orange-22: #301c03;
+  --gds-ref-color-orange-23: #180e02;
+  --gds-ref-color-red-1: #fffbfa;
+  --gds-ref-color-red-2: #fef7f6;
+  --gds-ref-color-red-3: #fef3f1;
+  --gds-ref-color-red-4: #fdefed;
+  --gds-ref-color-red-5: #fdebe8;
+  --gds-ref-color-red-6: #fad8d1;
+  --gds-ref-color-red-7: #f8c4ba;
+  --gds-ref-color-red-8: #f5b0a3;
+  --gds-ref-color-red-9: #f39d8c;
+  --gds-ref-color-red-10: #f08975;
+  --gds-ref-color-red-11: #ee765d;
+  --gds-ref-color-red-12: #eb583c;
+  --gds-ref-color-red-13: #e94e2f;
+  --gds-ref-color-red-14: #e73b18;
+  --gds-ref-color-red-15: #d03516;
+  --gds-ref-color-red-16: #b92f13;
+  --gds-ref-color-red-17: #a22911;
+  --gds-ref-color-red-18: #8a230f;
+  --gds-ref-color-red-19: #731d0c;
+  --gds-ref-color-red-20: #5c170a;
+  --gds-ref-color-red-21: #451207;
+  --gds-ref-color-red-22: #2e0c05;
+  --gds-ref-color-red-23: #170602;
+  --gds-ref-color-yellow-1: #fffefa;
+  --gds-ref-color-yellow-2: #fffdf5;
+  --gds-ref-color-yellow-3: #fffbf0;
+  --gds-ref-color-yellow-4: #fffaeb;
+  --gds-ref-color-yellow-5: #fff9e6;
+  --gds-ref-color-yellow-6: #fff3cc;
+  --gds-ref-color-yellow-7: #ffedb3;
+  --gds-ref-color-yellow-8: #ffe799;
+  --gds-ref-color-yellow-9: #ffe180;
+  --gds-ref-color-yellow-10: #ffdb66;
+  --gds-ref-color-yellow-11: #ffd54d;
+  --gds-ref-color-yellow-12: #ffcf33;
+  --gds-ref-color-yellow-13: #ffc91a;
+  --gds-ref-color-yellow-14: #fec200;
+  --gds-ref-color-yellow-15: #e6b000;
+  --gds-ref-color-yellow-16: #cc9c00;
+  --gds-ref-color-yellow-17: #b38900;
+  --gds-ref-color-yellow-18: #997500;
+  --gds-ref-color-yellow-19: #806200;
+  --gds-ref-color-yellow-20: #664e00;
+  --gds-ref-color-yellow-21: #4d3b00;
+  --gds-ref-color-yellow-22: #332700;
+  --gds-ref-color-yellow-23: #1a1400;"
+`;
+
+exports[`test internal output matches the contents in snapshot for 2023/internal/variables.shadows.css: tokens-internal-2023-internal-variables-shadows-css 1`] = `
+"/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+  --gds-sys-shadow-xs-01: 0px 1px 2px 0px rgba(10, 11, 10, 0.05);
+  --gds-sys-shadow-xs-02: 0px 0px 0px 0px transparent;
+  --gds-sys-shadow-s-01: 0px 1px 2px 0px rgba(10, 11, 10, 0.10);
+  --gds-sys-shadow-s-02: 0px 1px 3px 0px rgba(10, 11, 10, 0.06);
+  --gds-sys-shadow-m-01: 0px 2px 4px -2px rgba(10, 11, 10, 0.10);
+  --gds-sys-shadow-m-02: 0px 4px 8px -2px rgba(10, 11, 10, 0.06);
+  --gds-sys-shadow-l-01: 0px 4px 6px -2px rgba(10, 11, 10, 0.08);
+  --gds-sys-shadow-l-02: 0px 12px 16px -4px rgba(10, 11, 10, 0.03);
+  --gds-sys-shadow-xl-01: 0px 20px 24px -4px rgba(10, 11, 10, 0.08);
+  --gds-sys-shadow-xl-02: 0px 0px 0px 0px rgba(10, 11, 10, 0.08);
+  --gds-sys-shadow-2xl-01: 0px 24px 48px -12px rgba(10, 11, 10, 0.18);
+  --gds-sys-shadow-2xl-02: 0px 0px 0px 0px transparent;"
+`;
+
+exports[`test scss output matches the contents in snapshot for 2023/scss/_mixin.colors.ref.scss: tokens-scss-2023-scss--mixin-colors-ref-scss 1`] = `
+"/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+@mixin add-variables {
+  --gds-ref-color-blue-1: #fafdff;
+  --gds-ref-color-blue-2: #f5faff;
+  --gds-ref-color-blue-3: #f0f8ff;
+  --gds-ref-color-blue-4: #ebf5ff;
+  --gds-ref-color-blue-5: #e6f3ff;
+  --gds-ref-color-blue-6: #cce7ff;
+  --gds-ref-color-blue-7: #b3dbff;
+  --gds-ref-color-blue-8: #99cfff;
+  --gds-ref-color-blue-9: #80c3ff;
+  --gds-ref-color-blue-10: #66b8ff;
+  --gds-ref-color-blue-11: #4dacff;
+  --gds-ref-color-blue-12: #33a0ff;
+  --gds-ref-color-blue-13: #138fff;
+  --gds-ref-color-blue-14: #0088ff;
+  --gds-ref-color-blue-15: #007ae6;
+  --gds-ref-color-blue-16: #006dcc;
+  --gds-ref-color-blue-17: #005fb3;
+  --gds-ref-color-blue-18: #005299;
+  --gds-ref-color-blue-19: #004480;
+  --gds-ref-color-blue-20: #003666;
+  --gds-ref-color-blue-21: #00294d;
+  --gds-ref-color-blue-22: #001b33;
+  --gds-ref-color-blue-23: #000e1a;
+  --gds-ref-color-copper-1: #fdfdfc;
+  --gds-ref-color-copper-2: #fcfbf8;
+  --gds-ref-color-copper-3: #faf8f5;
+  --gds-ref-color-copper-4: #f8f6f1;
+  --gds-ref-color-copper-5: #f7f4ee;
+  --gds-ref-color-copper-6: #efe9dc;
+  --gds-ref-color-copper-7: #e7ddcb;
+  --gds-ref-color-copper-8: #ded2ba;
+  --gds-ref-color-copper-9: #d6c7a8;
+  --gds-ref-color-copper-10: #cebc97;
+  --gds-ref-color-copper-11: #c6b086;
+  --gds-ref-color-copper-12: #bea574;
+  --gds-ref-color-copper-13: #b69a63;
+  --gds-ref-color-copper-14: #ad8f52;
+  --gds-ref-color-copper-15: #a1844b;
+  --gds-ref-color-copper-16: #8b7241;
+  --gds-ref-color-copper-17: #796439;
+  --gds-ref-color-copper-18: #685631;
+  --gds-ref-color-copper-19: #574729;
+  --gds-ref-color-copper-20: #453921;
+  --gds-ref-color-copper-21: #342b18;
+  --gds-ref-color-copper-22: #231d10;
+  --gds-ref-color-copper-23: #110e08;
+  --gds-ref-color-green-1: #fbfdfb;
+  --gds-ref-color-green-2: #f8fcf8;
+  --gds-ref-color-green-3: #f4faf4;
+  --gds-ref-color-green-4: #f1f9f1;
+  --gds-ref-color-green-5: #eaf6ea;
+  --gds-ref-color-green-6: #dcefdc;
+  --gds-ref-color-green-7: #cceacc;
+  --gds-ref-color-green-8: #c3eac3;
+  --gds-ref-color-green-9: #b2e5b2;
+  --gds-ref-color-green-10: #9de79d;
+  --gds-ref-color-green-11: #8ae58d;
+  --gds-ref-color-green-12: #74e780;
+  --gds-ref-color-green-13: #63e378;
+  --gds-ref-color-green-14: #52e073;
+  --gds-ref-color-green-15: #38dc63;
+  --gds-ref-color-green-16: #26d95c;
+  --gds-ref-color-green-17: #17d350;
+  --gds-ref-color-green-18: #0bcb4b;
+  --gds-ref-color-green-19: #00bd49;
+  --gds-ref-color-green-20: #00ad43;
+  --gds-ref-color-green-21: #02a23f;
+  --gds-ref-color-green-22: #018d39;
+  --gds-ref-color-green-23: #027839;
+  --gds-ref-color-green-24: #026436;
+  --gds-ref-color-green-25: #015130;
+  --gds-ref-color-green-26: #003d26;
+  --gds-ref-color-green-27: #003824;
+  --gds-ref-color-green-28: #00291b;
+  --gds-ref-color-green-29: #00140d;
+  --gds-ref-color-green-30: #004f33;
+  --gds-ref-color-black: #000000;
+  --gds-ref-color-white: #ffffff;
+  --gds-ref-color-grey-1: #fcfdfc;
+  --gds-ref-color-grey-2: #fafafa;
+  --gds-ref-color-grey-3: #f7f8f7;
+  --gds-ref-color-grey-4: #f4f5f5;
+  --gds-ref-color-grey-5: #eff0f0;
+  --gds-ref-color-grey-6: #eaebeb;
+  --gds-ref-color-grey-7: #dfe1e1;
+  --gds-ref-color-grey-8: #d5d7d7;
+  --gds-ref-color-grey-9: #cacecc;
+  --gds-ref-color-grey-10: #c0c4c2;
+  --gds-ref-color-grey-11: #b5bab8;
+  --gds-ref-color-grey-12: #abb0ae;
+  --gds-ref-color-grey-13: #a0a6a4;
+  --gds-ref-color-grey-14: #969c9a;
+  --gds-ref-color-grey-15: #8b9290;
+  --gds-ref-color-grey-16: #818886;
+  --gds-ref-color-grey-17: #777e7c;
+  --gds-ref-color-grey-18: #6d7471;
+  --gds-ref-color-grey-19: #636967;
+  --gds-ref-color-grey-20: #595f5d;
+  --gds-ref-color-grey-21: #4f5452;
+  --gds-ref-color-grey-22: #454a48;
+  --gds-ref-color-grey-23: #3b3f3e;
+  --gds-ref-color-grey-24: #313533;
+  --gds-ref-color-grey-25: #282a29;
+  --gds-ref-color-grey-26: #1e201f;
+  --gds-ref-color-grey-27: #191a1a;
+  --gds-ref-color-grey-28: #141515;
+  --gds-ref-color-grey-29: #0f1010;
+  --gds-ref-color-grey-30: #0a0b0b;
+  --gds-ref-color-orange-1: #fffdfa;
+  --gds-ref-color-orange-2: #fefaf5;
+  --gds-ref-color-orange-3: #fef8f1;
+  --gds-ref-color-orange-4: #fef6ec;
+  --gds-ref-color-orange-5: #fdf3e7;
+  --gds-ref-color-orange-6: #fce8cf;
+  --gds-ref-color-orange-7: #fadcb7;
+  --gds-ref-color-orange-8: #f8d0a0;
+  --gds-ref-color-orange-9: #f7c588;
+  --gds-ref-color-orange-10: #f5b970;
+  --gds-ref-color-orange-11: #f3ae58;
+  --gds-ref-color-orange-12: #f19e38;
+  --gds-ref-color-orange-13: #f09628;
+  --gds-ref-color-orange-14: #ee8b11;
+  --gds-ref-color-orange-15: #D77DOF;
+  --gds-ref-color-orange-16: #BF6FOD;
+  --gds-ref-color-orange-17: #a7610c;
+  --gds-ref-color-orange-18: #8f530a;
+  --gds-ref-color-orange-19: #774508;
+  --gds-ref-color-orange-20: #5f3707;
+  --gds-ref-color-orange-21: #482a05;
+  --gds-ref-color-orange-22: #301c03;
+  --gds-ref-color-orange-23: #180e02;
+  --gds-ref-color-red-1: #fffbfa;
+  --gds-ref-color-red-2: #fef7f6;
+  --gds-ref-color-red-3: #fef3f1;
+  --gds-ref-color-red-4: #fdefed;
+  --gds-ref-color-red-5: #fdebe8;
+  --gds-ref-color-red-6: #fad8d1;
+  --gds-ref-color-red-7: #f8c4ba;
+  --gds-ref-color-red-8: #f5b0a3;
+  --gds-ref-color-red-9: #f39d8c;
+  --gds-ref-color-red-10: #f08975;
+  --gds-ref-color-red-11: #ee765d;
+  --gds-ref-color-red-12: #eb583c;
+  --gds-ref-color-red-13: #e94e2f;
+  --gds-ref-color-red-14: #e73b18;
+  --gds-ref-color-red-15: #d03516;
+  --gds-ref-color-red-16: #b92f13;
+  --gds-ref-color-red-17: #a22911;
+  --gds-ref-color-red-18: #8a230f;
+  --gds-ref-color-red-19: #731d0c;
+  --gds-ref-color-red-20: #5c170a;
+  --gds-ref-color-red-21: #451207;
+  --gds-ref-color-red-22: #2e0c05;
+  --gds-ref-color-red-23: #170602;
+  --gds-ref-color-yellow-1: #fffefa;
+  --gds-ref-color-yellow-2: #fffdf5;
+  --gds-ref-color-yellow-3: #fffbf0;
+  --gds-ref-color-yellow-4: #fffaeb;
+  --gds-ref-color-yellow-5: #fff9e6;
+  --gds-ref-color-yellow-6: #fff3cc;
+  --gds-ref-color-yellow-7: #ffedb3;
+  --gds-ref-color-yellow-8: #ffe799;
+  --gds-ref-color-yellow-9: #ffe180;
+  --gds-ref-color-yellow-10: #ffdb66;
+  --gds-ref-color-yellow-11: #ffd54d;
+  --gds-ref-color-yellow-12: #ffcf33;
+  --gds-ref-color-yellow-13: #ffc91a;
+  --gds-ref-color-yellow-14: #fec200;
+  --gds-ref-color-yellow-15: #e6b000;
+  --gds-ref-color-yellow-16: #cc9c00;
+  --gds-ref-color-yellow-17: #b38900;
+  --gds-ref-color-yellow-18: #997500;
+  --gds-ref-color-yellow-19: #806200;
+  --gds-ref-color-yellow-20: #664e00;
+  --gds-ref-color-yellow-21: #4d3b00;
+  --gds-ref-color-yellow-22: #332700;
+  --gds-ref-color-yellow-23: #1a1400;
+}
+"
+`;
+
+exports[`test scss output matches the contents in snapshot for 2023/scss/_mixin.dark.scss: tokens-scss-2023-scss--mixin-dark-scss 1`] = `
+"/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+@mixin add-variables {
+  --gds-sys-color-l1-neutral-01: #0a0b0b;
+  --gds-sys-color-l1-neutral-02: #282a29;
+  --gds-sys-color-l1-brand-01: #003824;
+  --gds-sys-color-l1-inversed: #ffffff;
+  --gds-sys-color-l2-neutral-01: #191a1a;
+  --gds-sys-color-l2-neutral-02: #191a1a;
+  --gds-sys-color-l2-neutral-03: #3b3f3e;
+  --gds-sys-color-l2-brand-01: #003824;
+  --gds-sys-color-l2-brand-02: #231d10;
+  --gds-sys-color-l2-positive-01: #003d26;
+  --gds-sys-color-l2-negative-01: #451207;
+  --gds-sys-color-l2-warning-01: #482a05;
+  --gds-sys-color-l2-information-01: #1e201f;
+  --gds-sys-color-l2-notice-01: #00294d;
+  --gds-sys-color-l3-brand-01: #d5d7d7;
+  --gds-sys-color-l3-brand-02: #efe9dc;
+  --gds-sys-color-l3-brand-03: #e7ddcb;
+  --gds-sys-color-l3-neutral-01: #d5d7d7;
+  --gds-sys-color-l3-neutral-02: #282a29;
+  --gds-sys-color-l3-neutral-03: #3b3f3e;
+  --gds-sys-color-l3-neutral-04: #3b3f3e;
+  --gds-sys-color-l3-neutral-05: #003824;
+  --gds-sys-color-l3-positive-01: #026436;
+  --gds-sys-color-l3-positive-02: #015130;
+  --gds-sys-color-l3-positive-03: #003d26;
+  --gds-sys-color-l3-negative-01: #a22911;
+  --gds-sys-color-l3-negative-02: #731d0c;
+  --gds-sys-color-l3-negative-03: #5c170a;
+  --gds-sys-color-l3-notice-01: #005fb3;
+  --gds-sys-color-l3-notice-02: #004480;
+  --gds-sys-color-l3-notice-03: #003666;
+  --gds-sys-color-l3-warning-01: #f19e38;
+  --gds-sys-color-l3-warning-02: #774508;
+  --gds-sys-color-l3-warning-03: #5f3707;
+  --gds-sys-color-l3-information-01: #d5d7d7;
+  --gds-sys-color-l3-information-02: #313533;
+  --gds-sys-color-l3-information-03: #595f5d;
+  --gds-sys-color-l3-disabled-01: #595f5d;
+  --gds-sys-color-l3-disabled-02: #595f5d;
+  --gds-sys-color-l3-disabled-03: #818886;
+  --gds-sys-color-border-interactive: #a0a6a4;
+  --gds-sys-color-border-subtle-01: #595f5d;
+  --gds-sys-color-border-subtle-02: #777e7c;
+  --gds-sys-color-border-strong: #f7f8f7;
+  --gds-sys-color-border-inverse: #ffffff;
+  --gds-sys-color-border-information-01: #636967;
+  --gds-sys-color-border-positive-01: #8ae58d;
+  --gds-sys-color-border-negative-01: #f08975;
+  --gds-sys-color-border-warning-01: #f5b970;
+  --gds-sys-color-border-notice-01: #66b8ff;
+  --gds-sys-color-border-information-02: rgba(99, 105, 103, 0.4);
+  --gds-sys-color-border-positive-02: rgba(138, 229, 141, 0.4);
+  --gds-sys-color-border-negative-02: rgba(240, 137, 117, 0.4);
+  --gds-sys-color-border-warning-02: rgba(245, 185, 112, 0.4);
+  --gds-sys-color-border-notice-02: rgba(102, 184, 255, 0.4);
+  --gds-sys-color-content-neutral-01: #f7f8f7;
+  --gds-sys-color-content-neutral-02: #abb0ae;
+  --gds-sys-color-content-neutral-03: #0a0b0b;
+  --gds-sys-color-content-neutral-04: #595f5d;
+  --gds-sys-color-content-inversed: #f7f8f7;
+  --gds-sys-color-content-brand-01: #003824;
+  --gds-sys-color-content-brand-02: #d6c7a8;
+  --gds-sys-color-content-positive-01: #8ae58d;
+  --gds-sys-color-content-positive-02: #027839;
+  --gds-sys-color-content-positive-03: #8ae58d;
+  --gds-sys-color-content-negative-01: #f08975;
+  --gds-sys-color-content-negative-02: #f5b0a3;
+  --gds-sys-color-content-warning-01: #f5b970;
+  --gds-sys-color-content-warning-02: #fce8cf;
+  --gds-sys-color-content-notice-01: #66b8ff;
+  --gds-sys-color-content-notice-02: #99cfff;
+  --gds-sys-color-content-disabled-01: #cacecc;
+  --gds-sys-color-content-disabled-02: #cacecc;
+  --gds-sys-color-state-brand-01: rgba(0, 0, 0, 0.2);
+  --gds-sys-color-state-brand-02: rgba(0, 0, 0, 0.3);
+  --gds-sys-color-state-brand-03: rgba(0, 56, 36, 0.3);
+  --gds-sys-color-state-brand-04: rgba(0, 56, 36, 0.7);
+  --gds-sys-color-state-brand-05: rgba(0, 56, 36, 0.5);
+  --gds-sys-color-state-brand-06: rgba(0, 56, 36, 0.9);
+  --gds-sys-color-state-neutral-01: rgba(0, 0, 0, 0.2);
+  --gds-sys-color-state-neutral-02: rgba(0, 0, 0, 0.35);
+  --gds-sys-color-state-neutral-03: rgba(255, 255, 255, 0.2);
+  --gds-sys-color-state-neutral-04: rgba(255, 255, 255, 0.3);
+  --gds-sys-color-state-neutral-05: rgba(255, 255, 255, 0.12);
+  --gds-sys-color-state-neutral-06: rgba(255, 255, 255, 0.25);
+  --gds-sys-color-state-positive-01: rgba(0, 0, 0, 0.12);
+  --gds-sys-color-state-positive-02: rgba(0, 0, 0, 0.23);
+  --gds-sys-color-state-positive-03: rgba(255, 255, 255, 0.08);
+  --gds-sys-color-state-positive-04: rgba(255, 255, 255, 0.14);
+  --gds-sys-color-state-positive-05: rgba(2, 120, 57, 0.3);
+  --gds-sys-color-state-positive-06: rgba(2, 120, 57, 0.5);
+  --gds-sys-color-state-negative-01: rgba(0, 0, 0, 0.15);
+  --gds-sys-color-state-negative-02: rgba(0, 0, 0, 0.3);
+  --gds-sys-color-state-negative-03: rgba(255, 255, 255, 0.08);
+  --gds-sys-color-state-negative-04: rgba(255, 255, 255, 0.14);
+  --gds-sys-color-state-negative-05: rgba(185, 47, 19, 0.3);
+  --gds-sys-color-state-negative-06: rgba(185, 47, 19, 0.45);
+  --gds-sys-color-state-notice-01: rgba(0, 0, 0, 0.12);
+  --gds-sys-color-state-notice-02: rgba(0, 0, 0, 0.2);
+  --gds-sys-color-state-notice-03: rgba(255, 255, 255, 0.06);
+  --gds-sys-color-state-notice-04: rgba(255, 255, 255, 0.1);
+  --gds-sys-color-state-notice-05: rgba(0, 95, 179, 0.4);
+  --gds-sys-color-state-notice-06: rgba(0, 95, 179, 0.6);
+  --gds-sys-color-state-warning-01: rgba(0, 0, 0, 0.06);
+  --gds-sys-color-state-warning-02: rgba(0, 0, 0, 0.14);
+  --gds-sys-color-state-warning-03: rgba(255, 255, 255, 0.08);
+  --gds-sys-color-state-warning-04: rgba(255, 255, 255, 0.14);
+  --gds-sys-color-state-warning-05: rgba(241, 158, 56, 0.12);
+  --gds-sys-color-state-warning-06: rgba(241, 158, 56, 0.2);
+}
+"
+`;
+
+exports[`test scss output matches the contents in snapshot for 2023/scss/_mixin.light.scss: tokens-scss-2023-scss--mixin-light-scss 1`] = `
+"/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+@mixin add-variables {
+  --gds-sys-color-l1-neutral-01: #ffffff;
+  --gds-sys-color-l1-neutral-02: #eaebeb;
+  --gds-sys-color-l1-brand-01: #003824;
+  --gds-sys-color-l1-inversed: #0a0b0b;
+  --gds-sys-color-l2-neutral-01: #f7f8f7;
+  --gds-sys-color-l2-neutral-02: #ffffff;
+  --gds-sys-color-l2-neutral-03: #0a0b0b;
+  --gds-sys-color-l2-brand-01: #003824;
+  --gds-sys-color-l2-brand-02: #f8f6f1;
+  --gds-sys-color-l2-positive-01: #f1f9f1;
+  --gds-sys-color-l2-negative-01: #fef7f6;
+  --gds-sys-color-l2-warning-01: #fef8f1;
+  --gds-sys-color-l2-information-01: #f7f8f7;
+  --gds-sys-color-l2-notice-01: #f5faff;
+  --gds-sys-color-l3-brand-01: #003824;
+  --gds-sys-color-l3-brand-02: #efe9dc;
+  --gds-sys-color-l3-brand-03: #e7ddcb;
+  --gds-sys-color-l3-neutral-01: #0a0b0b;
+  --gds-sys-color-l3-neutral-02: #eaebeb;
+  --gds-sys-color-l3-neutral-03: #d5d7d7;
+  --gds-sys-color-l3-neutral-04: #ffffff;
+  --gds-sys-color-l3-neutral-05: #ffffff;
+  --gds-sys-color-l3-positive-01: #027839;
+  --gds-sys-color-l3-positive-02: #dcefdc;
+  --gds-sys-color-l3-positive-03: #cceacc;
+  --gds-sys-color-l3-negative-01: #b92f13;
+  --gds-sys-color-l3-negative-02: #fdebe8;
+  --gds-sys-color-l3-negative-03: #fad8d1;
+  --gds-sys-color-l3-notice-01: #005fb3;
+  --gds-sys-color-l3-notice-02: #e6f3ff;
+  --gds-sys-color-l3-notice-03: #cce7ff;
+  --gds-sys-color-l3-warning-01: #8f530a;
+  --gds-sys-color-l3-warning-02: #fce8cf;
+  --gds-sys-color-l3-warning-03: #fadcb7;
+  --gds-sys-color-l3-information-01: #0a0b0b;
+  --gds-sys-color-l3-information-02: #eaebeb;
+  --gds-sys-color-l3-information-03: #dfe1e1;
+  --gds-sys-color-l3-disabled-01: #eff0f0;
+  --gds-sys-color-l3-disabled-02: #a0a6a4;
+  --gds-sys-color-l3-disabled-03: #eff0f0;
+  --gds-sys-color-border-interactive: #777e7c;
+  --gds-sys-color-border-subtle-01: #dfe1e1;
+  --gds-sys-color-border-subtle-02: #eff0f0;
+  --gds-sys-color-border-strong: #0a0b0b;
+  --gds-sys-color-border-inverse: #ffffff;
+  --gds-sys-color-border-information-01: #0a0b0b;
+  --gds-sys-color-border-positive-01: #027839;
+  --gds-sys-color-border-negative-01: #b92f13;
+  --gds-sys-color-border-warning-01: #8f530a;
+  --gds-sys-color-border-notice-01: #005fb3;
+  --gds-sys-color-border-information-02: rgba(10, 11, 11, 0.4);
+  --gds-sys-color-border-positive-02: rgba(2, 120, 57, 0.4);
+  --gds-sys-color-border-negative-02: rgba(185, 47, 19, 0.4);
+  --gds-sys-color-border-warning-02: rgba(143, 83, 10, 0.4);
+  --gds-sys-color-border-notice-02: rgba(0, 95, 179, 0.4);
+  --gds-sys-color-content-neutral-01: #0a0b0b;
+  --gds-sys-color-content-neutral-02: #636967;
+  --gds-sys-color-content-neutral-03: #ffffff;
+  --gds-sys-color-content-neutral-04: #a0a6a4;
+  --gds-sys-color-content-inversed: #ffffff;
+  --gds-sys-color-content-brand-01: #003824;
+  --gds-sys-color-content-brand-02: #685631;
+  --gds-sys-color-content-positive-01: #027839;
+  --gds-sys-color-content-positive-02: #eaf6ea;
+  --gds-sys-color-content-positive-03: #026436;
+  --gds-sys-color-content-negative-01: #b92f13;
+  --gds-sys-color-content-negative-02: #fdebe8;
+  --gds-sys-color-content-warning-01: #8f530a;
+  --gds-sys-color-content-warning-02: #fce8cf;
+  --gds-sys-color-content-notice-01: #005fb3;
+  --gds-sys-color-content-notice-02: #e6f3ff;
+  --gds-sys-color-content-disabled-01: #a0a6a4;
+  --gds-sys-color-content-disabled-02: #f7f8f7;
+  --gds-sys-color-state-brand-01: rgba(255, 255, 255, 0.2);
+  --gds-sys-color-state-brand-02: rgba(255, 255, 255, 0.35);
+  --gds-sys-color-state-brand-03: rgba(0, 56, 36, 0.06);
+  --gds-sys-color-state-brand-04: rgba(0, 56, 36, 0.14);
+  --gds-sys-color-state-brand-05: rgba(0, 56, 36, 0.06);
+  --gds-sys-color-state-brand-06: rgba(0, 56, 36, 0.14);
+  --gds-sys-color-state-neutral-01: rgba(255, 255, 255, 0.2);
+  --gds-sys-color-state-neutral-02: rgba(255, 255, 255, 0.35);
+  --gds-sys-color-state-neutral-03: rgba(0, 0, 0, 0.06);
+  --gds-sys-color-state-neutral-04: rgba(0, 0, 0, 0.14);
+  --gds-sys-color-state-neutral-05: rgba(0, 0, 0, 0.06);
+  --gds-sys-color-state-neutral-06: rgba(0, 0, 0, 0.14);
+  --gds-sys-color-state-positive-01: rgba(255, 255, 255, 0.12);
+  --gds-sys-color-state-positive-02: rgba(255, 255, 255, 0.23);
+  --gds-sys-color-state-positive-03: rgba(2, 120, 57, 0.08);
+  --gds-sys-color-state-positive-04: rgba(2, 120, 57, 0.16);
+  --gds-sys-color-state-positive-05: rgba(2, 120, 57, 0.08);
+  --gds-sys-color-state-positive-06: rgba(2, 120, 57, 0.16);
+  --gds-sys-color-state-negative-01: rgba(255, 255, 255, 0.08);
+  --gds-sys-color-state-negative-02: rgba(255, 255, 255, 0.16);
+  --gds-sys-color-state-negative-03: rgba(185, 47, 19, 0.08);
+  --gds-sys-color-state-negative-04: rgba(185, 47, 19, 0.16);
+  --gds-sys-color-state-negative-05: rgba(185, 47, 19, 0.08);
+  --gds-sys-color-state-negative-06: rgba(185, 47, 19, 0.16);
+  --gds-sys-color-state-notice-01: rgba(255, 255, 255, 0.2);
+  --gds-sys-color-state-notice-02: rgba(255, 255, 255, 0.35);
+  --gds-sys-color-state-notice-03: rgba(0, 95, 179, 0.08);
+  --gds-sys-color-state-notice-04: rgba(0, 95, 179, 0.16);
+  --gds-sys-color-state-notice-05: rgba(0, 95, 179, 0.08);
+  --gds-sys-color-state-notice-06: rgba(0, 95, 179, 0.16);
+  --gds-sys-color-state-warning-01: rgba(255, 255, 255, 0.2);
+  --gds-sys-color-state-warning-02: rgba(255, 255, 255, 0.35);
+  --gds-sys-color-state-warning-03: rgba(143, 83, 10, 0.08);
+  --gds-sys-color-state-warning-04: rgba(143, 83, 10, 0.16);
+  --gds-sys-color-state-warning-05: rgba(143, 83, 10, 0.08);
+  --gds-sys-color-state-warning-06: rgba(143, 83, 10, 0.16);
+}
+"
+`;
+
+exports[`test scss output matches the contents in snapshot for 2023/scss/variables.base.scss: tokens-scss-2023-scss-variables-base-scss 1`] = `
+"
+// Do not edit directly, this file was auto-generated.
+
+$gds-sys-state-hover-state-layer-opacity: 0.1;
+$gds-sys-motion-easing-ease-in: 0.64, 0, 0.78, 0;
+$gds-sys-motion-easing-ease-in-out: 0.83, 0, 0.17, 1;
+$gds-sys-motion-easing-ease-out: 0.22, 1, 0.36, 1;
+$gds-sys-motion-easing-linear: 0, 0, 1, 1;
+$gds-sys-motion-duration-fastest: .2s;
+$gds-sys-motion-duration-fast: .4s;
+$gds-sys-motion-duration-default: .5s;
+$gds-sys-motion-duration-slow: 1s;
+$gds-sys-motion-duration-slowest: 1.5s;
+$gds-sys-viewport-0: 0;
+$gds-sys-viewport-2xs: 320;
+$gds-sys-viewport-xs: 425;
+$gds-sys-viewport-s: 768;
+$gds-sys-viewport-m: 1024;
+$gds-sys-viewport-l: 1280;
+$gds-sys-viewport-xl: 1440;
+$gds-sys-viewport-2xl: 2560;
+$gds-sys-viewport-3xl: 3840;
+$gds-sys-viewport-4xl: 4320;
+$gds-sys-viewport-5xl: 6016;
+$gds-sys-viewport-6xl: 7680;
+$gds-sys-text-family: SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-weight-light: 300;
+$gds-sys-text-weight-regular: 400;
+$gds-sys-text-weight-book: 450;
+$gds-sys-text-weight-medium: 500;
+$gds-sys-text-weight-bold: 700;
+$gds-sys-text-heading-xl: 450 2rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-heading-l: 450 1.75rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-heading-m: 450 1.5rem/2rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-heading-s: 450 1.25rem/1.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-heading-xs: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-heading-2xs: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-detail-book-m: 450 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-detail-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-detail-book-xs: 450 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-detail-regular-m: 400 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-detail-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-detail-regular-xs: 400 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-book-l: 450 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-book-m: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-regular-l: 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-regular-m: 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-italic-l: italic 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-italic-m: italic 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-italic-s: italic 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-display-2xl: 450 5.125rem/5.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-display-xl: 450 4rem/4.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-display-l: 450 3rem/3.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-display-m: 450 2.25rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-display-s: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-preamble-2xl: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-preamble-xl: 450 1.75rem/2.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-preamble-l: 450 1.5rem/2rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-preamble-m: 450 1.25rem/1.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-preamble-s: 450 1.125rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-preamble-xs: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-space-0: 0px;
+$gds-sys-space-5xs: 1px;
+$gds-sys-space-4xs: 2px;
+$gds-sys-space-3xs: 4px;
+$gds-sys-space-2xs: 6px;
+$gds-sys-space-xs: 8px;
+$gds-sys-space-s: 12px;
+$gds-sys-space-m: 16px;
+$gds-sys-space-l: 20px;
+$gds-sys-space-xl: 24px;
+$gds-sys-space-2xl: 32px;
+$gds-sys-space-3xl: 40px;
+$gds-sys-space-4xl: 48px;
+$gds-sys-space-5xl: 64px;
+$gds-sys-space-6xl: 80px;
+$gds-sys-space-7xl: 96px;
+$gds-sys-space-8xl: 112px;
+$gds-sys-space-9xl: 120px;
+$gds-sys-space-max: 999px;
+$gds-sys-radius-0: 0px;
+$gds-sys-radius-none: 0px;
+$gds-sys-radius-5xs: 1px;
+$gds-sys-radius-4xs: 2px;
+$gds-sys-radius-3xs: 4px;
+$gds-sys-radius-2xs: 6px;
+$gds-sys-radius-xs: 8px;
+$gds-sys-radius-s: 12px;
+$gds-sys-radius-m: 16px;
+$gds-sys-radius-l: 20px;
+$gds-sys-radius-xl: 24px;
+$gds-sys-radius-2xl: 32px;
+$gds-sys-radius-3xl: 40px;
+$gds-sys-radius-4xl: 48px;
+$gds-sys-radius-5xl: 64px;
+$gds-sys-radius-max: 999px;
+"
+`;
+
+exports[`test scss output matches the contents in snapshot for 2023/scss/variables.colors.ref.scss: tokens-scss-2023-scss-variables-colors-ref-scss 1`] = `
+"
+// Do not edit directly, this file was auto-generated.
+
+$gds-ref-color-blue-1: #fafdff;
+$gds-ref-color-blue-2: #f5faff;
+$gds-ref-color-blue-3: #f0f8ff;
+$gds-ref-color-blue-4: #ebf5ff;
+$gds-ref-color-blue-5: #e6f3ff;
+$gds-ref-color-blue-6: #cce7ff;
+$gds-ref-color-blue-7: #b3dbff;
+$gds-ref-color-blue-8: #99cfff;
+$gds-ref-color-blue-9: #80c3ff;
+$gds-ref-color-blue-10: #66b8ff;
+$gds-ref-color-blue-11: #4dacff;
+$gds-ref-color-blue-12: #33a0ff;
+$gds-ref-color-blue-13: #138fff;
+$gds-ref-color-blue-14: #0088ff;
+$gds-ref-color-blue-15: #007ae6;
+$gds-ref-color-blue-16: #006dcc;
+$gds-ref-color-blue-17: #005fb3;
+$gds-ref-color-blue-18: #005299;
+$gds-ref-color-blue-19: #004480;
+$gds-ref-color-blue-20: #003666;
+$gds-ref-color-blue-21: #00294d;
+$gds-ref-color-blue-22: #001b33;
+$gds-ref-color-blue-23: #000e1a;
+$gds-ref-color-copper-1: #fdfdfc;
+$gds-ref-color-copper-2: #fcfbf8;
+$gds-ref-color-copper-3: #faf8f5;
+$gds-ref-color-copper-4: #f8f6f1;
+$gds-ref-color-copper-5: #f7f4ee;
+$gds-ref-color-copper-6: #efe9dc;
+$gds-ref-color-copper-7: #e7ddcb;
+$gds-ref-color-copper-8: #ded2ba;
+$gds-ref-color-copper-9: #d6c7a8;
+$gds-ref-color-copper-10: #cebc97;
+$gds-ref-color-copper-11: #c6b086;
+$gds-ref-color-copper-12: #bea574;
+$gds-ref-color-copper-13: #b69a63;
+$gds-ref-color-copper-14: #ad8f52;
+$gds-ref-color-copper-15: #a1844b;
+$gds-ref-color-copper-16: #8b7241;
+$gds-ref-color-copper-17: #796439;
+$gds-ref-color-copper-18: #685631;
+$gds-ref-color-copper-19: #574729;
+$gds-ref-color-copper-20: #453921;
+$gds-ref-color-copper-21: #342b18;
+$gds-ref-color-copper-22: #231d10;
+$gds-ref-color-copper-23: #110e08;
+$gds-ref-color-green-1: #fbfdfb;
+$gds-ref-color-green-2: #f8fcf8;
+$gds-ref-color-green-3: #f4faf4;
+$gds-ref-color-green-4: #f1f9f1;
+$gds-ref-color-green-5: #eaf6ea;
+$gds-ref-color-green-6: #dcefdc;
+$gds-ref-color-green-7: #cceacc;
+$gds-ref-color-green-8: #c3eac3;
+$gds-ref-color-green-9: #b2e5b2;
+$gds-ref-color-green-10: #9de79d;
+$gds-ref-color-green-11: #8ae58d;
+$gds-ref-color-green-12: #74e780;
+$gds-ref-color-green-13: #63e378;
+$gds-ref-color-green-14: #52e073;
+$gds-ref-color-green-15: #38dc63;
+$gds-ref-color-green-16: #26d95c;
+$gds-ref-color-green-17: #17d350;
+$gds-ref-color-green-18: #0bcb4b;
+$gds-ref-color-green-19: #00bd49;
+$gds-ref-color-green-20: #00ad43;
+$gds-ref-color-green-21: #02a23f;
+$gds-ref-color-green-22: #018d39;
+$gds-ref-color-green-23: #027839;
+$gds-ref-color-green-24: #026436;
+$gds-ref-color-green-25: #015130;
+$gds-ref-color-green-26: #003d26;
+$gds-ref-color-green-27: #003824;
+$gds-ref-color-green-28: #00291b;
+$gds-ref-color-green-29: #00140d;
+$gds-ref-color-green-30: #004f33;
+$gds-ref-color-black: #000000;
+$gds-ref-color-white: #ffffff;
+$gds-ref-color-grey-1: #fcfdfc;
+$gds-ref-color-grey-2: #fafafa;
+$gds-ref-color-grey-3: #f7f8f7;
+$gds-ref-color-grey-4: #f4f5f5;
+$gds-ref-color-grey-5: #eff0f0;
+$gds-ref-color-grey-6: #eaebeb;
+$gds-ref-color-grey-7: #dfe1e1;
+$gds-ref-color-grey-8: #d5d7d7;
+$gds-ref-color-grey-9: #cacecc;
+$gds-ref-color-grey-10: #c0c4c2;
+$gds-ref-color-grey-11: #b5bab8;
+$gds-ref-color-grey-12: #abb0ae;
+$gds-ref-color-grey-13: #a0a6a4;
+$gds-ref-color-grey-14: #969c9a;
+$gds-ref-color-grey-15: #8b9290;
+$gds-ref-color-grey-16: #818886;
+$gds-ref-color-grey-17: #777e7c;
+$gds-ref-color-grey-18: #6d7471;
+$gds-ref-color-grey-19: #636967;
+$gds-ref-color-grey-20: #595f5d;
+$gds-ref-color-grey-21: #4f5452;
+$gds-ref-color-grey-22: #454a48;
+$gds-ref-color-grey-23: #3b3f3e;
+$gds-ref-color-grey-24: #313533;
+$gds-ref-color-grey-25: #282a29;
+$gds-ref-color-grey-26: #1e201f;
+$gds-ref-color-grey-27: #191a1a;
+$gds-ref-color-grey-28: #141515;
+$gds-ref-color-grey-29: #0f1010;
+$gds-ref-color-grey-30: #0a0b0b;
+$gds-ref-color-orange-1: #fffdfa;
+$gds-ref-color-orange-2: #fefaf5;
+$gds-ref-color-orange-3: #fef8f1;
+$gds-ref-color-orange-4: #fef6ec;
+$gds-ref-color-orange-5: #fdf3e7;
+$gds-ref-color-orange-6: #fce8cf;
+$gds-ref-color-orange-7: #fadcb7;
+$gds-ref-color-orange-8: #f8d0a0;
+$gds-ref-color-orange-9: #f7c588;
+$gds-ref-color-orange-10: #f5b970;
+$gds-ref-color-orange-11: #f3ae58;
+$gds-ref-color-orange-12: #f19e38;
+$gds-ref-color-orange-13: #f09628;
+$gds-ref-color-orange-14: #ee8b11;
+$gds-ref-color-orange-15: #D77DOF;
+$gds-ref-color-orange-16: #BF6FOD;
+$gds-ref-color-orange-17: #a7610c;
+$gds-ref-color-orange-18: #8f530a;
+$gds-ref-color-orange-19: #774508;
+$gds-ref-color-orange-20: #5f3707;
+$gds-ref-color-orange-21: #482a05;
+$gds-ref-color-orange-22: #301c03;
+$gds-ref-color-orange-23: #180e02;
+$gds-ref-color-red-1: #fffbfa;
+$gds-ref-color-red-2: #fef7f6;
+$gds-ref-color-red-3: #fef3f1;
+$gds-ref-color-red-4: #fdefed;
+$gds-ref-color-red-5: #fdebe8;
+$gds-ref-color-red-6: #fad8d1;
+$gds-ref-color-red-7: #f8c4ba;
+$gds-ref-color-red-8: #f5b0a3;
+$gds-ref-color-red-9: #f39d8c;
+$gds-ref-color-red-10: #f08975;
+$gds-ref-color-red-11: #ee765d;
+$gds-ref-color-red-12: #eb583c;
+$gds-ref-color-red-13: #e94e2f;
+$gds-ref-color-red-14: #e73b18;
+$gds-ref-color-red-15: #d03516;
+$gds-ref-color-red-16: #b92f13;
+$gds-ref-color-red-17: #a22911;
+$gds-ref-color-red-18: #8a230f;
+$gds-ref-color-red-19: #731d0c;
+$gds-ref-color-red-20: #5c170a;
+$gds-ref-color-red-21: #451207;
+$gds-ref-color-red-22: #2e0c05;
+$gds-ref-color-red-23: #170602;
+$gds-ref-color-yellow-1: #fffefa;
+$gds-ref-color-yellow-2: #fffdf5;
+$gds-ref-color-yellow-3: #fffbf0;
+$gds-ref-color-yellow-4: #fffaeb;
+$gds-ref-color-yellow-5: #fff9e6;
+$gds-ref-color-yellow-6: #fff3cc;
+$gds-ref-color-yellow-7: #ffedb3;
+$gds-ref-color-yellow-8: #ffe799;
+$gds-ref-color-yellow-9: #ffe180;
+$gds-ref-color-yellow-10: #ffdb66;
+$gds-ref-color-yellow-11: #ffd54d;
+$gds-ref-color-yellow-12: #ffcf33;
+$gds-ref-color-yellow-13: #ffc91a;
+$gds-ref-color-yellow-14: #fec200;
+$gds-ref-color-yellow-15: #e6b000;
+$gds-ref-color-yellow-16: #cc9c00;
+$gds-ref-color-yellow-17: #b38900;
+$gds-ref-color-yellow-18: #997500;
+$gds-ref-color-yellow-19: #806200;
+$gds-ref-color-yellow-20: #664e00;
+$gds-ref-color-yellow-21: #4d3b00;
+$gds-ref-color-yellow-22: #332700;
+$gds-ref-color-yellow-23: #1a1400;
+"
+`;
+
+exports[`test scss output matches the contents in snapshot for 2023/scss/variables.dark.scss: tokens-scss-2023-scss-variables-dark-scss 1`] = `
+"
+// Do not edit directly, this file was auto-generated.
+
+$gds-sys-color-l1-neutral-01: #0a0b0b;
+$gds-sys-color-l1-neutral-02: #282a29;
+$gds-sys-color-l1-brand-01: #003824;
+$gds-sys-color-l1-inversed: #ffffff;
+$gds-sys-color-l2-neutral-01: #191a1a;
+$gds-sys-color-l2-neutral-02: #191a1a;
+$gds-sys-color-l2-neutral-03: #3b3f3e;
+$gds-sys-color-l2-brand-01: #003824;
+$gds-sys-color-l2-brand-02: #231d10;
+$gds-sys-color-l2-positive-01: #003d26;
+$gds-sys-color-l2-negative-01: #451207;
+$gds-sys-color-l2-warning-01: #482a05;
+$gds-sys-color-l2-information-01: #1e201f;
+$gds-sys-color-l2-notice-01: #00294d;
+$gds-sys-color-l3-brand-01: #d5d7d7;
+$gds-sys-color-l3-brand-02: #efe9dc;
+$gds-sys-color-l3-brand-03: #e7ddcb;
+$gds-sys-color-l3-neutral-01: #d5d7d7;
+$gds-sys-color-l3-neutral-02: #282a29;
+$gds-sys-color-l3-neutral-03: #3b3f3e;
+$gds-sys-color-l3-neutral-04: #3b3f3e;
+$gds-sys-color-l3-neutral-05: #003824;
+$gds-sys-color-l3-positive-01: #026436;
+$gds-sys-color-l3-positive-02: #015130;
+$gds-sys-color-l3-positive-03: #003d26;
+$gds-sys-color-l3-negative-01: #a22911;
+$gds-sys-color-l3-negative-02: #731d0c;
+$gds-sys-color-l3-negative-03: #5c170a;
+$gds-sys-color-l3-notice-01: #005fb3;
+$gds-sys-color-l3-notice-02: #004480;
+$gds-sys-color-l3-notice-03: #003666;
+$gds-sys-color-l3-warning-01: #f19e38;
+$gds-sys-color-l3-warning-02: #774508;
+$gds-sys-color-l3-warning-03: #5f3707;
+$gds-sys-color-l3-information-01: #d5d7d7;
+$gds-sys-color-l3-information-02: #313533;
+$gds-sys-color-l3-information-03: #595f5d;
+$gds-sys-color-l3-disabled-01: #595f5d;
+$gds-sys-color-l3-disabled-02: #595f5d;
+$gds-sys-color-l3-disabled-03: #818886;
+$gds-sys-color-border-interactive: #a0a6a4;
+$gds-sys-color-border-subtle-01: #595f5d;
+$gds-sys-color-border-subtle-02: #777e7c;
+$gds-sys-color-border-strong: #f7f8f7;
+$gds-sys-color-border-inverse: #ffffff;
+$gds-sys-color-border-information-01: #636967;
+$gds-sys-color-border-positive-01: #8ae58d;
+$gds-sys-color-border-negative-01: #f08975;
+$gds-sys-color-border-warning-01: #f5b970;
+$gds-sys-color-border-notice-01: #66b8ff;
+$gds-sys-color-border-information-02: rgba(99, 105, 103, 0.4);
+$gds-sys-color-border-positive-02: rgba(138, 229, 141, 0.4);
+$gds-sys-color-border-negative-02: rgba(240, 137, 117, 0.4);
+$gds-sys-color-border-warning-02: rgba(245, 185, 112, 0.4);
+$gds-sys-color-border-notice-02: rgba(102, 184, 255, 0.4);
+$gds-sys-color-content-neutral-01: #f7f8f7;
+$gds-sys-color-content-neutral-02: #abb0ae;
+$gds-sys-color-content-neutral-03: #0a0b0b;
+$gds-sys-color-content-neutral-04: #595f5d;
+$gds-sys-color-content-inversed: #f7f8f7;
+$gds-sys-color-content-brand-01: #003824;
+$gds-sys-color-content-brand-02: #d6c7a8;
+$gds-sys-color-content-positive-01: #8ae58d;
+$gds-sys-color-content-positive-02: #027839;
+$gds-sys-color-content-positive-03: #8ae58d;
+$gds-sys-color-content-negative-01: #f08975;
+$gds-sys-color-content-negative-02: #f5b0a3;
+$gds-sys-color-content-warning-01: #f5b970;
+$gds-sys-color-content-warning-02: #fce8cf;
+$gds-sys-color-content-notice-01: #66b8ff;
+$gds-sys-color-content-notice-02: #99cfff;
+$gds-sys-color-content-disabled-01: #cacecc;
+$gds-sys-color-content-disabled-02: #cacecc;
+$gds-sys-color-state-brand-01: rgba(0, 0, 0, 0.2);
+$gds-sys-color-state-brand-02: rgba(0, 0, 0, 0.3);
+$gds-sys-color-state-brand-03: rgba(0, 56, 36, 0.3);
+$gds-sys-color-state-brand-04: rgba(0, 56, 36, 0.7);
+$gds-sys-color-state-brand-05: rgba(0, 56, 36, 0.5);
+$gds-sys-color-state-brand-06: rgba(0, 56, 36, 0.9);
+$gds-sys-color-state-neutral-01: rgba(0, 0, 0, 0.2);
+$gds-sys-color-state-neutral-02: rgba(0, 0, 0, 0.35);
+$gds-sys-color-state-neutral-03: rgba(255, 255, 255, 0.2);
+$gds-sys-color-state-neutral-04: rgba(255, 255, 255, 0.3);
+$gds-sys-color-state-neutral-05: rgba(255, 255, 255, 0.12);
+$gds-sys-color-state-neutral-06: rgba(255, 255, 255, 0.25);
+$gds-sys-color-state-positive-01: rgba(0, 0, 0, 0.12);
+$gds-sys-color-state-positive-02: rgba(0, 0, 0, 0.23);
+$gds-sys-color-state-positive-03: rgba(255, 255, 255, 0.08);
+$gds-sys-color-state-positive-04: rgba(255, 255, 255, 0.14);
+$gds-sys-color-state-positive-05: rgba(2, 120, 57, 0.3);
+$gds-sys-color-state-positive-06: rgba(2, 120, 57, 0.5);
+$gds-sys-color-state-negative-01: rgba(0, 0, 0, 0.15);
+$gds-sys-color-state-negative-02: rgba(0, 0, 0, 0.3);
+$gds-sys-color-state-negative-03: rgba(255, 255, 255, 0.08);
+$gds-sys-color-state-negative-04: rgba(255, 255, 255, 0.14);
+$gds-sys-color-state-negative-05: rgba(185, 47, 19, 0.3);
+$gds-sys-color-state-negative-06: rgba(185, 47, 19, 0.45);
+$gds-sys-color-state-notice-01: rgba(0, 0, 0, 0.12);
+$gds-sys-color-state-notice-02: rgba(0, 0, 0, 0.2);
+$gds-sys-color-state-notice-03: rgba(255, 255, 255, 0.06);
+$gds-sys-color-state-notice-04: rgba(255, 255, 255, 0.1);
+$gds-sys-color-state-notice-05: rgba(0, 95, 179, 0.4);
+$gds-sys-color-state-notice-06: rgba(0, 95, 179, 0.6);
+$gds-sys-color-state-warning-01: rgba(0, 0, 0, 0.06);
+$gds-sys-color-state-warning-02: rgba(0, 0, 0, 0.14);
+$gds-sys-color-state-warning-03: rgba(255, 255, 255, 0.08);
+$gds-sys-color-state-warning-04: rgba(255, 255, 255, 0.14);
+$gds-sys-color-state-warning-05: rgba(241, 158, 56, 0.12);
+$gds-sys-color-state-warning-06: rgba(241, 158, 56, 0.2);
+"
+`;
+
+exports[`test scss output matches the contents in snapshot for 2023/scss/variables.light.scss: tokens-scss-2023-scss-variables-light-scss 1`] = `
+"
+// Do not edit directly, this file was auto-generated.
+
+$gds-sys-color-l1-neutral-01: #ffffff;
+$gds-sys-color-l1-neutral-02: #eaebeb;
+$gds-sys-color-l1-brand-01: #003824;
+$gds-sys-color-l1-inversed: #0a0b0b;
+$gds-sys-color-l2-neutral-01: #f7f8f7;
+$gds-sys-color-l2-neutral-02: #ffffff;
+$gds-sys-color-l2-neutral-03: #0a0b0b;
+$gds-sys-color-l2-brand-01: #003824;
+$gds-sys-color-l2-brand-02: #f8f6f1;
+$gds-sys-color-l2-positive-01: #f1f9f1;
+$gds-sys-color-l2-negative-01: #fef7f6;
+$gds-sys-color-l2-warning-01: #fef8f1;
+$gds-sys-color-l2-information-01: #f7f8f7;
+$gds-sys-color-l2-notice-01: #f5faff;
+$gds-sys-color-l3-brand-01: #003824;
+$gds-sys-color-l3-brand-02: #efe9dc;
+$gds-sys-color-l3-brand-03: #e7ddcb;
+$gds-sys-color-l3-neutral-01: #0a0b0b;
+$gds-sys-color-l3-neutral-02: #eaebeb;
+$gds-sys-color-l3-neutral-03: #d5d7d7;
+$gds-sys-color-l3-neutral-04: #ffffff;
+$gds-sys-color-l3-neutral-05: #ffffff;
+$gds-sys-color-l3-positive-01: #027839;
+$gds-sys-color-l3-positive-02: #dcefdc;
+$gds-sys-color-l3-positive-03: #cceacc;
+$gds-sys-color-l3-negative-01: #b92f13;
+$gds-sys-color-l3-negative-02: #fdebe8;
+$gds-sys-color-l3-negative-03: #fad8d1;
+$gds-sys-color-l3-notice-01: #005fb3;
+$gds-sys-color-l3-notice-02: #e6f3ff;
+$gds-sys-color-l3-notice-03: #cce7ff;
+$gds-sys-color-l3-warning-01: #8f530a;
+$gds-sys-color-l3-warning-02: #fce8cf;
+$gds-sys-color-l3-warning-03: #fadcb7;
+$gds-sys-color-l3-information-01: #0a0b0b;
+$gds-sys-color-l3-information-02: #eaebeb;
+$gds-sys-color-l3-information-03: #dfe1e1;
+$gds-sys-color-l3-disabled-01: #eff0f0;
+$gds-sys-color-l3-disabled-02: #a0a6a4;
+$gds-sys-color-l3-disabled-03: #eff0f0;
+$gds-sys-color-border-interactive: #777e7c;
+$gds-sys-color-border-subtle-01: #dfe1e1;
+$gds-sys-color-border-subtle-02: #eff0f0;
+$gds-sys-color-border-strong: #0a0b0b;
+$gds-sys-color-border-inverse: #ffffff;
+$gds-sys-color-border-information-01: #0a0b0b;
+$gds-sys-color-border-positive-01: #027839;
+$gds-sys-color-border-negative-01: #b92f13;
+$gds-sys-color-border-warning-01: #8f530a;
+$gds-sys-color-border-notice-01: #005fb3;
+$gds-sys-color-border-information-02: rgba(10, 11, 11, 0.4);
+$gds-sys-color-border-positive-02: rgba(2, 120, 57, 0.4);
+$gds-sys-color-border-negative-02: rgba(185, 47, 19, 0.4);
+$gds-sys-color-border-warning-02: rgba(143, 83, 10, 0.4);
+$gds-sys-color-border-notice-02: rgba(0, 95, 179, 0.4);
+$gds-sys-color-content-neutral-01: #0a0b0b;
+$gds-sys-color-content-neutral-02: #636967;
+$gds-sys-color-content-neutral-03: #ffffff;
+$gds-sys-color-content-neutral-04: #a0a6a4;
+$gds-sys-color-content-inversed: #ffffff;
+$gds-sys-color-content-brand-01: #003824;
+$gds-sys-color-content-brand-02: #685631;
+$gds-sys-color-content-positive-01: #027839;
+$gds-sys-color-content-positive-02: #eaf6ea;
+$gds-sys-color-content-positive-03: #026436;
+$gds-sys-color-content-negative-01: #b92f13;
+$gds-sys-color-content-negative-02: #fdebe8;
+$gds-sys-color-content-warning-01: #8f530a;
+$gds-sys-color-content-warning-02: #fce8cf;
+$gds-sys-color-content-notice-01: #005fb3;
+$gds-sys-color-content-notice-02: #e6f3ff;
+$gds-sys-color-content-disabled-01: #a0a6a4;
+$gds-sys-color-content-disabled-02: #f7f8f7;
+$gds-sys-color-state-brand-01: rgba(255, 255, 255, 0.2);
+$gds-sys-color-state-brand-02: rgba(255, 255, 255, 0.35);
+$gds-sys-color-state-brand-03: rgba(0, 56, 36, 0.06);
+$gds-sys-color-state-brand-04: rgba(0, 56, 36, 0.14);
+$gds-sys-color-state-brand-05: rgba(0, 56, 36, 0.06);
+$gds-sys-color-state-brand-06: rgba(0, 56, 36, 0.14);
+$gds-sys-color-state-neutral-01: rgba(255, 255, 255, 0.2);
+$gds-sys-color-state-neutral-02: rgba(255, 255, 255, 0.35);
+$gds-sys-color-state-neutral-03: rgba(0, 0, 0, 0.06);
+$gds-sys-color-state-neutral-04: rgba(0, 0, 0, 0.14);
+$gds-sys-color-state-neutral-05: rgba(0, 0, 0, 0.06);
+$gds-sys-color-state-neutral-06: rgba(0, 0, 0, 0.14);
+$gds-sys-color-state-positive-01: rgba(255, 255, 255, 0.12);
+$gds-sys-color-state-positive-02: rgba(255, 255, 255, 0.23);
+$gds-sys-color-state-positive-03: rgba(2, 120, 57, 0.08);
+$gds-sys-color-state-positive-04: rgba(2, 120, 57, 0.16);
+$gds-sys-color-state-positive-05: rgba(2, 120, 57, 0.08);
+$gds-sys-color-state-positive-06: rgba(2, 120, 57, 0.16);
+$gds-sys-color-state-negative-01: rgba(255, 255, 255, 0.08);
+$gds-sys-color-state-negative-02: rgba(255, 255, 255, 0.16);
+$gds-sys-color-state-negative-03: rgba(185, 47, 19, 0.08);
+$gds-sys-color-state-negative-04: rgba(185, 47, 19, 0.16);
+$gds-sys-color-state-negative-05: rgba(185, 47, 19, 0.08);
+$gds-sys-color-state-negative-06: rgba(185, 47, 19, 0.16);
+$gds-sys-color-state-notice-01: rgba(255, 255, 255, 0.2);
+$gds-sys-color-state-notice-02: rgba(255, 255, 255, 0.35);
+$gds-sys-color-state-notice-03: rgba(0, 95, 179, 0.08);
+$gds-sys-color-state-notice-04: rgba(0, 95, 179, 0.16);
+$gds-sys-color-state-notice-05: rgba(0, 95, 179, 0.08);
+$gds-sys-color-state-notice-06: rgba(0, 95, 179, 0.16);
+$gds-sys-color-state-warning-01: rgba(255, 255, 255, 0.2);
+$gds-sys-color-state-warning-02: rgba(255, 255, 255, 0.35);
+$gds-sys-color-state-warning-03: rgba(143, 83, 10, 0.08);
+$gds-sys-color-state-warning-04: rgba(143, 83, 10, 0.16);
+$gds-sys-color-state-warning-05: rgba(143, 83, 10, 0.08);
+$gds-sys-color-state-warning-06: rgba(143, 83, 10, 0.16);
+"
+`;
+
+exports[`test scss output matches the contents in snapshot for 2023/scss/variables.shadows.scss: tokens-scss-2023-scss-variables-shadows-scss 1`] = `
+"
+// Do not edit directly, this file was auto-generated.
+
+$gds-sys-shadow-xs-01: 0px 1px 2px 0px rgba(10, 11, 10, 0.05);
+$gds-sys-shadow-xs-02: 0px 0px 0px 0px transparent;
+$gds-sys-shadow-s-01: 0px 1px 2px 0px rgba(10, 11, 10, 0.10);
+$gds-sys-shadow-s-02: 0px 1px 3px 0px rgba(10, 11, 10, 0.06);
+$gds-sys-shadow-m-01: 0px 2px 4px -2px rgba(10, 11, 10, 0.10);
+$gds-sys-shadow-m-02: 0px 4px 8px -2px rgba(10, 11, 10, 0.06);
+$gds-sys-shadow-l-01: 0px 4px 6px -2px rgba(10, 11, 10, 0.08);
+$gds-sys-shadow-l-02: 0px 12px 16px -4px rgba(10, 11, 10, 0.03);
+$gds-sys-shadow-xl-01: 0px 20px 24px -4px rgba(10, 11, 10, 0.08);
+$gds-sys-shadow-xl-02: 0px 0px 0px 0px rgba(10, 11, 10, 0.08);
+$gds-sys-shadow-2xl-01: 0px 24px 48px -12px rgba(10, 11, 10, 0.18);
+$gds-sys-shadow-2xl-02: 0px 0px 0px 0px transparent;
+"
+`;
+
+exports[`test studio output matches the contents in snapshot for studio/studio.colors.dark.json: tokens-studio-studio-studio-colors-dark-json 1`] = `
+"{
+  "background": {
+    "L1": [
+      {
+        "token": "neutral-01",
+        "variable": "var(--gds-sys-color-l1-neutral-01)",
+        "value": "#0A0B0B"
+      },
+      {
+        "token": "neutral-02",
+        "variable": "var(--gds-sys-color-l1-neutral-02)",
+        "value": "#282A29"
+      },
+      {
+        "token": "brand-01",
+        "variable": "var(--gds-sys-color-l1-brand-01)",
+        "value": "#003824"
+      },
+      {
+        "token": "inversed",
+        "variable": "var(--gds-sys-color-l1-inversed)",
+        "value": "#FFFFFF"
+      }
+    ],
+    "L2": [
+      {
+        "token": "neutral-01",
+        "variable": "var(--gds-sys-color-l2-neutral-01)",
+        "value": "#191A1A"
+      },
+      {
+        "token": "neutral-02",
+        "variable": "var(--gds-sys-color-l2-neutral-02)",
+        "value": "#191A1A"
+      },
+      {
+        "token": "neutral-03",
+        "variable": "var(--gds-sys-color-l2-neutral-03)",
+        "value": "#3B3F3E"
+      },
+      {
+        "token": "brand-01",
+        "variable": "var(--gds-sys-color-l2-brand-01)",
+        "value": "#003824"
+      },
+      {
+        "token": "brand-02",
+        "variable": "var(--gds-sys-color-l2-brand-02)",
+        "value": "#231D10"
+      },
+      {
+        "token": "positive-01",
+        "variable": "var(--gds-sys-color-l2-positive-01)",
+        "value": "#003D26"
+      },
+      {
+        "token": "negative-01",
+        "variable": "var(--gds-sys-color-l2-negative-01)",
+        "value": "#451207"
+      },
+      {
+        "token": "warning-01",
+        "variable": "var(--gds-sys-color-l2-warning-01)",
+        "value": "#482A05"
+      },
+      {
+        "token": "information-01",
+        "variable": "var(--gds-sys-color-l2-information-01)",
+        "value": "#1E201F"
+      },
+      {
+        "token": "notice-01",
+        "variable": "var(--gds-sys-color-l2-notice-01)",
+        "value": "#00294D"
+      }
+    ],
+    "L3": [
+      {
+        "token": "brand-01",
+        "variable": "var(--gds-sys-color-l3-brand-01)",
+        "value": "#D5D7D7"
+      },
+      {
+        "token": "brand-02",
+        "variable": "var(--gds-sys-color-l3-brand-02)",
+        "value": "#EFE9DC"
+      },
+      {
+        "token": "brand-03",
+        "variable": "var(--gds-sys-color-l3-brand-03)",
+        "value": "#E7DDCB"
+      },
+      {
+        "token": "neutral-01",
+        "variable": "var(--gds-sys-color-l3-neutral-01)",
+        "value": "#D5D7D7"
+      },
+      {
+        "token": "neutral-02",
+        "variable": "var(--gds-sys-color-l3-neutral-02)",
+        "value": "#282A29"
+      },
+      {
+        "token": "neutral-03",
+        "variable": "var(--gds-sys-color-l3-neutral-03)",
+        "value": "#3B3F3E"
+      },
+      {
+        "token": "neutral-04",
+        "variable": "var(--gds-sys-color-l3-neutral-04)",
+        "value": "#3B3F3E"
+      },
+      {
+        "token": "neutral-05",
+        "variable": "var(--gds-sys-color-l3-neutral-05)",
+        "value": "#003824"
+      },
+      {
+        "token": "positive-01",
+        "variable": "var(--gds-sys-color-l3-positive-01)",
+        "value": "#026436"
+      },
+      {
+        "token": "positive-02",
+        "variable": "var(--gds-sys-color-l3-positive-02)",
+        "value": "#015130"
+      },
+      {
+        "token": "positive-03",
+        "variable": "var(--gds-sys-color-l3-positive-03)",
+        "value": "#003D26"
+      },
+      {
+        "token": "negative-01",
+        "variable": "var(--gds-sys-color-l3-negative-01)",
+        "value": "#A22911"
+      },
+      {
+        "token": "negative-02",
+        "variable": "var(--gds-sys-color-l3-negative-02)",
+        "value": "#731D0C"
+      },
+      {
+        "token": "negative-03",
+        "variable": "var(--gds-sys-color-l3-negative-03)",
+        "value": "#5C170A"
+      },
+      {
+        "token": "notice-01",
+        "variable": "var(--gds-sys-color-l3-notice-01)",
+        "value": "#005FB3"
+      },
+      {
+        "token": "notice-02",
+        "variable": "var(--gds-sys-color-l3-notice-02)",
+        "value": "#004480"
+      },
+      {
+        "token": "notice-03",
+        "variable": "var(--gds-sys-color-l3-notice-03)",
+        "value": "#003666"
+      },
+      {
+        "token": "warning-01",
+        "variable": "var(--gds-sys-color-l3-warning-01)",
+        "value": "#F19E38"
+      },
+      {
+        "token": "warning-02",
+        "variable": "var(--gds-sys-color-l3-warning-02)",
+        "value": "#774508"
+      },
+      {
+        "token": "warning-03",
+        "variable": "var(--gds-sys-color-l3-warning-03)",
+        "value": "#5F3707"
+      },
+      {
+        "token": "information-01",
+        "variable": "var(--gds-sys-color-l3-information-01)",
+        "value": "#D5D7D7"
+      },
+      {
+        "token": "information-02",
+        "variable": "var(--gds-sys-color-l3-information-02)",
+        "value": "#313533"
+      },
+      {
+        "token": "information-03",
+        "variable": "var(--gds-sys-color-l3-information-03)",
+        "value": "#595F5D"
+      },
+      {
+        "token": "disabled-01",
+        "variable": "var(--gds-sys-color-l3-disabled-01)",
+        "value": "#595F5D"
+      },
+      {
+        "token": "disabled-02",
+        "variable": "var(--gds-sys-color-l3-disabled-02)",
+        "value": "#595F5D"
+      },
+      {
+        "token": "disabled-03",
+        "variable": "var(--gds-sys-color-l3-disabled-03)",
+        "value": "#818886"
+      }
+    ]
+  },
+  "border": [
+    {
+      "token": "interactive",
+      "variable": "var(--gds-sys-color-border-interactive)",
+      "value": "#A0A6A4"
+    },
+    {
+      "token": "subtle-01",
+      "variable": "var(--gds-sys-color-border-subtle-01)",
+      "value": "#595F5D"
+    },
+    {
+      "token": "subtle-02",
+      "variable": "var(--gds-sys-color-border-subtle-02)",
+      "value": "#777E7C"
+    },
+    {
+      "token": "strong",
+      "variable": "var(--gds-sys-color-border-strong)",
+      "value": "#F7F8F7"
+    },
+    {
+      "token": "inverse",
+      "variable": "var(--gds-sys-color-border-inverse)",
+      "value": "#FFFFFF"
+    },
+    {
+      "token": "information-01",
+      "variable": "var(--gds-sys-color-border-information-01)",
+      "value": "#636967"
+    },
+    {
+      "token": "positive-01",
+      "variable": "var(--gds-sys-color-border-positive-01)",
+      "value": "#8AE58D"
+    },
+    {
+      "token": "negative-01",
+      "variable": "var(--gds-sys-color-border-negative-01)",
+      "value": "#F08975"
+    },
+    {
+      "token": "warning-01",
+      "variable": "var(--gds-sys-color-border-warning-01)",
+      "value": "#F5B970"
+    },
+    {
+      "token": "notice-01",
+      "variable": "var(--gds-sys-color-border-notice-01)",
+      "value": "#66B8FF"
+    },
+    {
+      "token": "information-02",
+      "variable": "var(--gds-sys-color-border-information-02)",
+      "value": "rgba(99, 105, 103, 0.4)"
+    },
+    {
+      "token": "positive-02",
+      "variable": "var(--gds-sys-color-border-positive-02)",
+      "value": "rgba(138, 229, 141, 0.4)"
+    },
+    {
+      "token": "negative-02",
+      "variable": "var(--gds-sys-color-border-negative-02)",
+      "value": "rgba(240, 137, 117, 0.4)"
+    },
+    {
+      "token": "warning-02",
+      "variable": "var(--gds-sys-color-border-warning-02)",
+      "value": "rgba(245, 185, 112, 0.4)"
+    },
+    {
+      "token": "notice-02",
+      "variable": "var(--gds-sys-color-border-notice-02)",
+      "value": "rgba(102, 184, 255, 0.4)"
+    }
+  ],
+  "content": [
+    {
+      "token": "neutral-01",
+      "variable": "var(--gds-sys-color-content-neutral-01)",
+      "value": "#F7F8F7"
+    },
+    {
+      "token": "neutral-02",
+      "variable": "var(--gds-sys-color-content-neutral-02)",
+      "value": "#ABB0AE"
+    },
+    {
+      "token": "neutral-03",
+      "variable": "var(--gds-sys-color-content-neutral-03)",
+      "value": "#0A0B0B"
+    },
+    {
+      "token": "neutral-04",
+      "variable": "var(--gds-sys-color-content-neutral-04)",
+      "value": "#595F5D"
+    },
+    {
+      "token": "inversed",
+      "variable": "var(--gds-sys-color-content-inversed)",
+      "value": "#F7F8F7"
+    },
+    {
+      "token": "brand-01",
+      "variable": "var(--gds-sys-color-content-brand-01)",
+      "value": "#003824"
+    },
+    {
+      "token": "brand-02",
+      "variable": "var(--gds-sys-color-content-brand-02)",
+      "value": "#D6C7A8"
+    },
+    {
+      "token": "positive-01",
+      "variable": "var(--gds-sys-color-content-positive-01)",
+      "value": "#8AE58D"
+    },
+    {
+      "token": "positive-02",
+      "variable": "var(--gds-sys-color-content-positive-02)",
+      "value": "#027839"
+    },
+    {
+      "token": "positive-03",
+      "variable": "var(--gds-sys-color-content-positive-03)",
+      "value": "#8AE58D"
+    },
+    {
+      "token": "negative-01",
+      "variable": "var(--gds-sys-color-content-negative-01)",
+      "value": "#F08975"
+    },
+    {
+      "token": "negative-02",
+      "variable": "var(--gds-sys-color-content-negative-02)",
+      "value": "#F5B0A3"
+    },
+    {
+      "token": "warning-01",
+      "variable": "var(--gds-sys-color-content-warning-01)",
+      "value": "#F5B970"
+    },
+    {
+      "token": "warning-02",
+      "variable": "var(--gds-sys-color-content-warning-02)",
+      "value": "#FCE8CF"
+    },
+    {
+      "token": "notice-01",
+      "variable": "var(--gds-sys-color-content-notice-01)",
+      "value": "#66B8FF"
+    },
+    {
+      "token": "notice-02",
+      "variable": "var(--gds-sys-color-content-notice-02)",
+      "value": "#99CFFF"
+    },
+    {
+      "token": "disabled-01",
+      "variable": "var(--gds-sys-color-content-disabled-01)",
+      "value": "#CACECC"
+    },
+    {
+      "token": "disabled-02",
+      "variable": "var(--gds-sys-color-content-disabled-02)",
+      "value": "#CACECC"
+    }
+  ],
+  "state": [
+    {
+      "token": "brand-01",
+      "variable": "var(--gds-sys-color-state-brand-01)",
+      "value": "rgba(0, 0, 0, 0.2)"
+    },
+    {
+      "token": "brand-02",
+      "variable": "var(--gds-sys-color-state-brand-02)",
+      "value": "rgba(0, 0, 0, 0.3)"
+    },
+    {
+      "token": "brand-03",
+      "variable": "var(--gds-sys-color-state-brand-03)",
+      "value": "rgba(0, 56, 36, 0.3)"
+    },
+    {
+      "token": "brand-04",
+      "variable": "var(--gds-sys-color-state-brand-04)",
+      "value": "rgba(0, 56, 36, 0.7)"
+    },
+    {
+      "token": "brand-05",
+      "variable": "var(--gds-sys-color-state-brand-05)",
+      "value": "rgba(0, 56, 36, 0.5)"
+    },
+    {
+      "token": "brand-06",
+      "variable": "var(--gds-sys-color-state-brand-06)",
+      "value": "rgba(0, 56, 36, 0.9)"
+    },
+    {
+      "token": "neutral-01",
+      "variable": "var(--gds-sys-color-state-neutral-01)",
+      "value": "rgba(0, 0, 0, 0.2)"
+    },
+    {
+      "token": "neutral-02",
+      "variable": "var(--gds-sys-color-state-neutral-02)",
+      "value": "rgba(0, 0, 0, 0.35)"
+    },
+    {
+      "token": "neutral-03",
+      "variable": "var(--gds-sys-color-state-neutral-03)",
+      "value": "rgba(255, 255, 255, 0.2)"
+    },
+    {
+      "token": "neutral-04",
+      "variable": "var(--gds-sys-color-state-neutral-04)",
+      "value": "rgba(255, 255, 255, 0.3)"
+    },
+    {
+      "token": "neutral-05",
+      "variable": "var(--gds-sys-color-state-neutral-05)",
+      "value": "rgba(255, 255, 255, 0.12)"
+    },
+    {
+      "token": "neutral-06",
+      "variable": "var(--gds-sys-color-state-neutral-06)",
+      "value": "rgba(255, 255, 255, 0.25)"
+    },
+    {
+      "token": "positive-01",
+      "variable": "var(--gds-sys-color-state-positive-01)",
+      "value": "rgba(0, 0, 0, 0.12)"
+    },
+    {
+      "token": "positive-02",
+      "variable": "var(--gds-sys-color-state-positive-02)",
+      "value": "rgba(0, 0, 0, 0.23)"
+    },
+    {
+      "token": "positive-03",
+      "variable": "var(--gds-sys-color-state-positive-03)",
+      "value": "rgba(255, 255, 255, 0.08)"
+    },
+    {
+      "token": "positive-04",
+      "variable": "var(--gds-sys-color-state-positive-04)",
+      "value": "rgba(255, 255, 255, 0.14)"
+    },
+    {
+      "token": "positive-05",
+      "variable": "var(--gds-sys-color-state-positive-05)",
+      "value": "rgba(2, 120, 57, 0.3)"
+    },
+    {
+      "token": "positive-06",
+      "variable": "var(--gds-sys-color-state-positive-06)",
+      "value": "rgba(2, 120, 57, 0.5)"
+    },
+    {
+      "token": "negative-01",
+      "variable": "var(--gds-sys-color-state-negative-01)",
+      "value": "rgba(0, 0, 0, 0.15)"
+    },
+    {
+      "token": "negative-02",
+      "variable": "var(--gds-sys-color-state-negative-02)",
+      "value": "rgba(0, 0, 0, 0.3)"
+    },
+    {
+      "token": "negative-03",
+      "variable": "var(--gds-sys-color-state-negative-03)",
+      "value": "rgba(255, 255, 255, 0.08)"
+    },
+    {
+      "token": "negative-04",
+      "variable": "var(--gds-sys-color-state-negative-04)",
+      "value": "rgba(255, 255, 255, 0.14)"
+    },
+    {
+      "token": "negative-05",
+      "variable": "var(--gds-sys-color-state-negative-05)",
+      "value": "rgba(185, 47, 19, 0.3)"
+    },
+    {
+      "token": "negative-06",
+      "variable": "var(--gds-sys-color-state-negative-06)",
+      "value": "rgba(185, 47, 19, 0.45)"
+    },
+    {
+      "token": "notice-01",
+      "variable": "var(--gds-sys-color-state-notice-01)",
+      "value": "rgba(0, 0, 0, 0.12)"
+    },
+    {
+      "token": "notice-02",
+      "variable": "var(--gds-sys-color-state-notice-02)",
+      "value": "rgba(0, 0, 0, 0.2)"
+    },
+    {
+      "token": "notice-03",
+      "variable": "var(--gds-sys-color-state-notice-03)",
+      "value": "rgba(255, 255, 255, 0.06)"
+    },
+    {
+      "token": "notice-04",
+      "variable": "var(--gds-sys-color-state-notice-04)",
+      "value": "rgba(255, 255, 255, 0.1)"
+    },
+    {
+      "token": "notice-05",
+      "variable": "var(--gds-sys-color-state-notice-05)",
+      "value": "rgba(0, 95, 179, 0.4)"
+    },
+    {
+      "token": "notice-06",
+      "variable": "var(--gds-sys-color-state-notice-06)",
+      "value": "rgba(0, 95, 179, 0.6)"
+    },
+    {
+      "token": "warning-01",
+      "variable": "var(--gds-sys-color-state-warning-01)",
+      "value": "rgba(0, 0, 0, 0.06)"
+    },
+    {
+      "token": "warning-02",
+      "variable": "var(--gds-sys-color-state-warning-02)",
+      "value": "rgba(0, 0, 0, 0.14)"
+    },
+    {
+      "token": "warning-03",
+      "variable": "var(--gds-sys-color-state-warning-03)",
+      "value": "rgba(255, 255, 255, 0.08)"
+    },
+    {
+      "token": "warning-04",
+      "variable": "var(--gds-sys-color-state-warning-04)",
+      "value": "rgba(255, 255, 255, 0.14)"
+    },
+    {
+      "token": "warning-05",
+      "variable": "var(--gds-sys-color-state-warning-05)",
+      "value": "rgba(241, 158, 56, 0.12)"
+    },
+    {
+      "token": "warning-06",
+      "variable": "var(--gds-sys-color-state-warning-06)",
+      "value": "rgba(241, 158, 56, 0.2)"
+    }
+  ]
+}"
+`;
+
+exports[`test studio output matches the contents in snapshot for studio/studio.colors.light.json: tokens-studio-studio-studio-colors-light-json 1`] = `
+"{
+  "background": {
+    "L1": [
+      {
+        "token": "neutral-01",
+        "variable": "var(--gds-sys-color-l1-neutral-01)",
+        "value": "#FFFFFF"
+      },
+      {
+        "token": "neutral-02",
+        "variable": "var(--gds-sys-color-l1-neutral-02)",
+        "value": "#EAEBEB"
+      },
+      {
+        "token": "brand-01",
+        "variable": "var(--gds-sys-color-l1-brand-01)",
+        "value": "#003824"
+      },
+      {
+        "token": "inversed",
+        "variable": "var(--gds-sys-color-l1-inversed)",
+        "value": "#0A0B0B"
+      }
+    ],
+    "L2": [
+      {
+        "token": "neutral-01",
+        "variable": "var(--gds-sys-color-l2-neutral-01)",
+        "value": "#F7F8F7"
+      },
+      {
+        "token": "neutral-02",
+        "variable": "var(--gds-sys-color-l2-neutral-02)",
+        "value": "#FFFFFF"
+      },
+      {
+        "token": "neutral-03",
+        "variable": "var(--gds-sys-color-l2-neutral-03)",
+        "value": "#0A0B0B"
+      },
+      {
+        "token": "brand-01",
+        "variable": "var(--gds-sys-color-l2-brand-01)",
+        "value": "#003824"
+      },
+      {
+        "token": "brand-02",
+        "variable": "var(--gds-sys-color-l2-brand-02)",
+        "value": "#F8F6F1"
+      },
+      {
+        "token": "positive-01",
+        "variable": "var(--gds-sys-color-l2-positive-01)",
+        "value": "#F1F9F1"
+      },
+      {
+        "token": "negative-01",
+        "variable": "var(--gds-sys-color-l2-negative-01)",
+        "value": "#FEF7F6"
+      },
+      {
+        "token": "warning-01",
+        "variable": "var(--gds-sys-color-l2-warning-01)",
+        "value": "#FEF8F1"
+      },
+      {
+        "token": "information-01",
+        "variable": "var(--gds-sys-color-l2-information-01)",
+        "value": "#F7F8F7"
+      },
+      {
+        "token": "notice-01",
+        "variable": "var(--gds-sys-color-l2-notice-01)",
+        "value": "#F5FAFF"
+      }
+    ],
+    "L3": [
+      {
+        "token": "brand-01",
+        "variable": "var(--gds-sys-color-l3-brand-01)",
+        "value": "#003824"
+      },
+      {
+        "token": "brand-02",
+        "variable": "var(--gds-sys-color-l3-brand-02)",
+        "value": "#EFE9DC"
+      },
+      {
+        "token": "brand-03",
+        "variable": "var(--gds-sys-color-l3-brand-03)",
+        "value": "#E7DDCB"
+      },
+      {
+        "token": "neutral-01",
+        "variable": "var(--gds-sys-color-l3-neutral-01)",
+        "value": "#0A0B0B"
+      },
+      {
+        "token": "neutral-02",
+        "variable": "var(--gds-sys-color-l3-neutral-02)",
+        "value": "#EAEBEB"
+      },
+      {
+        "token": "neutral-03",
+        "variable": "var(--gds-sys-color-l3-neutral-03)",
+        "value": "#D5D7D7"
+      },
+      {
+        "token": "neutral-04",
+        "variable": "var(--gds-sys-color-l3-neutral-04)",
+        "value": "#FFFFFF"
+      },
+      {
+        "token": "neutral-05",
+        "variable": "var(--gds-sys-color-l3-neutral-05)",
+        "value": "#FFFFFF"
+      },
+      {
+        "token": "positive-01",
+        "variable": "var(--gds-sys-color-l3-positive-01)",
+        "value": "#027839"
+      },
+      {
+        "token": "positive-02",
+        "variable": "var(--gds-sys-color-l3-positive-02)",
+        "value": "#DCEFDC"
+      },
+      {
+        "token": "positive-03",
+        "variable": "var(--gds-sys-color-l3-positive-03)",
+        "value": "#CCEACC"
+      },
+      {
+        "token": "negative-01",
+        "variable": "var(--gds-sys-color-l3-negative-01)",
+        "value": "#B92F13"
+      },
+      {
+        "token": "negative-02",
+        "variable": "var(--gds-sys-color-l3-negative-02)",
+        "value": "#FDEBE8"
+      },
+      {
+        "token": "negative-03",
+        "variable": "var(--gds-sys-color-l3-negative-03)",
+        "value": "#FAD8D1"
+      },
+      {
+        "token": "notice-01",
+        "variable": "var(--gds-sys-color-l3-notice-01)",
+        "value": "#005FB3"
+      },
+      {
+        "token": "notice-02",
+        "variable": "var(--gds-sys-color-l3-notice-02)",
+        "value": "#E6F3FF"
+      },
+      {
+        "token": "notice-03",
+        "variable": "var(--gds-sys-color-l3-notice-03)",
+        "value": "#CCE7FF"
+      },
+      {
+        "token": "warning-01",
+        "variable": "var(--gds-sys-color-l3-warning-01)",
+        "value": "#8F530A"
+      },
+      {
+        "token": "warning-02",
+        "variable": "var(--gds-sys-color-l3-warning-02)",
+        "value": "#FCE8CF"
+      },
+      {
+        "token": "warning-03",
+        "variable": "var(--gds-sys-color-l3-warning-03)",
+        "value": "#FADCB7"
+      },
+      {
+        "token": "information-01",
+        "variable": "var(--gds-sys-color-l3-information-01)",
+        "value": "#0A0B0B"
+      },
+      {
+        "token": "information-02",
+        "variable": "var(--gds-sys-color-l3-information-02)",
+        "value": "#EAEBEB"
+      },
+      {
+        "token": "information-03",
+        "variable": "var(--gds-sys-color-l3-information-03)",
+        "value": "#DFE1E1"
+      },
+      {
+        "token": "disabled-01",
+        "variable": "var(--gds-sys-color-l3-disabled-01)",
+        "value": "#EFF0F0"
+      },
+      {
+        "token": "disabled-02",
+        "variable": "var(--gds-sys-color-l3-disabled-02)",
+        "value": "#A0A6A4"
+      },
+      {
+        "token": "disabled-03",
+        "variable": "var(--gds-sys-color-l3-disabled-03)",
+        "value": "#EFF0F0"
+      }
+    ]
+  },
+  "border": [
+    {
+      "token": "interactive",
+      "variable": "var(--gds-sys-color-border-interactive)",
+      "value": "#777E7C"
+    },
+    {
+      "token": "subtle-01",
+      "variable": "var(--gds-sys-color-border-subtle-01)",
+      "value": "#DFE1E1"
+    },
+    {
+      "token": "subtle-02",
+      "variable": "var(--gds-sys-color-border-subtle-02)",
+      "value": "#EFF0F0"
+    },
+    {
+      "token": "strong",
+      "variable": "var(--gds-sys-color-border-strong)",
+      "value": "#0A0B0B"
+    },
+    {
+      "token": "inverse",
+      "variable": "var(--gds-sys-color-border-inverse)",
+      "value": "#FFFFFF"
+    },
+    {
+      "token": "information-01",
+      "variable": "var(--gds-sys-color-border-information-01)",
+      "value": "#0A0B0B"
+    },
+    {
+      "token": "positive-01",
+      "variable": "var(--gds-sys-color-border-positive-01)",
+      "value": "#027839"
+    },
+    {
+      "token": "negative-01",
+      "variable": "var(--gds-sys-color-border-negative-01)",
+      "value": "#B92F13"
+    },
+    {
+      "token": "warning-01",
+      "variable": "var(--gds-sys-color-border-warning-01)",
+      "value": "#8F530A"
+    },
+    {
+      "token": "notice-01",
+      "variable": "var(--gds-sys-color-border-notice-01)",
+      "value": "#005FB3"
+    },
+    {
+      "token": "information-02",
+      "variable": "var(--gds-sys-color-border-information-02)",
+      "value": "rgba(10, 11, 11, 0.4)"
+    },
+    {
+      "token": "positive-02",
+      "variable": "var(--gds-sys-color-border-positive-02)",
+      "value": "rgba(2, 120, 57, 0.4)"
+    },
+    {
+      "token": "negative-02",
+      "variable": "var(--gds-sys-color-border-negative-02)",
+      "value": "rgba(185, 47, 19, 0.4)"
+    },
+    {
+      "token": "warning-02",
+      "variable": "var(--gds-sys-color-border-warning-02)",
+      "value": "rgba(143, 83, 10, 0.4)"
+    },
+    {
+      "token": "notice-02",
+      "variable": "var(--gds-sys-color-border-notice-02)",
+      "value": "rgba(0, 95, 179, 0.4)"
+    }
+  ],
+  "content": [
+    {
+      "token": "neutral-01",
+      "variable": "var(--gds-sys-color-content-neutral-01)",
+      "value": "#0A0B0B"
+    },
+    {
+      "token": "neutral-02",
+      "variable": "var(--gds-sys-color-content-neutral-02)",
+      "value": "#636967"
+    },
+    {
+      "token": "neutral-03",
+      "variable": "var(--gds-sys-color-content-neutral-03)",
+      "value": "#FFFFFF"
+    },
+    {
+      "token": "neutral-04",
+      "variable": "var(--gds-sys-color-content-neutral-04)",
+      "value": "#A0A6A4"
+    },
+    {
+      "token": "inversed",
+      "variable": "var(--gds-sys-color-content-inversed)",
+      "value": "#FFFFFF"
+    },
+    {
+      "token": "brand-01",
+      "variable": "var(--gds-sys-color-content-brand-01)",
+      "value": "#003824"
+    },
+    {
+      "token": "brand-02",
+      "variable": "var(--gds-sys-color-content-brand-02)",
+      "value": "#685631"
+    },
+    {
+      "token": "positive-01",
+      "variable": "var(--gds-sys-color-content-positive-01)",
+      "value": "#027839"
+    },
+    {
+      "token": "positive-02",
+      "variable": "var(--gds-sys-color-content-positive-02)",
+      "value": "#EAF6EA"
+    },
+    {
+      "token": "positive-03",
+      "variable": "var(--gds-sys-color-content-positive-03)",
+      "value": "#026436"
+    },
+    {
+      "token": "negative-01",
+      "variable": "var(--gds-sys-color-content-negative-01)",
+      "value": "#B92F13"
+    },
+    {
+      "token": "negative-02",
+      "variable": "var(--gds-sys-color-content-negative-02)",
+      "value": "#FDEBE8"
+    },
+    {
+      "token": "warning-01",
+      "variable": "var(--gds-sys-color-content-warning-01)",
+      "value": "#8F530A"
+    },
+    {
+      "token": "warning-02",
+      "variable": "var(--gds-sys-color-content-warning-02)",
+      "value": "#FCE8CF"
+    },
+    {
+      "token": "notice-01",
+      "variable": "var(--gds-sys-color-content-notice-01)",
+      "value": "#005FB3"
+    },
+    {
+      "token": "notice-02",
+      "variable": "var(--gds-sys-color-content-notice-02)",
+      "value": "#E6F3FF"
+    },
+    {
+      "token": "disabled-01",
+      "variable": "var(--gds-sys-color-content-disabled-01)",
+      "value": "#A0A6A4"
+    },
+    {
+      "token": "disabled-02",
+      "variable": "var(--gds-sys-color-content-disabled-02)",
+      "value": "#F7F8F7"
+    }
+  ],
+  "state": [
+    {
+      "token": "brand-01",
+      "variable": "var(--gds-sys-color-state-brand-01)",
+      "value": "rgba(255, 255, 255, 0.2)"
+    },
+    {
+      "token": "brand-02",
+      "variable": "var(--gds-sys-color-state-brand-02)",
+      "value": "rgba(255, 255, 255, 0.35)"
+    },
+    {
+      "token": "brand-03",
+      "variable": "var(--gds-sys-color-state-brand-03)",
+      "value": "rgba(0, 56, 36, 0.06)"
+    },
+    {
+      "token": "brand-04",
+      "variable": "var(--gds-sys-color-state-brand-04)",
+      "value": "rgba(0, 56, 36, 0.14)"
+    },
+    {
+      "token": "brand-05",
+      "variable": "var(--gds-sys-color-state-brand-05)",
+      "value": "rgba(0, 56, 36, 0.06)"
+    },
+    {
+      "token": "brand-06",
+      "variable": "var(--gds-sys-color-state-brand-06)",
+      "value": "rgba(0, 56, 36, 0.14)"
+    },
+    {
+      "token": "neutral-01",
+      "variable": "var(--gds-sys-color-state-neutral-01)",
+      "value": "rgba(255, 255, 255, 0.2)"
+    },
+    {
+      "token": "neutral-02",
+      "variable": "var(--gds-sys-color-state-neutral-02)",
+      "value": "rgba(255, 255, 255, 0.35)"
+    },
+    {
+      "token": "neutral-03",
+      "variable": "var(--gds-sys-color-state-neutral-03)",
+      "value": "rgba(0, 0, 0, 0.06)"
+    },
+    {
+      "token": "neutral-04",
+      "variable": "var(--gds-sys-color-state-neutral-04)",
+      "value": "rgba(0, 0, 0, 0.14)"
+    },
+    {
+      "token": "neutral-05",
+      "variable": "var(--gds-sys-color-state-neutral-05)",
+      "value": "rgba(0, 0, 0, 0.06)"
+    },
+    {
+      "token": "neutral-06",
+      "variable": "var(--gds-sys-color-state-neutral-06)",
+      "value": "rgba(0, 0, 0, 0.14)"
+    },
+    {
+      "token": "positive-01",
+      "variable": "var(--gds-sys-color-state-positive-01)",
+      "value": "rgba(255, 255, 255, 0.12)"
+    },
+    {
+      "token": "positive-02",
+      "variable": "var(--gds-sys-color-state-positive-02)",
+      "value": "rgba(255, 255, 255, 0.23)"
+    },
+    {
+      "token": "positive-03",
+      "variable": "var(--gds-sys-color-state-positive-03)",
+      "value": "rgba(2, 120, 57, 0.08)"
+    },
+    {
+      "token": "positive-04",
+      "variable": "var(--gds-sys-color-state-positive-04)",
+      "value": "rgba(2, 120, 57, 0.16)"
+    },
+    {
+      "token": "positive-05",
+      "variable": "var(--gds-sys-color-state-positive-05)",
+      "value": "rgba(2, 120, 57, 0.08)"
+    },
+    {
+      "token": "positive-06",
+      "variable": "var(--gds-sys-color-state-positive-06)",
+      "value": "rgba(2, 120, 57, 0.16)"
+    },
+    {
+      "token": "negative-01",
+      "variable": "var(--gds-sys-color-state-negative-01)",
+      "value": "rgba(255, 255, 255, 0.08)"
+    },
+    {
+      "token": "negative-02",
+      "variable": "var(--gds-sys-color-state-negative-02)",
+      "value": "rgba(255, 255, 255, 0.16)"
+    },
+    {
+      "token": "negative-03",
+      "variable": "var(--gds-sys-color-state-negative-03)",
+      "value": "rgba(185, 47, 19, 0.08)"
+    },
+    {
+      "token": "negative-04",
+      "variable": "var(--gds-sys-color-state-negative-04)",
+      "value": "rgba(185, 47, 19, 0.16)"
+    },
+    {
+      "token": "negative-05",
+      "variable": "var(--gds-sys-color-state-negative-05)",
+      "value": "rgba(185, 47, 19, 0.08)"
+    },
+    {
+      "token": "negative-06",
+      "variable": "var(--gds-sys-color-state-negative-06)",
+      "value": "rgba(185, 47, 19, 0.16)"
+    },
+    {
+      "token": "notice-01",
+      "variable": "var(--gds-sys-color-state-notice-01)",
+      "value": "rgba(255, 255, 255, 0.2)"
+    },
+    {
+      "token": "notice-02",
+      "variable": "var(--gds-sys-color-state-notice-02)",
+      "value": "rgba(255, 255, 255, 0.35)"
+    },
+    {
+      "token": "notice-03",
+      "variable": "var(--gds-sys-color-state-notice-03)",
+      "value": "rgba(0, 95, 179, 0.08)"
+    },
+    {
+      "token": "notice-04",
+      "variable": "var(--gds-sys-color-state-notice-04)",
+      "value": "rgba(0, 95, 179, 0.16)"
+    },
+    {
+      "token": "notice-05",
+      "variable": "var(--gds-sys-color-state-notice-05)",
+      "value": "rgba(0, 95, 179, 0.08)"
+    },
+    {
+      "token": "notice-06",
+      "variable": "var(--gds-sys-color-state-notice-06)",
+      "value": "rgba(0, 95, 179, 0.16)"
+    },
+    {
+      "token": "warning-01",
+      "variable": "var(--gds-sys-color-state-warning-01)",
+      "value": "rgba(255, 255, 255, 0.2)"
+    },
+    {
+      "token": "warning-02",
+      "variable": "var(--gds-sys-color-state-warning-02)",
+      "value": "rgba(255, 255, 255, 0.35)"
+    },
+    {
+      "token": "warning-03",
+      "variable": "var(--gds-sys-color-state-warning-03)",
+      "value": "rgba(143, 83, 10, 0.08)"
+    },
+    {
+      "token": "warning-04",
+      "variable": "var(--gds-sys-color-state-warning-04)",
+      "value": "rgba(143, 83, 10, 0.16)"
+    },
+    {
+      "token": "warning-05",
+      "variable": "var(--gds-sys-color-state-warning-05)",
+      "value": "rgba(143, 83, 10, 0.08)"
+    },
+    {
+      "token": "warning-06",
+      "variable": "var(--gds-sys-color-state-warning-06)",
+      "value": "rgba(143, 83, 10, 0.16)"
+    }
+  ]
+}"
+`;
+
+exports[`test studio output matches the contents in snapshot for studio/studio.motion.json: tokens-studio-studio-studio-motion-json 1`] = `
+"{
+  "easing": [
+    {
+      "token": "ease-in",
+      "variable": "var(--gds-sys-motion-easing-ease-in)",
+      "value": "0.64, 0, 0.78, 0"
+    },
+    {
+      "token": "ease-in-out",
+      "variable": "var(--gds-sys-motion-easing-ease-in-out)",
+      "value": "0.83, 0, 0.17, 1"
+    },
+    {
+      "token": "ease-out",
+      "variable": "var(--gds-sys-motion-easing-ease-out)",
+      "value": "0.22, 1, 0.36, 1"
+    },
+    {
+      "token": "linear",
+      "variable": "var(--gds-sys-motion-easing-linear)",
+      "value": "0, 0, 1, 1"
+    }
+  ],
+  "duration": [
+    {
+      "token": "fastest",
+      "variable": "var(--gds-sys-motion-duration-fastest)",
+      "value": ".2s"
+    },
+    {
+      "token": "fast",
+      "variable": "var(--gds-sys-motion-duration-fast)",
+      "value": ".4s"
+    },
+    {
+      "token": "default",
+      "variable": "var(--gds-sys-motion-duration-default)",
+      "value": ".5s"
+    },
+    {
+      "token": "slow",
+      "variable": "var(--gds-sys-motion-duration-slow)",
+      "value": "1s"
+    },
+    {
+      "token": "slowest",
+      "variable": "var(--gds-sys-motion-duration-slowest)",
+      "value": "1.5s"
+    }
+  ]
+}"
+`;
+
+exports[`test studio output matches the contents in snapshot for studio/studio.radius.json: tokens-studio-studio-studio-radius-json 1`] = `
+"{
+  "radius": {
+    "0": {
+      "token": "0",
+      "variable": "var(--gds-sys-radius-0)",
+      "value": "0px"
+    },
+    "none": {
+      "token": "none",
+      "variable": "var(--gds-sys-radius-none)",
+      "value": "0px"
+    },
+    "5xs": {
+      "token": "5xs",
+      "variable": "var(--gds-sys-radius-5xs)",
+      "value": "1px"
+    },
+    "4xs": {
+      "token": "4xs",
+      "variable": "var(--gds-sys-radius-4xs)",
+      "value": "2px"
+    },
+    "3xs": {
+      "token": "3xs",
+      "variable": "var(--gds-sys-radius-3xs)",
+      "value": "4px"
+    },
+    "2xs": {
+      "token": "2xs",
+      "variable": "var(--gds-sys-radius-2xs)",
+      "value": "6px"
+    },
+    "xs": {
+      "token": "xs",
+      "variable": "var(--gds-sys-radius-xs)",
+      "value": "8px"
+    },
+    "s": {
+      "token": "s",
+      "variable": "var(--gds-sys-radius-s)",
+      "value": "12px"
+    },
+    "m": {
+      "token": "m",
+      "variable": "var(--gds-sys-radius-m)",
+      "value": "16px"
+    },
+    "l": {
+      "token": "l",
+      "variable": "var(--gds-sys-radius-l)",
+      "value": "20px"
+    },
+    "xl": {
+      "token": "xl",
+      "variable": "var(--gds-sys-radius-xl)",
+      "value": "24px"
+    },
+    "2xl": {
+      "token": "2xl",
+      "variable": "var(--gds-sys-radius-2xl)",
+      "value": "32px"
+    },
+    "3xl": {
+      "token": "3xl",
+      "variable": "var(--gds-sys-radius-3xl)",
+      "value": "40px"
+    },
+    "4xl": {
+      "token": "4xl",
+      "variable": "var(--gds-sys-radius-4xl)",
+      "value": "48px"
+    },
+    "5xl": {
+      "token": "5xl",
+      "variable": "var(--gds-sys-radius-5xl)",
+      "value": "64px"
+    },
+    "max": {
+      "token": "max",
+      "variable": "var(--gds-sys-radius-max)",
+      "value": "999px"
+    }
+  }
+}"
+`;
+
+exports[`test studio output matches the contents in snapshot for studio/studio.shadows.json: tokens-studio-studio-studio-shadows-json 1`] = `
+"{
+  "shadows": {
+    "xs": {
+      "token": "xs",
+      "variable": "var(--gds-sys-shadow-xs-01), var(--gds-sys-shadow-xs-02)",
+      "value": "xs"
+    },
+    "s": {
+      "token": "s",
+      "variable": "var(--gds-sys-shadow-s-01), var(--gds-sys-shadow-s-02)",
+      "value": "s"
+    },
+    "m": {
+      "token": "m",
+      "variable": "var(--gds-sys-shadow-m-01), var(--gds-sys-shadow-m-02)",
+      "value": "m"
+    },
+    "l": {
+      "token": "l",
+      "variable": "var(--gds-sys-shadow-l-01), var(--gds-sys-shadow-l-02)",
+      "value": "l"
+    },
+    "xl": {
+      "token": "xl",
+      "variable": "var(--gds-sys-shadow-xl-01), var(--gds-sys-shadow-xl-02)",
+      "value": "xl"
+    },
+    "2xl": {
+      "token": "2xl",
+      "variable": "var(--gds-sys-shadow-2xl-01), var(--gds-sys-shadow-2xl-02)",
+      "value": "2xl"
+    }
+  }
+}"
+`;
+
+exports[`test studio output matches the contents in snapshot for studio/studio.spacing.json: tokens-studio-studio-studio-spacing-json 1`] = `
+"{
+  "spacing": {
+    "0": {
+      "token": "0",
+      "variable": "var(--gds-sys-space-0)",
+      "value": "0px"
+    },
+    "5xs": {
+      "token": "5xs",
+      "variable": "var(--gds-sys-space-5xs)",
+      "value": "1px"
+    },
+    "4xs": {
+      "token": "4xs",
+      "variable": "var(--gds-sys-space-4xs)",
+      "value": "2px"
+    },
+    "3xs": {
+      "token": "3xs",
+      "variable": "var(--gds-sys-space-3xs)",
+      "value": "4px"
+    },
+    "2xs": {
+      "token": "2xs",
+      "variable": "var(--gds-sys-space-2xs)",
+      "value": "6px"
+    },
+    "xs": {
+      "token": "xs",
+      "variable": "var(--gds-sys-space-xs)",
+      "value": "8px"
+    },
+    "s": {
+      "token": "s",
+      "variable": "var(--gds-sys-space-s)",
+      "value": "12px"
+    },
+    "m": {
+      "token": "m",
+      "variable": "var(--gds-sys-space-m)",
+      "value": "16px"
+    },
+    "l": {
+      "token": "l",
+      "variable": "var(--gds-sys-space-l)",
+      "value": "20px"
+    },
+    "xl": {
+      "token": "xl",
+      "variable": "var(--gds-sys-space-xl)",
+      "value": "24px"
+    },
+    "2xl": {
+      "token": "2xl",
+      "variable": "var(--gds-sys-space-2xl)",
+      "value": "32px"
+    },
+    "3xl": {
+      "token": "3xl",
+      "variable": "var(--gds-sys-space-3xl)",
+      "value": "40px"
+    },
+    "4xl": {
+      "token": "4xl",
+      "variable": "var(--gds-sys-space-4xl)",
+      "value": "48px"
+    },
+    "5xl": {
+      "token": "5xl",
+      "variable": "var(--gds-sys-space-5xl)",
+      "value": "64px"
+    },
+    "6xl": {
+      "token": "6xl",
+      "variable": "var(--gds-sys-space-6xl)",
+      "value": "80px"
+    },
+    "7xl": {
+      "token": "7xl",
+      "variable": "var(--gds-sys-space-7xl)",
+      "value": "96px"
+    },
+    "8xl": {
+      "token": "8xl",
+      "variable": "var(--gds-sys-space-8xl)",
+      "value": "112px"
+    },
+    "9xl": {
+      "token": "9xl",
+      "variable": "var(--gds-sys-space-9xl)",
+      "value": "120px"
+    },
+    "max": {
+      "token": "max",
+      "variable": "var(--gds-sys-space-max)",
+      "value": "999px"
+    }
+  }
+}"
+`;
+
+exports[`test studio output matches the contents in snapshot for studio/studio.typography.json: tokens-studio-studio-studio-typography-json 1`] = `
+"{
+  "typography": {
+    "heading": {
+      "heading-xl": {
+        "token": "heading-xl",
+        "variable": "var(--gds-sys-text-heading-xl)",
+        "font-weight": "450",
+        "font-size": "32px",
+        "line-height": "44px"
+      },
+      "heading-l": {
+        "token": "heading-l",
+        "variable": "var(--gds-sys-text-heading-l)",
+        "font-weight": "450",
+        "font-size": "28px",
+        "line-height": "40px"
+      },
+      "heading-m": {
+        "token": "heading-m",
+        "variable": "var(--gds-sys-text-heading-m)",
+        "font-weight": "450",
+        "font-size": "24px",
+        "line-height": "32px"
+      },
+      "heading-s": {
+        "token": "heading-s",
+        "variable": "var(--gds-sys-text-heading-s)",
+        "font-weight": "450",
+        "font-size": "20px",
+        "line-height": "28px"
+      },
+      "heading-xs": {
+        "token": "heading-xs",
+        "variable": "var(--gds-sys-text-heading-xs)",
+        "font-weight": "450",
+        "font-size": "16px",
+        "line-height": "24px"
+      },
+      "heading-2xs": {
+        "token": "heading-2xs",
+        "variable": "var(--gds-sys-text-heading-2xs)",
+        "font-weight": "450",
+        "font-size": "14px",
+        "line-height": "20px"
+      }
+    },
+    "detail": {
+      "detail-book-m": {
+        "token": "detail-book-m",
+        "variable": "var(--gds-sys-text-detail-book-m)",
+        "font-weight": "450",
+        "font-size": "16px",
+        "line-height": "20px"
+      },
+      "detail-book-s": {
+        "token": "detail-book-s",
+        "variable": "var(--gds-sys-text-detail-book-s)",
+        "font-weight": "450",
+        "font-size": "14px",
+        "line-height": "20px"
+      },
+      "detail-book-xs": {
+        "token": "detail-book-xs",
+        "variable": "var(--gds-sys-text-detail-book-xs)",
+        "font-weight": "450",
+        "font-size": "12px",
+        "line-height": "16px"
+      },
+      "detail-regular-m": {
+        "token": "detail-regular-m",
+        "variable": "var(--gds-sys-text-detail-regular-m)",
+        "font-weight": "400",
+        "font-size": "16px",
+        "line-height": "20px"
+      },
+      "detail-regular-s": {
+        "token": "detail-regular-s",
+        "variable": "var(--gds-sys-text-detail-regular-s)",
+        "font-weight": "400",
+        "font-size": "14px",
+        "line-height": "20px"
+      },
+      "detail-regular-xs": {
+        "token": "detail-regular-xs",
+        "variable": "var(--gds-sys-text-detail-regular-xs)",
+        "font-weight": "400",
+        "font-size": "12px",
+        "line-height": "16px"
+      }
+    },
+    "body": {
+      "body-book-l": {
+        "token": "body-book-l",
+        "variable": "var(--gds-sys-text-body-book-l)",
+        "font-weight": "450",
+        "font-size": "20px",
+        "line-height": "26px"
+      },
+      "body-book-m": {
+        "token": "body-book-m",
+        "variable": "var(--gds-sys-text-body-book-m)",
+        "font-weight": "450",
+        "font-size": "16px",
+        "line-height": "24px"
+      },
+      "body-book-s": {
+        "token": "body-book-s",
+        "variable": "var(--gds-sys-text-body-book-s)",
+        "font-weight": "450",
+        "font-size": "14px",
+        "line-height": "20px"
+      },
+      "body-regular-l": {
+        "token": "body-regular-l",
+        "variable": "var(--gds-sys-text-body-regular-l)",
+        "font-weight": "400",
+        "font-size": "20px",
+        "line-height": "26px"
+      },
+      "body-regular-m": {
+        "token": "body-regular-m",
+        "variable": "var(--gds-sys-text-body-regular-m)",
+        "font-weight": "400",
+        "font-size": "16px",
+        "line-height": "24px"
+      },
+      "body-regular-s": {
+        "token": "body-regular-s",
+        "variable": "var(--gds-sys-text-body-regular-s)",
+        "font-weight": "400",
+        "font-size": "14px",
+        "line-height": "20px"
+      },
+      "body-italic-l": {
+        "token": "body-italic-l",
+        "variable": "var(--gds-sys-text-body-italic-l)",
+        "font-weight": "400",
+        "font-size": "20px",
+        "line-height": "26px"
+      },
+      "body-italic-m": {
+        "token": "body-italic-m",
+        "variable": "var(--gds-sys-text-body-italic-m)",
+        "font-weight": "400",
+        "font-size": "16px",
+        "line-height": "24px"
+      },
+      "body-italic-s": {
+        "token": "body-italic-s",
+        "variable": "var(--gds-sys-text-body-italic-s)",
+        "font-weight": "400",
+        "font-size": "14px",
+        "line-height": "20px"
+      }
+    },
+    "display": {
+      "display-2xl": {
+        "token": "display-2xl",
+        "variable": "var(--gds-sys-text-display-2xl)",
+        "font-weight": "450",
+        "font-size": "82px",
+        "line-height": "90px"
+      },
+      "display-xl": {
+        "token": "display-xl",
+        "variable": "var(--gds-sys-text-display-xl)",
+        "font-weight": "450",
+        "font-size": "64px",
+        "line-height": "72px"
+      },
+      "display-l": {
+        "token": "display-l",
+        "variable": "var(--gds-sys-text-display-l)",
+        "font-weight": "450",
+        "font-size": "48px",
+        "line-height": "56px"
+      },
+      "display-m": {
+        "token": "display-m",
+        "variable": "var(--gds-sys-text-display-m)",
+        "font-weight": "450",
+        "font-size": "36px",
+        "line-height": "44px"
+      },
+      "display-s": {
+        "token": "display-s",
+        "variable": "var(--gds-sys-text-display-s)",
+        "font-weight": "450",
+        "font-size": "32px",
+        "line-height": "40px"
+      }
+    },
+    "preamble": {
+      "preamble-2xl": {
+        "token": "preamble-2xl",
+        "variable": "var(--gds-sys-text-preamble-2xl)",
+        "font-weight": "450",
+        "font-size": "32px",
+        "line-height": "40px"
+      },
+      "preamble-xl": {
+        "token": "preamble-xl",
+        "variable": "var(--gds-sys-text-preamble-xl)",
+        "font-weight": "450",
+        "font-size": "28px",
+        "line-height": "36px"
+      },
+      "preamble-l": {
+        "token": "preamble-l",
+        "variable": "var(--gds-sys-text-preamble-l)",
+        "font-weight": "450",
+        "font-size": "24px",
+        "line-height": "32px"
+      },
+      "preamble-m": {
+        "token": "preamble-m",
+        "variable": "var(--gds-sys-text-preamble-m)",
+        "font-weight": "450",
+        "font-size": "20px",
+        "line-height": "28px"
+      },
+      "preamble-s": {
+        "token": "preamble-s",
+        "variable": "var(--gds-sys-text-preamble-s)",
+        "font-weight": "450",
+        "font-size": "18px",
+        "line-height": "26px"
+      },
+      "preamble-xs": {
+        "token": "preamble-xs",
+        "variable": "var(--gds-sys-text-preamble-xs)",
+        "font-weight": "450",
+        "font-size": "16px",
+        "line-height": "24px"
+      }
+    }
+  }
+}"
+`;
+
+exports[`test studio output matches the contents in snapshot for studio/studio.viewport.json: tokens-studio-studio-studio-viewport-json 1`] = `
+"{
+  "viewport": {
+    "0": {
+      "token": "0",
+      "variable": "var(--gds-sys-viewport-0)",
+      "value": "0px"
+    },
+    "2xs": {
+      "token": "2xs",
+      "variable": "var(--gds-sys-viewport-2xs)",
+      "value": "320px"
+    },
+    "xs": {
+      "token": "xs",
+      "variable": "var(--gds-sys-viewport-xs)",
+      "value": "425px"
+    },
+    "s": {
+      "token": "s",
+      "variable": "var(--gds-sys-viewport-s)",
+      "value": "768px"
+    },
+    "m": {
+      "token": "m",
+      "variable": "var(--gds-sys-viewport-m)",
+      "value": "1024px"
+    },
+    "l": {
+      "token": "l",
+      "variable": "var(--gds-sys-viewport-l)",
+      "value": "1280px"
+    },
+    "xl": {
+      "token": "xl",
+      "variable": "var(--gds-sys-viewport-xl)",
+      "value": "1440px"
+    },
+    "2xl": {
+      "token": "2xl",
+      "variable": "var(--gds-sys-viewport-2xl)",
+      "value": "2560px"
+    },
+    "3xl": {
+      "token": "3xl",
+      "variable": "var(--gds-sys-viewport-3xl)",
+      "value": "3840px"
+    },
+    "4xl": {
+      "token": "4xl",
+      "variable": "var(--gds-sys-viewport-4xl)",
+      "value": "4320px"
+    },
+    "5xl": {
+      "token": "5xl",
+      "variable": "var(--gds-sys-viewport-5xl)",
+      "value": "6016px"
+    },
+    "6xl": {
+      "token": "6xl",
+      "variable": "var(--gds-sys-viewport-6xl)",
+      "value": "7680px"
+    }
+  }
+}"
+`;

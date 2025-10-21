@@ -4,6 +4,7 @@ import isColorIsRef from './is-color-is-ref.ts'
 import isColorNoRef from './is-color-no-ref.ts'
 import isColor from './is-color.ts'
 import isDimension from './is-dimension.ts'
+import isFontWeight from './is-font-weight.ts'
 import isMotion from './is-motion.ts'
 import isRadius from './is-radius.ts'
 import isRef from './is-ref.ts'
@@ -23,6 +24,7 @@ export default {
   'no-colors': noColors,
   'base-tokens': baseTokens,
   'is-color': isColor,
+  'is-font-weight': isFontWeight,
   'is-color-no-ref': isColorNoRef,
   'is-color-is-ref': isColorIsRef,
   'is-ref': isRef,

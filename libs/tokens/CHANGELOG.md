@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.0
+
+### Minor Changes
+
+- 2d649da: Tokens: text tokens for CSS is updated to transform into rem instead of px
+
 ## 2.3.0
 
 ### Minor Changes
