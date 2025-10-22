@@ -106,7 +106,7 @@ export const Header: Story = {
         title="Basic Layout"
         excerpt="Simple card with title and description for text-focused content"
         href="#"
-        label="Learn More"
+        label="Learn more"
       ></gds-card-pattern-01>
 
       <!-- Image Card -->
@@ -115,7 +115,7 @@ export const Header: Story = {
         excerpt="Enhanced visual presentation with featured image"
         src="https://api.seb.io/assets/launch-hero.jpg"
         href="#"
-        label="Learn More"
+        label="Learn more"
       ></gds-card-pattern-01>
 
       <!-- Custom Header -->
@@ -144,7 +144,7 @@ export const Header: Story = {
   title="Basic Layout"
   excerpt="Simple card with title and description"
   href="#"
-  label="Learn More"
+  label="Learn more"
 ></gds-card-pattern-01>
 
 <!-- Image Content -->
@@ -153,7 +153,7 @@ export const Header: Story = {
   excerpt="Enhanced with featured image"
   src="image.jpg"
   href="#"
-  label="Learn More"
+  label="Learn more"
 ></gds-card-pattern-01>
 
 <!-- Custom Header -->
@@ -258,8 +258,8 @@ export const Content: Story = {
       <gds-card-pattern-01
         title="Without Excerpt"
         href="#"
-        variant="neutral-02"
         src="https://api.seb.io/assets/launch-hero.jpg"
+        label="Read more"
       ></gds-card-pattern-01>
 
       <!-- Long excerpt with custom label -->
@@ -267,7 +267,7 @@ export const Content: Story = {
         title="With Excerpt"
         excerpt="Long description text that demonstrates the three line limit with automatic truncation using ellipsis when content exceeds the available space"
         href="#"
-        label="View Details"
+        label="View details"
       ></gds-card-pattern-01>
     </gds-grid>
   `,
@@ -315,7 +315,6 @@ export const Content: Story = {
 <gds-card-pattern-01
   title="Without Excerpt"
   href="#"
-  variant="neutral-02"
   src="https://api.seb.io/assets/launch-hero.jpg"
 ></gds-card-pattern-01>
 
@@ -516,7 +515,7 @@ export const Variant: Story = {
         title="Neutral 01"
         excerpt="Default card appearance"
         href="#"
-        label="Learn More"
+        label="Learn more"
         src="https://api.seb.io/assets/launch-hero.jpg"
       ></gds-card-pattern-01>
 
@@ -525,7 +524,7 @@ export const Variant: Story = {
         title="Neutral 02"
         excerpt="Secondary variant"
         href="#"
-        label="Learn More"
+        label="Learn more"
         src="https://api.seb.io/assets/launch-hero.jpg"
       ></gds-card-pattern-01>
 
@@ -535,7 +534,7 @@ export const Variant: Story = {
         title="Neutral 02 · Outlined"
         excerpt="Secondary variant without border"
         href="#"
-        label="Learn More"
+        label="Learn more"
         src="https://api.seb.io/assets/launch-hero.jpg"
       ></gds-card-pattern-01>
     </gds-grid>
@@ -587,7 +586,7 @@ export const Theme: Story = {
             title="Light mode"
             excerpt="Card on light mode"
             href="#"
-            label="Learn More"
+            label="Learn more"
             src="https://api.seb.io/assets/launch-hero.jpg"
           ></gds-card-pattern-01>
         </gds-flex>
@@ -607,7 +606,7 @@ export const Theme: Story = {
             title="Dark mode"
             excerpt="Card on dark mode"
             href="#"
-            label="Learn More"
+            label="Learn more"
             src="https://api.seb.io/assets/launch-hero.jpg"
           ></gds-card-pattern-01>
         </gds-flex>
@@ -629,7 +628,7 @@ export const Theme: Story = {
     excerpt="Card on light mode"
     appearance="outlined"
     href="#"
-    label="Learn More"
+    label="Learn more"
   ></gds-card-pattern-01>
 </gds-theme>
 
@@ -640,7 +639,7 @@ export const Theme: Story = {
     excerpt="Card on dark mode"
     appearance="outlined"
     href="#"
-    label="Learn More"
+    label="Learn more"
   ></gds-card-pattern-01>
 </gds-theme>`,
         language: 'html',
