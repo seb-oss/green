@@ -284,14 +284,6 @@ export function ComponentLayoutClient({
               </Core.GdsFlex>
             )}
 
-            {children}
-
-            {component.soon && (
-              <Core.GdsAlert variant="notice">
-                {component.title} documentation is in progress.
-              </Core.GdsAlert>
-            )}
-
             {isLayoutComponent && section === 'overview' && (
               <Core.GdsAlert
                 variant="information"
@@ -304,7 +296,7 @@ export function ComponentLayoutClient({
                     display="inline"
                     font-weight="bold"
                   >
-                    This is a declarative layout component!{' '}
+                    This is a declarative layout component!
                   </Core.GdsText>
                   A micro-frontend optimized layout system using style
                   expressions, Generates encapsulated CSS in shadow DOM for
@@ -312,6 +304,15 @@ export function ComponentLayoutClient({
                 </Core.GdsText>
               </Core.GdsAlert>
             )}
+
+            {children}
+
+            {component.soon && (
+              <Core.GdsAlert variant="notice">
+                {component.title} documentation is in progress.
+              </Core.GdsAlert>
+            )}
+
             {section === 'code' && <ArgsTable componentName={slug} />}
             <Similar tag={firstTag} currentSlug={component.slug} />
           </Core.GdsFlex>
