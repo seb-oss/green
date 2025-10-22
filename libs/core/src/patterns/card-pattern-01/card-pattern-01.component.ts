@@ -1,4 +1,5 @@
-import { classMap } from 'lit/directives/class-map'
+import { property } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 
@@ -19,7 +20,6 @@ import {
   withMarginProps,
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import { withCardProps } from '../../utils/mixins/props-card'
 import { withImageProps } from '../../utils/mixins/props-image'
 import { withLinkProps } from '../../utils/mixins/props-link'
 import CardPattern01Styles from './card-pattern-01.styles'
@@ -38,12 +38,58 @@ import CardPattern01Styles from './card-pattern-01.styles'
 })
 export class GdsCardPattern01 extends withSizeXProps(
   withMarginProps(
-    withLayoutChildProps(
-      withLinkProps(withImageProps(withCardProps(GdsElement))),
-    ),
+    withLayoutChildProps(withLinkProps(withImageProps(GdsElement))),
   ),
 ) {
   static styles = [tokens, CardPattern01Styles]
+
+  /**
+   * The main title of the card
+   */
+  @property({ reflect: false })
+  title = ''
+
+  /**
+   * A brief description or summary text
+   */
+  @property({ reflect: false })
+  excerpt = ''
+
+  /**
+   * Optional label text (e.g., category, tag, or status)
+   */
+  @property({ reflect: false })
+  label = ''
+
+  /**
+   * Card background variant
+   * @default 'neutral-01'
+   */
+  @property({ reflect: false })
+  variant: 'neutral-01' | 'neutral-02' = 'neutral-01'
+
+  /**
+   * Enables border styling
+   * Designed to work with neutral-02 variant
+   * @default false
+   */
+  @property({ type: Boolean, reflect: false })
+  outlined = false
+
+  /**
+   * HTML tag for the card title
+   * Controls heading level for accessibility
+   */
+  @property({ reflect: false })
+  tag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'h2'
+
+  /**
+   * Aspect ratio/format of the card's media section
+   * - landscape: 16:9 or similar horizontal format
+   * - square: 1:1 square format
+   */
+  @property({ reflect: false, attribute: 'aspect-ratio' })
+  ratio: 'landscape' | 'square' = 'landscape'
 
   /**
    * Checks if footer content exists
@@ -69,6 +115,16 @@ export class GdsCardPattern01 extends withSizeXProps(
     }
   }
 
+  #getClasses(type?: 'linked' | 'static'): ReturnType<typeof classMap> {
+    return classMap({
+      card: true,
+      outlined: this.outlined,
+      [`card-${type}`]: !!type,
+      [`variant-${this.variant}`]: true,
+      [`ratio-${this.ratio}`]: true,
+    })
+  }
+
   /**
    * Renders linked version of the card
    * Includes href, target, and rel attributes
@@ -82,7 +138,7 @@ export class GdsCardPattern01 extends withSizeXProps(
         target=${ifDefined(this.target)}
         rel=${ifDefined(this.rel)}
         variant=${this.#getVariant()}
-        class=${this.classes('linked')}
+        class=${this.#getClasses('linked')}
       >
         ${this.#renderCardContent()}
       </gds-card-linked>
@@ -131,7 +187,7 @@ export class GdsCardPattern01 extends withSizeXProps(
         padding="0"
         gap="0"
         variant=${this.#getVariant()}
-        class=${this.classes('static')}
+        class=${this.#getClasses('static')}
       >
         ${this.#renderCardContent()}
       </gds-card>
