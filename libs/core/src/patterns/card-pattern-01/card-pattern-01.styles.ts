@@ -4,6 +4,7 @@ const style = css`
   :host {
     display: inline-block;
     height: max-content;
+    text-align: left;
   }
 
   .card-media {
