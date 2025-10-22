@@ -76,6 +76,8 @@ export function ComponentLayoutClient({
     (Array.isArray(component['ux-text']) && component['ux-text'].length > 0) ||
       (component['ux-text']?.section &&
         component['ux-text'].section.length > 0) ||
+      (Array.isArray(component.faq) && component.faq.length > 0) ||
+      (component.faq?.section && component.faq.section.length > 0) ||
       (component.accessibility?.section &&
         component.accessibility.section.length > 0),
   )
