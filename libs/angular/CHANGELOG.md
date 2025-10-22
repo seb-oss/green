@@ -1,5 +1,17 @@
 # Changelog
 
+## 6.7.0
+
+### Minor Changes
+
+- c70d4f1: **V-Angular:** Added afterClose output to nggv-dropdown-list componenet
+
+### Patch Changes
+
+- 527b5fd: V-angular: Don't hide column for hidden checkbox in table
+- Updated dependencies [808b0f1]
+  - @sebgroup/chlorophyll@3.6.25
+
 ## 6.6.0
 
 ### Minor Changes

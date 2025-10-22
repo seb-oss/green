@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.25
+
+### Patch Changes
+
+- 808b0f1: **Input**: removing transition all that caused unintentional animation on size change.
+
 ## 3.6.24
 
 ### Patch Changes
