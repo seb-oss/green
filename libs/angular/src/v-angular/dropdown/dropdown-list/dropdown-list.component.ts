@@ -87,8 +87,18 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
 
   @Output() selectedValueChanged = new EventEmitter<any>()
 
+  /**
+   * Emitted when the dropdown is closed by user interactions (e.g. Escape or Tab) or other immediate close triggers.
+   * This notifies external consumers that the dropdown was closed as a result of a user action.
+   */
   @Output() closed = new EventEmitter<void>()
 
+  /**
+   * Emitted after the dropdown has fully closed and internal cleanup has been performed.
+   * Use this for post-close tasks that must run after subscriptions are torn down and resources released.
+   */
+  @Output() afterClose = new EventEmitter<void>()
+  
   /** The current active option based on numeric index. */
   public activeIndex = -1
 
@@ -175,6 +185,7 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
       this.subscribeToKeyDownEvents()
     } else {
       this.closed$.next(true)
+      this.afterClose.emit()
       this.onClickSubscription?.unsubscribe()
       this.onKeyDownSubscription?.unsubscribe()
       this.onKeyUpSubscription?.unsubscribe()
