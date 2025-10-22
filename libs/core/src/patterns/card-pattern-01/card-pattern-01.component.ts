@@ -31,14 +31,6 @@ import CardPattern01Styles from './card-pattern-01.styles'
  * @slot header - Custom header content
  * @slot footer - Action items (buttons, links)
  *
- * @property {string} href - Makes card clickable
- * @property {string} title - Card title
- * @property {string} excerpt - Card description
- * @property {string} label - Footer link text
- * @property {boolean} outlined - Adds border for the neutral 02
- * @property {'neutral-01' | 'neutral-02'} variant - Visual style
- * @property {'landscape' | 'square'} 'aspect-ratio' - Media ratio
- *
  */
 
 @gdsCustomElement('gds-card-pattern-01', {
