@@ -106,6 +106,7 @@ export class GdsCardPattern01 extends withSizeXProps(
       this.#hasFooterContent(true),
       () => html`
         <gds-flex
+          font="detail-book-m"
           align-items="center"
           gap="s"
           pointer-events="none"
@@ -153,7 +154,7 @@ export class GdsCardPattern01 extends withSizeXProps(
     return when(
       this.#hasFooterContent(),
       () => html`
-        <gds-flex align-items="center" gap="s">
+        <gds-flex font="detail-book-m" align-items="center" gap="s">
           <slot name="footer"></slot>
         </gds-flex>
       `,
