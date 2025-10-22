@@ -19,7 +19,10 @@ import {
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsButton } from '../button/button.component'
 import { IconDotGridOneHorizontal } from '../icon/icons/dot-grid-one-horizontal'
-import { GdsPopover } from '../popover/popover.component'
+import {
+  applyTriggerAriaAttributes,
+  GdsPopover,
+} from '../popover/popover.component'
 
 export { GdsMenuItem }
 export { GdsMenuHeading } from '../../primitives/menu/menu-heading.component'
@@ -148,6 +151,7 @@ export class GdsContextMenu extends withMarginProps(
           this.open = true
         }
       })
+      applyTriggerAriaAttributes(btn, this.open, 'menu')
     }
   }
 
