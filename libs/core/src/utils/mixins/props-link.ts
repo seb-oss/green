@@ -57,7 +57,6 @@ export function withLinkProps<T extends Constructor<GdsElement>>(
 
     /**
      * Specifies where to open the linked document
-     * @property {'_self' | '_blank' | '_parent' | '_top'}
      */
     @property()
     target?: '_self' | '_blank' | '_parent' | '_top'
