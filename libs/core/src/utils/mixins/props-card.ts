@@ -43,6 +43,12 @@ export interface CardProps {
   outlined?: boolean
 
   /**
+   * HTML tag for the card title
+   * @default 'h2'
+   */
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+
+  /**
    * Aspect ratio/format of the card's media section
    */
   ratio?: 'landscape' | 'square'
@@ -94,6 +100,13 @@ export function withCardProps<T extends Constructor<GdsElement>>(
      */
     @property({ type: Boolean, reflect: false })
     outlined = false
+
+    /**
+     * HTML tag for the card title
+     * Controls heading level for accessibility
+     */
+    @property({ reflect: false })
+    tag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'h2'
 
     /**
      * Aspect ratio/format of the card's media section

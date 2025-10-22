@@ -49,22 +49,22 @@ export function withImageProps<T extends Constructor<GdsElement>>(
   base: T,
 ): Constructor<ImageProps> & T {
   class ImagePropsMixin extends base implements ImageProps {
-    @property()
+    @property({ reflect: false })
     src?: string
 
-    @property()
+    @property({ reflect: false })
     srcset?: string
 
-    @property()
+    @property({ reflect: false })
     sizes?: string
 
-    @property()
+    @property({ reflect: false })
     alt?: string
 
-    @property()
+    @property({ reflect: false })
     loading?: 'lazy' | 'eager' = 'lazy'
 
-    @property()
+    @property({ reflect: false })
     decoding?: 'auto' | 'sync' | 'async' = 'auto'
   }
 

@@ -181,6 +181,9 @@ export class GdsCardPattern01 extends withSizeXProps(
               object-position="center"
               border-radius="xs"
               aspect-ratio=${this.ratio === 'square' ? '1/1' : '16/9'}
+              loading=${ifDefined(this.loading)}
+              decoding=${ifDefined(this.decoding)}
+              alt=${ifDefined(this.alt)}
               class="card-media"
             ></gds-img>
           </gds-flex>
@@ -195,7 +198,9 @@ export class GdsCardPattern01 extends withSizeXProps(
               ${when(
                 this.title,
                 () => html`
-                  <gds-text tag="h2" font="heading-s">${this.title}</gds-text>
+                  <gds-text tag=${ifDefined(this.tag)} font="heading-s">
+                    ${this.title}
+                  </gds-text>
                 `,
               )}
               ${when(

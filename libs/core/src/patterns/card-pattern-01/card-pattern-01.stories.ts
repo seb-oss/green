@@ -20,8 +20,8 @@ import '../../components/divider'
  *
  * Features:
  * - Linked and non-linked variants
- * - Header with media or custom content
- * - Configurable media aspect ratio
+ * - Header with image or custom content
+ * - Configurable image aspect ratio
  * - Optional footer with actions
  * - Three appearance styles
  * - Two content size options
@@ -48,7 +48,7 @@ const meta: Meta = {
     aspectRatio: {
       control: 'select',
       options: ['landscape', 'square'],
-      description: 'Aspect ratio for media content',
+      description: 'Aspect ratio for the image',
       table: {
         defaultValue: { summary: 'landscape' },
       },
@@ -79,7 +79,7 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Linked card with media, title, excerpt, and footer label.',
+        story: 'Linked card with image, title, excerpt, and footer label.',
       },
       source: {
         code: `
@@ -109,9 +109,9 @@ export const Header: Story = {
         label="Learn More"
       ></gds-card-pattern-01>
 
-      <!-- Media Card -->
+      <!-- Image Card -->
       <gds-card-pattern-01
-        title="Media Content"
+        title="Image Content"
         excerpt="Enhanced visual presentation with featured image"
         src="https://api.seb.io/assets/launch-hero.jpg"
         href="#"
@@ -122,7 +122,7 @@ export const Header: Story = {
       <gds-card-pattern-01
         href="#"
         title="Custom Header"
-        excerpt="Flexible header slot for custom content when no media is present"
+        excerpt="Flexible header slot for custom content when no image is present"
       >
         <gds-icon-cloudy-sun size="xl" slot="header"></gds-icon-cloudy-sun>
       </gds-card-pattern-01>
@@ -133,8 +133,8 @@ export const Header: Story = {
       description: {
         story: `
 - Basic: Text-only layout for simple content
-- Media: Image-based presentation
-- Custom: Slotted content when no media present
+- Image: Image-based presentation
+- Custom: Slotted content when no image present
         `,
       },
       source: {
@@ -147,9 +147,9 @@ export const Header: Story = {
   label="Learn More"
 ></gds-card-pattern-01>
 
-<!-- Media Content -->
+<!-- Image Content -->
 <gds-card-pattern-01
-  title="Media Content"
+  title="Image Content"
   excerpt="Enhanced with featured image"
   src="image.jpg"
   href="#"
@@ -170,11 +170,12 @@ export const Header: Story = {
   },
 }
 
-export const Media: Story = {
+export const Image: Story = {
   render: () => html`
     <gds-grid columns="1; m{3}" gap="xl">
       <gds-card-pattern-01
-        title="Landscape media"
+        title="Landscape image"
+        alt="The image alt"
         excerpt="16:9 aspect ratio"
         src="https://api.seb.io/assets/launch-hero.jpg"
         aspect-ratio="landscape"
@@ -183,7 +184,8 @@ export const Media: Story = {
       ></gds-card-pattern-01>
 
       <gds-card-pattern-01
-        title="Square Media"
+        title="Square image"
+        alt="The image alt"
         excerpt="1:1 aspect ratio"
         src="https://api.seb.io/assets/launch-hero.jpg"
         aspect-ratio="square"
@@ -196,13 +198,30 @@ export const Media: Story = {
         story: `
 - Landscape (16:9): Default for featured content
 - Square (1:1): Alternative for specific layouts
+- Responsive images with srcset/sizes
+- Accessibility: Alt text inherits from card's alt property
+- Performance: Supports loading="lazy" and decoding="async" attributes
+
+Note: Image properties can be set directly on the card:
+
+\`\`\`html
+<gds-card-pattern-01
+  src="image.jpg"
+  alt="Descriptive text"
+  loading="lazy"
+  decoding="async"
+  srcset="image-800.jpg 800w, image-1200.jpg 1200w"
+  sizes="(max-width: 800px) 100vw, 800px"
+></gds-card-pattern-01>
+\`\`\`
         `,
       },
       source: {
         code: `
 <!-- Landscape with responsive images -->
 <gds-card-pattern-01
-  title="Landscape Media"
+  title="Landscape image"
+  alt="The image alt"
   excerpt="16:9 aspect ratio"
   src="image.jpg"
   aspect-ratio="landscape"
@@ -212,10 +231,100 @@ export const Media: Story = {
 
 <!-- Square aspect ratio -->
 <gds-card-pattern-01
-  title="Square Media"
+  title="Square image"
+  alt="The image alt"
   excerpt="1:1 aspect ratio"
   src="image.jpg"
   aspect-ratio="square"
+></gds-card-pattern-01>`,
+        language: 'html',
+        type: 'code',
+      },
+    },
+  },
+}
+
+export const Content: Story = {
+  render: () => html`
+    <gds-grid columns="1; m{3}" gap="xl">
+      <!-- Custom heading level -->
+      <gds-card-pattern-01
+        title="Heading Level"
+        excerpt="Using h3 tag for accessibility"
+        tag="h3"
+      ></gds-card-pattern-01>
+
+      <!-- Title only -->
+      <gds-card-pattern-01
+        title="Without Excerpt"
+        href="#"
+        variant="neutral-02"
+        src="https://api.seb.io/assets/launch-hero.jpg"
+      ></gds-card-pattern-01>
+
+      <!-- Long excerpt with custom label -->
+      <gds-card-pattern-01
+        title="With Excerpt"
+        excerpt="Long description text that demonstrates the three line limit with automatic truncation using ellipsis when content exceeds the available space"
+        href="#"
+        label="View Details"
+      ></gds-card-pattern-01>
+    </gds-grid>
+  `,
+  parameters: {
+    docs: {
+      description: {
+        story: `
+- Title tag: Supports h1-h6 (default: h2) for proper document structure, it does not affect the font size
+- Excerpt: Optional description with 3-line limit and ellipsis
+- Label: Custom text for linked card's footer (requires href)
+
+\`\`\`html
+<!-- Custom heading level -->
+<gds-card-pattern-01
+  title="Heading"
+  tag="h3"
+></gds-card-pattern-01>
+
+<!-- Without excerpt -->
+<gds-card-pattern-01
+  title="Title Only"
+  href="#"
+></gds-card-pattern-01>
+
+<!-- With excerpt and custom label -->
+<gds-card-pattern-01
+  title="Title"
+  excerpt="Description with three line limit"
+  href="#"
+  label="View Details"
+></gds-card-pattern-01>
+\`\`\`
+        `,
+      },
+      source: {
+        code: `
+<!-- Custom heading level -->
+<gds-card-pattern-01
+  title="Heading Level"
+  excerpt="Using h3 tag for accessibility"
+  tag="h3"
+></gds-card-pattern-01>
+
+<!-- Title only -->
+<gds-card-pattern-01
+  title="Without Excerpt"
+  href="#"
+  variant="neutral-02"
+  src="https://api.seb.io/assets/launch-hero.jpg"
+></gds-card-pattern-01>
+
+<!-- Long excerpt with custom label -->
+<gds-card-pattern-01
+  title="With Excerpt"
+  excerpt="Long description text that demonstrates the three line limit with automatic truncation using ellipsis when content exceeds the available space"
+  href="#"
+  label="View Details"
 ></gds-card-pattern-01>`,
         language: 'html',
         type: 'code',
