@@ -56,14 +56,13 @@ export class GdsCardPattern01 extends withSizeXProps(
   excerpt = ''
 
   /**
-   * Optional label text (e.g., category, tag, or status)
+   * Optional label text used on the linked card footer decorative element.
    */
   @property({ reflect: false })
   label = ''
 
   /**
    * Card background variant
-   * @default 'neutral-01'
    */
   @property({ reflect: false })
   variant: 'neutral-01' | 'neutral-02' = 'neutral-01'
@@ -71,7 +70,6 @@ export class GdsCardPattern01 extends withSizeXProps(
   /**
    * Enables border styling
    * Designed to work with neutral-02 variant
-   * @default false
    */
   @property({ type: Boolean, reflect: false })
   outlined = false
