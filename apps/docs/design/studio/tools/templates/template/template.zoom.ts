@@ -24,10 +24,10 @@ export function useTemplateZoom(minZoom = 0.5, maxZoom = 3) {
       .zoom<HTMLDivElement, unknown>()
       .scaleExtent([minZoom, maxZoom])
       .filter((event) => {
-        // Allow zooming only with meta key or buttons
+        // Allow zooming with meta key or buttons
         if (event.type === 'wheel') return event.metaKey || event.ctrlKey
-        // Allow panning only with meta key
-        if (event.type === 'mousedown') return event.metaKey || event.ctrlKey
+        // Allow panning by default
+        if (event.type === 'mousedown') return true
         return true
       })
       .on('zoom', (event: D3ZoomEvent<HTMLDivElement, unknown>) => {

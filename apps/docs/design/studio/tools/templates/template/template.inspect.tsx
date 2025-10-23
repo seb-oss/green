@@ -48,8 +48,7 @@ export default function Inspect({ content, viewports }: InspectProps) {
 
   // Handle component inspection
   const handleElementClick = useCallback((event: MouseEvent) => {
-    // Don't handle clicks when meta key is active (zooming/panning)
-    if (event.metaKey || event.ctrlKey) return
+    if (!event.shiftKey) return // Only handle shift-clicks
 
     const target = event.target as HTMLElement
     const gdsElement = target.closest('[gds-element]')
@@ -71,6 +70,28 @@ export default function Inspect({ content, viewports }: InspectProps) {
       return () => element.removeEventListener('click', handleElementClick)
     }
   }, [handleElementClick])
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.shiftKey && containerRef.current) {
+        containerRef.current.style.cursor = 'crosshair'
+      }
+    }
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (!e.shiftKey && containerRef.current) {
+        containerRef.current.style.cursor = isMetaKeyActive ? 'grab' : 'default'
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('keyup', handleKeyUp)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keyup', handleKeyUp)
+    }
+  }, [isMetaKeyActive])
 
   return (
     <Core.GdsFlex flex-direction="column" gap="l" position="relative">
@@ -117,6 +138,7 @@ export default function Inspect({ content, viewports }: InspectProps) {
           background: 'var(--gds-ref-palette-background-l2)',
           borderRadius: 'var(--gds-sys-border-radius-l)',
           cursor: isMetaKeyActive ? 'grab' : 'default',
+          touchAction: 'none', // Add this to prevent touch scrolling
         }}
       >
         <div
