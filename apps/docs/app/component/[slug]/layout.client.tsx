@@ -99,6 +99,7 @@ export function ComponentLayoutClient({
   return (
     <Core.GdsFlex flex-direction="column" gap="l" width="100%">
       <Breadcrumbs
+        type="component"
         key={`${slug}-${section}`}
         slug={component.slug}
         title={component.title}
@@ -218,7 +219,7 @@ export function ComponentLayoutClient({
             </Core.GdsCard>
           </Core.GdsTheme>
 
-          <Tabs slug={component.slug} />
+          <Tabs type="component" slug={component.slug} />
 
           <Core.GdsFlex flex-direction="column" id="component-content" gap="xl">
             {component.slug === 'icon' && (
