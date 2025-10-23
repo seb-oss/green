@@ -6,6 +6,7 @@ import {
   Output,
   TemplateRef,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core'
 
 import { DropdownOption } from '@sebgroup/green-angular/src/lib/dropdown'
@@ -27,6 +28,8 @@ interface MenuItems extends DropdownOption {
 @Component({
   selector: 'ngg-context-menu',
   templateUrl: './context-menu.component.html',
+  styleUrls: ['context-menu.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NggContextMenuComponent {
   /**
