@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.12.0
+
+### Minor Changes
+
+- 26ceb48: **Context Menu:** Add support for custom slotted trigger button
+- 0020685: **Image:** Add srcset and sizes support
+- 0020685: **Card Linked:** New components Card linked extending with link behaviour the defualt card
+- 0020685: **Div:** Add `aspect-ratio` and `cursor` prop
+
+### Patch Changes
+
+- 0020685: **Div:** Remove unused focus style
+- 0020685: **Link:** Use link props mixin
+- 0020685: **Image:** Use the image props mixin
+
 ## 2.11.0
 
 ### Minor Changes
