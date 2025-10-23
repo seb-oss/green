@@ -7,7 +7,7 @@
           "$value": "{ref.color.white}"
         },
         "neutral-02": {
-          "$value": "{ref.color.grey.6}"
+          "$value": "{ref.color.grey.4}"
         },
         "brand-01": {
           "$value": "{ref.color.green.27}"
