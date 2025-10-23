@@ -13,22 +13,24 @@ import {
 
 export const SEBIO = () => {
   const context = useOf('story')
+  const isPattern = context.story.title.startsWith('Patterns/')
 
   const componentName = context.story.title
     .replace('Components/', '')
+    .replace('Patterns/', '')
     .trim()
     .toLowerCase()
 
   const slug = context.story.componentId
     .replace('components-', '')
+    .replace('patterns-', '')
     .toLowerCase()
     .replace(/\s+/g, '-')
     .replace(/[^a-z0-9-]/g, '')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '')
 
-  const sebioUrl = `https://seb.io/component/${slug}`
-
+  const sebioUrl = `https://seb.io/${isPattern ? 'pattern' : 'component'}/${slug}`
   return (
     <GdsTheme designVersion="2023">
       <GdsCard

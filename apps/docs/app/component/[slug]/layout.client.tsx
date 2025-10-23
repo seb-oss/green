@@ -76,6 +76,8 @@ export function ComponentLayoutClient({
     (Array.isArray(component['ux-text']) && component['ux-text'].length > 0) ||
       (component['ux-text']?.section &&
         component['ux-text'].section.length > 0) ||
+      (Array.isArray(component.faq) && component.faq.length > 0) ||
+      (component.faq?.section && component.faq.section.length > 0) ||
       (component.accessibility?.section &&
         component.accessibility.section.length > 0),
   )
@@ -284,14 +286,6 @@ export function ComponentLayoutClient({
               </Core.GdsFlex>
             )}
 
-            {children}
-
-            {component.soon && (
-              <Core.GdsAlert variant="notice">
-                {component.title} documentation is in progress.
-              </Core.GdsAlert>
-            )}
-
             {isLayoutComponent && section === 'overview' && (
               <Core.GdsAlert
                 variant="information"
@@ -304,7 +298,7 @@ export function ComponentLayoutClient({
                     display="inline"
                     font-weight="bold"
                   >
-                    This is a declarative layout component!{' '}
+                    This is a declarative layout component!
                   </Core.GdsText>
                   A micro-frontend optimized layout system using style
                   expressions, Generates encapsulated CSS in shadow DOM for
@@ -312,6 +306,15 @@ export function ComponentLayoutClient({
                 </Core.GdsText>
               </Core.GdsAlert>
             )}
+
+            {children}
+
+            {component.soon && (
+              <Core.GdsAlert variant="notice">
+                {component.title} documentation is in progress.
+              </Core.GdsAlert>
+            )}
+
             {section === 'code' && <ArgsTable componentName={slug} />}
             <Similar tag={firstTag} currentSlug={component.slug} />
           </Core.GdsFlex>

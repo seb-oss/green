@@ -1,5 +1,42 @@
 # Changelog
 
+## 2.12.0
+
+### Minor Changes
+
+- 26ceb48: **Context Menu:** Add support for custom slotted trigger button
+- 0020685: **Image:** Add srcset and sizes support
+- 0020685: **Card Linked:** New components Card linked extending with link behaviour the defualt card
+- 0020685: **Div:** Add `aspect-ratio` and `cursor` prop
+
+### Patch Changes
+
+- 0020685: **Div:** Remove unused focus style
+- 0020685: **Link:** Use link props mixin
+- 0020685: **Image:** Use the image props mixin
+
+## 2.11.0
+
+### Minor Changes
+
+- 2d649da: **Core:** font-size values are now in rem instead of px
+
+## 2.10.1
+
+### Patch Changes
+
+- 96e6e2c: **Typography**: Set default paragraph font-weight to 'book'
+
+## 2.10.0
+
+### Minor Changes
+
+- 15410ee: **Input & Textarea:** Add support for customizable counter badge
+
+### Patch Changes
+
+- 15410ee: **Textarea:** Fix type issue with `autocorrect` property
+
 ## 2.9.0
 
 ### Minor Changes

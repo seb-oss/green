@@ -1,5 +1,41 @@
 # Changelog
 
+## 6.7.1
+
+### Patch Changes
+
+- 26ceb48: **Context Menu:** Fix broken custom template functionality in wrapper
+- Updated dependencies [0020685]
+- Updated dependencies [26ceb48]
+- Updated dependencies [0020685]
+- Updated dependencies [0020685]
+- Updated dependencies [0020685]
+- Updated dependencies [0020685]
+- Updated dependencies [0020685]
+  - @sebgroup/green-core@2.12.0
+
+## 6.7.0
+
+### Minor Changes
+
+- c70d4f1: **V-Angular:** Added afterClose output to nggv-dropdown-list componenet
+
+### Patch Changes
+
+- 527b5fd: V-angular: Don't hide column for hidden checkbox in table
+- Updated dependencies [808b0f1]
+  - @sebgroup/chlorophyll@3.6.25
+
+## 6.6.0
+
+### Minor Changes
+
+- 244e286: Dateinput (v-angular): Close on scroll toggled via input
+
+  Dropdown (v-angular): Close on scroll toggled via input
+
+- 385777b: Adding new input hiddenCheckboxRowIds to nggv-table component
+
 ## 6.5.0
 
 ### Minor Changes

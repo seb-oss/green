@@ -22,6 +22,38 @@ import type { GdsBackdrop } from './backdrop'
 export type UIStateChangeReason = 'show' | 'close' | 'cancel'
 
 /**
+ * Apply the necessary ARIA attributes to a popover trigger element. Use this to apply correct
+ * attributes in advance if you render `<gds-popover>` conditionally, since the popover component
+ * only applies these attributes when it initializes.
+ */
+export function applyTriggerAriaAttributes(
+  trigger: HTMLElement,
+  open: boolean,
+  popupRole: string,
+) {
+  // aria-expanded
+  trigger.setAttribute('aria-expanded', String(open))
+
+  // tabindex, role="button"
+  const focusableNodeNames = ['A', 'BUTTON', 'INPUT', 'TEXTAREA']
+  const isProbablyFocusable =
+    trigger.nodeName.startsWith('GDS-') ||
+    focusableNodeNames.includes(trigger.nodeName)
+  if (!isProbablyFocusable) {
+    trigger.setAttribute('tabindex', '0')
+    trigger.setAttribute('role', 'button')
+  }
+
+  // aria-haspopup
+  const ariaHasPopupAttr = trigger.nodeName.startsWith('GDS-')
+    ? 'gds-aria-haspopup'
+    : 'aria-haspopup'
+  if (trigger.getAttribute(ariaHasPopupAttr) === null) {
+    trigger.setAttribute(ariaHasPopupAttr, popupRole)
+  }
+}
+
+/**
  * @element gds-popover
  *
  * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
@@ -391,26 +423,7 @@ export class GdsPopover extends GdsElement {
 
   #setupTriggerAttributes() {
     if (this._trigger) {
-      // aria-expanded
-      this._trigger?.setAttribute('aria-expanded', String(this.open))
-
-      // tabindex, role="button"
-      const focusableNodeNames = ['A', 'BUTTON', 'INPUT', 'TEXTAREA']
-      const isProbablyFocusable =
-        this._trigger.nodeName.startsWith('GDS-') ||
-        focusableNodeNames.includes(this._trigger.nodeName)
-      if (!isProbablyFocusable) {
-        this._trigger.setAttribute('tabindex', '0')
-        this._trigger.setAttribute('role', 'button')
-      }
-
-      // aria-haspopup
-      const ariaHasPopupAttr = this._trigger.nodeName.startsWith('GDS-')
-        ? 'gds-aria-haspopup'
-        : 'aria-haspopup'
-      if (this._trigger.getAttribute(ariaHasPopupAttr) === null) {
-        this._trigger.setAttribute(ariaHasPopupAttr, this.popupRole)
-      }
+      applyTriggerAriaAttributes(this._trigger, this.open, this.popupRole)
     }
   }
 
