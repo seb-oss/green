@@ -182,7 +182,7 @@ const rewriteImports: esbuild.Plugin = {
 async function updatePackageJson() {
   const sideEffectFiles = glob
     .sync(
-      './dist/libs/core/src/{components,primitives,chunks}/**/!(*.component|*.styles|*.style|*.css|*.scss).js',
+      './dist/libs/core/src/{components,patterns,primitives,chunks}/**/!(*.component|*.styles|*.style|*.css|*.scss).js',
       { posix: true, dotRelative: true },
     )
     .map((file) => file.replace('/dist/libs/core/src', ''))

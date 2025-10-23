@@ -49,7 +49,7 @@
         "dist/libs/core/src/generated/react/*"
       ],
       "@sebgroup/green-core/pure": [
-        "dist/libs/core/src/components/pure.ts"
+        "dist/libs/core/src/pure.ts"
       ],
       "@sebgroup/green-core/everything": [
         "dist/libs/core/src/components/index.ts"

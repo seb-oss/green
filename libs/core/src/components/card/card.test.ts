@@ -1,4 +1,4 @@
-import { expect, fixture, html as testingHtml } from '@open-wc/testing'
+import { fixture, html as testingHtml } from '@open-wc/testing'
 
 import type { GdsCard } from '@sebgroup/green-core/components/card'
 
