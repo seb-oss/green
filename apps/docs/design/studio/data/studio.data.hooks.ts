@@ -4,7 +4,12 @@ import Fuse from 'fuse.js'
 
 import { useSearch } from '../context/search.context'
 import { studioData } from './studio.data'
-import { IconPage, StudioPage, TokenPage } from './studio.data.types'
+import {
+  IconPage,
+  StudioPage,
+  TemplatePage,
+  TokenPage,
+} from './studio.data.types'
 
 // get page by slug
 export const getPageBySlug = (slug: string): StudioPage | undefined => {
@@ -81,6 +86,35 @@ export function useSearchContent(page: StudioPage | null) {
       return {
         ...page,
         tokens: filteredGroups,
+      }
+    }
+
+    // Add handling for templates
+    if (page.type === 'templates' && 'templates' in page) {
+      const templatePage = page as TemplatePage
+      if (!templatePage.templates) return page
+
+      const filteredGroups = templatePage.templates
+        .map((group) => {
+          const fuse = new Fuse(group.items, {
+            keys: ['name', 'slug', 'related_components'],
+            threshold: 0.3,
+          })
+
+          const filteredItems = query
+            ? fuse.search(query).map((result) => result.item)
+            : group.items
+
+          return {
+            ...group,
+            items: filteredItems,
+          }
+        })
+        .filter((group) => group.items.length > 0)
+
+      return {
+        ...page,
+        templates: filteredGroups,
       }
     }
 

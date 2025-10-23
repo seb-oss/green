@@ -545,6 +545,12 @@ export function Studio({
         return !!page.icons && page.icons.length > 0
       case 'token':
         return !!page.tokens && page.tokens.length > 0
+      case 'templates':
+        return (
+          !!page.templates &&
+          page.templates.length > 0 &&
+          page.templates.some((group) => group.items.length > 0)
+        )
       default:
         return false
     }

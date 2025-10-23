@@ -31,6 +31,10 @@ export function useStudioPage(slug: string) {
     if (basePage.type === 'templates' && basePage.key === 'templates') {
       const templates = actions.getTemplates()
 
+      if (!templates || !Array.isArray(templates)) {
+        return basePage
+      }
+
       const templateGroups: TemplateGroup[] = [
         {
           key: 'templates',

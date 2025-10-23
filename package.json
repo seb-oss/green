@@ -197,6 +197,7 @@
     "copyfiles": "^2.4.1",
     "css-loader": "^6.7.3",
     "cssnano": "^5.1.7",
+    "d3": "^7.9.0",
     "esbuild-sass-plugin": "^2.9.0",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.3",

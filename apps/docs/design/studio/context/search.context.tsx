@@ -83,6 +83,8 @@ export function SearchProvider({ children }: { children: ReactNode }) {
           'Utilities',
           'Weather',
         ]
+      // case 'templates':
+      //   return ['All']
       default:
         return []
     }
