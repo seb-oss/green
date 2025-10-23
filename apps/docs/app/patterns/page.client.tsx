@@ -14,57 +14,27 @@ function calculateScore(text: string, query: string): number {
   return normalizedText.includes(normalizedQuery) ? 1 : 0
 }
 
-type FilterType = 'all' | 'stable' | 'beta' | 'layout'
-
-interface FilterOption {
-  type: FilterType
-  label: string
-}
-
-const filterOptions: FilterOption[] = [
-  { type: 'all', label: 'All' },
-  { type: 'stable', label: 'Stable' },
-  { type: 'layout', label: 'Layout' },
-  { type: 'beta', label: 'Beta' },
-]
-
 export function ComponentsClient() {
   const { isLoaded, actions } = useContentContext()
   const [query, setQuery] = useState('')
-  const [filter, setFilter] = useState<FilterType>('all')
 
   const components = actions.getComponents({
     sort: (a, b) => a.title.localeCompare(b.title),
   })
 
   const filteredComponents = useMemo(() => {
-    return components.filter((component) => {
+    // First filter for pattern components only
+    const patternComponents = components.filter((component) => {
       const isPattern = Array.isArray(component.category)
         ? component.category.includes('Patterns')
         : component.category === 'Patterns'
-      if (isPattern) return false
+      return isPattern
+    })
 
-      switch (filter) {
-        case 'stable':
-          if (component.beta) return false
-          break
-        case 'beta':
-          if (!component.beta) return false
-          break
-        case 'layout': {
-          const isLayout = Array.isArray(component.category)
-            ? component.category.includes('Layout')
-            : component.category === 'Layout'
-          if (!isLayout) return false
-          break
-        }
-        case 'all':
-        default:
-          break
-      }
+    // Then apply search query if exists
+    if (!query.trim()) return patternComponents
 
-      if (!query.trim()) return true
-
+    return patternComponents.filter((component) => {
       const titleScore = calculateScore(component.title, query)
       const summaryScore = component.summary
         ? calculateScore(component.summary, query)
@@ -72,25 +42,7 @@ export function ComponentsClient() {
 
       return titleScore > 0 || summaryScore > 0
     })
-  }, [components, query, filter])
-
-  const counts = useMemo(() => {
-    return {
-      all: components.length,
-      stable: components.filter((component) => !component.beta).length,
-      beta: components.filter((component) => component.beta).length,
-      layout: components.filter((component) =>
-        Array.isArray(component.category)
-          ? component.category.includes('Layout')
-          : component.category === 'Layout',
-      ).length,
-    }
-  }, [components])
-
-  const handleFilterChange = (event: CustomEvent) => {
-    const selectedFilter = event.detail.value as FilterType
-    setFilter(selectedFilter)
-  }
+  }, [components, query])
 
   return (
     <Core.GdsFlex flex-direction="column" gap="2xl" width="100%" font="body-s">
@@ -99,7 +51,7 @@ export function ComponentsClient() {
           <Core.IconHomeOpen size="m" slot="lead" />
           Home
         </Link>
-        <Core.GdsBreadcrumb>Components</Core.GdsBreadcrumb>
+        <Core.GdsBreadcrumb>Patterns</Core.GdsBreadcrumb>
       </Core.GdsBreadcrumbs>
       <Core.GdsFlex
         justify-content="center"
@@ -112,7 +64,7 @@ export function ComponentsClient() {
         <Core.GdsFlex flex-direction="column" gap="xs">
           <Core.GdsFlex gap="s" justify-content="center">
             <Core.GdsText tag="h1" font="heading-l; s{heading-xl}">
-              Components
+              Patterns
             </Core.GdsText>
           </Core.GdsFlex>
           <Core.GdsText
@@ -122,7 +74,7 @@ export function ComponentsClient() {
             text-wrap="pretty"
             text-align="center"
           >
-            Building blocks for creating user interfaces.
+            Pre-built compositions that help create consistent user experiences.
           </Core.GdsText>
         </Core.GdsFlex>
 
@@ -137,31 +89,16 @@ export function ComponentsClient() {
           >
             <Core.IconMagnifyingGlass slot="lead" size="l" />
           </Core.GdsInput>
-
-          <Core.GdsFlex
-            grid-column="1 / span 6"
-            height="100%"
-            align-items="center"
-            justify-content="flex-start"
-          >
-            <Core.GdsFilterChips value={filter} onchange={handleFilterChange}>
-              {filterOptions.map((option) => (
-                <Core.GdsFilterChip
-                  key={option.type}
-                  value={option.type}
-                  size="small"
-                  selected={filter === option.type}
-                >
-                  {option.label} ({counts[option.type]})
-                </Core.GdsFilterChip>
-              ))}
-            </Core.GdsFilterChips>
-          </Core.GdsFlex>
         </Core.GdsGrid>
       </Core.GdsFlex>
 
       {filteredComponents.length > 0 ? (
-        <Core.GdsGrid columns="1; xs{2}; l{3}" gap="l" max-width="180ch">
+        <Core.GdsGrid
+          columns="1; xs{2}; l{3}"
+          gap="l"
+          max-width="180ch"
+          margin="4xl 0 0 0"
+        >
           {filteredComponents.map((component) => (
             <Card
               key={component.title}
@@ -169,13 +106,9 @@ export function ComponentsClient() {
               href={component.slug}
               summary={component.summary}
               beta={component.beta}
-              layout={
-                Array.isArray(component.category)
-                  ? component.category.includes('Layout')
-                  : component.category === 'Layout'
-              }
               snippet={component.hero_snippet}
               list={false}
+              type="pattern"
             />
           ))}
         </Core.GdsGrid>
@@ -186,7 +119,7 @@ export function ComponentsClient() {
           padding="2xl"
         >
           <Core.GdsText color="secondary">
-            No components found matching <strong>{query}</strong>
+            No patterns found matching <strong>{query}</strong>
           </Core.GdsText>
         </Core.GdsFlex>
       )}

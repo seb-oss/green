@@ -11,7 +11,7 @@ import { Snippet } from '../snippet/snippet'
 import './card.css'
 
 interface CardProps {
-  type?: 'component' | 'template'
+  type?: 'component' | 'template' | 'pattern'
   list?: boolean
   title?: string
   beta?: boolean
@@ -66,11 +66,21 @@ export default function Card({
     >
       <Link
         key={href}
-        href={type === 'template' ? `/template/${href}` : `/component/${href}`}
+        href={
+          type === 'template'
+            ? `/template/${href}`
+            : type === 'pattern'
+              ? `/pattern/${href}`
+              : `/component/${href}`
+        }
         onClick={(e) => {
           e.preventDefault()
           const path =
-            type === 'template' ? `/template/${href}` : `/component/${href}`
+            type === 'template'
+              ? `/template/${href}`
+              : type === 'pattern'
+                ? `/pattern/${href}`
+                : `/component/${href}`
           window.scrollTo({ top: 0, behavior: 'auto' })
           router.push(path)
         }}
