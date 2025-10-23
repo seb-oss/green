@@ -46,17 +46,38 @@ export default function ExpandedNav({
       const hasSubItems =
         actions.getNavigation(link.slug) ||
         link.slug === 'components' ||
+        link.slug === 'patterns' ||
         link.slug === 'templates'
 
       if (hasSubItems) {
         let subItems: any[] = []
 
         if (link.slug === 'components') {
-          subItems = components.map((c) => ({
-            title: c.title,
-            href: `/component/${c.slug}`,
-            beta: c.beta,
-          }))
+          subItems = components
+            .filter(
+              (c) =>
+                !c.category ||
+                (Array.isArray(c.category)
+                  ? !c.category.includes('Patterns')
+                  : c.category !== 'Patterns'),
+            )
+            .map((c) => ({
+              title: c.title,
+              href: `/component/${c.slug}`,
+              beta: c.beta,
+            }))
+        } else if (link.slug === 'patterns') {
+          subItems = components
+            .filter((c) =>
+              Array.isArray(c.category)
+                ? c.category.includes('Patterns')
+                : c.category === 'Patterns',
+            )
+            .map((c) => ({
+              title: c.title,
+              href: `/pattern/${c.slug}`,
+              beta: c.beta,
+            }))
         } else if (link.slug === 'templates') {
           subItems = templates.map((t) => ({
             title: t.title,
