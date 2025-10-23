@@ -219,7 +219,7 @@ export function ComponentLayoutClient({
             </Core.GdsCard>
           </Core.GdsTheme>
 
-          <Tabs slug={component.slug} />
+          <Tabs type="pattern" slug={component.slug} />
 
           <Core.GdsFlex flex-direction="column" id="component-content" gap="xl">
             {component.slug === 'icon' && (
