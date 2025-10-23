@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.1
+
+### Patch Changes
+
+- 0020685: **Tokens:** Background L1 Neutral 01 update in light and dark mode
+
 ## 2.4.0
 
 ### Minor Changes

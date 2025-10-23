@@ -1,5 +1,19 @@
 # Changelog
 
+## 6.7.1
+
+### Patch Changes
+
+- 26ceb48: **Context Menu:** Fix broken custom template functionality in wrapper
+- Updated dependencies [0020685]
+- Updated dependencies [26ceb48]
+- Updated dependencies [0020685]
+- Updated dependencies [0020685]
+- Updated dependencies [0020685]
+- Updated dependencies [0020685]
+- Updated dependencies [0020685]
+  - @sebgroup/green-core@2.12.0
+
 ## 6.7.0
 
 ### Minor Changes
