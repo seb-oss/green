@@ -5,7 +5,6 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../hooks'
-import { useContent } from '../../settings/content'
 import { useSearch } from './context/search.context'
 import { useSearchContent } from './data/studio.data.hooks'
 import {
@@ -191,8 +190,6 @@ const CONTENT = (
   solid: boolean,
   size: string,
 ) => {
-  const { actions } = useContent()
-  // const CONTENT = (page: StudioPage, router: NextRouter, path: string) => {
   const ACTIVE = path.split('/')[3]
 
   // Show interactive pages first
