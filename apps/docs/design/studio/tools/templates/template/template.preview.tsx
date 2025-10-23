@@ -4,16 +4,12 @@ import parse from 'html-react-parser'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Template } from '../../../../../settings/content/types'
+import { ViewportInfo } from '../../../data/studio.data.types'
 import {
   convertAttributes,
   getComponent,
   getNodeContent,
 } from '../../compose/studio.compose.hooks'
-
-interface ViewportInfo {
-  token: string
-  value: string
-}
 
 interface PreviewProps {
   content: Template
@@ -46,7 +42,11 @@ export default function Preview({ content, viewports = [] }: PreviewProps) {
         const Component = getComponent(node.name)
         if (!Component) return undefined
 
-        const props = convertAttributes(node.attribs, node.name)
+        // const props = convertAttributes(node.attribs, node.name)
+        const props = {
+          ...convertAttributes(node.attribs, node.name),
+          'gds-element': node.name, // Add this line
+        }
         const childContent = node.children?.map(getNodeContent).join('')
 
         if (node.name === 'gds-rich-text') {

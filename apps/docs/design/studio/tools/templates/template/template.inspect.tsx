@@ -1,59 +1,68 @@
 // design/studio/parts/template/template.inspect.tsx
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Template } from '../../../../../settings/content/types'
+import { ViewportInfo } from '../../../data/studio.data.types'
 import { ComponentInspector } from './template.component'
 import Preview from './template.preview'
 import { useTemplateZoom } from './template.zoom'
 
 interface InspectProps {
   content: Template
+  viewports: ViewportInfo[]
 }
 
-export default function Inspect({ content }: InspectProps) {
+export default function Inspect({ content, viewports }: InspectProps) {
   const {
     containerRef,
     transformRef,
     viewport,
     handleZoom,
     resetZoom,
-    centerContent,
+    isMetaKeyActive,
   } = useTemplateZoom()
+
   const [showCode, setShowCode] = useState(false)
-  const [showViewports, setShowViewports] = useState(false)
   const [inspectedComponent, setInspectedComponent] = useState<string | null>(
     null,
   )
+  // const [showViewports, setShowViewports] = useState(false)
+  // const [inspectedComponent, setInspectedComponent] = useState<string | null>(
+  //   null,
+  // )
 
-  const viewports = [
-    { token: 'mobile', value: '320px' },
-    { token: 'tablet', value: '768px' },
-    { token: 'desktop', value: '1024px' },
-    { token: 'wide', value: '1440px' },
-  ]
+  // const viewports = [
+  //   { token: 'mobile', value: '320px' },
+  //   { token: 'tablet', value: '768px' },
+  //   { token: 'desktop', value: '1024px' },
+  //   { token: 'wide', value: '1440px' },
+  // ]
 
   // Center content when viewports are toggled
-  useEffect(() => {
-    if (showViewports) {
-      centerContent()
-    }
-  }, [showViewports, centerContent])
+  // useEffect(() => {
+  //   if (showViewports) {
+  //     centerContent()
+  //   }
+  // }, [showViewports, centerContent])
 
   // Handle component inspection
-  const handleElementClick = (event: MouseEvent) => {
+  const handleElementClick = useCallback((event: MouseEvent) => {
+    // Don't handle clicks when meta key is active (zooming/panning)
+    if (event.metaKey || event.ctrlKey) return
+
     const target = event.target as HTMLElement
     const gdsElement = target.closest('[gds-element]')
 
     if (gdsElement) {
-      const componentName = gdsElement
-        .getAttribute('gds-element')
-        ?.replace('gds-', '')
+      event.preventDefault()
+      event.stopPropagation()
+      const componentName = gdsElement.getAttribute('gds-element')
       if (componentName) {
         setInspectedComponent(componentName)
       }
     }
-  }
+  }, [])
 
   useEffect(() => {
     const element = transformRef.current
@@ -61,10 +70,10 @@ export default function Inspect({ content }: InspectProps) {
       element.addEventListener('click', handleElementClick)
       return () => element.removeEventListener('click', handleElementClick)
     }
-  }, [])
+  }, [handleElementClick])
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="l">
+    <Core.GdsFlex flex-direction="column" gap="l" position="relative">
       <Core.GdsFlex justify-content="space-between" align-items="center">
         <Core.GdsText tag="h1">{content.title}</Core.GdsText>
         <Core.GdsFlex gap="s">
@@ -90,13 +99,6 @@ export default function Inspect({ content }: InspectProps) {
             Refresh
           </Core.GdsButton>
           <Core.GdsButton
-            onClick={() => setShowViewports(!showViewports)}
-            size="small"
-            rank="secondary"
-          >
-            <Core.IconDevices />
-          </Core.GdsButton>
-          <Core.GdsButton
             onClick={() => setShowCode(!showCode)}
             size="small"
             rank="secondary"
@@ -114,7 +116,7 @@ export default function Inspect({ content }: InspectProps) {
           height: '600px',
           background: 'var(--gds-ref-palette-background-l2)',
           borderRadius: 'var(--gds-sys-border-radius-l)',
-          cursor: 'grab',
+          cursor: isMetaKeyActive ? 'grab' : 'default',
         }}
       >
         <div
@@ -124,14 +126,22 @@ export default function Inspect({ content }: InspectProps) {
             padding: '2rem',
           }}
         >
-          <Preview
-            content={content}
-            viewports={
-              showViewports ? viewports : [{ token: 'full', value: '100%' }]
-            }
-          />
+          <Preview content={content} viewports={viewports} />
         </div>
       </div>
+
+      {inspectedComponent && (
+        <Core.GdsFlex
+          position="absolute"
+          inset="40px 40px auto auto"
+          z-index="9"
+        >
+          <ComponentInspector
+            componentName={inspectedComponent}
+            onClose={() => setInspectedComponent(null)}
+          />
+        </Core.GdsFlex>
+      )}
 
       {showCode && content.code && (
         <Core.GdsCard padding="l">

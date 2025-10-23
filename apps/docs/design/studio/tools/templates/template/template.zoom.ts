@@ -15,6 +15,7 @@ export function useTemplateZoom(minZoom = 0.5, maxZoom = 3) {
   const transformRef = useRef<HTMLDivElement>(null)
   const zoomBehaviorRef = useRef<ZoomBehavior<HTMLDivElement, unknown>>(null)
   const [viewport, setViewport] = useState<ViewPort>({ scale: 1, x: 0, y: 0 })
+  const [isMetaKeyActive, setIsMetaKeyActive] = useState(false)
 
   const initializeZoom = useCallback(() => {
     if (!containerRef.current) return
@@ -22,6 +23,13 @@ export function useTemplateZoom(minZoom = 0.5, maxZoom = 3) {
     const zoom = d3
       .zoom<HTMLDivElement, unknown>()
       .scaleExtent([minZoom, maxZoom])
+      .filter((event) => {
+        // Allow zooming only with meta key or buttons
+        if (event.type === 'wheel') return event.metaKey || event.ctrlKey
+        // Allow panning only with meta key
+        if (event.type === 'mousedown') return event.metaKey || event.ctrlKey
+        return true
+      })
       .on('zoom', (event: D3ZoomEvent<HTMLDivElement, unknown>) => {
         const { x, y, k } = event.transform
         setViewport({ scale: k, x, y })
@@ -98,6 +106,39 @@ export function useTemplateZoom(minZoom = 0.5, maxZoom = 3) {
       )
   }, [viewport.scale])
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey) {
+        setIsMetaKeyActive(true)
+        if (containerRef.current) {
+          containerRef.current.style.cursor = 'grab'
+        }
+
+        if (e.key === '0') {
+          e.preventDefault()
+          resetZoom()
+        }
+      }
+    }
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (!e.metaKey && !e.ctrlKey) {
+        setIsMetaKeyActive(false)
+        if (containerRef.current) {
+          containerRef.current.style.cursor = 'default'
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('keyup', handleKeyUp)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keyup', handleKeyUp)
+    }
+  }, [resetZoom])
+
   return {
     containerRef,
     transformRef,
@@ -105,5 +146,6 @@ export function useTemplateZoom(minZoom = 0.5, maxZoom = 3) {
     handleZoom,
     resetZoom,
     centerContent,
+    isMetaKeyActive,
   }
 }

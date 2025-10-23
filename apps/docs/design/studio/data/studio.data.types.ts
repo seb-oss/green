@@ -125,6 +125,11 @@ export interface ColorPreviewProps {
   mode: 'light' | 'dark'
 }
 
+export interface ViewportInfo {
+  token: string
+  value: string
+}
+
 // Motion tokens
 
 export interface MotionToken {
