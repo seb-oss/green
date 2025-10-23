@@ -81,6 +81,27 @@ describe('<gds-context-menu>', () => {
       await expect(spy).to.have.been.calledOnce
       await expect(spy.firstCall.args[0].target).to.equal(item)
     })
+
+    it('should support custom slotted trigger', async () => {
+      const el = await fixture<GdsContextMenu>(html`
+        <gds-context-menu>
+          <gds-button slot="trigger" id="custom-trigger"
+            >Custom trigger</gds-button
+          >
+          <gds-menu-item>Item 1</gds-menu-item>
+          <gds-menu-item>Item 2</gds-menu-item>
+          <gds-menu-item>Item 3</gds-menu-item>
+        </gds-context-menu>
+      `)
+      await aTimeout(0)
+
+      const button = el.querySelector<GdsButton>('#custom-trigger')!
+      await clickOnElement(button)
+
+      await el.updateComplete
+
+      await expect(el.open).to.be.true
+    })
   })
 
   describe('Accessibility', () => {
