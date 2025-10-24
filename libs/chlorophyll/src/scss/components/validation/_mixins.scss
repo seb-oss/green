@@ -4,10 +4,6 @@ $_border-width: 1px;
 
 @mixin add-feedback-element($transform: true) {
   position: relative;
-  transition:
-    all 200ms ease-in-out,
-    outline-offset 0s,
-    outline-width 0s;
 
   &::before {
     background: transparent;
