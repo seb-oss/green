@@ -64,7 +64,7 @@
         "commands": [
           {
             "description": "change chlorophyll include paths in scss files",
-            "command": "bash -lc \"find dist/libs/charts/scss -type f -name '*.scss' -exec sed -i '' -e \\\"s|@use '@sebgroup/chlorophyll/src/scss|@use '@sebgroup/chlorophyll/scss|g\\\" {} +\""
+            "command": "bash -lc \"find ./dist/libs/charts/scss -type f -name '*.scss' -exec sed -i '' -e \\\"s|@use '@sebgroup/chlorophyll/src/scss|@use '@sebgroup/chlorophyll/scss|g\\\" {} +\""
           }
         ],
         "parallel": false
