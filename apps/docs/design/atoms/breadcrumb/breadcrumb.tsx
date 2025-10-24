@@ -16,11 +16,12 @@ interface BreadcrumbItem {
 interface BreadcrumbsProps {
   slug: string
   title: string
-  section: 'overview' | 'ux-text' | 'accessibility' | 'code'
+  section: 'overview' | 'ux-text' | 'accessibility' | 'code' | 'faq'
+  type: 'component' | 'pattern'
 }
 
 const BreadcrumbLink = ({ item }: { item: BreadcrumbItem }) => (
-  <Link href={item.href!}>
+  <Link href={item.href!} component="breadcrumb">
     {item.iconName && <Icon size="m" name={item.iconName} slot="lead" />}
     {item.label}
   </Link>
@@ -29,7 +30,7 @@ const BreadcrumbLink = ({ item }: { item: BreadcrumbItem }) => (
 const LastItem = ({
   section,
 }: {
-  section: 'overview' | 'ux-text' | 'accessibility' | 'code'
+  section: 'overview' | 'ux-text' | 'accessibility' | 'code' | 'faq'
 }) => {
   if (section === 'overview') return null
 
@@ -37,16 +38,18 @@ const LastItem = ({
     'ux-text': 'UX text',
     accessibility: 'Accessibility',
     code: 'Code',
+    faq: 'FAQ',
     overview: null,
   }[section]
 
-  return <Core.GdsText color="secondary">{sectionText}</Core.GdsText>
+  return <Core.GdsBreadcrumb>{sectionText}</Core.GdsBreadcrumb>
 }
 
 export default function Breadcrumbs({
   slug,
   title,
   section,
+  type,
 }: BreadcrumbsProps) {
   const breadcrumbItems = useMemo(
     () => [
@@ -56,16 +59,17 @@ export default function Breadcrumbs({
         iconName: 'IconHomeOpen',
       },
       {
-        label: 'Components',
-        href: '/components',
-        iconName: 'IconSquareGridCircle',
+        label: type === 'pattern' ? 'Patterns' : 'Components',
+        href: type === 'pattern' ? '/patterns' : '/components',
+        iconName:
+          type === 'pattern' ? 'IconCirclesThree' : 'IconSquareGridCircle',
       },
       {
         label: title,
-        href: `/component/${slug}`,
+        href: `/${type}/${slug}`,
       },
     ],
-    [slug, title],
+    [slug, title, type],
   )
 
   return (

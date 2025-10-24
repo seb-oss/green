@@ -12,5 +12,9 @@ const style = css`
     block-size: calc(var(--_block-size) + var(--gds-sys-space-xs));
     width: max-content;
   }
+
+  ::slotted([gds-element='gds-signal']) {
+    margin-left: var(--gds-sys-space-xs);
+  }
 `
 export default style

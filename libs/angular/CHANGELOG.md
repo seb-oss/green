@@ -1,5 +1,80 @@
 # Changelog
 
+## 6.7.1
+
+### Patch Changes
+
+- 26ceb48: **Context Menu:** Fix broken custom template functionality in wrapper
+- Updated dependencies [0020685]
+- Updated dependencies [26ceb48]
+- Updated dependencies [0020685]
+- Updated dependencies [0020685]
+- Updated dependencies [0020685]
+- Updated dependencies [0020685]
+- Updated dependencies [0020685]
+  - @sebgroup/green-core@2.12.0
+
+## 6.7.0
+
+### Minor Changes
+
+- c70d4f1: **V-Angular:** Added afterClose output to nggv-dropdown-list componenet
+
+### Patch Changes
+
+- 527b5fd: V-angular: Don't hide column for hidden checkbox in table
+- Updated dependencies [808b0f1]
+  - @sebgroup/chlorophyll@3.6.25
+
+## 6.6.0
+
+### Minor Changes
+
+- 244e286: Dateinput (v-angular): Close on scroll toggled via input
+
+  Dropdown (v-angular): Close on scroll toggled via input
+
+- 385777b: Adding new input hiddenCheckboxRowIds to nggv-table component
+
+## 6.5.0
+
+### Minor Changes
+
+- fd6856f: **NggCoreFormsModule:** Add support for standalone [formControl] directive. Fixes #2410
+
+## 6.4.1
+
+### Patch Changes
+
+- 4b6a253: **V-Angular:** Date input: Added Close on scroll and Dynamic positioning
+- Updated dependencies [90751c6]
+- Updated dependencies [5991ecf]
+  - @sebgroup/green-core@2.6.2
+
+## 6.4.0
+
+### Minor Changes
+
+- a69c3e1: Revert moving v-angular dropdown-list to CDK portal
+
+### Patch Changes
+
+- Updated dependencies [da0ab9a]
+- Updated dependencies [2ba96f6]
+  - @sebgroup/green-core@2.5.3
+
+## 6.3.0
+
+### Minor Changes
+
+- bfda3a6: V-Angular Dropdown: move dropdown list to CDK portal
+
+### Patch Changes
+
+- Updated dependencies [33b3aa0]
+- Updated dependencies [33b3aa0]
+  - @sebgroup/green-core@2.5.2
+
 ## 6.2.1
 
 ### Patch Changes

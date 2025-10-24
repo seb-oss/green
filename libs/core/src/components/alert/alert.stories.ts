@@ -1,11 +1,13 @@
 import { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 import { html } from '../../utils/helpers/custom-element-scoping'
 import { GdsAlert } from './alert.component'
 
 import './index.ts'
 import '../card/card.ts'
 import '../button/button.ts'
+import '../rich-text/rich-text.ts'
 
 /**
  * Alert is a message used to inform or update the user about the state of a system, page or function. Icons and color indicate the type and urgency of the information within the message.
@@ -15,14 +17,14 @@ const meta: Meta<GdsAlert> = {
   component: 'gds-alert',
   tags: ['autodocs'],
   argTypes: {
-    variant: {
-      control: 'select',
-      options: ['information', 'notice', 'positive', 'warning', 'negative'],
-    },
-    role: {
-      control: 'select',
-      options: ['alert', 'status'],
-    },
+    ...argTablePropsFor('gds-alert'),
+  },
+  args: {
+    variant: 'information',
+    role: 'alert',
+    buttonLabel: '',
+    innerHTML:
+      '<strong>Information</strong> Body text starts on the same row as heading. A link (optional) always ends the message.',
   },
 }
 
@@ -30,21 +32,12 @@ export default meta
 
 type Story = StoryObj<GdsAlert>
 
-export const DefaultParams: Story = {
+export const Default: Story = {
   parameters: {
     docs: {
       source: { format: true, type: 'dynamic' },
     },
     controls: { expanded: true },
-  },
-  args: {
-    variant: 'information',
-    role: 'alert',
-    dismissible: true,
-    timeout: 0,
-    buttonLabel: '',
-    innerHTML: `<strong>Information</strong> Body text starts on the same row as heading.
-    A link (optional) always ends the message.`,
   },
 }
 
@@ -53,7 +46,6 @@ export const DefaultParams: Story = {
  * Each variant has a specific color and icon to convey the message type.
  */
 export const Variants: Story = {
-  args: {},
   render: () => html`
     <gds-flex flex-direction="column" gap="m">
       <gds-alert variant="information" role="alert">
@@ -80,13 +72,11 @@ export const Variants: Story = {
  * Alerts can have a action button to allow users to take an immediate action.
  */
 export const WithAction: Story = {
-  ...DefaultParams,
   args: {
-    ...DefaultParams.parameters!.args,
     variant: 'information',
-    dismissible: true,
     buttonLabel: 'Take Action',
-    innerHTML: `<strong>Actionable</strong> Alert with a button for quick user interaction.`,
+    innerHTML:
+      '<strong>Actionable</strong> Alert with a button for quick user interaction.',
   },
 }
 
@@ -94,12 +84,10 @@ export const WithAction: Story = {
  * Alerts can be dismissed by the user, either by pressing the close button, or by using the Escape key while the alert is focused.
  */
 export const Dismissible: Story = {
-  ...DefaultParams,
   args: {
-    ...DefaultParams.parameters!.args,
     variant: 'information',
     dismissible: true,
-    innerHTML: `<strong>Dismissible</strong> User can dismiss this alert.`,
+    innerHTML: '<strong>Dismissible</strong> User can dismiss this alert.',
   },
 }
 
@@ -107,12 +95,11 @@ export const Dismissible: Story = {
  * Alerts can automatically dismiss themselves after a specified timeout.
  */
 export const AutoDismiss: Story = {
-  ...DefaultParams,
   args: {
-    ...DefaultParams.parameters!.args,
     variant: 'positive',
     timeout: 6400,
-    innerHTML: `<strong>Auto Dismiss</strong> This alert disappears automatically after a delay.`,
+    innerHTML:
+      '<strong>Auto Dismiss</strong> This alert disappears automatically after a delay.',
   },
 }
 
@@ -120,13 +107,11 @@ export const AutoDismiss: Story = {
  * Alerts can contain rich content in the main slot.
  */
 export const RichContent: Story = {
-  ...DefaultParams,
   args: {
-    ...DefaultParams.parameters!.args,
     variant: 'information',
-    role: 'alert',
     dismissible: true,
     buttonLabel: 'Learn More',
-    innerHTML: `<gds-rich-text><strong>Rich Content</strong> Includes <a href="#">a link</a>, <em>emphasis</em>, and <code>code</code>.</gds-rich-text>`,
+    innerHTML:
+      '<gds-rich-text><strong>Rich Content</strong> Includes <a href="#">a link</a>, <em>emphasis</em>, and <code>code</code>.</gds-rich-text>',
   },
 }

@@ -256,7 +256,6 @@ export const Size: Story = {
             label="Group Label"
             supporting-text="Support text for the group"
             value="4"
-            show-extended-supporting-text
           >
             <span slot="extended-supporting-text">
               Extended supporting text for the group
@@ -281,7 +280,6 @@ export const Size: Story = {
             supporting-text="Support text for the group"
             value="4"
             size="small"
-            show-extended-supporting-text
           >
             <span slot="extended-supporting-text">
               Extended supporting text for the group

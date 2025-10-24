@@ -1,0 +1,49 @@
+{
+  "sys": {
+    "color": {
+      "$type": "color",
+      "L1": {
+        "neutral-01": {
+          "$value": "{ref.color.grey.30}"
+        },
+        "neutral-02": {
+          "$value": "{ref.color.grey.30}"
+        },
+        "elevated-01": {
+          "$value": "{ref.color.grey.27}"
+        },
+        "elevated-02": {
+          "$value": "{ref.color.grey.27}"
+        }
+      },
+      "L2": {
+        "neutral-02": {
+          "$value": "{ref.color.grey.27}"
+        },
+        "neutral-03": {
+          "$value": "{ref.color.grey.27}"
+        },
+        "elevated-01": {
+          "$value": "{ref.color.grey.25}"
+        },
+        "elevated-02": {
+          "$value": "{ref.color.grey.25}"
+        }
+      },
+      "L3": {
+        "neutral-02": {
+          "$value": "{ref.color.grey.25}"
+        },
+        "neutral-03": {
+          "$value": "{ref.color.grey.23}"
+        },
+        "elevated-01": {
+          "$value": "{ref.color.grey.24}"
+        },
+        "elevated-02": {
+          "$value": "{ref.color.grey.24}"
+        }
+      }
+    }
+  }
+}

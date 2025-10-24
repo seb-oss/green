@@ -26,6 +26,22 @@ describe('<gds-checkbox>', () => {
       await el.updateComplete
       await expect(el).to.be.accessible()
     })
+
+    it('should have an associated error message when in invalid state', async () => {
+      const el = await fixture<GdsCheckbox>(
+        html`<gds-checkbox
+          label="Checkbox label"
+          error-message="This is an error message"
+          invalid
+        ></gds-checkbox>`,
+      )
+      await el.updateComplete
+      const input = el.shadowRoot?.querySelector('input')
+      expect(input?.getAttribute('aria-describedby')).to.contain('message')
+      const message = el.shadowRoot?.querySelector('#message')
+      expect(message?.innerText).to.equal('This is an error message')
+      await expect(el).to.be.accessible()
+    })
   })
 
   describe('API', () => {

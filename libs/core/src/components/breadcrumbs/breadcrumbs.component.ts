@@ -14,7 +14,9 @@ import {
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
 import { IconChevronLeft } from '../icon/icons/chevron-left.component'
-import BreadcrumbStyles from './breadcrumbs.styles'
+import BreadcrumbsStyles from './breadcrumbs.styles'
+
+import type { GdsBreadcrumb } from './breadcrumb/breadcrumb.component'
 
 /**
  * @element gds-breadcrumbs
@@ -29,7 +31,7 @@ import BreadcrumbStyles from './breadcrumbs.styles'
 export class GdsBreadcrumbs extends withLayoutChildProps(
   withSizeXProps(withMarginProps(GdsElement)),
 ) {
-  static styles = [tokens, BreadcrumbStyles]
+  static styles = [tokens, BreadcrumbsStyles]
 
   /**
    * Controls the font-size and spacing of separators and breadcrumbs items
@@ -44,10 +46,25 @@ export class GdsBreadcrumbs extends withLayoutChildProps(
   @property({ type: String })
   label: string = msg('Breadcrumbs')
 
-  render() {
-    const elements = Array.from(this.children)
-    const secondToLastIndex = elements.length - 2
+  get breadcrumbItems(): GdsBreadcrumb[] {
+    return Array.from(
+      this.querySelectorAll('[gds-element=gds-breadcrumb]'),
+    ) as GdsBreadcrumb[]
+  }
 
+  private handleSlotChange() {
+    const items = this.breadcrumbItems
+
+    items.forEach((item, index) => {
+      if (index === items.length - 2) {
+        item.setAttribute('return', '')
+      } else {
+        item.removeAttribute('return')
+      }
+    })
+  }
+
+  render() {
     return html`
       <nav
         role="navigation"
@@ -57,22 +74,9 @@ export class GdsBreadcrumbs extends withLayoutChildProps(
         <div class="mobile-return">
           <gds-icon-chevron-left></gds-icon-chevron-left>
         </div>
-        <ol>
-          ${elements.map(
-            (element, index) => html`
-              <li
-                class=${classMap({
-                  'show-on-mobile': index === secondToLastIndex,
-                })}
-              >
-                ${element}
-              </li>
-              ${index < elements.length - 1
-                ? html`<span class="separator" aria-hidden="true">/</span>`
-                : null}
-            `,
-          )}
-        </ol>
+        <div role="list" class="list">
+          <slot @slotchange=${this.handleSlotChange}></slot>
+        </div>
       </nav>
     `
   }

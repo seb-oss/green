@@ -1,5 +1,175 @@
 # Changelog
 
+## 2.12.0
+
+### Minor Changes
+
+- 26ceb48: **Context Menu:** Add support for custom slotted trigger button
+- 0020685: **Image:** Add srcset and sizes support
+- 0020685: **Card Linked:** New components Card linked extending with link behaviour the defualt card
+- 0020685: **Div:** Add `aspect-ratio` and `cursor` prop
+
+### Patch Changes
+
+- 0020685: **Div:** Remove unused focus style
+- 0020685: **Link:** Use link props mixin
+- 0020685: **Image:** Use the image props mixin
+
+## 2.11.0
+
+### Minor Changes
+
+- 2d649da: **Core:** font-size values are now in rem instead of px
+
+## 2.10.1
+
+### Patch Changes
+
+- 96e6e2c: **Typography**: Set default paragraph font-weight to 'book'
+
+## 2.10.0
+
+### Minor Changes
+
+- 15410ee: **Input & Textarea:** Add support for customizable counter badge
+
+### Patch Changes
+
+- 15410ee: **Textarea:** Fix type issue with `autocorrect` property
+
+## 2.9.0
+
+### Minor Changes
+
+- 4c85a71: **Dropdown:** Add mixing support for space and child
+- 4c85a71: **Divider:** Add DL mixin support for inline size
+- 4c85a71: **IMG:** Add margin mixin
+
+### Patch Changes
+
+- 4c85a71: **IMG:** Wrap prop with IfDefined directive
+
+## 2.8.2
+
+### Patch Changes
+
+- 1854fdf: **Dialog:** Remove border to avoid blurry edges
+
+## 2.8.1
+
+### Patch Changes
+
+- 52eb344: **Breadcrumb:** Fix the failing test issue move aria current to the current item
+
+## 2.8.0
+
+### Minor Changes
+
+- be2744e: **Card:** Add tertiary variant and update to `xl` the default padding on medium size screens
+- 48cfa84: **Breadcrumbs:** Add `breadcrumb` as slottable component, change the method how items are populated and separator is set.
+- 35fec52: **Theme:** Add support for `gds-theme="auto"` on root node
+
+### Patch Changes
+
+- 6ba44e5: **Filter chips:** Fix initial state issue when multiple mode is used
+- 35fec52: **Theme:** Revert default scheme to `light`, as `auto` should be opt-in.
+
+## 2.7.0
+
+### Minor Changes
+
+- 24f3d8a: **Filter chips:** Enable deselecting a previously selected filter chip in single select mode
+
+### Patch Changes
+
+- 40ff2e3: **Datepicker**: Updated design for small viewports
+
+## 2.6.6
+
+### Patch Changes
+
+- 16dbb32: **Datepicker:** Add `utcHours` property to specify the time component in UTC time of dates selected in the calendar popover. Fixes #1250
+- 66fe774: **Dropdown:** Add missing event dispatch when control is cleared using clear button
+
+## 2.6.5
+
+### Patch Changes
+
+- b3aad88: **Checkbox:** Fix error message association
+- b3aad88: **Radio:** Fix error message association
+- b3aad88: **Dropdown:** Fix selected value being added as part of the label
+- b3aad88: **Checkbox:** Fix issue with programatically moving focus to checkbox
+- b3aad88: **Input:** Fix error message association. Closes #2438
+
+## 2.6.4
+
+### Patch Changes
+
+- 1acd6a1: **FAB:** Fix button import bug when generating
+- d72190b: **SEP:** Grid fix to reflect the `auto-column` attribute
+- 1acd6a1: **FAB:** Increase the gap when there is a slotted signal
+
+## 2.6.3
+
+### Patch Changes
+
+- 8cdf051: **Grid:** Remove unused storybook style
+- 8cdf051: **Input:** Reflect size so it gets applied, fixing the gap on host for field base host
+
+## 2.6.2
+
+### Patch Changes
+
+- 90751c6: **Button:** Update wording to be `XS` everywhere, spacing and sizes on storybook
+- 5991ecf: Fixing import/exports in /components & /pure
+
+## 2.6.1
+
+### Patch Changes
+
+- a617652: **Checkbox:** Fix tree-shaking issue that sometimes happens with Angular
+
+## 2.6.0
+
+### Minor Changes
+
+- e5f21f0: **Input:** Update size small variables
+
+### Patch Changes
+
+- 69b2ee7: **Dialog:** Only close top-most dialog on click outside. Fixes #2423
+- e5f21f0: **Checkbox:** Small size aligment
+- e5f21f0: **FCH:** Add grouping default spacing variables for small size with fallback
+- e5f21f0: **Button:** Spacing and sizes
+- e5f21f0: **Card:** Update defaults
+- e5f21f0: **Input:** Icon and spacing for smaller size
+- e5f21f0: **Signal:** Use content color mixin for the signal
+- 69b2ee7: **Dialog:** Fix missing reason in `gds-ui-state` event under certain conditions
+- e5f21f0: **Dropdown:** Move chevron to action slot to fix spacing, update cross small icon when clearable
+- 69b2ee7: **Input:** Fix incorrect type declaration of the `autocorrect` property
+- e5f21f0: **Textarea:** Align spacing with textarea for trail and action
+- e5f21f0: **Select:** Chevron move to action slot same as dropdown spacing fix
+- e5f21f0: **Dialog:** Heading block start marin, dialog padding and radius update
+- 69b2ee7: **Dialog:** Only close if a click starts and ends outside
+- e5f21f0: **Radio:** Align spacing and sizes same as checkbox
+- e5f21f0: **Badge:** Inline and block size fixes and padding
+- e5f21f0: **Datepicker:** Add sizing variables for label, support text
+- f0da6d2: **Calendar:** Remove the commented style
+
+## 2.5.3
+
+### Patch Changes
+
+- da0ab9a: **Button:** Explicitly add `click()` method on Button, to allow simulated clicks to work same way on iOS Safari as on other browsers
+- 2ba96f6: **Calendar:** Focus outline distance fix
+
+## 2.5.2
+
+### Patch Changes
+
+- 33b3aa0: **Dialog:** Fix some sizing and overflow issues
+- 33b3aa0: **Dialog:** Correct order of events, so that `gds-close` does not fire if `gds-ui-state` was cancelled to prevent the dialog from closing.
+
 ## 2.5.1
 
 ### Patch Changes

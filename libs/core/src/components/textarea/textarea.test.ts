@@ -126,11 +126,48 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         const textareaEl = el.shadowRoot?.querySelector('textarea')
         expect(textareaEl?.getAttribute('autocapitalize')).to.equal('on')
         expect(textareaEl?.getAttribute('autocomplete')).to.equal('on')
-        expect(textareaEl?.getAttribute('autocorrect')).to.equal('on')
+        expect(textareaEl?.getAttribute('autocorrect')).to.equal('true')
         expect(textareaEl?.getAttribute('spellcheck')).to.equal('true')
         expect(textareaEl?.getAttribute('inputmode')).to.equal('numeric')
         expect(textareaEl?.getAttribute('autofocus')).to.equal('')
         expect(textareaEl?.getAttribute('enterkeyhint')).to.equal('enter')
+      })
+
+      it('should support customized character counter badge', async () => {
+        const charCounterCallback = (input: GdsTextarea) => {
+          const remaining = input.maxlength - input.value.length
+          return [remaining, remaining < 0 ? 'negative' : 'positive'] as const
+        }
+
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea
+            variant="${variant}"
+            maxlength="10"
+          ></gds-textarea>`,
+        )
+        el.charCounterCallback = charCounterCallback
+        el.value = '12345'
+        await el.updateComplete
+
+        const footer = el.shadowRoot?.querySelector(
+          '[gds-element=gds-form-control-footer]',
+        )
+        const remainingCharactersBadgeEl = footer.shadowRoot?.querySelector(
+          '[gds-element=gds-badge]',
+        )
+
+        expect(remainingCharactersBadgeEl).to.exist
+        expect(remainingCharactersBadgeEl?.textContent).to.equal('5')
+        expect(remainingCharactersBadgeEl?.getAttribute('variant')).to.equal(
+          'positive',
+        )
+
+        el.value = '12345678901'
+        await el.updateComplete
+        expect(remainingCharactersBadgeEl?.textContent).to.equal('-1')
+        expect(remainingCharactersBadgeEl?.getAttribute('variant')).to.equal(
+          'negative',
+        )
       })
     })
 
@@ -217,7 +254,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         )
 
         await textareaEl.updateComplete
-        expect(textareaEl.rows).to.equal(4)
+        expect(parseInt(textareaEl.rows, 10)).to.equal(4)
 
         textareaEl.value = 'Line 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6'
 
@@ -229,7 +266,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
           throw new Error('Native <textarea> was not found in the shadowRoot')
         }
 
-        expect(textareaEl.rows).to.be.greaterThan(4)
+        expect(parseInt(textareaEl.rows, 10)).to.be.greaterThan(4)
         expect(
           parseInt(nativeTextarea.style.getPropertyValue('--_lines'), 10),
         ).to.be.greaterThan(4)

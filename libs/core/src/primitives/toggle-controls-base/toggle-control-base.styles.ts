@@ -18,7 +18,7 @@ const style = css`
 
     .container {
       display: flex;
-      gap: var(--gds-sys-space-s);
+      gap: var(--_container-gap, var(--gds-sys-space-s));
     }
 
     .label {
@@ -28,7 +28,7 @@ const style = css`
     }
 
     slot[name='label']::slotted(*) {
-      font: var(--gds-sys-text-detail-book-m);
+      font: var(--_font-label, var(--gds-sys-text-detail-book-m));
       cursor: inherit;
     }
 

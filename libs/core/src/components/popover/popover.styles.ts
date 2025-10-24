@@ -14,7 +14,6 @@ const style = css`
     :host([open]) dialog {
       opacity: 1;
       box-sizing: border-box;
-      /*transform: translate3d(0, 0, 0);*/
       visibility: visible;
     }
 
@@ -29,7 +28,7 @@ const style = css`
       right: 0;
       margin: 0;
       box-shadow: var(--gds-sys-shadow-l-01);
-      border: var(--gds-sys-space-4xs) solid
+      border: var(--gds-sys-space-5xs) solid
         var(--gds-sys-color-border-subtle-01);
       border-radius: var(--gds-sys-radius-s);
       overscroll-behavior: contain;
@@ -48,7 +47,6 @@ const style = css`
         bottom: 0;
         left: 0;
 
-        max-height: 50svh;
         padding-bottom: 0;
 
         transform: translateY(0);

@@ -56,16 +56,11 @@ export function ComponentLayoutClient({
     if (pathname.includes('/ux-text')) return 'ux-text'
     if (pathname.includes('/accessibility')) return 'accessibility'
     if (pathname.includes('/code')) return 'code'
+    if (pathname.includes('/faq')) return 'faq'
     return 'overview'
   }
 
   const section = getSection(pathname)
-
-  // const section = pathname.includes('/ux-text')
-  //   ? 'ux-text'
-  //   : pathname.includes('/accessibility')
-  //     ? 'accessibility'
-  //     : 'overview'
 
   if (!isLoaded) return null
 
@@ -81,6 +76,8 @@ export function ComponentLayoutClient({
     (Array.isArray(component['ux-text']) && component['ux-text'].length > 0) ||
       (component['ux-text']?.section &&
         component['ux-text'].section.length > 0) ||
+      (Array.isArray(component.faq) && component.faq.length > 0) ||
+      (component.faq?.section && component.faq.section.length > 0) ||
       (component.accessibility?.section &&
         component.accessibility.section.length > 0),
   )
@@ -102,6 +99,7 @@ export function ComponentLayoutClient({
   return (
     <Core.GdsFlex flex-direction="column" gap="l" width="100%">
       <Breadcrumbs
+        type="component"
         key={`${slug}-${section}`}
         slug={component.slug}
         title={component.title}
@@ -163,7 +161,7 @@ export function ComponentLayoutClient({
               overflow="hidden"
               padding="0"
               variant="secondary"
-              border-width="4xs"
+              border-width="5xs"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               data-pattern
@@ -221,7 +219,7 @@ export function ComponentLayoutClient({
             </Core.GdsCard>
           </Core.GdsTheme>
 
-          <Tabs slug={component.slug} />
+          <Tabs type="component" slug={component.slug} />
 
           <Core.GdsFlex flex-direction="column" id="component-content" gap="xl">
             {component.slug === 'icon' && (
@@ -289,14 +287,6 @@ export function ComponentLayoutClient({
               </Core.GdsFlex>
             )}
 
-            {children}
-
-            {component.soon && (
-              <Core.GdsAlert variant="notice">
-                {component.title} documentation is in progress.
-              </Core.GdsAlert>
-            )}
-
             {isLayoutComponent && section === 'overview' && (
               <Core.GdsAlert
                 variant="information"
@@ -309,7 +299,7 @@ export function ComponentLayoutClient({
                     display="inline"
                     font-weight="bold"
                   >
-                    This is a declarative layout component!{' '}
+                    This is a declarative layout component!
                   </Core.GdsText>
                   A micro-frontend optimized layout system using style
                   expressions, Generates encapsulated CSS in shadow DOM for
@@ -317,6 +307,15 @@ export function ComponentLayoutClient({
                 </Core.GdsText>
               </Core.GdsAlert>
             )}
+
+            {children}
+
+            {component.soon && (
+              <Core.GdsAlert variant="notice">
+                {component.title} documentation is in progress.
+              </Core.GdsAlert>
+            )}
+
             {section === 'code' && <ArgsTable componentName={slug} />}
             <Similar tag={firstTag} currentSlug={component.slug} />
           </Core.GdsFlex>

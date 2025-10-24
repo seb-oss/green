@@ -1,7 +1,6 @@
 // tabs.tsx
 'use client'
 
-import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -9,21 +8,33 @@ import { useContent } from '../../../settings/content'
 
 interface TabsProps {
   slug: string
+  type: 'component' | 'pattern'
 }
 
-export default function Tabs({ slug }: TabsProps) {
+export default function Tabs({ slug, type }: TabsProps) {
   const router = useRouter()
   const { actions } = useContent()
   const pathname = usePathname()
 
-  const component = actions.getComponent(slug)
+  const content =
+    type === 'pattern'
+      ? actions
+          .getComponents()
+          .find((c) =>
+            Array.isArray(c.category)
+              ? c.category.includes('Patterns')
+              : c.category === 'Patterns' && c.slug === slug,
+          )
+      : actions.getComponent(slug)
 
-  if (!component) return null
+  if (!content) return null
 
   const currentPath = pathname.split('?')[0]
-  const OVERVIEW = currentPath === `/component/${slug}`
-  const UXTEXT = currentPath === `/component/${slug}/ux-text`
-  const A11Y = currentPath === `/component/${slug}/accessibility`
+  const basePath = `/${type}/${slug}`
+  const OVERVIEW = currentPath === basePath
+  const UXTEXT = currentPath === `${basePath}/ux-text`
+  const A11Y = currentPath === `${basePath}/accessibility`
+  const FAQ = currentPath === `${basePath}/faq`
 
   const InternalLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
@@ -31,19 +42,27 @@ export default function Tabs({ slug }: TabsProps) {
   }
 
   const hasUXText = Boolean(
-    (Array.isArray(component['ux-text']) && component['ux-text'].length > 0) ||
-      (component['ux-text']?.section &&
-        component['ux-text'].section.length > 0),
+    (Array.isArray(content['ux-text']) && content['ux-text'].length > 0) ||
+      (content['ux-text']?.section && content['ux-text'].section.length > 0),
   )
 
   const hasAccessibility = Boolean(
-    (Array.isArray(component.accessibility) &&
-      component.accessibility.length > 0) ||
-      (component.accessibility?.section &&
-        component.accessibility.section.length > 0),
+    (Array.isArray(content.accessibility) &&
+      content.accessibility.length > 0) ||
+      (content.accessibility?.section &&
+        content.accessibility.section.length > 0),
   )
 
-  if (!hasUXText && !hasAccessibility) return null
+  const hasFAQ = Boolean(
+    (Array.isArray(content.faq) && content.faq.length > 0) ||
+      (content.faq?.section && content.faq.section.length > 0),
+  )
+
+  if (!hasUXText && !hasAccessibility && !hasFAQ) return null
+  const getStorybookPath = (type: 'component' | 'pattern', slug: string) => {
+    const category = type === 'pattern' ? 'patterns' : 'components'
+    return `https://storybook.seb.io/latest/core/?path=/docs/${category}-${slug}--docs`
+  }
 
   return (
     <Core.GdsCard
@@ -55,7 +74,7 @@ export default function Tabs({ slug }: TabsProps) {
       variant="secondary"
       width="100%"
       role="navigation"
-      aria-label="Component documentation areas"
+      aria-label={`${type === 'pattern' ? 'Pattern' : 'Component'} documentation areas`}
     >
       <Core.GdsFlex
         justify-content="space-between"
@@ -67,7 +86,7 @@ export default function Tabs({ slug }: TabsProps) {
         <Core.GdsFlex height="100%" gap="0">
           <Core.GdsMenuButton
             onClick={InternalLink}
-            href={`/component/${slug}`}
+            href={basePath}
             selected={OVERVIEW}
           >
             Overview
@@ -75,7 +94,7 @@ export default function Tabs({ slug }: TabsProps) {
           {hasUXText && (
             <Core.GdsMenuButton
               onClick={InternalLink}
-              href={`/component/${slug}/ux-text`}
+              href={`${basePath}/ux-text`}
               selected={UXTEXT}
             >
               UX text
@@ -84,18 +103,24 @@ export default function Tabs({ slug }: TabsProps) {
           {hasAccessibility && (
             <Core.GdsMenuButton
               onClick={InternalLink}
-              href={`/component/${slug}/accessibility`}
+              href={`${basePath}/accessibility`}
               selected={A11Y}
             >
               Accessibility
             </Core.GdsMenuButton>
           )}
+          {hasFAQ && (
+            <Core.GdsMenuButton
+              onClick={InternalLink}
+              href={`${basePath}/faq`}
+              selected={FAQ}
+            >
+              FAQ
+            </Core.GdsMenuButton>
+          )}
         </Core.GdsFlex>
 
-        <Core.GdsLink
-          href={`https://storybook.seb.io/latest/core/?path=/docs/components-${slug}--docs`}
-          target="_blank"
-        >
+        <Core.GdsLink href={getStorybookPath(type, slug)} target="_blank">
           <Core.GdsFlex
             margin="0 0 0 auto"
             align-items="center"

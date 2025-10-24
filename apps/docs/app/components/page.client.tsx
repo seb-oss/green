@@ -39,6 +39,11 @@ export function ComponentsClient() {
 
   const filteredComponents = useMemo(() => {
     return components.filter((component) => {
+      const isPattern = Array.isArray(component.category)
+        ? component.category.includes('Patterns')
+        : component.category === 'Patterns'
+      if (isPattern) return false
+
       switch (filter) {
         case 'stable':
           if (component.beta) return false
@@ -90,11 +95,11 @@ export function ComponentsClient() {
   return (
     <Core.GdsFlex flex-direction="column" gap="2xl" width="100%" font="body-s">
       <Core.GdsBreadcrumbs size="small">
-        <Link component="link" href="/">
+        <Link component="breadcrumb" href="/">
           <Core.IconHomeOpen size="m" slot="lead" />
           Home
         </Link>
-        <Core.GdsText>Components</Core.GdsText>
+        <Core.GdsBreadcrumb>Components</Core.GdsBreadcrumb>
       </Core.GdsBreadcrumbs>
       <Core.GdsFlex
         justify-content="center"

@@ -1,5 +1,41 @@
 # Changelog
 
+## 2.4.1
+
+### Patch Changes
+
+- 0020685: **Tokens:** Background L1 Neutral 01 update in light and dark mode
+
+## 2.4.0
+
+### Minor Changes
+
+- 2d649da: Tokens: text tokens for CSS is updated to transform into rem instead of px
+
+## 2.3.0
+
+### Minor Changes
+
+- 1854fdf: **Background L3:** Add Neutral 05, Neutral 06 and fix Studio dark mode preview
+
+## 2.2.0
+
+### Minor Changes
+
+- 8cdf051: **Studio:** Studio tokens
+- 8cdf051: **Tokens:** Viewport tokens match the style expression bp
+
+## 2.1.0
+
+### Minor Changes
+
+- e5f21f0: **2XS:** Change value to 6 and add 5xs = 1
+- e5f21f0: **Tokens:** Spacing and radius tokens update
+
+### Patch Changes
+
+- e5f21f0: **Tokens:** typography fix for detail-s
+
 ## 2.0.2
 
 ### Patch Changes

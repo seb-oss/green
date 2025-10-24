@@ -87,6 +87,11 @@ export default {
         type: 'boolean',
       },
     },
+    closeOnScroll: {
+      control: {
+        type: 'boolean',
+      },
+    },
     dateLocale: {
       options: ['sv-SE', 'en-GB', 'da-DK'],
       control: {
@@ -147,6 +152,7 @@ const PrimaryTemplate: StoryFn<DateStoryArgs & any> = (args) => {
       [size]="size"
       [displayDisabledAsLocked]="displayDisabledAsLocked"
       [closeCalendarOnEscape]="closeCalendarOnEscape"
+      [closeOnScroll]="closeOnScroll"
       >
     </nggv-dateinput>
     `,
@@ -182,6 +188,7 @@ const TemplateWithSelected: StoryFn<DateStoryArgs> = (args) => {
       [dateCharacters]="dateCharacters"
       [firstDayOfWeek]="firstDayOfWeek"
       [formControl]="formControl"
+      [closeOnScroll]="closeOnScroll"
       >
     </nggv-dateinput>
     `,
@@ -229,6 +236,7 @@ const TemplateWithFormControl: StoryFn<DateStoryArgs & any> = (
           [reset]="reset$"
           [locked]="locked"
           [displayDisabledAsLocked]="displayDisabledAsLocked"
+          [closeOnScroll]="closeOnScroll"
           >
         </nggv-dateinput>
       </div>
@@ -281,6 +289,7 @@ const TemplateWithFormGroup: StoryFn<DateStoryArgs & any> = (
           [withErrorIcon]="withErrorIcon"
           [dateCharacters]="dateCharacters"
           [firstDayOfWeek]="firstDayOfWeek"
+          [closeOnScroll]="closeOnScroll"
           >
         </nggv-dateinput>
       </div>
@@ -321,6 +330,7 @@ const AltTemplate: StoryFn<DateStoryArgs> = (args) => {
         [withErrorIcon]="withErrorIcon"
         [firstDayOfWeek]="firstDayOfWeek"
         [formControl]="formControl"
+        [closeOnScroll]="closeOnScroll"
         >
       </nggv-dateinput>
     `,
@@ -351,6 +361,7 @@ const ExtendedTemplate: StoryFn<DateStoryArgs> = (args) => {
         [withErrorIcon]="withErrorIcon"
         [firstDayOfWeek]="firstDayOfWeek"
         [formControl]="formControl"
+        [closeOnScroll]="closeOnScroll"
         >
         <button class="gds-button gds-button-alternative gds-button--small" (click)="emitToday('${new Date().toISOString()}'); datepicker.close()">
           Today
@@ -392,6 +403,7 @@ const TemplateWithTwoInputs: StoryFn<DateStoryArgs> = (args) => {
           [withErrorIcon]="withErrorIcon"
           [firstDayOfWeek]="firstDayOfWeek"
           [formControl]="formControl"
+          [closeOnScroll]="closeOnScroll"
           >
         </nggv-dateinput>
         <input class="gds-field" style="margin-left: 1rem; width: 264px; height: 42px; margin-top: 2.5rem"/>
@@ -430,9 +442,46 @@ const CustomLockedTemplate: StoryFn<DateStoryArgs & any> = (args) => {
       [locked]="locked"
       [displayDisabledAsLocked]="displayDisabledAsLocked"
       [closeCalendarOnEscape]="closeCalendarOnEscape"
+      [closeOnScroll]="closeOnScroll"
       >
       <ng-template #lockedTpl let-state>Today ({{ state | date: 'shortDate' }})</ng-template>
     </nggv-dateinput>
+    `,
+    props: {
+      ...args,
+      formControl: dateFc,
+    },
+  }
+}
+const LargeBodyTemplate: StoryFn<DateStoryArgs & any> = (args) => {
+  const dateFc = new UntypedFormControl(args.ngModel)
+
+  return {
+    template: /*html*/ `
+    <div style="height: 2000px; padding-top:800px;">
+    <nggv-dateinput
+      [label]="label"
+      [locale]="locale"
+      [dateLocale]="dateLocale"
+      [disableDates]="disableDates"
+      [disableWeekDays]="disableWeekDays"
+      [required]="required"
+      [invalid]="invalid"
+      [error]="error"
+      [errorList]="errorList"
+      [withErrorIcon]="withErrorIcon"
+      [firstDayOfWeek]="firstDayOfWeek"
+      [formControl]="formControl"
+      [locked]="locked"
+      [size]="size"
+      [displayDisabledAsLocked]="displayDisabledAsLocked"
+      [closeCalendarOnEscape]="closeCalendarOnEscape"
+      [closeOnScroll]="closeOnScroll"
+      [dynamicPosition]="dynamicPosition"
+      >
+    </nggv-dateinput>
+
+    </div>
     `,
     props: {
       ...args,
@@ -449,6 +498,7 @@ Primary.args = {
   disableDates: [],
   disableWeekDays: [],
   closeCalendarOnEscape: true,
+  closeOnScroll: false,
   required: true,
   invalid: false,
   ngModel: null,
@@ -573,6 +623,12 @@ export const DoNotCloseCalendarOnEscClick = PrimaryTemplate.bind({})
 DoNotCloseCalendarOnEscClick.args = {
   ...Primary.args,
   closeCalendarOnEscape: false,
+}
+
+export const DynamicPosition = LargeBodyTemplate.bind({})
+DynamicPosition.args = {
+  ...Primary.args,
+  dynamicPosition: true,
 }
 
 export const CustomDateFormat = PrimaryTemplate.bind({})

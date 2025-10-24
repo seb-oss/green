@@ -57,7 +57,6 @@ export class GdsTheme extends GdsElement {
     return html`<slot></slot>`
   }
 
-  // TODO: Add prefers-color-scheme media query when `auto` is selected
   @watch('colorScheme')
   private _onColorSchemeChange() {
     switch (this.colorScheme) {
@@ -68,13 +67,13 @@ export class GdsTheme extends GdsElement {
         )
         break
       case 'light':
+      default:
         this._dynamicStylesController.inject(
           'color-scheme',
           unsafeCSS(`:host { ${colorsLight}}`),
         )
         break
       case 'auto':
-      default:
         this._dynamicStylesController.inject(
           'color-scheme',
           unsafeCSS(

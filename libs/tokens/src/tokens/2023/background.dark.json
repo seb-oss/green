@@ -7,7 +7,7 @@
           "$value": "{ref.color.grey.30}"
         },
         "neutral-02": {
-          "$value": "{ref.color.grey.25}"
+          "$value": "{ref.color.grey.30}"
         },
         "brand-01": {
           "$value": "{ref.color.green.27}"
@@ -69,6 +69,9 @@
         },
         "neutral-04": {
           "$value": "{ref.color.grey.23}"
+        },
+        "neutral-05": {
+          "$value": "{ref.color.green.27}"
         },
         "positive-01": {
           "$value": "{ref.color.green.24}"

@@ -1,5 +1,5 @@
-import { property, query, queryAsync } from 'lit/decorators.js'
-import { ifDefined } from 'lit/directives/if-defined.js'
+import { property, query } from 'lit/decorators.js'
+import { when } from 'lit/directives/when.js'
 
 import { GdsToggleControlBase } from '../../primitives/toggle-controls-base/toggle-control-base.component'
 import { gdsCustomElement, html } from '../../scoping'
@@ -8,7 +8,8 @@ import { checkboxToggle } from '../../shared-styles/rbcb-toggle.template'
 import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
-import { IconCheckmark, IconMinusSmall } from '../pure'
+import { IconCheckmark } from '../icon/icons/checkmark.component'
+import { IconMinusSmall } from '../icon/icons/minus-small.component'
 import CheckboxStyles from './checkbox.styles'
 
 /**
@@ -74,6 +75,10 @@ export class GdsCheckbox extends GdsFormControlElement {
     }
   }
 
+  focus(options?: FocusOptions): void {
+    this._elCheckbox.focus(options)
+  }
+
   render() {
     return html`
       <input
@@ -82,15 +87,17 @@ export class GdsCheckbox extends GdsFormControlElement {
         ?disabled=${this.disabled}
         ?indeterminate=${this.indeterminate}
         aria-invalid=${this.invalid}
-        aria-describedby=${ifDefined(
-          this.supportingText ? 'supporting-text' : '',
-        )}
+        aria-describedby="message supporting-text"
         id="checkbox-input"
         @change=${() => {
           this.checked = this._elCheckbox.checked
           this.#dispatchChangeEvents()
         }}
       />
+      ${when(
+        this.errorMessage,
+        () => html`<span id="message">${this.errorMessage}</span>`,
+      )}
       <gds-toggle-control-base type="checkbox" @click=${this.#toggleChecked}>
         <label for="checkbox-input" slot="label"> ${this.label} </label>
         <span

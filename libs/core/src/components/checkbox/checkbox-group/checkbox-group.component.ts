@@ -88,8 +88,9 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
    * to update the invalid state of the checkboxes in the group.
    */
   @watch('invalid')
+  @watch('errorMessage')
   private _handleGroupInvalidChange() {
-    this.#handleInvalidChange()
+    this.#syncCheckboxes()
   }
 
   focus() {
@@ -98,7 +99,7 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
 
   connectedCallback(): void {
     super.connectedCallback()
-    this.addEventListener('gds-validity-state', this.#handleInvalidChange)
+    this.addEventListener('gds-validity-state', this.#syncCheckboxes)
   }
 
   render() {
@@ -120,9 +121,10 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
     </div>`
   }
 
-  #handleInvalidChange = () => {
+  #syncCheckboxes = () => {
     this.checkboxes.forEach((checkbox) => {
       checkbox.invalid = this.invalid
+      checkbox.errorMessage = this.errorMessage
     })
   }
 
@@ -199,6 +201,7 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
     characterData: true,
   })
   private _syncOnDOMChange() {
+    this.#syncCheckboxes()
     this.#computeValue()
   }
 }

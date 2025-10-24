@@ -133,10 +133,10 @@ for (const variant of ['default'] as const) {
             step="1"
             autocapitalize="on"
             autocomplete="on"
-            autocorrect="on"
             spellcheck="true"
             inputmode="numeric"
             autofocus
+            autocorrect
             enterkeyhint="enter"
           ></gds-input>`,
         )
@@ -147,11 +147,45 @@ for (const variant of ['default'] as const) {
         expect(inputEl?.getAttribute('step')).to.equal('1')
         expect(inputEl?.getAttribute('autocapitalize')).to.equal('on')
         expect(inputEl?.getAttribute('autocomplete')).to.equal('on')
-        expect(inputEl?.getAttribute('autocorrect')).to.equal('on')
+        expect(inputEl?.getAttribute('autocorrect')).to.equal('true')
         expect(inputEl?.getAttribute('spellcheck')).to.equal('true')
         expect(inputEl?.getAttribute('inputmode')).to.equal('numeric')
         expect(inputEl?.getAttribute('autofocus')).to.equal('')
         expect(inputEl?.getAttribute('enterkeyhint')).to.equal('enter')
+      })
+
+      it('should support customized character counter badge', async () => {
+        const charCounterCallback = (input: GdsInput) => {
+          const remaining = input.maxlength - input.value.length
+          return [remaining, remaining < 0 ? 'negative' : 'positive'] as const
+        }
+
+        const el = await fixture<GdsInput>(
+          html`<gds-input variant="${variant}" maxlength="10"></gds-input>`,
+        )
+        el.charCounterCallback = charCounterCallback
+        el.value = '12345'
+        await el.updateComplete
+
+        const footer = el.shadowRoot?.querySelector(
+          '[gds-element=gds-form-control-footer]',
+        )
+        const remainingCharactersBadgeEl = footer.shadowRoot?.querySelector(
+          '[gds-element=gds-badge]',
+        )
+
+        expect(remainingCharactersBadgeEl).to.exist
+        expect(remainingCharactersBadgeEl?.textContent).to.equal('5')
+        expect(remainingCharactersBadgeEl?.getAttribute('variant')).to.equal(
+          'positive',
+        )
+
+        el.value = '12345678901'
+        await el.updateComplete
+        expect(remainingCharactersBadgeEl?.textContent).to.equal('-1')
+        expect(remainingCharactersBadgeEl?.getAttribute('variant')).to.equal(
+          'negative',
+        )
       })
     })
 
@@ -223,6 +257,24 @@ for (const variant of ['default'] as const) {
         )
         el.focus()
         expect(document.activeElement).to.equal(el)
+      })
+
+      it('should have an associated error message when in invalid state', async () => {
+        const el = await fixture<GdsInput>(
+          html`<gds-input
+            variant="${variant}"
+            label="My label"
+            error-message="This is an error"
+            .invalid=${true}
+          ></gds-input>`,
+        )
+        await aTimeout(0)
+        const inputEl = el.shadowRoot?.querySelector('input')
+        const errorMessageEl = el.shadowRoot?.querySelector('#message')
+        expect(errorMessageEl).to.exist
+        expect(inputEl?.getAttribute('aria-describedby')).to.contain('message')
+        expect(inputEl?.getAttribute('aria-invalid')).to.equal('true')
+        await expect(el).to.be.accessible()
       })
     })
   })
