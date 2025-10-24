@@ -5,7 +5,10 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 
 import './index.ts'
+import '../flex/flex.ts'
 import '../icon/icons/push.ts'
+
+import { ifDefined } from 'lit/directives/if-defined.js'
 
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/dropdown)
@@ -113,19 +116,36 @@ export const OptionHeadings: Story = {
 export const CustomTrigger: Story = {
   ...DefaultParams,
   name: 'Custom trigger content',
-  render: (args) => html`
-    <gds-dropdown
-      onchange="document.getElementById('trigger-value').innerText = event.target.value"
-    >
-      <div slot="trigger">
-        <b>Selected: </b>
-        <span id="trigger-value">v1</span>
-      </div>
-      <gds-option value="v1">Value 1</gds-option>
-      <gds-option value="v2">Value 2</gds-option>
-      <gds-option value="v3">Value 3</gds-option>
-    </gds-dropdown>
-  `,
+  render: (args) => {
+    const optionTemplate = (slot?: string) =>
+      html` <gds-flex
+        slot="${ifDefined(slot)}"
+        gap="xs"
+        width="100%"
+        justify-content="space-between"
+      >
+        <gds-flex flex-direction="column" gap="2xs">
+          <gds-text font="detail-regular-s">Account</gds-text>
+          <gds-text>123 456</gds-text>
+        </gds-flex>
+        <gds-flex flex-direction="column" gap="2xs">
+          <gds-text font="detail-regular-s" text-align="end">Balance</gds-text>
+          <gds-text text-align="end">9 654,00</gds-text>
+        </gds-flex>
+      </gds-flex>`
+
+    return html`
+      <gds-dropdown
+        width="250px"
+        onchange="document.getElementById('trigger-value').innerText = event.target.value"
+      >
+        ${optionTemplate('trigger')}
+        <gds-option value="v1">${optionTemplate()}</gds-option>
+        <gds-option value="v2">${optionTemplate()}</gds-option>
+        <gds-option value="v3">${optionTemplate()}</gds-option>
+      </gds-dropdown>
+    `
+  },
 }
 
 /**
