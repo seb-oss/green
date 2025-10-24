@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '../../tokens';
 
-$block-selector: '.skeleton-loader';
+$block-selector: '.gds-skeleton-loader';
 $selector: '#{$block-selector}[aria-busy="true"]';
 
 $highlight-color: var(--gds-sys-color-base-300);
