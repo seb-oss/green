@@ -1,0 +1,35 @@
+@mixin add-border-radius($radius: 0.25rem) {
+  border-radius: $radius;
+}
+
+@mixin add-border(
+  $sides: false,
+  $width: 1px,
+  $color: var(--gds-sys-color-base-600)
+) {
+  @if not $sides {
+    border: solid $width $color;
+  } @else {
+    @each $side in $sides {
+      border-#{$side}: solid $width $color;
+    }
+  }
+}
+
+@mixin add-border-color($color: var(--gds-sys-color-base-600)) {
+  @if not($color == var(--border-color)) {
+    --border-color: #{$color};
+  }
+}
+
+@mixin add-validation() {
+  &.is-invalid {
+    @include add-border-color(var(--gds-sys-color-text-error));
+    @include add-border-radius();
+  }
+
+  &.is-valid {
+    @include add-border-color(var(--gds-sys-color-dark-green-1));
+    @include add-border-radius();
+  }
+}

@@ -1,0 +1,19 @@
+@use 'sass:map';
+@use '../tokens';
+
+@mixin font-scale($step) {
+  font-size: map.get(tokens.$font-scale, $step);
+}
+
+@mixin font-size($size) {
+  font-size: map.get(tokens.$font-size, $size);
+}
+
+@mixin font-weight($weight) {
+  font-weight: map.get(tokens.$font-weights, $weight);
+}
+
+@mixin line-height($step) {
+  @warn 'This mixing: "@mixin line-height" is deprecated and should not be used. Use explicit rem values instead.';
+  line-height: map.get(tokens.$line-height-scale, $step);
+}
