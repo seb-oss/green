@@ -1,0 +1,183 @@
+#!/bin/bash
+if [[ -f app.properties ]]; then
+  . app.properties
+fi
+
+DEBUG=false
+VERBOSE=false
+PLATFORM_WINDOWS="mingwX64"
+PLATFORM_LINUX="linuxX64"
+PLATFORM_MAC_OS="macosX64"
+PLATFORM_MAC_APPLE_SILICON="macosArm64"
+
+if [[ "$*" == *"--debug"* ]]; then
+  DEBUG=true
+fi
+
+if [[ "$*" == *"--verbose"* ]]; then
+  DEBUG=true
+  VERBOSE=true
+fi
+
+if [[ "$*" == *"--upgrade"* ]]; then
+  MUST_UPGRADE=true
+fi
+
+fn_print_debug() {
+  if [[ $DEBUG == true ]]; then
+    echo "D: $1"
+  fi
+}
+
+fn_print_verbose() {
+  if [[ $VERBOSE == true ]]; then
+    echo "V: $1"
+  fi
+}
+
+fn_print_error() {
+  echo
+  echo "!!!!!!!!!!!!!!!!!!!"
+  echo "! CRITICAL FAILURE: $1"
+  echo "!!!!!!!!!!!!!!!!!!!"
+}
+
+fn_print_info() {
+  echo "I: $1"
+}
+
+fn_fetch_latest_version() {
+  if [ "$VERSION" == "" ] || [ $MUST_UPGRADE == true ]; then
+    fn_print_verbose "The app.properties file was not found. Fetching from Github."
+    VERSION=$(curl -s https://api.github.com/repos/rafaeltonholo/svg-to-compose/releases/latest \
+    | grep "tag_name" \
+    | cut -d : -f 2,3 \
+    | tr -d \", \
+    | xargs -n 1 echo)
+  else
+    fn_print_verbose "Current version: $VERSION"
+  fi
+}
+
+fn_os_check() {
+  unameOut=$(uname -a)
+  case "${unameOut}" in
+      *Microsoft*)  PLATFORM=$PLATFORM_WINDOWS;; # must be first since Windows subsystem for linux will have Linux in the name too
+      *microsoft*)  PLATFORM=$PLATFORM_WINDOWS;; #WARNING: My v2 uses ubuntu 20.4 at the moment slightly different name may not always work
+      Linux*)       PLATFORM=$PLATFORM_LINUX;;
+      Darwin*)      PLATFORM=$PLATFORM_MAC_OS;;
+      CYGWIN*)      PLATFORM=$PLATFORM_WINDOWS;;
+      MINGW*)       PLATFORM=$PLATFORM_WINDOWS;;
+      *Msys)        PLATFORM=$PLATFORM_WINDOWS;;
+      *)            PLATFORM="UNKNOWN:${unameOut}"
+  esac
+
+  if [[ $PLATFORM == "$PLATFORM_MAC_OS" ]] && [[ $(uname -m ) == "arm64" ]]; then
+      PLATFORM=$PLATFORM_MAC_APPLE_SILICON
+  fi
+}
+
+fn_main() {
+  fn_print_verbose "Initializing SVG to Compose script"
+  fn_print_verbose "Verifying binaries"
+
+  original_bin_folder=".s2c/bin"
+  bin_folder=$original_bin_folder
+  must_download=false
+  must_build=false
+
+  fn_os_check
+
+  program_ext="kexe"
+
+  if [[ $PLATFORM == "$PLATFORM_WINDOWS" ]]; then
+      program_ext="exe"
+  fi
+
+  if [[ $MUST_UPGRADE == true ]]; then
+    fn_print_info "Upgrading SVG to Compose binaries"
+    if [[ ! -d "gradle" ]]; then
+      must_download=true
+    else
+      must_build=true
+    fi
+  elif [[ ! -d "$bin_folder" ]] || [[ ! -f "$bin_folder/s2c.$program_ext" ]]; then
+    fn_print_verbose "Bin folder not present. Checking if it is the project folder..."
+
+    fn_print_verbose "Checking release version for $PLATFORM"
+    bin_folder="svg-to-compose/build/bin/$PLATFORM/releaseExecutable"
+    if [[ ! -d "$bin_folder" ]]; then
+      fn_print_verbose "Checking debug version for $PLATFORM"
+      bin_folder="svg-to-compose/build/bin/$PLATFORM/debugExecutable"
+      if [[ ! -d "$bin_folder" ]]; then
+        if [[ ! -d "gradle" ]]; then
+          must_download=true
+        else
+          must_build=true
+        fi
+      fi
+    fi
+  fi
+
+  if [[ $must_download == true ]]; then
+    bin_folder=$original_bin_folder
+    fn_print_info "⬇️ Downloading binaries from Github"
+    fn_fetch_latest_version
+    mkdir -p $bin_folder
+    binary_base_filename="s2c-${PLATFORM}-binaries"
+    binary_filename="${binary_base_filename}.zip"
+    fn_print_verbose "Binary name=$binary_filename"
+
+    download_url="https://github.com/rafaeltonholo/svg-to-compose/releases/download/$VERSION/$binary_filename"
+    fn_print_debug "Downloading from $download_url"
+    if ! command curl -L "$download_url" \
+                 --output "$bin_folder/$binary_filename"; then
+      fn_print_error "Error downloading binaries."
+      exit 1
+    fi
+
+    fn_print_info "🔓 Unzipping binaries"
+    if ! command unzip -qq "$bin_folder/$binary_filename" -d $bin_folder; then
+      fn_print_error "Error unzipping binaries."
+      exit 1
+    fi
+
+    fn_print_info "🧹 Cleaning up zip files"
+    cp -vr $bin_folder/$binary_base_filename/* $bin_folder/
+    rm -r "${bin_folder:?}/${binary_base_filename}" "${bin_folder:?}/${binary_filename}"
+    fn_print_debug "Giving execution permission to binaries"
+    chmod +x "$bin_folder/s2c.$program_ext"
+
+    fn_print_info "✅ Binaries download completed."
+  elif [[ $must_build == true ]]; then
+    fn_print_info "Found project structure, but not binaries. Build required."
+    if [[ $DEBUG == true ]] | [[ $VERBOSE == true ]]; then
+      build_type=Debug
+    else
+      build_type=Release
+    fi
+
+    build_platform="$(tr '[:lower:]' '[:upper:]' <<< ${PLATFORM:0:1})${PLATFORM:1}"
+    build_command="build$build_type$build_platform"
+    build_type_folder="$(tr '[:upper]' '[:lower]' <<< ${build_type:0:1})${build_type:1}"
+    bin_folder="svg-to-compose/build/bin/$PLATFORM/${build_type_folder}Executable"
+    command ./gradlew "$build_command"
+  fi
+
+  args=("$@")
+  if [[ $MUST_UPGRADE == true ]]; then
+    upgrade_flag="--upgrade"
+    # Iterate through the array and remove matching elements, preserving indices:
+    for i in "${!args[@]}"; do
+        if [[ "${args[i]}" = "$upgrade_flag" ]]; then
+            unset 'args[i]'
+            # Shift remaining elements to fill the gap:
+            args=("${args[@]}")
+        fi
+    done
+  fi
+
+  command "$bin_folder"/s2c.$program_ext "${args[@]}"
+}
+
+fn_main "$@"
