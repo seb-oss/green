@@ -405,6 +405,25 @@ describe('<gds-dropdown>', () => {
     await expect(gdsFormControlFooter.classList.contains('size-medium')).to.be
       .true
   })
+
+  it('field height should adapt to content in trigger', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown>
+        <div slot="trigger" style="padding: 16px 0;">Custom trigger</div>
+        <gds-option>Option 1</gds-option>
+        <gds-option>Option 2</gds-option>
+        <gds-option>Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    const field = el.test_getFieldElement()
+    await expect(field.clientHeight).to.be.greaterThan(
+      parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          '--gds-sys-space-3xl',
+        ),
+      ),
+    )
+  })
 })
 
 describe('<gds-dropdown> interactions', () => {
