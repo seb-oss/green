@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# --- 1. Run the s2c conversion (which produces bad code) ---
+OUT_DIR="../dist/libs/tokens/2023/android/icons"
+./s2c --optimize false --make-internal --minified -o "$OUT_DIR/solid" -t se.seb.gds.theme.GdsTheme -p se.seb.gds.icons.solid ../libs/core/src/components/icon/assets/solid/
+./s2c --optimize false --make-internal --minified -o "$OUT_DIR/regular" -t se.seb.gds.theme.GdsTheme -p se.seb.gds.icons.regular ../libs/core/src/components/icon/assets/regular/
+
+# --- 2. Fix the generated Kotlin files (.kt) ---
+
+# For Linux:
+# find "$OUT_DIR" -name "*.kt" -exec sed -i 's/0xCURRENTCOLOR/0xFF000000/g' {} +
+
+# For macOS:
+find "$OUT_DIR" -name "*.kt" -exec sed -i '' 's/0xCURRENTCOLOR/0xFF000000/g' {} +
+
+./generate-icon-manifest
+
