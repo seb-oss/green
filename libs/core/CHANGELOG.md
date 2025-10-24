@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.12.1
+
+### Patch Changes
+
+- 7ac380e: **Form controls:** Fix rendering regression where empty footer still takes up space
+
 ## 2.12.0
 
 ### Minor Changes
