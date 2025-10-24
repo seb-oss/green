@@ -95,9 +95,16 @@ export default function Inspect({ content, viewports }: InspectProps) {
 
   return (
     <Core.GdsFlex flex-direction="column" gap="l" position="relative">
-      <Core.GdsFlex justify-content="space-between" align-items="center">
+      <Core.GdsFlex
+        justify-content="space-between"
+        align-items="center"
+        position="absolute"
+        inset="0 0 auto 0"
+        z-index="10"
+        padding="m xl"
+      >
         <Core.GdsText tag="h1">{content.title}</Core.GdsText>
-        <Core.GdsFlex gap="s">
+        <Core.GdsFlex gap="s" align-items="center">
           <Core.GdsButton
             onClick={() => handleZoom(0.1)}
             size="small"
@@ -116,8 +123,7 @@ export default function Inspect({ content, viewports }: InspectProps) {
             <Core.IconZoomOut />
           </Core.GdsButton>
           <Core.GdsButton onClick={resetZoom} size="small" rank="secondary">
-            {/* <Core.IconRefresh /> */}
-            Refresh
+            <Core.IconArrow />
           </Core.GdsButton>
           <Core.GdsButton
             onClick={() => setShowCode(!showCode)}
@@ -134,9 +140,7 @@ export default function Inspect({ content, viewports }: InspectProps) {
         style={{
           overflow: 'hidden',
           width: '100%',
-          height: '600px',
-          background: 'var(--gds-ref-palette-background-l2)',
-          borderRadius: 'var(--gds-sys-border-radius-l)',
+          height: '100vh',
           cursor: isMetaKeyActive ? 'grab' : 'default',
           touchAction: 'none', // Add this to prevent touch scrolling
         }}
@@ -145,18 +149,18 @@ export default function Inspect({ content, viewports }: InspectProps) {
           ref={transformRef}
           style={{
             transformOrigin: '0 0',
-            padding: '2rem',
+            padding: '0',
           }}
         >
           <Preview content={content} viewports={viewports} />
         </div>
       </div>
 
-      {inspectedComponent && (
+      {!showCode && inspectedComponent && (
         <Core.GdsFlex
           position="absolute"
-          inset="40px 40px auto auto"
-          z-index="9"
+          inset="80px 20px auto auto"
+          z-index="20"
         >
           <ComponentInspector
             componentName={inspectedComponent}
@@ -166,7 +170,15 @@ export default function Inspect({ content, viewports }: InspectProps) {
       )}
 
       {showCode && content.code && (
-        <Core.GdsCard padding="l">
+        <Core.GdsCard
+          padding="l"
+          position="absolute"
+          inset="80px 20px auto auto"
+          z-index="20"
+          variant="secondary"
+          width="480px"
+          overflow="auto"
+        >
           <pre>
             <code>{content.code}</code>
           </pre>

@@ -150,6 +150,7 @@ export default function Template({ template }: { template: string }) {
         variant="primary"
         border-radius="m"
         overflow="auto"
+        padding="0"
       >
         <Tabs content={CONTENT} viewports={selectedViewportValues} />
       </Core.GdsCard>

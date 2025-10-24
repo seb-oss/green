@@ -10,7 +10,7 @@ interface ViewPort {
   y: number
 }
 
-export function useTemplateZoom(minZoom = 0.5, maxZoom = 3) {
+export function useTemplateZoom(minZoom = 0.5, maxZoom = 30) {
   const containerRef = useRef<HTMLDivElement>(null)
   const transformRef = useRef<HTMLDivElement>(null)
   const zoomBehaviorRef = useRef<ZoomBehavior<HTMLDivElement, unknown>>(null)
