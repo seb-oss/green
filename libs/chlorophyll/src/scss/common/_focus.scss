@@ -38,16 +38,10 @@
 ) {
   @if not $target == '' {
     #{$target} {
-      transition:
-        all var(--gds-sys-transition),
-        outline-offset 0s,
-        outline-width 0s;
+      transition: border var(--gds-sys-transition);
     }
   } @else {
-    transition:
-      all var(--gds-sys-transition),
-      outline-offset 0s,
-      outline-width 0s;
+    transition: border var(--gds-sys-transition);
   }
 
   &:not(:disabled, .disabled, [aria-disabled]):hover #{$target} {
