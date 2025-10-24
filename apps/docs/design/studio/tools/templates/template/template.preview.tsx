@@ -120,7 +120,7 @@ export default function Preview({ content, viewports = [] }: PreviewProps) {
         </>
       )}
 
-      <Core.GdsFlex width="max-content" overflow="auto" gap="xl" padding="l">
+      <Core.GdsFlex width="max-content" overflow="auto" gap="xl" padding="8xl">
         {viewports.length > 0 ? (
           viewports.map(({ token, value }, index) => (
             <Core.GdsCard

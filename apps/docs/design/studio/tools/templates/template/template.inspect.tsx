@@ -101,7 +101,7 @@ export default function Inspect({ content, viewports }: InspectProps) {
         position="absolute"
         inset="0 0 auto 0"
         z-index="10"
-        padding="m xl"
+        padding="2xl"
       >
         <Core.GdsText tag="h1">{content.title}</Core.GdsText>
         <Core.GdsFlex gap="s" align-items="center">
@@ -149,7 +149,7 @@ export default function Inspect({ content, viewports }: InspectProps) {
           ref={transformRef}
           style={{
             transformOrigin: '0 0',
-            padding: '0',
+            padding: '120px',
           }}
         >
           <Preview content={content} viewports={viewports} />
