@@ -8,6 +8,12 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { GdsButton } from '../button/button.component'
+import { IconChevronDoubleLeft } from '../icon/icons/chevron-double-left.component'
+import { IconChevronDoubleRight } from '../icon/icons/chevron-double-right.component'
+import { IconChevronLeft } from '../icon/icons/chevron-left.component'
+import { IconChevronRight } from '../icon/icons/chevron-right.component'
+import TableStyles from './table.styles'
 
 interface TableColumn {
   key: string
@@ -21,68 +27,17 @@ interface TableColumn {
   sortable?: boolean
 }
 
-@gdsCustomElement('gds-table')
+@gdsCustomElement('gds-table', {
+  dependsOn: [
+    GdsButton,
+    IconChevronLeft,
+    IconChevronDoubleLeft,
+    IconChevronRight,
+    IconChevronDoubleRight,
+  ],
+})
 export class GdsTable extends GdsElement {
-  static styles = [
-    tokens,
-    css`
-      :host {
-        display: block;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-
-      th,
-      td {
-        padding: 8px;
-        border: 1px solid #ddd;
-      }
-
-      .checkbox-cell {
-        width: 40px;
-        text-align: center;
-      }
-
-      .pagination {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        margin-top: 16px;
-      }
-
-      .page-button {
-        padding: 4px 8px;
-        border: 1px solid #ddd;
-        background: white;
-        cursor: pointer;
-      }
-
-      .page-button:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-
-      .current-page {
-        background: #eee;
-      }
-
-      @media (max-width: 768px) {
-        .responsive-table td {
-          display: flex;
-          justify-content: space-between;
-          padding: 8px;
-        }
-
-        .responsive-table td::before {
-          content: attr(data-label);
-          font-weight: bold;
-        }
-      }
-    `,
-  ]
+  static styles = [tokens, TableStyles]
 
   @property({ type: Array })
   columns: TableColumn[] = []
@@ -201,106 +156,111 @@ export class GdsTable extends GdsElement {
             )}
           </tbody>
         </table>
+        <div class="footer">
+          <div class="lead"></div>
+          <div class="trail">
+            <div class="pagination">
+              <gds-button
+                size="xs"
+                rank="secondary"
+                ?disabled=${this.page === 1}
+                @click=${() => (this.page = 1)}
+              >
+                <gds-icon-chevron-double-left
+                  size="m"
+                ></gds-icon-chevron-double-left>
+              </gds-button>
 
-        <div class="pagination">
-          <button
-            class="page-button"
-            ?disabled=${this.page === 1}
-            @click=${() => (this.page = 1)}
-          >
-            First
-          </button>
+              <gds-button
+                size="xs"
+                rank="secondary"
+                ?disabled=${this.page === 1}
+                @click=${() => this.page--}
+              >
+                <gds-icon-chevron-left size="m"></gds-icon-chevron-left>
+              </gds-button>
 
-          <button
-            class="page-button"
-            ?disabled=${this.page === 1}
-            @click=${() => this.page--}
-          >
-            Previous
-          </button>
+              ${visiblePages.map(
+                (p) => html`
+                  ${p === '...'
+                    ? html`<gds-button size="xs" rank="tertiary" inert disabled
+                        >...</gds-button
+                      >`
+                    : html`
+                        <gds-button
+                          size="xs"
+                          rank="${this.page === p ? 'secondary' : 'tertiary'}"
+                          class="page-unit page-button ${this.page === p
+                            ? 'current-page'
+                            : ''}"
+                          @click=${() => (this.page = p as number)}
+                        >
+                          ${p}
+                        </gds-button>
+                      `}
+                `,
+              )}
 
-          ${visiblePages.map(
-            (p) => html`
-              ${p === '...'
-                ? html`<span class="page-dots">...</span>`
-                : html`
-                    <button
-                      class="page-button ${this.page === p
-                        ? 'current-page'
-                        : ''}"
-                      @click=${() => (this.page = p as number)}
-                    >
-                      ${p}
-                    </button>
-                  `}
-            `,
-          )}
+              <gds-button
+                rank="secondary"
+                size="xs"
+                ?disabled=${this.page === pageCount}
+                @click=${() => this.page++}
+              >
+                <gds-icon-chevron-right size="m"></gds-icon-chevron-right>
+              </gds-button>
 
-          <button
-            class="page-button"
-            ?disabled=${this.page === pageCount}
-            @click=${() => this.page++}
-          >
-            Next
-          </button>
-
-          <button
-            class="page-button"
-            ?disabled=${this.page === pageCount}
-            @click=${() => (this.page = pageCount)}
-          >
-            Last
-          </button>
-
-          <select @change=${this.handlePageSizeChange}>
-            ${[5, 10, 25, 50].map(
-              (size) => html`
-                <option value=${size} ?selected=${this.pageSize === size}>
-                  ${size} per page
-                </option>
-              `,
-            )}
-          </select>
+              <gds-button
+                rank="secondary"
+                size="xs"
+                ?disabled=${this.page === pageCount}
+                @click=${() => (this.page = pageCount)}
+              >
+                <gds-icon-chevron-double-right
+                  size="m"
+                ></gds-icon-chevron-double-right>
+              </gds-button>
+            </div>
+            <select @change=${this.handlePageSizeChange}>
+              ${[5, 10, 25, 50].map(
+                (size) => html`
+                  <option value=${size} ?selected=${this.pageSize === size}>
+                    ${size} per page
+                  </option>
+                `,
+              )}
+            </select>
+          </div>
         </div>
       </div>
     `
   }
 
   private getVisiblePages(pageCount: number) {
-    const delta = 2
-    const range: number[] = [] // Only numbers in initial range
-    const rangeWithDots: (number | '...')[] = []
-    let l: number | undefined
-
-    range.push(1)
-
-    for (let i = this.page - delta; i <= this.page + delta; i++) {
-      if (i < pageCount && i > 1) {
-        range.push(i)
-      }
+    // Always show first and last page
+    if (pageCount <= 7) {
+      // If total pages are 7 or less, show all pages
+      return Array.from({ length: pageCount }, (_, i) => i + 1)
     }
 
-    range.push(pageCount)
+    // Always show first page, last page, and 5 pages around current page
+    const firstPage = 1
+    const lastPage = pageCount
+    let middlePages: number[] = []
 
-    // Remove duplicates and sort
-    const uniqueRange = [...new Set(range)].sort((a, b) => a - b)
-
-    for (let i = 0; i < uniqueRange.length; i++) {
-      const current = uniqueRange[i]
-
-      if (i > 0) {
-        const prev = uniqueRange[i - 1]
-        if (current - prev === 2) {
-          rangeWithDots.push(current - 1)
-        } else if (current - prev !== 1) {
-          rangeWithDots.push('...')
-        }
-      }
-
-      rangeWithDots.push(current)
+    if (this.page <= 4) {
+      // Near the start
+      middlePages = [2, 3, 4, 5]
+      return [1, ...middlePages, '...', lastPage]
+    } else if (this.page >= pageCount - 3) {
+      // Near the end
+      middlePages = [pageCount - 4, pageCount - 3, pageCount - 2, pageCount - 1]
+      return [1, '...', ...middlePages, lastPage]
+    } else {
+      // In the middle
+      middlePages = [this.page - 1, this.page, this.page + 1]
+      return [1, '...', ...middlePages, '...', lastPage]
     }
-
-    return rangeWithDots
   }
 
   private getSortIcon(columnKey: string) {
