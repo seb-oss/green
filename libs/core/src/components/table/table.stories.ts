@@ -12,6 +12,9 @@ import '../input/input'
 const meta: Meta = {
   title: 'Components/Table',
   component: 'gds-table',
+  argTypes: {
+    ...argTablePropsFor('gds-text'),
+  },
   tags: ['autodocs'],
   parameters: {
     docs: {
@@ -77,9 +80,26 @@ export const Default: Story = {
   args: {
     columns: columns,
     data: generateMockData(100),
+    density: 'comfortable',
   },
+  argTypes: {
+    density: {
+      control: 'select',
+      options: ['comfortable', 'compact', 'spacious'],
+      description: 'Controls the spacing density of the table',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'comfortable' },
+      },
+    },
+  },
+
   render: (args) => html`
-    <gds-table .columns=${args.columns} .data=${args.data}></gds-table>
+    <gds-table
+      .columns=${args.columns}
+      .data=${args.data}
+      density=${args.density}
+    ></gds-table>
   `,
 }
 
@@ -171,4 +191,79 @@ Demonstrates different column alignments:
   render: (args) => html`
     <gds-table .columns=${args.columns} .data=${args.data}></gds-table>
   `,
+}
+
+// Add a specific story for density comparison
+export const DensityModes: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 32px;">
+      <div>
+        <h3>Compact</h3>
+        <gds-table
+          .columns=${columns}
+          .data=${generateMockData(5)}
+          density="compact"
+        ></gds-table>
+      </div>
+
+      <div>
+        <h3>Comfortable (Default)</h3>
+        <gds-table
+          .columns=${columns}
+          .data=${generateMockData(5)}
+          density="comfortable"
+        ></gds-table>
+      </div>
+
+      <div>
+        <h3>Spacious</h3>
+        <gds-table
+          .columns=${columns}
+          .data=${generateMockData(5)}
+          density="spacious"
+        ></gds-table>
+      </div>
+    </div>
+  `,
+  parameters: {
+    docs: {
+      description: {
+        story: `
+### Density Modes
+The table supports three density modes:
+- **Compact**: Minimal spacing, good for displaying large datasets
+- **Comfortable**: Default mode, balanced spacing
+- **Spacious**: More generous spacing, good for readability
+        `,
+      },
+    },
+  },
+}
+
+export const ColumnVisibility: Story = {
+  args: {
+    columns: [
+      { key: 'id', label: '#', sortable: true, align: 'right' },
+      { key: 'name', label: 'Name', sortable: true },
+      { key: 'email', label: 'Email', sortable: true },
+      { key: 'role', label: 'Role', sortable: true },
+      { key: 'status', label: 'Status', sortable: true, align: 'center' },
+      { key: 'created', label: 'Created Date', sortable: true },
+      { key: 'lastLogin', label: 'Last Login', sortable: true },
+    ],
+    data: generateMockData(20),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+### Column Visibility
+Users can show/hide columns using the column selector dropdown in the header.
+- Multiple columns can be selected/deselected
+- Column visibility state is maintained
+- Responsive design adjusts to visible columns
+        `,
+      },
+    },
+  },
 }

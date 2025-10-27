@@ -20,6 +20,13 @@ const style = css`
   td {
     padding: 8px;
     border: 1px solid #ddd;
+    font-weight: normal;
+  }
+
+  .column {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .checkbox-cell {
