@@ -1,5 +1,4 @@
-// table.component.ts
-import { css, PropertyValues } from 'lit'
+import { css } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
@@ -9,11 +8,6 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import {
-  withLayoutChildProps,
-  withMarginProps,
-  withSizeXProps,
-} from '../../utils/mixins/declarative-layout-mixins'
 
 interface TableColumn {
   key: string
@@ -21,35 +15,14 @@ interface TableColumn {
   sortable?: boolean
 }
 
-// interface TableConfig {
-//   columns: TableColumn[]
-//   pageSize: number
-//   pageSizeOptions: number[]
-// }
-// table.component.ts
-// import { css, PropertyValues } from 'lit'
-// import { property, state } from 'lit/decorators.js'
-// import { classMap } from 'lit/directives/class-map.js'
-
-// interface TableColumn {
-//   key: string;
-//   label: string;
-//   sortable: boolean;
-// }
-
-interface TableState {
-  page: number
-  pageSize: number
-  sortColumn?: string
-  sortDirection?: 'asc' | 'desc'
-  selectedRows: Set<number>
-  searchQuery: string
+interface TableColumn {
+  key: string
+  label: string
+  sortable?: boolean
 }
 
 @gdsCustomElement('gds-table')
-export class GdsTable extends withSizeXProps(
-  withMarginProps(withLayoutChildProps(GdsElement)),
-) {
+export class GdsTable extends GdsElement {
   static styles = [
     tokens,
     css`
@@ -57,68 +30,50 @@ export class GdsTable extends withSizeXProps(
         display: block;
       }
 
-      .table-container {
-        overflow-x: auto;
-      }
-
-      .table-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem;
-        gap: 1rem;
-      }
-
-      .table-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem;
-      }
-
-      .pagination-controls {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
       table {
         width: 100%;
         border-collapse: collapse;
       }
 
-      th {
-        text-align: left;
-        cursor: pointer;
-        user-select: none;
+      th,
+      td {
+        padding: 8px;
+        border: 1px solid #ddd;
       }
 
-      .sort-header {
+      .checkbox-cell {
+        width: 40px;
+        text-align: center;
+      }
+
+      .pagination {
         display: flex;
+        gap: 8px;
         align-items: center;
-        gap: 0.5rem;
+        margin-top: 16px;
+      }
+
+      .page-button {
+        padding: 4px 8px;
+        border: 1px solid #ddd;
+        background: white;
+        cursor: pointer;
+      }
+
+      .page-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .current-page {
+        background: #eee;
       }
 
       @media (max-width: 768px) {
-        .responsive-table {
-          display: block;
-        }
-
-        .responsive-table thead {
-          display: none;
-        }
-
-        .responsive-table tr {
-          display: block;
-          margin-bottom: 1rem;
-          border: 1px solid var(--gds-border-color);
-        }
-
         .responsive-table td {
           display: flex;
           justify-content: space-between;
-          padding: 0.5rem;
-          border: none;
+          padding: 8px;
         }
 
         .responsive-table td::before {
@@ -136,85 +91,105 @@ export class GdsTable extends withSizeXProps(
   data: any[] = []
 
   @state()
-  private tableState: TableState = {
-    page: 1,
-    pageSize: 10,
-    selectedRows: new Set(),
-    searchQuery: '',
+  private page = 1
+
+  @state()
+  private pageSize = 10
+
+  @state()
+  private selectedRows = new Set<number>()
+
+  @state()
+  private sortColumn?: string
+
+  @state()
+  private sortDirection: 'asc' | 'desc' = 'asc'
+
+  private getPageCount() {
+    return Math.ceil(this.filteredData.length / this.pageSize)
   }
 
-  private dataMethod?: (
-    state: TableState,
-  ) => Promise<{ data: any[]; total: number }>
+  private get filteredData() {
+    const searchInput = this.shadowRoot?.querySelector(
+      'input[type="search"]',
+    ) as HTMLInputElement
+    const query = searchInput?.value.toLowerCase() || ''
 
-  public setDataMethod(
-    method: (state: TableState) => Promise<{ data: any[]; total: number }>,
-  ) {
-    this.dataMethod = method
-    this.loadData()
-  }
+    let filtered = this.data
 
-  private async loadData() {
-    if (this.dataMethod) {
-      const response = await this.dataMethod(this.tableState)
-      this.data = response.data
-      this.dispatchEvent(new CustomEvent('data-loaded', { detail: response }))
+    if (query) {
+      filtered = this.data.filter((item) =>
+        Object.values(item).some((val) =>
+          String(val).toLowerCase().includes(query),
+        ),
+      )
     }
+
+    if (this.sortColumn) {
+      filtered = [...filtered].sort((a, b) => {
+        const aVal = String(a[this.sortColumn!])
+        const bVal = String(b[this.sortColumn!])
+        return this.sortDirection === 'asc'
+          ? aVal.localeCompare(bVal)
+          : bVal.localeCompare(aVal)
+      })
+    }
+
+    return filtered
+  }
+
+  private get paginatedData() {
+    const start = (this.page - 1) * this.pageSize
+    return this.filteredData.slice(start, start + this.pageSize)
   }
 
   render() {
+    const pageCount = this.getPageCount()
+    const visiblePages = this.getVisiblePages(pageCount)
+
     return html`
-      <div class="table-container">
-        <div class="table-header">
-          <gds-input
+      <div>
+        <div style="margin-bottom: 16px">
+          <input
             type="search"
             placeholder="Search..."
             @input=${this.handleSearch}
-            value=${this.tableState.searchQuery}
-          ></gds-input>
+          />
         </div>
 
         <table class=${classMap({ 'responsive-table': true })}>
           <thead>
             <tr>
-              <th>
-                <gds-checkbox
+              <th class="checkbox-cell">
+                <input
+                  type="checkbox"
                   @change=${this.handleSelectAll}
-                  ?checked=${this.tableState.selectedRows.size ===
-                  this.data.length}
-                ></gds-checkbox>
+                  .checked=${this.selectedRows.size ===
+                  this.paginatedData.length}
+                />
               </th>
               ${this.columns.map(
                 (column) => html`
                   <th @click=${() => this.handleSort(column.key)}>
-                    <div class="sort-header">
-                      ${column.label}
-                      ${column.sortable
-                        ? html`
-                            <gds-icon
-                              name=${this.tableState.sortColumn === column.key
-                                ? this.tableState.sortDirection === 'asc'
-                                  ? 'arrow-up'
-                                  : 'arrow-down'
-                                : 'arrow-both'}
-                            ></gds-icon>
-                          `
-                        : ''}
-                    </div>
+                    ${column.label}
+                    ${column.sortable
+                      ? html` <span>${this.getSortIcon(column.key)}</span> `
+                      : ''}
                   </th>
                 `,
               )}
             </tr>
           </thead>
           <tbody>
-            ${this.data.map(
+            ${this.paginatedData.map(
               (row, index) => html`
                 <tr>
-                  <td>
-                    <gds-checkbox
+                  <td class="checkbox-cell">
+                    <input
+                      type="checkbox"
+                      .checked=${this.selectedRows.has(index)}
                       @change=${(e: Event) => this.handleRowSelect(index, e)}
-                      ?checked=${this.tableState.selectedRows.has(index)}
-                    ></gds-checkbox>
+                    />
                   </td>
                   ${this.columns.map(
                     (column) => html`
@@ -227,127 +202,164 @@ export class GdsTable extends withSizeXProps(
           </tbody>
         </table>
 
-        <div class="table-footer">
-          <div class="pagination-info">
-            Showing ${(this.tableState.page - 1) * this.tableState.pageSize + 1}
-            to
-            ${Math.min(
-              this.tableState.page * this.tableState.pageSize,
-              this.data.length,
+        <div class="pagination">
+          <button
+            class="page-button"
+            ?disabled=${this.page === 1}
+            @click=${() => (this.page = 1)}
+          >
+            First
+          </button>
+
+          <button
+            class="page-button"
+            ?disabled=${this.page === 1}
+            @click=${() => this.page--}
+          >
+            Previous
+          </button>
+
+          ${visiblePages.map(
+            (p) => html`
+              ${p === '...'
+                ? html`<span class="page-dots">...</span>`
+                : html`
+                    <button
+                      class="page-button ${this.page === p
+                        ? 'current-page'
+                        : ''}"
+                      @click=${() => (this.page = p as number)}
+                    >
+                      ${p}
+                    </button>
+                  `}
+            `,
+          )}
+
+          <button
+            class="page-button"
+            ?disabled=${this.page === pageCount}
+            @click=${() => this.page++}
+          >
+            Next
+          </button>
+
+          <button
+            class="page-button"
+            ?disabled=${this.page === pageCount}
+            @click=${() => (this.page = pageCount)}
+          >
+            Last
+          </button>
+
+          <select @change=${this.handlePageSizeChange}>
+            ${[5, 10, 25, 50].map(
+              (size) => html`
+                <option value=${size} ?selected=${this.pageSize === size}>
+                  ${size} per page
+                </option>
+              `,
             )}
-            of ${this.data.length} entries
-          </div>
-
-          <div class="pagination-controls">
-            <gds-button
-              size="small"
-              rank="secondary"
-              ?disabled=${this.tableState.page === 1}
-              @click=${() => this.handlePageChange(this.tableState.page - 1)}
-              >Previous</gds-button
-            >
-
-            <gds-dropdown
-              size="small"
-              .value=${this.tableState.pageSize}
-              @change=${this.handlePageSizeChange}
-            >
-              <gds-option value="5">5 per page</gds-option>
-              <gds-option value="10">10 per page</gds-option>
-              <gds-option value="25">25 per page</gds-option>
-              <gds-option value="50">50 per page</gds-option>
-            </gds-dropdown>
-
-            <gds-button
-              size="small"
-              rank="secondary"
-              ?disabled=${this.tableState.page * this.tableState.pageSize >=
-              this.data.length}
-              @click=${() => this.handlePageChange(this.tableState.page + 1)}
-              >Next</gds-button
-            >
-          </div>
+          </select>
         </div>
       </div>
     `
   }
 
-  private handleSearch(e: Event) {
-    const input = e.target as HTMLInputElement
-    this.tableState = {
-      ...this.tableState,
-      searchQuery: input.value,
-      page: 1,
+  private getVisiblePages(pageCount: number) {
+    const delta = 2
+    const range: number[] = [] // Only numbers in initial range
+    const rangeWithDots: (number | '...')[] = []
+    let l: number | undefined
+
+    range.push(1)
+
+    for (let i = this.page - delta; i <= this.page + delta; i++) {
+      if (i < pageCount && i > 1) {
+        range.push(i)
+      }
     }
-    this.loadData()
+
+    range.push(pageCount)
+
+    // Remove duplicates and sort
+    const uniqueRange = [...new Set(range)].sort((a, b) => a - b)
+
+    for (let i = 0; i < uniqueRange.length; i++) {
+      const current = uniqueRange[i]
+
+      if (i > 0) {
+        const prev = uniqueRange[i - 1]
+        if (current - prev === 2) {
+          rangeWithDots.push(current - 1)
+        } else if (current - prev !== 1) {
+          rangeWithDots.push('...')
+        }
+      }
+
+      rangeWithDots.push(current)
+    }
+
+    return rangeWithDots
+  }
+
+  private getSortIcon(columnKey: string) {
+    if (this.sortColumn !== columnKey) return '↕'
+    return this.sortDirection === 'asc' ? '↑' : '↓'
+  }
+
+  private handleSearch() {
+    this.page = 1
+    this.requestUpdate()
   }
 
   private handleSort(columnKey: string) {
     const column = this.columns.find((col) => col.key === columnKey)
     if (!column?.sortable) return
 
-    this.tableState = {
-      ...this.tableState,
-      sortColumn: columnKey,
-      sortDirection:
-        this.tableState.sortColumn === columnKey &&
-        this.tableState.sortDirection === 'asc'
-          ? 'desc'
-          : 'asc',
+    if (this.sortColumn === columnKey) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc'
+    } else {
+      this.sortColumn = columnKey
+      this.sortDirection = 'asc'
     }
-    this.loadData()
+
+    this.page = 1
+    this.requestUpdate()
   }
 
-  private handlePageChange(page: number) {
-    this.tableState = {
-      ...this.tableState,
-      page,
-    }
-    this.loadData()
-  }
-
-  private handlePageSizeChange(e: CustomEvent) {
-    this.tableState = {
-      ...this.tableState,
-      pageSize: Number(e.detail.value),
-      page: 1,
-    }
-    this.loadData()
+  private handlePageSizeChange(e: Event) {
+    this.pageSize = Number((e.target as HTMLSelectElement).value)
+    this.page = 1
+    this.requestUpdate()
   }
 
   private handleSelectAll(e: Event) {
-    const checkbox = e.target as HTMLInputElement
-    this.tableState = {
-      ...this.tableState,
-      selectedRows: checkbox.checked
-        ? new Set(this.data.map((_, index) => index))
-        : new Set(),
-    }
+    const checked = (e.target as HTMLInputElement).checked
+    this.selectedRows = checked
+      ? new Set(this.paginatedData.map((_, i) => i))
+      : new Set()
+
     this.dispatchEvent(
       new CustomEvent('selection-change', {
-        detail: { selectedRows: Array.from(this.tableState.selectedRows) },
+        detail: { selectedRows: Array.from(this.selectedRows) },
       }),
     )
   }
 
   private handleRowSelect(index: number, e: Event) {
-    const checkbox = e.target as HTMLInputElement
-    const newSelectedRows = new Set(this.tableState.selectedRows)
+    const checked = (e.target as HTMLInputElement).checked
 
-    if (checkbox.checked) {
-      newSelectedRows.add(index)
+    if (checked) {
+      this.selectedRows.add(index)
     } else {
-      newSelectedRows.delete(index)
+      this.selectedRows.delete(index)
     }
 
-    this.tableState = {
-      ...this.tableState,
-      selectedRows: newSelectedRows,
-    }
-
+    this.requestUpdate()
     this.dispatchEvent(
       new CustomEvent('selection-change', {
-        detail: { selectedRows: Array.from(newSelectedRows) },
+        detail: { selectedRows: Array.from(this.selectedRows) },
       }),
     )
   }
