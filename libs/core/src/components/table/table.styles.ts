@@ -5,6 +5,12 @@ const style = css`
     display: block;
   }
 
+  .gds-table {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;
@@ -21,7 +27,8 @@ const style = css`
     text-align: center;
   }
 
-  .footer {
+  .footer,
+  .header {
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -33,12 +40,12 @@ const style = css`
       gap: 20px;
     }
   }
+
   /** Pagination stuff */
   .pagination {
     display: flex;
     gap: 8px;
     align-items: center;
-    padding: 20px;
   }
 
   .page-button:disabled {
@@ -57,6 +64,19 @@ const style = css`
       content: attr(data-label);
       font-weight: bold;
     }
+  }
+
+  .text-right {
+    text-align: right;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  tr.selected,
+  td.selected {
+    background-color: #ccc;
   }
 `
 export default style

@@ -32,21 +32,45 @@ A responsive table component with the following features:
 export default meta
 type Story = StoryObj
 
-// Generate mock data
+// Update mock data generator to include amount
 const generateMockData = (count: number) =>
   Array.from({ length: count }, (_, i) => ({
     id: i + 1,
     name: `User ${i + 1}`,
     email: `user${i + 1}@example.com`,
-    role: ['Admin', 'User', 'Editor'][i % 3],
+    amount: Math.floor(Math.random() * 10000),
     status: ['Active', 'Inactive'][i % 2],
   }))
 
 const columns = [
-  { key: 'name', label: 'Name', sortable: true },
-  { key: 'email', label: 'Email', sortable: true },
-  { key: 'role', label: 'Role', sortable: true },
-  { key: 'status', label: 'Status', sortable: true },
+  {
+    key: 'id',
+    label: '#',
+    sortable: true,
+    align: 'right',
+  },
+  {
+    key: 'name',
+    label: 'Name',
+    sortable: true,
+  },
+  {
+    key: 'email',
+    label: 'Email',
+    sortable: true,
+  },
+  {
+    key: 'amount',
+    label: 'Amount',
+    sortable: true,
+    align: 'right',
+  },
+  {
+    key: 'status',
+    label: 'Status',
+    sortable: true,
+    align: 'center',
+  },
 ]
 
 export const Default: Story = {
@@ -123,5 +147,28 @@ export const WithSelectionHandler: Story = {
         }}
       ></gds-table>
     </div>
+  `,
+}
+
+export const ColumnAlignment: Story = {
+  args: {
+    columns: columns,
+    data: generateMockData(20),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+Demonstrates different column alignments:
+- ID: right-aligned (for numbers)
+- Name & Email: left-aligned (default for text)
+- Amount: right-aligned (for currency/numbers)
+- Status: center-aligned
+        `,
+      },
+    },
+  },
+  render: (args) => html`
+    <gds-table .columns=${args.columns} .data=${args.data}></gds-table>
   `,
 }

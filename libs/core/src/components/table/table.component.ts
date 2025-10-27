@@ -1,6 +1,7 @@
 import { css } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
@@ -9,16 +10,21 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsButton } from '../button/button.component'
+import { GdsDropdown } from '../dropdown/dropdown.component'
 import { IconChevronDoubleLeft } from '../icon/icons/chevron-double-left.component'
 import { IconChevronDoubleRight } from '../icon/icons/chevron-double-right.component'
 import { IconChevronLeft } from '../icon/icons/chevron-left.component'
 import { IconChevronRight } from '../icon/icons/chevron-right.component'
+import { IconMagnifyingGlass } from '../icon/icons/magnifying-glass.component'
+import { IconSort } from '../icon/icons/sort.component'
+import { GdsInput } from '../input/input.component'
 import TableStyles from './table.styles'
 
 interface TableColumn {
   key: string
   label: string
   sortable?: boolean
+  align?: 'left' | 'right' | 'center'
 }
 
 interface TableColumn {
@@ -30,10 +36,14 @@ interface TableColumn {
 @gdsCustomElement('gds-table', {
   dependsOn: [
     GdsButton,
+    GdsInput,
+    GdsDropdown,
     IconChevronLeft,
     IconChevronDoubleLeft,
     IconChevronRight,
     IconChevronDoubleRight,
+    IconMagnifyingGlass,
+    IconSort,
   ],
 })
 export class GdsTable extends GdsElement {
@@ -60,16 +70,15 @@ export class GdsTable extends GdsElement {
   @state()
   private sortDirection: 'asc' | 'desc' = 'asc'
 
+  @state()
+  private searchQuery = ''
+
   private getPageCount() {
     return Math.ceil(this.filteredData.length / this.pageSize)
   }
 
   private get filteredData() {
-    const searchInput = this.shadowRoot?.querySelector(
-      'input[type="search"]',
-    ) as HTMLInputElement
-    const query = searchInput?.value.toLowerCase() || ''
-
+    const query = this.searchQuery.toLowerCase()
     let filtered = this.data
 
     if (query) {
@@ -103,13 +112,25 @@ export class GdsTable extends GdsElement {
     const visiblePages = this.getVisiblePages(pageCount)
 
     return html`
-      <div>
-        <div style="margin-bottom: 16px">
-          <input
-            type="search"
-            placeholder="Search..."
-            @input=${this.handleSearch}
-          />
+      <div class="gds-table">
+        <div class="header">
+          <div class="lead">
+            <gds-input
+              type="text"
+              size="small"
+              plain
+              clearable
+              placeholder="Search..."
+              .value=${this.searchQuery}
+              @input=${this.handleSearch}
+              @gds-input-cleared=${this.handleSearchClear}
+            >
+              <gds-icon-magnifying-glass
+                slot="lead"
+              ></gds-icon-magnifying-glass>
+            </gds-input>
+          </div>
+          <div class="trail">Trail content</div>
         </div>
 
         <table class=${classMap({ 'responsive-table': true })}>
@@ -123,12 +144,27 @@ export class GdsTable extends GdsElement {
                   this.paginatedData.length}
                 />
               </th>
+
               ${this.columns.map(
                 (column) => html`
-                  <th @click=${() => this.handleSort(column.key)}>
+                  <th
+                    class=${classMap({
+                      'text-right': column.align === 'right',
+                      'text-center': column.align === 'center',
+                    })}
+                  >
                     ${column.label}
                     ${column.sortable
-                      ? html` <span>${this.getSortIcon(column.key)}</span> `
+                      ? html`
+                          <gds-button
+                            size="xs"
+                            rank="tertiary"
+                            ?disabled=${!column.sortable}
+                            @click=${() => this.handleSort(column.key)}
+                          >
+                            <gds-icon-sort size="s"></gds-icon-sort>
+                          </gds-button>
+                        `
                       : ''}
                   </th>
                 `,
@@ -148,7 +184,19 @@ export class GdsTable extends GdsElement {
                   </td>
                   ${this.columns.map(
                     (column) => html`
-                      <td data-label=${column.label}>${row[column.key]}</td>
+                      <!-- <td data-label=${column.label}>${row[
+                        column.key
+                      ]}</td> -->
+                      <td
+                        data-label=${column.label}
+                        class=${classMap({
+                          'text-right': column.align === 'right',
+                          'text-center': column.align === 'center',
+                          selected: this.selectedRows.has(index),
+                        })}
+                      >
+                        ${row[column.key]}
+                      </td>
                     `,
                   )}
                 </tr>
@@ -167,17 +215,23 @@ export class GdsTable extends GdsElement {
                 @click=${() => (this.page = 1)}
               >
                 <gds-icon-chevron-double-left
-                  size="m"
+                  stroke="2"
+                  size="l"
                 ></gds-icon-chevron-double-left>
               </gds-button>
 
               <gds-button
                 size="xs"
-                rank="secondary"
+                rank="tertiary"
                 ?disabled=${this.page === 1}
                 @click=${() => this.page--}
               >
-                <gds-icon-chevron-left size="m"></gds-icon-chevron-left>
+                <gds-icon-chevron-left
+                  stroke="2"
+                  size="l"
+                  slot="lead"
+                ></gds-icon-chevron-left>
+                Prev
               </gds-button>
 
               ${visiblePages.map(
@@ -207,7 +261,12 @@ export class GdsTable extends GdsElement {
                 ?disabled=${this.page === pageCount}
                 @click=${() => this.page++}
               >
-                <gds-icon-chevron-right size="m"></gds-icon-chevron-right>
+                Next
+                <gds-icon-chevron-right
+                  slot="trail"
+                  stroke="2"
+                  size="l"
+                ></gds-icon-chevron-right>
               </gds-button>
 
               <gds-button
@@ -217,19 +276,25 @@ export class GdsTable extends GdsElement {
                 @click=${() => (this.page = pageCount)}
               >
                 <gds-icon-chevron-double-right
-                  size="m"
+                  stroke="2"
+                  size="l"
                 ></gds-icon-chevron-double-right>
               </gds-button>
             </div>
-            <select @change=${this.handlePageSizeChange}>
+
+            <gds-dropdown
+              plain
+              size="small"
+              @change=${this.handlePageSizeChange}
+            >
               ${[5, 10, 25, 50].map(
                 (size) => html`
-                  <option value=${size} ?selected=${this.pageSize === size}>
+                  <gds-option value=${size} ?selected=${this.pageSize === size}>
                     ${size} per page
-                  </option>
+                  </gds-option>
                 `,
               )}
-            </select>
+            </gds-dropdown>
           </div>
         </div>
       </div>
@@ -237,27 +302,20 @@ export class GdsTable extends GdsElement {
   }
 
   private getVisiblePages(pageCount: number) {
-    // Always show first and last page
     if (pageCount <= 7) {
-      // If total pages are 7 or less, show all pages
       return Array.from({ length: pageCount }, (_, i) => i + 1)
     }
 
-    // Always show first page, last page, and 5 pages around current page
-    const firstPage = 1
     const lastPage = pageCount
     let middlePages: number[] = []
 
     if (this.page <= 4) {
-      // Near the start
       middlePages = [2, 3, 4, 5]
       return [1, ...middlePages, '...', lastPage]
     } else if (this.page >= pageCount - 3) {
-      // Near the end
       middlePages = [pageCount - 4, pageCount - 3, pageCount - 2, pageCount - 1]
       return [1, '...', ...middlePages, lastPage]
     } else {
-      // In the middle
       middlePages = [this.page - 1, this.page, this.page + 1]
       return [1, '...', ...middlePages, '...', lastPage]
     }
@@ -268,7 +326,15 @@ export class GdsTable extends GdsElement {
     return this.sortDirection === 'asc' ? '↑' : '↓'
   }
 
-  private handleSearch() {
+  private handleSearch(e: Event) {
+    const input = e.target as HTMLInputElement
+    this.searchQuery = input.value
+    this.page = 1
+    this.requestUpdate()
+  }
+
+  private handleSearchClear() {
+    this.searchQuery = ''
     this.page = 1
     this.requestUpdate()
   }
@@ -288,8 +354,8 @@ export class GdsTable extends GdsElement {
     this.requestUpdate()
   }
 
-  private handlePageSizeChange(e: Event) {
-    this.pageSize = Number((e.target as HTMLSelectElement).value)
+  private handlePageSizeChange(e: CustomEvent<{ value: string }>) {
+    this.pageSize = Number(e.detail.value)
     this.page = 1
     this.requestUpdate()
   }
