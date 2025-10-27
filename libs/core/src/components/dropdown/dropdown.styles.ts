@@ -11,6 +11,12 @@ const style = css`
 
     #field::part(_base) {
       cursor: pointer;
+      block-size: auto;
+    }
+
+    #clear-btn {
+      margin-top: calc(-1 * var(--gds-sys-space-xs));
+      margin-bottom: calc(-1 * var(--gds-sys-space-xs));
     }
 
     button#trigger {
