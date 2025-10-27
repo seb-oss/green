@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.12.2
+
+### Patch Changes
+
+- effeb0e: **Dropdown:** Fix styling regression where height of field was no longer adapting to custom trigger content
+
 ## 2.12.1
 
 ### Patch Changes
