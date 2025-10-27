@@ -13,6 +13,7 @@ import {
 
 export const SEBIO = () => {
   const context = useOf('story')
+  const isPattern = context.story.title.startsWith('Patterns/')
 
   const componentName = context.story.title
     .replace('Components/', '')
@@ -29,8 +30,7 @@ export const SEBIO = () => {
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '')
 
-  const sebioUrl = `https://seb.io/component/${slug}`
-
+  const sebioUrl = `https://seb.io/${isPattern ? 'pattern' : 'component'}/${slug}`
   return (
     <GdsTheme designVersion="2023">
       <GdsCard

@@ -101,6 +101,8 @@ export class GdsImg extends withPositioningProps(
       alt="${ifDefined(this.alt)}"
       srcset=${ifDefined(this.srcset)}
       sizes=${ifDefined(this.sizes)}
+      loading=${ifDefined(this.loading)}
+      decoding=${ifDefined(this.decoding)}
     />`
   }
 }

@@ -17,6 +17,7 @@ interface BreadcrumbsProps {
   slug: string
   title: string
   section: 'overview' | 'ux-text' | 'accessibility' | 'code' | 'faq'
+  type: 'component' | 'pattern'
 }
 
 const BreadcrumbLink = ({ item }: { item: BreadcrumbItem }) => (
@@ -48,6 +49,7 @@ export default function Breadcrumbs({
   slug,
   title,
   section,
+  type,
 }: BreadcrumbsProps) {
   const breadcrumbItems = useMemo(
     () => [
@@ -57,16 +59,17 @@ export default function Breadcrumbs({
         iconName: 'IconHomeOpen',
       },
       {
-        label: 'Components',
-        href: '/components',
-        iconName: 'IconSquareGridCircle',
+        label: type === 'pattern' ? 'Patterns' : 'Components',
+        href: type === 'pattern' ? '/patterns' : '/components',
+        iconName:
+          type === 'pattern' ? 'IconCirclesThree' : 'IconSquareGridCircle',
       },
       {
         label: title,
-        href: `/component/${slug}`,
+        href: `/${type}/${slug}`,
       },
     ],
-    [slug, title],
+    [slug, title, type],
   )
 
   return (

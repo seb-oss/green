@@ -15,6 +15,14 @@
         "experimentalVmModule": true
       }
     },
+    "test-update-snapshot": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["nx run tokens:test --updateSnapshot"],
+        "parallel": false
+      }
+    },
+
     "build": {
       "executor": "nx:run-commands",
       "options": {
