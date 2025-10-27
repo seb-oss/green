@@ -98,6 +98,10 @@
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
+    },
+    "publish-snapshot": {
+      "executor": "@sebgroup/repo-tools:publish-snapshot",
+      "options": {}
     }
   }
 }
