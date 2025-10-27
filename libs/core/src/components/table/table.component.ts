@@ -1,4 +1,3 @@
-import { css } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
@@ -159,6 +158,9 @@ export class GdsTable extends GdsElement {
                 size="small"
                 @change=${this.handleColumnVisibility}
               >
+                <gds-option value="" isplaceholder=""
+                  >This is a placeholder</gds-option
+                >
                 ${this.columns.map(
                   (column) => html`
                     <gds-option
@@ -206,7 +208,7 @@ export class GdsTable extends GdsElement {
                         ${column.sortable
                           ? html`
                               <gds-button
-                                size="xs"
+                                size="small"
                                 rank="tertiary"
                                 ?disabled=${!column.sortable}
                                 @click=${() => this.handleSort(column.key)}
@@ -273,43 +275,39 @@ export class GdsTable extends GdsElement {
             <slot name="footer-trail">
               <div class="pagination">
                 <gds-button
-                  size="xs"
-                  rank="secondary"
+                  size="small"
+                  rank="tertiary"
                   ?disabled=${this.page === 1}
                   @click=${() => (this.page = 1)}
                 >
                   <gds-icon-chevron-double-left
-                    stroke="2"
                     size="m"
                   ></gds-icon-chevron-double-left>
                 </gds-button>
 
                 <gds-button
-                  size="xs"
+                  size="small"
                   rank="tertiary"
                   ?disabled=${this.page === 1}
                   @click=${() => this.page--}
                 >
-                  <gds-icon-chevron-left
-                    stroke="2"
-                    size="m"
-                  ></gds-icon-chevron-left>
+                  <gds-icon-chevron-left size="m"></gds-icon-chevron-left>
                 </gds-button>
 
                 ${visiblePages.map(
                   (p) => html`
                     ${p === '...'
                       ? html`<gds-button
-                          size="xs"
+                          size="small"
                           rank="tertiary"
+                          width="40px"
                           inert
-                          disabled
                           >...</gds-button
                         >`
                       : html`
                           <gds-button
-                            size="xs"
-                            rank="${this.page === p ? 'secondary' : 'tertiary'}"
+                            size="small"
+                            rank="${this.page === p ? 'primary' : 'tertiary'}"
                             class="page-unit page-button ${this.page === p
                               ? 'current-page'
                               : ''}"
@@ -323,28 +321,51 @@ export class GdsTable extends GdsElement {
 
                 <gds-button
                   rank="tertiary"
-                  size="xs"
+                  size="small"
                   ?disabled=${this.page === pageCount}
                   @click=${() => this.page++}
                 >
-                  <gds-icon-chevron-right
-                    stroke="2"
-                    size="m"
-                  ></gds-icon-chevron-right>
+                  <gds-icon-chevron-right size="m"></gds-icon-chevron-right>
                 </gds-button>
 
                 <gds-button
-                  rank="secondary"
-                  size="xs"
+                  rank="tertiary"
+                  size="small"
                   ?disabled=${this.page === pageCount}
                   @click=${() => (this.page = pageCount)}
                 >
                   <gds-icon-chevron-double-right
-                    stroke="2"
                     size="m"
                   ></gds-icon-chevron-double-right>
                 </gds-button>
               </div>
+
+              <!-- <gds-context-menu>
+                <gds-flex
+                  slot="trigger"
+                  align-items="center"
+                  width="max-content"
+                  gap="s"
+                >
+                  Items per page
+                  <gds-button rank="secondary" rank="secondary" size="small">
+                    10
+                    <gds-icon-chevron-bottom
+                      slot="trail"
+                    ></gds-icon-chevron-bottom>
+                  </gds-button>
+                </gds-flex>
+                ${[5, 10, 25, 50].map(
+                (size) => html`
+                  <gds-menu-item
+                    value=${size}
+                    ?selected=${this.pageSize === size}
+                  >
+                    ${size} per page
+                  </gds-menu-item>
+                `,
+              )}
+              </gds-context-menu> -->
 
               <gds-dropdown
                 plain
