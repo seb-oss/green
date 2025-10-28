@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.12.3
+
+### Patch Changes
+
+- eee97dc: **GdsMenuHeading:** (React) add missing export
+
 ## 2.12.2
 
 ### Patch Changes
