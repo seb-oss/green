@@ -320,11 +320,6 @@ export class GdsTable extends GdsElement {
     }
   }
 
-  private getSortIcon(columnKey: string) {
-    if (this.sortColumn !== columnKey) return '↕'
-    return this.sortDirection === 'asc' ? '↑' : '↓'
-  }
-
   private handleSearch(e: Event) {
     const input = e.target as HTMLInputElement
     this.searchQuery = input.value
@@ -356,12 +351,6 @@ export class GdsTable extends GdsElement {
   private handleColumnVisibility(e: CustomEvent) {
     const selectedColumns = e.detail.value as string[]
     this.visibleColumns = new Set(selectedColumns)
-    this.requestUpdate()
-  }
-
-  private handlePageSizeChange(e: CustomEvent<{ value: string }>) {
-    this.pageSize = Number(e.detail.value)
-    this.page = 1
     this.requestUpdate()
   }
 
