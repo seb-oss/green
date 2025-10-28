@@ -9,6 +9,19 @@ import './table'
 import '../dropdown/dropdown'
 import '../input/input'
 
+import { TableRequest, TableResponse } from './table.types'
+
+interface MockData {
+  id: number
+  name: string
+  email: string
+  role: string
+  status: string
+  amount: number
+  lastLogin: string
+  [key: string]: any
+}
+
 const meta: Meta = {
   title: 'Components/Table',
   component: 'gds-table',
@@ -35,212 +48,58 @@ A responsive table component with the following features:
 export default meta
 type Story = StoryObj
 
-// Update mock data generator to include amount
-const generateMockData = (count: number) =>
-  Array.from({ length: count }, (_, i) => ({
+// Use the interface in your mock API
+const mockApi = async (
+  request: TableRequest,
+): Promise<TableResponse<MockData>> => {
+  await new Promise((resolve) => setTimeout(resolve, 1000))
+
+  if (Math.random() < 0.1) {
+    throw new Error('Random server error')
+  }
+
+  const allData: MockData[] = Array.from({ length: 100 }, (_, i) => ({
     id: i + 1,
     name: `User ${i + 1}`,
     email: `user${i + 1}@example.com`,
-    amount: Math.floor(Math.random() * 10000),
+    role: ['Admin', 'User', 'Editor'][i % 3],
     status: ['Active', 'Inactive'][i % 2],
+    amount: Math.floor(Math.random() * 10000),
+    lastLogin: new Date(Date.now() - Math.random() * 10000000000).toISOString(),
   }))
 
-const columns = [
-  {
-    key: 'id',
-    label: '#',
-    sortable: true,
-    align: 'right',
-  },
-  {
-    key: 'name',
-    label: 'Name',
-    sortable: true,
-  },
-  {
-    key: 'email',
-    label: 'Email',
-    sortable: true,
-  },
-  {
-    key: 'amount',
-    label: 'Amount',
-    sortable: true,
-    align: 'right',
-  },
-  {
-    key: 'status',
-    label: 'Status',
-    sortable: true,
-    align: 'center',
-  },
-]
+  let filtered = [...allData]
 
+  if (request.searchQuery) {
+    const query = request.searchQuery.toLowerCase()
+    filtered = filtered.filter((item) =>
+      Object.values(item).some((val) =>
+        String(val).toLowerCase().includes(query),
+      ),
+    )
+  }
+
+  if (request.sortColumn) {
+    filtered.sort((a, b) => {
+      // Now TypeScript knows these properties exist
+      const aVal = String(a[request.sortColumn as keyof MockData])
+      const bVal = String(b[request.sortColumn as keyof MockData])
+      return request.sortDirection === 'asc'
+        ? aVal.localeCompare(bVal)
+        : bVal.localeCompare(aVal)
+    })
+  }
+
+  const start = (request.page - 1) * request.pageSize
+  const paginatedData = filtered.slice(start, start + request.pageSize)
+
+  return {
+    data: paginatedData,
+    total: filtered.length,
+  }
+}
+// table.stories.ts
 export const Default: Story = {
-  args: {
-    columns: columns,
-    data: generateMockData(100),
-    density: 'comfortable',
-  },
-  argTypes: {
-    density: {
-      control: 'select',
-      options: ['comfortable', 'compact', 'spacious'],
-      description: 'Controls the spacing density of the table',
-      table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'comfortable' },
-      },
-    },
-  },
-
-  render: (args) => html`
-    <gds-table
-      .columns=${args.columns}
-      .data=${args.data}
-      density=${args.density}
-    ></gds-table>
-  `,
-}
-
-export const SmallDataSet: Story = {
-  args: {
-    columns: columns,
-    data: generateMockData(5),
-  },
-  render: (args) => html`
-    <gds-table .columns=${args.columns} .data=${args.data}></gds-table>
-  `,
-}
-
-export const LargeDataSet: Story = {
-  args: {
-    columns: columns,
-    data: generateMockData(1000),
-  },
-  render: (args) => html`
-    <gds-table .columns=${args.columns} .data=${args.data}></gds-table>
-  `,
-}
-
-export const CustomColumns: Story = {
-  args: {
-    columns: [
-      { key: 'id', label: '#', sortable: true },
-      { key: 'name', label: 'Full Name', sortable: true },
-      { key: 'email', label: 'Contact Email', sortable: true },
-    ],
-    data: generateMockData(50),
-  },
-  render: (args) => html`
-    <gds-table .columns=${args.columns} .data=${args.data}></gds-table>
-  `,
-}
-
-export const NonSortableColumns: Story = {
-  args: {
-    columns: columns.map((col) => ({ ...col, sortable: false })),
-    data: generateMockData(50),
-  },
-  render: (args) => html`
-    <gds-table .columns=${args.columns} .data=${args.data}></gds-table>
-  `,
-}
-
-// Example of handling selection events
-export const WithSelectionHandler: Story = {
-  args: {
-    columns: columns,
-    data: generateMockData(20),
-  },
-  render: (args) => html`
-    <div>
-      <p id="selection-info">No rows selected</p>
-      <gds-table
-        .columns=${args.columns}
-        .data=${args.data}
-        @selection-change=${(e: CustomEvent) => {
-          const info = document.getElementById('selection-info')
-          if (info) {
-            info.textContent = `Selected rows: ${e.detail.selectedRows.length}`
-          }
-        }}
-      ></gds-table>
-    </div>
-  `,
-}
-
-export const ColumnAlignment: Story = {
-  args: {
-    columns: columns,
-    data: generateMockData(20),
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: `
-Demonstrates different column alignments:
-- ID: right-aligned (for numbers)
-- Name & Email: left-aligned (default for text)
-- Amount: right-aligned (for currency/numbers)
-- Status: center-aligned
-        `,
-      },
-    },
-  },
-  render: (args) => html`
-    <gds-table .columns=${args.columns} .data=${args.data}></gds-table>
-  `,
-}
-
-// Add a specific story for density comparison
-export const DensityModes: Story = {
-  render: () => html`
-    <div style="display: flex; flex-direction: column; gap: 32px;">
-      <div>
-        <h3>Compact</h3>
-        <gds-table
-          .columns=${columns}
-          .data=${generateMockData(5)}
-          density="compact"
-        ></gds-table>
-      </div>
-
-      <div>
-        <h3>Comfortable (Default)</h3>
-        <gds-table
-          .columns=${columns}
-          .data=${generateMockData(5)}
-          density="comfortable"
-        ></gds-table>
-      </div>
-
-      <div>
-        <h3>Spacious</h3>
-        <gds-table
-          .columns=${columns}
-          .data=${generateMockData(5)}
-          density="spacious"
-        ></gds-table>
-      </div>
-    </div>
-  `,
-  parameters: {
-    docs: {
-      description: {
-        story: `
-### Density Modes
-The table supports three density modes:
-- **Compact**: Minimal spacing, good for displaying large datasets
-- **Comfortable**: Default mode, balanced spacing
-- **Spacious**: More generous spacing, good for readability
-        `,
-      },
-    },
-  },
-}
-
-export const ColumnVisibility: Story = {
   args: {
     columns: [
       { key: 'id', label: '#', sortable: true, align: 'right' },
@@ -248,22 +107,22 @@ export const ColumnVisibility: Story = {
       { key: 'email', label: 'Email', sortable: true },
       { key: 'role', label: 'Role', sortable: true },
       { key: 'status', label: 'Status', sortable: true, align: 'center' },
-      { key: 'created', label: 'Created Date', sortable: true },
+      { key: 'amount', label: 'Amount', sortable: true, align: 'right' },
       { key: 'lastLogin', label: 'Last Login', sortable: true },
     ],
-    data: generateMockData(20),
+    density: 'comfortable',
+    dataProvider: mockApi,
   },
-  parameters: {
-    docs: {
-      description: {
-        story: `
-### Column Visibility
-Users can show/hide columns using the column selector dropdown in the header.
-- Multiple columns can be selected/deselected
-- Column visibility state is maintained
-- Responsive design adjusts to visible columns
-        `,
-      },
-    },
-  },
+  render: (args) => html`
+    <gds-table
+      .columns=${args.columns}
+      .dataProvider=${args.dataProvider}
+      density=${args.density}
+      @data-loaded=${(e: CustomEvent) => console.log('Data loaded:', e.detail)}
+      @data-error=${(e: CustomEvent) =>
+        console.error('Error loading data:', e.detail)}
+      @selection-change=${(e: CustomEvent) =>
+        console.log('Selection changed:', e.detail)}
+    ></gds-table>
+  `,
 }
