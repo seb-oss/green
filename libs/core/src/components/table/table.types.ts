@@ -34,3 +34,15 @@ export interface TableResponse<T> {
 }
 
 export type TableDensity = 'comfortable' | 'compact' | 'spacious'
+
+// Caching
+
+export interface CacheEntry<T> {
+  data: T[]
+  total: number
+  timestamp: number
+}
+
+export interface TableCache<T> {
+  [key: string]: CacheEntry<T>
+}

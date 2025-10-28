@@ -73,5 +73,48 @@ const style = css`
   td.selected {
     background-color: #ccc;
   }
+
+  /** Loading and stuff */
+
+  .skeleton-row td {
+    padding: 8px;
+  }
+
+  .skeleton-cell {
+    height: 20px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #eee 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+  }
+
+  .skeleton-checkbox {
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #eee 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+  }
+
+  @keyframes skeleton-loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
 `
 export default style

@@ -16,6 +16,8 @@ import { GdsInput } from '../input/input.component'
 import { GdsPagination } from '../pagination/pagination.component'
 import TableStyles from './table.styles'
 import {
+  CacheEntry,
+  TableCache,
   TableColumn,
   TableDensity,
   TableRequest,
@@ -40,6 +42,12 @@ import {
 })
 export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
   static styles = [tokens, TableStyles]
+
+  private cache: TableCache<T> = {}
+  private cacheDuration = 5 * 60 * 1000
+
+  @state()
+  private skeletonRows = 10
 
   @property({ type: Array })
   columns: TableColumn[] = []
@@ -79,8 +87,31 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
     await this.loadData()
   }
 
+  private getCacheKey(): string {
+    return JSON.stringify({
+      page: this.tableState.page,
+      pageSize: this.tableState.pageSize,
+      sortColumn: this.tableState.sortColumn,
+      sortDirection: this.tableState.sortDirection,
+      searchQuery: this.tableState.searchQuery,
+    })
+  }
+
+  private isCacheValid(entry: CacheEntry<T>): boolean {
+    return Date.now() - entry.timestamp < this.cacheDuration
+  }
+
   private async loadData() {
     if (!this.dataProvider) return
+
+    const cacheKey = this.getCacheKey()
+    const cachedData = this.cache[cacheKey]
+
+    if (cachedData && this.isCacheValid(cachedData)) {
+      this.data = cachedData.data
+      this.totalRows = cachedData.total
+      return
+    }
 
     this.loading = true
     this.error = null
@@ -93,6 +124,12 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
         sortDirection: this.tableState.sortDirection,
         searchQuery: this.tableState.searchQuery,
       })
+
+      this.cache[cacheKey] = {
+        data: response.data,
+        total: response.total,
+        timestamp: Date.now(),
+      }
 
       this.data = response.data
       this.totalRows = response.total
@@ -115,6 +152,19 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
     } finally {
       this.loading = false
     }
+  }
+
+  private renderSkeletonRow() {
+    return html`
+      <tr class="skeleton-row">
+        <td class="checkbox-cell">
+          <div class="skeleton-checkbox"></div>
+        </td>
+        ${this.columns
+          .filter((column) => this.tableState.visibleColumns.has(column.key))
+          .map(() => html` <td><div class="skeleton-cell"></div></td> `)}
+      </tr>
+    `
   }
 
   render() {
@@ -160,73 +210,70 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
         </div>
 
         ${when(
-          this.loading,
-          () => html`<div class="loading">Loading ...</div>`,
-          () =>
-            when(
-              this.error,
-              () => html`
-                <div class="error">
-                  <p>Error loading data: ${this.error!.message}</p>
-                  <gds-button @click=${() => this.loadData()}>Retry</gds-button>
-                </div>
-              `,
-              () => html`
-                <table class=${classMap({ 'responsive-table': true })}>
-                  <thead>
-                    <tr>
-                      <th>
-                        <input
-                          type="checkbox"
-                          .checked=${this.selectedRows.size ===
-                          this.data.length}
-                          @change=${this.handleSelectAll}
-                        />
-                      </th>
-                      ${this.columns
-                        .filter((column) =>
-                          this.tableState.visibleColumns.has(column.key),
-                        )
-                        .map(
-                          (column) => html`
-                            <th
-                              class=${classMap({
-                                'text-right': column.align === 'right',
-                                'text-center': column.align === 'center',
-                              })}
-                            >
-                              <div class="column-header">
-                                ${column.label}
-                                ${when(
-                                  column.sortable,
-                                  () => html`
-                                    <gds-button
-                                      size="small"
-                                      rank="tertiary"
-                                      @click=${() =>
-                                        this.handleSort(column.key)}
-                                    >
-                                      <gds-icon-sort
-                                        class=${classMap({
-                                          active:
-                                            this.tableState.sortColumn ===
-                                            column.key,
-                                          asc:
-                                            this.tableState.sortDirection ===
-                                            'asc',
-                                        })}
-                                      ></gds-icon-sort>
-                                    </gds-button>
-                                  `,
-                                )}
-                              </div>
-                            </th>
-                          `,
-                        )}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    ${this.data.map(
+          this.error,
+          () => html`
+            <div class="error">
+              <p>Error loading data: ${this.error!.message}</p>
+              <gds-button @click=${() => this.loadData()}>Retry</gds-button>
+            </div>
+          `,
+          () => html`
+            <table class=${classMap({ 'responsive-table': true })}>
+              <thead>
+                <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      .checked=${this.selectedRows.size === this.data.length}
+                      @change=${this.handleSelectAll}
+                    />
+                  </th>
+                  ${this.columns
+                    .filter((column) =>
+                      this.tableState.visibleColumns.has(column.key),
+                    )
+                    .map(
+                      (column) => html`
+                        <th
+                          class=${classMap({
+                            'text-right': column.align === 'right',
+                            'text-center': column.align === 'center',
+                          })}
+                        >
+                          <div class="column-header">
+                            ${column.label}
+                            ${when(
+                              column.sortable,
+                              () => html`
+                                <gds-button
+                                  size="small"
+                                  rank="tertiary"
+                                  @click=${() => this.handleSort(column.key)}
+                                >
+                                  <gds-icon-sort
+                                    class=${classMap({
+                                      active:
+                                        this.tableState.sortColumn ===
+                                        column.key,
+                                      asc:
+                                        this.tableState.sortDirection === 'asc',
+                                    })}
+                                  ></gds-icon-sort>
+                                </gds-button>
+                              `,
+                            )}
+                          </div>
+                        </th>
+                      `,
+                    )}
+                </tr>
+              </thead>
+              <tbody>
+                ${this.loading
+                  ? Array(this.skeletonRows)
+                      .fill(0)
+                      .map(() => this.renderSkeletonRow())
+                  : this.data.map(
                       (row, index) => html`
                         <tr
                           class=${classMap({
@@ -261,10 +308,9 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                         </tr>
                       `,
                     )}
-                  </tbody>
-                </table>
-              `,
-            ),
+              </tbody>
+            </table>
+          `,
         )}
 
         <div class="footer">
