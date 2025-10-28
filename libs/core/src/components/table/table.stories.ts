@@ -81,7 +81,6 @@ const mockApi = async (
 
   if (request.sortColumn) {
     filtered.sort((a, b) => {
-      // Now TypeScript knows these properties exist
       const aVal = String(a[request.sortColumn as keyof MockData])
       const bVal = String(b[request.sortColumn as keyof MockData])
       return request.sortDirection === 'asc'
