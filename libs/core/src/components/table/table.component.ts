@@ -17,6 +17,7 @@ import { IconChevronRight } from '../icon/icons/chevron-right.component'
 import { IconMagnifyingGlass } from '../icon/icons/magnifying-glass.component'
 import { IconSort } from '../icon/icons/sort.component'
 import { GdsInput } from '../input/input.component'
+import { GdsPagination } from '../pagination/pagination.component'
 import TableStyles from './table.styles'
 
 interface TableColumn {
@@ -35,8 +36,13 @@ interface TableColumn {
 
 type TableDensity = 'comfortable' | 'compact' | 'spacious'
 
+/**
+ * @element gds-table
+ * @status beta
+ */
 @gdsCustomElement('gds-table', {
   dependsOn: [
+    GdsPagination,
     GdsButton,
     GdsInput,
     GdsDropdown,
@@ -273,116 +279,20 @@ export class GdsTable extends GdsElement {
           </div>
           <div class="trail">
             <slot name="footer-trail">
-              <div class="pagination">
-                <gds-button
-                  size="small"
-                  rank="tertiary"
-                  ?disabled=${this.page === 1}
-                  @click=${() => (this.page = 1)}
-                >
-                  <gds-icon-chevron-double-left
-                    size="m"
-                  ></gds-icon-chevron-double-left>
-                </gds-button>
-
-                <gds-button
-                  size="small"
-                  rank="tertiary"
-                  ?disabled=${this.page === 1}
-                  @click=${() => this.page--}
-                >
-                  <gds-icon-chevron-left size="m"></gds-icon-chevron-left>
-                </gds-button>
-
-                ${visiblePages.map(
-                  (p) => html`
-                    ${p === '...'
-                      ? html`<gds-button
-                          size="small"
-                          rank="tertiary"
-                          width="40px"
-                          inert
-                          >...</gds-button
-                        >`
-                      : html`
-                          <gds-button
-                            size="small"
-                            rank="${this.page === p ? 'primary' : 'tertiary'}"
-                            class="page-unit page-button ${this.page === p
-                              ? 'current-page'
-                              : ''}"
-                            @click=${() => (this.page = p as number)}
-                          >
-                            ${p}
-                          </gds-button>
-                        `}
-                  `,
-                )}
-
-                <gds-button
-                  rank="tertiary"
-                  size="small"
-                  ?disabled=${this.page === pageCount}
-                  @click=${() => this.page++}
-                >
-                  <gds-icon-chevron-right size="m"></gds-icon-chevron-right>
-                </gds-button>
-
-                <gds-button
-                  rank="tertiary"
-                  size="small"
-                  ?disabled=${this.page === pageCount}
-                  @click=${() => (this.page = pageCount)}
-                >
-                  <gds-icon-chevron-double-right
-                    size="m"
-                  ></gds-icon-chevron-double-right>
-                </gds-button>
-              </div>
-
-              <!-- <gds-context-menu>
-                <gds-flex
-                  slot="trigger"
-                  align-items="center"
-                  width="max-content"
-                  gap="s"
-                >
-                  Items per page
-                  <gds-button rank="secondary" rank="secondary" size="small">
-                    10
-                    <gds-icon-chevron-bottom
-                      slot="trail"
-                    ></gds-icon-chevron-bottom>
-                  </gds-button>
-                </gds-flex>
-                ${[5, 10, 25, 50].map(
-                (size) => html`
-                  <gds-menu-item
-                    value=${size}
-                    ?selected=${this.pageSize === size}
-                  >
-                    ${size} per page
-                  </gds-menu-item>
-                `,
-              )}
-              </gds-context-menu> -->
-
-              <gds-dropdown
-                plain
-                size="small"
-                @change=${this.handlePageSizeChange}
-              >
-                ${[5, 10, 25, 50].map(
-                  (size) => html`
-                    <gds-option
-                      value=${size}
-                      ?selected=${this.pageSize === size}
-                    >
-                      ${size} per page
-                    </gds-option>
-                  `,
-                )}
-              </gds-dropdown>
+              <gds-pagination
+                .page=${this.page}
+                .pageSize=${this.pageSize}
+                .total=${this.filteredData.length}
+                @page-change=${(e: CustomEvent) => {
+                  this.page = e.detail.page
+                  this.requestUpdate()
+                }}
+                @page-size-change=${(e: CustomEvent) => {
+                  this.pageSize = e.detail.pageSize
+                  this.page = 1
+                  this.requestUpdate()
+                }}
+              ></gds-pagination>
             </slot>
           </div>
         </div>

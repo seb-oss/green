@@ -48,18 +48,6 @@ const style = css`
     }
   }
 
-  /** Pagination stuff */
-  .pagination {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .page-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
   @media (max-width: 768px) {
     .responsive-table td {
       display: flex;
