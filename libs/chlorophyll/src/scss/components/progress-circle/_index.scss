@@ -1,0 +1,48 @@
+@use 'sass:map';
+@use 'functions';
+@use 'mixins';
+
+$animation-duration: 0.7s;
+$ring-width: 11px;
+$size: 220px;
+
+.gds-progress-circle {
+  @include mixins.use-circle($size, false);
+  background: var(--gds-sys-color-base-400);
+
+  .ring {
+    @include mixins.use-circle($size);
+    clip: rect(0px, $size, $size, functions.get-radius($size));
+
+    &-progress {
+      @include mixins.use-circle($size);
+      @include mixins.use-animation();
+      & {
+        clip: rect(0px, functions.get-radius($size), $size, 0px);
+      }
+    }
+
+    @each $variant, $colors in mixins.$variants {
+      .#{$variant} {
+        @include mixins.background-variant(map.get($colors, 'background'));
+      }
+    }
+  }
+
+  .full-ring {
+    @include mixins.use-animation();
+  }
+
+  .inner-circle {
+    @include mixins.use-circle(
+      functions.get-inner-circle-size($size, $ring-width)
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: $ring-width 0 0 $ring-width;
+    background: var(--gds-sys-color-background-primary);
+    overflow: hidden;
+  }
+}

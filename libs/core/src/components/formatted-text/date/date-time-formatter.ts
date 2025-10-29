@@ -19,9 +19,9 @@ export const dateTimeFormats = {
       convertValueToDate(value),
     ),
   dateLongWithWeekday: (value, locale) =>
-    new Intl.DateTimeFormat(locale, { dateStyle: 'full' }).format(
-      convertValueToDate(value),
-    ),
+    new Intl.DateTimeFormat(locale, { dateStyle: 'full' })
+      .format(convertValueToDate(value))
+      .replace(',', ''),
   dateShort: (value, locale) => {
     const formatter = new Intl.DateTimeFormat(locale, { dateStyle: 'medium' })
     if (locale?.toLowerCase() === 'sv-se') {

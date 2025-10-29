@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/react-charts/src",
   "projectType": "library",
-  "tags": [],
+  "tags": ["lib"],
   "targets": {
     "build": {
       "executor": "@nx/rollup:rollup",
@@ -84,6 +84,14 @@
     },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
+      "options": {}
+    },
+    "version-as-snapshot": {
+      "executor": "@sebgroup/repo-tools:version-as-snapshot",
+      "options": {}
+    },
+    "publish-snapshot": {
+      "executor": "@sebgroup/repo-tools:publish-snapshot",
       "options": {}
     }
   }

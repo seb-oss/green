@@ -39,10 +39,14 @@ export const InPageWizardStepCard = ({
   nextBtnText = 'Next',
   onEditClick,
 }: InPageWizardStepCardProps) => {
-  const sectionClassName = classNames('gds-in-page-wizard-step-card', 'card', {
-    active: stepStatus === 'IsActive',
-    completed: stepStatus === 'IsComplete',
-  })
+  const sectionClassName = classNames(
+    'gds-card',
+    'gds-in-page-wizard-step-card',
+    {
+      active: stepStatus === 'IsActive',
+      completed: stepStatus === 'IsComplete',
+    },
+  )
 
   return (
     <section className={sectionClassName} data-testid={dataTestid}>
@@ -59,7 +63,10 @@ export const InPageWizardStepCard = ({
 
         {stepStatus === 'IsComplete' && (
           <div className="gds-in-page-wizard-step-card__header__edit">
-            <button className="secondary small" onClick={onEditClick}>
+            <button
+              className="gds-button secondary small"
+              onClick={onEditClick}
+            >
               <Edit fill={'var(--color)'} height={16} width={16} />
               {editBtnText}
             </button>
@@ -73,7 +80,7 @@ export const InPageWizardStepCard = ({
 
       {stepStatus === 'IsActive' && !hideFooter && (
         <footer className="gds-in-page-wizard-step-card__footer">
-          <button className="primary" onClick={onNextClick}>
+          <button className="gds-button" onClick={onNextClick}>
             {nextBtnText}
             {nextBtnIcon}
           </button>
@@ -82,7 +89,7 @@ export const InPageWizardStepCard = ({
 
       {stepStatus === 'IsComplete' && !hideFooter && (
         <footer className="gds-in-page-wizard-step-card__footer gds-in-page-wizard-step-card__footer--edit">
-          <button className="secondary" onClick={onEditClick}>
+          <button className="gds-button secondary" onClick={onEditClick}>
             <Edit fill={'var(--color)'} height={16} width={16} />
             {editBtnText}
           </button>

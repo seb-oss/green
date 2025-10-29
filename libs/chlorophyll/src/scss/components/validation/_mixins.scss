@@ -1,0 +1,103 @@
+@use '../../common';
+
+$_border-width: 1px;
+
+@mixin add-feedback-element($transform: true) {
+  position: relative;
+
+  &::before {
+    background: transparent;
+    border-radius: 0 0 4px 4px;
+    clip-path: inset(4px 0 0 0);
+    content: '';
+    display: block;
+    height: 4px;
+    position: absolute;
+
+    @if ($transform) {
+      transform: translate3d(0, -12px, 0);
+    }
+
+    transition: 300ms ease-in-out;
+    width: 100%;
+  }
+}
+
+@mixin add-feedback($color) {
+  color: $color;
+  opacity: 1;
+
+  &::before {
+    background: $color;
+    clip-path: inset(1px 0 0 0);
+  }
+}
+
+@mixin add-form-info() {
+  @include common.font-scale(1);
+  display: inline-block;
+  line-height: 1.25rem;
+  color: var(--gds-sys-color-text-primary);
+  width: 100%;
+}
+
+@mixin add-validation() {
+  .was-validated input + .gds-form-info,
+  .was-validated textarea + .gds-form-info,
+  .was-validated fieldset + .gds-form-info,
+  .was-validated .gds-form-item__footer .gds-form-info {
+    font-weight: 500;
+  }
+
+  .was-validated input:not(.is-invalid):valid + .gds-form-info,
+  .was-validated textarea:not(.is-invalid):valid + .gds-form-info,
+  .was-validated fieldset:not(.is-invalid).is-valid:valid + .gds-form-info,
+  .is-valid:not(.gds-group) ~ .gds-form-info,
+  .is-valid .gds-form-item__footer .gds-form-info,
+  .is-valid:is(.gds-group) + .gds-form-info {
+    @include add-feedback(var(--gds-sys-color-dark-green-2));
+  }
+
+  .was-validated input:not(.is-valid):invalid + .gds-form-info,
+  .was-validated textarea:not(.is-valid):invalid + .gds-form-info,
+  .was-validated fieldset:not(.is-valid).is-invalid + .gds-form-info,
+  .is-invalid:not(.gds-group) ~ .gds-form-info,
+  .is-invalid .gds-form-item__footer .gds-form-info,
+  .is-invalid:is(.gds-group) + .gds-form-info {
+    @include add-feedback(var(--gds-sys-color-text-error));
+  }
+}
+
+/* rules for groups of checkboxes and radio buttons*/
+@mixin add-fieldset-validation() {
+  fieldset {
+    @include common.padding(0);
+    @include common.margin(0);
+    border: 0;
+    > div {
+      width: fit-content;
+    }
+
+    &.is-valid > div {
+      border: $_border-width solid var(--gds-sys-color-dark-green-2);
+      border-radius: var(--gds-sys-shape-corner-medium);
+    }
+
+    &.is-invalid > div {
+      border: $_border-width solid var(--gds-sys-color-text-error);
+      border-radius: var(--gds-sys-shape-corner-medium);
+    }
+  }
+
+  fieldset.is-valid,
+  fieldset.is-invalid {
+    @include common.add-border-radius();
+    @include common.margin-bottom(3);
+  }
+
+  legend {
+    @include common.padding(0);
+    @include common.font-weight('medium');
+    line-height: 1.25rem;
+  }
+}

@@ -1,3 +1,5 @@
+import React from 'react'
+
 import Button from '../button/button'
 import { TextInput } from '../input/input'
 import { Group } from './group'
@@ -36,7 +38,7 @@ export const StaticText = {
     groupFocus: true,
     children: [
       <TextInput placeholder="First input field" />,
-      <span className="form-text">kr</span>,
+      <span className="gds-form-text">kr</span>,
     ],
   },
 }
@@ -51,7 +53,7 @@ export const Error = {
     error: 'Error message',
     children: [
       <TextInput placeholder="First input field" />,
-      <span className="form-text">kr</span>,
+      <span className="gds-form-text">kr</span>,
     ],
   },
 }

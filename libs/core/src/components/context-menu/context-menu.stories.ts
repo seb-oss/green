@@ -45,7 +45,7 @@ const DefaultParams: Story = {
   },
   argTypes: {
     items: {
-      control: { type: 'array' },
+      control: { type: 'object' },
     },
   },
   args: {
