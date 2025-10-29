@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.13.0
+
+### Minor Changes
+
+- ba7e126: **Icon:** Add Small chevrons, expand and sorting icons
+
 ## 2.12.3
 
 ### Patch Changes
