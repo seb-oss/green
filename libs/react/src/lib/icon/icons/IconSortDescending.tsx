@@ -1,0 +1,1 @@
+export { IconSortDescending } from '@sebgroup/green-core/react';
