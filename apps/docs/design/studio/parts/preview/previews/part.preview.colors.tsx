@@ -22,13 +22,9 @@ export default function Colors({ token, theme }: ColorPreviewProps) {
   }
   return (
     <Core.GdsFlex align-items="center" gap="s">
-      {theme === 'dark' ? (
-        <Core.GdsTheme colorScheme="dark">
-          <Preview />
-        </Core.GdsTheme>
-      ) : (
+      <Core.GdsTheme colorScheme={theme === 'dark' ? 'dark' : 'light'}>
         <Preview />
-      )}
+      </Core.GdsTheme>
       <Core.GdsText>{token.value}</Core.GdsText>
     </Core.GdsFlex>
   )

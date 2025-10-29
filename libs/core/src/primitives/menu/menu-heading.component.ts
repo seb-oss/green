@@ -5,6 +5,11 @@ import { gdsCustomElement } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import MenuHeadingStyles from './menu-heading.styles'
 
+/**
+ * @element gds-menu-heading
+ *
+ * @slot - The default slot for the menu heading content.
+ */
 @gdsCustomElement('gds-menu-heading')
 export class GdsMenuHeading extends GdsElement {
   static styles = MenuHeadingStyles

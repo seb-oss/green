@@ -1,0 +1,1 @@
+export { IconMinimize } from '@sebgroup/green-core/react';
