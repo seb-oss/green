@@ -14,19 +14,44 @@ const style = css`
   table {
     width: 100%;
     border-collapse: collapse;
+    border-spacing: 0;
+    border: none;
+  }
+
+  thead tr {
+    background: #eee;
+    background-clip: content-box;
+    border-radius: 12px;
+  }
+
+  thead th {
+    padding: 12px 8px;
+    border: none;
+    font-weight: 500;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid #ccc;
   }
 
   th,
   td {
     padding: 8px;
-    border: 1px solid #ddd;
     font-weight: normal;
   }
+
+  /** heading */
 
   .column {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .column-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .checkbox-cell {
@@ -76,44 +101,31 @@ const style = css`
 
   /** Loading and stuff */
 
-  .skeleton-row td {
-    padding: 8px;
+  .skeleton-row {
+    display: table-row;
+    mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 40%,
+      #000 50%,
+      rgba(0, 0, 0, 0) 60%
+    );
+    mask-size: 400%;
+    animation: shimmer 6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
   }
 
   .skeleton-cell {
     height: 20px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      #eee 50%,
-      transparent 100%
-    );
-    background-size: 200% 100%;
-    animation: skeleton-loading 1.5s infinite;
-    border-radius: 4px;
+    border-radius: 40px;
+    background: currentColor;
+    opacity: 0.1;
   }
 
-  .skeleton-checkbox {
-    width: 20px;
-    height: 20px;
-    margin: 0 auto;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      #eee 50%,
-      transparent 100%
-    );
-    background-size: 200% 100%;
-    animation: skeleton-loading 1.5s infinite;
-    border-radius: 4px;
-  }
-
-  @keyframes skeleton-loading {
+  @keyframes shimmer {
     0% {
-      background-position: 200% 0;
+      mask-position: 100%;
     }
     100% {
-      background-position: -200% 0;
+      mask-position: 0%;
     }
   }
 `

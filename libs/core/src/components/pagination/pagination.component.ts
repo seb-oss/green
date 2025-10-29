@@ -11,16 +11,16 @@ import { GdsButton } from '../button/button.component'
 import { GdsDropdown } from '../dropdown/dropdown.component'
 import { IconChevronDoubleLeft } from '../icon/icons/chevron-double-left.component'
 import { IconChevronDoubleRight } from '../icon/icons/chevron-double-right.component'
-import { IconChevronLeft } from '../icon/icons/chevron-left.component'
-import { IconChevronRight } from '../icon/icons/chevron-right.component'
+import { IconChevronLeftSmall } from '../icon/icons/chevron-left-small.component'
+import { IconChevronRightSmall } from '../icon/icons/chevron-right-small.component'
 
 @gdsCustomElement('gds-pagination', {
   dependsOn: [
     GdsButton,
     GdsDropdown,
-    IconChevronLeft,
+    IconChevronLeftSmall,
     IconChevronDoubleLeft,
-    IconChevronRight,
+    IconChevronRightSmall,
     IconChevronDoubleRight,
   ],
 })
@@ -88,7 +88,8 @@ export class GdsPagination extends GdsElement {
           ?disabled=${this.page === 1}
           @click=${() => this.handlePageChange(1)}
         >
-          <gds-icon-chevron-double-left size="m"></gds-icon-chevron-double-left>
+          <gds-icon-chevron-double-left size="l">
+          </gds-icon-chevron-double-left>
         </gds-button>
 
         <gds-button
@@ -97,7 +98,7 @@ export class GdsPagination extends GdsElement {
           ?disabled=${this.page === 1}
           @click=${() => this.handlePageChange(this.page - 1)}
         >
-          <gds-icon-chevron-left size="m"></gds-icon-chevron-left>
+          <gds-icon-chevron-left-small size="l"> </gds-icon-chevron-left-small>
         </gds-button>
 
         ${visiblePages.map(
@@ -124,7 +125,8 @@ export class GdsPagination extends GdsElement {
           ?disabled=${this.page === pageCount}
           @click=${() => this.handlePageChange(this.page + 1)}
         >
-          <gds-icon-chevron-right size="m"></gds-icon-chevron-right>
+          <gds-icon-chevron-right-small size="l">
+          </gds-icon-chevron-right-small>
         </gds-button>
 
         <gds-button
@@ -133,9 +135,8 @@ export class GdsPagination extends GdsElement {
           ?disabled=${this.page === pageCount}
           @click=${() => this.handlePageChange(pageCount)}
         >
-          <gds-icon-chevron-double-right
-            size="m"
-          ></gds-icon-chevron-double-right>
+          <gds-icon-chevron-double-right size="l">
+          </gds-icon-chevron-double-right>
         </gds-button>
       </div>
 

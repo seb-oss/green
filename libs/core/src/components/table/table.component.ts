@@ -11,6 +11,8 @@ import {
 import { GdsButton } from '../button/button.component'
 import { GdsDropdown } from '../dropdown/dropdown.component'
 import { IconMagnifyingGlass } from '../icon/icons/magnifying-glass.component'
+import { IconSortDown } from '../icon/icons/sort-down.component'
+import { IconSortUp } from '../icon/icons/sort-up.component'
 import { IconSort } from '../icon/icons/sort.component'
 import { GdsInput } from '../input/input.component'
 import { GdsPagination } from '../pagination/pagination.component'
@@ -38,6 +40,8 @@ import {
     GdsPagination,
     IconMagnifyingGlass,
     IconSort,
+    IconSortUp,
+    IconSortDown,
   ],
 })
 export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
@@ -157,8 +161,8 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
   private renderSkeletonRow() {
     return html`
       <tr class="skeleton-row">
-        <td class="checkbox-cell">
-          <div class="skeleton-checkbox"></div>
+        <td>
+          <div class="skeleton-cell"></div>
         </td>
         ${this.columns
           .filter((column) => this.tableState.visibleColumns.has(column.key))
@@ -221,7 +225,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
             <table class=${classMap({ 'responsive-table': true })}>
               <thead>
                 <tr>
-                  <th>
+                  <th class="checkbox-cell">
                     <input
                       type="checkbox"
                       .checked=${this.selectedRows.size === this.data.length}
@@ -246,19 +250,33 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                               column.sortable,
                               () => html`
                                 <gds-button
-                                  size="small"
+                                  size="xs"
                                   rank="tertiary"
                                   @click=${() => this.handleSort(column.key)}
                                 >
-                                  <gds-icon-sort
-                                    class=${classMap({
-                                      active:
+                                  ${when(
+                                    this.tableState.sortColumn === column.key &&
+                                      this.tableState.sortDirection === 'asc',
+                                    () =>
+                                      html`<gds-icon-sort-up
+                                        size="m"
+                                      ></gds-icon-sort-up>`,
+                                    () =>
+                                      when(
                                         this.tableState.sortColumn ===
-                                        column.key,
-                                      asc:
-                                        this.tableState.sortDirection === 'asc',
-                                    })}
-                                  ></gds-icon-sort>
+                                          column.key &&
+                                          this.tableState.sortDirection ===
+                                            'desc',
+                                        () =>
+                                          html`<gds-icon-sort-down
+                                            size="m"
+                                          ></gds-icon-sort-down>`,
+                                        () =>
+                                          html`<gds-icon-sort
+                                            size="m"
+                                          ></gds-icon-sort>`, // default unsorted icon
+                                      ),
+                                  )}
                                 </gds-button>
                               `,
                             )}
@@ -280,7 +298,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                             selected: this.selectedRows.has(index),
                           })}
                         >
-                          <td>
+                          <td class="checkbox-cell">
                             <input
                               type="checkbox"
                               .checked=${this.selectedRows.has(index)}

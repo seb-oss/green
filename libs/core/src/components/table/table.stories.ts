@@ -54,9 +54,9 @@ const mockApi = async (
 ): Promise<TableResponse<MockData>> => {
   await new Promise((resolve) => setTimeout(resolve, 1000))
 
-  if (Math.random() < 0.1) {
-    throw new Error('Random server error')
-  }
+  // if (Math.random() < 0.1) {
+  //   throw new Error('Random server error')
+  // }
 
   const allData: MockData[] = Array.from({ length: 100 }, (_, i) => ({
     id: i + 1,
