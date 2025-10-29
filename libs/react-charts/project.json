@@ -86,6 +86,10 @@
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
     },
+    "version-as-snapshot": {
+      "executor": "@sebgroup/repo-tools:version-as-snapshot",
+      "options": {}
+    },
     "publish-snapshot": {
       "executor": "@sebgroup/repo-tools:publish-snapshot",
       "options": {}
