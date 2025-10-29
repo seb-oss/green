@@ -1,0 +1,1 @@
+export { IconExpand } from '@sebgroup/green-core/react';
