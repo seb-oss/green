@@ -55,7 +55,7 @@ const style = css`
     background: rgba(0, 0, 0, 0.05);
     border-radius: 8px;
     transition: all 420ms;
-    inset: 4px;
+    inset: 8px 4px;
 
     @starting-style {
       opacity: 0;
