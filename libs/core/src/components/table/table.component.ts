@@ -14,12 +14,14 @@ import {
   GdsMenuItem,
 } from '../context-menu/context-menu.component'
 import { GdsDropdown } from '../dropdown/dropdown.component'
+import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import { IconMagnifyingGlass } from '../icon/icons/magnifying-glass.component'
 import { IconSortDown } from '../icon/icons/sort-down.component'
 import { IconSortUp } from '../icon/icons/sort-up.component'
 import { IconSort } from '../icon/icons/sort.component'
 import { GdsInput } from '../input/input.component'
 import { GdsPagination } from '../pagination/pagination.component'
+import { GdsTableRowSelector } from './row-selector/row-selector.component'
 import TableStyles from './table.styles'
 import {
   CacheEntry,
@@ -38,6 +40,7 @@ import {
  */
 @gdsCustomElement('gds-table', {
   dependsOn: [
+    GdsTableRowSelector,
     GdsButton,
     GdsInput,
     GdsDropdown,
@@ -48,6 +51,7 @@ import {
     IconSort,
     IconSortUp,
     IconSortDown,
+    IconCrossSmall,
   ],
 })
 export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
@@ -198,25 +202,6 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
             </gds-input>
           </div>
           <div class="trail">
-            <!-- <gds-dropdown
-              multiple
-              plain
-              size="small"
-              label="Columns"
-              @change=${this.handleColumnVisibility}
-            >
-              ${this.columns.map(
-              (column) => html`
-                <gds-option
-                  value=${column.key}
-                  ?selected=${this.tableState.visibleColumns.has(column.key)}
-                >
-                  ${column.label}
-                </gds-option>
-              `,
-            )}
-            </gds-dropdown> -->
-
             <gds-dropdown
               multiple
               plain
@@ -256,13 +241,12 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                     this.selectable,
                     () => html`
                       <th class="checkbox-cell">
-                        <input
-                          type="checkbox"
+                        <gds-table-row-selector
                           .checked=${this.isAllSelected}
                           .indeterminate=${this.isPartialSelection}
-                          @change=${this.handleSelectAll}
                           aria-label="Select all rows"
-                        />
+                          @selector-change=${this.handleSelectAll}
+                        ></gds-table-row-selector>
                       </th>
                     `,
                   )}
@@ -341,13 +325,12 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                         this.selectable,
                         () => html`
                           <td class="checkbox-cell">
-                            <input
-                              type="checkbox"
+                            <gds-table-row-selector
                               .checked=${this.selectedRows.has(index)}
-                              @change=${(e: Event) =>
-                                this.handleRowSelect(index, e)}
                               aria-label="Select row ${index + 1}"
-                            />
+                              @selector-change=${(e: CustomEvent) =>
+                                this.handleRowSelect(index, e)}
+                            ></gds-table-row-selector>
                           </td>
                         `,
                       )}
@@ -386,11 +369,12 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                     ${this.selectedRows.size} of ${this.data.length} selected
                   </span>
                   <gds-button
-                    size="small"
-                    rank="tertiary"
+                    size="xs"
+                    rank="secondary"
                     @click=${this.clearSelection}
                   >
                     Clear
+                    <gds-icon-cross-small slot="trail"></gds-icon-cross-small>
                   </gds-button>
                 </div>
               `,
@@ -483,20 +467,19 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
     this.requestUpdate()
   }
 
-  private handleSelectAll(e: Event) {
+  private handleSelectAll(e: CustomEvent) {
     if (this.isAllSelected) {
       this.clearSelectionInternal()
     } else {
       this.selectAllInternal()
     }
-
     this.emitSelectionChange()
   }
 
-  private handleRowSelect(index: number, e: Event) {
-    const checkbox = e.target as HTMLInputElement
+  private handleRowSelect(index: number, e: CustomEvent) {
+    const isChecked = e.detail.checked
 
-    if (checkbox.checked) {
+    if (isChecked) {
       this.selectedRows.add(index)
     } else {
       this.selectedRows.delete(index)

@@ -17,6 +17,7 @@ const style = css`
     border-collapse: collapse;
     border-spacing: 0;
     border: none;
+    table-layout: auto;
   }
 
   thead {
@@ -160,13 +161,10 @@ const style = css`
 
   /* Selection styling */
   .checkbox-cell {
-    width: 40px;
-    text-align: center;
-  }
-
-  .checkbox-cell input[type='checkbox'] {
-    margin: 0;
-    cursor: pointer;
+    min-width: 20px;
+    width: 20px;
+    max-width: 20px;
+    padding: 12px 16px;
   }
 
   tr.selected {
@@ -241,7 +239,7 @@ const style = css`
    */
 
   .footer .lead {
-    padding-left: 16px;
+    padding-left: 12px;
     font: var(--gds-sys-text-detail-book-xs);
     color: var(--gds-sys-color-content-neutral-02);
   }
