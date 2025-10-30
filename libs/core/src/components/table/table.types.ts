@@ -5,6 +5,12 @@ export interface TableColumn {
   sortable?: boolean
   align?: 'left' | 'right'
   visible?: boolean
+  // ⚠️ Experimental
+  slots?: {
+    lead?: (row: any, index: number) => any
+    value?: (row: any, index: number) => any
+    trail?: (row: any, index: number) => any
+  }
 }
 
 export interface TableRow {

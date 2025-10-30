@@ -8,6 +8,10 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 import './table'
 import '../dropdown/dropdown'
 import '../input/input'
+import '../img/img'
+import '../formatted-text/number/formatted-number'
+import '../formatted-text/account/formatted-account'
+import '../formatted-text/date/formatted-date'
 
 import { TableRequest, TableResponse } from './table.types'
 
@@ -64,7 +68,8 @@ const mockApi = async (
     email: `user${i + 1}@example.com`,
     role: ['Admin', 'User', 'Editor'][i % 3],
     status: ['Active', 'Inactive'][i % 2],
-    amount: Math.floor(Math.random() * 10000),
+    amount: Math.floor(Math.random() * 100000) + 1000,
+    account: `5440${String(Math.floor(Math.random() * 10000000)).padStart(7, '0')}`,
     lastLogin: new Date(Date.now() - Math.random() * 10000000000).toISOString(),
   }))
 
@@ -102,12 +107,85 @@ export const Default: Story = {
   args: {
     columns: [
       { key: 'id', label: 'Number', sortable: false, align: 'left' },
-      { key: 'name', label: 'Name', sortable: false },
+      {
+        key: 'name',
+        label: 'Name',
+        sortable: false,
+        slots: {
+          lead: (row: { name: string }) =>
+            row.name === 'User 5'
+              ? html` <gds-img
+                  src="https://github.com/astrit.png"
+                  border-radius="max"
+                  width="24px"
+                  height="24px"
+                ></gds-img>`
+              : null,
+          trail: (row: { name: string }) =>
+            row.name === 'User 5' ? html`<span>GIT</span>` : null,
+        },
+      },
       { key: 'email', label: 'Email', sortable: true },
       { key: 'role', label: 'Role', sortable: true },
-      { key: 'status', label: 'Status', sortable: true, align: 'center' },
-      { key: 'amount', label: 'Amount', sortable: true, align: 'right' },
-      { key: 'lastLogin', label: 'Last Login', sortable: true },
+      {
+        key: 'status',
+        label: 'Status',
+        sortable: true,
+        align: 'center',
+        slots: {
+          // Custom value rendering with badge
+          value: (row: { status: unknown }) => html`
+            <gds-badge
+              size="small"
+              variant=${row.status === 'Active' ? 'positive' : 'negative'}
+            >
+              ${row.status}
+            </gds-badge>
+          `,
+        },
+      },
+      {
+        key: 'amount',
+        label: 'Amount',
+        sortable: true,
+        align: 'right',
+        slots: {
+          value: (row: MockData) => html`
+            <gds-formatted-number>${row.amount}</gds-formatted-number>
+          `,
+          trail: (row: MockData) =>
+            html`<gds-badge size="small"> SEK </gds-badge>`,
+        },
+      },
+      {
+        key: 'account',
+        label: 'Account',
+        sortable: true,
+        align: 'right',
+        slots: {
+          value: (row: MockData) => html`
+            <gds-formatted-account
+              .account=${row.account}
+              format="seb-account"
+            ></gds-formatted-account>
+          `,
+        },
+      },
+      {
+        key: 'lastLogin',
+        label: 'Last Login',
+        sortable: true,
+        align: 'right',
+        slots: {
+          value: (row: MockData) => html`
+            <gds-formatted-date
+              .value=${row.lastLogin}
+              locale="sv-SE"
+              format="dateLong"
+            ></gds-formatted-date>
+          `,
+        },
+      },
     ],
     density: 'comfortable',
     dataProvider: mockApi,

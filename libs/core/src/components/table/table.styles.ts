@@ -21,8 +21,10 @@ const style = css`
   }
 
   thead {
-    position: relative;
+    position: sticky;
     font-weight: normal;
+    top: 20px;
+    z-index: 2;
   }
 
   thead::before {
@@ -242,6 +244,20 @@ const style = css`
     padding-left: 12px;
     font: var(--gds-sys-text-detail-book-xs);
     color: var(--gds-sys-color-content-neutral-02);
+  }
+
+  /**
+   * ⚠️ Experimental
+   */
+
+  .cell-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .text-right .cell-content {
+    justify-content: flex-end;
   }
 `
 

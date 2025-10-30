@@ -180,6 +180,46 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
     }
   }
 
+  // ⚠️ Experimental
+  @state()
+  private cellSlots: Record<string, { lead?: any; trail?: any; value?: any }> =
+    {}
+
+  private renderCellContent(row: T, rowIndex: number, column: TableColumn) {
+    const cellKey = `${column.key}-${rowIndex}`
+    // const cellValue = row[column.key]
+
+    // Check for cell-specific slots first
+    const cellSpecificSlots = this.cellSlots[cellKey]
+
+    // Get column-level slots
+    const columnLevelLead = column.slots?.lead?.(row, rowIndex)
+    const columnLevelTrail = column.slots?.trail?.(row, rowIndex)
+    const columnLevelValue = column.slots?.value?.(row, rowIndex)
+
+    // Use cell-specific if available, otherwise fall back to column-level
+    const leadContent = cellSpecificSlots?.lead || columnLevelLead
+    const trailContent = cellSpecificSlots?.trail || columnLevelTrail
+    const valueContent =
+      cellSpecificSlots?.value !== undefined
+        ? cellSpecificSlots.value
+        : columnLevelValue
+
+    const cellValue = valueContent || row[column.key]
+
+    return html`
+      <div class="cell-content">
+        ${leadContent
+          ? html`<span class="cell-lead">${leadContent}</span>`
+          : ''}
+        <span class="cell-value">${cellValue}</span>
+        ${trailContent
+          ? html`<span class="cell-trail">${trailContent}</span>`
+          : ''}
+      </div>
+    `
+  }
+
   render() {
     return html`
       <div class="gds-table ${this.density}">
@@ -344,10 +384,9 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                               data-label=${column.label}
                               class=${classMap({
                                 'text-right': column.align === 'right',
-                                // 'text-center': column.align === 'center',
                               })}
                             >
-                              ${row[column.key]}
+                              ${this.renderCellContent(row, index, column)}
                             </td>
                           `,
                         )}
@@ -548,5 +587,40 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
       indices,
       data: indices.map((i) => this.data[i]),
     }
+  }
+
+  /**
+   * ⚠️ Experimental
+   */
+
+  /**
+   * Set cell-specific slots
+   */
+  setCellSlot(
+    columnKey: string,
+    rowIndex: number,
+    lead?: any,
+    trail?: any,
+    value?: any,
+  ) {
+    const cellKey = `${columnKey}-${rowIndex}`
+    this.cellSlots = {
+      ...this.cellSlots,
+      [cellKey]: { lead, trail, value },
+    }
+    this.requestUpdate()
+  }
+
+  /**
+   * Clear cell-specific slots
+   */
+  clearCellSlots(columnKey?: string, rowIndex?: number) {
+    if (columnKey !== undefined && rowIndex !== undefined) {
+      const cellKey = `${columnKey}-${rowIndex}`
+      delete this.cellSlots[cellKey]
+    } else {
+      this.cellSlots = {}
+    }
+    this.requestUpdate()
   }
 }
