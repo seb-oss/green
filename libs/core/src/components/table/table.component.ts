@@ -299,7 +299,9 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                                     this.tableState.sortColumn === column.key &&
                                       this.tableState.sortDirection === 'asc',
                                     () =>
-                                      html`<gds-icon-sort-up></gds-icon-sort-up>`,
+                                      html`<gds-icon-sort-up
+                                        size="m"
+                                      ></gds-icon-sort-up>`,
                                     () =>
                                       when(
                                         this.tableState.sortColumn ===
@@ -307,9 +309,13 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                                           this.tableState.sortDirection ===
                                             'desc',
                                         () =>
-                                          html`<gds-icon-sort-down></gds-icon-sort-down>`,
+                                          html`<gds-icon-sort-down
+                                            size="m"
+                                          ></gds-icon-sort-down>`,
                                         () =>
-                                          html`<gds-icon-sort-down></gds-icon-sort-down>`, // Default to down arrow
+                                          html`<gds-icon-sort-down
+                                            size="m"
+                                          ></gds-icon-sort-down>`,
                                       ),
                                   )}
                                 </span>
