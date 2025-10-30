@@ -30,8 +30,31 @@ const style = css`
     font-weight: 500;
   }
 
+  /* 
   tbody tr {
     border-bottom: 1px solid #ccc;
+  }
+  */
+
+  tbody tr {
+    border-bottom: 1px solid #ccc;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  tbody tr.loading {
+    opacity: 0.3;
+  }
+
+  tbody tr.fade-in {
+    opacity: 0;
+    animation: fadeIn 240ms linear forwards;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
   }
 
   th,
@@ -99,6 +122,11 @@ const style = css`
     background-color: #ccc;
   }
 
+  /** Loading and stuff */
+  /** Loading and stuff */
+  /** Loading and stuff */
+  /** Loading and stuff */
+  /** Loading and stuff */
   /** Loading and stuff */
 
   .skeleton-row {

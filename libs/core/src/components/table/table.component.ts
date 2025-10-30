@@ -50,9 +50,6 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
   private cache: TableCache<T> = {}
   private cacheDuration = 5 * 60 * 1000
 
-  @state()
-  private skeletonRows = 10
-
   @property({ type: Array })
   columns: TableColumn[] = []
 
@@ -61,6 +58,9 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
 
   @property({ reflect: true })
   density: TableDensity = 'comfortable'
+
+  @property({ type: Boolean, reflect: true })
+  selectable = false
 
   @state()
   private tableState: TableState = {
@@ -89,6 +89,18 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
     super.connectedCallback()
     this.tableState.visibleColumns = new Set(this.columns.map((col) => col.key))
     await this.loadData()
+  }
+
+  private get hasSelection(): boolean {
+    return this.selectedRows.size > 0
+  }
+
+  private get isAllSelected(): boolean {
+    return this.data.length > 0 && this.selectedRows.size === this.data.length
+  }
+
+  private get isPartialSelection(): boolean {
+    return this.hasSelection && !this.isAllSelected
   }
 
   private getCacheKey(): string {
@@ -158,19 +170,6 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
     }
   }
 
-  private renderSkeletonRow() {
-    return html`
-      <tr class="skeleton-row">
-        <td>
-          <div class="skeleton-cell"></div>
-        </td>
-        ${this.columns
-          .filter((column) => this.tableState.visibleColumns.has(column.key))
-          .map(() => html` <td><div class="skeleton-cell"></div></td> `)}
-      </tr>
-    `
-  }
-
   render() {
     return html`
       <div class="gds-table ${this.density}">
@@ -225,13 +224,20 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
             <table class=${classMap({ 'responsive-table': true })}>
               <thead>
                 <tr>
-                  <th class="checkbox-cell">
-                    <input
-                      type="checkbox"
-                      .checked=${this.selectedRows.size === this.data.length}
-                      @change=${this.handleSelectAll}
-                    />
-                  </th>
+                  ${when(
+                    this.selectable,
+                    () => html`
+                      <th class="checkbox-cell">
+                        <input
+                          type="checkbox"
+                          .checked=${this.isAllSelected}
+                          .indeterminate=${this.isPartialSelection}
+                          @change=${this.handleSelectAll}
+                          aria-label="Select all rows"
+                        />
+                      </th>
+                    `,
+                  )}
                   ${this.columns
                     .filter((column) =>
                       this.tableState.visibleColumns.has(column.key),
@@ -287,45 +293,49 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                 </tr>
               </thead>
               <tbody>
-                ${this.loading
-                  ? Array(this.skeletonRows)
-                      .fill(0)
-                      .map(() => this.renderSkeletonRow())
-                  : this.data.map(
-                      (row, index) => html`
-                        <tr
-                          class=${classMap({
-                            selected: this.selectedRows.has(index),
-                          })}
-                        >
+                ${this.data.map(
+                  (row, index) => html`
+                    <tr
+                      class=${classMap({
+                        selected: this.selectedRows.has(index),
+                        loading: this.loading,
+                        'fade-in': !this.loading,
+                      })}
+                    >
+                      ${when(
+                        this.selectable,
+                        () => html`
                           <td class="checkbox-cell">
                             <input
                               type="checkbox"
                               .checked=${this.selectedRows.has(index)}
                               @change=${(e: Event) =>
                                 this.handleRowSelect(index, e)}
+                              aria-label="Select row ${index + 1}"
                             />
                           </td>
-                          ${this.columns
-                            .filter((column) =>
-                              this.tableState.visibleColumns.has(column.key),
-                            )
-                            .map(
-                              (column) => html`
-                                <td
-                                  data-label=${column.label}
-                                  class=${classMap({
-                                    'text-right': column.align === 'right',
-                                    'text-center': column.align === 'center',
-                                  })}
-                                >
-                                  ${row[column.key]}
-                                </td>
-                              `,
-                            )}
-                        </tr>
-                      `,
-                    )}
+                        `,
+                      )}
+                      ${this.columns
+                        .filter((column) =>
+                          this.tableState.visibleColumns.has(column.key),
+                        )
+                        .map(
+                          (column) => html`
+                            <td
+                              data-label=${column.label}
+                              class=${classMap({
+                                'text-right': column.align === 'right',
+                                'text-center': column.align === 'center',
+                              })}
+                            >
+                              ${row[column.key]}
+                            </td>
+                          `,
+                        )}
+                    </tr>
+                  `,
+                )}
               </tbody>
             </table>
           `,
@@ -334,8 +344,21 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
         <div class="footer">
           <div class="lead">
             ${when(
-              this.selectedRows.size > 0,
-              () => html`<span>${this.selectedRows.size} rows selected</span>`,
+              this.selectable && this.hasSelection,
+              () => html`
+                <div class="selection-info">
+                  <span>
+                    ${this.selectedRows.size} of ${this.data.length} selected
+                  </span>
+                  <gds-button
+                    size="small"
+                    rank="tertiary"
+                    @click=${this.clearSelection}
+                  >
+                    Clear
+                  </gds-button>
+                </div>
+              `,
               () => html`
                 <span>
                   Showing
@@ -364,6 +387,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
     `
   }
 
+  // Event handlers
   private async handleSearch(e: Event) {
     const input = e.target as HTMLInputElement
     this.tableState = {
@@ -424,33 +448,90 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
   }
 
   private handleSelectAll(e: Event) {
-    const checked = (e.target as HTMLInputElement).checked
-    this.selectedRows = checked
-      ? new Set(this.data.map((_, i) => i))
-      : new Set()
+    const checkbox = e.target as HTMLInputElement
 
-    this.dispatchEvent(
-      new CustomEvent('selection-change', {
-        detail: { selectedRows: Array.from(this.selectedRows) },
-        bubbles: true,
-      }),
-    )
+    if (this.isAllSelected) {
+      // If all selected, clear all
+      this.clearSelectionInternal()
+    } else {
+      // If none or partial, select all
+      this.selectAllInternal()
+    }
+
+    this.emitSelectionChange()
   }
 
   private handleRowSelect(index: number, e: Event) {
-    const checked = (e.target as HTMLInputElement).checked
+    const checkbox = e.target as HTMLInputElement
 
-    if (checked) {
+    if (checkbox.checked) {
       this.selectedRows.add(index)
     } else {
       this.selectedRows.delete(index)
     }
 
+    this.emitSelectionChange()
+    this.requestUpdate()
+  }
+
+  private selectAllInternal(): void {
+    this.selectedRows = new Set(this.data.map((_, i) => i))
+    this.requestUpdate()
+  }
+
+  private clearSelectionInternal(): void {
+    this.selectedRows.clear()
+    this.requestUpdate()
+  }
+
+  private emitSelectionChange(): void {
     this.dispatchEvent(
       new CustomEvent('selection-change', {
-        detail: { selectedRows: Array.from(this.selectedRows) },
+        detail: {
+          selectedIndices: Array.from(this.selectedRows),
+          selectedData: Array.from(this.selectedRows).map((i) => this.data[i]),
+          count: this.selectedRows.size,
+        },
         bubbles: true,
       }),
     )
+  }
+
+  /**
+   * Public API
+   * Clear all selections
+   */
+  clearSelection(): void {
+    this.clearSelectionInternal()
+    this.emitSelectionChange()
+  }
+
+  /**
+   * Select all rows
+   */
+  selectAll(): void {
+    this.selectAllInternal()
+    this.emitSelectionChange()
+  }
+
+  /**
+   * Select specific rows by indices
+   */
+  setSelection(indices: number[]): void {
+    const validIndices = indices.filter((i) => i >= 0 && i < this.data.length)
+    this.selectedRows = new Set(validIndices)
+    this.emitSelectionChange()
+    this.requestUpdate()
+  }
+
+  /**
+   * Get selected row data
+   */
+  getSelection(): { indices: number[]; data: T[] } {
+    const indices = Array.from(this.selectedRows)
+    return {
+      indices,
+      data: indices.map((i) => this.data[i]),
+    }
   }
 }

@@ -114,6 +114,7 @@ export const Default: Story = {
   },
   render: (args) => html`
     <gds-table
+      selectable
       .columns=${args.columns}
       .dataProvider=${args.dataProvider}
       density=${args.density}
