@@ -9,6 +9,10 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsButton } from '../button/button.component'
+import {
+  GdsContextMenu,
+  GdsMenuItem,
+} from '../context-menu/context-menu.component'
 import { GdsDropdown } from '../dropdown/dropdown.component'
 import { IconMagnifyingGlass } from '../icon/icons/magnifying-glass.component'
 import { IconSortDown } from '../icon/icons/sort-down.component'
@@ -38,6 +42,8 @@ import {
     GdsInput,
     GdsDropdown,
     GdsPagination,
+    GdsContextMenu,
+    GdsMenuItem,
     IconMagnifyingGlass,
     IconSort,
     IconSortUp,
@@ -184,6 +190,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
               .value=${this.tableState.searchQuery}
               @input=${this.handleSearch}
               @gds-input-cleared=${this.handleSearchClear}
+              width="240px"
             >
               <gds-icon-magnifying-glass
                 slot="lead"
@@ -191,13 +198,34 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
             </gds-input>
           </div>
           <div class="trail">
-            <gds-dropdown
+            <!-- <gds-dropdown
               multiple
               plain
               size="small"
               label="Columns"
               @change=${this.handleColumnVisibility}
             >
+              ${this.columns.map(
+              (column) => html`
+                <gds-option
+                  value=${column.key}
+                  ?selected=${this.tableState.visibleColumns.has(column.key)}
+                >
+                  ${column.label}
+                </gds-option>
+              `,
+            )}
+            </gds-dropdown> -->
+
+            <gds-dropdown
+              multiple
+              plain
+              size="small"
+              searchable
+              .value=${Array.from(this.tableState.visibleColumns)}
+              @change=${this.handleColumnVisibility}
+            >
+              <span slot="trigger">Columns</span>
               ${this.columns.map(
                 (column) => html`
                   <gds-option
@@ -379,6 +407,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
               .page=${this.tableState.page}
               .pageSize=${this.tableState.pageSize}
               .total=${this.totalRows}
+              .pageSizes=${[5, 10, 20, 50, 100]}
               @page-change=${this.handlePageChange}
               @page-size-change=${this.handlePageSizeChange}
             ></gds-pagination>
@@ -449,13 +478,9 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
   }
 
   private handleSelectAll(e: Event) {
-    const checkbox = e.target as HTMLInputElement
-
     if (this.isAllSelected) {
-      // If all selected, clear all
       this.clearSelectionInternal()
     } else {
-      // If none or partial, select all
       this.selectAllInternal()
     }
 

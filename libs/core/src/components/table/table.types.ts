@@ -3,7 +3,7 @@ export interface TableColumn {
   key: string
   label: string
   sortable?: boolean
-  align?: 'left' | 'right' | 'center'
+  align?: 'left' | 'right'
   visible?: boolean
 }
 

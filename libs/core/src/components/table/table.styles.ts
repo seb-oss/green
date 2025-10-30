@@ -3,6 +3,7 @@ import { css } from 'lit'
 const style = css`
   :host {
     display: block;
+    font: var(--gds-sys-text-detail-book-s);
   }
 
   .gds-table {
@@ -18,7 +19,6 @@ const style = css`
     border: none;
   }
 
-  /* Professional rounded header with pseudo-element */
   thead {
     position: relative;
     font-weight: normal;
@@ -55,6 +55,7 @@ const style = css`
     @starting-style {
       opacity: 0;
       translate: 0 -2px;
+      scale: 0.8;
     }
   }
 
@@ -66,6 +67,7 @@ const style = css`
 
   thead th.sortable:hover::before {
     display: flex;
+    scale: 1;
   }
 
   thead th.sortable:active::before {
@@ -89,8 +91,8 @@ const style = css`
     display: flex;
     align-items: center;
     margin-left: 8px;
-    opacity: 0.6;
-    transition: opacity 0.2s ease;
+    opacity: 0.4;
+    transition: opacity 420ms ease;
     flex-shrink: 0;
   }
 
@@ -125,7 +127,7 @@ const style = css`
 
   /* Body styling */
   tbody tr {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--gds-sys-color-border-subtle-01);
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
   }
@@ -141,6 +143,7 @@ const style = css`
 
   tbody td {
     padding-inline: 16px;
+    padding-block: 12px;
   }
 
   @keyframes fadeIn {
@@ -231,6 +234,16 @@ const style = css`
     background: #fef2f2;
     border-radius: 8px;
     border: 1px solid #fecaca;
+  }
+
+  /** 
+   * Footer
+   */
+
+  .footer .lead {
+    padding-left: 16px;
+    font: var(--gds-sys-text-detail-book-xs);
+    color: var(--gds-sys-color-content-neutral-02);
   }
 `
 

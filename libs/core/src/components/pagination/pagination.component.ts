@@ -1,6 +1,7 @@
 // pagination.component.ts
 import { css } from 'lit'
 import { property } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 
 import { GdsElement } from '../../gds-element'
 import {
@@ -8,16 +9,26 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsButton } from '../button/button.component'
+import {
+  GdsContextMenu,
+  GdsMenuItem,
+} from '../context-menu/context-menu.component'
 import { GdsDropdown } from '../dropdown/dropdown.component'
+import { IconChevronBottom } from '../icon/icons/chevron-bottom.component'
 import { IconChevronDoubleLeft } from '../icon/icons/chevron-double-left.component'
 import { IconChevronDoubleRight } from '../icon/icons/chevron-double-right.component'
 import { IconChevronLeftSmall } from '../icon/icons/chevron-left-small.component'
 import { IconChevronRightSmall } from '../icon/icons/chevron-right-small.component'
+import { GdsText } from '../text/text.component'
 
 @gdsCustomElement('gds-pagination', {
   dependsOn: [
     GdsButton,
+    GdsText,
     GdsDropdown,
+    GdsContextMenu,
+    GdsMenuItem,
+    IconChevronBottom,
     IconChevronLeftSmall,
     IconChevronDoubleLeft,
     IconChevronRightSmall,
@@ -30,12 +41,19 @@ export class GdsPagination extends GdsElement {
       :host {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 40px;
       }
 
       .pagination {
         display: flex;
         gap: 4px;
+      }
+
+      .page-size {
+        gap: 10px;
+        display: flex;
+        align-items: center;
+        min-width: max-content;
       }
     `,
   ]
@@ -140,15 +158,30 @@ export class GdsPagination extends GdsElement {
         </gds-button>
       </div>
 
-      <gds-dropdown plain size="small" @change=${this.handlePageSizeChange}>
-        ${this.pageSizes.map(
-          (size) => html`
-            <gds-option value=${size} ?selected=${this.pageSize === size}>
-              ${size} per page
-            </gds-option>
-          `,
-        )}
-      </gds-dropdown>
+      <div class="page-size">
+        <gds-text font="detail-book-s">Items per page</gds-text>
+        <gds-context-menu @gds-menu-item-click=${this.handlePageSizeMenuClick}>
+          <gds-button slot="trigger" size="small" rank="secondary">
+            ${this.pageSize}
+            <gds-icon-chevron-bottom
+              slot="trail"
+              size="m"
+            ></gds-icon-chevron-bottom>
+          </gds-button>
+          ${this.pageSizes.map(
+            (size) => html`
+              <gds-menu-item
+                data-value=${size}
+                class=${classMap({
+                  selected: this.pageSize === size,
+                })}
+              >
+                ${size}
+              </gds-menu-item>
+            `,
+          )}
+        </gds-context-menu>
+      </div>
     `
   }
 
@@ -161,12 +194,17 @@ export class GdsPagination extends GdsElement {
     )
   }
 
-  private handlePageSizeChange(e: CustomEvent) {
-    this.dispatchEvent(
-      new CustomEvent('page-size-change', {
-        detail: { pageSize: Number(e.detail.value) },
-        bubbles: true,
-      }),
-    )
+  private handlePageSizeMenuClick(e: CustomEvent) {
+    const menuItem = e.target as HTMLElement
+    const newPageSize = parseInt(menuItem.dataset.value || '10')
+
+    if (newPageSize !== this.pageSize) {
+      this.dispatchEvent(
+        new CustomEvent('page-size-change', {
+          detail: { pageSize: newPageSize },
+          bubbles: true,
+        }),
+      )
+    }
   }
 }
