@@ -7,8 +7,10 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 import './table'
 import '../dropdown/dropdown'
+import '../context-menu/context-menu'
 import '../input/input'
 import '../img/img'
+import '../icon/icons/dot-grid-one-horizontal'
 import '../formatted-text/number/formatted-number'
 import '../formatted-text/account/formatted-account'
 import '../formatted-text/date/formatted-date'
@@ -125,7 +127,25 @@ export const Default: Story = {
             row.name === 'User 5' ? html`<span>GIT</span>` : null,
         },
       },
-      { key: 'email', label: 'Email', sortable: true },
+      {
+        key: 'email',
+        label: 'Email',
+        sortable: true,
+        slots: {
+          trail: (row: MockData) => html`
+            <gds-button
+              size="xs"
+              rank="secondary"
+              @click=${(e: Event) => {
+                e.stopPropagation() // Prevent row click
+                console.log('Quick action for', row.name)
+              }}
+            >
+              Copy
+            </gds-button>
+          `,
+        },
+      },
       { key: 'role', label: 'Role', sortable: true },
       {
         key: 'status',
@@ -183,6 +203,45 @@ export const Default: Story = {
               locale="sv-SE"
               format="dateLong"
             ></gds-formatted-date>
+          `,
+        },
+      },
+      {
+        key: 'actions',
+        label: 'Actions',
+        type: 'actions',
+        align: 'right',
+        width: '200px',
+        slots: {
+          value: (row: MockData) => html`
+            <gds-context-menu>
+              <gds-button slot="trigger" size="small" rank="tertiary">
+                <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+              </gds-button>
+              ${row.status === 'Active'
+                ? html`
+                    <gds-menu-item
+                      @click=${() => console.log('Deactivate', row)}
+                    >
+                      Deactivate
+                    </gds-menu-item>
+                  `
+                : html`
+                    <gds-menu-item @click=${() => console.log('Activate', row)}>
+                      Activate
+                    </gds-menu-item>
+                  `}
+              <gds-menu-item @click=${() => console.log('View logs', row)}>
+                View Activity Log
+              </gds-menu-item>
+              <gds-divider></gds-divider>
+              <gds-menu-item
+                variant="negative"
+                @click=${() => console.log('Delete', row)}
+              >
+                Delete User
+              </gds-menu-item>
+            </gds-context-menu>
           `,
         },
       },

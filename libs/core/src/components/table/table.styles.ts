@@ -9,6 +9,7 @@ const style = css`
   .gds-table {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 24px;
   }
 
@@ -18,6 +19,7 @@ const style = css`
     border-spacing: 0;
     border: none;
     table-layout: auto;
+    overflow: auto;
   }
 
   thead {
