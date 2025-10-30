@@ -101,8 +101,8 @@ const mockApi = async (
 export const Default: Story = {
   args: {
     columns: [
-      { key: 'id', label: '#', sortable: true, align: 'right' },
-      { key: 'name', label: 'Name', sortable: true },
+      { key: 'id', label: '#', sortable: false, align: 'right' },
+      { key: 'name', label: 'Name', sortable: false },
       { key: 'email', label: 'Email', sortable: true },
       { key: 'role', label: 'Role', sortable: true },
       { key: 'status', label: 'Status', sortable: true, align: 'center' },

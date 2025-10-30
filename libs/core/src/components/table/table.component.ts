@@ -246,27 +246,32 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                       (column) => html`
                         <th
                           class=${classMap({
-                            'text-right': column.align === 'right',
-                            'text-center': column.align === 'center',
+                            // 'text-right': column.align === 'right',
+                            // 'text-center': column.align === 'center',
+                            sortable: !!column.sortable,
+                            sorted: this.tableState.sortColumn === column.key,
+                            'sort-asc':
+                              this.tableState.sortColumn === column.key &&
+                              this.tableState.sortDirection === 'asc',
+                            'sort-desc':
+                              this.tableState.sortColumn === column.key &&
+                              this.tableState.sortDirection === 'desc',
                           })}
+                          @click=${column.sortable
+                            ? () => this.handleSort(column.key)
+                            : null}
                         >
                           <div class="column-header">
-                            ${column.label}
+                            <span class="column-label">${column.label}</span>
                             ${when(
                               column.sortable,
                               () => html`
-                                <gds-button
-                                  size="xs"
-                                  rank="tertiary"
-                                  @click=${() => this.handleSort(column.key)}
-                                >
+                                <span class="sort-icon">
                                   ${when(
                                     this.tableState.sortColumn === column.key &&
                                       this.tableState.sortDirection === 'asc',
                                     () =>
-                                      html`<gds-icon-sort-up
-                                        size="m"
-                                      ></gds-icon-sort-up>`,
+                                      html`<gds-icon-sort-up></gds-icon-sort-up>`,
                                     () =>
                                       when(
                                         this.tableState.sortColumn ===
@@ -274,16 +279,12 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                                           this.tableState.sortDirection ===
                                             'desc',
                                         () =>
-                                          html`<gds-icon-sort-down
-                                            size="m"
-                                          ></gds-icon-sort-down>`,
+                                          html`<gds-icon-sort-down></gds-icon-sort-down>`,
                                         () =>
-                                          html`<gds-icon-sort
-                                            size="m"
-                                          ></gds-icon-sort>`, // default unsorted icon
+                                          html`<gds-icon-sort-down></gds-icon-sort-down>`, // Default to down arrow
                                       ),
                                   )}
-                                </gds-button>
+                                </span>
                               `,
                             )}
                           </div>
@@ -326,7 +327,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                               data-label=${column.label}
                               class=${classMap({
                                 'text-right': column.align === 'right',
-                                'text-center': column.align === 'center',
+                                // 'text-center': column.align === 'center',
                               })}
                             >
                               ${row[column.key]}
