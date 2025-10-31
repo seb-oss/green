@@ -1,5 +1,29 @@
 # Changelog
 
+## 2.13.0
+
+### Minor Changes
+
+- ba7e126: **Icon:** Add Small chevrons, expand and sorting icons
+
+## 2.12.3
+
+### Patch Changes
+
+- eee97dc: **GdsMenuHeading:** (React) add missing export
+
+## 2.12.2
+
+### Patch Changes
+
+- effeb0e: **Dropdown:** Fix styling regression where height of field was no longer adapting to custom trigger content
+
+## 2.12.1
+
+### Patch Changes
+
+- 7ac380e: **Form controls:** Fix rendering regression where empty footer still takes up space
+
 ## 2.12.0
 
 ### Minor Changes
