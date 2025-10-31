@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.13.2
+
+### Patch Changes
+
+- 1bd52f1: **Dropdown:** Fix background color of selected option in dark mode
+
 ## 2.13.1
 
 ### Patch Changes
