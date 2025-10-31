@@ -243,10 +243,11 @@ export const Default: Story = {
       title="Custom table title"
       subtitle="Custom table subtitle"
       selectable
+      responsive
+      density=${args.density}
       .columns=${args.columns}
       .dataProvider=${args.dataProvider}
       .actions=${args.actions}
-      density=${args.density}
       @data-loaded=${(e: CustomEvent) => console.log('Data loaded:', e.detail)}
       @data-error=${(e: CustomEvent) =>
         console.error('Error loading data:', e.detail)}
