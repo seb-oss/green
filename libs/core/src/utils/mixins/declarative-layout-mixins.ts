@@ -216,6 +216,7 @@ export interface LayoutChildProps {
   'grid-row'?: string
   'grid-area'?: string
   flex?: string
+  order?: string
 }
 
 /**
