@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.13.1
+
+### Patch Changes
+
+- bb08507: **Exports:** Fix path for 'pure' export in package.json
+
 ## 2.13.0
 
 ### Minor Changes
