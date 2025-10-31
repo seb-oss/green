@@ -30,6 +30,7 @@ export class GdsTableRowSelector extends GdsElement {
         justify-content: center;
         width: max-content;
         outline: none;
+        margin: auto;
       }
     `,
   ]

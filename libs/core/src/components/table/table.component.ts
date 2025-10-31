@@ -72,6 +72,9 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
   @property({ type: Boolean, reflect: true })
   selectable = false
 
+  @property({ type: Function })
+  actions?: (row: T, index: number) => any
+
   @state()
   private tableState: TableState = {
     page: 1,
@@ -349,6 +352,10 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                         </th>
                       `,
                     )}
+                  ${when(
+                    this.actions,
+                    () => html`<th class="actions-header"></th>`,
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -358,7 +365,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                       class=${classMap({
                         selected: this.selectedRows.has(index),
                         loading: this.loading,
-                        'fade-in': !this.loading,
+                        // 'fade-in': !this.loading,
                       })}
                     >
                       ${when(
@@ -390,6 +397,14 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                             </td>
                           `,
                         )}
+                      ${when(
+                        this.actions,
+                        () => html`
+                          <td class="actions-cell">
+                            ${this.actions!(row, index)}
+                          </td>
+                        `,
+                      )}
                     </tr>
                   `,
                 )}
@@ -412,8 +427,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
                     rank="secondary"
                     @click=${this.clearSelection}
                   >
-                    Clear
-                    <gds-icon-cross-small slot="trail"></gds-icon-cross-small>
+                    <gds-icon-cross-small></gds-icon-cross-small>
                   </gds-button>
                 </div>
               `,

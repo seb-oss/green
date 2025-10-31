@@ -195,7 +195,7 @@ export const Default: Story = {
         key: 'lastLogin',
         label: 'Last Login',
         sortable: true,
-        align: 'right',
+        align: 'left',
         slots: {
           value: (row: MockData) => html`
             <gds-formatted-date
@@ -206,46 +206,35 @@ export const Default: Story = {
           `,
         },
       },
-      {
-        key: 'actions',
-        label: 'Actions',
-        type: 'actions',
-        align: 'right',
-        width: '200px',
-        slots: {
-          value: (row: MockData) => html`
-            <gds-context-menu>
-              <gds-button slot="trigger" size="small" rank="tertiary">
-                <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
-              </gds-button>
-              ${row.status === 'Active'
-                ? html`
-                    <gds-menu-item
-                      @click=${() => console.log('Deactivate', row)}
-                    >
-                      Deactivate
-                    </gds-menu-item>
-                  `
-                : html`
-                    <gds-menu-item @click=${() => console.log('Activate', row)}>
-                      Activate
-                    </gds-menu-item>
-                  `}
-              <gds-menu-item @click=${() => console.log('View logs', row)}>
-                View Activity Log
-              </gds-menu-item>
-              <gds-divider></gds-divider>
-              <gds-menu-item
-                variant="negative"
-                @click=${() => console.log('Delete', row)}
-              >
-                Delete User
-              </gds-menu-item>
-            </gds-context-menu>
-          `,
-        },
-      },
     ],
+    actions: (row: MockData) => html`
+      <gds-context-menu>
+        <gds-button slot="trigger" size="small" rank="tertiary">
+          <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+        </gds-button>
+        ${row.status === 'Active'
+          ? html`
+              <gds-menu-item @click=${() => console.log('Deactivate', row)}>
+                Deactivate
+              </gds-menu-item>
+            `
+          : html`
+              <gds-menu-item @click=${() => console.log('Activate', row)}>
+                Activate
+              </gds-menu-item>
+            `}
+        <gds-menu-item @click=${() => console.log('View logs', row)}>
+          View Activity Log
+        </gds-menu-item>
+        <gds-divider></gds-divider>
+        <gds-menu-item
+          variant="negative"
+          @click=${() => console.log('Delete', row)}
+        >
+          Delete User
+        </gds-menu-item>
+      </gds-context-menu>
+    `,
     density: 'comfortable',
     dataProvider: mockApi,
   },
@@ -254,6 +243,7 @@ export const Default: Story = {
       selectable
       .columns=${args.columns}
       .dataProvider=${args.dataProvider}
+      .actions=${args.actions}
       density=${args.density}
       @data-loaded=${(e: CustomEvent) => console.log('Data loaded:', e.detail)}
       @data-error=${(e: CustomEvent) =>

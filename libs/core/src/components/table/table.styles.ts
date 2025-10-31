@@ -55,7 +55,7 @@ const style = css`
     background: rgba(0, 0, 0, 0.05);
     border-radius: 8px;
     transition: all 420ms;
-    inset: 8px 4px;
+    inset: 6px 4px;
 
     @starting-style {
       opacity: 0;
@@ -139,6 +139,7 @@ const style = css`
 
   tbody tr.loading {
     opacity: 0.3;
+    pointer-events: none;
   }
 
   tbody tr.fade-in {
@@ -171,11 +172,26 @@ const style = css`
     padding: 12px 16px;
   }
 
-  tr.selected {
-    background-color: rgba(59, 130, 246, 0.1);
+  tr {
+    position: relative;
   }
 
-  tr.selected:hover {
+  tr.selected {
+    border-color: transparent;
+  }
+
+  tr.selected::after {
+    content: '';
+    display: flex;
+    position: absolute;
+    inset: 1px 0;
+    border-radius: 12px;
+    background-color: rgba(59, 130, 246, 0.1);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  tr.selected:hover::before {
     background-color: rgba(59, 130, 246, 0.15);
   }
 
