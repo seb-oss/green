@@ -60,6 +60,9 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
   private cache: TableCache<T> = {}
   private cacheDuration = 5 * 60 * 1000
 
+  @property({ type: String })
+  subtitle?: string
+
   @property({ type: Array })
   columns: TableColumn[] = []
 
@@ -227,44 +230,66 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
     return html`
       <div class="gds-table ${this.density}">
         <div class="header">
-          <div class="lead">
-            <gds-input
-              type="text"
-              size="small"
-              plain
-              clearable
-              placeholder="Search..."
-              .value=${this.tableState.searchQuery}
-              @input=${this.handleSearch}
-              @gds-input-cleared=${this.handleSearchClear}
-              width="240px"
-            >
-              <gds-icon-magnifying-glass
-                slot="lead"
-              ></gds-icon-magnifying-glass>
-            </gds-input>
+          <div class="header-meta">
+            ${when(
+              this.title,
+              () => html`
+                <gds-text tag="h2" font="heading-m">${this.title}</gds-text>
+              `,
+            )}
+            ${when(
+              this.subtitle,
+              () => html`
+                <gds-text tag="p" font="detail-book-s"
+                  >${this.subtitle}</gds-text
+                >
+              `,
+            )}
           </div>
-          <div class="trail">
-            <gds-dropdown
-              multiple
-              plain
-              size="small"
-              searchable
-              .value=${Array.from(this.tableState.visibleColumns)}
-              @change=${this.handleColumnVisibility}
-            >
-              <span slot="trigger">Columns</span>
-              ${this.columns.map(
-                (column) => html`
-                  <gds-option
-                    value=${column.key}
-                    ?selected=${this.tableState.visibleColumns.has(column.key)}
-                  >
-                    ${column.label}
-                  </gds-option>
-                `,
-              )}
-            </gds-dropdown>
+          <div class="header-slots">
+            <div class="lead">
+              <gds-input
+                type="text"
+                size="small"
+                plain
+                clearable
+                placeholder="Search..."
+                .value=${this.tableState.searchQuery}
+                @input=${this.handleSearch}
+                @gds-input-cleared=${this.handleSearchClear}
+                width="240px"
+              >
+                <gds-icon-magnifying-glass
+                  slot="lead"
+                ></gds-icon-magnifying-glass>
+              </gds-input>
+              <slot name="header-lead"></slot>
+            </div>
+            <div class="trail">
+              <slot name="header-trail"></slot>
+              <gds-dropdown
+                multiple
+                plain
+                size="small"
+                searchable
+                .value=${Array.from(this.tableState.visibleColumns)}
+                @change=${this.handleColumnVisibility}
+              >
+                <span slot="trigger">Columns</span>
+                ${this.columns.map(
+                  (column) => html`
+                    <gds-option
+                      value=${column.key}
+                      ?selected=${this.tableState.visibleColumns.has(
+                        column.key,
+                      )}
+                    >
+                      ${column.label}
+                    </gds-option>
+                  `,
+                )}
+              </gds-dropdown>
+            </div>
           </div>
         </div>
 

@@ -196,8 +196,7 @@ const style = css`
   }
 
   /* Footer and header layout */
-  .footer,
-  .header {
+  .footer {
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -208,6 +207,29 @@ const style = css`
       align-items: center;
       gap: 20px;
     }
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .header-slots {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .lead,
+    .trail {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+  }
+
+  .header-meta {
+    display: flex;
+    flex-direction: column;
   }
 
   .selection-info {

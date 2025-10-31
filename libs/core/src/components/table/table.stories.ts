@@ -240,6 +240,8 @@ export const Default: Story = {
   },
   render: (args) => html`
     <gds-table
+      title="Custom table title"
+      subtitle="Custom table subtitle"
       selectable
       .columns=${args.columns}
       .dataProvider=${args.dataProvider}
@@ -250,6 +252,13 @@ export const Default: Story = {
         console.error('Error loading data:', e.detail)}
       @selection-change=${(e: CustomEvent) =>
         console.log('Selection changed:', e.detail)}
-    ></gds-table>
+    >
+      <gds-button slot="header-lead" size="small" rank="secondary">
+        Lead slot
+      </gds-button>
+      <gds-button slot="header-trail" size="small" rank="secondary">
+        trail slot
+      </gds-button>
+    </gds-table>
   `,
 }
