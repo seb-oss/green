@@ -99,34 +99,29 @@ export default {
         }
       }, 10)
 
-      const storyColorSchemeStyleAuto = html`<style>
+      const storyDarkmodeStyle = `
+        .sb-show-main,
+        .docs-story {
+          background-color: #0a0b0b;
+        }`
+
+      const storyLightmodeStyle = `
+        .sb-show-main,
         .docs-story {
           background-color: #fff;
-        }
+        }`
+
+      const storyAutomodeStyle = `
+        ${storyLightmodeStyle}
         @media (prefers-color-scheme: dark) {
-          .docs-story {
-            background-color: #000;
-          }
-        }
-      </style>`
-
-      const storyDarkmodeStyle = html`<style>
-        .docs-story {
-          background-color: #000;
-        }
-      </style>`
-
-      const storyLightmodeStyle = html`<style>
-        .docs-story {
-          background-color: #fff;
-        }
-      </style>`
+          ${storyDarkmodeStyle}
+        }`
 
       const renderStoryColorSchemeStyle = () => {
         switch (context.globals.colorScheme) {
           default:
           case 'auto':
-            return storyColorSchemeStyleAuto
+            return storyAutomodeStyle
           case 'dark':
             return storyDarkmodeStyle
           case 'light':
@@ -134,7 +129,10 @@ export default {
         }
       }
 
-      return html`${renderStoryColorSchemeStyle()}<gds-theme
+      return html`<style>
+          ${renderStoryColorSchemeStyle()}
+        </style>
+        <gds-theme
           .designVersion=${context.globals.style}
           .colorScheme=${context.globals.colorScheme}
           >${storyFn()}</gds-theme
