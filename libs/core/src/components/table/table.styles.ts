@@ -278,17 +278,8 @@ const style = css`
     text-align: center;
   }
 
-  /* ============================================
-   * States & Feedback
-   * Error states and loading animations
-   * ============================================ */
-  .error {
-    padding: 24px;
-    text-align: center;
-    color: #dc2626;
-    background: #fef2f2;
-    border-radius: 8px;
-    border: 1px solid #fecaca;
+  .space-between .cell-content {
+    justify-content: space-between;
   }
 
   /* ============================================

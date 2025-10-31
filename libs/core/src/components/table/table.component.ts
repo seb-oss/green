@@ -9,10 +9,7 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsButton } from '../button/button.component'
-import {
-  GdsContextMenu,
-  GdsMenuItem,
-} from '../context-menu/context-menu.component'
+import { GdsCard } from '../card/card.component'
 import { GdsDropdown } from '../dropdown/dropdown.component'
 import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import { IconMagnifyingGlass } from '../icon/icons/magnifying-glass.component'
@@ -21,6 +18,7 @@ import { IconSortUp } from '../icon/icons/sort-up.component'
 import { IconSort } from '../icon/icons/sort.component'
 import { GdsInput } from '../input/input.component'
 import { GdsPagination } from '../pagination/pagination.component'
+import { GdsText } from '../text/text.component'
 import { GdsTableRowSelector } from './row-selector/row-selector.component'
 import TableStyles from './table.styles'
 import {
@@ -43,10 +41,10 @@ import {
     GdsTableRowSelector,
     GdsButton,
     GdsInput,
+    GdsCard,
+    GdsText,
     GdsDropdown,
     GdsPagination,
-    GdsContextMenu,
-    GdsMenuItem,
     IconMagnifyingGlass,
     IconSort,
     IconSortUp,
@@ -195,38 +193,22 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
 
   /**
    * Renders the content of a single table cell
-   * Handles both column-level and cell-specific slots with proper fallback logic
+   * Handles both column-level and cell-specific pseudo slots with proper fallback logic
    */
-  #renderCellContent(row: T, rowIndex: number, column: TableColumn) {
-    const cellKey = `${column.key}-${rowIndex}`
+  #renderCellContent(row: T, index: number, column: TableColumn) {
+    const id = `${column.key}-${index}`
+    const cell = this.slots[id]
+    const col = column.slots
 
-    // Check for cell-specific slots first
-    const cellSpecificSlots = this.slots[cellKey]
-
-    // Get column-level slots
-    const columnLevelLead = column.slots?.lead?.(row, rowIndex)
-    const columnLevelTrail = column.slots?.trail?.(row, rowIndex)
-    const columnLevelValue = column.slots?.value?.(row, rowIndex)
-
-    // Use cell-specific if available, otherwise fall back to column-level
-    const leadContent = cellSpecificSlots?.lead || columnLevelLead
-    const trailContent = cellSpecificSlots?.trail || columnLevelTrail
-    const valueContent =
-      cellSpecificSlots?.value !== undefined
-        ? cellSpecificSlots.value
-        : columnLevelValue
-
-    const cellValue = valueContent || row[column.key]
+    const lead = cell?.lead ?? col?.lead?.(row, index)
+    const value = cell?.value ?? col?.value?.(row, index) ?? row[column.key]
+    const trail = cell?.trail ?? col?.trail?.(row, index)
 
     return html`
       <div class="cell-content">
-        ${leadContent
-          ? html`<span class="cell-lead">${leadContent}</span>`
-          : ''}
-        <span class="cell-value">${cellValue}</span>
-        ${trailContent
-          ? html`<span class="cell-trail">${trailContent}</span>`
-          : ''}
+        ${lead && html`<span class="cell-lead">${lead}</span>`}
+        <span class="cell-value">${value}</span>
+        ${trail && html`<span class="cell-trail">${trail}</span>`}
       </div>
     `
   }
@@ -402,6 +384,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
         data-label=${column.label}
         class=${classMap({
           'text-right': column.align === 'right',
+          'space-between': column.justify === true,
         })}
       >
         ${this.#renderCellContent(row, rowIndex, column)}
@@ -475,10 +458,16 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
    */
   #renderErrorState() {
     return html`
-      <div class="error">
-        <p>Error loading data: ${this.error!.message}</p>
-        <gds-button @click=${() => this.#loadData()}>Retry</gds-button>
-      </div>
+      <gds-card
+        variant="negative"
+        justify-content="center"
+        align-items="flex-start"
+      >
+        <gds-text tag="p">Error loading data</gds-text>
+        <gds-button @click=${() => this.#loadData()} variant="negative">
+          Retry
+        </gds-button>
+      </gds-card>
     `
   }
 
@@ -490,36 +479,40 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
     return html`
       <div class="footer">
         <div class="lead">
-          ${when(
-            this.selectable && this.#hasSelection,
-            () => html`
-              <div class="selection-info">
+          <slot name="footer-lead">
+            ${when(
+              this.selectable && this.#hasSelection,
+              () => html`
+                <div class="selection-info">
+                  <span>
+                    ${this.selectedRows.size} of ${this.data.length} selected
+                  </span>
+                  <gds-button
+                    size="xs"
+                    rank="secondary"
+                    @click=${this.clearSelection}
+                  >
+                    <gds-icon-cross-small></gds-icon-cross-small>
+                  </gds-button>
+                </div>
+              `,
+              () => html`
                 <span>
-                  ${this.selectedRows.size} of ${this.data.length} selected
+                  Showing
+                  ${(this.tableState.page - 1) * this.tableState.pageSize + 1}
+                  to
+                  ${Math.min(
+                    this.tableState.page * this.tableState.pageSize,
+                    this.totalRows,
+                  )}
+                  of ${this.totalRows} entries
                 </span>
-                <gds-button
-                  size="xs"
-                  rank="secondary"
-                  @click=${this.clearSelection}
-                >
-                  <gds-icon-cross-small></gds-icon-cross-small>
-                </gds-button>
-              </div>
-            `,
-            () => html`
-              <span>
-                Showing
-                ${(this.tableState.page - 1) * this.tableState.pageSize + 1} to
-                ${Math.min(
-                  this.tableState.page * this.tableState.pageSize,
-                  this.totalRows,
-                )}
-                of ${this.totalRows} entries
-              </span>
-            `,
-          )}
+              `,
+            )}
+          </slot>
         </div>
         <div class="trail">
+          <slot name="footer-trail"></slot>
           <gds-pagination
             .page=${this.tableState.page}
             .pageSize=${this.tableState.pageSize}

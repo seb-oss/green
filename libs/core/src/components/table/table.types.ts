@@ -5,6 +5,7 @@ export interface TableColumn {
   sortable?: boolean
   align?: 'left' | 'right'
   visible?: boolean
+  justify?: boolean
   // ⚠️ Experimental
   slots?: {
     lead?: (row: any, index: number) => any
