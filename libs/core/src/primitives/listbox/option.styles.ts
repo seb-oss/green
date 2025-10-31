@@ -35,7 +35,7 @@ const style = css`
     }
 
     :host([highlighted]) {
-      background-color: var(--gds-sys-color-l3-neutral-01);
+      background-color: var(--gds-sys-color-l2-neutral-03);
       color: var(--gds-sys-color-content-inversed);
     }
 
