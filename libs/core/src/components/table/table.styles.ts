@@ -1,6 +1,10 @@
 import { css } from 'lit'
 
 const style = css`
+  /* ============================================
+   * Host & Container
+   * Base component setup and main container
+   * ============================================ */
   :host {
     display: block;
     font: var(--gds-sys-text-detail-book-s);
@@ -13,6 +17,10 @@ const style = css`
     gap: 24px;
   }
 
+  /* ============================================
+   * Table Structure
+   * Core table element and layout configuration
+   * ============================================ */
   table {
     width: 100%;
     border-collapse: collapse;
@@ -22,6 +30,17 @@ const style = css`
     overflow: auto;
   }
 
+  /* Base cell styling (shared by th and td) */
+  th,
+  td {
+    padding: 8px;
+    font-weight: normal;
+  }
+
+  /* ============================================
+   * Table Header
+   * Sticky header with background and sorting
+   * ============================================ */
   thead {
     position: sticky;
     font-weight: normal;
@@ -29,6 +48,7 @@ const style = css`
     z-index: 2;
   }
 
+  /* Header background overlay */
   thead::before {
     content: '';
     position: absolute;
@@ -38,6 +58,7 @@ const style = css`
     z-index: 0;
   }
 
+  /* Header cells */
   thead th {
     padding: 12px 16px;
     border: none;
@@ -48,6 +69,7 @@ const style = css`
     transition: all 0.2s ease;
   }
 
+  /* Header cell hover effect background */
   thead th::before {
     content: '';
     display: none;
@@ -64,7 +86,10 @@ const style = css`
     }
   }
 
-  /* Sortable header styling */
+  /* ============================================
+   * Sortable Columns
+   * Interactive sorting behavior and indicators
+   * ============================================ */
   thead th.sortable {
     cursor: pointer;
     user-select: none;
@@ -79,7 +104,7 @@ const style = css`
     background: rgba(0, 0, 0, 0.1);
   }
 
-  /* Column header layout */
+  /* Column header content layout */
   .column-header {
     display: flex;
     align-items: center;
@@ -92,45 +117,27 @@ const style = css`
     font-weight: normal;
   }
 
+  /* Sort icon styling */
   .sort-icon {
     display: flex;
     align-items: center;
     margin-left: 8px;
     opacity: 0.4;
     transition: opacity 420ms ease;
-    flex-shrink: 0;
   }
 
-  /* Show sort icon more prominently when sorted */
   thead th.sorted .sort-icon {
     opacity: 1;
   }
 
-  /* Hover effect for sortable columns */
   thead th.sortable:hover .sort-icon {
     opacity: 0.8;
   }
 
-  /* Right-aligned columns */
-  .text-right .column-header {
-    flex-direction: row-reverse;
-  }
-
-  .text-right .sort-icon {
-    margin-left: 0;
-    margin-right: 8px;
-  }
-
-  /* Center-aligned columns */
-  .text-center .column-header {
-    justify-content: center;
-  }
-
-  .text-center .column-label {
-    text-align: center;
-  }
-
-  /* Body styling */
+  /* ============================================
+   * Table Body
+   * Data rows and cells styling
+   * ============================================ */
   tbody tr {
     border-bottom: 1px solid var(--gds-sys-color-border-subtle-01);
     opacity: 1;
@@ -142,29 +149,19 @@ const style = css`
     pointer-events: none;
   }
 
-  tbody tr.fade-in {
-    opacity: 0;
-    animation: fadeIn 240ms linear forwards;
-  }
-
   tbody td {
     padding-inline: 16px;
     padding-block: 12px;
   }
 
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-    }
+  /* ============================================
+   * Row Selection
+   * Checkbox and selected state styles
+   * ============================================ */
+  tr {
+    position: relative;
   }
 
-  th,
-  td {
-    padding: 8px;
-    font-weight: normal;
-  }
-
-  /* Selection styling */
   .checkbox-cell {
     min-width: 20px;
     width: 20px;
@@ -172,14 +169,11 @@ const style = css`
     padding: 12px 16px;
   }
 
-  tr {
-    position: relative;
-  }
-
   tr.selected {
     border-color: transparent;
   }
 
+  /* Selected row highlight */
   tr.selected::after {
     content: '';
     display: flex;
@@ -195,41 +189,47 @@ const style = css`
     background-color: rgba(59, 130, 246, 0.15);
   }
 
-  /* Footer and header layout */
-  .footer {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-
-    .lead,
-    .trail {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-  }
-
+  /* ============================================
+   * Header & Footer Layout
+   * Top and bottom control sections
+   * ============================================ */
   .header {
     display: flex;
     flex-direction: column;
     gap: 20px;
-
-    .header-slots {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .lead,
-    .trail {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
   }
 
   .header-meta {
     display: flex;
     flex-direction: column;
+  }
+
+  .header-slots {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .footer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* Shared layout for header and footer sections */
+  .header .lead,
+  .header .trail,
+  .footer .lead,
+  .footer .trail {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* Footer specific styling */
+  .footer .lead {
+    padding-left: 12px;
+    font: var(--gds-sys-text-detail-book-xs);
+    color: var(--gds-sys-color-content-neutral-02);
   }
 
   .selection-info {
@@ -238,7 +238,63 @@ const style = css`
     gap: 12px;
   }
 
-  /* Responsive design */
+  /* ============================================
+   * Cell Content & Alignment
+   * Cell content layout and text alignment
+   * ============================================ */
+  .cell-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Text alignment utilities */
+  .text-right {
+    text-align: right;
+  }
+
+  .text-right .column-header {
+    flex-direction: row-reverse;
+  }
+
+  .text-right .sort-icon {
+    margin-left: 0;
+    margin-right: 8px;
+  }
+
+  .text-right .cell-content {
+    justify-content: flex-end;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .text-center .column-header {
+    justify-content: center;
+  }
+
+  .text-center .column-label {
+    text-align: center;
+  }
+
+  /* ============================================
+   * States & Feedback
+   * Error states and loading animations
+   * ============================================ */
+  .error {
+    padding: 24px;
+    text-align: center;
+    color: #dc2626;
+    background: #fef2f2;
+    border-radius: 8px;
+    border: 1px solid #fecaca;
+  }
+
+  /* ============================================
+   * Responsive Design
+   * Mobile and tablet adaptations
+   * ============================================ */
   @media (max-width: 768px) {
     .responsive-table td {
       display: flex;
@@ -251,54 +307,15 @@ const style = css`
       font-weight: bold;
     }
 
-    /* Adjust sort icons on mobile */
     .sort-icon {
       margin-left: 4px;
     }
   }
 
-  /* Utility classes */
-  .text-right {
-    text-align: right;
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
-  /* Error state */
-  .error {
-    padding: 24px;
-    text-align: center;
-    color: #dc2626;
-    background: #fef2f2;
-    border-radius: 8px;
-    border: 1px solid #fecaca;
-  }
-
-  /** 
-   * Footer
-   */
-
-  .footer .lead {
-    padding-left: 12px;
-    font: var(--gds-sys-text-detail-book-xs);
-    color: var(--gds-sys-color-content-neutral-02);
-  }
-
-  /**
-   * ⚠️ Experimental
-   */
-
-  .cell-content {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .text-right .cell-content {
-    justify-content: flex-end;
-  }
+  /* ============================================
+   * Density modes
+   * TBD
+   * ============================================ */
 `
 
 export default style
