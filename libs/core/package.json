@@ -44,7 +44,7 @@
     "./jest-config": "./green-jest-config.cjs",
     "./everything": "./components/index.js",
     "./components/*": "./components/*",
-    "./pure": "./components/pure.js",
+    "./pure": "./pure.js",
     "./_primitives/*": "./primitives/*",
     "./react": "./generated/react/index.js",
     "./react/*": "./generated/react/*"
