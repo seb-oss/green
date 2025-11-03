@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.13.2
+
+### Patch Changes
+
+- c6b4a63: **GroupedList:** Added interim 2023 styling, fixes #2413
+- b086b0b: **Declarative layout:** Add missing member `order` to `LayoutChildProps` interface
+- 1bd52f1: **Dropdown:** Fix background color of selected option in dark mode
+
 ## 2.13.1
 
 ### Patch Changes
