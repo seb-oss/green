@@ -129,7 +129,7 @@ export class GdsPagination extends GdsElement {
                   <gds-button
                     size="small"
                     rank="${this.page === p ? 'primary' : 'tertiary'}"
-                    @click=${() => this.handlePageChange(p)}
+                    @click=${() => this.handlePageChange(p as number)}
                   >
                     ${p}
                   </gds-button>
