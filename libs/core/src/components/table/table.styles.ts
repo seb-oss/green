@@ -74,10 +74,11 @@ const style = css`
     content: '';
     display: none;
     position: absolute;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     transition: all 420ms;
     inset: 6px 4px;
+    z-index: -1;
 
     @starting-style {
       opacity: 0;
@@ -86,13 +87,13 @@ const style = css`
     }
   }
 
-  /* ============================================
+  /** 
    * Sortable Columns
-   * Interactive sorting behavior and indicators
-   * ============================================ */
+   **/
   thead th.sortable {
     cursor: pointer;
     user-select: none;
+    transition: all 0.2s ease;
   }
 
   thead th.sortable:hover::before {
@@ -101,15 +102,19 @@ const style = css`
   }
 
   thead th.sortable:active::before {
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.2);
   }
+  /* 
+  thead th.sorted::before {
+    display: flex;
+  } */
 
   /* Column header content layout */
   .column-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    /* width: 100%; */
     min-height: 20px;
   }
 
@@ -122,22 +127,24 @@ const style = css`
     display: flex;
     align-items: center;
     margin-left: 8px;
-    opacity: 0.4;
     transition: opacity 420ms ease;
+    z-index: 1;
+    opacity: 0;
+  }
+
+  thead th.sortable:hover:not(.sorted) .sort-icon {
+    opacity: 0.8;
   }
 
   thead th.sorted .sort-icon {
     opacity: 1;
   }
 
-  thead th.sortable:hover .sort-icon {
-    opacity: 0.8;
-  }
-
-  /* ============================================
+  /* 
    * Table Body
    * Data rows and cells styling
-   * ============================================ */
+   **/
+
   tbody tr {
     border-bottom: 1px solid var(--gds-sys-color-border-subtle-01);
     opacity: 1;
@@ -253,7 +260,8 @@ const style = css`
     text-align: right;
   }
 
-  .text-right .column-header {
+  .text-right .column-header,
+  th.actions {
     flex-direction: row-reverse;
   }
 
@@ -262,20 +270,9 @@ const style = css`
     margin-right: 8px;
   }
 
-  .text-right .cell-content {
+  .text-right .cell-content,
+  td.actions-cell .cell-content {
     justify-content: flex-end;
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
-  .text-center .column-header {
-    justify-content: center;
-  }
-
-  .text-center .column-label {
-    text-align: center;
   }
 
   .space-between .cell-content {

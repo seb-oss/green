@@ -102,7 +102,6 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
   @state()
   private error: Error | null = null
 
-  // ⚠️ Experimental
   @state()
   private slots: Record<string, { lead?: any; trail?: any; value?: any }> = {}
 
@@ -192,6 +191,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
   }
 
   /**
+   * ⚠️ Experimental
    * Renders the content of a single table cell
    * Handles both column-level and cell-specific pseudo slots with proper fallback logic
    */
@@ -214,30 +214,21 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
   }
 
   /**
-   * Renders the sorting icon for a column header
-   * Shows different icons based on the current sort state
+   * Renders the sorting icon ONLY when column is sorted
+   * Returns the appropriate icon based on sort direction
    */
   #renderSortIcon(column: TableColumn) {
-    const isSortedColumn = this.tableState.sortColumn === column.key
+    const isSorted = this.tableState.sortColumn === column.key
     const sortDirection = this.tableState.sortDirection
 
-    // Determine which icon to show based on sort state
-    if (!isSortedColumn) {
-      // Default unsorted icon
-      return html`<gds-icon-sort-down size="m"></gds-icon-sort-down>`
+    if (isSorted) {
+      return sortDirection === 'asc'
+        ? html`<gds-icon-sort-up size="m"></gds-icon-sort-up>`
+        : html`<gds-icon-sort-down size="m"></gds-icon-sort-down>`
     }
 
-    // Show appropriate icon based on sort direction
-    switch (sortDirection) {
-      case 'asc':
-        return html`<gds-icon-sort-up size="m"></gds-icon-sort-up>`
-      case 'desc':
-        return html`<gds-icon-sort-down size="m"></gds-icon-sort-down>`
-      default:
-        return html`<gds-icon-sort-down size="m"></gds-icon-sort-down>`
-    }
+    return html`<gds-icon-sort-up size="m"></gds-icon-sort-up>`
   }
-
   /**
    * Renders the table header controls section
    * Includes title, subtitle, search input, and column visibility dropdown
@@ -318,16 +309,18 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
    * Handles sortable columns, sort state visualization, and click handlers
    */
   #renderColumnHeader(column: TableColumn) {
-    const isSortedColumn = this.tableState.sortColumn === column.key
+    const isSorted = this.tableState.sortColumn === column.key
     const sortDirection = this.tableState.sortDirection
 
     return html`
       <th
         class=${classMap({
           sortable: !!column.sortable,
-          sorted: isSortedColumn,
-          'sort-asc': isSortedColumn && sortDirection === 'asc',
-          'sort-desc': isSortedColumn && sortDirection === 'desc',
+          sorted: isSorted,
+          'sort-asc': isSorted && sortDirection === 'asc',
+          'sort-desc': isSorted && sortDirection === 'desc',
+          'text-right': column.align === 'right',
+          'space-between': column.justify === true,
         })}
         @click=${column.sortable ? () => this.#handleSort(column.key) : null}
       >
@@ -336,7 +329,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
           ${when(
             column.sortable,
             () => html`
-              <span class="sort-icon"> ${this.#renderSortIcon(column)} </span>
+              <span class="sort-icon">${this.#renderSortIcon(column)}</span>
             `,
           )}
         </div>
@@ -368,7 +361,13 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
           ${this.columns
             .filter((column) => this.tableState.visibleColumns.has(column.key))
             .map((column) => this.#renderColumnHeader(column))}
-          ${when(this.actions, () => html`<th class="actions-header"></th>`)}
+          ${when(
+            this.actions,
+            () =>
+              html`<th class="column-header actions">
+                <div class="column-label">Actions</div>
+              </th>`,
+          )}
         </tr>
       </thead>
     `
@@ -423,7 +422,9 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
         ${when(
           this.actions,
           () => html`
-            <td class="actions-cell">${this.actions!(row, index)}</td>
+            <td class="actions-cell">
+              <div class="cell-content">${this.actions!(row, index)}</div>
+            </td>
           `,
         )}
       </tr>

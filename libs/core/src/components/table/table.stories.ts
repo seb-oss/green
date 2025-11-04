@@ -3,6 +3,7 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './table'
+import '../card'
 import '../dropdown/dropdown'
 import '../context-menu/context-menu'
 import '../input/input'
@@ -87,9 +88,9 @@ const mockDataProvider = async (
   await new Promise((resolve) => setTimeout(resolve, API_DELAY_MS))
 
   // Uncomment to test error handling
-  if (Math.random() < 0.1) {
-    throw new Error('Network error: Failed to fetch data')
-  }
+  // if (Math.random() < 0.1) {
+  //   throw new Error('Network error: Failed to fetch data')
+  // }
 
   // Generate base dataset
   const allData = generateMockDataset()
