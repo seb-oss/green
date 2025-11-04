@@ -42,15 +42,15 @@ export function withLinkProps<T extends Constructor<GdsElement>>(
      */
     @property()
     get rel(): string | undefined {
-      if (this._rel) {
-        return this._rel
+      if (this.#rel) {
+        return this.#rel
       }
       return this.target === '_blank' ? 'noreferrer noopener' : undefined
     }
     set rel(value: string | undefined) {
-      this._rel = value
+      this.#rel = value
     }
-    private _rel?: string
+    #rel?: string
 
     /**
      * When present, indicates that the linked resource should be downloaded
