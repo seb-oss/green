@@ -76,6 +76,9 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
   @property({ type: Boolean, reflect: false })
   responsive = false
 
+  @property({ type: Boolean })
+  plain = false
+
   @property()
   actions?: (row: T, index: number) => any
 
@@ -234,6 +237,8 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
    * Includes title, subtitle, search input, and column visibility dropdown
    */
   #renderHeaderControls() {
+    if (this.plain) return null
+
     return html`
       <div class="header">
         ${when(
@@ -477,6 +482,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
    * Shows either selection count or row count depending on selection state
    */
   #renderFooter() {
+    if (this.plain) return null
     return html`
       <div class="footer">
         <div class="lead">
