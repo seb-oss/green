@@ -198,8 +198,11 @@ export const html = htmlTemplateTagFactory(litHtml)
  * Returns the correctly scoped tag name for the given tag.
  * @param tagName The tag name to scope
  */
-export function getScopedTagName(tagName: string) {
-  return ScopedElementRegistry.instance.get(tagName) ?? tagName
+export function getScopedTagName(tagName: string, alwaysAddSuffix = false) {
+  return (
+    ScopedElementRegistry.instance.get(tagName) ??
+    tagName + (alwaysAddSuffix ? VER_SUFFIX : '')
+  )
 }
 
 /**
