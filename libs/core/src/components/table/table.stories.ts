@@ -49,15 +49,21 @@ const DEPARTMENTS = [
 
 const generateUserRecord = (index: number): UserData => {
   const id = index + 1
-  const firstName = ['David', 'Una', 'Rob', 'Jack', 'Charlie', 'Diana'][
+  const firstName = ['Sven', 'Erik', 'Olof', 'Ingrid', 'Nils', 'Anna'][
     index % 6
   ]
-  const lastName = ['Smith', 'Doe', 'Williams', 'Brown', 'Jones'][index % 5]
+  const lastName = [
+    'Lindgren',
+    'Svensson',
+    'Pettersson',
+    'Gustafsson',
+    'Larsson',
+  ][index % 5]
 
   return {
     id,
     name: `${firstName} ${lastName}`,
-    email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@company.com`,
+    email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@seb.io`,
     role: USER_ROLES[index % USER_ROLES.length],
     status: USER_STATUSES[index % USER_STATUSES.length],
     department: DEPARTMENTS[index % DEPARTMENTS.length],
@@ -141,12 +147,10 @@ const tableColumns: TableColumn[] = [
     sortable: true,
     cell: {
       lead: {
-        type: 'image',
-        src: (row) => row.avatarUrl || '',
+        type: 'avatar',
+        src: (row) => row.avatarUrl,
         alt: (row) => row.name,
-        'border-radius': 'max',
-        width: '24px',
-        height: '24px',
+        size: 'xl',
       },
     },
   },

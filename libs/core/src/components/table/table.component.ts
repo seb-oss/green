@@ -39,7 +39,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   #cache: Types.Cache<T> = {}
   #cacheDuration = 5 * 60 * 1000
 
-  @property({ type: String })
+  @property({ type: String, reflect: false })
   subtitle?: string
 
   @property({ type: Array })

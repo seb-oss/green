@@ -6,7 +6,6 @@ import type {
   NumberFormats,
 } from '../formatted-text/formatters'
 
-// Helper to make properties optional and add value resolver
 type CellProps<T> = {
   [K in keyof T]?: T[K] | ((row: any) => T[K])
 }
@@ -17,21 +16,11 @@ export interface BadgeCell
   value: string | ((row: any) => string)
 }
 
-export interface ImageCell
-  extends CellProps<
-    Pick<
-      GdsImg,
-      | 'src'
-      | 'alt'
-      | 'width'
-      | 'height'
-      | 'border-radius'
-      | 'object-fit'
-      | 'object-position'
-      | 'loading'
-    >
-  > {
-  type: 'image'
+export interface AvatarCell {
+  type: 'avatar'
+  src: string | ((row: any) => string)
+  alt?: string | ((row: any) => string)
+  size?: string
 }
 
 export interface CopyButtonCell extends CellProps<Pick<GdsButton, 'size'>> {
@@ -62,7 +51,7 @@ export interface FormattedDateCell {
 
 export type CellType =
   | BadgeCell
-  | ImageCell
+  | AvatarCell
   | CopyButtonCell
   | FormattedNumberCell
   | FormattedAccountCell

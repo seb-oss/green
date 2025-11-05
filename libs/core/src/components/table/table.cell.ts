@@ -29,21 +29,21 @@ const cellRenderers = {
     `
   },
 
-  image: (config: Extract<CellType, { type: 'image' }>, row: any) => {
+  avatar: (config: Extract<CellType, { type: 'avatar' }>, row: any) => {
     const src = resolve(config.src, row)
     if (!src) return null
+
+    const size = config.size || '24px'
 
     return html`
       <gds-img
         src="${src}"
         alt="${resolve(config.alt, row) || ''}"
-        width="${resolve(config.width, row) || ''}"
-        height="${resolve(config.height, row) || ''}"
-        border-radius="${resolve(config['border-radius'], row) || ''}"
-        object-fit="${resolve(config['object-fit'], row) || ''}"
-        object-position="${resolve(config['object-position'], row) || ''}"
-        loading="${(resolve(config.loading, row) as GdsImg['loading']) ||
-        'lazy'}"
+        width="${size}"
+        height="${size}"
+        border-radius="max"
+        object-fit="cover"
+        object-position="center"
       ></gds-img>
     `
   },
