@@ -1,21 +1,20 @@
 import { css } from 'lit'
 import { property } from 'lit/decorators.js'
 
-import { GdsElement } from '../../../gds-element'
-import rbcbToggleStyles from '../../../shared-styles/rbcb-toggle.style'
-import { checkboxToggle } from '../../../shared-styles/rbcb-toggle.template'
-import { tokens } from '../../../tokens.style'
+import { GdsElement } from '../../gds-element'
+import rbcbToggleStyles from '../../shared-styles/rbcb-toggle.style'
+import { checkboxToggle } from '../../shared-styles/rbcb-toggle.template'
+import { tokens } from '../../tokens.style'
 import {
   gdsCustomElement,
   html,
-} from '../../../utils/helpers/custom-element-scoping'
-import { IconCheckmark } from '../../icon/icons/checkmark.component'
-import { IconMinusSmall } from '../../icon/icons/minus-small.component'
+} from '../../utils/helpers/custom-element-scoping'
+import { IconCheckmark, IconMinusSmall } from '../icon/icons/pure'
 
-@gdsCustomElement('gds-table-row-selector', {
+@gdsCustomElement('gds-table-checkbox', {
   dependsOn: [IconCheckmark, IconMinusSmall],
 })
-export class GdsTableRowSelector extends GdsElement {
+export class GdsTableCheckbox extends GdsElement {
   static styles = [
     tokens,
     rbcbToggleStyles,

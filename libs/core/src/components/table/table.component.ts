@@ -3,23 +3,29 @@ import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
+import {
+  GdsButton,
+  GdsCard,
+  GdsDropdown,
+  GdsInput,
+  GdsPagination,
+  GdsText,
+} from '../../pure'
 import { tokens } from '../../tokens.style'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { GdsButton } from '../button/button.component'
-import { GdsCard } from '../card/card.component'
-import { GdsDropdown } from '../dropdown/dropdown.component'
-import { IconCrossSmall } from '../icon/icons/cross-small.component'
-import { IconMagnifyingGlass } from '../icon/icons/magnifying-glass.component'
-import { IconSortDown } from '../icon/icons/sort-down.component'
-import { IconSortUp } from '../icon/icons/sort-up.component'
-import { IconSort } from '../icon/icons/sort.component'
-import { GdsInput } from '../input/input.component'
-import { GdsPagination } from '../pagination/pagination.component'
-import { GdsText } from '../text/text.component'
-import { GdsTableRowSelector } from './row-selector/row-selector.component'
+import {
+  IconCopy,
+  IconCrossSmall,
+  IconMagnifyingGlass,
+  IconSort,
+  IconSortDown,
+  IconSortUp,
+} from '../icon/icons/pure'
+import { Cell } from './table.cell'
+import { GdsTableCheckbox } from './table.checkbox'
 import TableStyles from './table.styles'
 import {
   CacheEntry,
@@ -38,7 +44,7 @@ import {
  */
 @gdsCustomElement('gds-table', {
   dependsOn: [
-    GdsTableRowSelector,
+    GdsTableCheckbox,
     GdsButton,
     GdsInput,
     GdsCard,
@@ -46,6 +52,7 @@ import {
     GdsDropdown,
     GdsPagination,
     IconMagnifyingGlass,
+    IconCopy,
     IconSort,
     IconSortUp,
     IconSortDown,
@@ -200,17 +207,15 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
 
   /**
    * ⚠️ Experimental
-   * Renders the content of a single table cell
-   * Handles both column-level and cell-specific pseudo slots with proper fallback logic
+   * Renders a cell based on its type
    */
-  #renderCellContent(row: T, index: number, column: TableColumn) {
-    const id = `${column.key}-${index}`
-    const cell = this.slots[id]
-    const col = column.slots
 
-    const lead = cell?.lead ?? col?.lead?.(row, index)
-    const value = cell?.value ?? col?.value?.(row, index) ?? row[column.key]
-    const trail = cell?.trail ?? col?.trail?.(row, index)
+  #renderCellContent(row: T, index: number, column: TableColumn) {
+    const { cell } = column
+
+    const lead = Cell(cell?.lead, row)
+    const value = cell?.value ? Cell(cell.value, row) : row[column.key]
+    const trail = Cell(cell?.trail, row)
 
     return html`
       <div class="cell-content">
@@ -293,7 +298,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
               plain
               size="small"
               searchable
-              .value=${Array.from(this.tableState.visibleColumns)}
+              .value=${Array.from(this.tableState.visibleColumns) as any}
               @change=${this.#handleColumnVisibility}
             >
               <span slot="trigger">Columns</span>
@@ -359,12 +364,12 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
             this.selectable,
             () => html`
               <th class="checkbox-cell">
-                <gds-table-row-selector
+                <gds-table-checkbox
                   .checked=${this.#isAllSelected}
                   .indeterminate=${this.#isPartialSelection}
                   aria-label="Select all rows"
                   @selector-change=${this.#handleSelectAll}
-                ></gds-table-row-selector>
+                ></gds-table-checkbox>
               </th>
             `,
           )}
@@ -418,12 +423,12 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
           () => html`
             <td class="checkbox-cell" data-label="Select">
               <div class="cell-content">
-                <gds-table-row-selector
+                <gds-table-checkbox
                   .checked=${this.selectedRows.has(index)}
                   aria-label="Select row ${index + 1}"
                   @selector-change=${(e: CustomEvent) =>
                     this.#handleRowSelect(index, e)}
-                ></gds-table-row-selector>
+                ></gds-table-checkbox>
               </div>
             </td>
           `,
@@ -749,7 +754,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
    */
   #emitSelectionChange(): void {
     this.dispatchEvent(
-      new CustomEvent('selection-change', {
+      new CustomEvent('gds-table-selection', {
         detail: {
           selectedIndices: Array.from(this.selectedRows),
           selectedData: Array.from(this.selectedRows).map((i) => this.data[i]),
@@ -796,40 +801,5 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
       indices,
       data: indices.map((i) => this.data[i]),
     }
-  }
-
-  /**
-   * ⚠️ Experimental
-   */
-
-  /**
-   * Set cell-specific slots
-   */
-  setCellSlot(
-    columnKey: string,
-    rowIndex: number,
-    lead?: any,
-    trail?: any,
-    value?: any,
-  ) {
-    const cellKey = `${columnKey}-${rowIndex}`
-    this.slots = {
-      ...this.slots,
-      [cellKey]: { lead, trail, value },
-    }
-    this.requestUpdate()
-  }
-
-  /**
-   * Clear cell-specific slots
-   */
-  clearCellSlots(columnKey?: string, rowIndex?: number) {
-    if (columnKey !== undefined && rowIndex !== undefined) {
-      const cellKey = `${columnKey}-${rowIndex}`
-      delete this.slots[cellKey]
-    } else {
-      this.slots = {}
-    }
-    this.requestUpdate()
   }
 }

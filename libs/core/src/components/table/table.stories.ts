@@ -11,9 +11,6 @@ import '../img/img'
 import '../icon/icons/dot-grid-one-horizontal'
 import '../icon/icons/plus-small'
 import '../icon/icons/copy'
-import '../formatted-text/number/formatted-number'
-import '../formatted-text/account/formatted-account'
-import '../formatted-text/date/formatted-date'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 import { TableColumn, TableRequest, TableResponse } from './table.types'
@@ -52,7 +49,7 @@ const DEPARTMENTS = [
 
 const generateUserRecord = (index: number): UserData => {
   const id = index + 1
-  const firstName = ['Jane', 'John', 'Bob', 'Alice', 'Charlie', 'Diana'][
+  const firstName = ['David', 'Una', 'Rob', 'Jack', 'Charlie', 'Diana'][
     index % 6
   ]
   const lastName = ['Smith', 'Doe', 'Williams', 'Brown', 'Jones'][index % 5]
@@ -67,7 +64,7 @@ const generateUserRecord = (index: number): UserData => {
     amount: Math.floor(Math.random() * 100000) + 1000,
     account: `5440${String(Math.floor(Math.random() * 10000000)).padStart(7, '0')}`,
     lastLogin: new Date(Date.now() - Math.random() * 10000000000).toISOString(),
-    avatarUrl: index === 1 ? 'https://github.com/astrit.png' : undefined,
+    avatarUrl: `https://github.com/${firstName}.png`,
   }
 }
 
@@ -133,125 +130,98 @@ const mockDataProvider = async (
  * Table column configurations with custom renderers
  */
 const tableColumns: TableColumn[] = [
-  // ID Column - Simple numeric identifier
   {
     key: 'id',
     label: 'ID',
     sortable: false,
-    align: 'left',
   },
-
-  // Name Column - With optional avatar
   {
     key: 'name',
     label: 'Name',
     sortable: true,
-    slots: {
-      lead: (row: UserData) =>
-        row.avatarUrl
-          ? html` <gds-img
-              src="${row.avatarUrl}"
-              alt="${row.name} avatar"
-              border-radius="max"
-              width="24px"
-              height="24px"
-            ></gds-img>`
-          : null,
+    cell: {
+      lead: {
+        type: 'image',
+        src: (row) => row.avatarUrl || '',
+        alt: (row) => row.name,
+        'border-radius': 'max',
+        width: '24px',
+        height: '24px',
+      },
     },
   },
-
-  // Email Column - With copy action
   {
     key: 'email',
     label: 'Email',
     sortable: true,
     justify: true,
-    slots: {
-      trail: (row: UserData) => html`
-        <gds-button
-          size="small"
-          rank="tertiary"
-          @click=${async (e: Event) => {
-            e.stopPropagation()
-            await navigator.clipboard.writeText(row.email)
-            console.log(`Copied email: ${row.email}`)
-          }}
-          title="Copy email"
-        >
-          <gds-icon-copy size="m"></gds-icon-copy>
-        </gds-button>
-      `,
+    cell: {
+      trail: {
+        type: 'copy-button',
+        value: (row) => row.email,
+        size: 'small',
+      },
     },
   },
-
-  // Role Column
   {
     key: 'role',
     label: 'Role',
     sortable: true,
   },
-
-  // Status Column - With visual badge
   {
     key: 'status',
     label: 'Status',
     sortable: true,
-    slots: {
-      value: (row: UserData) => html`
-        <gds-badge
-          size="small"
-          variant="${row.status === 'Active' ? 'positive' : 'negative'}"
-        >
-          ${row.status}
-        </gds-badge>
-      `,
+    cell: {
+      value: {
+        type: 'badge',
+        value: (row) => row.status,
+        variant: (row) => (row.status === 'Active' ? 'positive' : 'negative'),
+        size: 'small',
+      },
     },
   },
-
-  // Amount Column - Formatted number with currency
   {
     key: 'amount',
     label: 'Amount',
     sortable: true,
     align: 'right',
-    slots: {
-      value: (row: UserData) => html`
-        <gds-formatted-number>${row.amount}</gds-formatted-number>
-      `,
-      trail: () => html` <gds-badge size="small">SEK</gds-badge> `,
+    cell: {
+      value: {
+        type: 'formatted-number',
+        value: (row) => row.amount,
+      },
+      trail: {
+        type: 'badge',
+        value: 'SEK',
+        size: 'small',
+      },
     },
   },
-
-  // Account Column - Formatted account number
   {
     key: 'account',
     label: 'Account',
     sortable: true,
     align: 'right',
-    slots: {
-      value: (row: UserData) => html`
-        <gds-formatted-account
-          .account="${row.account}"
-          format="seb-account"
-        ></gds-formatted-account>
-      `,
+    cell: {
+      value: {
+        type: 'formatted-account',
+        value: (row) => row.account,
+        format: 'seb-account',
+      },
     },
   },
-
-  // Last Login Column - Formatted date
   {
     key: 'lastLogin',
     label: 'Last Login',
     sortable: true,
-    align: 'left',
-    slots: {
-      value: (row: UserData) => html`
-        <gds-formatted-date
-          .value="${row.lastLogin}"
-          locale="sv-SE"
-          format="dateLong"
-        ></gds-formatted-date>
-      `,
+    cell: {
+      value: {
+        type: 'formatted-date',
+        value: (row) => row.lastLogin,
+        locale: 'sv-SE',
+        format: 'dateLong',
+      },
     },
   },
 ]
@@ -380,6 +350,7 @@ export const Default: Story = {
         Add User
         <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
       </gds-button>
+      <gds-icon-copy slot="email-copy-icon" size="m"></gds-icon-copy>
     </gds-table>
   `,
 }

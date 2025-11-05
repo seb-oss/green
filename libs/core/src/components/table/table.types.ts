@@ -1,4 +1,5 @@
-// table.types.ts
+import { CellType } from './table.cell.types'
+
 export interface TableColumn {
   key: string
   label: string
@@ -6,11 +7,10 @@ export interface TableColumn {
   align?: 'left' | 'right'
   visible?: boolean
   justify?: boolean
-  // ⚠️ Experimental
-  slots?: {
-    lead?: (row: any, index: number) => any
-    value?: (row: any, index: number) => any
-    trail?: (row: any, index: number) => any
+  cell?: {
+    lead?: CellType
+    value?: CellType
+    trail?: CellType
   }
 }
 
