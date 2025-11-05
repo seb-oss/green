@@ -1,13 +1,11 @@
 import { css } from 'lit'
 
 const style = css`
-  /* 
-   * Host & Container
-   * Base component setup and main container
-   *  */
+  /* Host & Container */
   :host {
     display: block;
     font: var(--gds-sys-text-detail-book-s);
+    color: var(--gds-sys-color-neutral-01);
   }
 
   .gds-table {
@@ -17,11 +15,7 @@ const style = css`
     gap: var(--gds-sys-space-xl);
   }
 
-  /* 
-   * Density Modes
-   * Spacing variables for different density levels
-   *  */
-
+  /* Density Modes */
   /* Default (comfortable) density */
   .gds-table {
     --table-cell-padding-y: var(--gds-sys-space-s);
@@ -72,18 +66,14 @@ const style = css`
     font: var(--table-font-size);
   }
 
-  /*
-   * Container that enables horizontal scroll
-   **/
+  /* Container that enables horizontal scroll */
   .data {
     width: 100%;
     overflow-x: auto;
     overflow-y: visible;
   }
 
-  /* 
-   * Table Structure
-   **/
+  /* Table Structure */
   table {
     width: max-content;
     min-width: 100%;
@@ -100,10 +90,7 @@ const style = css`
     font-weight: normal;
   }
 
-  /* 
-   * Table Header
-   * Sticky header with background and sorting
-   *  */
+  /* Table Header */
   thead {
     position: relative;
     font-weight: normal;
@@ -114,7 +101,7 @@ const style = css`
     content: '';
     position: absolute;
     inset: 0;
-    background: #eee;
+    background: var(--gds-sys-color-l2-neutral-01);
     border-radius: var(--gds-sys-space-s);
     z-index: 0;
   }
@@ -127,7 +114,6 @@ const style = css`
     position: relative;
     z-index: 1;
     background: transparent;
-    transition: all 0.2s ease;
   }
 
   /* Header cell hover effect background */
@@ -135,10 +121,10 @@ const style = css`
     content: '';
     display: none;
     position: absolute;
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--gds-sys-color-l3-neutral-02);
     border-radius: var(--gds-sys-space-xs);
-    transition: all 420ms;
-    inset: 6px 4px;
+    transition: all var(--gds-sys-motion-duration-fast);
+    inset: var(--gds-sys-space-2xs) var(--gds-sys-space-3xs);
     z-index: -1;
 
     @starting-style {
@@ -148,13 +134,14 @@ const style = css`
     }
   }
 
-  /** 
-   * Sortable Columns
-   **/
+  thead tr th {
+    position: relative;
+  }
+
+  /* Sortable Columns */
   thead th.sortable {
     cursor: pointer;
     user-select: none;
-    transition: all 0.2s ease;
   }
 
   thead th.sortable:hover::before {
@@ -163,7 +150,8 @@ const style = css`
   }
 
   thead th.sortable:active::before {
-    background: rgba(0, 0, 0, 0.2);
+    translate: 0 1px;
+    background: var(--gds-sys-color-l3-neutral-03);
   }
 
   /* Column header content layout */
@@ -178,36 +166,40 @@ const style = css`
     font-weight: normal;
   }
 
-  /* Sort icon styling */
   .sort-icon {
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 420ms ease;
-    translate: 0 -2px;
     opacity: 0;
     z-index: 1;
   }
 
   thead th.sortable:hover:not(.sorted) .sort-icon {
     opacity: 0.8;
-    translate: 0;
   }
 
   thead th.sorted .sort-icon {
     opacity: 1;
   }
 
-  /* 
-   * Table Body
-   * Data rows and cells styling
-   **/
+  /* Table Body */
 
   tbody tr {
-    border-bottom: 1px solid var(--gds-sys-color-border-subtle-01);
     opacity: 1;
-    transition: opacity 0.3s ease-in-out;
+    transition:
+      opacity var(--gds-sys-motion-duration-fastest)
+        var(--gds-sys-motion-easing-ease-in-out),
+      border-color var(--gds-sys-motion-duration-fastest)
+        var(--gds-sys-motion-easing-linear);
     min-height: var(--table-row-min-height);
+    border-top: var(--gds-sys-space-5xs) solid
+      var(--gds-sys-color-border-subtle-01);
+  }
+
+  tbody tr:last-child {
+    border-bottom: var(--gds-sys-space-5xs) solid
+      var(--gds-sys-color-border-subtle-01);
   }
 
   tbody tr.loading {
@@ -219,10 +211,7 @@ const style = css`
     padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
   }
 
-  /* 
-   * Row Selection
-   * Checkbox and selected state styles
-   *  */
+  /* Row Selection */
   tr {
     position: relative;
   }
@@ -234,8 +223,21 @@ const style = css`
     padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
   }
 
-  tr.selected {
+  tr:first-child {
+    border-top-width: var(--gds-sys-space-4xs);
+  }
+
+  tr.selected,
+  tr:first-child {
     border-color: transparent;
+  }
+
+  tr.selected + tr {
+    border-color: transparent;
+  }
+
+  tr.selected:last-child {
+    border-bottom-color: transparent;
   }
 
   /* Selected row highlight */
@@ -243,21 +245,24 @@ const style = css`
     content: '';
     display: flex;
     position: absolute;
-    inset: 1px 0;
+    inset: var(--gds-sys-space-5xs) 0;
     border-radius: var(--gds-sys-space-s);
     background-color: rgba(59, 130, 246, 0.1);
     z-index: 0;
     pointer-events: none;
+    transition: all var(--gds-sys-motion-duration-fastest);
+
+    @starting-style {
+      opacity: 0;
+      translate: var(--gds-sys-space-3xs) 0;
+    }
   }
 
   tr.selected:hover::before {
     background-color: rgba(59, 130, 246, 0.15);
   }
 
-  /* 
-   * Header & Footer Layout
-   * Top and bottom control sections
-   *  */
+  /* Header & Footer Layout */
   .header {
     display: flex;
     flex-direction: column;
@@ -303,10 +308,7 @@ const style = css`
     gap: var(--gds-sys-space-s);
   }
 
-  /* 
-   * Cell Content & Alignment
-   * Cell content layout and text alignment
-   *  */
+  /* Cell Content & Alignment */
   .cell-content {
     display: flex;
     align-items: center;
@@ -332,10 +334,7 @@ const style = css`
     justify-content: space-between;
   }
 
-  /* 
-   * Responsive Design
-   * Mobile and tablet adaptations
-   *  */
+  /*  Responsive Design  */
   .responsive.data {
     display: contents;
   }
