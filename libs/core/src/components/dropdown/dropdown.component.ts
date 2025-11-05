@@ -61,7 +61,7 @@ class Dropdown extends GdsFormControlElement implements OptionsContainer {
   searchable = false
 
   /**
-   * Wheter the dropdown should support multiple selections.
+   * Whether the dropdown should support multiple selections.
    * When set to true, the dropdown will render a checkbox next to each option.
    * The value of the dropdown will be an array of the selected values.
    */
@@ -248,12 +248,17 @@ class Dropdown extends GdsFormControlElement implements OptionsContainer {
 
   connectedCallback() {
     super.connectedCallback()
-
+    this.addEventListener('blur', this.#handleBlur)
     this.updateComplete.then(() => {
       this._handleLightDOMChange()
       this._handleValueChange()
       this._handleOpenChange()
     })
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('blur', this.#handleBlur)
   }
 
   render() {
@@ -510,6 +515,15 @@ class Dropdown extends GdsFormControlElement implements OptionsContainer {
     })
   }
 
+  #handleBlur = (e: Event) => {
+    if (!this.open) {
+      this.dispatchCustomEvent('gds-blur', {
+        detail: { relatedTarget: (e as FocusEvent).relatedTarget },
+        bubbles: false,
+        composed: true,
+      })
+    }
+  }
   #calcMaxHeight = (trigger: HTMLElement) => {
     if (this.combobox) {
       const triggerRect = trigger.getBoundingClientRect()
