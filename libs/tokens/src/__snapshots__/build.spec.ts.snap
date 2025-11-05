@@ -299,7 +299,7 @@ exports[`test css output matches the contents in snapshot for 2023/css/variables
 
 :root {
   --gds-sys-color-l1-neutral-01: #0a0b0b;
-  --gds-sys-color-l1-neutral-02: #282a29;
+  --gds-sys-color-l1-neutral-02: #0a0b0b;
   --gds-sys-color-l1-brand-01: #003824;
   --gds-sys-color-l1-inversed: #ffffff;
   --gds-sys-color-l2-neutral-01: #191a1a;
@@ -418,7 +418,7 @@ exports[`test css output matches the contents in snapshot for 2023/css/variables
 
 :root {
   --gds-sys-color-l1-neutral-01: #ffffff;
-  --gds-sys-color-l1-neutral-02: #eaebeb;
+  --gds-sys-color-l1-neutral-02: #f4f5f5;
   --gds-sys-color-l1-brand-01: #003824;
   --gds-sys-color-l1-inversed: #0a0b0b;
   --gds-sys-color-l2-neutral-01: #f7f8f7;
@@ -767,7 +767,7 @@ exports[`test figma output matches the contents in snapshot for 2023/figma/figma
 exports[`test figma output matches the contents in snapshot for 2023/figma/figma-colours.dark.json: tokens-figma-2023-figma-figma-colours-dark-json 1`] = `
 "[
   {"name":"L1/neutral-01","value":"#0A0B0B","type":"color"},
-  {"name":"L1/neutral-02","value":"#282A29","type":"color"},
+  {"name":"L1/neutral-02","value":"#0A0B0B","type":"color"},
   {"name":"L1/brand-01","value":"#003824","type":"color"},
   {"name":"L1/inversed","value":"#FFFFFF","type":"color"},
   {"name":"L2/neutral-01","value":"#191A1A","type":"color"},
@@ -882,7 +882,7 @@ exports[`test figma output matches the contents in snapshot for 2023/figma/figma
 exports[`test figma output matches the contents in snapshot for 2023/figma/figma-colours.light.json: tokens-figma-2023-figma-figma-colours-light-json 1`] = `
 "[
   {"name":"L1/neutral-01","value":"#FFFFFF","type":"color"},
-  {"name":"L1/neutral-02","value":"#EAEBEB","type":"color"},
+  {"name":"L1/neutral-02","value":"#F4F5F5","type":"color"},
   {"name":"L1/brand-01","value":"#003824","type":"color"},
   {"name":"L1/inversed","value":"#0A0B0B","type":"color"},
   {"name":"L2/neutral-01","value":"#F7F8F7","type":"color"},
@@ -1104,7 +1104,7 @@ exports[`test internal output matches the contents in snapshot for 2023/internal
 
   color-scheme: dark;
   --gds-sys-color-l1-neutral-01: #0a0b0b;
-  --gds-sys-color-l1-neutral-02: #282a29;
+  --gds-sys-color-l1-neutral-02: #0a0b0b;
   --gds-sys-color-l1-brand-01: #003824;
   --gds-sys-color-l1-inversed: #ffffff;
   --gds-sys-color-l2-neutral-01: #191a1a;
@@ -1222,7 +1222,7 @@ exports[`test internal output matches the contents in snapshot for 2023/internal
 
   color-scheme: light;
   --gds-sys-color-l1-neutral-01: #ffffff;
-  --gds-sys-color-l1-neutral-02: #eaebeb;
+  --gds-sys-color-l1-neutral-02: #f4f5f5;
   --gds-sys-color-l1-brand-01: #003824;
   --gds-sys-color-l1-inversed: #0a0b0b;
   --gds-sys-color-l2-neutral-01: #f7f8f7;
@@ -1729,7 +1729,7 @@ exports[`test scss output matches the contents in snapshot for 2023/scss/_mixin.
 
 @mixin add-variables {
   --gds-sys-color-l1-neutral-01: #0a0b0b;
-  --gds-sys-color-l1-neutral-02: #282a29;
+  --gds-sys-color-l1-neutral-02: #0a0b0b;
   --gds-sys-color-l1-brand-01: #003824;
   --gds-sys-color-l1-inversed: #ffffff;
   --gds-sys-color-l2-neutral-01: #191a1a;
@@ -1848,7 +1848,7 @@ exports[`test scss output matches the contents in snapshot for 2023/scss/_mixin.
 
 @mixin add-variables {
   --gds-sys-color-l1-neutral-01: #ffffff;
-  --gds-sys-color-l1-neutral-02: #eaebeb;
+  --gds-sys-color-l1-neutral-02: #f4f5f5;
   --gds-sys-color-l1-brand-01: #003824;
   --gds-sys-color-l1-inversed: #0a0b0b;
   --gds-sys-color-l2-neutral-01: #f7f8f7;
@@ -2251,7 +2251,7 @@ exports[`test scss output matches the contents in snapshot for 2023/scss/variabl
 // Do not edit directly, this file was auto-generated.
 
 $gds-sys-color-l1-neutral-01: #0a0b0b;
-$gds-sys-color-l1-neutral-02: #282a29;
+$gds-sys-color-l1-neutral-02: #0a0b0b;
 $gds-sys-color-l1-brand-01: #003824;
 $gds-sys-color-l1-inversed: #ffffff;
 $gds-sys-color-l2-neutral-01: #191a1a;
@@ -2367,7 +2367,7 @@ exports[`test scss output matches the contents in snapshot for 2023/scss/variabl
 // Do not edit directly, this file was auto-generated.
 
 $gds-sys-color-l1-neutral-01: #ffffff;
-$gds-sys-color-l1-neutral-02: #eaebeb;
+$gds-sys-color-l1-neutral-02: #f4f5f5;
 $gds-sys-color-l1-brand-01: #003824;
 $gds-sys-color-l1-inversed: #0a0b0b;
 $gds-sys-color-l2-neutral-01: #f7f8f7;
@@ -2509,7 +2509,7 @@ exports[`test studio output matches the contents in snapshot for studio/studio.c
       {
         "token": "neutral-02",
         "variable": "var(--gds-sys-color-l1-neutral-02)",
-        "value": "#282A29"
+        "value": "#0A0B0B"
       },
       {
         "token": "brand-01",
@@ -3073,7 +3073,7 @@ exports[`test studio output matches the contents in snapshot for studio/studio.c
       {
         "token": "neutral-02",
         "variable": "var(--gds-sys-color-l1-neutral-02)",
-        "value": "#EAEBEB"
+        "value": "#F4F5F5"
       },
       {
         "token": "brand-01",

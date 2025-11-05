@@ -39,6 +39,11 @@ export function ComponentsClient() {
 
   const filteredComponents = useMemo(() => {
     return components.filter((component) => {
+      const isPattern = Array.isArray(component.category)
+        ? component.category.includes('Patterns')
+        : component.category === 'Patterns'
+      if (isPattern) return false
+
       switch (filter) {
         case 'stable':
           if (component.beta) return false

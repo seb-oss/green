@@ -1,0 +1,67 @@
+// utils/mixins/props-image.ts
+import { property } from 'lit/decorators.js'
+
+import { GdsElement } from '../../gds-element'
+
+type Constructor<T = GdsElement> = new (...args: any[]) => T
+
+export interface ImageProps {
+  src?: string
+  srcset?: string
+  sizes?: string
+  alt?: string
+  loading?: 'lazy' | 'eager'
+  decoding?: 'auto' | 'sync' | 'async'
+}
+
+/**
+ * Mixin that adds image-related properties to a component.
+ * Use this for any component that needs to display images with responsive
+ * and accessibility support.
+ */
+export function withImageProps<T extends Constructor<GdsElement>>(
+  base: T,
+): Constructor<ImageProps> & T {
+  class ImagePropsMixin extends base implements ImageProps {
+    /**
+     * The URL of the image
+     */
+    @property({ reflect: false })
+    src?: string
+
+    /**
+     * The srcset attribute for responsive images
+     * Format: "image.jpg 1x, image-2x.jpg 2x" or "image-320.jpg 320w, image-640.jpg 640w"
+     */
+    @property({ reflect: false })
+    srcset?: string
+
+    /**
+     * The sizes attribute for responsive images
+     * Format: "(max-width: 320px) 280px, (max-width: 640px) 580px, 800px"
+     */
+    @property({ reflect: false })
+    sizes?: string
+
+    /**
+     * Alternative text description of the image
+     * Required for accessibility. Should be empty string if image is decorative.
+     */
+    @property({ reflect: false })
+    alt?: string
+
+    /**
+     * Loading strategy for the image
+     */
+    @property({ reflect: false })
+    loading?: 'lazy' | 'eager' = 'lazy'
+
+    /**
+     * Decoding strategy for the image
+     */
+    @property({ reflect: false })
+    decoding?: 'auto' | 'sync' | 'async' = 'auto'
+  }
+
+  return ImagePropsMixin as Constructor<ImageProps> & T
+}

@@ -14,6 +14,7 @@ import {
   withSizeXProps,
   withSizeYProps,
 } from '../../utils/mixins/declarative-layout-mixins'
+import { withImageProps } from '../../utils/mixins/props-image'
 import IMGStyles from './img.styles'
 
 /**
@@ -23,7 +24,7 @@ import IMGStyles from './img.styles'
  */
 @gdsCustomElement('gds-img')
 export class GdsImg extends withPositioningProps(
-  withMarginProps(withSizeXProps(withSizeYProps(GdsElement))),
+  withMarginProps(withSizeXProps(withSizeYProps(withImageProps(GdsElement)))),
 ) {
   static styles = [tokens, IMGStyles]
 
@@ -44,7 +45,7 @@ export class GdsImg extends withPositioningProps(
    *
    * The above example will apply the aspect ratio of 16/9 for large screens, 4/3 for medium screens, and 1/1 for small screens.
    */
-  @styleExpressionProperty()
+  @styleExpressionProperty({ selector: 'img' })
   'aspect-ratio'?: string
 
   /**
@@ -94,26 +95,14 @@ export class GdsImg extends withPositioningProps(
   })
   'object-position'?: string
 
-  /**
-   * The image source URL.
-   *
-   * @property src
-   */
-  @property()
-  src?: string
-
-  /**
-   * The image alt text.
-   *
-   * @property alt
-   */
-  @property()
-  alt?: string
-
   render() {
     return html`<img
       src="${ifDefined(this.src)}"
       alt="${ifDefined(this.alt)}"
+      srcset=${ifDefined(this.srcset)}
+      sizes=${ifDefined(this.sizes)}
+      loading=${ifDefined(this.loading)}
+      decoding=${ifDefined(this.decoding)}
     />`
   }
 }

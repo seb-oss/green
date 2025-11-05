@@ -1,5 +1,58 @@
 # Changelog
 
+## 2.13.2
+
+### Patch Changes
+
+- c6b4a63: **GroupedList:** Added interim 2023 styling, fixes #2413
+- b086b0b: **Declarative layout:** Add missing member `order` to `LayoutChildProps` interface
+- 1bd52f1: **Dropdown:** Fix background color of selected option in dark mode
+
+## 2.13.1
+
+### Patch Changes
+
+- bb08507: **Exports:** Fix path for 'pure' export in package.json
+
+## 2.13.0
+
+### Minor Changes
+
+- ba7e126: **Icon:** Add Small chevrons, expand and sorting icons
+
+## 2.12.3
+
+### Patch Changes
+
+- eee97dc: **GdsMenuHeading:** (React) add missing export
+
+## 2.12.2
+
+### Patch Changes
+
+- effeb0e: **Dropdown:** Fix styling regression where height of field was no longer adapting to custom trigger content
+
+## 2.12.1
+
+### Patch Changes
+
+- 7ac380e: **Form controls:** Fix rendering regression where empty footer still takes up space
+
+## 2.12.0
+
+### Minor Changes
+
+- 26ceb48: **Context Menu:** Add support for custom slotted trigger button
+- 0020685: **Image:** Add srcset and sizes support
+- 0020685: **Card Linked:** New components Card linked extending with link behaviour the defualt card
+- 0020685: **Div:** Add `aspect-ratio` and `cursor` prop
+
+### Patch Changes
+
+- 0020685: **Div:** Remove unused focus style
+- 0020685: **Link:** Use link props mixin
+- 0020685: **Image:** Use the image props mixin
+
 ## 2.11.0
 
 ### Minor Changes

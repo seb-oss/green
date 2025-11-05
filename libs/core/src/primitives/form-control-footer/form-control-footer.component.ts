@@ -32,7 +32,7 @@ export class GdsFormControlFooter extends GdsElement {
   private _handleVisibilityChange() {
     this.classList.toggle(
       'visually-hidden',
-      !this.errorMessage && !this.charCounter,
+      !this.errorMessage && !this.charCounter?.[1],
     )
   }
 

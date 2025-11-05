@@ -311,7 +311,7 @@ export const RenderColumn = (
                 <Core.GdsFlex flex-direction="column" gap="m" slot="dialog">
                   <Core.GdsCard
                     padding="l"
-                    height="200px"
+                    min-height="200px"
                     overflow="auto"
                     justify-content="center"
                     align-items="center"
