@@ -350,7 +350,6 @@ export const Default: Story = {
         Add User
         <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
       </gds-button>
-      <gds-icon-copy slot="email-copy-icon" size="m"></gds-icon-copy>
     </gds-table>
   `,
 }
