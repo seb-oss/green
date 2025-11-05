@@ -1,10 +1,10 @@
 import { css } from 'lit'
 
 const style = css`
-  /* ============================================
+  /* 
    * Host & Container
    * Base component setup and main container
-   * ============================================ */
+   *  */
   :host {
     display: block;
     font: var(--gds-sys-text-detail-book-s);
@@ -14,38 +14,99 @@ const style = css`
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 24px;
+    gap: var(--gds-sys-space-xl);
   }
 
-  /* ============================================
-   * Table Structure
-   * Core table element and layout configuration
-   * ============================================ */
-  table {
+  /* 
+   * Density Modes
+   * Spacing variables for different density levels
+   *  */
+
+  /* Default (comfortable) density */
+  .gds-table {
+    --table-cell-padding-y: var(--gds-sys-space-s);
+    --table-cell-padding-x: var(--gds-sys-space-m);
+    --table-header-padding-y: var(--gds-sys-space-s);
+    --table-header-padding-x: var(--gds-sys-space-m);
+    --table-row-min-height: var(--gds-sys-space-4xl);
+    --table-font-size: var(--gds-sys-text-detail-book-s);
+    --table-gap: var(--gds-sys-space-xl);
+  }
+
+  /* Compact density */
+  .gds-table.compact {
+    --table-cell-padding-y: var(--gds-sys-space-xs);
+    --table-cell-padding-x: var(--gds-sys-space-s);
+    --table-header-padding-y: var(--gds-sys-space-xs);
+    --table-header-padding-x: var(--gds-sys-space-s);
+    --table-row-min-height: var(--gds-sys-space-xl);
+    --table-font-size: var(--gds-sys-text-detail-book-xs);
+    --table-gap: var(--gds-sys-space-m);
+  }
+
+  /* Comfortable density (explicit) */
+  .gds-table.comfortable {
+    --table-cell-padding-y: var(--gds-sys-space-s);
+    --table-cell-padding-x: var(--gds-sys-space-m);
+    --table-header-padding-y: var(--gds-sys-space-s);
+    --table-header-padding-x: var(--gds-sys-space-m);
+    --table-row-min-height: var(--gds-sys-space-4xl);
+    --table-font-size: var(--gds-sys-text-detail-book-s);
+    --table-gap: var(--gds-sys-space-xl);
+  }
+
+  /* Spacious density */
+  .gds-table.spacious {
+    --table-cell-padding-y: var(--gds-sys-space-m);
+    --table-cell-padding-x: var(--gds-sys-space-l);
+    --table-header-padding-y: var(--gds-sys-space-m);
+    --table-header-padding-x: var(--gds-sys-space-l);
+    --table-row-min-height: var(--gds-sys-space-5xl);
+    --table-font-size: var(--gds-sys-text-detail-book-m);
+    --table-gap: 32px;
+  }
+
+  /* Apply density variables */
+  .gds-table {
+    gap: var(--table-gap);
+    font: var(--table-font-size);
+  }
+
+  /*
+   * Container that enables horizontal scroll
+   **/
+  .data {
     width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+
+  /* 
+   * Table Structure
+   **/
+  table {
+    width: max-content;
+    min-width: 100%;
+    table-layout: auto;
     border-collapse: collapse;
     border-spacing: 0;
     border: none;
-    table-layout: auto;
-    overflow: auto;
   }
 
   /* Base cell styling (shared by th and td) */
   th,
   td {
-    padding: 8px;
+    padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
     font-weight: normal;
   }
 
-  /* ============================================
+  /* 
    * Table Header
    * Sticky header with background and sorting
-   * ============================================ */
+   *  */
   thead {
-    position: sticky;
+    position: relative;
     font-weight: normal;
-    top: 20px;
-    z-index: 2;
   }
 
   /* Header background overlay */
@@ -54,13 +115,13 @@ const style = css`
     position: absolute;
     inset: 0;
     background: #eee;
-    border-radius: 12px;
+    border-radius: var(--gds-sys-space-s);
     z-index: 0;
   }
 
   /* Header cells */
   thead th {
-    padding: 12px 16px;
+    padding: var(--table-header-padding-y) var(--table-header-padding-x);
     border: none;
     font-weight: 500;
     position: relative;
@@ -75,7 +136,7 @@ const style = css`
     display: none;
     position: absolute;
     background: rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: var(--gds-sys-space-xs);
     transition: all 420ms;
     inset: 6px 4px;
     z-index: -1;
@@ -104,18 +165,13 @@ const style = css`
   thead th.sortable:active::before {
     background: rgba(0, 0, 0, 0.2);
   }
-  /* 
-  thead th.sorted::before {
-    display: flex;
-  } */
 
   /* Column header content layout */
   .column-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* width: 100%; */
-    min-height: 20px;
+    min-height: var(--gds-sys-space-l);
   }
 
   .column-label {
@@ -126,14 +182,16 @@ const style = css`
   .sort-icon {
     display: flex;
     align-items: center;
-    margin-left: 8px;
-    transition: opacity 420ms ease;
-    z-index: 1;
+    justify-content: center;
+    transition: all 420ms ease;
+    translate: 0 -2px;
     opacity: 0;
+    z-index: 1;
   }
 
   thead th.sortable:hover:not(.sorted) .sort-icon {
     opacity: 0.8;
+    translate: 0;
   }
 
   thead th.sorted .sort-icon {
@@ -149,6 +207,7 @@ const style = css`
     border-bottom: 1px solid var(--gds-sys-color-border-subtle-01);
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
+    min-height: var(--table-row-min-height);
   }
 
   tbody tr.loading {
@@ -157,23 +216,22 @@ const style = css`
   }
 
   tbody td {
-    padding-inline: 16px;
-    padding-block: 12px;
+    padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
   }
 
-  /* ============================================
+  /* 
    * Row Selection
    * Checkbox and selected state styles
-   * ============================================ */
+   *  */
   tr {
     position: relative;
   }
 
   .checkbox-cell {
-    min-width: 20px;
-    width: 20px;
-    max-width: 20px;
-    padding: 12px 16px;
+    min-width: var(--gds-sys-space-l);
+    width: var(--gds-sys-space-l);
+    max-width: var(--gds-sys-space-l);
+    padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
   }
 
   tr.selected {
@@ -186,7 +244,7 @@ const style = css`
     display: flex;
     position: absolute;
     inset: 1px 0;
-    border-radius: 12px;
+    border-radius: var(--gds-sys-space-s);
     background-color: rgba(59, 130, 246, 0.1);
     z-index: 0;
     pointer-events: none;
@@ -196,14 +254,14 @@ const style = css`
     background-color: rgba(59, 130, 246, 0.15);
   }
 
-  /* ============================================
+  /* 
    * Header & Footer Layout
    * Top and bottom control sections
-   * ============================================ */
+   *  */
   .header {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: calc(var(--table-gap) * 0.8);
   }
 
   .header-meta {
@@ -229,12 +287,12 @@ const style = css`
   .footer .trail {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: calc(var(--table-gap) * 0.8);
   }
 
   /* Footer specific styling */
   .footer .lead {
-    padding-left: 12px;
+    padding-left: var(--gds-sys-space-s);
     font: var(--gds-sys-text-detail-book-xs);
     color: var(--gds-sys-color-content-neutral-02);
   }
@@ -242,13 +300,13 @@ const style = css`
   .selection-info {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: var(--gds-sys-space-s);
   }
 
-  /* ============================================
+  /* 
    * Cell Content & Alignment
    * Cell content layout and text alignment
-   * ============================================ */
+   *  */
   .cell-content {
     display: flex;
     align-items: center;
@@ -265,11 +323,6 @@ const style = css`
     flex-direction: row-reverse;
   }
 
-  .text-right .sort-icon {
-    margin-left: 0;
-    margin-right: 8px;
-  }
-
   .text-right .cell-content,
   td.actions-cell .cell-content {
     justify-content: flex-end;
@@ -279,31 +332,34 @@ const style = css`
     justify-content: space-between;
   }
 
-  /* ============================================
+  /* 
    * Responsive Design
    * Mobile and tablet adaptations
-   * ============================================ */
-  @media (max-width: 768px) {
-    .responsive-table td {
+   *  */
+  .responsive.data {
+    display: contents;
+  }
+
+  .responsive thead {
+    position: sticky;
+    top: var(--gds-sys-space-l);
+    z-index: 2;
+  }
+
+  @media (max-width: 760px) {
+    .responsive td {
+      width: 100%;
+      min-width: unset;
       display: flex;
       justify-content: space-between;
-      padding: 8px;
+      padding: var(--gds-sys-space-xs);
     }
 
-    .responsive-table td::before {
+    .responsive td::before {
       content: attr(data-label);
       font-weight: bold;
     }
-
-    .sort-icon {
-      margin-left: 4px;
-    }
   }
-
-  /* ============================================
-   * Density modes
-   * TBD
-   * ============================================ */
 `
 
 export default style

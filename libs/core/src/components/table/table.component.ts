@@ -451,10 +451,16 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
    * Renders the complete table element with header and body
    */
   #renderTable() {
+    const CLASSES = classMap({
+      responsive: this.responsive,
+      data: true,
+    })
     return html`
-      <table class=${classMap({ 'responsive-table': this.responsive })}>
-        ${this.#renderTableHeader()} ${this.#renderTableBody()}
-      </table>
+      <div class=${CLASSES}>
+        <table>
+          ${this.#renderTableHeader()} ${this.#renderTableBody()}
+        </table>
+      </div>
     `
   }
 
