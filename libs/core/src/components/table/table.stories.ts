@@ -353,7 +353,96 @@ export const Default: Story = {
   },
   render: (args) => html`
     <gds-table
-      responsive
+      title="${args.title}"
+      subtitle="${args.subtitle}"
+      ?selectable="${args.selectable}"
+      density="${args.density}"
+      .columns="${args.columns}"
+      .dataProvider="${args.dataProvider}"
+      .actions="${args.actions}"
+      @data-loaded="${(e: CustomEvent) =>
+        console.log('✓ Data loaded:', e.detail)}"
+      @data-error="${(e: CustomEvent) =>
+        console.error('✗ Error loading data:', e.detail)}"
+      @selection-change="${(e: CustomEvent) =>
+        console.log('→ Selection changed:', e.detail)}"
+    >
+      <!-- Optional header slots for additional controls -->
+      <gds-button slot="header-lead" size="small" rank="secondary">
+        Export
+      </gds-button>
+      <gds-button
+        slot="header-trail"
+        size="small"
+        rank="secondary"
+        variant="positive"
+      >
+        Add User
+        <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
+      </gds-button>
+    </gds-table>
+  `,
+}
+
+export const Plain: Story = {
+  args: {
+    columns: tableColumns,
+    actions: renderRowActions,
+    density: 'comfortable',
+    dataProvider: mockDataProvider,
+    selectable: true,
+    title: 'User Management',
+    subtitle: 'Manage system users and their permissions',
+    plain: true,
+  },
+  render: (args) => html`
+    <gds-table
+      .plain="${args.plain}"
+      title="${args.title}"
+      subtitle="${args.subtitle}"
+      ?selectable="${args.selectable}"
+      density="${args.density}"
+      .columns="${args.columns}"
+      .dataProvider="${args.dataProvider}"
+      .actions="${args.actions}"
+      @data-loaded="${(e: CustomEvent) =>
+        console.log('✓ Data loaded:', e.detail)}"
+      @data-error="${(e: CustomEvent) =>
+        console.error('✗ Error loading data:', e.detail)}"
+      @selection-change="${(e: CustomEvent) =>
+        console.log('→ Selection changed:', e.detail)}"
+    >
+      <!-- Optional header slots for additional controls -->
+      <gds-button slot="header-lead" size="small" rank="secondary">
+        Export
+      </gds-button>
+      <gds-button
+        slot="header-trail"
+        size="small"
+        rank="secondary"
+        variant="positive"
+      >
+        Add User
+        <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
+      </gds-button>
+    </gds-table>
+  `,
+}
+
+export const Responsive: Story = {
+  args: {
+    columns: tableColumns,
+    actions: renderRowActions,
+    density: 'comfortable',
+    dataProvider: mockDataProvider,
+    selectable: true,
+    title: 'User Management',
+    subtitle: 'Manage system users and their permissions',
+    responsive: true,
+  },
+  render: (args) => html`
+    <gds-table
+      .responsive="${args.responsive}"
       title="${args.title}"
       subtitle="${args.subtitle}"
       ?selectable="${args.selectable}"

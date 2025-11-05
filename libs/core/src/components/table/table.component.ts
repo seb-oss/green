@@ -416,13 +416,15 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
         ${when(
           this.selectable,
           () => html`
-            <td class="checkbox-cell">
-              <gds-table-row-selector
-                .checked=${this.selectedRows.has(index)}
-                aria-label="Select row ${index + 1}"
-                @selector-change=${(e: CustomEvent) =>
-                  this.#handleRowSelect(index, e)}
-              ></gds-table-row-selector>
+            <td class="checkbox-cell" data-label="Select">
+              <div class="cell-content">
+                <gds-table-row-selector
+                  .checked=${this.selectedRows.has(index)}
+                  aria-label="Select row ${index + 1}"
+                  @selector-change=${(e: CustomEvent) =>
+                    this.#handleRowSelect(index, e)}
+                ></gds-table-row-selector>
+              </div>
             </td>
           `,
         )}
@@ -432,7 +434,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
         ${when(
           this.actions,
           () => html`
-            <td class="actions-cell">
+            <td class="actions-cell" data-label="Actions">
               <div class="cell-content">${this.actions!(row, index)}</div>
             </td>
           `,

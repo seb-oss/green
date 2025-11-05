@@ -73,6 +73,12 @@ const style = css`
     overflow-y: visible;
   }
 
+  .data:not(.responsive) {
+    border-radius: var(--gds-sys-space-m);
+    border: var(--gds-sys-space-5xs) solid var(--gds-sys-color-border-subtle-01);
+    padding: var(--gds-sys-space-3xs);
+  }
+
   /* Table Structure */
   table {
     width: max-content;
@@ -144,9 +150,11 @@ const style = css`
     user-select: none;
   }
 
-  thead th.sortable:hover::before {
-    display: flex;
-    scale: 1;
+  @media (pointer: fine) {
+    thead th.sortable:hover::before {
+      display: flex;
+      scale: 1;
+    }
   }
 
   thead th.sortable:active::before {
@@ -175,8 +183,10 @@ const style = css`
     z-index: 1;
   }
 
-  thead th.sortable:hover:not(.sorted) .sort-icon {
-    opacity: 0.8;
+  @media (pointer: fine) {
+    thead th.sortable:hover:not(.sorted) .sort-icon {
+      opacity: 0.8;
+    }
   }
 
   thead th.sorted .sort-icon {
@@ -197,7 +207,7 @@ const style = css`
       var(--gds-sys-color-border-subtle-01);
   }
 
-  tbody tr:last-child {
+  .responsive tbody tr:last-child {
     border-bottom: var(--gds-sys-space-5xs) solid
       var(--gds-sys-color-border-subtle-01);
   }
@@ -247,8 +257,8 @@ const style = css`
     position: absolute;
     inset: var(--gds-sys-space-5xs) 0;
     border-radius: var(--gds-sys-space-s);
-    background-color: rgba(59, 130, 246, 0.1);
-    z-index: 0;
+    background-color: var(--gds-sys-color-l3-notice-02);
+    z-index: -1;
     pointer-events: none;
     transition: all var(--gds-sys-motion-duration-fastest);
 
@@ -258,8 +268,10 @@ const style = css`
     }
   }
 
-  tr.selected:hover::before {
-    background-color: rgba(59, 130, 246, 0.15);
+  @media (pointer: fine) {
+    tr.selected:hover::after {
+      background-color: var(--gds-sys-color-l3-notice-03);
+    }
   }
 
   /* Header & Footer Layout */
@@ -334,7 +346,15 @@ const style = css`
     justify-content: space-between;
   }
 
-  /*  Responsive Design  */
+  /*
+  * Responsive Design  
+  */
+
+  .checkbox-label,
+  .actions-label {
+    display: none;
+  }
+
   .responsive.data {
     display: contents;
   }
@@ -346,26 +366,60 @@ const style = css`
   }
 
   @media (max-width: 760px) {
+    .responsive thead {
+      display: none;
+    }
+
+    .responsive tbody {
+      display: flex;
+      flex-direction: column;
+      gap: var(--table-gap);
+    }
+
+    .responsive tr {
+      display: block;
+      padding: var(--table-cell-padding-x);
+      border: var(--gds-sys-space-5xs) solid
+        var(--gds-sys-color-border-subtle-01);
+      border-radius: var(--gds-sys-space-s);
+      margin: 0;
+    }
+
+    .responsive tr.selected {
+      border-color: transparent;
+    }
+
     .responsive td {
       width: 100%;
-      min-width: unset;
+      max-width: 100%;
+      box-sizing: border-box;
       display: flex;
       justify-content: space-between;
-      padding: var(--gds-sys-space-xs);
+      align-items: center;
+      padding: var(--gds-sys-space-xs) 0;
     }
 
     .responsive td::before {
       content: attr(data-label);
-      font-weight: bold;
+      color: var(--gds-sys-color-content-neutral-02);
+      font-weight: 500;
+      margin-right: var(--gds-sys-space-s);
+    }
+
+    .responsive .checkbox-label {
+      display: none;
+    }
+
+    .responsive .actions-label {
+      display: none;
+    }
+
+    .responsive .cell-content {
+      justify-content: flex-end;
     }
   }
 
-  /* ============================================
- * Skeleton Loading State
- * Initial load skeleton animations
- * ============================================ */
-
-  /* Skeleton base styles */
+  /* Skeleton Loading State */
   .skeleton {
     display: inline-block;
     background: linear-gradient(
