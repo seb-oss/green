@@ -228,7 +228,7 @@ class Button extends GdsFormControlElement<any> {
     if ((e.code === 'Space' || e.key === 'Enter') && !e.repeat) {
       const ripple = this._ripple;
       if (ripple) {
-        ripple.triggerCenteredRipple();
+        ripple.triggerRipple();
       }
     }
   }

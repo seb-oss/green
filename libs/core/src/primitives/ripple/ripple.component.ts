@@ -17,33 +17,24 @@ export class GdsRipple extends GdsElement {
   }
 
   onmousedown = (e: MouseEvent) => {
-    const target = e.target as HTMLElement
-    const rect = target.getBoundingClientRect()
-    const rippleEl = this._rippleEl
-
-    if (rippleEl) {
-      rippleEl.classList.remove('gds-ripple-effect')
-      this.style.setProperty('--gds-ripple-top', `${e.clientY - rect.top}px`)
-      this.style.setProperty('--gds-ripple-left', `${e.clientX - rect.left}px`)
-      setTimeout(() => {
-        rippleEl.classList.add('gds-ripple-effect')
-      }, 20)
-    }
+    this.triggerRipple(e.clientX, e.clientY);
   }
 
-  triggerCenteredRipple() {
+  triggerRipple(x?: number, y?: number) {
     const rippleEl = this._rippleEl;
     const rect = this.getBoundingClientRect();
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
+
+    // Default to center if no coordinates provided
+    const rippleX = x ?? rect.left + rect.width / 2;
+    const rippleY = y ?? rect.top + rect.height / 2;
 
     if (rippleEl) {
-      rippleEl.classList.remove('gds-ripple-effect')
-      this.style.setProperty('--gds-ripple-top', `${y - rect.top}px`)
-      this.style.setProperty('--gds-ripple-left', `${x - rect.left}px`)
+      rippleEl.classList.remove('gds-ripple-effect');
+      this.style.setProperty('--gds-ripple-top', `${rippleY - rect.top}px`);
+      this.style.setProperty('--gds-ripple-left', `${rippleX - rect.left}px`);
       setTimeout(() => {
-        rippleEl.classList.add('gds-ripple-effect')
-      }, 20)
+        rippleEl.classList.add('gds-ripple-effect');
+      }, 20);
     }
   }
 }
