@@ -179,12 +179,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     }
   }
 
-  /**
-   * ⚠️ Experimental
-   * Renders a cell based on its type
-   */
-
-  #renderCellContent(row: T, index: number, column: Types.Column) {
+  #renderCellContent(row: T, column: Types.Column) {
     const { cell } = column
 
     const lead = Cell(cell?.lead, row)
@@ -366,7 +361,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Renders a single data cell within a table row
    * Applies alignment and renders cell content with slots
    */
-  #renderTableCell(row: T, rowIndex: number, column: Types.Column) {
+  #renderTableCell(row: T, column: Types.Column) {
     return html`
       <td
         data-label=${column.label}
@@ -375,7 +370,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           'space-between': column.justify === true,
         })}
       >
-        ${this.#renderCellContent(row, rowIndex, column)}
+        ${this.#renderCellContent(row, column)}
       </td>
     `
   }
@@ -409,7 +404,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         )}
         ${this.columns
           .filter((column) => this.tableState.visibleColumns.has(column.key))
-          .map((column) => this.#renderTableCell(row, index, column))}
+          .map((column) => this.#renderTableCell(row, column))}
         ${when(
           this.actions,
           () => html`
