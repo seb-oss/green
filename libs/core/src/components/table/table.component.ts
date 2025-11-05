@@ -4,39 +4,13 @@ import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
 import {
-  GdsButton,
-  GdsCard,
-  GdsDropdown,
-  GdsInput,
-  GdsPagination,
-  GdsText,
-} from '../../pure'
-import { tokens } from '../../tokens.style'
-import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import {
-  IconCopy,
-  IconCrossSmall,
-  IconMagnifyingGlass,
-  IconSort,
-  IconSortDown,
-  IconSortUp,
-} from '../icon/icons/pure'
 import { Cell } from './table.cell'
-import { GdsTableCheckbox } from './table.checkbox'
+import * as GDS from './table.imports'
 import TableStyles from './table.styles'
-import {
-  CacheEntry,
-  TableCache,
-  TableColumn,
-  TableDensity,
-  TableRequest,
-  TableResponse,
-  TableRow,
-  TableState,
-} from './table.types'
+import * as Types from './table.types'
 
 /**
  * @element gds-table
@@ -44,38 +18,38 @@ import {
  */
 @gdsCustomElement('gds-table', {
   dependsOn: [
-    GdsTableCheckbox,
-    GdsButton,
-    GdsInput,
-    GdsCard,
-    GdsText,
-    GdsDropdown,
-    GdsPagination,
-    IconMagnifyingGlass,
-    IconCopy,
-    IconSort,
-    IconSortUp,
-    IconSortDown,
-    IconCrossSmall,
+    GDS.Checkbox,
+    GDS.Button,
+    GDS.Input,
+    GDS.Card,
+    GDS.Text,
+    GDS.Dropdown,
+    GDS.Pagination,
+    GDS.MagnifyingGlass,
+    GDS.Sort,
+    GDS.SortUp,
+    GDS.SortDown,
+    GDS.CrossSmall,
+    GDS.Copy,
   ],
 })
-export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
-  static styles = [tokens, TableStyles]
+export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
+  static styles = [GDS.tokens, TableStyles]
 
-  #cache: TableCache<T> = {}
+  #cache: Types.Cache<T> = {}
   #cacheDuration = 5 * 60 * 1000
 
   @property({ type: String })
   subtitle?: string
 
   @property({ type: Array })
-  columns: TableColumn[] = []
+  columns: Types.Column[] = []
 
   @property()
-  dataProvider!: (request: TableRequest) => Promise<TableResponse<T>>
+  dataProvider!: (request: Types.Request) => Promise<Types.Response<T>>
 
   @property({ reflect: false })
-  density: TableDensity = 'comfortable'
+  density: Types.Density = 'comfortable'
 
   @property({ type: Boolean, reflect: false })
   selectable = false
@@ -90,7 +64,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
   actions?: (row: T, index: number) => any
 
   @state()
-  private tableState: TableState = {
+  private tableState: Types.State = {
     page: 1,
     pageSize: 10,
     searchQuery: '',
@@ -146,7 +120,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
     })
   }
 
-  #isCacheValid(entry: CacheEntry<T>): boolean {
+  #isCacheValid(entry: Types.CacheEntry<T>): boolean {
     return Date.now() - entry.timestamp < this.#cacheDuration
   }
 
@@ -210,7 +184,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
    * Renders a cell based on its type
    */
 
-  #renderCellContent(row: T, index: number, column: TableColumn) {
+  #renderCellContent(row: T, index: number, column: Types.Column) {
     const { cell } = column
 
     const lead = Cell(cell?.lead, row)
@@ -230,7 +204,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
    * Renders the sorting icon ONLY when column is sorted
    * Returns the appropriate icon based on sort direction
    */
-  #renderSortIcon(column: TableColumn) {
+  #renderSortIcon(column: Types.Column) {
     const isSorted = this.tableState.sortColumn === column.key
     const sortDirection = this.tableState.sortDirection
 
@@ -323,7 +297,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
    * Renders a single column header cell
    * Handles sortable columns, sort state visualization, and click handlers
    */
-  #renderColumnHeader(column: TableColumn) {
+  #renderColumnHeader(column: Types.Column) {
     const isSorted = this.tableState.sortColumn === column.key
     const sortDirection = this.tableState.sortDirection
 
@@ -392,7 +366,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
    * Renders a single data cell within a table row
    * Applies alignment and renders cell content with slots
    */
-  #renderTableCell(row: T, rowIndex: number, column: TableColumn) {
+  #renderTableCell(row: T, rowIndex: number, column: Types.Column) {
     return html`
       <td
         data-label=${column.label}
