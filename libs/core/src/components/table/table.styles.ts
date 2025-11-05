@@ -73,6 +73,7 @@ const style = css`
     width: 100%;
     overflow-x: auto;
     overflow-y: visible;
+    box-sizing: border-box;
   }
 
   .data:not(.responsive) {
