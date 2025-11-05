@@ -6,6 +6,8 @@ const style = css`
     display: block;
     font: var(--gds-sys-text-detail-book-s);
     color: var(--gds-sys-color-neutral-01);
+    text-align: left;
+    contain: paint;
   }
 
   .gds-table {
