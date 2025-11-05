@@ -25,13 +25,13 @@ export class GdsRipple extends GdsElement {
     const rect = this.getBoundingClientRect();
 
     // Default to center if no coordinates provided
-    const rippleX = x ?? rect.left + rect.width / 2;
-    const rippleY = y ?? rect.top + rect.height / 2;
+    const rippleX = x !== undefined ? x - rect.left : rect.width / 2;
+    const rippleY = y !== undefined ? y - rect.top : rect.height / 2;
 
     if (rippleEl) {
       rippleEl.classList.remove('gds-ripple-effect');
-      this.style.setProperty('--gds-ripple-top', `${rippleY - rect.top}px`);
-      this.style.setProperty('--gds-ripple-left', `${rippleX - rect.left}px`);
+      this.style.setProperty('--gds-ripple-top', `${rippleY}px`);
+      this.style.setProperty('--gds-ripple-left', `${rippleX}px`);
       setTimeout(() => {
         rippleEl.classList.add('gds-ripple-effect');
       }, 20);
