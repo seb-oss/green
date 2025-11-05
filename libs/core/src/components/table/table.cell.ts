@@ -14,7 +14,7 @@ const resolve = <T>(
   value: T | ((row: any) => T) | undefined,
   row: any,
 ): T | undefined =>
-  typeof value === 'function' ? (value as Function)(row) : value
+  typeof value === 'function' ? (value as (row: any) => T)(row) : value
 
 const cellRenderers = {
   badge: (config: Extract<CellType, { type: 'badge' }>, row: any) => {
