@@ -61,9 +61,9 @@ const generateUserRecord = (index: number): UserData => {
     role: USER_ROLES[index % USER_ROLES.length],
     status: USER_STATUSES[index % USER_STATUSES.length],
     department: DEPARTMENTS[index % DEPARTMENTS.length],
-    amount: Math.floor(Math.random() * 100000) + 1000,
-    account: `5440${String(Math.floor(Math.random() * 10000000)).padStart(7, '0')}`,
-    lastLogin: new Date(Date.now() - Math.random() * 10000000000).toISOString(),
+    amount: ((index * 1234 + 5000) % 100000) + 1000,
+    account: `5440${String((index * 7919) % 10000000).padStart(7, '0')}`,
+    lastLogin: new Date(Date.now() - index * 86400000).toISOString(),
     avatarUrl: `https://github.com/${firstName}.png`,
   }
 }
