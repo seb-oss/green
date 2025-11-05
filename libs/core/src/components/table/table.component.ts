@@ -91,6 +91,9 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
   }
 
   @state()
+  private initialLoad = true
+
+  @state()
   private loading = false
 
   @state()
@@ -149,6 +152,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
     if (cachedData && this.#isCacheValid(cachedData)) {
       this.data = cachedData.data
       this.totalRows = cachedData.total
+      this.initialLoad = false
       return
     }
 
@@ -173,9 +177,10 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
       this.data = response.data
       this.totalRows = response.total
       this.selectedRows.clear()
+      this.initialLoad = false
 
       this.dispatchEvent(
-        new CustomEvent('data-loaded', {
+        new CustomEvent('gds-table-data-loaded', {
           detail: response,
           bubbles: true,
         }),
@@ -183,7 +188,7 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
     } catch (error) {
       this.error = error as Error
       this.dispatchEvent(
-        new CustomEvent('data-error', {
+        new CustomEvent('gds-table-data-error', {
           detail: error,
           bubbles: true,
         }),
@@ -437,9 +442,62 @@ export class GdsTable<T extends TableRow = TableRow> extends GdsElement {
   }
 
   /**
+   * Renders skeleton cell content
+   */
+  #renderSkeletonCell() {
+    return html`
+      <div class="cell-content">
+        <span class="skeleton skeleton-text"></span>
+      </div>
+    `
+  }
+
+  /**
+   * Renders a skeleton row for loading state
+   */
+  #renderSkeletonRow(index: number) {
+    return html`
+      <tr class="skeleton-row">
+        ${when(
+          this.selectable,
+          () => html`
+            <td class="checkbox-cell">
+              <span class="skeleton skeleton-checkbox"></span>
+            </td>
+          `,
+        )}
+        ${this.columns
+          .filter((column) => this.tableState.visibleColumns.has(column.key))
+          .map(() => html` <td>${this.#renderSkeletonCell()}</td> `)}
+        ${when(
+          this.actions,
+          () => html`
+            <td class="actions-cell">
+              <div class="cell-content">
+                <span class="skeleton skeleton-action"></span>
+              </div>
+            </td>
+          `,
+        )}
+      </tr>
+    `
+  }
+
+  /**
    * Renders the table body with all data rows
    */
   #renderTableBody() {
+    // Show the skeleton only on the initial load
+    if (this.loading && this.initialLoad) {
+      const skeletonRows = Array.from(
+        { length: this.tableState.pageSize },
+        (_, i) => this.#renderSkeletonRow(i),
+      )
+      return html`<tbody>
+        ${skeletonRows}
+      </tbody>`
+    }
+
     return html`
       <tbody>
         ${this.data.map((row, index) => this.#renderTableRow(row, index))}
