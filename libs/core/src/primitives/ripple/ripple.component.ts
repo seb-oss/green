@@ -30,4 +30,20 @@ export class GdsRipple extends GdsElement {
       }, 20)
     }
   }
+
+  triggerCenteredRipple() {
+    const rippleEl = this._rippleEl;
+    const rect = this.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+
+    if (rippleEl) {
+      rippleEl.classList.remove('gds-ripple-effect')
+      this.style.setProperty('--gds-ripple-top', `${y - rect.top}px`)
+      this.style.setProperty('--gds-ripple-left', `${x - rect.left}px`)
+      setTimeout(() => {
+        rippleEl.classList.add('gds-ripple-effect')
+      }, 20)
+    }
+  }
 }
