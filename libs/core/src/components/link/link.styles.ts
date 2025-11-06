@@ -18,17 +18,24 @@ const style = css`
       text-decoration: none;
       text-underline-offset: 0.2lh;
       color: currentColor;
-      outline-offset: 4px;
+      cursor: pointer;
+      border-radius: var(--gds-sys-radius-3xs);
+      outline-offset: var(--gds-sys-space-3xs);
       outline-color: currentColor;
       font-weight: var(--gds-sys-text-weight-book);
-      transition: all 0.2s ease-in-out;
+      will-change: text-underline-offset;
+      transition-property: text-underline-offset;
+      transition-duration: var(--gds-sys-motion-duration-fastest);
+      transition-timing-function: var(--gds-sys-motion-easing-ease-in-out);
 
-      &:hover {
-        text-decoration: underline;
-        text-underline-offset: 0.16lh;
+      @media (pointer: fine) {
+        &:hover {
+          text-decoration: underline;
+          text-underline-offset: 0.16lh;
 
-        &:active {
-          text-underline-offset: 0.08lh;
+          &:active {
+            text-underline-offset: 0.08lh;
+          }
         }
       }
     }
