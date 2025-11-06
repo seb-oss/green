@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.14.0
+
+### Minor Changes
+
+- b8061fa: **Button**: Ripple effect now triggers on keyboard press (Space/Enter), fixes issue #1880
+
 ## 2.13.2
 
 ### Patch Changes
