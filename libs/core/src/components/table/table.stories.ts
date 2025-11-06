@@ -91,9 +91,9 @@ const mockDataProvider = async (
   await new Promise((resolve) => setTimeout(resolve, API_DELAY_MS))
 
   // Uncomment to test error handling
-  // if (Math.random() < 0.1) {
-  //   throw new Error('Network error: Failed to fetch data')
-  // }
+  if (Math.random() < 0.1) {
+    throw new Error('Network error: Failed to fetch data')
+  }
 
   // Generate base dataset
   const allData = generateMockDataset()
@@ -234,47 +234,36 @@ const tableColumns: TableColumn[] = [
  * Row actions renderer
  * Provides context menu with actions based on row state
  */
-const renderRowActions = (row: UserData) => html`
-  <gds-context-menu>
-    <gds-button
-      slot="trigger"
-      size="small"
-      rank="tertiary"
-      aria-label="Actions for ${row.name}"
-    >
-      <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
-    </gds-button>
-
-    <!-- Status toggle action -->
-    <gds-menu-item @click=${() => console.log(`Toggle status for:`, row)}>
-      ${row.status === 'Active' ? 'Deactivate' : 'Activate'}
-    </gds-menu-item>
-
-    <!-- View logs action -->
-    <gds-menu-item @click=${() => console.log(`View activity log for:`, row)}>
-      View Activity Log
-    </gds-menu-item>
-
-    <!-- Edit action -->
-    <gds-menu-item @click=${() => console.log(`Edit user:`, row)}>
-      Edit User
-    </gds-menu-item>
-
-    <gds-divider></gds-divider>
-
-    <!-- Delete action -->
-    <gds-menu-item
-      variant="negative"
-      @click=${() => {
-        if (confirm(`Delete user ${row.name}?`)) {
-          console.log(`Delete user:`, row)
-        }
-      }}
-    >
-      Delete User
-    </gds-menu-item>
-  </gds-context-menu>
-`
+const tableActions = {
+  label: 'Operations',
+  cell: {
+    type: 'action-menu',
+    items: [
+      {
+        label: (row: { status: string }) =>
+          row.status === 'Active' ? 'Deactivate' : 'Activate',
+        onClick: (row: any) => console.log('Toggle', row),
+      },
+      {
+        label: 'View Activity Log',
+        onClick: (row: any) => console.log('View logs', row),
+      },
+      {
+        label: 'Edit User',
+        onClick: (row: any) => console.log('Edit', row),
+      },
+      {
+        divider: true,
+        label: 'Delete User',
+        onClick: (row: { name: any }) => {
+          if (confirm(`Delete ${row.name}?`)) {
+            console.log('Delete', row)
+          }
+        },
+      },
+    ],
+  },
+}
 
 const meta: Meta = {
   title: 'Components/Table',
@@ -318,17 +307,13 @@ type Story = StoryObj
 export const Default: Story = {
   args: {
     columns: tableColumns,
-    actions: renderRowActions,
+    actions: tableActions,
     density: 'comfortable',
     dataProvider: mockDataProvider,
     selectable: true,
-    title: 'User Management',
-    subtitle: 'Manage system users and their permissions',
   },
   render: (args) => html`
     <gds-table
-      title="${args.title}"
-      subtitle="${args.subtitle}"
       ?selectable="${args.selectable}"
       density="${args.density}"
       .columns="${args.columns}"
@@ -361,12 +346,10 @@ export const Default: Story = {
 export const Plain: Story = {
   args: {
     columns: tableColumns,
-    actions: renderRowActions,
+    actions: tableActions,
     density: 'comfortable',
     dataProvider: mockDataProvider,
     selectable: true,
-    title: 'User Management',
-    subtitle: 'Manage system users and their permissions',
     plain: true,
   },
   render: (args) => html`
@@ -384,32 +367,21 @@ export const Plain: Story = {
 export const Responsive: Story = {
   args: {
     columns: tableColumns,
-    actions: renderRowActions,
+    actions: tableActions,
     density: 'comfortable',
     dataProvider: mockDataProvider,
     selectable: true,
-    title: 'User Management',
-    subtitle: 'Manage system users and their permissions',
     responsive: true,
   },
   render: (args) => html`
     <gds-table
       .responsive="${args.responsive}"
-      title="${args.title}"
-      subtitle="${args.subtitle}"
       ?selectable="${args.selectable}"
       density="${args.density}"
       .columns="${args.columns}"
       .dataProvider="${args.dataProvider}"
       .actions="${args.actions}"
-      @data-loaded="${(e: CustomEvent) =>
-        console.log('✓ Data loaded:', e.detail)}"
-      @data-error="${(e: CustomEvent) =>
-        console.error('✗ Error loading data:', e.detail)}"
-      @selection-change="${(e: CustomEvent) =>
-        console.log('→ Selection changed:', e.detail)}"
     >
-      <!-- Optional header slots for additional controls -->
       <gds-button slot="header-lead" size="small" rank="secondary">
         Export
       </gds-button>
@@ -423,5 +395,119 @@ export const Responsive: Story = {
         <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
       </gds-button>
     </gds-table>
+  `,
+}
+
+// Actions examples
+
+// Single Button
+export const ActionsButton: Story = {
+  args: {
+    columns: tableColumns,
+    actions: {
+      label: 'Actions',
+      cell: {
+        type: 'action-button',
+        label: 'Edit',
+        size: 'small',
+        rank: 'secondary',
+        onClick: (row: any) => console.log('Edit', row),
+      },
+    },
+    dataProvider: mockDataProvider,
+  },
+  render: (args) => html`
+    <gds-table
+      .columns="${args.columns}"
+      .dataProvider="${args.dataProvider}"
+      .actions="${args.actions}"
+    ></gds-table>
+  `,
+}
+
+//  Multiple Buttons
+export const ActionsButtons: Story = {
+  args: {
+    columns: tableColumns,
+    actions: {
+      label: '', // No label
+      cell: {
+        type: 'action-buttons',
+        buttons: [
+          { label: 'Edit', onClick: (row: any) => console.log('Edit', row) },
+          {
+            label: 'Delete',
+            variant: 'negative',
+            onClick: (row: any) => console.log('Delete', row),
+          },
+        ],
+      },
+    },
+    dataProvider: mockDataProvider,
+  },
+  render: (args) => html`
+    <gds-table
+      .columns="${args.columns}"
+      .dataProvider="${args.dataProvider}"
+      .actions="${args.actions}"
+    ></gds-table>
+  `,
+}
+
+//  Link
+export const ActionsLink: Story = {
+  args: {
+    columns: tableColumns,
+    actions: {
+      label: 'Details',
+      cell: {
+        type: 'action-link',
+        label: 'View',
+        href: (row: { id: any }) => `/users/${row.id}`,
+        target: '_blank',
+      },
+    },
+    dataProvider: mockDataProvider,
+  },
+  render: (args) => html`
+    <gds-table
+      .columns="${args.columns}"
+      .dataProvider="${args.dataProvider}"
+      .actions="${args.actions}"
+    ></gds-table>
+  `,
+}
+
+// Menu
+export const ActionsMenu: Story = {
+  args: {
+    columns: tableColumns,
+    actions: {
+      label: 'Operations',
+      cell: {
+        type: 'action-menu',
+        items: [
+          { label: 'Edit', onClick: (row: any) => console.log('Edit', row) },
+          {
+            label: 'View Logs',
+            onClick: (row: any) => console.log('Logs', row),
+          },
+          {
+            divider: true,
+            label: 'Delete',
+            variant: 'negative',
+            onClick: (row: any) => console.log('Delete', row),
+          },
+        ],
+      },
+    },
+    dataProvider: mockDataProvider,
+  },
+  render: (args) => html`
+    <gds-table
+      .columns="${args.columns}"
+      .dataProvider="${args.dataProvider}"
+      .actions="${args.actions}"
+    ></gds-table>
   `,
 }

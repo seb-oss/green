@@ -39,9 +39,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   #cache: Types.Cache<T> = {}
   #cacheDuration = 5 * 60 * 1000
 
-  @property({ type: String, reflect: false })
-  subtitle?: string
-
   @property({ type: Array })
   columns: Types.Column[] = []
 
@@ -61,10 +58,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   plain = false
 
   @property()
-  actions?: (row: T, index: number) => any
-
-  @property({ type: String })
-  actionsLabel = 'Actions'
+  actions?: Types.Actions | ((row: T, index: number) => any)
 
   @state()
   private tableState: Types.State = {
@@ -91,9 +85,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   @state()
   private error: Error | null = null
-
-  @state()
-  private slots: Record<string, { lead?: any; trail?: any; value?: any }> = {}
 
   async connectedCallback() {
     super.connectedCallback()
@@ -223,69 +214,44 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     return html`
       <div class="header">
-        ${when(
-          this.title || this.subtitle,
-          () => html`
-            <div class="header-meta">
-              ${when(
-                this.title,
-                () => html`
-                  <gds-text tag="h2" font="heading-m">${this.title}</gds-text>
-                `,
-              )}
-              ${when(
-                this.subtitle,
-                () => html`
-                  <gds-text tag="p" font="detail-book-s"
-                    >${this.subtitle}</gds-text
-                  >
-                `,
-              )}
-            </div>
-          `,
-        )}
-        <div class="header-slots">
-          <div class="lead">
-            <gds-input
-              type="text"
-              size="small"
-              plain
-              clearable
-              placeholder="Search..."
-              .value=${this.tableState.searchQuery}
-              @input=${this.#handleSearch}
-              @gds-input-cleared=${this.#handleSearchClear}
-              width="240px"
-            >
-              <gds-icon-magnifying-glass
-                slot="lead"
-              ></gds-icon-magnifying-glass>
-            </gds-input>
-            <slot name="header-lead"></slot>
-          </div>
-          <div class="trail">
-            <slot name="header-trail"></slot>
-            <gds-dropdown
-              multiple
-              plain
-              size="small"
-              searchable
-              .value=${Array.from(this.tableState.visibleColumns) as any}
-              @change=${this.#handleColumnVisibility}
-            >
-              <span slot="trigger">Columns</span>
-              ${this.columns.map(
-                (column) => html`
-                  <gds-option
-                    value=${column.key}
-                    ?selected=${this.tableState.visibleColumns.has(column.key)}
-                  >
-                    ${column.label}
-                  </gds-option>
-                `,
-              )}
-            </gds-dropdown>
-          </div>
+        <div class="lead">
+          <gds-input
+            type="text"
+            size="small"
+            plain
+            clearable
+            placeholder="Search..."
+            .value=${this.tableState.searchQuery}
+            @input=${this.#handleSearch}
+            @gds-input-cleared=${this.#handleSearchClear}
+            width="240px"
+          >
+            <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
+          </gds-input>
+          <slot name="header-lead"></slot>
+        </div>
+        <div class="trail">
+          <slot name="header-trail"></slot>
+          <gds-dropdown
+            multiple
+            plain
+            size="small"
+            searchable
+            .value=${Array.from(this.tableState.visibleColumns) as any}
+            @change=${this.#handleColumnVisibility}
+          >
+            <span slot="trigger">Columns</span>
+            ${this.columns.map(
+              (column) => html`
+                <gds-option
+                  value=${column.key}
+                  ?selected=${this.tableState.visibleColumns.has(column.key)}
+                >
+                  ${column.label}
+                </gds-option>
+              `,
+            )}
+          </gds-dropdown>
         </div>
       </div>
     `
@@ -352,9 +318,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             this.actions,
             () =>
               html`<th class="column-header actions">
-                ${this.actionsLabel
-                  ? html` <div class="column-label">${this.actionsLabel}</div>`
-                  : ''}
+                ${typeof this.actions === 'object' && this.actions.label
+                  ? html`<div class="column-label">${this.actions.label}</div>`
+                  : html`<div class="column-label">Actions</div>`}
               </th>`,
           )}
         </tr>
@@ -414,7 +380,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           this.actions,
           () => html`
             <td class="actions-cell" data-label="Actions">
-              <div class="cell-content">${this.actions!(row, index)}</div>
+              <div class="cell-content">
+                ${typeof this.actions === 'function'
+                  ? this.actions(row, index)
+                  : Cell(this.actions!.cell, row)}
+              </div>
             </td>
           `,
         )}
@@ -509,15 +479,47 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    */
   #renderErrorState() {
     return html`
-      <gds-card
-        variant="negative"
-        justify-content="center"
-        align-items="flex-start"
-      >
+      <gds-card justify-content="center" align-items="flex-start">
         <gds-text tag="p">Error loading data</gds-text>
-        <gds-button @click=${() => this.#loadData()} variant="negative">
+        <gds-button size="small" @click=${() => this.#loadData()}>
           Retry
         </gds-button>
+      </gds-card>
+    `
+  }
+
+  /**
+   * Renders empty state when no data found
+   */
+  #renderEmptyState() {
+    const hasSearch = this.tableState.searchQuery.length > 0
+
+    return html`
+      <gds-card justify-content="space-between" align-items="flex-start">
+        <gds-flex flex-direction="column">
+          <gds-text tag="p" font="heading-s">
+            ${hasSearch ? 'No results found' : 'No data available'}
+          </gds-text>
+          ${hasSearch
+            ? html`
+                <gds-text
+                  tag="p"
+                  font="detail-book-s"
+                  color="var(--gds-sys-color-content-neutral-02)"
+                >
+                  No results for "${this.tableState.searchQuery}"
+                </gds-text>
+              `
+            : ''}
+        </gds-flex>
+
+        ${hasSearch
+          ? html`
+              <gds-button size="small" @click=${this.#handleSearchClear}>
+                Clear search
+              </gds-button>
+            `
+          : ''}
       </gds-card>
     `
   }
@@ -589,7 +591,12 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         ${when(
           this.error,
           () => this.#renderErrorState(),
-          () => this.#renderTable(),
+          () =>
+            when(
+              this.data.length === 0 && !this.loading,
+              () => this.#renderEmptyState(),
+              () => this.#renderTable(),
+            ),
         )}
         ${this.#renderFooter()}
       </div>

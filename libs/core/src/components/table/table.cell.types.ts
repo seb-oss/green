@@ -50,40 +50,51 @@ export interface FormattedDateCell {
 }
 
 // Action types
-
-export interface ActionMenuCell {
-  type: 'action-menu'
-  items: Array<{
-    label: string | ((row: any) => string)
-    onClick: (row: any) => void
-    variant?: 'negative'
-    divider?: boolean
-  }>
+export interface ActionButtonCell {
+  type: 'action-button'
+  label: string | ((row: any) => string)
+  size?: GdsButton['size']
+  rank?: GdsButton['rank']
+  variant?: GdsButton['variant']
+  onClick: (row: any) => void
 }
 
 export interface ActionButtonsCell {
   type: 'action-buttons'
   buttons: Array<{
-    icon: 'edit' | 'delete' | 'view'
-    variant?: 'positive' | 'negative' | 'neutral'
+    label: string | ((row: any) => string)
+    size?: GdsButton['size']
+    rank?: GdsButton['rank']
+    variant?: GdsButton['variant']
     onClick: (row: any) => void
   }>
 }
 
 export interface ActionLinkCell {
   type: 'action-link'
-  href: string | ((row: any) => string)
   label: string | ((row: any) => string)
+  href: string | ((row: any) => string)
   target?: '_self' | '_blank'
+}
+
+export interface ActionMenuCell {
+  type: 'action-menu'
+  items: Array<{
+    label: string | ((row: any) => string)
+    variant?: 'negative'
+    divider?: boolean
+    onClick: (row: any) => void
+  }>
 }
 
 export type CellType =
   | BadgeCell
   | AvatarCell
   | CopyButtonCell
-  | ActionMenuCell
+  | ActionButtonCell
   | ActionButtonsCell
   | ActionLinkCell
+  | ActionMenuCell
   | FormattedNumberCell
   | FormattedAccountCell
   | FormattedDateCell

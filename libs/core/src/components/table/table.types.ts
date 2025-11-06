@@ -15,6 +15,11 @@ export interface Column {
   }
 }
 
+export interface Actions {
+  label?: string
+  cell: CellType
+}
+
 export interface Row {
   [key: string]: any
 }
@@ -53,6 +58,7 @@ export interface Cache<T> {
   [key: string]: CacheEntry<T>
 }
 
+export type TableActions = Actions
 export type TableColumn = Column
 export type TableRow = Row
 export type TableState = State

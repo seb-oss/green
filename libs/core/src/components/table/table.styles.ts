@@ -7,7 +7,6 @@ const style = css`
     font: var(--gds-sys-text-detail-book-s);
     color: var(--gds-sys-color-neutral-01);
     text-align: left;
-    contain: paint;
   }
 
   /* Density Modes */
@@ -86,6 +85,7 @@ const style = css`
     border-collapse: collapse;
     border-spacing: 0;
     border: none;
+    contain: paint;
   }
 
   /* Base cell styling (shared by th and td) */
@@ -297,17 +297,6 @@ const style = css`
 
   /* Header & Footer Layout */
   .header {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--table-gap) * 0.8);
-  }
-
-  .header-meta {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .header-slots {
     display: flex;
     justify-content: space-between;
   }
