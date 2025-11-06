@@ -63,6 +63,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   @property()
   actions?: (row: T, index: number) => any
 
+  @property({ type: String })
+  actionsLabel = 'Actions'
+
   @state()
   private tableState: Types.State = {
     page: 1,
@@ -349,7 +352,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             this.actions,
             () =>
               html`<th class="column-header actions">
-                <div class="column-label">Actions</div>
+                ${this.actionsLabel
+                  ? html` <div class="column-label">${this.actionsLabel}</div>`
+                  : ''}
               </th>`,
           )}
         </tr>

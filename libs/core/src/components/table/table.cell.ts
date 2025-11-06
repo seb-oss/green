@@ -69,6 +69,66 @@ const cellRenderers = {
     `
   },
 
+  // Add these renderers
+  'action-menu': (
+    config: Extract<CellType, { type: 'action-menu' }>,
+    row: any,
+  ) => html`
+    <gds-context-menu>
+      <gds-button slot="trigger" size="small" rank="tertiary">
+        <gds-icon-dot-grid-one-horizontal
+          size="m"
+        ></gds-icon-dot-grid-one-horizontal>
+      </gds-button>
+      ${config.items.map(
+        (item, idx) => html`
+          ${item.divider ? html`<gds-divider></gds-divider>` : ''}
+          <gds-menu-item
+            variant="${item.variant || ''}"
+            @click="${() => item.onClick(row)}"
+          >
+            ${resolve(item.label, row)}
+          </gds-menu-item>
+        `,
+      )}
+    </gds-context-menu>
+  `,
+
+  'action-buttons': (
+    config: Extract<CellType, { type: 'action-buttons' }>,
+    row: any,
+  ) => html`
+    <div style="display: flex; gap: 4px;">
+      ${config.buttons.map(
+        (btn) => html`
+          <gds-button
+            size="small"
+            rank="tertiary"
+            variant="${btn.variant || 'neutral'}"
+            @click="${(e: Event) => {
+              e.stopPropagation()
+              btn.onClick(row)
+            }}"
+          >
+            asdasd
+          </gds-button>
+        `,
+      )}
+    </div>
+  `,
+
+  'action-link': (
+    config: Extract<CellType, { type: 'action-link' }>,
+    row: any,
+  ) => html`
+    <gds-link
+      href="${resolve(config.href, row)}"
+      target="${config.target || '_self'}"
+    >
+      ${resolve(config.label, row)}
+    </gds-link>
+  `,
+
   'formatted-number': (
     config: Extract<CellType, { type: 'formatted-number' }>,
     row: any,

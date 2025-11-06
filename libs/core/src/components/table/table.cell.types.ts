@@ -49,10 +49,41 @@ export interface FormattedDateCell {
   format?: DateTimeFormat
 }
 
+// Action types
+
+export interface ActionMenuCell {
+  type: 'action-menu'
+  items: Array<{
+    label: string | ((row: any) => string)
+    onClick: (row: any) => void
+    variant?: 'negative'
+    divider?: boolean
+  }>
+}
+
+export interface ActionButtonsCell {
+  type: 'action-buttons'
+  buttons: Array<{
+    icon: 'edit' | 'delete' | 'view'
+    variant?: 'positive' | 'negative' | 'neutral'
+    onClick: (row: any) => void
+  }>
+}
+
+export interface ActionLinkCell {
+  type: 'action-link'
+  href: string | ((row: any) => string)
+  label: string | ((row: any) => string)
+  target?: '_self' | '_blank'
+}
+
 export type CellType =
   | BadgeCell
   | AvatarCell
   | CopyButtonCell
+  | ActionMenuCell
+  | ActionButtonsCell
+  | ActionLinkCell
   | FormattedNumberCell
   | FormattedAccountCell
   | FormattedDateCell

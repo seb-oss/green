@@ -92,13 +92,16 @@ const style = css`
   th,
   td {
     padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
+  }
+
+  tbody td {
     font-weight: normal;
+    font: var(--gds-sys-text-detail-regular-s);
   }
 
   /* Table Header */
   thead {
     position: relative;
-    font-weight: normal;
   }
 
   /* Header background overlay */
@@ -115,7 +118,6 @@ const style = css`
   thead th {
     padding: var(--table-header-padding-y) var(--table-header-padding-x);
     border: none;
-    font-weight: 500;
     position: relative;
     z-index: 1;
     background: transparent;
@@ -273,18 +275,13 @@ const style = css`
 
   tr.selected::after {
     display: flex;
-    background-color: var(--gds-sys-color-l3-notice-02);
-  }
-
-  tr.selected::after {
-    display: flex;
-    background-color: var(--gds-sys-color-l3-notice-02);
+    background-color: var(--gds-sys-color-l3-neutral-02);
   }
 
   @media (hover: hover) {
     tr.selected:hover::after {
       display: flex;
-      background-color: var(--gds-sys-color-l3-notice-03);
+      background-color: var(--gds-sys-color-l3-neutral-03);
     }
   }
 
@@ -370,9 +367,7 @@ const style = css`
     justify-content: space-between;
   }
 
-  /*
-  * Responsive Design  
-  */
+  /* Responsive Design */
 
   .checkbox-label,
   .actions-label {
