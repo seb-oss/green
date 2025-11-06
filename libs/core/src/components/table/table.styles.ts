@@ -202,11 +202,10 @@ const style = css`
 
   tbody tr {
     opacity: 1;
-    transition:
-      opacity var(--gds-sys-motion-duration-fastest)
-        var(--gds-sys-motion-easing-ease-in-out),
-      border-color var(--gds-sys-motion-duration-fastest)
-        var(--gds-sys-motion-easing-linear);
+    transition-property: opacity, border-color, background-color;
+    transition-duration: var(--gds-sys-motion-duration-fast);
+    transition-timing-function: var(--gds-sys-motion-easing-ease-in-out),
+      var(--gds-sys-motion-easing-linear);
     min-height: var(--table-row-min-height);
     border-top: var(--gds-sys-space-5xs) solid
       var(--gds-sys-color-border-subtle-01);
@@ -220,6 +219,10 @@ const style = css`
   tbody tr.loading {
     opacity: 0.3;
     pointer-events: none;
+  }
+
+  tbody tr.loading:not(:first-child) {
+    border-color: var(--gds-sys-color-border-subtle-02);
   }
 
   tbody td {
@@ -256,16 +259,15 @@ const style = css`
   }
 
   /* Selected row highlight */
-  tr.selected::after {
+  tr::after {
     content: '';
-    display: flex;
+    display: none;
     position: absolute;
     inset: var(--gds-sys-space-5xs) 0;
     border-radius: var(--gds-sys-space-s);
-    background-color: var(--gds-sys-color-l3-notice-02);
+    transition: all var(--gds-sys-motion-duration-fastest);
     z-index: -1;
     pointer-events: none;
-    transition: all var(--gds-sys-motion-duration-fastest);
 
     @starting-style {
       opacity: 0;
@@ -273,10 +275,31 @@ const style = css`
     }
   }
 
+  tr.selected::after {
+    display: flex;
+    background-color: var(--gds-sys-color-l3-notice-02);
+  }
+
+  tr.selected::after {
+    display: flex;
+    background-color: var(--gds-sys-color-l3-notice-02);
+  }
+
   @media (hover: hover) {
     tr.selected:hover::after {
+      display: flex;
       background-color: var(--gds-sys-color-l3-notice-03);
     }
+  }
+
+  tbody tr:hover,
+  tbody tr:hover + tr {
+    border-color: transparent;
+  }
+
+  tbody tr:hover:not(.selected)::after {
+    display: flex;
+    background-color: var(--gds-sys-color-l2-neutral-01);
   }
 
   /* Header & Footer Layout */

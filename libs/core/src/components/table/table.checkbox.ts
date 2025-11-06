@@ -24,7 +24,7 @@ export class GdsTableCheckbox extends GdsElement {
         display: contents;
       }
 
-      .table-row-selector {
+      .table-checkbox {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -72,7 +72,7 @@ export class GdsTableCheckbox extends GdsElement {
         @change=${this.handleChange}
         @keydown=${this.handleKeydown}
       />
-      <div class="table-row-selector" @click=${this.handleClick}>
+      <div class="table-checkbox" @click=${this.handleClick}>
         ${checkboxToggle({
           checked: this.checked,
           indeterminate: this.indeterminate,
