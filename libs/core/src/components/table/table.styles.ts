@@ -10,13 +10,6 @@ const style = css`
     contain: paint;
   }
 
-  .gds-table {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: var(--gds-sys-space-xl);
-  }
-
   /* Density Modes */
   /* Default (comfortable) density */
   .gds-table {
@@ -59,13 +52,16 @@ const style = css`
     --table-header-padding-x: var(--gds-sys-space-l);
     --table-row-min-height: var(--gds-sys-space-5xl);
     --table-font-size: var(--gds-sys-text-detail-book-m);
-    --table-gap: 32px;
+    --table-gap: var(--gds-sys-space-2xl);
   }
 
   /* Apply density variables */
   .gds-table {
+    display: flex;
+    flex-direction: column;
     gap: var(--table-gap);
     font: var(--table-font-size);
+    width: 100%;
   }
 
   /* Container that enables horizontal scroll */
