@@ -7,7 +7,7 @@ import {
   numberFormats,
 } from '../formatted-text/formatters'
 
-import type { GdsBadge, GdsImg } from '../../pure'
+import type { GdsBadge } from '../../pure'
 import type { CellType } from './table.cell.types'
 
 const resolve = <T>(
@@ -64,7 +64,7 @@ const cellRenderers = {
           await navigator.clipboard.writeText(valueToCopy)
         }}"
       >
-        <gds-icon-copy size="m"></gds-icon-copy>
+        <gds-icon-copy size="s"></gds-icon-copy>
       </gds-button>
     `
   },

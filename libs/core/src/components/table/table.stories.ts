@@ -163,7 +163,7 @@ const tableColumns: TableColumn[] = [
       trail: {
         type: 'copy-button',
         value: (row) => row.email,
-        size: 'small',
+        size: 'xs',
       },
     },
   },
