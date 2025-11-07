@@ -13,6 +13,8 @@ import * as Types from './table.types'
 /**
  * @element gds-table
  * @status beta
+ *
+ * ⚠️ Declare events
  */
 @gdsCustomElement('gds-table', {
   dependsOn: Table.Dependencies,
