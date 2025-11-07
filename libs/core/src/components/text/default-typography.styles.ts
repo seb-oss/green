@@ -42,7 +42,8 @@ export const defaultStyles = css`
     }
 
     strong {
-      font: var(--gds-sys-text-body-medium-m);
+      /*font: var(--gds-sys-text-body-medium-m);  */
+      font-weight: var(--gds-sys-text-weight-medium);
     }
   }
 `
