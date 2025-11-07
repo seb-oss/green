@@ -339,8 +339,8 @@ exports[`test css output matches the contents in snapshot for 2023/css/variables
   --gds-sys-color-l3-disabled-02: #595f5d;
   --gds-sys-color-l3-disabled-03: #818886;
   --gds-sys-color-border-interactive: #a0a6a4;
-  --gds-sys-color-border-subtle-01: #595f5d;
-  --gds-sys-color-border-subtle-02: #777e7c;
+  --gds-sys-color-border-subtle-01: #454a48;
+  --gds-sys-color-border-subtle-02: #282a29;
   --gds-sys-color-border-strong: #f7f8f7;
   --gds-sys-color-border-inverse: #ffffff;
   --gds-sys-color-border-information-01: #636967;
@@ -807,8 +807,8 @@ exports[`test figma output matches the contents in snapshot for 2023/figma/figma
   {"name":"L3/disabled-02","value":"#595F5D","type":"color"},
   {"name":"L3/disabled-03","value":"#818886","type":"color"},
   {"name":"border/interactive","value":"#A0A6A4","type":"color"},
-  {"name":"border/subtle-01","value":"#595F5D","type":"color"},
-  {"name":"border/subtle-02","value":"#777E7C","type":"color"},
+  {"name":"border/subtle-01","value":"#454A48","type":"color"},
+  {"name":"border/subtle-02","value":"#282A29","type":"color"},
   {"name":"border/strong","value":"#F7F8F7","type":"color"},
   {"name":"border/inverse","value":"#FFFFFF","type":"color"},
   {"name":"border/information-01","value":"#636967","type":"color"},
@@ -1144,8 +1144,8 @@ exports[`test internal output matches the contents in snapshot for 2023/internal
   --gds-sys-color-l3-disabled-02: #595f5d;
   --gds-sys-color-l3-disabled-03: #818886;
   --gds-sys-color-border-interactive: #a0a6a4;
-  --gds-sys-color-border-subtle-01: #595f5d;
-  --gds-sys-color-border-subtle-02: #777e7c;
+  --gds-sys-color-border-subtle-01: #454a48;
+  --gds-sys-color-border-subtle-02: #282a29;
   --gds-sys-color-border-strong: #f7f8f7;
   --gds-sys-color-border-inverse: #ffffff;
   --gds-sys-color-border-information-01: #636967;
@@ -1769,8 +1769,8 @@ exports[`test scss output matches the contents in snapshot for 2023/scss/_mixin.
   --gds-sys-color-l3-disabled-02: #595f5d;
   --gds-sys-color-l3-disabled-03: #818886;
   --gds-sys-color-border-interactive: #a0a6a4;
-  --gds-sys-color-border-subtle-01: #595f5d;
-  --gds-sys-color-border-subtle-02: #777e7c;
+  --gds-sys-color-border-subtle-01: #454a48;
+  --gds-sys-color-border-subtle-02: #282a29;
   --gds-sys-color-border-strong: #f7f8f7;
   --gds-sys-color-border-inverse: #ffffff;
   --gds-sys-color-border-information-01: #636967;
@@ -2291,8 +2291,8 @@ $gds-sys-color-l3-disabled-01: #595f5d;
 $gds-sys-color-l3-disabled-02: #595f5d;
 $gds-sys-color-l3-disabled-03: #818886;
 $gds-sys-color-border-interactive: #a0a6a4;
-$gds-sys-color-border-subtle-01: #595f5d;
-$gds-sys-color-border-subtle-02: #777e7c;
+$gds-sys-color-border-subtle-01: #454a48;
+$gds-sys-color-border-subtle-02: #282a29;
 $gds-sys-color-border-strong: #f7f8f7;
 $gds-sys-color-border-inverse: #ffffff;
 $gds-sys-color-border-information-01: #636967;
@@ -2716,12 +2716,12 @@ exports[`test studio output matches the contents in snapshot for studio/studio.c
     {
       "token": "subtle-01",
       "variable": "var(--gds-sys-color-border-subtle-01)",
-      "value": "#595F5D"
+      "value": "#454A48"
     },
     {
       "token": "subtle-02",
       "variable": "var(--gds-sys-color-border-subtle-02)",
-      "value": "#777E7C"
+      "value": "#282A29"
     },
     {
       "token": "strong",
