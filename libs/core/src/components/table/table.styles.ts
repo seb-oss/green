@@ -1,17 +1,17 @@
 import { css } from 'lit'
 
-const style = css`
+export const TableStyles = css`
   /* Host & Container */
   :host {
     display: block;
     font: var(--gds-sys-text-detail-book-s);
-    color: var(--gds-sys-color-neutral-01);
+    color: var(--gds-sys-color-content-neutral-01);
     text-align: left;
   }
 
   /* Density Modes */
   /* Default (comfortable) density */
-  .gds-table {
+  .table {
     --table-cell-padding-y: var(--gds-sys-space-s);
     --table-cell-padding-x: var(--gds-sys-space-m);
     --table-header-padding-y: var(--gds-sys-space-s);
@@ -22,7 +22,7 @@ const style = css`
   }
 
   /* Compact density */
-  .gds-table.compact {
+  .table.compact {
     --table-cell-padding-y: var(--gds-sys-space-xs);
     --table-cell-padding-x: var(--gds-sys-space-s);
     --table-header-padding-y: var(--gds-sys-space-xs);
@@ -33,7 +33,7 @@ const style = css`
   }
 
   /* Comfortable density (explicit) */
-  .gds-table.comfortable {
+  .table.comfortable {
     --table-cell-padding-y: var(--gds-sys-space-s);
     --table-cell-padding-x: var(--gds-sys-space-m);
     --table-header-padding-y: var(--gds-sys-space-s);
@@ -44,7 +44,7 @@ const style = css`
   }
 
   /* Spacious density */
-  .gds-table.spacious {
+  .table.spacious {
     --table-cell-padding-y: var(--gds-sys-space-m);
     --table-cell-padding-x: var(--gds-sys-space-l);
     --table-header-padding-y: var(--gds-sys-space-m);
@@ -55,7 +55,7 @@ const style = css`
   }
 
   /* Apply density variables */
-  .gds-table {
+  .table {
     display: flex;
     flex-direction: column;
     gap: var(--table-gap);
@@ -503,5 +503,3 @@ const style = css`
     }
   }
 `
-
-export default style

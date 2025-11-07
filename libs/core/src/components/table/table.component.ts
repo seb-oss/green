@@ -3,13 +3,12 @@ import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
+import { tokens } from '../../tokens.style'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { Cell } from './table.cell'
 import * as GDS from './table.imports'
-import TableStyles from './table.styles'
 import * as Types from './table.types'
 
 /**
@@ -20,7 +19,11 @@ import * as Types from './table.types'
   dependsOn: [
     GDS.Checkbox,
     GDS.Button,
+    GDS.Divider,
     GDS.Input,
+    GDS.Img,
+    GDS.ContextMenu,
+    GDS.MenuItem,
     GDS.Card,
     GDS.Text,
     GDS.Dropdown,
@@ -31,13 +34,17 @@ import * as Types from './table.types'
     GDS.SortDown,
     GDS.CrossSmall,
     GDS.Copy,
+    GDS.DotGridOneHorizontal,
   ],
 })
 export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
-  static styles = [GDS.tokens, TableStyles]
+  static styles = [tokens, GDS.Styles]
 
   #cache: Types.Cache<T> = {}
   #cacheDuration = 5 * 60 * 1000
+
+  @property({ type: Array })
+  pageSizes = [5, 10, 20, 50, 100]
 
   @property({ type: Array })
   columns: Types.Column[] = []
@@ -172,13 +179,192 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       this.loading = false
     }
   }
-
+  /* 
   #renderCellContent(row: T, column: Types.Column) {
     const { cell } = column
 
     const lead = Cell(cell?.lead, row)
     const value = cell?.value ? Cell(cell.value, row) : row[column.key]
     const trail = Cell(cell?.trail, row)
+
+    return html`
+      <div class="cell-content">
+        ${lead && html`<span class="cell-lead">${lead}</span>`}
+        <span class="cell-value">${value}</span>
+        ${trail && html`<span class="cell-trail">${trail}</span>`}
+      </div>
+    `
+  } */
+
+  #renderCell(config: Types.Cell | undefined, row: T): any {
+    if (!config) return null
+
+    // const resolve = <T>(
+    //   value: T | ((row: any) => T) | undefined,
+    // ): T | undefined =>
+    //   typeof value === 'function' ? (value as any)(row) : value
+    const resolve = <V>(
+      value: V | ((r: any) => V) | undefined,
+    ): V | undefined =>
+      typeof value === 'function' ? (value as any)(row) : value
+
+    switch (config.type) {
+      case 'badge': {
+        const variant = (resolve(config.variant) as any) || 'information'
+        const size = (resolve(config.size) as any) || 'small'
+        return html`
+          <gds-badge size="${size}" variant="${variant}">
+            ${resolve(config.value)}
+          </gds-badge>
+        `
+      }
+
+      case 'avatar': {
+        const src = resolve(config.src)
+        if (!src) return null
+        const size = config.size || '24px'
+        return html`
+          <gds-img
+            src="${src}"
+            alt="${resolve(config.alt) || ''}"
+            width="${size}"
+            height="${size}"
+            border-radius="max"
+            object-fit="cover"
+          ></gds-img>
+        `
+      }
+
+      case 'copy-button': {
+        const valueToCopy = String(resolve(config.value) || '')
+        const size = resolve(config.size) || 'small'
+        return html`
+          <gds-button
+            size="${size}"
+            rank="tertiary"
+            @click="${async (e: Event) => {
+              e.stopPropagation()
+              await navigator.clipboard.writeText(valueToCopy)
+            }}"
+          >
+            <gds-icon-copy size="s"></gds-icon-copy>
+          </gds-button>
+        `
+      }
+
+      case 'formatted-number': {
+        const value = resolve(config.value)
+        const formatter =
+          GDS.FormatNumber[config.format || 'decimalsAndThousands']
+        return formatter(value, config.locale, config.currency)
+      }
+
+      case 'formatted-account': {
+        const value = resolve(config.value)
+        const formatter = GDS.FormatAccount[config.format || 'seb-account']
+        return formatter(value)
+      }
+
+      case 'formatted-date': {
+        const value = resolve(config.value)
+        const formatter = GDS.FormatDate[config.format || 'dateLong']
+        return formatter(value, config.locale)
+      }
+      case 'action-button': {
+        const label = resolve(config.label)
+        const size = config.size || 'small'
+        const rank = config.rank || 'secondary'
+        const variant = config.variant || 'neutral'
+
+        return html`
+          <gds-button
+            size="${size}"
+            rank="${rank}"
+            variant="${variant}"
+            @click="${(e: Event) => {
+              e.stopPropagation()
+              config.onClick(row)
+            }}"
+          >
+            ${label}
+          </gds-button>
+        `
+      }
+
+      case 'action-buttons': {
+        const buttons = config.buttons
+
+        return html`
+          <div style="display: flex; gap: var(--gds-sys-space-xs);">
+            ${buttons.map((btn) => {
+              const label = resolve(btn.label)
+              const size = btn.size || 'small'
+              const rank = btn.rank || 'secondary'
+              const variant = btn.variant || 'neutral'
+
+              return html`
+                <gds-button
+                  size="${size}"
+                  rank="${rank}"
+                  variant="${variant}"
+                  @click="${(e: Event) => {
+                    e.stopPropagation()
+                    btn.onClick(row)
+                  }}"
+                >
+                  ${label}
+                </gds-button>
+              `
+            })}
+          </div>
+        `
+      }
+
+      case 'action-link': {
+        const href = resolve(config.href)
+        const label = resolve(config.label)
+        const target = config.target || '_self'
+
+        return html`
+          <gds-link .href="${href}" target="${target}"> ${label} </gds-link>
+        `
+      }
+
+      case 'action-menu': {
+        const items = config.items
+
+        return html`
+          <gds-context-menu>
+            <gds-button slot="trigger" size="small" rank="tertiary">
+              <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+            </gds-button>
+            ${items.map((item) => {
+              const label = resolve(item.label)
+
+              return html`
+                ${item.divider ? html`<gds-divider></gds-divider>` : ''}
+                <gds-menu-item @click="${() => item.onClick(row)}">
+                  ${label}
+                </gds-menu-item>
+              `
+            })}
+          </gds-context-menu>
+        `
+      }
+
+      default:
+        return null
+    }
+  }
+
+  #renderCellContent(row: T, column: Types.Column) {
+    const { cell } = column
+
+    const lead = this.#renderCell(cell?.lead, row)
+    const value = cell?.value
+      ? this.#renderCell(cell.value, row)
+      : row[column.key]
+    const trail = this.#renderCell(cell?.trail, row)
 
     return html`
       <div class="cell-content">
@@ -383,7 +569,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
               <div class="cell-content">
                 ${typeof this.actions === 'function'
                   ? this.actions(row, index)
-                  : Cell(this.actions!.cell, row)}
+                  : this.#renderCell(this.actions!.cell, row)}
               </div>
             </td>
           `,
@@ -571,7 +757,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             .page=${this.tableState.page}
             .pageSize=${this.tableState.pageSize}
             .total=${this.totalRows}
-            .pageSizes=${[5, 10, 20, 50, 100]}
+            .pageSizes=${this.pageSizes}
             @page-change=${this.#handlePageChange}
             @page-size-change=${this.#handlePageSizeChange}
           ></gds-pagination>
@@ -586,7 +772,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    */
   render() {
     return html`
-      <div class="gds-table ${this.density}">
+      <div class="table ${this.density}">
         ${this.#renderHeaderControls()}
         ${when(
           this.error,
