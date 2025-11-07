@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.15.0
+
+### Minor Changes
+
+- 96c1c96: **Dropdown**: dispatched gds-blur in dropdown.component.ts only when focus is shifted away, fixes #2339
+
+### Patch Changes
+
+- a8613b0: **Icon:** Exclemation mark icon svg update
+- 2495ea0: Updating package.json to export the new patterns directory
+- a8613b0: **Text:** Default typography style on strong, paragraph and list item
+- 665c853: **Link:** Improve transition and add cursor
+
 ## 2.14.0
 
 ### Minor Changes
