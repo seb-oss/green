@@ -152,7 +152,7 @@ export default function Table() {
         columns={columns}
         dataProvider={pokemonDataProvider}
         actions={actions}
-        pageSizes={[10, 25, 50, 100, 1000]}
+        pageSizes={[10, 25, 50, 100]}
       >
         <Core.GdsButton slot="header-lead" size="small" rank="secondary">
           Export Team
