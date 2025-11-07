@@ -206,7 +206,7 @@ const tableColumns: TableColumn[] = [
     key: 'account',
     label: 'Account',
     sortable: true,
-    align: 'right',
+    align: 'left',
     cell: {
       value: {
         type: 'formatted-account',
@@ -326,17 +326,11 @@ export const Default: Story = {
       @selection-change="${(e: CustomEvent) =>
         console.log('→ Selection changed:', e.detail)}"
     >
-      <!-- Optional header slots for additional controls -->
       <gds-button slot="header-lead" size="small" rank="secondary">
         Export
       </gds-button>
-      <gds-button
-        slot="header-trail"
-        size="small"
-        rank="secondary"
-        variant="positive"
-      >
-        Add User
+      <gds-button slot="header-trail" size="small" rank="secondary">
+        Add user
         <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
       </gds-button>
     </gds-table>
