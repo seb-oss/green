@@ -3,12 +3,11 @@ import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
-import { tokens } from '../../tokens.style'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import * as GDS from './table.imports'
+import * as Table from './table.imports'
 import * as Types from './table.types'
 
 /**
@@ -16,29 +15,10 @@ import * as Types from './table.types'
  * @status beta
  */
 @gdsCustomElement('gds-table', {
-  dependsOn: [
-    GDS.Checkbox,
-    GDS.Button,
-    GDS.Divider,
-    GDS.Input,
-    GDS.Img,
-    GDS.ContextMenu,
-    GDS.MenuItem,
-    GDS.Card,
-    GDS.Text,
-    GDS.Dropdown,
-    GDS.Pagination,
-    GDS.MagnifyingGlass,
-    GDS.Sort,
-    GDS.SortUp,
-    GDS.SortDown,
-    GDS.CrossSmall,
-    GDS.Copy,
-    GDS.DotGridOneHorizontal,
-  ],
+  dependsOn: Table.Dependencies,
 })
 export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
-  static styles = [tokens, GDS.Styles]
+  static styles = [Table.Tokens, Table.Styles]
 
   #cache: Types.Cache<T> = {}
   #cacheDuration = 5 * 60 * 1000
@@ -68,7 +48,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   actions?: Types.Actions | ((row: T, index: number) => any)
 
   @state()
-  private tableState: Types.State = {
+  private view: Types.State = {
     page: 1,
     pageSize: 10,
     searchQuery: '',
@@ -76,7 +56,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   @state()
-  private initialLoad = true
+  private loaded = true
 
   @state()
   private loading = false
@@ -85,26 +65,26 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   private data: T[] = []
 
   @state()
-  private totalRows = 0
+  private total = 0
 
   @state()
-  private selectedRows = new Set<number>()
+  private selected = new Set<number>()
 
   @state()
   private error: Error | null = null
 
   async connectedCallback() {
     super.connectedCallback()
-    this.tableState.visibleColumns = new Set(this.columns.map((col) => col.key))
+    this.view.visibleColumns = new Set(this.columns.map((col) => col.key))
     await this.#loadData()
   }
 
   get #hasSelection(): boolean {
-    return this.selectedRows.size > 0
+    return this.selected.size > 0
   }
 
   get #isAllSelected(): boolean {
-    return this.data.length > 0 && this.selectedRows.size === this.data.length
+    return this.data.length > 0 && this.selected.size === this.data.length
   }
 
   get #isPartialSelection(): boolean {
@@ -113,11 +93,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   #getCacheKey(): string {
     return JSON.stringify({
-      page: this.tableState.page,
-      pageSize: this.tableState.pageSize,
-      sortColumn: this.tableState.sortColumn,
-      sortDirection: this.tableState.sortDirection,
-      searchQuery: this.tableState.searchQuery,
+      page: this.view.page,
+      pageSize: this.view.pageSize,
+      sortColumn: this.view.sortColumn,
+      sortDirection: this.view.sortDirection,
+      searchQuery: this.view.searchQuery,
     })
   }
 
@@ -133,8 +113,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     if (cachedData && this.#isCacheValid(cachedData)) {
       this.data = cachedData.data
-      this.totalRows = cachedData.total
-      this.initialLoad = false
+      this.total = cachedData.total
+      this.loaded = false
       return
     }
 
@@ -143,11 +123,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     try {
       const response = await this.dataProvider({
-        page: this.tableState.page,
-        pageSize: this.tableState.pageSize,
-        sortColumn: this.tableState.sortColumn,
-        sortDirection: this.tableState.sortDirection,
-        searchQuery: this.tableState.searchQuery,
+        page: this.view.page,
+        pageSize: this.view.pageSize,
+        sortColumn: this.view.sortColumn,
+        sortDirection: this.view.sortDirection,
+        searchQuery: this.view.searchQuery,
       })
 
       this.#cache[cacheKey] = {
@@ -157,9 +137,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       }
 
       this.data = response.data
-      this.totalRows = response.total
-      this.selectedRows.clear()
-      this.initialLoad = false
+      this.total = response.total
+      this.selected.clear()
+      this.loaded = false
 
       this.dispatchEvent(
         new CustomEvent('gds-table-data-loaded', {
@@ -179,30 +159,10 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       this.loading = false
     }
   }
-  /* 
-  #renderCellContent(row: T, column: Types.Column) {
-    const { cell } = column
-
-    const lead = Cell(cell?.lead, row)
-    const value = cell?.value ? Cell(cell.value, row) : row[column.key]
-    const trail = Cell(cell?.trail, row)
-
-    return html`
-      <div class="cell-content">
-        ${lead && html`<span class="cell-lead">${lead}</span>`}
-        <span class="cell-value">${value}</span>
-        ${trail && html`<span class="cell-trail">${trail}</span>`}
-      </div>
-    `
-  } */
 
   #renderCell(config: Types.Cell | undefined, row: T): any {
     if (!config) return null
 
-    // const resolve = <T>(
-    //   value: T | ((row: any) => T) | undefined,
-    // ): T | undefined =>
-    //   typeof value === 'function' ? (value as any)(row) : value
     const resolve = <V>(
       value: V | ((r: any) => V) | undefined,
     ): V | undefined =>
@@ -255,19 +215,19 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       case 'formatted-number': {
         const value = resolve(config.value)
         const formatter =
-          GDS.FormatNumber[config.format || 'decimalsAndThousands']
+          Table.FormatNumber[config.format || 'decimalsAndThousands']
         return formatter(value, config.locale, config.currency)
       }
 
       case 'formatted-account': {
         const value = resolve(config.value)
-        const formatter = GDS.FormatAccount[config.format || 'seb-account']
+        const formatter = Table.FormatAccount[config.format || 'seb-account']
         return formatter(value)
       }
 
       case 'formatted-date': {
         const value = resolve(config.value)
-        const formatter = GDS.FormatDate[config.format || 'dateLong']
+        const formatter = Table.FormatDate[config.format || 'dateLong']
         return formatter(value, config.locale)
       }
       case 'action-button': {
@@ -375,13 +335,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  /**
-   * Renders the sorting icon ONLY when column is sorted
-   * Returns the appropriate icon based on sort direction
-   */
   #renderSortIcon(column: Types.Column) {
-    const isSorted = this.tableState.sortColumn === column.key
-    const sortDirection = this.tableState.sortDirection
+    const isSorted = this.view.sortColumn === column.key
+    const sortDirection = this.view.sortDirection
 
     if (isSorted) {
       return sortDirection === 'asc'
@@ -391,10 +347,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     return html`<gds-icon-sort-up size="m"></gds-icon-sort-up>`
   }
-  /**
-   * Renders the table header controls section
-   * Includes title, subtitle, search input, and column visibility dropdown
-   */
+
   #renderHeaderControls() {
     if (this.plain) return null
 
@@ -407,7 +360,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             plain
             clearable
             placeholder="Search..."
-            .value=${this.tableState.searchQuery}
+            .value=${this.view.searchQuery}
             @input=${this.#handleSearch}
             @gds-input-cleared=${this.#handleSearchClear}
             width="240px"
@@ -423,7 +376,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             plain
             size="small"
             searchable
-            .value=${Array.from(this.tableState.visibleColumns) as any}
+            .value=${Array.from(this.view.visibleColumns) as any}
             @change=${this.#handleColumnVisibility}
           >
             <span slot="trigger">Columns</span>
@@ -431,7 +384,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
               (column) => html`
                 <gds-option
                   value=${column.key}
-                  ?selected=${this.tableState.visibleColumns.has(column.key)}
+                  ?selected=${this.view.visibleColumns.has(column.key)}
                 >
                   ${column.label}
                 </gds-option>
@@ -443,13 +396,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  /**
-   * Renders a single column header cell
-   * Handles sortable columns, sort state visualization, and click handlers
-   */
   #renderColumnHeader(column: Types.Column) {
-    const isSorted = this.tableState.sortColumn === column.key
-    const sortDirection = this.tableState.sortDirection
+    const isSorted = this.view.sortColumn === column.key
+    const sortDirection = this.view.sortDirection
 
     return html`
       <th
@@ -476,10 +425,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  /**
-   * Renders the complete table header including all column headers
-   * Conditionally includes selection checkbox and actions column
-   */
   #renderTableHeader() {
     return html`
       <thead>
@@ -498,7 +443,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             `,
           )}
           ${this.columns
-            .filter((column) => this.tableState.visibleColumns.has(column.key))
+            .filter((column) => this.view.visibleColumns.has(column.key))
             .map((column) => this.#renderColumnHeader(column))}
           ${when(
             this.actions,
@@ -514,10 +459,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  /**
-   * Renders a single data cell within a table row
-   * Applies alignment and renders cell content with slots
-   */
   #renderTableCell(row: T, column: Types.Column) {
     return html`
       <td
@@ -532,15 +473,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  /**
-   * Renders a single table row with all its cells
-   * Handles selection state, loading state, and optional action cells
-   */
   #renderTableRow(row: T, index: number) {
     return html`
       <tr
         class=${classMap({
-          selected: this.selectedRows.has(index),
+          selected: this.selected.has(index),
           loading: this.loading,
         })}
       >
@@ -550,7 +487,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             <td class="checkbox-cell" data-label="Select">
               <div class="cell-content">
                 <gds-table-checkbox
-                  .checked=${this.selectedRows.has(index)}
+                  .checked=${this.selected.has(index)}
                   aria-label="Select row ${index + 1}"
                   @selector-change=${(e: CustomEvent) =>
                     this.#handleRowSelect(index, e)}
@@ -560,7 +497,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           `,
         )}
         ${this.columns
-          .filter((column) => this.tableState.visibleColumns.has(column.key))
+          .filter((column) => this.view.visibleColumns.has(column.key))
           .map((column) => this.#renderTableCell(row, column))}
         ${when(
           this.actions,
@@ -578,9 +515,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  /**
-   * Renders skeleton cell content
-   */
   #renderSkeletonCell() {
     return html`
       <div class="cell-content">
@@ -589,9 +523,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  /**
-   * Renders a skeleton row for loading state
-   */
   #renderSkeletonRow(index: number) {
     return html`
       <tr class="skeleton-row">
@@ -604,7 +535,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           `,
         )}
         ${this.columns
-          .filter((column) => this.tableState.visibleColumns.has(column.key))
+          .filter((column) => this.view.visibleColumns.has(column.key))
           .map(() => html` <td>${this.#renderSkeletonCell()}</td> `)}
         ${when(
           this.actions,
@@ -620,15 +551,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  /**
-   * Renders the table body with all data rows
-   */
   #renderTableBody() {
     // Show the skeleton only on the initial load
-    if (this.loading && this.initialLoad) {
-      const skeletonRows = Array.from(
-        { length: this.tableState.pageSize },
-        (_, i) => this.#renderSkeletonRow(i),
+    if (this.loading && this.loaded) {
+      const skeletonRows = Array.from({ length: this.view.pageSize }, (_, i) =>
+        this.#renderSkeletonRow(i),
       )
       return html`<tbody>
         ${skeletonRows}
@@ -642,9 +569,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  /**
-   * Renders the complete table element with header and body
-   */
   #renderTable() {
     const CLASSES = classMap({
       responsive: this.responsive,
@@ -659,10 +583,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  /**
-   * Renders the error state UI when data loading fails
-   * Provides a retry button to attempt loading again
-   */
   #renderErrorState() {
     return html`
       <gds-card justify-content="center" align-items="flex-start">
@@ -674,11 +594,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  /**
-   * Renders empty state when no data found
-   */
   #renderEmptyState() {
-    const hasSearch = this.tableState.searchQuery.length > 0
+    const hasSearch = this.view.searchQuery.length > 0
 
     return html`
       <gds-card justify-content="space-between" align-items="flex-start">
@@ -693,7 +610,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
                   font="detail-book-s"
                   color="var(--gds-sys-color-content-neutral-02)"
                 >
-                  No results for "${this.tableState.searchQuery}"
+                  No results for "${this.view.searchQuery}"
                 </gds-text>
               `
             : ''}
@@ -710,10 +627,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  /**
-   * Renders the table footer with pagination and selection info
-   * Shows either selection count or row count depending on selection state
-   */
   #renderFooter() {
     if (this.plain) return null
     return html`
@@ -725,7 +638,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
               () => html`
                 <div class="selection-info">
                   <span>
-                    ${this.selectedRows.size} of ${this.data.length} selected
+                    ${this.selected.size} of ${this.data.length} selected
                   </span>
                   <gds-button
                     size="xs"
@@ -738,14 +651,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
               `,
               () => html`
                 <span>
-                  Showing
-                  ${(this.tableState.page - 1) * this.tableState.pageSize + 1}
-                  to
-                  ${Math.min(
-                    this.tableState.page * this.tableState.pageSize,
-                    this.totalRows,
-                  )}
-                  of ${this.totalRows} entries
+                  Showing ${(this.view.page - 1) * this.view.pageSize + 1} to
+                  ${Math.min(this.view.page * this.view.pageSize, this.total)}
+                  of ${this.total} entries
                 </span>
               `,
             )}
@@ -754,9 +662,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         <div class="trail">
           <slot name="footer-trail"></slot>
           <gds-pagination
-            .page=${this.tableState.page}
-            .pageSize=${this.tableState.pageSize}
-            .total=${this.totalRows}
+            .page=${this.view.page}
+            .pageSize=${this.view.pageSize}
+            .total=${this.total}
             .pageSizes=${this.pageSizes}
             @page-change=${this.#handlePageChange}
             @page-size-change=${this.#handlePageSizeChange}
@@ -766,10 +674,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  /**
-   * Main render method that orchestrates the complete table UI
-   * Conditionally renders error state or table content
-   */
   render() {
     return html`
       <div class="table ${this.density}">
@@ -795,8 +699,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    */
   async #handleSearch(e: Event) {
     const input = e.target as HTMLInputElement
-    this.tableState = {
-      ...this.tableState,
+    this.view = {
+      ...this.view,
       searchQuery: input.value,
       page: 1,
     }
@@ -808,8 +712,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Resets search query and reloads data
    */
   async #handleSearchClear() {
-    this.tableState = {
-      ...this.tableState,
+    this.view = {
+      ...this.view,
       searchQuery: '',
       page: 1,
     }
@@ -821,12 +725,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Toggles sort direction if same column, otherwise sets new sort column
    */
   async #handleSort(columnKey: string) {
-    this.tableState = {
-      ...this.tableState,
+    this.view = {
+      ...this.view,
       sortColumn: columnKey,
       sortDirection:
-        this.tableState.sortColumn === columnKey &&
-        this.tableState.sortDirection === 'asc'
+        this.view.sortColumn === columnKey && this.view.sortDirection === 'asc'
           ? 'desc'
           : 'asc',
       page: 1,
@@ -838,8 +741,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Handles pagination page change
    */
   async #handlePageChange(e: CustomEvent) {
-    this.tableState = {
-      ...this.tableState,
+    this.view = {
+      ...this.view,
       page: e.detail.page,
     }
     await this.#loadData()
@@ -850,8 +753,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Resets to first page when page size changes
    */
   async #handlePageSizeChange(e: CustomEvent) {
-    this.tableState = {
-      ...this.tableState,
+    this.view = {
+      ...this.view,
       pageSize: e.detail.pageSize,
       page: 1,
     }
@@ -864,8 +767,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    */
   #handleColumnVisibility(e: CustomEvent) {
     const selectedColumns = e.detail.value as string[]
-    this.tableState = {
-      ...this.tableState,
+    this.view = {
+      ...this.view,
       visibleColumns: new Set(selectedColumns),
     }
     this.requestUpdate()
@@ -891,9 +794,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     const isChecked = e.detail.checked
 
     if (isChecked) {
-      this.selectedRows.add(index)
+      this.selected.add(index)
     } else {
-      this.selectedRows.delete(index)
+      this.selected.delete(index)
     }
 
     this.#emitSelectionChange()
@@ -904,7 +807,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Internal method to select all rows
    */
   #selectAllInternal(): void {
-    this.selectedRows = new Set(this.data.map((_, i) => i))
+    this.selected = new Set(this.data.map((_, i) => i))
     this.requestUpdate()
   }
 
@@ -912,7 +815,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Internal method to clear all selections
    */
   #clearSelectionInternal(): void {
-    this.selectedRows.clear()
+    this.selected.clear()
     this.requestUpdate()
   }
 
@@ -923,9 +826,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     this.dispatchEvent(
       new CustomEvent('gds-table-selection', {
         detail: {
-          selectedIndices: Array.from(this.selectedRows),
-          selectedData: Array.from(this.selectedRows).map((i) => this.data[i]),
-          count: this.selectedRows.size,
+          selectedIndices: Array.from(this.selected),
+          selectedData: Array.from(this.selected).map((i) => this.data[i]),
+          count: this.selected.size,
         },
         bubbles: true,
       }),
@@ -954,7 +857,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    */
   setSelection(indices: number[]): void {
     const validIndices = indices.filter((i) => i >= 0 && i < this.data.length)
-    this.selectedRows = new Set(validIndices)
+    this.selected = new Set(validIndices)
     this.#emitSelectionChange()
     this.requestUpdate()
   }
@@ -963,7 +866,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Get selected row data
    */
   getSelection(): { indices: number[]; data: T[] } {
-    const indices = Array.from(this.selectedRows)
+    const indices = Array.from(this.selected)
     return {
       indices,
       data: indices.map((i) => this.data[i]),

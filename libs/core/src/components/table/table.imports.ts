@@ -1,27 +1,26 @@
-// table.imports.ts
-
-export {
-  GdsButton as Button,
-  GdsCard as Card,
-  GdsDivider as Divider,
-  GdsImg as Img,
-  GdsContextMenu as ContextMenu,
-  GdsMenuItem as MenuItem,
-  GdsDropdown as Dropdown,
-  GdsInput as Input,
-  GdsPagination as Pagination,
-  GdsText as Text,
+import {
+  GdsBadge,
+  GdsButton,
+  GdsCard,
+  GdsContextMenu,
+  GdsDivider,
+  GdsDropdown,
+  GdsFlex,
+  GdsImg,
+  GdsInput,
+  GdsLink,
+  GdsMenuItem,
+  GdsPagination,
+  GdsText,
+  IconCopy,
+  IconCrossSmall,
+  IconDotGridOneHorizontal,
+  IconMagnifyingGlass,
+  IconSort,
+  IconSortDown,
+  IconSortUp,
 } from '../../pure'
-
-export {
-  IconCopy as Copy,
-  IconCrossSmall as CrossSmall,
-  IconMagnifyingGlass as MagnifyingGlass,
-  IconSort as Sort,
-  IconSortDown as SortDown,
-  IconSortUp as SortUp,
-  IconDotGridOneHorizontal as DotGridOneHorizontal,
-} from '../icon/icons/pure'
+import { GdsTableCheckbox } from './table.checkbox'
 
 export {
   accountsFormats as FormatAccount,
@@ -30,7 +29,28 @@ export {
 } from '../formatted-text/formatters'
 
 export { TableStyles as Styles } from './table.styles'
+export { tokens as Tokens } from '../../tokens.style'
 
-export { GdsTableCheckbox as Checkbox } from './table.checkbox'
-
-export { tokens } from '../../tokens.style'
+export const Dependencies = [
+  GdsTableCheckbox,
+  GdsButton,
+  GdsCard,
+  GdsDivider,
+  GdsImg,
+  GdsContextMenu,
+  GdsMenuItem,
+  GdsDropdown,
+  GdsInput,
+  GdsPagination,
+  GdsText,
+  GdsBadge,
+  GdsLink,
+  GdsFlex,
+  IconCopy,
+  IconCrossSmall,
+  IconMagnifyingGlass,
+  IconSort,
+  IconSortDown,
+  IconSortUp,
+  IconDotGridOneHorizontal,
+]
