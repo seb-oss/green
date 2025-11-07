@@ -7,10 +7,10 @@
           "$value": "{ref.color.grey.13}"
         },
         "subtle-01": {
-          "$value": "{ref.color.grey.20}"
+          "$value": "{ref.color.grey.22}"
         },
         "subtle-02": {
-          "$value": "{ref.color.grey.17}"
+          "$value": "{ref.color.grey.25}"
         },
         "strong": {
           "$value": "{ref.color.grey.3}"
