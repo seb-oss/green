@@ -221,38 +221,37 @@ exports[`test css output matches the contents in snapshot for 2023/css/variables
   --gds-sys-text-weight-book: 450;
   --gds-sys-text-weight-medium: 500;
   --gds-sys-text-weight-bold: 700;
+  --gds-sys-text-display-2xl: 450 5.125rem/5.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-xl: 450 4rem/4.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-l: 450 3rem/3.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-m: 450 2.25rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-s: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-heading-xl: 450 2rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-heading-l: 450 1.75rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-heading-m: 450 1.5rem/2rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-heading-s: 450 1.25rem/1.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-heading-xs: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-heading-2xs: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-detail-book-m: 450 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-detail-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-detail-book-xs: 450 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-detail-regular-m: 400 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-detail-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-detail-regular-xs: 400 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-book-l: 450 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-book-m: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-regular-l: 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-regular-m: 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-italic-l: italic 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-italic-m: italic 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-italic-s: italic 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-display-2xl: 450 5.125rem/5.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-display-xl: 450 4rem/4.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-display-l: 450 3rem/3.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-display-m: 450 2.25rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-display-s: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-preamble-2xl: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-preamble-xl: 450 1.75rem/2.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-preamble-l: 450 1.5rem/2rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-preamble-m: 450 1.25rem/1.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-preamble-s: 450 1.125rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-preamble-xs: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-book-m: 450 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-book-xs: 450 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-regular-m: 400 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-regular-xs: 400 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-medium-m: 500 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-medium-s: 500 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-book-m: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-regular-l: 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-regular-m: 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-italic-m: italic 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-italic-s: italic 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-space-0: 0px;
   --gds-sys-space-5xs: 1px;
   --gds-sys-space-4xs: 2px;
@@ -339,8 +338,8 @@ exports[`test css output matches the contents in snapshot for 2023/css/variables
   --gds-sys-color-l3-disabled-02: #595f5d;
   --gds-sys-color-l3-disabled-03: #818886;
   --gds-sys-color-border-interactive: #a0a6a4;
-  --gds-sys-color-border-subtle-01: #595f5d;
-  --gds-sys-color-border-subtle-02: #777e7c;
+  --gds-sys-color-border-subtle-01: #454a48;
+  --gds-sys-color-border-subtle-02: #282a29;
   --gds-sys-color-border-strong: #f7f8f7;
   --gds-sys-color-border-inverse: #ffffff;
   --gds-sys-color-border-information-01: #636967;
@@ -661,6 +660,21 @@ exports[`test figma output matches the contents in snapshot for 2023/figma/figma
 
 exports[`test figma output matches the contents in snapshot for 2023/figma/figma.typography.json: tokens-figma-2023-figma-figma-typography-json 1`] = `
 "[
+  {"name":"text/display-2xl-fontWeight","value":450,"type":"float"},
+  {"name":"text/display-2xl-fontSize","value":82,"type":"float"},
+  {"name":"text/display-2xl-lineHeight","value":90,"type":"float"},
+  {"name":"text/display-xl-fontWeight","value":450,"type":"float"},
+  {"name":"text/display-xl-fontSize","value":64,"type":"float"},
+  {"name":"text/display-xl-lineHeight","value":72,"type":"float"},
+  {"name":"text/display-l-fontWeight","value":450,"type":"float"},
+  {"name":"text/display-l-fontSize","value":48,"type":"float"},
+  {"name":"text/display-l-lineHeight","value":56,"type":"float"},
+  {"name":"text/display-m-fontWeight","value":450,"type":"float"},
+  {"name":"text/display-m-fontSize","value":36,"type":"float"},
+  {"name":"text/display-m-lineHeight","value":44,"type":"float"},
+  {"name":"text/display-s-fontWeight","value":450,"type":"float"},
+  {"name":"text/display-s-fontSize","value":32,"type":"float"},
+  {"name":"text/display-s-lineHeight","value":40,"type":"float"},
   {"name":"text/heading-xl-fontWeight","value":450,"type":"float"},
   {"name":"text/heading-xl-fontSize","value":32,"type":"float"},
   {"name":"text/heading-xl-lineHeight","value":44,"type":"float"},
@@ -679,6 +693,24 @@ exports[`test figma output matches the contents in snapshot for 2023/figma/figma
   {"name":"text/heading-2xs-fontWeight","value":450,"type":"float"},
   {"name":"text/heading-2xs-fontSize","value":14,"type":"float"},
   {"name":"text/heading-2xs-lineHeight","value":20,"type":"float"},
+  {"name":"text/preamble-2xl-fontWeight","value":450,"type":"float"},
+  {"name":"text/preamble-2xl-fontSize","value":32,"type":"float"},
+  {"name":"text/preamble-2xl-lineHeight","value":40,"type":"float"},
+  {"name":"text/preamble-xl-fontWeight","value":450,"type":"float"},
+  {"name":"text/preamble-xl-fontSize","value":28,"type":"float"},
+  {"name":"text/preamble-xl-lineHeight","value":36,"type":"float"},
+  {"name":"text/preamble-l-fontWeight","value":450,"type":"float"},
+  {"name":"text/preamble-l-fontSize","value":24,"type":"float"},
+  {"name":"text/preamble-l-lineHeight","value":32,"type":"float"},
+  {"name":"text/preamble-m-fontWeight","value":450,"type":"float"},
+  {"name":"text/preamble-m-fontSize","value":20,"type":"float"},
+  {"name":"text/preamble-m-lineHeight","value":28,"type":"float"},
+  {"name":"text/preamble-s-fontWeight","value":450,"type":"float"},
+  {"name":"text/preamble-s-fontSize","value":18,"type":"float"},
+  {"name":"text/preamble-s-lineHeight","value":26,"type":"float"},
+  {"name":"text/preamble-xs-fontWeight","value":450,"type":"float"},
+  {"name":"text/preamble-xs-fontSize","value":16,"type":"float"},
+  {"name":"text/preamble-xs-lineHeight","value":24,"type":"float"},
   {"name":"text/detail-book-m-fontWeight","value":450,"type":"float"},
   {"name":"text/detail-book-m-fontSize","value":16,"type":"float"},
   {"name":"text/detail-book-m-lineHeight","value":20,"type":"float"},
@@ -697,9 +729,12 @@ exports[`test figma output matches the contents in snapshot for 2023/figma/figma
   {"name":"text/detail-regular-xs-fontWeight","value":400,"type":"float"},
   {"name":"text/detail-regular-xs-fontSize","value":12,"type":"float"},
   {"name":"text/detail-regular-xs-lineHeight","value":16,"type":"float"},
-  {"name":"text/body-book-l-fontWeight","value":450,"type":"float"},
-  {"name":"text/body-book-l-fontSize","value":20,"type":"float"},
-  {"name":"text/body-book-l-lineHeight","value":26,"type":"float"},
+  {"name":"text/body-medium-m-fontWeight","value":500,"type":"float"},
+  {"name":"text/body-medium-m-fontSize","value":16,"type":"float"},
+  {"name":"text/body-medium-m-lineHeight","value":24,"type":"float"},
+  {"name":"text/body-medium-s-fontWeight","value":500,"type":"float"},
+  {"name":"text/body-medium-s-fontSize","value":14,"type":"float"},
+  {"name":"text/body-medium-s-lineHeight","value":20,"type":"float"},
   {"name":"text/body-book-m-fontWeight","value":450,"type":"float"},
   {"name":"text/body-book-m-fontSize","value":16,"type":"float"},
   {"name":"text/body-book-m-lineHeight","value":24,"type":"float"},
@@ -712,13 +747,6 @@ exports[`test figma output matches the contents in snapshot for 2023/figma/figma
   {"name":"text/body-regular-m-fontWeight","value":400,"type":"float"},
   {"name":"text/body-regular-m-fontSize","value":16,"type":"float"},
   {"name":"text/body-regular-m-lineHeight","value":24,"type":"float"},
-  {"name":"text/body-regular-s-fontWeight","value":400,"type":"float"},
-  {"name":"text/body-regular-s-fontSize","value":14,"type":"float"},
-  {"name":"text/body-regular-s-lineHeight","value":20,"type":"float"},
-  {"name":"text/body-italic-l-fontWeight","value":400,"type":"float"},
-  {"name":"text/body-italic-l-fontStyle","value":"italic","type":"string"},
-  {"name":"text/body-italic-l-fontSize","value":20,"type":"float"},
-  {"name":"text/body-italic-l-lineHeight","value":26,"type":"float"},
   {"name":"text/body-italic-m-fontWeight","value":400,"type":"float"},
   {"name":"text/body-italic-m-fontStyle","value":"italic","type":"string"},
   {"name":"text/body-italic-m-fontSize","value":16,"type":"float"},
@@ -726,40 +754,7 @@ exports[`test figma output matches the contents in snapshot for 2023/figma/figma
   {"name":"text/body-italic-s-fontWeight","value":400,"type":"float"},
   {"name":"text/body-italic-s-fontStyle","value":"italic","type":"string"},
   {"name":"text/body-italic-s-fontSize","value":14,"type":"float"},
-  {"name":"text/body-italic-s-lineHeight","value":20,"type":"float"},
-  {"name":"text/display-2xl-fontWeight","value":450,"type":"float"},
-  {"name":"text/display-2xl-fontSize","value":82,"type":"float"},
-  {"name":"text/display-2xl-lineHeight","value":90,"type":"float"},
-  {"name":"text/display-xl-fontWeight","value":450,"type":"float"},
-  {"name":"text/display-xl-fontSize","value":64,"type":"float"},
-  {"name":"text/display-xl-lineHeight","value":72,"type":"float"},
-  {"name":"text/display-l-fontWeight","value":450,"type":"float"},
-  {"name":"text/display-l-fontSize","value":48,"type":"float"},
-  {"name":"text/display-l-lineHeight","value":56,"type":"float"},
-  {"name":"text/display-m-fontWeight","value":450,"type":"float"},
-  {"name":"text/display-m-fontSize","value":36,"type":"float"},
-  {"name":"text/display-m-lineHeight","value":44,"type":"float"},
-  {"name":"text/display-s-fontWeight","value":450,"type":"float"},
-  {"name":"text/display-s-fontSize","value":32,"type":"float"},
-  {"name":"text/display-s-lineHeight","value":40,"type":"float"},
-  {"name":"text/preamble-2xl-fontWeight","value":450,"type":"float"},
-  {"name":"text/preamble-2xl-fontSize","value":32,"type":"float"},
-  {"name":"text/preamble-2xl-lineHeight","value":40,"type":"float"},
-  {"name":"text/preamble-xl-fontWeight","value":450,"type":"float"},
-  {"name":"text/preamble-xl-fontSize","value":28,"type":"float"},
-  {"name":"text/preamble-xl-lineHeight","value":36,"type":"float"},
-  {"name":"text/preamble-l-fontWeight","value":450,"type":"float"},
-  {"name":"text/preamble-l-fontSize","value":24,"type":"float"},
-  {"name":"text/preamble-l-lineHeight","value":32,"type":"float"},
-  {"name":"text/preamble-m-fontWeight","value":450,"type":"float"},
-  {"name":"text/preamble-m-fontSize","value":20,"type":"float"},
-  {"name":"text/preamble-m-lineHeight","value":28,"type":"float"},
-  {"name":"text/preamble-s-fontWeight","value":450,"type":"float"},
-  {"name":"text/preamble-s-fontSize","value":18,"type":"float"},
-  {"name":"text/preamble-s-lineHeight","value":26,"type":"float"},
-  {"name":"text/preamble-xs-fontWeight","value":450,"type":"float"},
-  {"name":"text/preamble-xs-fontSize","value":16,"type":"float"},
-  {"name":"text/preamble-xs-lineHeight","value":24,"type":"float"}
+  {"name":"text/body-italic-s-lineHeight","value":20,"type":"float"}
 ]
 "
 `;
@@ -807,8 +802,8 @@ exports[`test figma output matches the contents in snapshot for 2023/figma/figma
   {"name":"L3/disabled-02","value":"#595F5D","type":"color"},
   {"name":"L3/disabled-03","value":"#818886","type":"color"},
   {"name":"border/interactive","value":"#A0A6A4","type":"color"},
-  {"name":"border/subtle-01","value":"#595F5D","type":"color"},
-  {"name":"border/subtle-02","value":"#777E7C","type":"color"},
+  {"name":"border/subtle-01","value":"#454A48","type":"color"},
+  {"name":"border/subtle-02","value":"#282A29","type":"color"},
   {"name":"border/strong","value":"#F7F8F7","type":"color"},
   {"name":"border/inverse","value":"#FFFFFF","type":"color"},
   {"name":"border/information-01","value":"#636967","type":"color"},
@@ -1027,38 +1022,37 @@ exports[`test internal output matches the contents in snapshot for 2023/internal
   --gds-sys-text-weight-book: 450;
   --gds-sys-text-weight-medium: 500;
   --gds-sys-text-weight-bold: 700;
+  --gds-sys-text-display-2xl: 450 5.125rem/5.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-xl: 450 4rem/4.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-l: 450 3rem/3.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-m: 450 2.25rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-display-s: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-heading-xl: 450 2rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-heading-l: 450 1.75rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-heading-m: 450 1.5rem/2rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-heading-s: 450 1.25rem/1.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-heading-xs: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-heading-2xs: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-detail-book-m: 450 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-detail-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-detail-book-xs: 450 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-detail-regular-m: 400 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-detail-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-detail-regular-xs: 400 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-book-l: 450 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-book-m: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-regular-l: 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-regular-m: 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-italic-l: italic 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-italic-m: italic 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-body-italic-s: italic 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-display-2xl: 450 5.125rem/5.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-display-xl: 450 4rem/4.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-display-l: 450 3rem/3.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-display-m: 450 2.25rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-  --gds-sys-text-display-s: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-preamble-2xl: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-preamble-xl: 450 1.75rem/2.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-preamble-l: 450 1.5rem/2rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-preamble-m: 450 1.25rem/1.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-preamble-s: 450 1.125rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-preamble-xs: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-book-m: 450 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-book-xs: 450 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-regular-m: 400 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-detail-regular-xs: 400 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-medium-m: 500 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-medium-s: 500 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-book-m: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-regular-l: 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-regular-m: 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-italic-m: italic 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-italic-s: italic 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-space-0: 0px;
   --gds-sys-space-5xs: 1px;
   --gds-sys-space-4xs: 2px;
@@ -1144,8 +1138,8 @@ exports[`test internal output matches the contents in snapshot for 2023/internal
   --gds-sys-color-l3-disabled-02: #595f5d;
   --gds-sys-color-l3-disabled-03: #818886;
   --gds-sys-color-border-interactive: #a0a6a4;
-  --gds-sys-color-border-subtle-01: #595f5d;
-  --gds-sys-color-border-subtle-02: #777e7c;
+  --gds-sys-color-border-subtle-01: #454a48;
+  --gds-sys-color-border-subtle-02: #282a29;
   --gds-sys-color-border-strong: #f7f8f7;
   --gds-sys-color-border-inverse: #ffffff;
   --gds-sys-color-border-information-01: #636967;
@@ -1769,8 +1763,8 @@ exports[`test scss output matches the contents in snapshot for 2023/scss/_mixin.
   --gds-sys-color-l3-disabled-02: #595f5d;
   --gds-sys-color-l3-disabled-03: #818886;
   --gds-sys-color-border-interactive: #a0a6a4;
-  --gds-sys-color-border-subtle-01: #595f5d;
-  --gds-sys-color-border-subtle-02: #777e7c;
+  --gds-sys-color-border-subtle-01: #454a48;
+  --gds-sys-color-border-subtle-02: #282a29;
   --gds-sys-color-border-strong: #f7f8f7;
   --gds-sys-color-border-inverse: #ffffff;
   --gds-sys-color-border-information-01: #636967;
@@ -1992,38 +1986,37 @@ $gds-sys-text-weight-regular: 400;
 $gds-sys-text-weight-book: 450;
 $gds-sys-text-weight-medium: 500;
 $gds-sys-text-weight-bold: 700;
+$gds-sys-text-display-2xl: 450 5.125rem/5.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-display-xl: 450 4rem/4.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-display-l: 450 3rem/3.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-display-m: 450 2.25rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-display-s: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-heading-xl: 450 2rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-heading-l: 450 1.75rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-heading-m: 450 1.5rem/2rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-heading-s: 450 1.25rem/1.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-heading-xs: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-heading-2xs: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-detail-book-m: 450 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-detail-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-detail-book-xs: 450 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-detail-regular-m: 400 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-detail-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-detail-regular-xs: 400 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-body-book-l: 450 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-body-book-m: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-body-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-body-regular-l: 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-body-regular-m: 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-body-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-body-italic-l: italic 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-body-italic-m: italic 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-body-italic-s: italic 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-display-2xl: 450 5.125rem/5.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-display-xl: 450 4rem/4.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-display-l: 450 3rem/3.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-display-m: 450 2.25rem/2.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
-$gds-sys-text-display-s: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-preamble-2xl: 450 2rem/2.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-preamble-xl: 450 1.75rem/2.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-preamble-l: 450 1.5rem/2rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-preamble-m: 450 1.25rem/1.75rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-preamble-s: 450 1.125rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-preamble-xs: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-detail-book-m: 450 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-detail-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-detail-book-xs: 450 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-detail-regular-m: 400 1rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-detail-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-detail-regular-xs: 400 0.75rem/1rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-medium-m: 500 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-medium-s: 500 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-book-m: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-regular-l: 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-regular-m: 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-italic-m: italic 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-italic-s: italic 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-space-0: 0px;
 $gds-sys-space-5xs: 1px;
 $gds-sys-space-4xs: 2px;
@@ -2291,8 +2284,8 @@ $gds-sys-color-l3-disabled-01: #595f5d;
 $gds-sys-color-l3-disabled-02: #595f5d;
 $gds-sys-color-l3-disabled-03: #818886;
 $gds-sys-color-border-interactive: #a0a6a4;
-$gds-sys-color-border-subtle-01: #595f5d;
-$gds-sys-color-border-subtle-02: #777e7c;
+$gds-sys-color-border-subtle-01: #454a48;
+$gds-sys-color-border-subtle-02: #282a29;
 $gds-sys-color-border-strong: #f7f8f7;
 $gds-sys-color-border-inverse: #ffffff;
 $gds-sys-color-border-information-01: #636967;
@@ -2716,12 +2709,12 @@ exports[`test studio output matches the contents in snapshot for studio/studio.c
     {
       "token": "subtle-01",
       "variable": "var(--gds-sys-color-border-subtle-01)",
-      "value": "#595F5D"
+      "value": "#454A48"
     },
     {
       "token": "subtle-02",
       "variable": "var(--gds-sys-color-border-subtle-02)",
-      "value": "#777E7C"
+      "value": "#282A29"
     },
     {
       "token": "strong",
@@ -3908,6 +3901,43 @@ exports[`test studio output matches the contents in snapshot for studio/studio.s
 exports[`test studio output matches the contents in snapshot for studio/studio.typography.json: tokens-studio-studio-studio-typography-json 1`] = `
 "{
   "typography": {
+    "display": {
+      "display-2xl": {
+        "token": "display-2xl",
+        "variable": "var(--gds-sys-text-display-2xl)",
+        "font-weight": "450",
+        "font-size": "82px",
+        "line-height": "90px"
+      },
+      "display-xl": {
+        "token": "display-xl",
+        "variable": "var(--gds-sys-text-display-xl)",
+        "font-weight": "450",
+        "font-size": "64px",
+        "line-height": "72px"
+      },
+      "display-l": {
+        "token": "display-l",
+        "variable": "var(--gds-sys-text-display-l)",
+        "font-weight": "450",
+        "font-size": "48px",
+        "line-height": "56px"
+      },
+      "display-m": {
+        "token": "display-m",
+        "variable": "var(--gds-sys-text-display-m)",
+        "font-weight": "450",
+        "font-size": "36px",
+        "line-height": "44px"
+      },
+      "display-s": {
+        "token": "display-s",
+        "variable": "var(--gds-sys-text-display-s)",
+        "font-weight": "450",
+        "font-size": "32px",
+        "line-height": "40px"
+      }
+    },
     "heading": {
       "heading-xl": {
         "token": "heading-xl",
@@ -3950,6 +3980,50 @@ exports[`test studio output matches the contents in snapshot for studio/studio.t
         "font-weight": "450",
         "font-size": "14px",
         "line-height": "20px"
+      }
+    },
+    "preamble": {
+      "preamble-2xl": {
+        "token": "preamble-2xl",
+        "variable": "var(--gds-sys-text-preamble-2xl)",
+        "font-weight": "450",
+        "font-size": "32px",
+        "line-height": "40px"
+      },
+      "preamble-xl": {
+        "token": "preamble-xl",
+        "variable": "var(--gds-sys-text-preamble-xl)",
+        "font-weight": "450",
+        "font-size": "28px",
+        "line-height": "36px"
+      },
+      "preamble-l": {
+        "token": "preamble-l",
+        "variable": "var(--gds-sys-text-preamble-l)",
+        "font-weight": "450",
+        "font-size": "24px",
+        "line-height": "32px"
+      },
+      "preamble-m": {
+        "token": "preamble-m",
+        "variable": "var(--gds-sys-text-preamble-m)",
+        "font-weight": "450",
+        "font-size": "20px",
+        "line-height": "28px"
+      },
+      "preamble-s": {
+        "token": "preamble-s",
+        "variable": "var(--gds-sys-text-preamble-s)",
+        "font-weight": "450",
+        "font-size": "18px",
+        "line-height": "26px"
+      },
+      "preamble-xs": {
+        "token": "preamble-xs",
+        "variable": "var(--gds-sys-text-preamble-xs)",
+        "font-weight": "450",
+        "font-size": "16px",
+        "line-height": "24px"
       }
     },
     "detail": {
@@ -3997,12 +4071,19 @@ exports[`test studio output matches the contents in snapshot for studio/studio.t
       }
     },
     "body": {
-      "body-book-l": {
-        "token": "body-book-l",
-        "variable": "var(--gds-sys-text-body-book-l)",
-        "font-weight": "450",
-        "font-size": "20px",
-        "line-height": "26px"
+      "body-medium-m": {
+        "token": "body-medium-m",
+        "variable": "var(--gds-sys-text-body-medium-m)",
+        "font-weight": "500",
+        "font-size": "16px",
+        "line-height": "24px"
+      },
+      "body-medium-s": {
+        "token": "body-medium-s",
+        "variable": "var(--gds-sys-text-body-medium-s)",
+        "font-weight": "500",
+        "font-size": "14px",
+        "line-height": "20px"
       },
       "body-book-m": {
         "token": "body-book-m",
@@ -4032,20 +4113,6 @@ exports[`test studio output matches the contents in snapshot for studio/studio.t
         "font-size": "16px",
         "line-height": "24px"
       },
-      "body-regular-s": {
-        "token": "body-regular-s",
-        "variable": "var(--gds-sys-text-body-regular-s)",
-        "font-weight": "400",
-        "font-size": "14px",
-        "line-height": "20px"
-      },
-      "body-italic-l": {
-        "token": "body-italic-l",
-        "variable": "var(--gds-sys-text-body-italic-l)",
-        "font-weight": "400",
-        "font-size": "20px",
-        "line-height": "26px"
-      },
       "body-italic-m": {
         "token": "body-italic-m",
         "variable": "var(--gds-sys-text-body-italic-m)",
@@ -4059,87 +4126,6 @@ exports[`test studio output matches the contents in snapshot for studio/studio.t
         "font-weight": "400",
         "font-size": "14px",
         "line-height": "20px"
-      }
-    },
-    "display": {
-      "display-2xl": {
-        "token": "display-2xl",
-        "variable": "var(--gds-sys-text-display-2xl)",
-        "font-weight": "450",
-        "font-size": "82px",
-        "line-height": "90px"
-      },
-      "display-xl": {
-        "token": "display-xl",
-        "variable": "var(--gds-sys-text-display-xl)",
-        "font-weight": "450",
-        "font-size": "64px",
-        "line-height": "72px"
-      },
-      "display-l": {
-        "token": "display-l",
-        "variable": "var(--gds-sys-text-display-l)",
-        "font-weight": "450",
-        "font-size": "48px",
-        "line-height": "56px"
-      },
-      "display-m": {
-        "token": "display-m",
-        "variable": "var(--gds-sys-text-display-m)",
-        "font-weight": "450",
-        "font-size": "36px",
-        "line-height": "44px"
-      },
-      "display-s": {
-        "token": "display-s",
-        "variable": "var(--gds-sys-text-display-s)",
-        "font-weight": "450",
-        "font-size": "32px",
-        "line-height": "40px"
-      }
-    },
-    "preamble": {
-      "preamble-2xl": {
-        "token": "preamble-2xl",
-        "variable": "var(--gds-sys-text-preamble-2xl)",
-        "font-weight": "450",
-        "font-size": "32px",
-        "line-height": "40px"
-      },
-      "preamble-xl": {
-        "token": "preamble-xl",
-        "variable": "var(--gds-sys-text-preamble-xl)",
-        "font-weight": "450",
-        "font-size": "28px",
-        "line-height": "36px"
-      },
-      "preamble-l": {
-        "token": "preamble-l",
-        "variable": "var(--gds-sys-text-preamble-l)",
-        "font-weight": "450",
-        "font-size": "24px",
-        "line-height": "32px"
-      },
-      "preamble-m": {
-        "token": "preamble-m",
-        "variable": "var(--gds-sys-text-preamble-m)",
-        "font-weight": "450",
-        "font-size": "20px",
-        "line-height": "28px"
-      },
-      "preamble-s": {
-        "token": "preamble-s",
-        "variable": "var(--gds-sys-text-preamble-s)",
-        "font-weight": "450",
-        "font-size": "18px",
-        "line-height": "26px"
-      },
-      "preamble-xs": {
-        "token": "preamble-xs",
-        "variable": "var(--gds-sys-text-preamble-xs)",
-        "font-weight": "450",
-        "font-size": "16px",
-        "line-height": "24px"
       }
     }
   }
