@@ -1,5 +1,38 @@
 # Changelog
 
+## 2.15.0
+
+### Minor Changes
+
+- 96c1c96: **Dropdown**: dispatched gds-blur in dropdown.component.ts only when focus is shifted away, fixes #2339
+
+### Patch Changes
+
+- a8613b0: **Icon:** Exclemation mark icon svg update
+- 2495ea0: Updating package.json to export the new patterns directory
+- a8613b0: **Text:** Default typography style on strong, paragraph and list item
+- 665c853: **Link:** Improve transition and add cursor
+
+## 2.14.0
+
+### Minor Changes
+
+- b8061fa: **Button**: Ripple effect now triggers on keyboard press (Space/Enter), fixes issue #1880
+
+## 2.13.2
+
+### Patch Changes
+
+- c6b4a63: **GroupedList:** Added interim 2023 styling, fixes #2413
+- b086b0b: **Declarative layout:** Add missing member `order` to `LayoutChildProps` interface
+- 1bd52f1: **Dropdown:** Fix background color of selected option in dark mode
+
+## 2.13.1
+
+### Patch Changes
+
+- bb08507: **Exports:** Fix path for 'pure' export in package.json
+
 ## 2.13.0
 
 ### Minor Changes

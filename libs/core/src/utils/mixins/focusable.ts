@@ -16,7 +16,7 @@ export const Focusable = <T extends Constructor<LitElement>>(superClass: T) => {
       this.setAttribute('tabindex', '-1')
       this.dispatchEvent(
         new FocusEvent('gds-blur', {
-          bubbles: true,
+          bubbles: false,
           composed: true,
           relatedTarget: e.relatedTarget,
         }),
@@ -26,7 +26,7 @@ export const Focusable = <T extends Constructor<LitElement>>(superClass: T) => {
     onfocus = (e: FocusEvent) => {
       this.dispatchEvent(
         new FocusEvent('gds-focus', {
-          bubbles: true,
+          bubbles: false,
           composed: true,
           relatedTarget: e.relatedTarget,
         }),

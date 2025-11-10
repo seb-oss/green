@@ -7,7 +7,9 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { tokens } from '../../tokens.style'
 import { GdsListItem } from './list-item.component'
+import GroupedListStyles from './grouped-list.styles'
 
 export { GdsListItem }
 
@@ -19,6 +21,8 @@ export { GdsListItem }
  */
 @gdsCustomElement('gds-grouped-list', { dependsOn: [GdsListItem] })
 export class GdsGroupedList extends GdsElement {
+  static styles = [tokens, GroupedListStyles]
+
   /**
    * The label for the list that will render in the shadowDOM as the first <li> element in the list with the class `gds-list-heading`
    */

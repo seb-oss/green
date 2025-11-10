@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.4.2
+
+### Patch Changes
+
+- a8613b0: **Border:** Update Subtle 01, Subtle 02 dark values
+- a8613b0: **Tokens:** Typography update body tokens
+
 ## 2.4.1
 
 ### Patch Changes

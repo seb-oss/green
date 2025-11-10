@@ -114,6 +114,7 @@ class Button extends GdsFormControlElement<any> {
 
   @query('slot:not([name])') private _mainSlot?: HTMLSlotElement
   @query('.button') private _button?: HTMLElement
+  @query('gds-ripple') private _ripple?: GdsRipple
 
   #isIconButton = false
 
@@ -171,6 +172,7 @@ class Button extends GdsFormControlElement<any> {
         download=${ifDefined(this.#isLink ? this.download : undefined)}
         part="_button"
         @click="${this.#handleClick}"
+        @keydown="${this.#handleKeyDown}"
         ${forwardAttributes(
           (attr) =>
             attr.name.startsWith('gds-aria') ||
@@ -185,8 +187,8 @@ class Button extends GdsFormControlElement<any> {
           !this._isUsingTransitionalStyles,
           () => html`<gds-ripple part="_ripple"></gds-ripple>`,
         )}
-        </${tag}>
-        `
+      </${tag}>
+      `
   }
 
   protected _getValidityAnchor(): HTMLElement {
@@ -217,6 +219,16 @@ class Button extends GdsFormControlElement<any> {
         this.form.requestSubmit()
       } else if (this.type === 'reset') {
         this.form.reset()
+      }
+    }
+  }
+
+  #handleKeyDown = (e: KeyboardEvent) => {
+    if (this.disabled) return;
+    if ((e.code === 'Space' || e.key === 'Enter') && !e.repeat) {
+      const ripple = this._ripple;
+      if (ripple) {
+        ripple.triggerRipple();
       }
     }
   }
