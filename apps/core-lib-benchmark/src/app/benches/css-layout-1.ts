@@ -28,7 +28,7 @@ export class CssLayout1 extends LitElement {
   render() {
     return html`${repeat(
       this.entries,
-      (e) =>
+      () =>
         html`<div class="container1">
           <div class="flex1">
             <div class="card1">1</div>
