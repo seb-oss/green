@@ -653,13 +653,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
               `,
               () => html`
                 <span>
-                  <!-- Showing ${(this.view.page - 1) * this.view.pageSize +
-                  1} to
+                  Showing ${(this.view.page - 1) * this.view.pageSize + 1} to
                   ${Math.min(this.view.page * this.view.pageSize, this.total)}
-                  of ${this.total} entries -->
-                  ${(this.view.page - 1) * this.view.pageSize + 1}-
-                  ${Math.min(this.view.page * this.view.pageSize, this.total)} /
-                  ${this.total}
+                  of ${this.total} entries
                 </span>
               `,
             )}
