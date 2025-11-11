@@ -1,11 +1,3 @@
-// Helper function to convert CamelCase to UPPER_SNAKE_CASE
-function camelToUpperSnake(str) {
-  return str
-    .replace(/([A-Z])/g, '_$1')
-    .replace(/^_/, '')
-    .toUpperCase()
-}
-
 function cleanTokenName(str) {
   return str.replace(/sys|Color|Text/gi, '')
 }
@@ -21,7 +13,7 @@ ${options.accessControl ? `${options.accessControl} ` : ''}${
 ${allTokens
   .map(
     (token) =>
-      `    ${token.comment ? `/** ${token.comment} */\n  ` : ''}${options.accessControl ? `${options.accessControl} ` : ''}${camelToUpperSnake(cleanTokenName(token.name))},`,
+      `    ${token.comment ? `/** ${token.comment} */\n  ` : ''}${options.accessControl ? `${options.accessControl} ` : ''}${cleanTokenName(token.name).toUpperCase()},`,
   )
   .join('\n')}
 }\n`

@@ -37,6 +37,20 @@ export const globalTypes = {
       dynamicTitle: true,
     },
   },
+  colorScheme: {
+    name: 'Change color scheme',
+    defaultValue: 'light',
+    toolbar: {
+      icon: 'mirror',
+      items: [
+        { value: 'light', title: 'Light' },
+        { value: 'dark', title: 'Dark' },
+        { value: 'auto', title: 'Auto' },
+      ],
+      showName: true,
+      dynamicTitle: true,
+    },
+  },
 }
 
 const { setLocale } = gdsInitLocalization()
@@ -85,9 +99,44 @@ export default {
         }
       }, 10)
 
-      return html`<gds-theme .designVersion=${context.globals.style}
-        >${storyFn()}</gds-theme
-      >`
+      const storyDarkmodeStyle = `
+        .sb-show-main,
+        .docs-story {
+          background-color: #0a0b0b;
+        }`
+
+      const storyLightmodeStyle = `
+        .sb-show-main,
+        .docs-story {
+          background-color: #fff;
+        }`
+
+      const storyAutomodeStyle = `
+        ${storyLightmodeStyle}
+        @media (prefers-color-scheme: dark) {
+          ${storyDarkmodeStyle}
+        }`
+
+      const renderStoryColorSchemeStyle = () => {
+        switch (context.globals.colorScheme) {
+          default:
+          case 'auto':
+            return storyAutomodeStyle
+          case 'dark':
+            return storyDarkmodeStyle
+          case 'light':
+            return storyLightmodeStyle
+        }
+      }
+
+      return html`<style>
+          ${renderStoryColorSchemeStyle()}
+        </style>
+        <gds-theme
+          .designVersion=${context.globals.style}
+          .colorScheme=${context.globals.colorScheme}
+          >${storyFn()}</gds-theme
+        >`
     },
   ],
 }

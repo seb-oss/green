@@ -17,17 +17,24 @@ export class GdsRipple extends GdsElement {
   }
 
   onmousedown = (e: MouseEvent) => {
-    const target = e.target as HTMLElement
-    const rect = target.getBoundingClientRect()
-    const rippleEl = this._rippleEl
+    this.triggerRipple(e.clientX, e.clientY);
+  }
+
+  triggerRipple(x?: number, y?: number) {
+    const rippleEl = this._rippleEl;
+    const rect = this.getBoundingClientRect();
+
+    // Default to center if no coordinates provided
+    const rippleX = x !== undefined ? x - rect.left : rect.width / 2;
+    const rippleY = y !== undefined ? y - rect.top : rect.height / 2;
 
     if (rippleEl) {
-      rippleEl.classList.remove('gds-ripple-effect')
-      this.style.setProperty('--gds-ripple-top', `${e.clientY - rect.top}px`)
-      this.style.setProperty('--gds-ripple-left', `${e.clientX - rect.left}px`)
+      rippleEl.classList.remove('gds-ripple-effect');
+      this.style.setProperty('--gds-ripple-top', `${rippleY}px`);
+      this.style.setProperty('--gds-ripple-left', `${rippleX}px`);
       setTimeout(() => {
-        rippleEl.classList.add('gds-ripple-effect')
-      }, 20)
+        rippleEl.classList.add('gds-ripple-effect');
+      }, 20);
     }
   }
 }
