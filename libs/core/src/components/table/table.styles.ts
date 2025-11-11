@@ -172,7 +172,7 @@ export const TableStyles = css`
   }
 
   .column-label {
-    font-weight: normal;
+    font-weight: var(--gds-sys-text-weight-book);
   }
 
   .sort-icon {

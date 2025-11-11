@@ -41,19 +41,45 @@ export class GdsPagination extends GdsElement {
       :host {
         display: flex;
         align-items: center;
-        gap: 40px;
+        gap: var(--gds-sys-space-xl);
       }
 
       .pagination {
         display: flex;
-        gap: 4px;
+        gap: var(--gds-sys-space-2xs);
       }
 
       .page-size {
-        gap: 10px;
+        gap: var(--gds-sys-space-xs);
         display: flex;
         align-items: center;
         min-width: max-content;
+      }
+
+      .ellipsis {
+        aspect-ratio: 1/1;
+      }
+
+      .ellipsis .icon {
+        display: none;
+      }
+
+      .ellipsis:hover .dots {
+        display: none;
+      }
+
+      .ellipsis:hover .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .ellips {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
       }
     `,
   ]
@@ -94,13 +120,40 @@ export class GdsPagination extends GdsElement {
     }
   }
 
+  private renderEllipsisButton(isFirst: boolean, pageCount: number) {
+    const targetPage = isFirst
+      ? Math.max(1, this.page - 3)
+      : Math.min(pageCount, this.page + 3)
+
+    const icon = isFirst
+      ? html`<gds-icon-chevron-double-left
+          size="m"
+        ></gds-icon-chevron-double-left>`
+      : html`<gds-icon-chevron-double-right
+          size="m"
+        ></gds-icon-chevron-double-right>`
+
+    return html`
+      <gds-button
+        size="small"
+        rank="tertiary"
+        class="ellipsis"
+        width="32px"
+        @click=${() => this.handlePageChange(targetPage)}
+      >
+        <span class="dots">...</span>
+        <span class="icon">${icon}</span>
+      </gds-button>
+    `
+  }
+
   render() {
     const pageCount = this.pageCount
     const visiblePages = this.getVisiblePages(pageCount)
 
     return html`
       <div class="pagination">
-        <gds-button
+        <!-- <gds-button
           size="small"
           rank="tertiary"
           ?disabled=${this.page === 1}
@@ -108,11 +161,11 @@ export class GdsPagination extends GdsElement {
         >
           <gds-icon-chevron-double-left size="l">
           </gds-icon-chevron-double-left>
-        </gds-button>
+        </gds-button> -->
 
         <gds-button
           size="small"
-          rank="tertiary"
+          rank="secondary"
           ?disabled=${this.page === 1}
           @click=${() => this.handlePageChange(this.page - 1)}
         >
@@ -120,6 +173,21 @@ export class GdsPagination extends GdsElement {
         </gds-button>
 
         ${visiblePages.map(
+          (p, index) => html`
+            ${p === '...'
+              ? this.renderEllipsisButton(index === 1, pageCount)
+              : html`
+                  <gds-button
+                    size="small"
+                    rank="${this.page === p ? 'primary' : 'tertiary'}"
+                    @click=${() => this.handlePageChange(p as number)}
+                  >
+                    ${p}
+                  </gds-button>
+                `}
+          `,
+        )}
+        <!-- ${visiblePages.map(
           (p) => html`
             ${p === '...'
               ? html`<gds-button size="small" rank="tertiary" width="40px" inert
@@ -135,11 +203,11 @@ export class GdsPagination extends GdsElement {
                   </gds-button>
                 `}
           `,
-        )}
+        )} -->
 
         <gds-button
-          rank="tertiary"
           size="small"
+          rank="secondary"
           ?disabled=${this.page === pageCount}
           @click=${() => this.handlePageChange(this.page + 1)}
         >
@@ -147,7 +215,7 @@ export class GdsPagination extends GdsElement {
           </gds-icon-chevron-right-small>
         </gds-button>
 
-        <gds-button
+        <!-- <gds-button
           rank="tertiary"
           size="small"
           ?disabled=${this.page === pageCount}
@@ -155,11 +223,11 @@ export class GdsPagination extends GdsElement {
         >
           <gds-icon-chevron-double-right size="l">
           </gds-icon-chevron-double-right>
-        </gds-button>
+        </gds-button> -->
       </div>
 
       <div class="page-size">
-        <gds-text font="detail-book-s">Items per page</gds-text>
+        <!-- <gds-text font="detail-book-s">Items per page</gds-text> -->
         <gds-context-menu @gds-menu-item-click=${this.handlePageSizeMenuClick}>
           <gds-button slot="trigger" size="small" rank="secondary">
             ${this.pageSize}

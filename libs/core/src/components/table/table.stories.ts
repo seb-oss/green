@@ -91,9 +91,9 @@ const mockDataProvider = async (
   await new Promise((resolve) => setTimeout(resolve, API_DELAY_MS))
 
   // Uncomment to test error handling
-  if (Math.random() < 0.1) {
-    throw new Error('Network error: Failed to fetch data')
-  }
+  // if (Math.random() < 0.1) {
+  //   throw new Error('Network error: Failed to fetch data')
+  // }
 
   // Generate base dataset
   const allData = generateMockDataset()
