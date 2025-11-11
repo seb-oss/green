@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.4.3
+
+### Patch Changes
+
+- 9c52d03: Change format of enum values for jvm
+- 8a41bdf: Update release workflow to publish all android tokens
+
 ## 2.4.2
 
 ### Patch Changes
