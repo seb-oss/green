@@ -144,6 +144,15 @@ export default css`
     color: var(--gds-sys-color-content-negative-01);
   }
 
+  /* Visually hidden checkbox   */
+  .visually-hidden-checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+
   /*
    * When using the checkbox in a listbox, we need to remove the outline
    * from the checkbox since it exsist on the list item

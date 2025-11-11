@@ -16,11 +16,17 @@ import {
   IconCrossSmall,
   IconDotGridOneHorizontal,
   IconMagnifyingGlass,
+  IconMinusSmall,
   IconSort,
   IconSortDown,
   IconSortUp,
 } from '../../pure'
-import { GdsTableCheckbox } from './table.checkbox'
+import checkboxStyles from '../../shared-styles/rbcb-toggle.style'
+import { tokens } from '../../tokens.style'
+// import { GdsTableCheckbox } from './table.checkbox'
+import { TableStyles } from './table.styles'
+
+export { checkboxToggle as Checkbox } from '../../shared-styles/rbcb-toggle.template'
 
 export {
   accountsFormats as FormatAccount,
@@ -28,11 +34,10 @@ export {
   numberFormats as FormatNumber,
 } from '../formatted-text/formatters'
 
-export { TableStyles as Styles } from './table.styles'
-export { tokens as Tokens } from '../../tokens.style'
+export const Styles = [tokens, checkboxStyles, TableStyles]
 
 export const Dependencies = [
-  GdsTableCheckbox,
+  // GdsTableCheckbox,
   GdsButton,
   GdsCard,
   GdsDivider,
@@ -48,6 +53,7 @@ export const Dependencies = [
   GdsFlex,
   IconCopy,
   IconCrossSmall,
+  IconMinusSmall,
   IconMagnifyingGlass,
   IconSort,
   IconSortDown,

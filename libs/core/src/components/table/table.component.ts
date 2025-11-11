@@ -20,7 +20,7 @@ import * as Types from './table.types'
   dependsOn: Table.Dependencies,
 })
 export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
-  static styles = [Table.Tokens, Table.Styles]
+  static styles = Table.Styles
 
   #cache: Types.Cache<T> = {}
   #cacheDuration = 5 * 60 * 1000
@@ -435,12 +435,20 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             this.selectable,
             () => html`
               <th class="checkbox-cell">
-                <gds-table-checkbox
-                  .checked=${this.#isAllSelected}
-                  .indeterminate=${this.#isPartialSelection}
-                  aria-label="Select all rows"
-                  @selector-change=${this.#handleSelectAll}
-                ></gds-table-checkbox>
+                ${this.#renderCheckbox({
+                  checked: this.#isAllSelected,
+                  indeterminate: this.#isPartialSelection,
+                  ariaLabel: 'Select all rows',
+                  onToggle: () => {
+                    if (this.#isAllSelected) {
+                      this.#clearSelectionInternal()
+                    } else {
+                      this.#selectAllInternal()
+                    }
+                    this.#emitSelectionChange()
+                    this.requestUpdate()
+                  },
+                })}
               </th>
             `,
           )}
@@ -487,14 +495,20 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           this.selectable,
           () => html`
             <td class="checkbox-cell" data-label="Select">
-              <div class="cell-content">
-                <gds-table-checkbox
-                  .checked=${this.selected.has(index)}
-                  aria-label="Select row ${index + 1}"
-                  @selector-change=${(e: CustomEvent) =>
-                    this.#handleRowSelect(index, e)}
-                ></gds-table-checkbox>
-              </div>
+              ${this.#renderCheckbox({
+                checked: this.selected.has(index),
+                indeterminate: false,
+                ariaLabel: `Select row ${index + 1}`,
+                onToggle: () => {
+                  if (this.selected.has(index)) {
+                    this.selected.delete(index)
+                  } else {
+                    this.selected.add(index)
+                  }
+                  this.#emitSelectionChange()
+                  this.requestUpdate()
+                },
+              })}
             </td>
           `,
         )}
@@ -514,6 +528,60 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           `,
         )}
       </tr>
+    `
+  }
+
+  #renderCheckbox({
+    checked,
+    indeterminate = false,
+    disabled = false,
+    ariaLabel,
+    onToggle,
+  }: {
+    checked: boolean
+    indeterminate?: boolean
+    disabled?: boolean
+    ariaLabel: string
+    onToggle: () => void
+  }) {
+    const toggle = (e?: Event) => {
+      e?.stopPropagation()
+      if (disabled) return
+      onToggle()
+    }
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault()
+        toggle(e)
+      }
+    }
+
+    return html`
+      <div
+        class="rbcb-wrapper"
+        role="checkbox"
+        aria-checked=${indeterminate ? 'mixed' : checked ? 'true' : 'false'}
+        aria-label=${ariaLabel}
+        @click=${toggle}
+        @keydown=${onKey}
+      >
+        <input
+          type="checkbox"
+          class="visually-hidden-checkbox"
+          .checked=${checked}
+          .indeterminate=${indeterminate}
+          ?disabled=${disabled}
+          aria-hidden="true"
+          @change=${toggle}
+        />
+        ${Table.Checkbox({
+          checked,
+          indeterminate,
+          disabled,
+          invalid: false,
+        })}
+      </div>
     `
   }
 
@@ -792,15 +860,25 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   /**
    * Handles individual row selection change
    */
-  #handleRowSelect(index: number, e: CustomEvent) {
-    const isChecked = e.detail.checked
+  // #handleRowSelect(index: number, e: CustomEvent) {
+  //   const isChecked = e.detail.checked
 
-    if (isChecked) {
-      this.selected.add(index)
-    } else {
+  //   if (isChecked) {
+  //     this.selected.add(index)
+  //   } else {
+  //     this.selected.delete(index)
+  //   }
+
+  //   this.#emitSelectionChange()
+  //   this.requestUpdate()
+  // }
+
+  #toggleRowSelect(index: number) {
+    if (this.selected.has(index)) {
       this.selected.delete(index)
+    } else {
+      this.selected.add(index)
     }
-
     this.#emitSelectionChange()
     this.requestUpdate()
   }

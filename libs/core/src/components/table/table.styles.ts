@@ -239,6 +239,10 @@ export const TableStyles = css`
     padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
   }
 
+  .rbcb-wrapper {
+    position: relative;
+  }
+
   tr:first-child {
     border-top-width: var(--gds-sys-space-4xs);
   }
