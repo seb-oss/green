@@ -373,7 +373,7 @@ const themes = {
             filter: 'is-typography',
             options: {
               objectType: 'object',
-              className: 'GdsTypographyTokens',
+              className: 'GdsTypography',
               import: [
                 'androidx.compose.ui.text.TextStyle',
                 'androidx.compose.ui.text.font.FontWeight',
