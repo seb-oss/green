@@ -172,7 +172,6 @@ export default css`
   }
 
   @media (hover: hover) {
-    .rbcb:hover:not(.--disabled) .rbcb__perimeter,
     :host([gds-element='gds-checkbox']:hover)
       .rbcb:not(.--disabled)
       .rbcb__perimeter,
@@ -181,19 +180,20 @@ export default css`
       .rbcb__perimeter,
     :host([gds-element='gds-radio']:hover)
       .rbcb:not(.--disabled)
-      .rbcb__perimeter {
+      .rbcb__perimeter,
+    .rbcb:hover:not(.--disabled) .rbcb__perimeter {
       background-color: var(--_perimeter-bg-mix);
       scale: 1;
     }
   }
 
-  .rbcb:active:not(.--disabled) .rbcb__perimeter,
   :host([gds-element='gds-checkbox']:active)
     .rbcb:not(.--disabled)
     .rbcb__perimeter,
   :host([gds-element='gds-radio']:active)
     .rbcb:not(.--disabled)
-    .rbcb__perimeter {
+    .rbcb__perimeter,
+  .rbcb:active:not(.--disabled) .rbcb__perimeter {
     background-color: var(--_perimeter-bg-mix-active);
     scale: 0.9;
   }
