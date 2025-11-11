@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.4.3
+
+### Patch Changes
+
+- 9c52d03: Change format of enum values for jvm
+- 8a41bdf: Update release workflow to publish all android tokens
+
+## 2.4.2
+
+### Patch Changes
+
+- a8613b0: **Border:** Update Subtle 01, Subtle 02 dark values
+- a8613b0: **Tokens:** Typography update body tokens
+
 ## 2.4.1
 
 ### Patch Changes
