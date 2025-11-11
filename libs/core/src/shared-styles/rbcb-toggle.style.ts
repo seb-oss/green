@@ -161,29 +161,46 @@ export default css`
     outline: none;
   }
 
-  :host(:focus-visible) .rbcb__perimeter,
-  :host(:focus-within) .rbcb__perimeter {
+  :host([gds-element='gds-radio']:focus-visible) .rbcb__perimeter,
+  :host([gds-element='gds-radio']:focus-within) .rbcb__perimeter,
+  :host([gds-element='gds-checkbox']:focus-visible) .rbcb__perimeter,
+  :host([gds-element='gds-checkbox']:focus-within) .rbcb__perimeter,
+  .rbcb-wrapper:focus-visible .rbcb__perimeter,
+  .rbcb-wrapper:focus-within .rbcb__perimeter {
     outline-width: var(--gds-sys-space-4xs);
     scale: 1;
   }
 
   @media (hover: hover) {
     .rbcb:hover:not(.--disabled) .rbcb__perimeter,
-    :host(:hover) .rbcb:not(.--disabled) .rbcb__perimeter {
+    :host([gds-element='gds-checkbox']:hover)
+      .rbcb:not(.--disabled)
+      .rbcb__perimeter,
+    :host([gds-element='gds-option']:hover)
+      .rbcb:not(.--disabled)
+      .rbcb__perimeter,
+    :host([gds-element='gds-radio']:hover)
+      .rbcb:not(.--disabled)
+      .rbcb__perimeter {
       background-color: var(--_perimeter-bg-mix);
       scale: 1;
     }
+  }
+
+  .rbcb:active:not(.--disabled) .rbcb__perimeter,
+  :host([gds-element='gds-checkbox']:active)
+    .rbcb:not(.--disabled)
+    .rbcb__perimeter,
+  :host([gds-element='gds-radio']:active)
+    .rbcb:not(.--disabled)
+    .rbcb__perimeter {
+    background-color: var(--_perimeter-bg-mix-active);
+    scale: 0.9;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .rbcb__toggle {
       transition: none;
     }
-  }
-
-  .rbcb:active:not(.--disabled) .rbcb__perimeter,
-  :host(:active) .rbcb:not(.--disabled) .rbcb__perimeter {
-    background-color: var(--_perimeter-bg-mix-active);
-    scale: 0.9;
   }
 `
