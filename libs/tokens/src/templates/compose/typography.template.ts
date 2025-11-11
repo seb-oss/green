@@ -18,6 +18,8 @@ function toPascalCase(name: string) {
 
 export default ({ allTokens, header, options }) => `${header}
 
+package ${options.packageName ?? ''}
+
 ${options.import.map(/** @param {string} item */ (item) => `import ${item}`).join('\n')}
 
 ${options.objectType ? `${options.objectType} ` : ''}${options.className ? `${options.className}` : ''} {
