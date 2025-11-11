@@ -32,7 +32,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   columns: Types.Column[] = []
 
   @property()
-  dataProvider!: (request: Types.Request) => Promise<Types.Response<T>>
+  data!: (request: Types.Request) => Promise<Types.Response<T>>
 
   @property({ reflect: false })
   density: Types.Density = 'comfortable'
@@ -64,7 +64,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   private loading = false
 
   @state()
-  private data: T[] = []
+  private rows: T[] = []
 
   @state()
   private total = 0
@@ -86,7 +86,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   get #isAllSelected(): boolean {
-    return this.data.length > 0 && this.selected.size === this.data.length
+    return this.rows.length > 0 && this.selected.size === this.rows.length
   }
 
   get #isPartialSelection(): boolean {
@@ -108,13 +108,13 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   async #loadData() {
-    if (!this.dataProvider) return
+    if (!this.data) return
 
     const cacheKey = this.#getCacheKey()
     const cachedData = this.#cache[cacheKey]
 
     if (cachedData && this.#isCacheValid(cachedData)) {
-      this.data = cachedData.data
+      this.rows = cachedData.rows
       this.total = cachedData.total
       this.loaded = false
       return
@@ -124,7 +124,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     this.error = null
 
     try {
-      const response = await this.dataProvider({
+      const response = await this.data({
         page: this.view.page,
         rows: this.view.rows,
         sortColumn: this.view.sortColumn,
@@ -133,12 +133,12 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       })
 
       this.#cache[cacheKey] = {
-        data: response.data,
+        rows: response.rows,
         total: response.total,
         timestamp: Date.now(),
       }
 
-      this.data = response.data
+      this.rows = response.rows
       this.total = response.total
       this.selected.clear()
       this.loaded = false
@@ -628,7 +628,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     return html`
       <tbody>
-        ${this.data.map((row, index) => this.#renderTableRow(row, index))}
+        ${this.rows.map((row, index) => this.#renderTableRow(row, index))}
       </tbody>
     `
   }
@@ -702,7 +702,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
               () => html`
                 <div class="selection-info">
                   <span>
-                    ${this.selected.size} of ${this.data.length} selected
+                    ${this.selected.size} of ${this.rows.length} selected
                   </span>
                   <gds-button
                     size="xs"
@@ -747,7 +747,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           () => this.#renderErrorState(),
           () =>
             when(
-              this.data.length === 0 && !this.loading,
+              this.rows.length === 0 && !this.loading,
               () => this.#renderEmptyState(),
               () => this.#renderTable(),
             ),
@@ -871,7 +871,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Internal method to select all rows
    */
   #selectAllInternal(): void {
-    this.selected = new Set(this.data.map((_, i) => i))
+    this.selected = new Set(this.rows.map((_, i) => i))
     this.requestUpdate()
   }
 
@@ -891,7 +891,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       new CustomEvent('gds-table-selection', {
         detail: {
           selectedIndices: Array.from(this.selected),
-          selectedData: Array.from(this.selected).map((i) => this.data[i]),
+          selectedData: Array.from(this.selected).map((i) => this.rows[i]),
           count: this.selected.size,
         },
         bubbles: true,
@@ -920,7 +920,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Select specific rows by indices
    */
   setSelection(indices: number[]): void {
-    const validIndices = indices.filter((i) => i >= 0 && i < this.data.length)
+    const validIndices = indices.filter((i) => i >= 0 && i < this.rows.length)
     this.selected = new Set(validIndices)
     this.#emitSelectionChange()
     this.requestUpdate()
@@ -933,7 +933,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     const indices = Array.from(this.selected)
     return {
       indices,
-      data: indices.map((i) => this.data[i]),
+      data: indices.map((i) => this.rows[i]),
     }
   }
 }

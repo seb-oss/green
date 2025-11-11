@@ -49,14 +49,14 @@ export interface Request {
 }
 
 export interface Response<T> {
-  data: T[]
+  rows: T[]
   total: number
 }
 
 export type Density = 'comfortable' | 'compact' | 'spacious'
 
 export interface CacheEntry<T> {
-  data: T[]
+  rows: T[]
   total: number
   timestamp: number
 }

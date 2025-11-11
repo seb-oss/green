@@ -150,9 +150,9 @@ export default function Table() {
         selectable
         density="comfortable"
         columns={columns}
-        dataProvider={pokemonDataProvider}
+        data={pokemonDataProvider}
         actions={actions}
-        pageSizes={[10, 25, 50, 100]}
+        options={[10, 25, 50, 100]}
       >
         <Core.GdsButton slot="header-lead" size="small" rank="secondary">
           Export Team

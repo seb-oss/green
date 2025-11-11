@@ -107,10 +107,10 @@ export class TableBenchmark extends LitElement {
       <gds-table 
         selectable
         density="comfortable"
-        .pageSizes="${[this.ROW_COUNT]}"
-        .pageSize="${this.ROW_COUNT}"
+        .options="${[this.ROW_COUNT]}"
+        .rows="${this.ROW_COUNT}"
         .columns="${this.columns}"
-        .dataProvider="${this.dataProvider}"
+        .data="${this.dataProvider}"
       ></gds-table>
     `
     const end = performance.now()

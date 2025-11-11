@@ -128,7 +128,7 @@ const mockDataProvider = async (
   const paginatedData = processedData.slice(startIndex, endIndex)
 
   return {
-    data: paginatedData,
+    rows: paginatedData,
     total: processedData.length,
   }
 }
@@ -316,7 +316,7 @@ export const Default: Story = {
     columns: tableColumns,
     actions: tableActions,
     density: 'comfortable',
-    dataProvider: mockDataProvider,
+    data: mockDataProvider,
     selectable: true,
   },
   render: (args) => html`
@@ -324,7 +324,7 @@ export const Default: Story = {
       density="${args.density}"
       ?selectable="${args.selectable}"
       .columns="${args.columns}"
-      .dataProvider="${args.dataProvider}"
+      .data="${args.data}"
       .actions="${args.actions}"
     >
       <gds-button slot="header-lead" size="small" rank="secondary">
@@ -343,7 +343,7 @@ export const Plain: Story = {
     columns: tableColumns,
     actions: tableActions,
     density: 'comfortable',
-    dataProvider: mockDataProvider,
+    data: mockDataProvider,
     selectable: true,
     plain: true,
   },
@@ -353,7 +353,7 @@ export const Plain: Story = {
       density="${args.density}"
       .plain="${args.plain}"
       .columns="${args.columns}"
-      .dataProvider="${args.dataProvider}"
+      .data="${args.data}"
     >
     </gds-table>
   `,
@@ -364,17 +364,17 @@ export const Responsive: Story = {
     columns: tableColumns,
     actions: tableActions,
     density: 'comfortable',
-    dataProvider: mockDataProvider,
+    data: mockDataProvider,
     selectable: true,
     responsive: true,
   },
   render: (args) => html`
     <gds-table
-      .responsive="${args.responsive}"
-      ?selectable="${args.selectable}"
       density="${args.density}"
+      ?selectable="${args.selectable}"
+      .responsive="${args.responsive}"
       .columns="${args.columns}"
-      .dataProvider="${args.dataProvider}"
+      .data="${args.data}"
       .actions="${args.actions}"
     >
       <gds-button slot="header-lead" size="small" rank="secondary">
@@ -409,12 +409,12 @@ export const ActionsButton: Story = {
         onClick: (row: any) => console.log('Edit', row),
       },
     },
-    dataProvider: mockDataProvider,
+    data: mockDataProvider,
   },
   render: (args) => html`
     <gds-table
       .columns="${args.columns}"
-      .dataProvider="${args.dataProvider}"
+      .data="${args.data}"
       .actions="${args.actions}"
     ></gds-table>
   `,
@@ -438,12 +438,12 @@ export const ActionsButtons: Story = {
         ],
       },
     },
-    dataProvider: mockDataProvider,
+    data: mockDataProvider,
   },
   render: (args) => html`
     <gds-table
       .columns="${args.columns}"
-      .dataProvider="${args.dataProvider}"
+      .data="${args.data}"
       .actions="${args.actions}"
     ></gds-table>
   `,
@@ -462,12 +462,12 @@ export const ActionsLink: Story = {
         target: '_blank',
       },
     },
-    dataProvider: mockDataProvider,
+    data: mockDataProvider,
   },
   render: (args) => html`
     <gds-table
       .columns="${args.columns}"
-      .dataProvider="${args.dataProvider}"
+      .data="${args.data}"
       .actions="${args.actions}"
     ></gds-table>
   `,
@@ -496,12 +496,12 @@ export const ActionsMenu: Story = {
         ],
       },
     },
-    dataProvider: mockDataProvider,
+    data: mockDataProvider,
   },
   render: (args) => html`
     <gds-table
       .columns="${args.columns}"
-      .dataProvider="${args.dataProvider}"
+      .data="${args.data}"
       .actions="${args.actions}"
     ></gds-table>
   `,
