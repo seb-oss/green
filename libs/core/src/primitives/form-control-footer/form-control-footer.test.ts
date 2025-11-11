@@ -21,6 +21,44 @@ describe('<gds-form-control-footer>', () => {
     expect(el.getAttribute('gds-element')).to.equal('gds-form-control-footer')
   })
 
+  it('is visually hidden when no error message or char counter is set', async () => {
+    const el = await fixture<GdsFormControlFooter>(
+      html`<gds-form-control-footer></gds-form-control-footer>`,
+    )
+    await el.updateComplete
+    expect(el.classList.contains('visually-hidden')).to.be.true
+  })
+
+  it('is visually hidden when char counter visibility is set to false', async () => {
+    const el = await fixture<GdsFormControlFooter>(
+      html`<gds-form-control-footer
+        .charCounter=${[10, false]}
+      ></gds-form-control-footer>`,
+    )
+    await el.updateComplete
+    expect(el.classList.contains('visually-hidden')).to.be.true
+  })
+
+  it('is visible when error message is set', async () => {
+    const el = await fixture<GdsFormControlFooter>(
+      html`<gds-form-control-footer
+        .errorMessage=${'This is an error message'}
+      ></gds-form-control-footer>`,
+    )
+    await el.updateComplete
+    expect(el.classList.contains('visually-hidden')).to.be.false
+  })
+
+  it('is visible when char counter is set', async () => {
+    const el = await fixture<GdsFormControlFooter>(
+      html`<gds-form-control-footer
+        .charCounter=${[10, 'positive']}
+      ></gds-form-control-footer>`,
+    )
+    await el.updateComplete
+    expect(el.classList.contains('visually-hidden')).to.be.false
+  })
+
   describe('Accessibility', () => {
     it('is accessible', async () => {
       const el = await fixture<GdsFormControlFooter>(

@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.33.0
+
+### Minor Changes
+
+- ba7e126: **Icon:** Add sort and maximize icon wrappers
+
+### Patch Changes
+
+- Updated dependencies [ba7e126]
+  - @sebgroup/green-core@2.13.0
+
 ## 3.32.1
 
 ### Patch Changes
