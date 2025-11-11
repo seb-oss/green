@@ -85,6 +85,14 @@ export interface BadgeCell
   value: string | ((row: any) => string)
 }
 
+export interface InputCell {
+  type: 'input'
+}
+
+export interface DropdownCell {
+  type: 'dropdown'
+}
+
 export interface AvatarCell {
   type: 'avatar'
   src: string | ((row: any) => string)
@@ -158,6 +166,8 @@ export interface ActionMenuCell {
 
 export type Cell =
   | BadgeCell
+  | InputCell
+  | DropdownCell
   | AvatarCell
   | CopyButtonCell
   | ActionButtonCell

@@ -160,6 +160,12 @@ const tableColumns: TableColumn[] = [
     sortable: true,
     justify: true,
     cell: {
+      lead: {
+        type: 'input',
+      },
+      value: {
+        type: 'dropdown',
+      },
       trail: {
         type: 'copy-button',
         value: (row) => row.email,

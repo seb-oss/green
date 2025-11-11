@@ -153,6 +153,10 @@ export default css`
     pointer-events: none;
   }
 
+  .rbcb-wrapper {
+    position: relative;
+  }
+
   /*
    * When using the checkbox in a listbox, we need to remove the outline
    * from the checkbox since it exsist on the list item

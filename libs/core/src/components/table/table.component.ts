@@ -232,6 +232,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         const formatter = Table.FormatDate[config.format || 'dateLong']
         return formatter(value, config.locale)
       }
+
       case 'action-button': {
         const label = resolve(config.label)
         const size = config.size || 'small'
@@ -254,32 +255,26 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       }
 
       case 'action-buttons': {
-        const buttons = config.buttons
+        return config.buttons.map((btn) => {
+          const label = resolve(btn.label)
+          const size = btn.size || 'small'
+          const rank = btn.rank || 'secondary'
+          const variant = btn.variant || 'neutral'
 
-        return html`
-          <div style="display: flex; gap: var(--gds-sys-space-xs);">
-            ${buttons.map((btn) => {
-              const label = resolve(btn.label)
-              const size = btn.size || 'small'
-              const rank = btn.rank || 'secondary'
-              const variant = btn.variant || 'neutral'
-
-              return html`
-                <gds-button
-                  size="${size}"
-                  rank="${rank}"
-                  variant="${variant}"
-                  @click="${(e: Event) => {
-                    e.stopPropagation()
-                    btn.onClick(row)
-                  }}"
-                >
-                  ${label}
-                </gds-button>
-              `
-            })}
-          </div>
-        `
+          return html`
+            <gds-button
+              size="${size}"
+              rank="${rank}"
+              variant="${variant}"
+              @click="${(e: Event) => {
+                e.stopPropagation()
+                btn.onClick(row)
+              }}"
+            >
+              ${label}
+            </gds-button>
+          `
+        })
       }
 
       case 'action-link': {
@@ -289,6 +284,18 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
         return html`
           <gds-link .href="${href}" target="${target}"> ${label} </gds-link>
+        `
+      }
+
+      case 'input': {
+        return html` <gds-input size="small" width="100%" plain></gds-input> `
+      }
+
+      case 'dropdown': {
+        return html`
+          <gds-dropdown plain size="small" width="100%">
+            <gds-option>Hello</gds-option>
+          </gds-dropdown>
         `
       }
 
