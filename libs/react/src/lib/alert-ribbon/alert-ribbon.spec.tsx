@@ -11,7 +11,7 @@ describe('AlertRibbon', () => {
   it('renders', () => {
     const { container } = render(<AlertRibbon>AlertRibbon</AlertRibbon>)
 
-    expect(container.getElementsByClassName('alert-ribbon')[0]).toBeTruthy()
+    expect(container.getElementsByClassName('gds-alert-ribbon')[0]).toBeTruthy()
   })
   it('sets type class', () => {
     render(
@@ -70,7 +70,7 @@ describe('AlertRibbon', () => {
 
     expect(screen.getByLabelText('Close message').tagName).toEqual('BUTTON')
     expect(
-      screen.getByLabelText('Close message').classList.contains('close'),
+      screen.getByLabelText('Close message').classList.contains('gds-close'),
     ).toEqual(true)
   })
 })
