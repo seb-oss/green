@@ -42,7 +42,7 @@ export class TableBenchmark extends LitElement {
     id: i + 1,
     name: `Pokemon ${i + 1}`,
     type: ['fire', 'water', 'grass', 'electric', 'psychic'][i % 5] as Pokemon['type'],
-    height: ((i % 20) + 1) / 10 + ' m',
+    height: ((i % 20) + 1) / 10 + ' mx',
     weight: ((i % 100) + 1) / 10 + ' kg',
     abilities: (i % 5) + 1,
     sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${(i % 151) + 1}.png`,
@@ -55,31 +55,31 @@ export class TableBenchmark extends LitElement {
       key: 'name',
       label: 'Name',
       sortable: true,
-      cell: {
-        lead: { type: 'avatar', src: row => row.sprite, alt: row => row.name, size: '32px' }
-      }
+      // cell: {
+      //   lead: { type: 'avatar', src: row => row.sprite, alt: row => row.name, size: '32px' }
+      // }
     },
     {
       key: 'type',
       label: 'Type',
       sortable: true,
-      cell: {
-        value: {
-          type: 'badge',
-          value: row => row.type,
-          variant: row => {
-            const colors: Record<Pokemon['type'], string> = {
-              fire: 'negative',
-              water: 'information',
-              grass: 'positive',
-              electric: 'warning',
-              psychic: 'notice'
-            }
-            return colors[row.type]
-          },
-          size: 'small'
-        }
-      }
+      // cell: {
+      //   value: {
+      //     type: 'badge',
+      //     value: row => row.type,
+      //     variant: row => {
+      //       const colors: Record<Pokemon['type'], string> = {
+      //         fire: 'negative',
+      //         water: 'information',
+      //         grass: 'positive',
+      //         electric: 'warning',
+      //         psychic: 'notice'
+      //       }
+      //       return colors[row.type]
+      //     },
+      //     size: 'small'
+      //   }
+      // }
     },
     { key: 'height', label: 'Height', sortable: true, align: 'right' },
     { key: 'weight', label: 'Weight', sortable: true, align: 'right' },
