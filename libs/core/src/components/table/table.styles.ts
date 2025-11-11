@@ -299,12 +299,28 @@ export const TableStyles = css`
   .header {
     display: flex;
     justify-content: space-between;
+    transition-property: opacity, translate;
+    transition-duration: var(--gds-sys-motion-duration-fast);
+    transition-timing-function: var(--gds-sys-motion-easing-ease);
+
+    @starting-style {
+      opacity: 0;
+      translate: 0 -2px;
+    }
   }
 
   .footer {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    transition-property: opacity, translate;
+    transition-duration: var(--gds-sys-motion-duration-fast);
+    transition-timing-function: var(--gds-sys-motion-easing-ease);
+
+    @starting-style {
+      opacity: 0;
+      translate: 0 2px;
+    }
   }
 
   /* Shared layout for header and footer sections */

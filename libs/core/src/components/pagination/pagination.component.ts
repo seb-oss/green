@@ -1,9 +1,10 @@
-// pagination.component.ts
-import { css } from 'lit'
 import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
+// import * as Pagination from './pagination.imports'
+import { tokens } from '../../tokens.style'
 import {
   gdsCustomElement,
   html,
@@ -20,7 +21,14 @@ import { IconChevronDoubleRight } from '../icon/icons/chevron-double-right.compo
 import { IconChevronLeftSmall } from '../icon/icons/chevron-left-small.component'
 import { IconChevronRightSmall } from '../icon/icons/chevron-right-small.component'
 import { GdsText } from '../text/text.component'
+import { PaginationStyles } from './pagination.styles'
 
+/**
+ * @element gds-pagination
+ * @status beta
+ *
+ * ⚠️ Declare events
+ */
 @gdsCustomElement('gds-pagination', {
   dependsOn: [
     GdsButton,
@@ -36,45 +44,28 @@ import { GdsText } from '../text/text.component'
   ],
 })
 export class GdsPagination extends GdsElement {
-  static styles = [
-    css`
-      :host {
-        display: flex;
-        align-items: center;
-        gap: var(--gds-sys-space-xl);
-      }
-
-      .pagination {
-        display: flex;
-        gap: var(--gds-sys-space-2xs);
-      }
-
-      .page-size {
-        gap: var(--gds-sys-space-xs);
-        display: flex;
-        align-items: center;
-        min-width: max-content;
-      }
-    `,
-  ]
+  static styles = [tokens, PaginationStyles]
 
   @property({ type: Number })
   page = 1
 
   @property({ type: Number })
-  pageSize = 10
+  rows = 10
 
   @property({ type: Number })
   total = 0
 
   @property({ type: Array })
-  pageSizes = [5, 10, 25, 50]
+  options = [5, 10, 25, 50]
 
-  private get pageCount() {
-    return Math.ceil(this.total / this.pageSize)
+  @property({ type: Boolean })
+  jump = false
+
+  get #pageCount() {
+    return Math.ceil(this.total / this.rows)
   }
 
-  private getVisiblePages(pageCount: number) {
+  #getVisiblePages(pageCount: number) {
     if (pageCount <= 7) {
       return Array.from({ length: pageCount }, (_, i) => i + 1)
     }
@@ -95,26 +86,31 @@ export class GdsPagination extends GdsElement {
   }
 
   render() {
-    const pageCount = this.pageCount
-    const visiblePages = this.getVisiblePages(pageCount)
+    const pageCount = this.#pageCount
+    const visiblePages = this.#getVisiblePages(pageCount)
 
     return html`
-      <div class="pagination">
-        <!-- <gds-button
-          size="small"
-          rank="tertiary"
-          ?disabled=${this.page === 1}
-          @click=${() => this.handlePageChange(1)}
-        >
-          <gds-icon-chevron-double-left size="l">
-          </gds-icon-chevron-double-left>
-        </gds-button> -->
+      <div class="pages">
+        ${when(
+          this.jump,
+          () => html`
+            <gds-button
+              size="small"
+              rank="secondary"
+              ?disabled=${this.page === 1}
+              @click=${() => this.#handlePageChange(1)}
+            >
+              <gds-icon-chevron-double-left size="l">
+              </gds-icon-chevron-double-left>
+            </gds-button>
+          `,
+        )}
 
         <gds-button
           size="small"
           rank="secondary"
           ?disabled=${this.page === 1}
-          @click=${() => this.handlePageChange(this.page - 1)}
+          @click=${() => this.#handlePageChange(this.page - 1)}
         >
           <gds-icon-chevron-left-small size="l"> </gds-icon-chevron-left-small>
         </gds-button>
@@ -134,96 +130,80 @@ export class GdsPagination extends GdsElement {
                   <gds-button
                     size="small"
                     rank="${this.page === p ? 'primary' : 'tertiary'}"
-                    @click=${() => this.handlePageChange(p as number)}
+                    @click=${() => this.#handlePageChange(p as number)}
                   >
                     ${p}
                   </gds-button>
                 `}
           `,
         )}
-        <!-- ${visiblePages.map(
-          (p) => html`
-            ${p === '...'
-              ? html`<gds-button size="small" rank="tertiary" width="40px" inert
-                  >...</gds-button
-                >`
-              : html`
-                  <gds-button
-                    size="small"
-                    rank="${this.page === p ? 'primary' : 'tertiary'}"
-                    @click=${() => this.handlePageChange(p as number)}
-                  >
-                    ${p}
-                  </gds-button>
-                `}
-          `,
-        )} -->
 
         <gds-button
           size="small"
           rank="secondary"
           ?disabled=${this.page === pageCount}
-          @click=${() => this.handlePageChange(this.page + 1)}
+          @click=${() => this.#handlePageChange(this.page + 1)}
         >
           <gds-icon-chevron-right-small size="l">
           </gds-icon-chevron-right-small>
         </gds-button>
-
-        <!-- <gds-button
-          rank="tertiary"
-          size="small"
-          ?disabled=${this.page === pageCount}
-          @click=${() => this.handlePageChange(pageCount)}
-        >
-          <gds-icon-chevron-double-right size="l">
-          </gds-icon-chevron-double-right>
-        </gds-button> -->
+        ${when(
+          this.jump,
+          () => html`
+            <gds-button
+              rank="secondary"
+              size="small"
+              ?disabled=${this.page === pageCount}
+              @click=${() => this.#handlePageChange(pageCount)}
+            >
+              <gds-icon-chevron-double-right size="l">
+              </gds-icon-chevron-double-right>
+            </gds-button>
+          `,
+        )}
       </div>
 
-      <div class="page-size">
-        <!-- <gds-text font="detail-book-s">Items per page</gds-text> -->
-        <gds-context-menu @gds-menu-item-click=${this.handlePageSizeMenuClick}>
-          <gds-button slot="trigger" size="small" rank="secondary">
-            ${this.pageSize}
-            <gds-icon-chevron-bottom
-              slot="trail"
-              size="m"
-            ></gds-icon-chevron-bottom>
-          </gds-button>
-          ${this.pageSizes.map(
-            (size) => html`
-              <gds-menu-item
-                data-value=${size}
-                class=${classMap({
-                  selected: this.pageSize === size,
-                })}
-              >
-                ${size}
-              </gds-menu-item>
-            `,
-          )}
-        </gds-context-menu>
-      </div>
+      <gds-context-menu @gds-menu-item-click=${this.#handlePageSizeMenuClick}>
+        <gds-button slot="trigger" size="small" rank="secondary">
+          ${this.rows}
+          <gds-icon-chevron-bottom
+            slot="trail"
+            size="m"
+          ></gds-icon-chevron-bottom>
+        </gds-button>
+        ${this.options.map(
+          (size) => html`
+            <gds-menu-item
+              data-value=${size}
+              class=${classMap({
+                selected: this.rows === size,
+              })}
+            >
+              ${size}
+            </gds-menu-item>
+          `,
+        )}
+      </gds-context-menu>
     `
   }
 
-  private handlePageChange(newPage: number) {
+  #handlePageChange(newPage: number) {
     this.dispatchEvent(
-      new CustomEvent('page-change', {
+      new CustomEvent('gds-page-change', {
         detail: { page: newPage },
         bubbles: true,
       }),
     )
   }
 
-  private handlePageSizeMenuClick(e: CustomEvent) {
-    const menuItem = e.target as HTMLElement
-    const newPageSize = parseInt(menuItem.dataset.value || '10')
+  #handlePageSizeMenuClick(e: CustomEvent) {
+    const item = e.target as HTMLElement
+    const limit = parseInt(item.dataset.value || '10')
 
-    if (newPageSize !== this.pageSize) {
+    if (limit !== this.rows) {
       this.dispatchEvent(
-        new CustomEvent('page-size-change', {
-          detail: { pageSize: newPageSize },
+        new CustomEvent('gds-rows-change', {
+          detail: { rows: limit },
           bubbles: true,
         }),
       )

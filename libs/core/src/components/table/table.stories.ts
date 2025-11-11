@@ -8,6 +8,7 @@ import '../dropdown/dropdown'
 import '../context-menu/context-menu'
 import '../input/input'
 import '../img/img'
+import '../pagination/pagination'
 import '../icon/icons/dot-grid-one-horizontal'
 import '../icon/icons/plus-small'
 import '../icon/icons/copy'
@@ -122,8 +123,8 @@ const mockDataProvider = async (
   }
 
   // Apply pagination
-  const startIndex = (request.page - 1) * request.pageSize
-  const endIndex = startIndex + request.pageSize
+  const startIndex = (request.page - 1) * request.rows
+  const endIndex = startIndex + request.rows
   const paginatedData = processedData.slice(startIndex, endIndex)
 
   return {
@@ -320,17 +321,11 @@ export const Default: Story = {
   },
   render: (args) => html`
     <gds-table
-      ?selectable="${args.selectable}"
       density="${args.density}"
+      ?selectable="${args.selectable}"
       .columns="${args.columns}"
       .dataProvider="${args.dataProvider}"
       .actions="${args.actions}"
-      @data-loaded="${(e: CustomEvent) =>
-        console.log('✓ Data loaded:', e.detail)}"
-      @data-error="${(e: CustomEvent) =>
-        console.error('✗ Error loading data:', e.detail)}"
-      @selection-change="${(e: CustomEvent) =>
-        console.log('→ Selection changed:', e.detail)}"
     >
       <gds-button slot="header-lead" size="small" rank="secondary">
         Export

@@ -10,7 +10,7 @@ import {
   GdsInput,
   GdsLink,
   GdsMenuItem,
-  GdsPagination,
+  // GdsPagination,
   GdsText,
   IconCopy,
   IconCrossSmall,
@@ -23,7 +23,7 @@ import {
 } from '../../pure'
 import checkboxStyles from '../../shared-styles/rbcb-toggle.style'
 import { tokens } from '../../tokens.style'
-// import { GdsTableCheckbox } from './table.checkbox'
+import { GdsPagination } from '../pagination/pagination.component'
 import { TableStyles } from './table.styles'
 
 export { checkboxToggle as Checkbox } from '../../shared-styles/rbcb-toggle.template'
@@ -37,7 +37,6 @@ export {
 export const Styles = [tokens, checkboxStyles, TableStyles]
 
 export const Dependencies = [
-  // GdsTableCheckbox,
   GdsButton,
   GdsCard,
   GdsDivider,

@@ -33,7 +33,7 @@ export interface Row {
 
 export interface State {
   page: number
-  pageSize: number
+  rows: number
   sortColumn?: string
   sortDirection?: 'asc' | 'desc'
   searchQuery: string
@@ -42,7 +42,7 @@ export interface State {
 
 export interface Request {
   page: number
-  pageSize: number
+  rows: number
   sortColumn?: string
   sortDirection?: 'asc' | 'desc'
   searchQuery?: string

@@ -26,7 +26,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   #cacheDuration = 5 * 60 * 1000
 
   @property({ type: Array })
-  pageSizes = [5, 10, 20, 50, 100]
+  options = [5, 10, 20, 50, 100]
 
   @property({ type: Array })
   columns: Types.Column[] = []
@@ -52,7 +52,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   @state()
   private view: Types.State = {
     page: 1,
-    pageSize: 10,
+    rows: 10,
     searchQuery: '',
     visibleColumns: new Set(),
   }
@@ -96,7 +96,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   #getCacheKey(): string {
     return JSON.stringify({
       page: this.view.page,
-      pageSize: this.view.pageSize,
+      rows: this.view.rows,
       sortColumn: this.view.sortColumn,
       sortDirection: this.view.sortDirection,
       searchQuery: this.view.searchQuery,
@@ -126,7 +126,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     try {
       const response = await this.dataProvider({
         page: this.view.page,
-        pageSize: this.view.pageSize,
+        rows: this.view.rows,
         sortColumn: this.view.sortColumn,
         sortDirection: this.view.sortDirection,
         searchQuery: this.view.searchQuery,
@@ -446,15 +446,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
                   checked: this.#isAllSelected,
                   indeterminate: this.#isPartialSelection,
                   ariaLabel: 'Select all rows',
-                  onToggle: () => {
-                    if (this.#isAllSelected) {
-                      this.#clearSelectionInternal()
-                    } else {
-                      this.#selectAllInternal()
-                    }
-                    this.#emitSelectionChange()
-                    this.requestUpdate()
-                  },
+                  onToggle: () => this.#handleSelectAll({} as CustomEvent),
                 })}
               </th>
             `,
@@ -506,15 +498,10 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
                 checked: this.selected.has(index),
                 indeterminate: false,
                 ariaLabel: `Select row ${index + 1}`,
-                onToggle: () => {
-                  if (this.selected.has(index)) {
-                    this.selected.delete(index)
-                  } else {
-                    this.selected.add(index)
-                  }
-                  this.#emitSelectionChange()
-                  this.requestUpdate()
-                },
+                onToggle: () =>
+                  this.#handleRowSelect(index, {
+                    detail: { checked: !this.selected.has(index) },
+                  } as CustomEvent),
               })}
             </td>
           `,
@@ -551,8 +538,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     ariaLabel: string
     onToggle: () => void
   }) {
-    const toggle = (e?: Event) => {
-      e?.stopPropagation()
+    const toggle = (e: Event) => {
+      e.stopPropagation()
       if (disabled) return
       onToggle()
     }
@@ -631,7 +618,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   #renderTableBody() {
     // Show the skeleton only on the initial load
     if (this.loading && this.loaded) {
-      const skeletonRows = Array.from({ length: this.view.pageSize }, (_, i) =>
+      const skeletonRows = Array.from({ length: this.view.rows }, (_, i) =>
         this.#renderSkeletonRow(i),
       )
       return html`<tbody>
@@ -705,7 +692,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   #renderFooter() {
-    if (this.plain) return null
+    if (this.plain || this.total < 1) return null
     return html`
       <div class="footer">
         <div class="lead">
@@ -728,9 +715,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
               `,
               () => html`
                 <span>
-                  Showing ${(this.view.page - 1) * this.view.pageSize + 1} to
-                  ${Math.min(this.view.page * this.view.pageSize, this.total)}
-                  of ${this.total} entries
+                  Showing ${(this.view.page - 1) * this.view.rows + 1} to
+                  ${Math.min(this.view.page * this.view.rows, this.total)} of
+                  ${this.total} entries
                 </span>
               `,
             )}
@@ -740,11 +727,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           <slot name="footer-trail"></slot>
           <gds-pagination
             .page=${this.view.page}
-            .pageSize=${this.view.pageSize}
+            .rows=${this.view.rows}
+            .options=${this.options}
             .total=${this.total}
-            .pageSizes=${this.pageSizes}
-            @page-change=${this.#handlePageChange}
-            @page-size-change=${this.#handlePageSizeChange}
+            @gds-page-change=${this.#handlePageChange}
+            @gds-rows-change=${this.#handlePageSizeChange}
           ></gds-pagination>
         </div>
       </div>
@@ -832,7 +819,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   async #handlePageSizeChange(e: CustomEvent) {
     this.view = {
       ...this.view,
-      pageSize: e.detail.pageSize,
+      rows: e.detail.rows,
       page: 1,
     }
     await this.#loadData()
@@ -867,25 +854,15 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   /**
    * Handles individual row selection change
    */
-  // #handleRowSelect(index: number, e: CustomEvent) {
-  //   const isChecked = e.detail.checked
+  #handleRowSelect(index: number, e: CustomEvent) {
+    const isChecked = e.detail.checked
 
-  //   if (isChecked) {
-  //     this.selected.add(index)
-  //   } else {
-  //     this.selected.delete(index)
-  //   }
-
-  //   this.#emitSelectionChange()
-  //   this.requestUpdate()
-  // }
-
-  #toggleRowSelect(index: number) {
-    if (this.selected.has(index)) {
-      this.selected.delete(index)
-    } else {
+    if (isChecked) {
       this.selected.add(index)
+    } else {
+      this.selected.delete(index)
     }
+
     this.#emitSelectionChange()
     this.requestUpdate()
   }
