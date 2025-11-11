@@ -55,32 +55,6 @@ export class GdsPagination extends GdsElement {
         align-items: center;
         min-width: max-content;
       }
-
-      .ellipsis {
-        aspect-ratio: 1/1;
-      }
-
-      .ellipsis .icon {
-        display: none;
-      }
-
-      .ellipsis:hover .dots {
-        display: none;
-      }
-
-      .ellipsis:hover .icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .ellips {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-      }
     `,
   ]
 
@@ -120,33 +94,6 @@ export class GdsPagination extends GdsElement {
     }
   }
 
-  private renderEllipsisButton(isFirst: boolean, pageCount: number) {
-    const targetPage = isFirst
-      ? Math.max(1, this.page - 3)
-      : Math.min(pageCount, this.page + 3)
-
-    const icon = isFirst
-      ? html`<gds-icon-chevron-double-left
-          size="m"
-        ></gds-icon-chevron-double-left>`
-      : html`<gds-icon-chevron-double-right
-          size="m"
-        ></gds-icon-chevron-double-right>`
-
-    return html`
-      <gds-button
-        size="small"
-        rank="tertiary"
-        class="ellipsis"
-        width="32px"
-        @click=${() => this.handlePageChange(targetPage)}
-      >
-        <span class="dots">...</span>
-        <span class="icon">${icon}</span>
-      </gds-button>
-    `
-  }
-
   render() {
     const pageCount = this.pageCount
     const visiblePages = this.getVisiblePages(pageCount)
@@ -173,9 +120,16 @@ export class GdsPagination extends GdsElement {
         </gds-button>
 
         ${visiblePages.map(
-          (p, index) => html`
+          (p) => html`
             ${p === '...'
-              ? this.renderEllipsisButton(index === 1, pageCount)
+              ? html`<gds-button
+                  size="small"
+                  rank="tertiary"
+                  width="40px"
+                  inert
+                >
+                  ...
+                </gds-button>`
               : html`
                   <gds-button
                     size="small"
