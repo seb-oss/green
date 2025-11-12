@@ -368,12 +368,12 @@ const themes = {
             },
           },
           {
-            destination: 'typography/GdsTypography.kt',
+            destination: 'typography/GdsTypographyTokens.kt',
             format: 'compose/typography',
             filter: 'is-typography',
             options: {
               objectType: 'object',
-              className: 'GdsTypography',
+              className: 'GdsTypographyTokens',
               import: [
                 'androidx.compose.ui.text.TextStyle',
                 'androidx.compose.ui.text.font.FontWeight',
