@@ -17,11 +17,8 @@ import {
 import IconStyles from './icon.styles'
 
 /**
- * @element gds-icon
- *
  * @part icon - The icon SVG element.
  */
-
 export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
   static styles = [tokens, IconStyles]
 
