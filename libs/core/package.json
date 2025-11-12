@@ -48,5 +48,6 @@
     "./_primitives/*": "./primitives/*",
     "./react": "./generated/react/index.js",
     "./react/*": "./generated/react/*"
-  }
+  },
+  "customElements": "custom-elements.json"
 }

@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist",
+    "declaration": true,
+    "types": []
+  },
+  "include": ["**/*.ts", "**/*.css"],
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.react.ts",
+    "**/*.stories.ts",
+    "**/*.stories.js"
+  ]
+}

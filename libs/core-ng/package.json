@@ -1,0 +1,33 @@
+{
+  "name": "@sebgroup/green-core-ng",
+  "description": "Angular wrappers for @sebgroup/green-core web components.",
+  "version": "2.13.2",
+  "main": "index.js",
+  "module": "index.js",
+  "type": "module",
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "contributors": [],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/seb-oss/green/"
+  },
+  "homepage": "https://storybook.seb.io/latest/core/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seb-oss/green.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "directory": "../../dist/libs/core-ng"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "@angular/core": ">=18",
+    "@sebgroup/green-core": ">=2.13.2"
+  },
+  "peerDependenciesMeta": {},
+  "exports": {
+    ".": "./index.js"
+  }
+}
