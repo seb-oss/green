@@ -14,10 +14,10 @@ function mapFontWeight(weight: string | number): string {
       return 'FontWeight.Normal'
     case '450':
     case 450:
-      return 'FontWeight.Medium'
+      return 'FontWeight(450)'
     case '500':
     case 500:
-      return 'FontWeight.SemiBold'
+      return 'FontWeight.Medium'
     case '600':
     case 600:
       return 'FontWeight.SemiBold'

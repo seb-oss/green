@@ -4,9 +4,10 @@ function mapFontFamily(fontFamily: string) {
 }
 
 function mapFontWeight(weight: number) {
-  if (weight == 450) return 'FontWeight.Medium'
-  if (weight == 500) return 'FontWeight.SemiBold'
-  if (weight >= 600) return 'FontWeight.Bold'
+  if (weight == 450) return 'FontWeight(450)'
+  if (weight == 500) return 'FontWeight.Medium'
+  if (weight == 600) return 'FontWeight.SemiBold'
+  if (weight > 600) return 'FontWeight.Bold'
   return 'FontWeight.Normal'
 }
 
