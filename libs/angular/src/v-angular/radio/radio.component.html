@@ -48,36 +48,39 @@
   </div>
 
   <!-- ERRORS -->
-  <ng-container *transloco="let t; read: scope">
-    <div
-      class="form-info form-info--error"
-      [attr.for]="id + '-radio'"
-      *ngIf="invalid && (error || ngControl?.invalid)"
-    >
-      <span class="error-icon">
-        <gds-icon-triangle-exclamation
-          width="16"
-          height="16"
-          [solid]="true"
-          *nggCoreElement
-        ></gds-icon-triangle-exclamation>
-      </span>
-      <span
-        *ngIf="error; else errorsRef"
-        [attr.data-thook]="thook + '-errorlabel'"
+  <!-- if no nggv-radio-group is present -->
+  @if (!isGroup) {
+    <ng-container *transloco="let t; read: scope">
+      <div
+        class="form-info form-info--error"
+        [attr.for]="id + '-radio'"
+        *ngIf="invalid && (error || ngControl?.invalid)"
       >
-        {{ error }}
-      </span>
-      <ng-template #errorsRef>
+        <span class="error-icon">
+          <gds-icon-triangle-exclamation
+            width="16"
+            height="16"
+            [solid]="true"
+            *nggCoreElement
+          ></gds-icon-triangle-exclamation>
+        </span>
         <span
-          *ngIf="firstError as error"
+          *ngIf="error; else errorsRef"
           [attr.data-thook]="thook + '-errorlabel'"
         >
-          {{ t('error.field' + error?.code, error?.params) }}
+          {{ error }}
         </span>
-      </ng-template>
-    </div>
-  </ng-container>
+        <ng-template #errorsRef>
+          <span
+            *ngIf="firstError as error"
+            [attr.data-thook]="thook + '-errorlabel'"
+          >
+            {{ t('error.field' + error?.code, error?.params) }}
+          </span>
+        </ng-template>
+      </div>
+    </ng-container>
+  }
 
   <!-- CHILDREN -->
   <ng-content></ng-content>
