@@ -14,10 +14,10 @@ function mapFontWeight(weight: string | number): string {
       return 'FontWeight.Normal'
     case '450':
     case 450:
-      return 'FontWeight.Medium'
+      return 'FontWeight(450)'
     case '500':
     case 500:
-      return 'FontWeight.SemiBold'
+      return 'FontWeight.Medium'
     case '600':
     case 600:
       return 'FontWeight.SemiBold'
@@ -34,20 +34,19 @@ function mapFontWeight(weight: string | number): string {
       return 'FontWeight.Normal'
   }
 }
-function toPascalCase(name: string) {
-  return name
-    .replace(/(^\w|-\w)/g, (m) => m.replace('-', '').toUpperCase())
-    .replace(/^SysText/, '')
-}
 
 export default ({ allTokens, header, options }) => `${header}
+
+package ${options.packageName ?? ''}
 
 ${options.import.map(/** @param {string} item */ (item) => `import ${item}`).join('\n')}
 
 val GdsSansSerif = FontFamily(
 ${allTokens
   .map((token) => {
-    return `  Font(R.font.seb_sans_serif_${token.path[token.path.length - 1]}, ${mapFontWeight(token.$value)}),`
+    const fontVariant = token.path[token.path.length - 1];
+    const fontName = fontVariant === 'regular' ? 'seb_sans_serif' : `seb_sans_serif_${fontVariant}`;
+    return `  Font(R.font.${fontName}, ${mapFontWeight(token.$value)}),`;
   })
   .join('\n')}
 )

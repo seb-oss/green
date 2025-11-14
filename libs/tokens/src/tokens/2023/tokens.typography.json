@@ -288,6 +288,15 @@
           "lineHeight": 24
         }
       },
+      "body-regular-s": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{sys.text.family}",
+          "fontWeight": "{sys.text.weight.regular}",
+          "fontSize": 14,
+          "lineHeight": 20
+        }
+      },
       "body-italic-m": {
         "$type": "typography",
         "$value": {
