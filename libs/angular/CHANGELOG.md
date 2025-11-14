@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.8.0
+
+### Minor Changes
+
+- fa7db49: **V-Angular:** Radio: Create nggv-radio-group. Fixes #2468
+
 ## 6.7.1
 
 ### Patch Changes
