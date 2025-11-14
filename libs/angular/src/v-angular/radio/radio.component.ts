@@ -88,7 +88,7 @@ export class NggvRadioComponent
    * If true, errors will be shown in nggv-radio-group component.
    * If false, errors will be show below each radio button
    */
-  isGroup: boolean = false
+  isGroup = false
   /**
    * Creates a new RadioComponent
    * @param ngControl optional FormControl provided when component is used in a form, through dependency injection.
