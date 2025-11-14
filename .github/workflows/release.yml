@@ -71,8 +71,8 @@ jobs:
         with:
           name: androidtokens
           path: |
-            ./dist/libs/tokens/2023/android/Colors/*
-            ./dist/libs/tokens/2023/android/Typography/*
+            ./dist/libs/tokens/2023/android/colors/*.kt
+            ./dist/libs/tokens/2023/android/typography/*.kt
 
       - name: Upload Android font resources
         uses: actions/upload-artifact@v4
