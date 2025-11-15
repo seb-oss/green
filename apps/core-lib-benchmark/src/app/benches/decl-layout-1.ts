@@ -3,7 +3,6 @@ import { customElement } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { html } from '@sebgroup/green-core/scoping.js'
 
-import '@sebgroup/green-core/components/container/index.js'
 import '@sebgroup/green-core/components/flex/index.js'
 import '@sebgroup/green-core/components/card/index.js'
 
@@ -14,7 +13,7 @@ export class DeclLayout1 extends LitElement {
   render() {
     return html`${repeat(
       this.entries,
-      (e) =>
+      () =>
         html`<gds-div margin="s" padding="s">
           <gds-flex gap="s">
             <gds-card border="4xs" padding="s" border-radius="s"

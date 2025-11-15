@@ -3,7 +3,6 @@ import { customElement } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { html } from '@sebgroup/green-core/scoping.js'
 
-import '@sebgroup/green-core/components/container/index.js'
 import '@sebgroup/green-core/components/flex/index.js'
 import '@sebgroup/green-core/components/card/index.js'
 import '@sebgroup/green-core/components/context-menu/index.js'
@@ -18,7 +17,7 @@ export class DeclLayout1 extends LitElement {
   render() {
     return html`${repeat(
       this.entries,
-      (e) =>
+      () =>
         html`
             <gds-context-menu>
               <gds-menu-item>Item 1</gds-menu-item>

@@ -81,39 +81,41 @@ export class GdsCheckbox extends GdsFormControlElement {
 
   render() {
     return html`
-      <input
-        type="checkbox"
-        ?checked=${this.checked}
-        ?disabled=${this.disabled}
-        ?indeterminate=${this.indeterminate}
-        aria-invalid=${this.invalid}
-        aria-describedby="message supporting-text"
-        id="checkbox-input"
-        @change=${() => {
-          this.checked = this._elCheckbox.checked
-          this.#dispatchChangeEvents()
-        }}
-      />
-      ${when(
-        this.errorMessage,
-        () => html`<span id="message">${this.errorMessage}</span>`,
-      )}
-      <gds-toggle-control-base type="checkbox" @click=${this.#toggleChecked}>
-        <label for="checkbox-input" slot="label"> ${this.label} </label>
-        <span
-          slot="supporting-text"
-          class="supporting-text"
-          id="supporting-text"
-        >
-          ${this.supportingText}
-        </span>
-        ${checkboxToggle({
-          checked: this.checked,
-          indeterminate: this.indeterminate,
-          disabled: this.disabled,
-          invalid: this.invalid,
-        })}
-      </gds-toggle-control-base>
+        <input
+          type="checkbox"
+          class="visually-hidden-checkbox"
+          ?checked=${this.checked}
+          ?disabled=${this.disabled}
+          ?indeterminate=${this.indeterminate}
+          aria-invalid=${this.invalid}
+          aria-describedby="message supporting-text"
+          id="checkbox-input"
+          @change=${() => {
+            this.checked = this._elCheckbox.checked
+            this.#dispatchChangeEvents()
+          }}
+        />
+        ${when(
+          this.errorMessage,
+          () => html`<span id="message">${this.errorMessage}</span>`,
+        )}
+        <gds-toggle-control-base type="checkbox" @click=${this.#toggleChecked}>
+          <label for="checkbox-input" slot="label"> ${this.label} </label>
+          <span
+            slot="supporting-text"
+            class="supporting-text"
+            id="supporting-text"
+          >
+            ${this.supportingText}
+          </span>
+          ${checkboxToggle({
+            checked: this.checked,
+            indeterminate: this.indeterminate,
+            disabled: this.disabled,
+            invalid: this.invalid,
+          })}
+        </gds-toggle-control-base>
+      </div>
     `
   }
 
