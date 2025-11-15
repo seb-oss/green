@@ -167,6 +167,7 @@ const tableColumns: TableColumn[] = [
         value: (row: { email: any }) => row.email,
         size: 'small',
         slot: 'email-copy',
+        onClick: () => alert('email copied'),
       },
     },
   },
@@ -246,7 +247,7 @@ const tableColumns: TableColumn[] = [
 const tableActions = {
   label: 'Operations',
   cell: {
-    type: 'action-menu',
+    type: 'context-menu',
     items: [
       {
         label: (row: { status: string }) =>
@@ -396,119 +397,5 @@ export const Responsive: Story = {
         <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
       </gds-button>
     </gds-table>
-  `,
-}
-
-// Actions examples
-
-// Single Button
-export const ActionsButton: Story = {
-  args: {
-    columns: tableColumns,
-    actions: {
-      label: 'Actions',
-      cell: {
-        type: 'action-button',
-        label: 'Edit',
-        size: 'small',
-        rank: 'secondary',
-        onClick: (row: any) => console.log('Edit', row),
-      },
-    },
-    data: mockDataProvider,
-  },
-  render: (args) => html`
-    <gds-table
-      .columns="${args.columns}"
-      .data="${args.data}"
-      .actions="${args.actions}"
-    ></gds-table>
-  `,
-}
-
-//  Multiple Buttons
-export const ActionsButtons: Story = {
-  args: {
-    columns: tableColumns,
-    actions: {
-      label: '', // No label
-      cell: {
-        type: 'action-buttons',
-        buttons: [
-          { label: 'Edit', onClick: (row: any) => console.log('Edit', row) },
-          {
-            label: 'Delete',
-            variant: 'negative',
-            onClick: (row: any) => console.log('Delete', row),
-          },
-        ],
-      },
-    },
-    data: mockDataProvider,
-  },
-  render: (args) => html`
-    <gds-table
-      .columns="${args.columns}"
-      .data="${args.data}"
-      .actions="${args.actions}"
-    ></gds-table>
-  `,
-}
-
-//  Link
-export const ActionsLink: Story = {
-  args: {
-    columns: tableColumns,
-    actions: {
-      label: 'Details',
-      cell: {
-        type: 'action-link',
-        label: 'View',
-        href: (row: { id: any }) => `/users/${row.id}`,
-        target: '_blank',
-      },
-    },
-    data: mockDataProvider,
-  },
-  render: (args) => html`
-    <gds-table
-      .columns="${args.columns}"
-      .data="${args.data}"
-      .actions="${args.actions}"
-    ></gds-table>
-  `,
-}
-
-// Menu
-export const ActionsMenu: Story = {
-  args: {
-    columns: tableColumns,
-    actions: {
-      label: 'Operations',
-      cell: {
-        type: 'action-menu',
-        items: [
-          { label: 'Edit', onClick: (row: any) => console.log('Edit', row) },
-          {
-            label: 'View Logs',
-            onClick: (row: any) => console.log('Logs', row),
-          },
-          {
-            divider: true,
-            label: 'Delete',
-            variant: 'negative',
-            onClick: (row: any) => console.log('Delete', row),
-          },
-        ],
-      },
-    },
-    data: mockDataProvider,
-  },
-  render: (args) => html`
-    <gds-table
-      .columns="${args.columns}"
-      .data="${args.data}"
-      .actions="${args.actions}"
-    ></gds-table>
   `,
 }

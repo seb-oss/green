@@ -3,7 +3,6 @@ import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
-// import * as Pagination from './pagination.imports'
 import { tokens } from '../../tokens.style'
 import {
   gdsCustomElement,

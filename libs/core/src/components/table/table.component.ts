@@ -173,8 +173,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     switch (config.type) {
       case 'badge': {
-        const variant = (resolve(config.variant) as any) || 'information'
-        const size = (resolve(config.size) as any) || 'small'
+        const variant = resolve(config.variant) || 'information'
+        const size = resolve(config.size) || 'small'
         return html`
           <gds-badge size="${size}" variant="${variant}">
             ${resolve(config.value)}
@@ -222,6 +222,10 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             size="${size || 'small'}"
             variant="${variant || 'neutral'}"
             rank="${rank || 'secondary'}"
+            @click="${(e: Event) => {
+              e.stopPropagation()
+              config.onClick(row)
+            }}"
           >
             ${content ? content : label}
           </gds-button>
@@ -246,6 +250,27 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         `
       }
 
+      case 'context-menu': {
+        const items = config.items
+
+        return html`
+          <gds-context-menu>
+            <gds-button slot="trigger" size="small" rank="tertiary">
+              <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+            </gds-button>
+            ${items.map((item) => {
+              const label = resolve(item.label)
+
+              return html`
+                <gds-menu-item @click="${() => item.onClick(row)}">
+                  ${label}
+                </gds-menu-item>
+              `
+            })}
+          </gds-context-menu>
+        `
+      }
+
       case 'formatted-number': {
         const value = resolve(config.value)
         const formatter =
@@ -263,82 +288,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         const value = resolve(config.value)
         const formatter = Table.FormatDate[config.format || 'dateLong']
         return formatter(value, config.locale)
-      }
-
-      case 'action-button': {
-        const label = resolve(config.label)
-        const size = config.size || 'small'
-        const rank = config.rank || 'secondary'
-        const variant = config.variant || 'neutral'
-
-        return html`
-          <gds-button
-            size="${size}"
-            rank="${rank}"
-            variant="${variant}"
-            @click="${(e: Event) => {
-              e.stopPropagation()
-              config.onClick(row)
-            }}"
-          >
-            ${label}
-          </gds-button>
-        `
-      }
-
-      case 'action-buttons': {
-        return config.buttons.map((btn) => {
-          const label = resolve(btn.label)
-          const size = btn.size || 'small'
-          const rank = btn.rank || 'secondary'
-          const variant = btn.variant || 'neutral'
-
-          return html`
-            <gds-button
-              size="${size}"
-              rank="${rank}"
-              variant="${variant}"
-              @click="${(e: Event) => {
-                e.stopPropagation()
-                btn.onClick(row)
-              }}"
-            >
-              ${label}
-            </gds-button>
-          `
-        })
-      }
-
-      case 'action-link': {
-        const href = resolve(config.href)
-        const label = resolve(config.label)
-        const target = config.target || '_self'
-
-        return html`
-          <gds-link .href="${href}" target="${target}"> ${label} </gds-link>
-        `
-      }
-
-      case 'action-menu': {
-        const items = config.items
-
-        return html`
-          <gds-context-menu>
-            <gds-button slot="trigger" size="small" rank="tertiary">
-              <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
-            </gds-button>
-            ${items.map((item) => {
-              const label = resolve(item.label)
-
-              return html`
-                ${item.divider ? html`<gds-divider></gds-divider>` : ''}
-                <gds-menu-item @click="${() => item.onClick(row)}">
-                  ${label}
-                </gds-menu-item>
-              `
-            })}
-          </gds-context-menu>
-        `
       }
 
       default:

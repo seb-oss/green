@@ -1,16 +1,23 @@
-// Cell types
-
-// table.cell.types.ts
 import { GdsElement } from '../../gds-element'
-import { ImageProps } from '../../utils/mixins/props-image'
 
-import type { GdsBadge, GdsButton, GdsImg, GdsLink } from '../../pure'
+import type {
+  GdsBadge,
+  GdsButton,
+  GdsContextMenu,
+  GdsImg,
+  GdsLink,
+} from '../../pure'
 import type {
   AccountFormats,
   DateTimeFormat,
   NumberFormats,
 } from '../formatted-text/formatters'
 
+/**
+ * ============================================================================
+ *  TABLE TYPES
+ * ============================================================================
+ */
 export interface Column {
   key: string
   label: string
@@ -78,20 +85,21 @@ export type TableDensity = Density
 export type TableCache<T> = Cache<T>
 export type TableCacheEntry<T> = CacheEntry<T>
 
+/**
+ * ============================================================================
+ *  CELL COMPONENT TYPES
+ * ============================================================================
+ */
 type CellProps<T> = {
   [K in keyof T]?: T[K] | ((row: any) => T[K])
 }
 
+// Different approach consideation omit or pick individually
 export interface Badge extends CellProps<Pick<GdsBadge, 'variant' | 'size'>> {
   type: 'badge'
   value: string | ((row: any) => string)
 }
 
-// Cleanup
-// Cleanup
-// Cleanup
-// Cleanup
-// Cleanup
 export interface Image extends CellProps<Omit<GdsImg, keyof GdsElement>> {
   type: 'image'
   src: string | ((row: any) => string)
@@ -100,70 +108,16 @@ export interface Image extends CellProps<Omit<GdsImg, keyof GdsElement>> {
 export interface Button extends CellProps<Omit<GdsButton, keyof GdsElement>> {
   type: 'button'
   slot?: string | ((row: any) => string)
+  onClick: (row: any) => void
 }
 
 export interface Link extends CellProps<Omit<GdsLink, keyof GdsElement>> {
   type: 'link'
 }
 
-// Cleanup
-// Cleanup
-// Cleanup
-// Cleanup
-
-// Formatters
-export interface Number {
-  type: 'formatted-number'
-  value: number | string | ((row: any) => number | string)
-  locale?: string
-  currency?: string
-  format?: NumberFormats
-}
-
-export interface Account {
-  type: 'formatted-account'
-  value: string | ((row: any) => string)
-  format?: AccountFormats
-}
-
-export interface Date {
-  type: 'formatted-date'
-  value: string | Date | ((row: any) => string | Date)
-  locale?: string
-  format?: DateTimeFormat
-}
-
-/* ACTION TYPES */
-export interface ActionButtonCell {
-  type: 'action-button'
-  label: string | ((row: any) => string)
-  size?: GdsButton['size']
-  rank?: GdsButton['rank']
-  variant?: GdsButton['variant']
-  onClick: (row: any) => void
-}
-
-export interface ActionButtonsCell {
-  type: 'action-buttons'
-  buttons: Array<{
-    label: string | ((row: any) => string)
-    size?: GdsButton['size']
-    rank?: GdsButton['rank']
-    variant?: GdsButton['variant']
-    onClick: (row: any) => void
-  }>
-}
-
-export interface ActionLinkCell {
-  type: 'action-link'
-  label: string | ((row: any) => string)
-  href: string | ((row: any) => string)
-  target?: '_self' | '_blank'
-}
-
-export interface ActionMenuCell {
-  type: 'action-menu'
-  label: string | ((row: any) => string)
+export interface ContextMenu
+  extends CellProps<Omit<GdsContextMenu, keyof GdsElement>> {
+  type: 'context-menu'
   items: Array<{
     label: string | ((row: any) => string)
     divider?: boolean
@@ -171,18 +125,36 @@ export interface ActionMenuCell {
   }>
 }
 
+export interface FormattedNumber {
+  type: 'formatted-number'
+  value: number | string | ((row: any) => number | string)
+  locale?: string
+  currency?: string
+  format?: NumberFormats
+}
+
+export interface FormattedAccount {
+  type: 'formatted-account'
+  value: string | ((row: any) => string)
+  format?: AccountFormats
+}
+
+export interface FormattedDate {
+  type: 'formatted-date'
+  value: string | Date | ((row: any) => string | Date)
+  locale?: string
+  format?: DateTimeFormat
+}
+
 export type Cell =
   | Image
   | Button
   | Link
   | Badge
-  | ActionButtonCell
-  | ActionButtonsCell
-  | ActionLinkCell
-  | ActionMenuCell
-  | Number
-  | Account
-  | Date
+  | ContextMenu
+  | FormattedNumber
+  | FormattedAccount
+  | FormattedDate
 
 export interface CellConfig {
   lead?: Cell
