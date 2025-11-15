@@ -148,10 +148,11 @@ const tableColumns: TableColumn[] = [
     sortable: true,
     cell: {
       lead: {
-        type: 'avatar',
+        type: 'image',
         src: (row) => row.avatarUrl,
         alt: (row) => row.name,
-        size: 'xl',
+        width: 'xl',
+        height: 'xl',
       },
     },
   },
@@ -161,16 +162,11 @@ const tableColumns: TableColumn[] = [
     sortable: true,
     justify: true,
     cell: {
-      lead: {
-        type: 'input',
-      },
-      value: {
-        type: 'dropdown',
-      },
       trail: {
-        type: 'copy-button',
-        value: (row) => row.email,
-        size: 'xs',
+        type: 'button',
+        value: (row: { email: any }) => row.email,
+        size: 'small',
+        slot: 'email-copy',
       },
     },
   },
@@ -178,6 +174,12 @@ const tableColumns: TableColumn[] = [
     key: 'role',
     label: 'Role',
     sortable: true,
+    cell: {
+      value: {
+        type: 'link',
+        label: (row) => row.status,
+      },
+    },
   },
   {
     key: 'status',
@@ -334,6 +336,10 @@ export const Default: Story = {
         Add user
         <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
       </gds-button>
+      <!-- If not cloning shows up on first row only -->
+      <template slot="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
     </gds-table>
   `,
 }

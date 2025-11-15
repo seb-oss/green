@@ -1,5 +1,6 @@
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
@@ -181,36 +182,67 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         `
       }
 
-      case 'avatar': {
+      case 'image': {
         const src = resolve(config.src)
         if (!src) return null
-        const size = config.size || '24px'
+
+        const width = resolve(config.width) || '24px'
+        const height = resolve(config.height) || '24px'
+        const borderRadius = resolve(config['border-radius']) || 'max'
+        const objectFit = resolve(config['object-fit']) || 'cover'
+
         return html`
           <gds-img
             src="${src}"
             alt="${resolve(config.alt) || ''}"
-            width="${size}"
-            height="${size}"
-            border-radius="max"
-            object-fit="cover"
+            width="${width}"
+            height="${height}"
+            border-radius="${borderRadius}"
+            object-fit="${objectFit}"
+            object-position="center"
           ></gds-img>
         `
       }
 
-      case 'copy-button': {
-        const valueToCopy = String(resolve(config.value) || '')
-        const size = resolve(config.size) || 'small'
+      case 'button': {
+        const size = resolve(config.size)
+        const variant = resolve(config.variant)
+        const rank = resolve(config.rank)
+        const label = resolve(config.label)
+        const slot = resolve(config.slot)
+
+        // Look for another solution here
+        const template = this.querySelector(
+          `template[slot="${slot}"]`,
+        ) as HTMLTemplateElement
+        const content = template?.content.cloneNode(true)
+
         return html`
           <gds-button
-            size="${size}"
-            rank="tertiary"
-            @click="${async (e: Event) => {
-              e.stopPropagation()
-              await navigator.clipboard.writeText(valueToCopy)
-            }}"
+            size="${size || 'small'}"
+            variant="${variant || 'neutral'}"
+            rank="${rank || 'secondary'}"
           >
-            <gds-icon-copy size="s"></gds-icon-copy>
+            ${content ? content : label}
           </gds-button>
+        `
+      }
+
+      case 'link': {
+        const href = resolve(config.href)
+        const label = resolve(config.label)
+        const target = resolve(config.target)
+        const download = resolve(config.download)
+
+        return html`
+          <gds-link
+            href=${href || ''}
+            target=${target || '_self'}
+            download=${download || false}
+            text-decoration="underline"
+          >
+            ${label}
+          </gds-link>
         `
       }
 
@@ -287,18 +319,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         `
       }
 
-      case 'input': {
-        return html` <gds-input size="small" width="100%" plain></gds-input> `
-      }
-
-      case 'dropdown': {
-        return html`
-          <gds-dropdown plain size="small" width="100%">
-            <gds-option>Hello</gds-option>
-          </gds-dropdown>
-        `
-      }
-
       case 'action-menu': {
         const items = config.items
 
@@ -328,18 +348,13 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   #renderCellContent(row: T, column: Types.Column) {
     const { cell } = column
-
-    const lead = this.#renderCell(cell?.lead, row)
-    const value = cell?.value
-      ? this.#renderCell(cell.value, row)
-      : row[column.key]
-    const trail = this.#renderCell(cell?.trail, row)
-
     return html`
       <div class="cell-content">
-        ${lead && html`<span class="cell-lead">${lead}</span>`}
-        <span class="cell-value">${value}</span>
-        ${trail && html`<span class="cell-trail">${trail}</span>`}
+        ${[
+          this.#renderCell(cell?.lead, row),
+          this.#renderCell(cell?.value, row) ?? row[column.key],
+          this.#renderCell(cell?.trail, row),
+        ]}
       </div>
     `
   }

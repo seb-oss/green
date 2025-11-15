@@ -1,7 +1,10 @@
 // Cell types
 
 // table.cell.types.ts
-import type { GdsBadge, GdsButton } from '../../pure'
+import { GdsElement } from '../../gds-element'
+import { ImageProps } from '../../utils/mixins/props-image'
+
+import type { GdsBadge, GdsButton, GdsImg, GdsLink } from '../../pure'
 import type {
   AccountFormats,
   DateTimeFormat,
@@ -79,33 +82,37 @@ type CellProps<T> = {
   [K in keyof T]?: T[K] | ((row: any) => T[K])
 }
 
-export interface BadgeCell
-  extends CellProps<Pick<GdsBadge, 'variant' | 'size'>> {
+export interface Badge extends CellProps<Pick<GdsBadge, 'variant' | 'size'>> {
   type: 'badge'
   value: string | ((row: any) => string)
 }
 
-export interface InputCell {
-  type: 'input'
-}
-
-export interface DropdownCell {
-  type: 'dropdown'
-}
-
-export interface AvatarCell {
-  type: 'avatar'
+// Cleanup
+// Cleanup
+// Cleanup
+// Cleanup
+// Cleanup
+export interface Image extends CellProps<Omit<GdsImg, keyof GdsElement>> {
+  type: 'image'
   src: string | ((row: any) => string)
-  alt?: string | ((row: any) => string)
-  size?: string
 }
 
-export interface CopyButtonCell extends CellProps<Pick<GdsButton, 'size'>> {
-  type: 'copy-button'
-  value: string | ((row: any) => string)
+export interface Button extends CellProps<Omit<GdsButton, keyof GdsElement>> {
+  type: 'button'
+  slot?: string | ((row: any) => string)
 }
 
-export interface FormattedNumberCell {
+export interface Link extends CellProps<Omit<GdsLink, keyof GdsElement>> {
+  type: 'link'
+}
+
+// Cleanup
+// Cleanup
+// Cleanup
+// Cleanup
+
+// Formatters
+export interface Number {
   type: 'formatted-number'
   value: number | string | ((row: any) => number | string)
   locale?: string
@@ -113,13 +120,13 @@ export interface FormattedNumberCell {
   format?: NumberFormats
 }
 
-export interface FormattedAccountCell {
+export interface Account {
   type: 'formatted-account'
   value: string | ((row: any) => string)
   format?: AccountFormats
 }
 
-export interface FormattedDateCell {
+export interface Date {
   type: 'formatted-date'
   value: string | Date | ((row: any) => string | Date)
   locale?: string
@@ -165,18 +172,17 @@ export interface ActionMenuCell {
 }
 
 export type Cell =
-  | BadgeCell
-  | InputCell
-  | DropdownCell
-  | AvatarCell
-  | CopyButtonCell
+  | Image
+  | Button
+  | Link
+  | Badge
   | ActionButtonCell
   | ActionButtonsCell
   | ActionLinkCell
   | ActionMenuCell
-  | FormattedNumberCell
-  | FormattedAccountCell
-  | FormattedDateCell
+  | Number
+  | Account
+  | Date
 
 export interface CellConfig {
   lead?: Cell
