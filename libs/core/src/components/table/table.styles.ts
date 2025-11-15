@@ -169,6 +169,7 @@ export const TableStyles = css`
     align-items: center;
     justify-content: space-between;
     min-height: var(--gds-sys-space-l);
+    gap: var(--table-gap);
   }
 
   .column-label {
