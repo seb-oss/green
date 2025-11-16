@@ -11,6 +11,7 @@ import '../img/img'
 import '../pagination/pagination'
 import '../icon/icons/dot-grid-one-horizontal'
 import '../icon/icons/plus-small'
+import '../icon/icons/settings-slider-hor'
 import '../icon/icons/copy'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
@@ -330,13 +331,26 @@ export const Default: Story = {
       .data="${args.data}"
       .actions="${args.actions}"
     >
-      <gds-button slot="header-lead" size="small" rank="secondary">
+      <!-- <gds-button slot="header-lead" size="small" rank="secondary">
         Export
       </gds-button>
       <gds-button slot="header-trail" size="small" rank="secondary">
         Add user
         <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
-      </gds-button>
+      </gds-button> -->
+      <gds-context-menu slot="header-trail">
+        <gds-button slot="trigger" rank="secondary" size="small">
+          <gds-icon-settings-slider-hor
+            slot="lead"
+          ></gds-icon-settings-slider-hor>
+          Sort
+        </gds-button>
+        <gds-menu-heading>Sort by</gds-menu-heading>
+        <gds-menu-item>Column name</gds-menu-item>
+        <gds-menu-heading>Sort direction</gds-menu-heading>
+        <gds-menu-item>A to Z</gds-menu-item>
+        <gds-menu-item>Z to A</gds-menu-item>
+      </gds-context-menu>
       <!-- If not cloning shows up on first row only -->
       <template slot="email-copy">
         <gds-icon-copy size="s"></gds-icon-copy>
@@ -349,19 +363,13 @@ export const Plain: Story = {
   args: {
     columns: tableColumns,
     actions: tableActions,
-    density: 'comfortable',
     data: mockDataProvider,
-    selectable: true,
-    plain: true,
   },
   render: (args) => html`
-    <gds-table
-      responsive
-      density="${args.density}"
-      .plain="${args.plain}"
-      .columns="${args.columns}"
-      .data="${args.data}"
-    >
+    <gds-table plain .columns="${args.columns}" .data="${args.data}">
+      <template slot="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
     </gds-table>
   `,
 }
@@ -369,33 +377,13 @@ export const Plain: Story = {
 export const Responsive: Story = {
   args: {
     columns: tableColumns,
-    actions: tableActions,
-    density: 'comfortable',
     data: mockDataProvider,
-    selectable: true,
-    responsive: true,
   },
   render: (args) => html`
-    <gds-table
-      density="${args.density}"
-      ?selectable="${args.selectable}"
-      .responsive="${args.responsive}"
-      .columns="${args.columns}"
-      .data="${args.data}"
-      .actions="${args.actions}"
-    >
-      <gds-button slot="header-lead" size="small" rank="secondary">
-        Export
-      </gds-button>
-      <gds-button
-        slot="header-trail"
-        size="small"
-        rank="secondary"
-        variant="positive"
-      >
-        Add User
-        <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
-      </gds-button>
+    <gds-table responsive .columns="${args.columns}" .data="${args.data}">
+      <template slot="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
     </gds-table>
   `,
 }
