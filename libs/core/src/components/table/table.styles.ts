@@ -296,6 +296,16 @@ export const TableStyles = css`
     background-color: var(--gds-sys-color-l2-neutral-01);
   }
 
+  /* Striped */
+  .striped tbody tr:not(.selected, :hover):nth-child(even)::after {
+    display: flex;
+    background-color: var(--gds-sys-color-l2-neutral-01);
+  }
+
+  .striped tbody tr {
+    border-color: transparent;
+  }
+
   /* Header & Footer Layout */
   .header {
     display: flex;
@@ -371,6 +381,21 @@ export const TableStyles = css`
 
   .space-between .cell-content {
     justify-content: space-between;
+  }
+
+  /* Wrap content */
+  td.wrap .cell-content {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  td.wrap {
+    max-width: var(--cell-width);
+  }
+
+  td.wrap .cell-content {
+    align-items: flex-start;
   }
 
   /* Responsive Design */

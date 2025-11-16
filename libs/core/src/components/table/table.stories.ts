@@ -162,6 +162,7 @@ const tableColumns: TableColumn[] = [
     label: 'Email',
     sortable: true,
     justify: true,
+    width: '40ch',
     cell: {
       trail: {
         type: 'button',
@@ -385,5 +386,178 @@ export const Responsive: Story = {
         <gds-icon-copy size="s"></gds-icon-copy>
       </template>
     </gds-table>
+  `,
+}
+
+export const Striped: Story = {
+  args: {
+    columns: tableColumns,
+    actions: tableActions,
+    data: mockDataProvider,
+  },
+  render: (args) => html`
+    <gds-table plain striped .columns="${args.columns}" .data="${args.data}">
+      <template slot="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
+    </gds-table>
+  `,
+}
+
+/**
+ * Extended data model with longer text for wrapping demo
+ */
+interface UserFeedback {
+  id: number
+  name: string
+  email: string
+  feedback: string
+  notes: string
+  status: 'Active' | 'Inactive'
+  department: string
+}
+
+const FEEDBACK_SAMPLES = [
+  'The new dashboard is intuitive and user-friendly. Great job on the redesign!',
+  'We encountered some performance issues when filtering large datasets. Please investigate.',
+  'The API documentation needs to be more comprehensive. Consider adding more examples.',
+  'Excellent work on the accessibility improvements. WCAG compliance is now perfect!',
+  'The mobile experience is smooth, but there are some minor UI glitches on smaller screens.',
+  'Feature request: Could we add dark mode support? Many users are asking for this.',
+]
+
+const NOTES_SAMPLES = [
+  'User prefers email notifications over push notifications. Update preferences accordingly.',
+  'Follow-up meeting scheduled for next Tuesday at 2 PM. Discuss Q4 roadmap and timeline.',
+  'Customer account upgraded to premium tier. Activate all pro features immediately.',
+  'Technical support ticket #12345 resolved. User confirmed the issue is now fixed.',
+]
+
+const generateFeedbackRecord = (index: number): UserFeedback => {
+  const id = index + 1
+  const firstName = ['Sven', 'Erik', 'Olof', 'Ingrid', 'Nils', 'Anna'][
+    index % 6
+  ]
+  const lastName = [
+    'Lindgren',
+    'Svensson',
+    'Pettersson',
+    'Gustafsson',
+    'Larsson',
+  ][index % 5]
+  const DEPARTMENTS = [
+    'Engineering',
+    'Sales',
+    'Marketing',
+    'Support',
+    'HR',
+  ] as const
+
+  return {
+    id,
+    name: `${firstName} ${lastName}`,
+    email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@seb.io`,
+    feedback: FEEDBACK_SAMPLES[index % FEEDBACK_SAMPLES.length],
+    notes: NOTES_SAMPLES[index % NOTES_SAMPLES.length],
+    status: index % 2 === 0 ? 'Active' : 'Inactive',
+    department: DEPARTMENTS[index % DEPARTMENTS.length],
+  }
+}
+
+const feedbackDataProvider = async (
+  request: TableRequest,
+): Promise<TableResponse<UserFeedback>> => {
+  // Simulate network delay
+  await new Promise((resolve) => setTimeout(resolve, 800))
+
+  const allData = Array.from({ length: 50 }, (_, i) =>
+    generateFeedbackRecord(i),
+  )
+  let processedData = [...allData]
+
+  // Apply search filter if query provided
+  if (request.searchQuery) {
+    const query = request.searchQuery.toLowerCase()
+    processedData = processedData.filter((item) =>
+      Object.values(item).some((value) =>
+        String(value).toLowerCase().includes(query),
+      ),
+    )
+  }
+
+  // Apply sorting if requested
+  if (request.sortColumn) {
+    processedData.sort((a, b) => {
+      const aValue = String(a[request.sortColumn as keyof UserFeedback])
+      const bValue = String(b[request.sortColumn as keyof UserFeedback])
+
+      return request.sortDirection === 'asc'
+        ? aValue.localeCompare(bValue)
+        : bValue.localeCompare(aValue)
+    })
+  }
+
+  // Apply pagination
+  const startIndex = (request.page - 1) * request.rows
+  const endIndex = startIndex + request.rows
+  const paginatedData = processedData.slice(startIndex, endIndex)
+
+  return {
+    rows: paginatedData, // ← Returns 'rows' not 'data'
+    total: processedData.length,
+  }
+}
+
+const feedbackColumns: TableColumn[] = [
+  {
+    key: 'name',
+    label: 'Name',
+    sortable: true,
+    width: '120px',
+  },
+  {
+    key: 'feedback',
+    label: 'Feedback',
+    sortable: true,
+    width: '300px',
+  },
+  {
+    key: 'notes',
+    label: 'Notes',
+    sortable: true,
+    width: '280px',
+  },
+  {
+    key: 'department',
+    label: 'Department',
+    sortable: true,
+    width: '120px',
+  },
+  {
+    key: 'status',
+    label: 'Status',
+    sortable: true,
+    width: '100px',
+    cell: {
+      value: {
+        type: 'badge',
+        value: (row) => row.status,
+        variant: (row) => (row.status === 'Active' ? 'positive' : 'negative'),
+        size: 'small',
+      },
+    },
+  },
+]
+
+export const Wrapping: Story = {
+  args: {
+    columns: feedbackColumns,
+    dataProvider: feedbackDataProvider,
+  },
+  render: (args) => html`
+    <gds-table
+      .columns="${args.columns}"
+      .data="${args.dataProvider}"
+    ></gds-table>
   `,
 }

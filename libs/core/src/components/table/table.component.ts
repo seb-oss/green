@@ -1,6 +1,7 @@
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
+import { styleMap } from 'lit/directives/style-map.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
@@ -46,6 +47,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   @property({ type: Boolean })
   plain = false
+
+  @property({ type: Boolean })
+  striped = false
 
   @property()
   actions?: Types.Actions | ((row: T, index: number) => any)
@@ -436,9 +440,13 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return html`
       <td
         data-label=${column.label}
+        style=${styleMap({
+          '--cell-width': column.width,
+        })}
         class=${classMap({
           'text-right': column.align === 'right',
           'space-between': column.justify === true,
+          wrap: Boolean(column.width),
         })}
       >
         ${this.#renderCellContent(row, column)}
@@ -703,8 +711,14 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   render() {
+    const classes = {
+      table: true,
+      plain: this.plain,
+      striped: this.striped,
+      [this.density]: this.density,
+    }
     return html`
-      <div class="table ${this.density}">
+      <div class="${classMap(classes)}">
         ${this.#renderHeaderControls()}
         ${when(
           this.error,

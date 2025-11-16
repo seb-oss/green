@@ -25,6 +25,7 @@ export interface Column {
   align?: 'left' | 'right'
   visible?: boolean
   justify?: boolean
+  width?: string
   cell?: {
     lead?: Cell
     value?: Cell
