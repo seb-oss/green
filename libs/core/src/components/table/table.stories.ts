@@ -246,7 +246,7 @@ const tableColumns: TableColumn[] = [
  * Provides context menu with actions based on row state
  */
 const tableActions = {
-  label: 'Operations',
+  label: 'Actions',
   cell: {
     type: 'context-menu',
     items: [
