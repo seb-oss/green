@@ -25,7 +25,7 @@ const style = css`
       padding-block: var(--gds-sys-space-xs);
       padding-inline: var(--gds-sys-space-m) var(--gds-sys-space-s);
       min-block-size: var(--gds-sys-space-3xl);
-      min-block-size: var(--gds-sys-space-3xl);
+      block-size: var(--gds-sys-space-3xl);
       outline-style: solid;
       outline-width: 0;
       border-radius: var(--gds-sys-radius-xs);
@@ -63,7 +63,7 @@ const style = css`
 
     .field.small {
       gap: var(--gds-sys-space-3xs);
-      padding: calc(var(--gds-sys-space-xs) - 1px) var(--gds-sys-space-xs);
+      padding: var(--gds-sys-space-3xs) var(--gds-sys-space-xs);
       min-block-size: var(--gds-sys-space-2xl);
       block-size: var(--gds-sys-space-2xl);
       border-radius: var(--gds-sys-radius-2xs);

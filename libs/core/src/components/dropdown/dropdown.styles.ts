@@ -11,6 +11,7 @@ const style = css`
 
     #field::part(_base) {
       cursor: pointer;
+      block-size: auto;
     }
 
     #clear-btn {
