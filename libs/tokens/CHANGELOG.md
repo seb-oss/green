@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.4
+
+### Patch Changes
+
+- f1e9913: Fix font format for Android
+
 ## 2.4.3
 
 ### Patch Changes
