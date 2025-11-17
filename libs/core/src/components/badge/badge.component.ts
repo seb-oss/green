@@ -69,8 +69,11 @@ export class GdsBadge extends withSizeXProps(
 
     return html`
       <div class="${classes}">
-        ${this.#renderLeadSlot()} ${this.#renderMainSlot()}
-        ${this.#renderTrailSlot()}
+        ${[
+          this.#renderLeadSlot(),
+          this.#renderMainSlot(),
+          this.#renderTrailSlot(),
+        ]}
       </div>
     `
   }
