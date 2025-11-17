@@ -25,8 +25,6 @@ import { PaginationStyles } from './pagination.styles'
 /**
  * @element gds-pagination
  * @status beta
- *
- * ⚠️ Declare events
  */
 @gdsCustomElement('gds-pagination', {
   dependsOn: [
@@ -64,104 +62,149 @@ export class GdsPagination extends GdsElement {
     return Math.ceil(this.total / this.rows)
   }
 
-  #getVisiblePages(pageCount: number) {
+  #getVisiblePages(pageCount: number): (number | string)[] {
     if (pageCount <= 7) {
       return Array.from({ length: pageCount }, (_, i) => i + 1)
     }
 
     const lastPage = pageCount
-    let middlePages: number[] = []
+    const pages: (number | string)[] = []
+
+    pages.push(1)
 
     if (this.page <= 4) {
-      middlePages = [2, 3, 4, 5]
-      return [1, ...middlePages, '...', lastPage]
+      pages.push(2, 3, 4, 5, '...', lastPage)
     } else if (this.page >= pageCount - 3) {
-      middlePages = [pageCount - 4, pageCount - 3, pageCount - 2, pageCount - 1]
-      return [1, '...', ...middlePages, lastPage]
+      pages.push(
+        '...',
+        pageCount - 4,
+        pageCount - 3,
+        pageCount - 2,
+        pageCount - 1,
+        lastPage,
+      )
     } else {
-      middlePages = [this.page - 1, this.page, this.page + 1]
-      return [1, '...', ...middlePages, '...', lastPage]
+      pages.push(
+        '...',
+        this.page - 1,
+        this.page,
+        this.page + 1,
+        '...',
+        lastPage,
+      )
     }
+
+    return pages
   }
 
-  render() {
+  #renderPageButton(page: number | string) {
+    if (page === '...') {
+      return html`
+        <gds-button size="small" rank="tertiary" inert> ... </gds-button>
+      `
+    }
+
+    const pageNum = page as number
+    const isActive = this.page === pageNum
+
+    return html`
+      <gds-button
+        size="small"
+        rank="${isActive ? 'primary' : 'tertiary'}"
+        @click=${() => this.#handlePageChange(pageNum)}
+      >
+        ${pageNum}
+      </gds-button>
+    `
+  }
+
+  #renderPageButtons() {
     const pageCount = this.#pageCount
     const visiblePages = this.#getVisiblePages(pageCount)
 
+    return html` ${visiblePages.map((page) => this.#renderPageButton(page))} `
+  }
+
+  #renderJumpFirstButton() {
     return html`
-      <div class="pages">
-        ${when(
-          this.jump,
-          () => html`
-            <gds-button
-              size="small"
-              rank="secondary"
-              ?disabled=${this.page === 1}
-              @click=${() => this.#handlePageChange(1)}
-            >
-              <gds-icon-chevron-double-left size="l">
-              </gds-icon-chevron-double-left>
-            </gds-button>
-          `,
-        )}
+      <gds-button
+        size="small"
+        rank="secondary"
+        ?disabled=${this.page === 1}
+        @click=${() => this.#handlePageChange(1)}
+      >
+        <gds-icon-chevron-double-left size="l"></gds-icon-chevron-double-left>
+      </gds-button>
+    `
+  }
 
-        <gds-button
-          size="small"
-          rank="secondary"
-          ?disabled=${this.page === 1}
-          @click=${() => this.#handlePageChange(this.page - 1)}
-        >
-          <gds-icon-chevron-left-small size="l"> </gds-icon-chevron-left-small>
-        </gds-button>
+  #renderPreviousButton() {
+    return html`
+      <gds-button
+        size="small"
+        rank="secondary"
+        ?disabled=${this.page === 1}
+        @click=${() => this.#handlePageChange(this.page - 1)}
+      >
+        <gds-icon-chevron-left-small size="l"></gds-icon-chevron-left-small>
+      </gds-button>
+    `
+  }
 
-        ${visiblePages.map(
-          (p) => html`
-            ${p === '...'
-              ? html`<gds-button
-                  size="small"
-                  rank="tertiary"
-                  width="40px"
-                  inert
-                >
-                  ...
-                </gds-button>`
-              : html`
-                  <gds-button
-                    size="small"
-                    rank="${this.page === p ? 'primary' : 'tertiary'}"
-                    @click=${() => this.#handlePageChange(p as number)}
-                  >
-                    ${p}
-                  </gds-button>
-                `}
-          `,
-        )}
+  #renderNextButton() {
+    const pageCount = this.#pageCount
 
-        <gds-button
-          size="small"
-          rank="secondary"
-          ?disabled=${this.page === pageCount}
-          @click=${() => this.#handlePageChange(this.page + 1)}
-        >
-          <gds-icon-chevron-right-small size="l">
-          </gds-icon-chevron-right-small>
-        </gds-button>
-        ${when(
-          this.jump,
-          () => html`
-            <gds-button
-              rank="secondary"
-              size="small"
-              ?disabled=${this.page === pageCount}
-              @click=${() => this.#handlePageChange(pageCount)}
-            >
-              <gds-icon-chevron-double-right size="l">
-              </gds-icon-chevron-double-right>
-            </gds-button>
-          `,
-        )}
-      </div>
+    return html`
+      <gds-button
+        size="small"
+        rank="secondary"
+        ?disabled=${this.page === pageCount}
+        @click=${() => this.#handlePageChange(this.page + 1)}
+      >
+        <gds-icon-chevron-right-small size="l"></gds-icon-chevron-right-small>
+      </gds-button>
+    `
+  }
 
+  #renderJumpLastButton() {
+    const pageCount = this.#pageCount
+
+    return html`
+      <gds-button
+        size="small"
+        rank="secondary"
+        ?disabled=${this.page === pageCount}
+        @click=${() => this.#handlePageChange(pageCount)}
+      >
+        <gds-icon-chevron-double-right size="l"></gds-icon-chevron-double-right>
+      </gds-button>
+    `
+  }
+
+  #renderNavigationControls() {
+    return html`
+      ${when(this.jump, () => this.#renderJumpFirstButton())}
+      ${this.#renderPreviousButton()} ${this.#renderPageButtons()}
+      ${this.#renderNextButton()}
+      ${when(this.jump, () => this.#renderJumpLastButton())}
+    `
+  }
+
+  #renderPageSizeOption(size: number) {
+    const isSelected = this.rows === size
+
+    return html`
+      <gds-menu-item
+        data-value=${size}
+        class=${classMap({ selected: isSelected })}
+      >
+        ${size}
+      </gds-menu-item>
+    `
+  }
+
+  #renderPageSizeMenu() {
+    return html`
       <gds-context-menu @gds-menu-item-click=${this.#handlePageSizeMenuClick}>
         <gds-button slot="trigger" size="small" rank="secondary">
           ${this.rows}
@@ -170,19 +213,15 @@ export class GdsPagination extends GdsElement {
             size="m"
           ></gds-icon-chevron-bottom>
         </gds-button>
-        ${this.options.map(
-          (size) => html`
-            <gds-menu-item
-              data-value=${size}
-              class=${classMap({
-                selected: this.rows === size,
-              })}
-            >
-              ${size}
-            </gds-menu-item>
-          `,
-        )}
+        ${this.options.map((size) => this.#renderPageSizeOption(size))}
       </gds-context-menu>
+    `
+  }
+
+  render() {
+    return html`
+      <div class="pages">${this.#renderNavigationControls()}</div>
+      ${this.#renderPageSizeMenu()}
     `
   }
 

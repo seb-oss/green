@@ -162,12 +162,12 @@ const tableColumns: TableColumn[] = [
     key: 'email',
     label: 'Email',
     sortable: true,
-    justify: true,
+    justify: 'space-between',
     cell: {
       trail: {
         type: 'button',
         value: (row: { email: any }) => row.email,
-        size: 'small',
+        size: 'xs',
         slot: 'email-copy',
         label: 'Copy',
         onClick: () => alert('email copied'),
@@ -204,7 +204,7 @@ const tableColumns: TableColumn[] = [
     key: 'amount',
     label: 'Amount',
     sortable: true,
-    align: 'right',
+    justify: 'end',
     cell: {
       value: {
         type: 'formatted-number',
@@ -221,7 +221,6 @@ const tableColumns: TableColumn[] = [
     key: 'account',
     label: 'Account',
     sortable: true,
-    align: 'left',
     cell: {
       value: {
         type: 'formatted-account',
@@ -527,7 +526,7 @@ const feedbackColumns: TableColumn[] = [
     key: 'name',
     label: 'Name',
     sortable: true,
-    width: '120px',
+    align: 'start',
   },
   {
     key: 'feedback',

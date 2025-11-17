@@ -11,4 +11,9 @@ export const PaginationStyles = css`
     display: flex;
     gap: var(--gds-sys-space-2xs);
   }
+
+  .pages ::part(_button) {
+    padding: 0;
+    aspect-ratio: 1/1;
+  }
 `

@@ -358,32 +358,16 @@ export const TableStyles = css`
   }
 
   /* Cell Content & Alignment */
+
   .cell-content {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     gap: 10px;
   }
 
-  /* Text alignment utilities */
-  .text-right {
-    text-align: right;
-  }
-
-  .text-right .column-header,
-  th.actions {
-    flex-direction: row-reverse;
-  }
-
-  .text-right .cell-content,
-  td.actions-cell .cell-content {
-    justify-content: flex-end;
-  }
-
-  .space-between .cell-content {
-    justify-content: space-between;
-  }
-
-  /* Wrap content */
+  /* Wrapping utilities */
   td.wrap .cell-content {
     white-space: normal;
     word-wrap: break-word;
@@ -394,8 +378,64 @@ export const TableStyles = css`
     max-width: var(--cell-width);
   }
 
-  td.wrap .cell-content {
-    align-items: flex-start;
+  /* Justify utilities */
+
+  .justify-start .cell-content {
+    text-align: left;
+    justify-content: start;
+  }
+
+  .justify-center .cell-content {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .justify-space-between .cell-content {
+    text-align: left;
+    justify-content: space-between;
+  }
+
+  .justify-end .cell-content,
+  td.actions-cell .cell-content {
+    text-align: right;
+    justify-content: flex-end;
+  }
+
+  .justify-end .column-header {
+    flex-direction: row-reverse;
+  }
+
+  /* Align utilities */
+  td {
+    height: 100%;
+  }
+
+  .align-start {
+    vertical-align: top;
+  }
+
+  .align-end {
+    vertical-align: bottom;
+  }
+
+  .align-center {
+    vertical-align: middle;
+  }
+
+  .align-start .cell-content {
+    align-items: start;
+  }
+
+  .align-center .cell-content {
+    align-items: center;
+  }
+
+  .align-stretch .cell-content {
+    align-items: stretch;
+  }
+
+  .align-end .cell-content {
+    align-items: end;
   }
 
   /* Responsive Design */

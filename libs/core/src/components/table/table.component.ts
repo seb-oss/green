@@ -321,11 +321,14 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   #renderCellContent(row: T, column: Types.Column) {
     const { cell } = column
+    const value = this.#renderCell(cell?.value, row) ?? row[column.key]
+    const processedValue = column.justify ? html`<span>${value}</span>` : value
+
     return html`
       <div class="cell-content">
         ${[
           this.#renderCell(cell?.lead, row),
-          this.#renderCell(cell?.value, row) ?? row[column.key],
+          processedValue,
           this.#renderCell(cell?.trail, row),
         ]}
       </div>
@@ -417,16 +420,18 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     const isSorted = this.view.sortColumn === column.key
     const sortDirection = this.view.sortDirection
 
+    const classes = classMap({
+      sortable: !!column.sortable,
+      sorted: isSorted,
+      'sort-asc': isSorted && sortDirection === 'asc',
+      'sort-desc': isSorted && sortDirection === 'desc',
+      [`align-${column.align}`]: !!column.align,
+      [`justify-${column.justify}`]: !!column.justify,
+    })
+
     return html`
       <th
-        class=${classMap({
-          sortable: !!column.sortable,
-          sorted: isSorted,
-          'sort-asc': isSorted && sortDirection === 'asc',
-          'sort-desc': isSorted && sortDirection === 'desc',
-          'text-right': column.align === 'right',
-          'space-between': column.justify === true,
-        })}
+        class=${classes}
         @click=${column.sortable ? () => this.#handleSort(column.key) : null}
       >
         <div class="column-header">
@@ -477,18 +482,18 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   #renderTableCell(row: T, column: Types.Column) {
+    const classes = classMap({
+      [`align-${column.align}`]: !!column.align,
+      [`justify-${column.justify}`]: !!column.justify,
+      wrap: Boolean(column.width),
+    })
+
+    const style = styleMap({
+      '--cell-width': column.width,
+    })
+
     return html`
-      <td
-        data-label=${column.label}
-        style=${styleMap({
-          '--cell-width': column.width,
-        })}
-        class=${classMap({
-          'text-right': column.align === 'right',
-          'space-between': column.justify === true,
-          wrap: Boolean(column.width),
-        })}
-      >
+      <td data-label=${column.label} style=${style} class=${classes}>
         ${this.#renderCellContent(row, column)}
       </td>
     `

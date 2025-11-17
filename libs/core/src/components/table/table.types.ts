@@ -22,9 +22,9 @@ export interface Column {
   key: string
   label: string
   sortable?: boolean
-  align?: 'left' | 'right'
+  align?: 'start' | 'center' | 'stretch' | 'end'
+  justify?: 'start' | 'center' | 'space-between' | 'end'
   visible?: boolean
-  justify?: boolean
   width?: string
   cell?: {
     lead?: Cell
