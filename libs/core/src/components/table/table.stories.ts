@@ -338,7 +338,6 @@ export const Default: Story = {
       .data="${args.data}"
       .actions="${args.actions}"
     >
-      <!-- If not cloning shows up on first row only -->
       <template slot="email-copy">
         <gds-icon-copy size="m" slot="trail"></gds-icon-copy>
       </template>
