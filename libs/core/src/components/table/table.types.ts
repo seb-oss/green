@@ -114,6 +114,8 @@ export interface Button extends CellProps<Omit<GdsButton, keyof GdsElement>> {
 
 export interface Link extends CellProps<Omit<GdsLink, keyof GdsElement>> {
   type: 'link'
+  slot?: string | ((row: any) => string)
+  onClick?: (row: any) => void
 }
 
 export interface ContextMenu

@@ -26,6 +26,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   #cache: Types.Cache<T> = {}
   #cacheDuration = 5 * 60 * 1000
+  #templateCache = new Map<string, HTMLTemplateElement>()
 
   @property({ type: Array })
   options = [5, 10, 20, 50, 100]
@@ -167,6 +168,23 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     }
   }
 
+  /**
+   * Retrieves template content for the given slot name.
+   * Uses caching to prevent repeated DOM queries for better performance in large tables.
+   */
+  #getSlotContent(slot: string | undefined) {
+    if (!slot) return null
+
+    if (!this.#templateCache.has(slot)) {
+      const template = this.querySelector(
+        `template[slot="${slot}"]`,
+      ) as HTMLTemplateElement
+      this.#templateCache.set(slot, template)
+    }
+
+    return this.#templateCache.get(slot)?.content.cloneNode(true)
+  }
+
   #renderCell(config: Types.Cell | undefined, row: T): any {
     if (!config) return null
 
@@ -213,34 +231,28 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         const variant = resolve(config.variant)
         const rank = resolve(config.rank)
         const label = resolve(config.label)
-        const slot = resolve(config.slot)
-
-        // Look for another solution here
-        const template = this.querySelector(
-          `template[slot="${slot}"]`,
-        ) as HTMLTemplateElement
-        const content = template?.content.cloneNode(true)
+        const slot = resolve(config.slot) as string | undefined
+        const clonedSlot = this.#getSlotContent(slot)
 
         return html`
           <gds-button
             size="${size || 'small'}"
             variant="${variant || 'neutral'}"
             rank="${rank || 'secondary'}"
-            @click="${(e: Event) => {
-              e.stopPropagation()
-              config.onClick(row)
-            }}"
           >
-            ${content ? content : label}
+            ${clonedSlot} ${label}
           </gds-button>
         `
       }
 
       case 'link': {
         const href = resolve(config.href)
+        if (!href) return null
         const label = resolve(config.label)
         const target = resolve(config.target)
         const download = resolve(config.download)
+        const slot = resolve(config.slot) as string | undefined
+        const clonedSlot = this.#getSlotContent(slot)
 
         return html`
           <gds-link
@@ -249,7 +261,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             download=${download || false}
             text-decoration="underline"
           >
-            ${label}
+            ${clonedSlot} ${label}
           </gds-link>
         `
       }

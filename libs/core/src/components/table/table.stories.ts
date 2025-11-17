@@ -12,6 +12,7 @@ import '../pagination/pagination'
 import '../icon/icons/dot-grid-one-horizontal'
 import '../icon/icons/plus-small'
 import '../icon/icons/settings-slider-hor'
+import '../icon/icons/cloud-download'
 import '../icon/icons/copy'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
@@ -162,13 +163,13 @@ const tableColumns: TableColumn[] = [
     label: 'Email',
     sortable: true,
     justify: true,
-    width: '40ch',
     cell: {
       trail: {
         type: 'button',
         value: (row: { email: any }) => row.email,
         size: 'small',
         slot: 'email-copy',
+        label: 'Copy',
         onClick: () => alert('email copied'),
       },
     },
@@ -180,7 +181,9 @@ const tableColumns: TableColumn[] = [
     cell: {
       value: {
         type: 'link',
+        href: '#',
         label: (row) => row.status,
+        slot: 'role-link',
       },
     },
   },
@@ -354,7 +357,13 @@ export const Default: Story = {
       </gds-context-menu>
       <!-- If not cloning shows up on first row only -->
       <template slot="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy size="m" slot="trail"></gds-icon-copy>
+      </template>
+      <template slot="role-link">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
