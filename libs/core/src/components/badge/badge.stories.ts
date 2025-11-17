@@ -44,6 +44,18 @@ const meta: Meta = {
   tags: ['autodocs'],
   argTypes: {
     ...argTablePropsFor('gds-badge'),
+    fontFamily: {
+      control: 'select',
+      options: [
+        'SEB SansSerif pre 25',
+        'SEB SansSerif early 25',
+        'SEB SansSerif late 25',
+        'SEB SansSerif late 25 vertical metrics',
+      ],
+    },
+  },
+  args: {
+    fontFamily: 'SEB SansSerif pre 25',
   },
 }
 
@@ -54,6 +66,7 @@ export const Variants: Story = {
   name: 'Variants',
   render: (args) => html`
     <gds-flex
+      style="--gds-sys-text-detail-book-s: 450 0.875rem / 1.25rem '${args.fontFamily}'; --gds-sys-text-detail-book-xs: 450 0.75rem / 1rem '${args.fontFamily}';"
       flex-direction="column"
       justify-content="center"
       gap="4xl"

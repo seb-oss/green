@@ -1,0 +1,95 @@
+@use 'variables' as *;
+
+@font-face {
+  font-family: 'SEB SansSerif late 25';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25/SEBSansSerif-Light.woff2')
+    format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25/SEBSansSerif-Regular.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25/SEBSansSerif-Book.woff2')
+    format('woff2');
+  font-weight: 450;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25/SEBSansSerif-Medium.woff2')
+    format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25/SEBSansSerif-Bold.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/**
+* Italics
+*/
+
+@font-face {
+  font-family: 'SEB SansSerif late 25';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25/SEBSansSerif-LightItalic.woff2')
+    format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25/SEBSansSerif-Italic.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25/SEBSansSerif-BookItalic.woff2')
+    format('woff2');
+  font-weight: 450;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25/SEBSansSerif-MediumItalic.woff2')
+    format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25/SEBSansSerif-BoldItalic.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}

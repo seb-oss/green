@@ -13,7 +13,7 @@ import FlexStyles from './flex.styles'
  */
 @gdsCustomElement('gds-flex')
 export class GdsFlex extends GdsDiv {
-  static styles = [tokens, FlexStyles]
+  static styles = [FlexStyles]
 
   render() {
     return html`<slot></slot>`

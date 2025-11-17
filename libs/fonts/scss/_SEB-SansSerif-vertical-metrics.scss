@@ -1,0 +1,95 @@
+@use 'variables' as *;
+
+@font-face {
+  font-family: 'SEB SansSerif late 25 vertical metrics';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25-fix-vertical-metrics/SEBSansSerif-Light.woff2')
+    format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25 vertical metrics';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25-fix-vertical-metrics/SEBSansSerif-Regular.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25 vertical metrics';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25-fix-vertical-metrics/SEBSansSerif-Book.woff2')
+    format('woff2');
+  font-weight: 450;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25 vertical metrics';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25-fix-vertical-metrics/SEBSansSerif-Medium.woff2')
+    format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25 vertical metrics';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25-fix-vertical-metrics/SEBSansSerif-Bold.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/**
+* Italics
+*/
+
+@font-face {
+  font-family: 'SEB SansSerif late 25 vertical metrics';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25-fix-vertical-metrics/SEBSansSerif-LightItalic.woff2')
+    format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25 vertical metrics';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25-fix-vertical-metrics/SEBSansSerif-Italic.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25 vertical metrics';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25-fix-vertical-metrics/SEBSansSerif-BookItalic.woff2')
+    format('woff2');
+  font-weight: 450;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25 vertical metrics';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25-fix-vertical-metrics/SEBSansSerif-MediumItalic.woff2')
+    format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif late 25 vertical metrics';
+  src: url('#{$seb-font-path}/SEBSansSerif-late25-fix-vertical-metrics/SEBSansSerif-BoldItalic.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}

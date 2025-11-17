@@ -37,7 +37,7 @@ export class GdsDiv extends withSizeXProps(
     ),
   ),
 ) {
-  static styles = [tokens, DivStyles]
+  static styles = [DivStyles]
 
   /**
    * Controls the display property.

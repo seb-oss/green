@@ -22,7 +22,7 @@ import BadgeStyles from './badge.styles'
 export class GdsBadge extends withSizeXProps(
   withMarginProps(withLayoutChildProps(GdsElement)),
 ) {
-  static styles = [tokens, BadgeStyles]
+  static styles = [BadgeStyles]
 
   /**
    * Controls the variant of the badge.
