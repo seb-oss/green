@@ -46,10 +46,16 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   @property({ type: Boolean, reflect: false })
   responsive = false
 
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: false })
   plain = false
 
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: false })
+  searchable = false
+
+  @property({ type: Boolean, reflect: false })
+  settings = false
+
+  @property({ type: Boolean, reflect: false })
   striped = false
 
   @property()
@@ -233,6 +239,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         const label = resolve(config.label)
         const slot = resolve(config.slot) as string | undefined
         const clonedSlot = this.#getSlotContent(slot)
+        const content = [label, clonedSlot]
 
         return html`
           <gds-button
@@ -240,7 +247,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             variant="${variant || 'neutral'}"
             rank="${rank || 'secondary'}"
           >
-            ${clonedSlot} ${label}
+            ${content}
           </gds-button>
         `
       }
@@ -253,6 +260,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         const download = resolve(config.download)
         const slot = resolve(config.slot) as string | undefined
         const clonedSlot = this.#getSlotContent(slot)
+        const content = [label, clonedSlot]
 
         return html`
           <gds-link
@@ -261,7 +269,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             download=${download || false}
             text-decoration="underline"
           >
-            ${clonedSlot} ${label}
+            ${content}
           </gds-link>
         `
       }
@@ -337,49 +345,69 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return html`<gds-icon-sort-up size="m"></gds-icon-sort-up>`
   }
 
-  #renderHeaderControls() {
-    if (this.plain) return null
+  #hasHeaderContent() {
+    return (
+      this.searchable ||
+      this.settings ||
+      this.querySelector('[slot="header-lead"]') ||
+      this.querySelector('[slot="header-trail"]')
+    )
+  }
 
+  #renderHeaderControls() {
+    if (this.plain || !this.#hasHeaderContent()) return null
     return html`
       <div class="header">
         <div class="lead">
-          <gds-input
-            type="text"
-            size="small"
-            plain
-            clearable
-            placeholder="Search..."
-            .value=${this.view.searchQuery}
-            @input=${this.#handleSearch}
-            @gds-input-cleared=${this.#handleSearchClear}
-            width="240px"
-          >
-            <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
-          </gds-input>
+          ${when(
+            this.searchable,
+            () => html`
+              <gds-input
+                type="text"
+                size="small"
+                plain
+                clearable
+                placeholder="Search..."
+                .value=${this.view.searchQuery}
+                @input=${this.#handleSearch}
+                @gds-input-cleared=${this.#handleSearchClear}
+                width="240px"
+              >
+                <gds-icon-magnifying-glass
+                  slot="lead"
+                ></gds-icon-magnifying-glass>
+              </gds-input>
+            `,
+          )}
           <slot name="header-lead"></slot>
         </div>
         <div class="trail">
           <slot name="header-trail"></slot>
-          <gds-dropdown
-            multiple
-            plain
-            size="small"
-            searchable
-            .value=${Array.from(this.view.visibleColumns) as any}
-            @change=${this.#handleColumnVisibility}
-          >
-            <span slot="trigger">Columns</span>
-            ${this.columns.map(
-              (column) => html`
-                <gds-option
-                  value=${column.key}
-                  ?selected=${this.view.visibleColumns.has(column.key)}
-                >
-                  ${column.label}
-                </gds-option>
-              `,
-            )}
-          </gds-dropdown>
+          ${when(
+            this.settings,
+            () => html`
+              <gds-dropdown
+                multiple
+                plain
+                size="small"
+                searchable
+                .value=${Array.from(this.view.visibleColumns) as any}
+                @change=${this.#handleColumnVisibility}
+              >
+                <span slot="trigger">Columns</span>
+                ${this.columns.map(
+                  (column) => html`
+                    <gds-option
+                      value=${column.key}
+                      ?selected=${this.view.visibleColumns.has(column.key)}
+                    >
+                      ${column.label}
+                    </gds-option>
+                  `,
+                )}
+              </gds-dropdown>
+            `,
+          )}
         </div>
       </div>
     `

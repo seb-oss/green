@@ -326,10 +326,14 @@ export const Default: Story = {
     density: 'comfortable',
     data: mockDataProvider,
     selectable: true,
+    searchable: true,
+    settings: true,
   },
   render: (args) => html`
     <gds-table
       density="${args.density}"
+      ?searchable="${args.searchable}"
+      ?settings="${args.settings}"
       ?selectable="${args.selectable}"
       .columns="${args.columns}"
       .data="${args.data}"
@@ -357,8 +361,15 @@ export const Plain: Story = {
   },
   render: (args) => html`
     <gds-table plain .columns="${args.columns}" .data="${args.data}">
+      <!-- If not cloning shows up on first row only -->
       <template slot="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy size="m" slot="trail"></gds-icon-copy>
+      </template>
+      <template slot="role-link">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
@@ -371,8 +382,15 @@ export const Responsive: Story = {
   },
   render: (args) => html`
     <gds-table responsive .columns="${args.columns}" .data="${args.data}">
+      <!-- If not cloning shows up on first row only -->
       <template slot="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy size="m" slot="trail"></gds-icon-copy>
+      </template>
+      <template slot="role-link">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
@@ -386,8 +404,15 @@ export const Striped: Story = {
   },
   render: (args) => html`
     <gds-table plain striped .columns="${args.columns}" .data="${args.data}">
+      <!-- If not cloning shows up on first row only -->
       <template slot="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy size="m" slot="trail"></gds-icon-copy>
+      </template>
+      <template slot="role-link">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
@@ -545,6 +570,7 @@ export const Wrapping: Story = {
   },
   render: (args) => html`
     <gds-table
+      responsive
       .columns="${args.columns}"
       .data="${args.dataProvider}"
     ></gds-table>
