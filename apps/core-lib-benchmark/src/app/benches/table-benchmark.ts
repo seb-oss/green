@@ -1,6 +1,7 @@
 import { LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import '@sebgroup/green-core/components/table/index.js'
+import '@sebgroup/green-core/components/icon/icons/copy.js'
 import { html } from '@sebgroup/green-core/scoping.js'
 import type { Column, Request, Response } from '@sebgroup/green-core/components/table/table.types'
 
@@ -31,7 +32,21 @@ export class TableBenchmark extends LitElement {
 
   private columns: Column[] = [
     { key: 'id', label: '#', sortable: true },
-    { key: 'name', label: 'Name', sortable: true },
+    { 
+      key: 'name', 
+      label: 'Name', 
+      sortable: true, 
+      cell: {
+        trail: {
+          type: 'button',
+          value: (row: { email: any }) => row.email,
+          size: 'xs',
+          slot: 'email-copy',
+          label: 'Copy',
+          onClick: () => alert('email copied'),
+        },
+      } 
+    },
     {
       key: 'type',
       label: 'Type',
@@ -83,7 +98,11 @@ export class TableBenchmark extends LitElement {
         .columns=${this.columns}
         .data=${this.dataProvider}
         .options=${[50, 100, 200]}
-      ></gds-table>
+      >
+        <template slot="email-copy">
+        <gds-icon-copy size="m" slot="trail"></gds-icon-copy>
+      </template>
+    </gds-table>
     `
     const end = performance.now()
 

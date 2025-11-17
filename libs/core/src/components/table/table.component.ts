@@ -246,6 +246,10 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             size="${size || 'small'}"
             variant="${variant || 'neutral'}"
             rank="${rank || 'secondary'}"
+            @click="${(e: Event) => {
+              e.stopPropagation()
+              config.onClick(row)
+            }}"
           >
             ${content}
           </gds-button>
