@@ -250,6 +250,7 @@ exports[`test css output matches the contents in snapshot for 2023/css/variables
   --gds-sys-text-body-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-body-regular-l: 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-body-regular-m: 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-body-italic-m: italic 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-body-italic-s: italic 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-space-0: 0px;
@@ -747,6 +748,9 @@ exports[`test figma output matches the contents in snapshot for 2023/figma/figma
   {"name":"text/body-regular-m-fontWeight","value":400,"type":"float"},
   {"name":"text/body-regular-m-fontSize","value":16,"type":"float"},
   {"name":"text/body-regular-m-lineHeight","value":24,"type":"float"},
+  {"name":"text/body-regular-s-fontWeight","value":400,"type":"float"},
+  {"name":"text/body-regular-s-fontSize","value":14,"type":"float"},
+  {"name":"text/body-regular-s-lineHeight","value":20,"type":"float"},
   {"name":"text/body-italic-m-fontWeight","value":400,"type":"float"},
   {"name":"text/body-italic-m-fontStyle","value":"italic","type":"string"},
   {"name":"text/body-italic-m-fontSize","value":16,"type":"float"},
@@ -1051,6 +1055,7 @@ exports[`test internal output matches the contents in snapshot for 2023/internal
   --gds-sys-text-body-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-body-regular-l: 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-body-regular-m: 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+  --gds-sys-text-body-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-body-italic-m: italic 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-text-body-italic-s: italic 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
   --gds-sys-space-0: 0px;
@@ -2015,6 +2020,7 @@ $gds-sys-text-body-book-m: 450 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEB
 $gds-sys-text-body-book-s: 450 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-body-regular-l: 400 1.25rem/1.625rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-body-regular-m: 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
+$gds-sys-text-body-regular-s: 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-body-italic-m: italic 400 1rem/1.5rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-text-body-italic-s: italic 400 0.875rem/1.25rem SEB SansSerif, SEB SansSerif GDS, SEBSansSerif;
 $gds-sys-space-0: 0px;
@@ -4112,6 +4118,13 @@ exports[`test studio output matches the contents in snapshot for studio/studio.t
         "font-weight": "400",
         "font-size": "16px",
         "line-height": "24px"
+      },
+      "body-regular-s": {
+        "token": "body-regular-s",
+        "variable": "var(--gds-sys-text-body-regular-s)",
+        "font-weight": "400",
+        "font-size": "14px",
+        "line-height": "20px"
       },
       "body-italic-m": {
         "token": "body-italic-m",

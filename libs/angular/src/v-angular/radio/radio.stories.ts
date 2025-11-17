@@ -3,7 +3,12 @@ import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
 
 import { CommonModule } from '@angular/common'
 import { CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom } from '@angular/core'
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms'
 import {
   applicationConfig,
   Meta,
@@ -13,6 +18,7 @@ import {
 
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import { NggvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggvRadioGroupComponent } from './radio-group/radio-group.component'
 import { NggvRadioComponent } from './radio.component'
 
 interface StoryInputListener {
@@ -28,6 +34,7 @@ const meta: Meta<NggvRadioComponent> = {
       providers: [importProvidersFrom(NggvI18nModule)],
     }),
     moduleMetadata({
+      declarations: [NggvRadioGroupComponent],
       imports: [
         CommonModule,
         FormsModule,
@@ -151,6 +158,64 @@ const TemplateWithFormControl: StoryFn<NggvRadioComponent & any> = (
   }
 }
 
+const TemplateRadioGroup: StoryFn<NggvRadioComponent & any> = (
+  args: NggvRadioComponent & any,
+) => {
+  const ctrl = new FormControl({ value: args.selected, name: args.name })
+  const grp = new FormGroup({
+    imaginaryFormControl: ctrl,
+  })
+
+  return {
+    template: /*html*/ `
+    <div [formGroup]="formGroup">
+      <nggv-radio-group direction="row"
+          formControlName="imaginaryFormControl"
+          [error]="error"
+          [invalid]="invalid">
+        <nggv-radio
+          formControlName="imaginaryFormControl"
+          [label]="label"
+          [name]="formControlName"
+          [value]="name + '1'"
+          [size]="size"
+          [invalid]="invalid"
+          [error]="error"
+          [ngModel]="selected"
+          (ngModelChange)="action($event)">
+        </nggv-radio>
+        <nggv-radio
+        formControlName="imaginaryFormControl"
+          [label]="label"
+          [name]="formControlName"
+          [size]="size"
+          [error]="error"
+          [invalid]="invalid"
+          [value]="name + '2'"
+          [ngModel]="selected"
+          (ngModelChange)="action($event)">
+        </nggv-radio>
+        <nggv-radio
+        formControlName="imaginaryFormControl"
+          [label]="label"
+          [name]="formControlName"
+          [size]="size"
+          [error]="error"
+          [invalid]="invalid"
+          [value]="name + '3'"
+          [ngModel]="selected"
+          (ngModelChange)="action($event)">
+        </nggv-radio>
+      </nggv-radio-group>
+    </div>
+  `,
+    props: {
+      ...args,
+      formGroup: grp,
+    },
+  }
+}
+
 export const Primary = Template.bind({})
 Primary.args = {
   label: 'Radio label',
@@ -172,4 +237,11 @@ WithDisplayDisabledAsLocked.args = {
   ...Primary.args,
   locked: false,
   displayDisabledAsLocked: true,
+}
+
+export const RadioGroup = TemplateRadioGroup.bind({})
+RadioGroup.args = {
+  ...Primary.args,
+  invalid: true,
+  error: 'this is an error',
 }
