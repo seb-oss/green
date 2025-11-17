@@ -257,7 +257,7 @@ class Dropdown extends GdsFormControlElement implements OptionsContainer {
   }
 
   disconnectedCallback() {
-    super.disconnectedCallback();
+    super.disconnectedCallback()
     this.removeEventListener('blur', this.#handleBlur)
   }
 
@@ -344,7 +344,10 @@ class Dropdown extends GdsFormControlElement implements OptionsContainer {
           ${when(!this.combobox || this.multiple, () =>
             this.#renderTriggerButton(),
           )}
-          <gds-icon-chevron-bottom slot="action"></gds-icon-chevron-bottom>
+          <gds-icon-chevron-bottom
+            size=${this.size === 'small' ? 'm' : 'l'}
+            slot="action"
+          ></gds-icon-chevron-bottom>
         </gds-field-base>
 
         ${when(

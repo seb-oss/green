@@ -25,7 +25,7 @@ const style = css`
       padding-block: var(--gds-sys-space-xs);
       padding-inline: var(--gds-sys-space-m) var(--gds-sys-space-s);
       min-block-size: var(--gds-sys-space-3xl);
-      block-size: var(--gds-sys-space-3xl);
+      min-block-size: var(--gds-sys-space-3xl);
       outline-style: solid;
       outline-width: 0;
       border-radius: var(--gds-sys-radius-xs);
@@ -91,6 +91,14 @@ const style = css`
 
     .field.lead-slot-occupied {
       padding-inline-start: var(--gds-sys-space-s);
+    }
+
+    .field.lead-has-badge {
+      padding-inline-start: var(--gds-sys-space-2xs);
+    }
+
+    .field.small.lead-has-badge {
+      padding-inline-start: var(--gds-sys-space-2xs);
     }
 
     .field.trail-slot-occupied {
