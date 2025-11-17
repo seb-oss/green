@@ -479,7 +479,6 @@ const generateFeedbackRecord = (index: number): UserFeedback => {
 const feedbackDataProvider = async (
   request: TableRequest,
 ): Promise<TableResponse<UserFeedback>> => {
-  // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 800))
 
   const allData = Array.from({ length: 50 }, (_, i) =>
@@ -487,7 +486,6 @@ const feedbackDataProvider = async (
   )
   let processedData = [...allData]
 
-  // Apply search filter if query provided
   if (request.searchQuery) {
     const query = request.searchQuery.toLowerCase()
     processedData = processedData.filter((item) =>
@@ -497,7 +495,6 @@ const feedbackDataProvider = async (
     )
   }
 
-  // Apply sorting if requested
   if (request.sortColumn) {
     processedData.sort((a, b) => {
       const aValue = String(a[request.sortColumn as keyof UserFeedback])
@@ -509,13 +506,12 @@ const feedbackDataProvider = async (
     })
   }
 
-  // Apply pagination
   const startIndex = (request.page - 1) * request.rows
   const endIndex = startIndex + request.rows
   const paginatedData = processedData.slice(startIndex, endIndex)
 
   return {
-    rows: paginatedData, // ← Returns 'rows' not 'data'
+    rows: paginatedData,
     total: processedData.length,
   }
 }
@@ -561,8 +557,33 @@ const feedbackColumns: TableColumn[] = [
   },
 ]
 
+const feedbackActions = {
+  label: 'Actions',
+  cell: [
+    {
+      type: 'button',
+      label: (row: UserFeedback) =>
+        row.status === 'Active' ? 'Deactivate' : 'Activate',
+      size: 'xs',
+      onClick: (row: UserFeedback) => console.log('Toggle', row),
+    },
+    {
+      type: 'button',
+      label: 'Delete',
+      size: 'xs',
+      variant: 'negative',
+      onClick: (row: UserFeedback) => {
+        if (confirm(`Delete ${row.name}?`)) {
+          console.log('Delete', row)
+        }
+      },
+    },
+  ],
+} as any
+
 export const Wrapping: Story = {
   args: {
+    actions: feedbackActions,
     columns: feedbackColumns,
     dataProvider: feedbackDataProvider,
   },
@@ -571,6 +592,7 @@ export const Wrapping: Story = {
       responsive
       .columns="${args.columns}"
       .data="${args.dataProvider}"
+      .actions="${args.actions}"
     ></gds-table>
   `,
 }

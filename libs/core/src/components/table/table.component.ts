@@ -191,8 +191,12 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return this.#templateCache.get(slot)?.content.cloneNode(true)
   }
 
-  #renderCell(config: Types.Cell | undefined, row: T): any {
+  #renderCell(config: Types.Cell | Types.Cell[] | undefined, row: T): any {
     if (!config) return null
+
+    if (Array.isArray(config)) {
+      return config.map((c) => this.#renderCell(c, row))
+    }
 
     const resolve = <V>(
       value: V | ((r: any) => V) | undefined,

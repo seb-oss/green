@@ -172,8 +172,13 @@ export const TableStyles = css`
     gap: var(--table-gap);
   }
 
+  .column-header.actions {
+    justify-content: flex-end;
+  }
+
   .column-label {
     font-weight: var(--gds-sys-text-weight-book);
+    justify-content: flex-end;
   }
 
   .sort-icon {

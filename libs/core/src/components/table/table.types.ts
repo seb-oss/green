@@ -27,15 +27,15 @@ export interface Column {
   visible?: boolean
   width?: string
   cell?: {
-    lead?: Cell
-    value?: Cell
-    trail?: Cell
+    lead?: Cell | Cell[]
+    value?: Cell | Cell[]
+    trail?: Cell | Cell[]
   }
 }
 
 export interface Actions {
   label?: string
-  cell: Cell
+  cell: Cell | Cell[]
 }
 
 export interface Row {
