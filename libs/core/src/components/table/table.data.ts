@@ -450,6 +450,7 @@ export const Feedback = {
 
   ActionContextMenu: {
     label: 'Actions',
+    align: 'start',
     justify: 'end',
     cell: {
       type: 'context-menu',

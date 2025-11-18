@@ -300,7 +300,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
         return html`
           <gds-context-menu>
-            <gds-button slot="trigger" size="small" rank="tertiary">
+            <gds-button slot="trigger" size="xs" rank="tertiary">
               <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
             </gds-button>
             ${items.map((item) => {
