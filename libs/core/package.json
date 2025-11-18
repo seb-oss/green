@@ -48,6 +48,7 @@
     "./_primitives/*": "./primitives/*",
     "./react": "./generated/react/index.js",
     "./react/*": "./generated/react/*",
-    "./patterns/*": "./patterns/*"
+    "./patterns/*": "./patterns/*",
+    "./tokens": "./tokens.style.js"
   }
 }
