@@ -80,29 +80,29 @@ export const Variants: Story = {
         <gds-flex gap="xl">
           <gds-badge variant="information">
             <gds-icon-circle-info slot="lead"></gds-icon-circle-info>
-            Information
+            Status text
           </gds-badge>
           <gds-badge variant="notice">
             <gds-icon-circle-info slot="lead"></gds-icon-circle-info>
-            Notice
+            Status text
           </gds-badge>
           <gds-badge variant="positive">
             <gds-icon-circle-check slot="lead"></gds-icon-circle-check>
-            Positive
+            Status text
           </gds-badge>
           <gds-badge variant="warning">
             <gds-icon-circle-check slot="lead"></gds-icon-circle-check>
-            Warning
+            Status text
           </gds-badge>
           <gds-badge variant="negative">
             <gds-icon-triangle-exclamation slot="lead">
             </gds-icon-triangle-exclamation>
-            Negative
+            Status text
           </gds-badge>
           <gds-badge variant="disabled">
             <gds-icon-triangle-exclamation slot="lead">
             </gds-icon-triangle-exclamation>
-            Disabled
+            Status text
           </gds-badge>
         </gds-flex>
       </gds-flex>
