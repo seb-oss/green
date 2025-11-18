@@ -1,0 +1,42 @@
+@use 'mixins';
+@use '../../components/list';
+@use '../../components/popover';
+@use '../../components/utility';
+@forward 'mixins';
+
+.gds-dropdown {
+  @include mixins.dropdown-trigger();
+}
+
+.gds-dropdown-popover {
+  --z-index: var(--gds-z-index-dropdown);
+
+  .hidden {
+    visibility: hidden;
+    display: none;
+  }
+
+  /**
+   * Menu
+   */
+  ul[role='menu'] {
+    @include mixins.menu();
+  }
+
+  /**
+   * Dropdown select
+   */
+  ul[role='listbox'] {
+    @include mixins.select();
+  }
+
+  /**
+   * Dropdown multi-select
+   */
+  .sg-fieldset-container {
+    overflow-y: auto;
+    fieldset[role='listbox'][aria-multiselectable='true'] {
+      @include mixins.multi-select();
+    }
+  }
+}

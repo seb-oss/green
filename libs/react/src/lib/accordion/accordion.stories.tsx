@@ -29,7 +29,9 @@ export const Default = {
               our handleResize function. There are solid debounce
               implementations. Let's add a short and simple one to our example
             </p>
-            <a href="#">And this is a link</a>
+            <a class="gds-link" href="#">
+              And this is a link
+            </a>
           </>
         ),
 

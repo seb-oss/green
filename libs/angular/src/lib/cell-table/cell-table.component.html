@@ -1,4 +1,8 @@
-<div #targetElement role="table" [ngClass]="className">
+<div
+  #targetElement
+  role="table"
+  [ngClass]="'gds-cell-table-table ' + className"
+>
   <div class="cell-table-table d-flex flex-column">
     <div
       *ngFor="let row of rows; trackBy: trackByRowId"

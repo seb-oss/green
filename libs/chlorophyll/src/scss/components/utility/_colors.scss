@@ -1,0 +1,63 @@
+@use 'sass:map';
+
+$colors: (
+  'light': (
+    color: var(--gds-sys-color-base-200),
+    contrast: var(--gds-sys-color-text-primary),
+  ),
+  'dark': (
+    color: var(--gds-sys-color-base-900),
+    contrast: var(--gds-sys-color-text-inverted),
+  ),
+  'primary': (
+    color: var(--gds-sys-color-text-primary),
+    contrast: var(--gds-sys-color-background-secondary),
+  ),
+  'secondary': (
+    color: var(--gds-sys-color-text-secondary),
+    contrast: var(--gds-sys-color-background-secondary),
+  ),
+  'info': (
+    color: var(--gds-sys-color-dark-blue-2),
+    contrast: var(--gds-sys-color-text-white),
+  ),
+  'success': (
+    color: var(--gds-sys-color-dark-green-2),
+    contrast: var(--gds-sys-color-text-white),
+  ),
+  'warning': (
+    color: var(--gds-sys-color-yellow),
+    contrast: var(--gds-sys-color-text-primary),
+  ),
+  'danger': (
+    color: var(--gds-sys-color-dark-red-1),
+    contrast: var(--gds-sys-color-text-white),
+  ),
+  'reset': (
+    color: inherit,
+    contrast: null,
+  ),
+  'background': (
+    color: var(--gds-sys-color-background-secondary),
+    contrast: null,
+  ),
+  'transparent': (
+    color: transparent,
+    contrast: null,
+  ),
+);
+
+@each $key, $variant in $colors {
+  .text-#{$key} {
+    color: map.get($variant, 'color') !important;
+    --color: #{map.get($variant, 'color')} !important;
+  }
+
+  .bg-#{$key} {
+    background: map.get($variant, 'color') !important;
+    --background: map.get($variant, 'color') !important;
+    @if (map.get($variant, 'contrast') != null) {
+      color: map.get($variant, 'contrast') !important;
+    }
+  }
+}

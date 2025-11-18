@@ -92,6 +92,10 @@
     white-space: nowrap;
     margin-left: 0.5em;
   }
+
+  /**
+   * Background image for sortable column.
+   */
   .gds-table__sortable-col::after {
     content: '';
     display: inline-block;
@@ -273,9 +277,8 @@
   }
 
   .progress {
-    color: #45b400; // IE fallback for ::-ms-fill
+    color: #45b400; /* IE fallback for ::-ms-fill */
 
-    // Progress
     &::-webkit-progress-value {
       background-color: #45b400;
     }

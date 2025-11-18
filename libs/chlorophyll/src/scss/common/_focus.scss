@@ -1,0 +1,106 @@
+@use '../tokens';
+@use 'functions';
+@use 'sass:map';
+
+@mixin add-focus($suffix: 'visible', $target: '') {
+  @if $suffix != '' {
+    $suffix: '-' + $suffix;
+  }
+
+  @if $suffix != '' {
+    &:focus:not(:focus-visible) {
+      box-shadow: none;
+      outline: 0;
+    }
+  }
+
+  &:focus,
+  &:focus#{$suffix} #{$target} {
+    outline-color: var(--gds-sys-color-focus-outline);
+    outline-style: solid;
+    outline-width: 0.125rem;
+    outline-offset: 0.125rem;
+  }
+}
+
+/**
+* @deprecated
+* Use `add-focus` instead
+*/
+@mixin add-outline-focus-state() {
+  @include add-focus('within');
+}
+
+@mixin add-hover-state(
+  $bg: var(--gds-sys-color-dark-blue-1),
+  $target: '',
+  $color: var(--gds-sys-color-text-white)
+) {
+  @if not $target == '' {
+    #{$target} {
+      transition: border var(--gds-sys-transition);
+    }
+  } @else {
+    transition: border var(--gds-sys-transition);
+  }
+
+  &:not(:disabled, .disabled, [aria-disabled]):hover #{$target} {
+    background: $bg;
+    color: $color;
+    --background: #{$bg};
+    --color: #{$color};
+
+    border-color: $bg;
+  }
+}
+
+@mixin add-active-state(
+  $bg: var(--gds-sys-color-dark-blue-2),
+  $fadeActiveHover: false,
+  $color: var(--gds-sys-color-text-white)
+) {
+  &[aria-selected='true'],
+  &:active,
+  &.active,
+  &.active:hover,
+  &:active:hover {
+    background: $bg;
+    color: $color;
+    --background: $bg;
+    --color: $color;
+    border-color: $bg;
+  }
+  @if ($fadeActiveHover) {
+    &[aria-selected]:hover,
+    &.active:hover,
+    &:active:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+@mixin add-hover-active-state(
+  $hover: var(--gds-sys-color-dark-blue-1),
+  $active: var(--gds-sys-color-dark-blue-2),
+  $fadeActiveHover: false,
+  $hoverColor: var(--gds-sys-color-text-white),
+  $activeColor: var(--gds-sys-color-text-white)
+) {
+  @include add-hover-state($hover, '', $hoverColor);
+  @include add-active-state($active, $fadeActiveHover, $activeColor);
+}
+
+/** add background color, color and border-color to element when it has focus-visible i.e. tab focus */
+@mixin add-active-focus-state(
+  $bg: var(--gds-sys-color-dark-blue-2),
+  $color: var(--gds-sys-color-text-white)
+) {
+  &:focus-visible {
+    background: $bg;
+    color: $color;
+    --background: $bg;
+    --color: $color;
+    border-color: $bg;
+    border-color: $color;
+  }
+}

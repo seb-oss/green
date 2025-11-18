@@ -1,29 +1,16 @@
-@use '@sebgroup/chlorophyll/scss/components/table/mixins' as table;
-@use '../../../../chlorophyll/scss/components/form/checkbox/mixins' as checkbox;
-@use '../../../../chlorophyll/scss/components/form/checkbox/tokens';
-@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-mixins;
+@use '@sebgroup/chlorophyll/src/scss/tokens/mixin-sys-light-2016' as
+  light-tokens;
+@use '@sebgroup/chlorophyll/src/scss/tokens/shape';
+@use '@sebgroup/chlorophyll/src/scss/components/table/mixins' as table;
+@use '../../../../chlorophyll/src/scss/components/checkbox/mixins' as checkbox;
+@use '../../../../chlorophyll/src/scss/components/form/mixins' as form-mixins;
+
+:host {
+  @include light-tokens.add-variables();
+  @include shape.add-tokens();
+}
 
 ::ng-deep .gds-table {
-  --gds-ref-pallet-base100: #f8f8f8;
-  --gds-ref-pallet-base600: hsl(0, 0%, 53%);
-  --sg-table-header-background: #1a1a1a;
-  --sg-table-header-color: #fff;
-  --sg-table-cell-padding-x: 0.5rem;
-  --sg-table-cell-padding-y: 0.6875rem;
-  --sg-table-border-width: 1px;
-  --sg-table-border-color: var(--gds-ref-pallet-base300);
-  --sg-table-sort-icon-color: var(--gds-ref-pallet-base600);
-  --gds-ref-pallet-base500: hsl(0, 0%, 68%);
-  --sg-table-sort-icon-color-active: #fff;
-  --gds-sys-color-surface: #fff;
-  --gds-ref-pallet-base200: #e8e8e8;
-  --gds-sys-color-base: #333;
-  --gds-sys-shape-corner-small: 0.125rem;
-  --gds-sys-color-blue-dark-2: #007ac7;
-  --gds-sys-shape-corner-medium: 0.25rem;
-  --sg-table-row-expand-font-weight: 500;
-  --sg-table-row-expand-font-weight-light: 400;
-
   @include table.add-table();
   width: 100%;
 
@@ -38,14 +25,14 @@
   }
 
   tr:hover td {
-    background-color: var(--gds-ref-pallet-base100);
+    background-color: var(--gds-sys-color-base-100);
   }
 
   .gds-table__numeric-col {
     text-align: right;
   }
 
-  thead tr th.gds-table__numeric-col .sg-table-sort {
+  thead tr th.gds-table__numeric-col .gds-table-sort {
     justify-content: end;
   }
 
@@ -60,7 +47,8 @@
   }
 
   tbody {
-    border-bottom: var(--sg-table-border-width) solid var(--sg-table-border-color);
+    border-bottom: var(--sg-table-border-width) solid
+      var(--sg-table-border-color);
   }
 
   td {
@@ -74,7 +62,7 @@
 
     ::ng-deep {
       td {
-        padding: var(--sg-table-cell-padding-y) var(--sg-table-cell-padding-x);
+        padding: 0.6875rem 0.5rem;
       }
     }
   }
@@ -126,7 +114,7 @@
 
   tr.row {
     &__expand {
-      background-color: var(--gds-ref-pallet-base100);
+      background-color: var(--gds-sys-color-base-100);
 
       .gds-item-field-wrap {
         display: flex;
@@ -162,22 +150,25 @@
     }
   }
 
-  @include tokens.add-checkbox-tokens;
   @include checkbox.add-checkbox();
 
-  .gds-field-checkbox-wrap .form-control:has(input[type='checkbox']) {
+  .gds-field-checkbox-wrap .gds-form-control:has(input[type='checkbox']) {
     @include form-mixins.add-form-control;
     line-height: 1.125rem;
     padding: 0;
   }
 
   #thead-checkbox input[type='checkbox'] ~ i {
-    box-shadow: inset 0 0 0 1px var(--gds-comp-checkbox-container-color);
-    background-color: var(--gds-comp-checkbox-border-color);
+    box-shadow: inset 0 0 0 1px var(--gds-sys-color-text-inverted);
+    background-color: transparent;
+
+    &:after {
+      box-sizing: border-box;
+    }
   }
 
   #thead-checkbox:has(input[type='checkbox']:focus-visible):focus-within {
-    outline-color: var(--sg-table-header-color);
+    outline-color: var(--gds-sys-color-white);
   }
 
   #thead-checkbox input[type='checkbox']:hover {
@@ -190,7 +181,6 @@
     }
 
     &:checked ~ i {
-      background-color: var(--gds-comp-checkbox-border-color);
       box-shadow: inset 0 0 0 1px #ababab;
 
       &::after {
