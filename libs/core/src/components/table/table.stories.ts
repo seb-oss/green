@@ -14,6 +14,9 @@ import '../icon/icons/plus-small'
 import '../icon/icons/settings-slider-hor'
 import '../icon/icons/cloud-download'
 import '../icon/icons/copy'
+import '../icon/icons/pin'
+import '../icon/icons/circle-check'
+import '../icon/icons/cross-small'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 import { Feedback, Users } from './table.data'
@@ -178,15 +181,53 @@ export const Formatting: Story = {
 export const Actions: Story = {
   args: {
     columns: Feedback.Columns,
-    actions: Feedback.Actions,
+    actions: Feedback.MultipleActions,
     data: Feedback.Data,
   },
   render: (args) => html`
     <gds-table
+      plain
+      .rows=${2}
+      .page=${2}
       .columns="${args.columns}"
       .data="${args.data}"
       .actions="${args.actions}"
-    ></gds-table>
+    >
+      <template slot="actions-activate">
+        <gds-icon-pin></gds-icon-pin>
+      </template>
+      <template slot="actions-delete">
+        <gds-icon-cross-small></gds-icon-cross-small>
+      </template>
+    </gds-table>
+
+    <br />
+    <br />
+    <br />
+
+    <gds-table
+      plain
+      .rows=${2}
+      .page=${2}
+      .columns="${args.columns}"
+      .data="${args.data}"
+      .actions="${Feedback.ActionContextMenu}"
+    >
+    </gds-table>
+
+    <br />
+    <br />
+    <br />
+
+    <gds-table
+      plain
+      .rows=${2}
+      .page=${2}
+      .columns="${args.columns}"
+      .data="${args.data}"
+      .actions="${Feedback.ActionLink}"
+    >
+    </gds-table>
   `,
 }
 

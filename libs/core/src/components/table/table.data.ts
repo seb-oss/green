@@ -396,23 +396,24 @@ export const Feedback = {
     },
   ] as TableColumn[],
 
-  Actions: {
+  MultipleActions: {
     label: 'Actions',
     align: 'start',
     justify: 'start',
     cell: [
       {
         type: 'button',
-        label: (row: FeedbackData) =>
-          row.status === 'Active' ? 'Deactivate' : 'Activate',
+        /*    label: (row: FeedbackData) =>
+          row.status === 'Active' ? 'Deactivate' : 'Activate', */
         size: 'xs',
+        slot: 'actions-activate',
         onClick: (row: FeedbackData) => console.log('Toggle status', row),
       },
       {
         type: 'button',
-        label: 'Delete',
         size: 'xs',
         variant: 'negative',
+        slot: 'actions-delete',
         onClick: (row: FeedbackData) => {
           if (confirm(`Delete feedback from ${row.name}?`)) {
             console.log('Delete feedback', row)
@@ -420,6 +421,53 @@ export const Feedback = {
         },
       },
     ],
+  } as any,
+
+  ActionLink: {
+    label: 'Actions',
+    align: 'start',
+    justify: 'end',
+    cell: [
+      {
+        type: 'link',
+        href: '#',
+        label: 'Link',
+      },
+    ],
+  } as any,
+
+  ActionButton: {
+    label: 'Actions',
+    align: 'start',
+    justify: 'start',
+    cell: [
+      {
+        type: 'button',
+        label: 'Link',
+      },
+    ],
+  } as any,
+
+  ActionContextMenu: {
+    label: 'Actions',
+    justify: 'end',
+    cell: {
+      type: 'context-menu',
+      items: [
+        {
+          label: 'Activate',
+        },
+        {
+          label: 'View Details',
+        },
+        {
+          label: 'Edit Profile',
+        },
+        {
+          label: 'Delete User',
+        },
+      ],
+    },
   } as any,
   Data: feedbackDataProvider,
 }
