@@ -172,13 +172,8 @@ export const TableStyles = css`
     gap: var(--table-gap);
   }
 
-  .column-header.actions {
-    justify-content: flex-end;
-  }
-
   .column-label {
     font-weight: var(--gds-sys-text-weight-book);
-    justify-content: flex-end;
   }
 
   .sort-icon {
@@ -400,8 +395,7 @@ export const TableStyles = css`
     justify-content: space-between;
   }
 
-  .justify-end .cell-content,
-  td.actions-cell .cell-content {
+  .justify-end .cell-content {
     text-align: right;
     justify-content: flex-end;
   }

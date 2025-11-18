@@ -272,9 +272,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
         return html`
           <gds-link
-            href=${href || ''}
-            target=${target || '_self'}
-            download=${download || false}
+            href=${ifDefined(href)}
+            target=${ifDefined(target)}
+            .download=${download}
             text-decoration="underline"
           >
             ${content}
@@ -455,35 +455,55 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
+  #renderActionsHeader() {
+    if (!this.actions || typeof this.actions === 'function') return null
+
+    const label = this.actions.label || 'Actions'
+
+    const classes = classMap({
+      actions: true,
+      'column-header': true,
+      [`align-${this.actions.align}`]: !!this.actions.align,
+      [`justify-${this.actions.justify}`]: !!this.actions.justify,
+    })
+
+    return html`
+      <th class="${classes}">
+        <div class="column-label">${label}</div>
+      </th>
+    `
+  }
+
+  #renderSelectableHeader() {
+    if (!this.selectable) return null
+
+    return html`
+      <th class="checkbox-cell">
+        ${this.#renderCheckbox({
+          checked: this.#isAllSelected,
+          indeterminate: this.#isPartialSelection,
+          ariaLabel: 'Select all rows',
+          onToggle: () => this.#handleSelectAll({} as CustomEvent),
+        })}
+      </th>
+    `
+  }
+
+  #renderColumnHeaders() {
+    return this.columns
+      .filter((column) => this.view.visibleColumns.has(column.key))
+      .map((column) => this.#renderColumnHeader(column))
+  }
+
   #renderTableHeader() {
     return html`
       <thead>
         <tr>
-          ${when(
-            this.selectable,
-            () => html`
-              <th class="checkbox-cell">
-                ${this.#renderCheckbox({
-                  checked: this.#isAllSelected,
-                  indeterminate: this.#isPartialSelection,
-                  ariaLabel: 'Select all rows',
-                  onToggle: () => this.#handleSelectAll({} as CustomEvent),
-                })}
-              </th>
-            `,
-          )}
-          ${this.columns
-            .filter((column) => this.view.visibleColumns.has(column.key))
-            .map((column) => this.#renderColumnHeader(column))}
-          ${when(
-            this.actions,
-            () =>
-              html`<th class="column-header actions">
-                ${typeof this.actions === 'object' && this.actions.label
-                  ? html`<div class="column-label">${this.actions.label}</div>`
-                  : html`<div class="column-label">Actions</div>`}
-              </th>`,
-          )}
+          ${[
+            this.#renderSelectableHeader(),
+            this.#renderColumnHeaders(),
+            this.#renderActionsHeader(),
+          ]}
         </tr>
       </thead>
     `
@@ -507,6 +527,56 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
+  #renderSelectableCell(index: number) {
+    if (!this.selectable) return null
+
+    return html`
+      <td class="checkbox-cell" data-label="Select">
+        ${this.#renderCheckbox({
+          checked: this.selected.has(index),
+          indeterminate: false,
+          ariaLabel: `Select row ${index + 1}`,
+          onToggle: () =>
+            this.#handleRowSelect(index, {
+              detail: { checked: !this.selected.has(index) },
+            } as CustomEvent),
+        })}
+      </td>
+    `
+  }
+
+  #renderRowCells(row: T) {
+    return this.columns
+      .filter((column) => this.view.visibleColumns.has(column.key))
+      .map((column) => this.#renderTableCell(row, column))
+  }
+
+  #renderActionsCell(row: T, index: number) {
+    if (!this.actions) return null
+
+    if (typeof this.actions === 'function') {
+      return html`
+        <td class="actions-cell" data-label="Actions">
+          <div class="cell-content">${this.actions(row, index)}</div>
+        </td>
+      `
+    }
+
+    const content = this.#renderCell(this.actions.cell, row)
+
+    const classes = classMap({
+      'actions-cell': true,
+      [`align-${this.actions.align}`]: !!this.actions.align,
+      [`justify-${this.actions.justify}`]: !!this.actions.justify,
+    })
+
+    return html`
+      <td class="${classes}" data-label="Actions">
+        <div class="cell-content">${content}</div>
+      </td>
+    `
+  }
+
   #renderTableRow(row: T, index: number) {
     return html`
       <tr
@@ -515,37 +585,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           loading: this.loading,
         })}
       >
-        ${when(
-          this.selectable,
-          () => html`
-            <td class="checkbox-cell" data-label="Select">
-              ${this.#renderCheckbox({
-                checked: this.selected.has(index),
-                indeterminate: false,
-                ariaLabel: `Select row ${index + 1}`,
-                onToggle: () =>
-                  this.#handleRowSelect(index, {
-                    detail: { checked: !this.selected.has(index) },
-                  } as CustomEvent),
-              })}
-            </td>
-          `,
-        )}
-        ${this.columns
-          .filter((column) => this.view.visibleColumns.has(column.key))
-          .map((column) => this.#renderTableCell(row, column))}
-        ${when(
-          this.actions,
-          () => html`
-            <td class="actions-cell" data-label="Actions">
-              <div class="cell-content">
-                ${typeof this.actions === 'function'
-                  ? this.actions(row, index)
-                  : this.#renderCell(this.actions!.cell, row)}
-              </div>
-            </td>
-          `,
-        )}
+        ${[
+          this.#renderSelectableCell(index),
+          this.#renderRowCells(row),
+          this.#renderActionsCell(row, index),
+        ]}
       </tr>
     `
   }
@@ -694,11 +738,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           </gds-text>
           ${hasSearch
             ? html`
-                <gds-text
-                  tag="p"
-                  font="detail-book-s"
-                  color="var(--gds-sys-color-content-neutral-02)"
-                >
+                <gds-text tag="p" font="detail-book-s">
                   No results for "${this.view.searchQuery}"
                 </gds-text>
               `

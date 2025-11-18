@@ -35,6 +35,8 @@ export interface Column {
 
 export interface Actions {
   label?: string
+  align?: 'start' | 'center' | 'stretch' | 'end'
+  justify?: 'start' | 'center' | 'space-between' | 'end'
   cell: Cell | Cell[]
 }
 
