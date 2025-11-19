@@ -77,99 +77,71 @@ export const TableStyles = css`
     padding: var(--gds-sys-space-3xs);
   }
 
-  /* Table Structure */
   table {
     width: max-content;
     min-width: 100%;
     table-layout: auto;
     border-collapse: collapse;
+    /*  border-collapse: separate; */
     border-spacing: 0;
     border: none;
-    contain: paint;
-  }
-
-  /* Base cell styling (shared by th and td) */
-  th,
-  td {
-    padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
   }
 
   tbody td {
     font-weight: normal;
     font: var(--gds-sys-text-detail-regular-s);
+    padding-block: var(--table-cell-padding-y);
+    padding-inline: var(--table-cell-padding-x);
+  }
+
+  thead tr th:first-child,
+  tbody tr td:first-child {
+    border-top-left-radius: var(--gds-sys-radius-s);
+    border-bottom-left-radius: var(--gds-sys-radius-s);
+  }
+
+  thead tr th:last-child,
+  tbody tr td:last-child {
+    border-top-right-radius: var(--gds-sys-radius-s);
+    border-bottom-right-radius: var(--gds-sys-radius-s);
   }
 
   /* Table Header */
+
   thead {
-    position: relative;
-  }
-
-  /* Header background overlay */
-  thead::before {
-    content: '';
-    position: absolute;
-    inset: 0;
     background: var(--gds-sys-color-l2-neutral-01);
-    border-radius: var(--gds-sys-space-s);
-    z-index: 0;
-  }
-
-  /* Header cells */
-  thead th {
-    padding: var(--table-header-padding-y) var(--table-header-padding-x);
-    border: none;
-    position: relative;
-    z-index: 1;
-    background: transparent;
-  }
-
-  /* Header cell hover effect background */
-  thead th::before {
-    content: '';
-    display: none;
-    position: absolute;
-    background: var(--gds-sys-color-l3-neutral-02);
-    border-radius: var(--gds-sys-space-xs);
-    transition: all var(--gds-sys-motion-duration-fast);
-    inset: var(--gds-sys-space-2xs) var(--gds-sys-space-3xs);
-    z-index: -1;
-
-    @starting-style {
-      opacity: 0;
-      translate: 0 -2px;
-      scale: 0.8;
-    }
   }
 
   thead tr th {
-    position: relative;
+    padding-block: var(--gds-sys-space-3xs);
   }
 
-  /* Sortable Columns */
   thead th.sortable {
     cursor: pointer;
     user-select: none;
-  }
-
-  @media (hover: hover) {
-    thead th.sortable:hover::before {
-      display: flex;
-      scale: 1;
-    }
-  }
-
-  thead th.sortable:active::before {
-    translate: 0 1px;
-    background: var(--gds-sys-color-l3-neutral-03);
   }
 
   /* Column header content layout */
   .column-header {
     display: flex;
     align-items: center;
+    position: relative;
     justify-content: space-between;
     min-height: var(--gds-sys-space-l);
     gap: var(--table-gap);
+    padding: calc(var(--table-cell-padding-y) / 2) var(--table-cell-padding-x);
+    transition: all var(--gds-sys-motion-duration-fast);
+    background: transparent;
+    border-radius: var(--gds-sys-radius-xs);
+    transition: all var(--gds-sys-motion-duration-fast);
+  }
+
+  th.sortable .column-header:hover {
+    background-color: var(--gds-sys-color-l3-neutral-02);
+  }
+
+  th.sortable:active .column-header {
+    background-color: var(--gds-sys-color-l3-neutral-03);
   }
 
   .column-label {
@@ -184,7 +156,6 @@ export const TableStyles = css`
     transition-duration: var(--gds-sys-motion-duration-fast);
     transition-timing-function: var(--gds-sys-motion-easing-ease);
     opacity: 0;
-    z-index: 1;
   }
 
   @media (hover: hover) {
@@ -200,14 +171,15 @@ export const TableStyles = css`
   /* Table Body */
 
   tbody tr {
-    opacity: 1;
+    min-height: var(--table-row-min-height);
+    border-style: solid;
+    border-color: var(--gds-sys-color-border-subtle-01);
+    border-width: 0px;
+    border-top-width: var(--gds-sys-space-5xs);
     transition-property: opacity, border-color, background-color;
     transition-duration: var(--gds-sys-motion-duration-fast);
     transition-timing-function: var(--gds-sys-motion-easing-ease-in-out),
       var(--gds-sys-motion-easing-linear);
-    min-height: var(--table-row-min-height);
-    border-top: var(--gds-sys-space-5xs) solid
-      var(--gds-sys-color-border-subtle-01);
   }
 
   .responsive tbody tr:last-child {
@@ -224,14 +196,7 @@ export const TableStyles = css`
     border-color: var(--gds-sys-color-border-subtle-02);
   }
 
-  tbody td {
-    padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
-  }
-
   /* Row Selection */
-  tr {
-    position: relative;
-  }
 
   .checkbox-cell {
     min-width: var(--gds-sys-space-l);
@@ -240,49 +205,34 @@ export const TableStyles = css`
     padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
   }
 
-  tr:first-child {
+  tbody tr:first-child {
     border-top-width: var(--gds-sys-space-4xs);
   }
 
-  tr.selected,
-  tr:first-child {
+  tbody tr.selected,
+  tbody tr:first-child {
     border-color: transparent;
   }
 
-  tr.selected + tr {
+  tbody tr.selected + tr {
     border-color: transparent;
   }
 
-  tr.selected:last-child {
+  tbody tr.selected:last-child {
     border-bottom-color: transparent;
   }
 
-  /* Selected row highlight */
-  tr::after {
-    content: '';
-    display: none;
-    position: absolute;
-    inset: var(--gds-sys-space-5xs) 0;
-    border-radius: var(--gds-sys-space-s);
-    transition: all var(--gds-sys-motion-duration-fastest);
-    z-index: -1;
-    pointer-events: none;
-
-    @starting-style {
-      opacity: 0;
-      translate: var(--gds-sys-space-3xs) 0;
-    }
-  }
-
-  tr.selected::after {
-    display: flex;
+  tbody tr.selected {
     background-color: var(--gds-sys-color-l3-neutral-02);
   }
 
   @media (hover: hover) {
-    tr.selected:hover::after {
-      display: flex;
+    tbody tr.selected:hover {
       background-color: var(--gds-sys-color-l3-neutral-03);
+    }
+
+    tbody tr:hover:not(.selected) {
+      background-color: var(--gds-sys-color-l2-neutral-01);
     }
   }
 
@@ -291,14 +241,8 @@ export const TableStyles = css`
     border-color: transparent;
   }
 
-  tbody tr:hover:not(.selected)::after {
-    display: flex;
-    background-color: var(--gds-sys-color-l2-neutral-01);
-  }
-
   /* Striped */
-  .striped tbody tr:not(.selected, :hover):nth-child(even)::after {
-    display: flex;
+  .striped tbody tr:not(.selected, :hover):nth-child(even) {
     background-color: var(--gds-sys-color-l2-neutral-01);
   }
 
@@ -592,10 +536,11 @@ export const TableStyles = css`
 
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
-    .sort-icon,
     tbody tr,
-    tbody tr::after,
-    thead th::before {
+    .sort-icon,
+    .column-header,
+    .header,
+    .footer {
       transition: none;
     }
   }
