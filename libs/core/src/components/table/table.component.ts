@@ -521,6 +521,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           ]}
         </tr>
       </thead>
+      <div class="divider" inert></div>
     `
   }
 

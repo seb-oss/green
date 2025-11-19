@@ -82,9 +82,11 @@ export const TableStyles = css`
     min-width: 100%;
     table-layout: auto;
     border-collapse: collapse;
-    /*  border-collapse: separate; */
     border-spacing: 0;
     border: none;
+    /* spacing */
+    /* border-collapse: separate;
+    border-spacing: 0 var(--gds-sys-space-4xs); */
   }
 
   tbody td {
@@ -114,6 +116,7 @@ export const TableStyles = css`
 
   thead tr th {
     padding-block: var(--gds-sys-space-3xs);
+    background: var(--gds-sys-color-l2-neutral-01);
   }
 
   thead th.sortable {
@@ -130,8 +133,6 @@ export const TableStyles = css`
     min-height: var(--gds-sys-space-l);
     gap: var(--table-gap);
     padding: calc(var(--table-cell-padding-y) / 2) var(--table-cell-padding-x);
-    transition: all var(--gds-sys-motion-duration-fast);
-    background: transparent;
     border-radius: var(--gds-sys-radius-xs);
     transition: all var(--gds-sys-motion-duration-fast);
   }
@@ -171,7 +172,6 @@ export const TableStyles = css`
   /* Table Body */
 
   tbody tr {
-    min-height: var(--table-row-min-height);
     border-style: solid;
     border-color: var(--gds-sys-color-border-subtle-01);
     border-width: 0px;
@@ -205,10 +205,6 @@ export const TableStyles = css`
     padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
   }
 
-  tbody tr:first-child {
-    border-top-width: var(--gds-sys-space-4xs);
-  }
-
   tbody tr.selected,
   tbody tr:first-child {
     border-color: transparent;
@@ -239,6 +235,12 @@ export const TableStyles = css`
   tbody tr:hover,
   tbody tr:hover + tr {
     border-color: transparent;
+  }
+
+  .divider {
+    height: var(--gds-sys-space-4xs);
+    width: 100%;
+    pointer-events: none;
   }
 
   /* Striped */
