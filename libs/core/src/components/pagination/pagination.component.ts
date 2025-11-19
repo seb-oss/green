@@ -70,7 +70,6 @@ export class GdsPagination extends withMarginProps(
 
   @watchMediaQuery('(max-width: 768px)')
   _handleMobile(matches: boolean) {
-    console.log('Mobile state changed:', matches)
     this._isMobile = matches
   }
 
