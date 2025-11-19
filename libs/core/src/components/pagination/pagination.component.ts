@@ -8,6 +8,11 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import { GdsButton } from '../button/button.component'
 import {
   GdsContextMenu,
@@ -40,7 +45,9 @@ import { PaginationStyles } from './pagination.styles'
     IconChevronDoubleRight,
   ],
 })
-export class GdsPagination extends GdsElement {
+export class GdsPagination extends withMarginProps(
+  withSizeXProps(withLayoutChildProps(GdsElement)),
+) {
   static styles = [tokens, PaginationStyles]
 
   @property({ type: Number })

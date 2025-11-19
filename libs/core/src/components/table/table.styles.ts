@@ -455,6 +455,22 @@ export const TableStyles = css`
   }
 
   @media (max-width: 760px) {
+    .header,
+    .footer {
+      flex-direction: column;
+      gap: calc(var(--table-gap) / 2);
+    }
+
+    .footer {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .footer .lead,
+    .footer .trail {
+      display: contents;
+    }
+
     .responsive thead {
       display: none;
     }

@@ -395,7 +395,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
                 .value=${this.view.searchQuery}
                 @input=${this.#handleSearch}
                 @gds-input-cleared=${this.#handleSearchClear}
-                width="240px"
+                width="100%; l{240px}"
               >
                 <gds-icon-magnifying-glass
                   slot="lead"
@@ -812,6 +812,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             .total=${this.total}
             @gds-page-change=${this.#handlePageChange}
             @gds-rows-change=${this.#handlePageSizeChange}
+            width="100%"
           ></gds-pagination>
         </div>
       </div>
