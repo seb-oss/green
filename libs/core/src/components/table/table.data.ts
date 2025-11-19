@@ -139,7 +139,6 @@ export const Users = {
           value: (row: UserData) => row.email,
           size: 'xs',
           slot: 'email-copy',
-          onClick: () => console.log('Email copied'),
         },
       },
     },
@@ -233,24 +232,24 @@ export const Users = {
         {
           label: (row: UserData) =>
             row.status === 'Active' ? 'Deactivate' : 'Activate',
-          onClick: (row: UserData) => console.log('Toggle status', row),
+          /*  onClick: (row: UserData) => console.log('Toggle status', row), */
         },
         {
           label: 'View Details',
-          onClick: (row: UserData) => console.log('View user', row),
+          /* onClick: (row: UserData) => console.log('View user', row), */
         },
         {
           label: 'Edit Profile',
-          onClick: (row: UserData) => console.log('Edit user', row),
+          /* onClick: (row: UserData) => console.log('Edit user', row), */
         },
         {
           divider: true,
           label: 'Delete User',
-          onClick: (row: UserData) => {
+          /* onClick: (row: UserData) => {
             if (confirm(`Delete ${row.name}?`)) {
               console.log('Delete user', row)
             }
-          },
+          }, */
         },
       ],
     },
@@ -403,22 +402,14 @@ export const Feedback = {
     cell: [
       {
         type: 'button',
-        /*    label: (row: FeedbackData) =>
-          row.status === 'Active' ? 'Deactivate' : 'Activate', */
         size: 'xs',
         slot: 'actions-activate',
-        onClick: (row: FeedbackData) => console.log('Toggle status', row),
       },
       {
         type: 'button',
         size: 'xs',
         variant: 'negative',
         slot: 'actions-delete',
-        onClick: (row: FeedbackData) => {
-          if (confirm(`Delete feedback from ${row.name}?`)) {
-            console.log('Delete feedback', row)
-          }
-        },
       },
     ],
   } as any,
