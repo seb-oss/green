@@ -402,17 +402,32 @@ export const TableStyles = css`
     .header,
     .footer {
       flex-direction: column;
+    }
+
+    .header {
       gap: calc(var(--table-gap) / 2);
     }
 
     .footer {
       justify-content: center;
       align-items: center;
+      gap: var(--table-gap);
     }
 
-    .footer .lead,
     .footer .trail {
       display: contents;
+    }
+
+    .footer .lead {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: var(--gds-sys-space-xl);
+      border-width: 0 0 var(--gds-sys-space-4xs) 0;
+      border-style: solid;
+      border-color: var(--gds-sys-color-border-subtle-02);
+      padding-bottom: var(--gds-sys-space-l);
     }
 
     .responsive thead {
@@ -450,8 +465,7 @@ export const TableStyles = css`
 
     .responsive td::before {
       content: attr(data-label);
-      color: var(--gds-sys-color-content-neutral-02);
-      font-weight: 500;
+      font-weight: var(--gds-sys-text-weight-book);
       margin-right: var(--gds-sys-space-s);
     }
 

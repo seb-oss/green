@@ -1,9 +1,10 @@
-import { property } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
+import { watchMediaQuery } from '../../utils/decorators'
 import {
   gdsCustomElement,
   html,
@@ -64,6 +65,14 @@ export class GdsPagination extends withMarginProps(
 
   @property({ type: Boolean })
   jump = false
+
+  @state() private _isMobile = false
+
+  @watchMediaQuery('(max-width: 768px)')
+  _handleMobile(matches: boolean) {
+    console.log('Mobile state changed:', matches)
+    this._isMobile = matches
+  }
 
   get #pageCount() {
     return Math.ceil(this.total / this.rows)
@@ -211,6 +220,8 @@ export class GdsPagination extends withMarginProps(
   }
 
   #renderPageSizeMenu() {
+    if (this._isMobile) return null
+
     return html`
       <gds-context-menu @gds-menu-item-click=${this.#handlePageSizeMenuClick}>
         <gds-button slot="trigger" size="small" rank="secondary">
