@@ -3,11 +3,7 @@ import '../core/core.globals'
 import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
 
 import { CommonModule } from '@angular/common'
-import {
-  APP_INITIALIZER,
-  CUSTOM_ELEMENTS_SCHEMA,
-  importProvidersFrom,
-} from '@angular/core'
+import { CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom, inject, provideAppInitializer } from '@angular/core'
 import {
   AbstractControl,
   ReactiveFormsModule,
@@ -106,12 +102,10 @@ const meta: Meta<NggvInputComponent> = {
     applicationConfig({
       providers: [
         importProvidersFrom(NggvI18nModule),
-        {
-          provide: APP_INITIALIZER,
-          useFactory: translocoStorybookInitializer, // our initializer hook
-          multi: true,
-          deps: [TranslocoService], // the dependencies that Angular passes as arguments to our hook
-        },
+        provideAppInitializer(() => {
+        const initializerFn = (translocoStorybookInitializer)(inject(TranslocoService));
+        return initializerFn();
+      }),
         DropdownUtils,
       ],
     }),

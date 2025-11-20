@@ -23,8 +23,8 @@ import { ToastComponent, ToastMessageService } from './index'
 import { MessageType } from './toast.models'
 
 @Component({
-  selector: 'nggv-toast-story',
-  template: `<nggv-toast> </nggv-toast>
+    selector: 'nggv-toast-story',
+    template: `<nggv-toast> </nggv-toast>
     <button (click)="addMessage(MessageType.Success, '', 'Sucesss')">
       Success
     </button>
@@ -43,6 +43,7 @@ import { MessageType } from './toast.models'
       Custom content with <a href="#">Link!</a>
     </ng-template>
     <button (click)="addCustomMessage(customToast)">Custom content</button>`,
+    standalone: false
 })
 class NggvToastStoryComponent {
   constructor(public toastMessageService: ToastMessageService) {}

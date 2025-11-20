@@ -5,8 +5,9 @@ import { Observable, of } from 'rxjs'
 import { SegmentedControl } from '@sebgroup/green-angular'
 
 @Component({
-  templateUrl: './segmented-control.component.html',
-  styleUrls: ['./segmented-control.component.css'],
+    templateUrl: './segmented-control.component.html',
+    styleUrls: ['./segmented-control.component.css'],
+    standalone: false
 })
 export class SegmentedControlComponent {
   $controls: Observable<Array<SegmentedControl>> = of([

@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core'
 
-@Pipe({ name: 'dateThook' })
+@Pipe({
+    name: 'dateThook',
+    standalone: false
+})
 export class DateThookPipe implements PipeTransform {
   get today(): Date {
     const tmp = new Date()

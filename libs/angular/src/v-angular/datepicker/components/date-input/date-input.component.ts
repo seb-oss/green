@@ -45,9 +45,10 @@ import type { CalendarType } from '../../datepicker.models'
  * https://jsverse.github.io/transloco/docs/plugins/locale/#setup
  */
 @Component({
-  selector: 'nggv-dateinput,nggv-input[type=date]',
-  templateUrl: './date-input.component.html',
-  styleUrls: ['./date-input.component.scss'],
+    selector: 'nggv-dateinput,nggv-input[type=date]',
+    templateUrl: './date-input.component.html',
+    styleUrls: ['./date-input.component.scss'],
+    standalone: false
 })
 export class DateInputComponent
   extends DateControlValueAccessorComponent

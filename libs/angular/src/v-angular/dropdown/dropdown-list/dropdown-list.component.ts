@@ -26,9 +26,10 @@ import {
 } from '@sebgroup/green-angular/src/v-angular/core'
 
 @Component({
-  selector: 'nggv-dropdown-list',
-  templateUrl: './dropdown-list.component.html',
-  styleUrls: ['./dropdown-list.component.scss'],
+    selector: 'nggv-dropdown-list',
+    templateUrl: './dropdown-list.component.html',
+    styleUrls: ['./dropdown-list.component.scss'],
+    standalone: false
 })
 export class NggvDropdownListComponent implements OnInit, OnChanges {
   @Input() set expanded(state: boolean) {

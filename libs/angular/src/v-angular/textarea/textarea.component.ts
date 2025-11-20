@@ -16,9 +16,10 @@ import { NggvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/s
 
 /** Textarea fields allow users to add and edit longer or multiple line text. */
 @Component({
-  selector: 'nggv-textarea',
-  templateUrl: './textarea.component.html',
-  styleUrls: ['./textarea.component.scss'],
+    selector: 'nggv-textarea',
+    templateUrl: './textarea.component.html',
+    styleUrls: ['./textarea.component.scss'],
+    standalone: false
 })
 export class NggvTextareaComponent extends NggvBaseControlValueAccessorComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */

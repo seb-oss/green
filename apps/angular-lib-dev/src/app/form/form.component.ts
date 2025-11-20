@@ -29,9 +29,10 @@ import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-st
 registerTransitionalStyles()
 
 @Component({
-  selector: 'green-form',
-  templateUrl: './form.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'green-form',
+    templateUrl: './form.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class FormComponent {
   constructor(private fb: NonNullableFormBuilder) {}

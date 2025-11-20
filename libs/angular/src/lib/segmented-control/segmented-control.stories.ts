@@ -14,12 +14,14 @@ import { of } from 'rxjs'
 import { NggSegmentedControlComponent } from './segmented-control.component'
 
 @Component({
-  template: ` <p class="mt-4">Option A</p> `,
+    template: ` <p class="mt-4">Option A</p> `,
+    standalone: false
 })
 class OptionAComponent {}
 
 @Component({
-  template: ` <p class="mt-4">Option B</p> `,
+    template: ` <p class="mt-4">Option B</p> `,
+    standalone: false
 })
 class OptionBComponent {}
 

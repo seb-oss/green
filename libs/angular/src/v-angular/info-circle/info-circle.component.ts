@@ -7,9 +7,10 @@ import { Component, HostBinding, Input } from '@angular/core'
  * https://designlibrary.sebgroup.com/components/component-contextual-help-button
  */
 @Component({
-  selector: 'nggv-info-circle',
-  templateUrl: './info-circle.component.html',
-  styleUrls: ['./info-circle.component.scss'],
+    selector: 'nggv-info-circle',
+    templateUrl: './info-circle.component.html',
+    styleUrls: ['./info-circle.component.scss'],
+    standalone: false
 })
 export class NggvInfoCircleComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */

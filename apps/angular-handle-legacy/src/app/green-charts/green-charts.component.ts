@@ -3,8 +3,8 @@ import { Component } from '@angular/core'
 import { ChartSettings } from '@sebgroup/green-charts'
 
 @Component({
-  selector: 'green-green-charts',
-  template: `<h3 class="my-3">Green chart</h3>
+    selector: 'green-green-charts',
+    template: `<h3 class="my-3">Green chart</h3>
     <div class="use-green">
       <ngg-chart [settings]="settings"></ngg-chart>
     </div>
@@ -13,6 +13,7 @@ import { ChartSettings } from '@sebgroup/green-charts'
       <button type="button">Green default button</button>
       <button type="submit">Green primary button</button>
     </div>`,
+    standalone: false
 })
 export class GreenChartsComponent {
   settings: ChartSettings = {

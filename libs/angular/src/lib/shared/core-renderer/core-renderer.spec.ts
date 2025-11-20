@@ -9,7 +9,8 @@ import {
 } from './core-renderer'
 
 @Component({
-  template: '<gds-button></gds-button>',
+    template: '<gds-button></gds-button>',
+    standalone: false
 })
 class TestComponent {}
 

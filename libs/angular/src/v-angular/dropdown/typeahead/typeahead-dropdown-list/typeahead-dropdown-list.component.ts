@@ -18,12 +18,13 @@ import { NggvDropdownListComponent } from '../../dropdown-list/dropdown-list.com
 
 // Use dropdownList template and combine stylesheets
 @Component({
-  selector: 'nggv-typeahead-dropdown-list',
-  templateUrl: '../../dropdown-list/dropdown-list.component.html',
-  styleUrls: [
-    '../typeahead-dropdown-list/typeahead-dropdown-list.component.scss',
-    '../../dropdown-list/dropdown-list.component.scss',
-  ],
+    selector: 'nggv-typeahead-dropdown-list',
+    templateUrl: '../../dropdown-list/dropdown-list.component.html',
+    styleUrls: [
+        '../typeahead-dropdown-list/typeahead-dropdown-list.component.scss',
+        '../../dropdown-list/dropdown-list.component.scss',
+    ],
+    standalone: false
 })
 export class NggvTypeaheadDropdownListComponent
   extends NggvDropdownListComponent

@@ -27,8 +27,8 @@ interface WithExtras {
 }
 
 @Component({
-  selector: 'nggv-input-mask-story',
-  template: `
+    selector: 'nggv-input-mask-story',
+    template: `
     <div class="container">
       <div class="row">
         <div class="column">
@@ -103,8 +103,8 @@ interface WithExtras {
       </div>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       * {
         box-sizing: border-box;
         width: 100%;
@@ -130,7 +130,8 @@ interface WithExtras {
         clear: both;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 class NggvInputMaskStoryComponent {
   dateFC = new UntypedFormControl('')

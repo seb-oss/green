@@ -56,10 +56,11 @@ const data: MockData[] = [
 ]
 
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[columnType]',
-  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['columnType', 'sortable', 'sortOrder', 'value', 'thook'],
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[columnType]',
+    // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+    inputs: ['columnType', 'sortable', 'sortOrder', 'value', 'thook'],
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 class TableDirectiveMock {}

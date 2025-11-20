@@ -31,7 +31,8 @@ type Position = {
  * https://designlibrary.sebgroup.com/components/component-tooltip
  */
 @Directive({
-  selector: '[nggvTooltip]',
+    selector: '[nggvTooltip]',
+    standalone: false
 })
 export class NggvTooltipDirective
   implements AfterViewInit, OnChanges, OnDestroy

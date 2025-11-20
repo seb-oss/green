@@ -22,9 +22,10 @@ import '@sebgroup/green-core/components/icon/icons/chevron-left.js'
 import '@sebgroup/green-core/components/icon/icons/chevron-right.js'
 
 @Component({
-  selector: 'nggv-calendar-control',
-  templateUrl: './calendar-control.component.html',
-  styleUrls: ['./calendar-control.component.scss'],
+    selector: 'nggv-calendar-control',
+    templateUrl: './calendar-control.component.html',
+    styleUrls: ['./calendar-control.component.scss'],
+    standalone: false
 })
 export class CalendarControlComponent implements OnInit, OnChanges, OnDestroy {
   // nextIcon: IconDefinition = faChevronRight
