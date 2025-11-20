@@ -235,11 +235,12 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         const height = resolve(config.height) || '24px'
         const borderRadius = resolve(config['border-radius']) || 'max'
         const objectFit = resolve(config['object-fit']) || 'cover'
+        const alt = resolve(config.alt) || ''
 
         return html`
           <gds-img
             src="${src}"
-            alt="${resolve(config.alt) || ''}"
+            alt="${alt}"
             width="${width}"
             height="${height}"
             border-radius="${borderRadius}"
@@ -536,7 +537,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     })
 
     return html`
-      <td data-label=${column.label} style=${style} class=${classes}>
+      <td
+        data-label=${ifDefined(this.responsive ? column.label : undefined)}
+        style=${style}
+        class=${classes}
+      >
         ${this.#renderCellContent(row, column)}
       </td>
     `
