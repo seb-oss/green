@@ -7,6 +7,8 @@ export const TableStyles = css`
     font: var(--gds-sys-text-detail-book-s);
     color: var(--gds-sys-color-content-neutral-01);
     text-align: left;
+    --table-border: var(--gds-sys-space-5xs) solid
+      var(--gds-sys-color-border-subtle-01);
   }
 
   /* Density Modes */
@@ -19,6 +21,7 @@ export const TableStyles = css`
     --table-row-min-height: var(--gds-sys-space-4xl);
     --table-font-size: var(--gds-sys-text-detail-book-s);
     --table-gap: var(--gds-sys-space-xl);
+    --table-border-spacing: 0 var(--gds-sys-space-4xs);
   }
 
   /* Compact density */
@@ -30,6 +33,7 @@ export const TableStyles = css`
     --table-row-min-height: var(--gds-sys-space-xl);
     --table-font-size: var(--gds-sys-text-detail-book-xs);
     --table-gap: var(--gds-sys-space-m);
+    --table-border-spacing: 0 var(--gds-sys-space-5xs);
   }
 
   /* Comfortable density (explicit) */
@@ -41,6 +45,7 @@ export const TableStyles = css`
     --table-row-min-height: var(--gds-sys-space-4xl);
     --table-font-size: var(--gds-sys-text-detail-book-s);
     --table-gap: var(--gds-sys-space-xl);
+    --table-border-spacing: 0 var(--gds-sys-space-4xs);
   }
 
   /* Spacious density */
@@ -52,6 +57,7 @@ export const TableStyles = css`
     --table-row-min-height: var(--gds-sys-space-5xl);
     --table-font-size: var(--gds-sys-text-detail-book-m);
     --table-gap: var(--gds-sys-space-2xl);
+    --table-border-spacing: 0 var(--gds-sys-space-3xs);
   }
 
   /* Apply density variables */
@@ -81,12 +87,9 @@ export const TableStyles = css`
     width: max-content;
     min-width: 100%;
     table-layout: auto;
-    border-collapse: collapse;
-    border-spacing: 0;
     border: none;
-    /* spacing */
-    /* border-collapse: separate;
-    border-spacing: 0 var(--gds-sys-space-4xs); */
+    border-collapse: separate;
+    border-spacing: var(--table-border-spacing);
   }
 
   tbody td {
@@ -97,22 +100,21 @@ export const TableStyles = css`
   }
 
   thead tr th:first-child,
-  tbody tr td:first-child {
+  tbody tr:hover td:first-child,
+  tbody tr.selected td:first-child {
     border-top-left-radius: var(--gds-sys-radius-s);
     border-bottom-left-radius: var(--gds-sys-radius-s);
   }
 
   thead tr th:last-child,
-  tbody tr td:last-child {
+  tbody tr td:last-child,
+  tbody tr:hover td:last-child,
+  tbody tr.selected td:last-child {
     border-top-right-radius: var(--gds-sys-radius-s);
     border-bottom-right-radius: var(--gds-sys-radius-s);
   }
 
   /* Table Header */
-
-  thead {
-    background: var(--gds-sys-color-l2-neutral-01);
-  }
 
   thead tr th {
     padding-block: var(--gds-sys-space-3xs);
@@ -171,20 +173,8 @@ export const TableStyles = css`
 
   /* Table Body */
 
-  tbody tr {
-    border-style: solid;
-    border-color: var(--gds-sys-color-border-subtle-01);
-    border-width: 0px;
-    border-top-width: var(--gds-sys-space-5xs);
-    transition-property: opacity, border-color, background-color;
-    transition-duration: var(--gds-sys-motion-duration-fast);
-    transition-timing-function: var(--gds-sys-motion-easing-ease-in-out),
-      var(--gds-sys-motion-easing-linear);
-  }
-
-  .responsive tbody tr:last-child {
-    border-bottom: var(--gds-sys-space-5xs) solid
-      var(--gds-sys-color-border-subtle-01);
+  tbody tr td {
+    border-top: var(--table-border);
   }
 
   tbody tr.loading {
@@ -192,7 +182,7 @@ export const TableStyles = css`
     pointer-events: none;
   }
 
-  tbody tr.loading:not(:first-child) {
+  tbody tr.loading:not(:first-child) td {
     border-color: var(--gds-sys-color-border-subtle-02);
   }
 
@@ -205,16 +195,18 @@ export const TableStyles = css`
     padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
   }
 
-  tbody tr.selected,
-  tbody tr:first-child {
+  tbody tr:hover td,
+  tbody tr.selected td,
+  tbody tr:first-child td {
     border-color: transparent;
   }
 
-  tbody tr.selected + tr {
+  tbody tr:hover + tr td,
+  tbody tr.selected + tr td {
     border-color: transparent;
   }
 
-  tbody tr.selected:last-child {
+  tbody tr.selected:last-child td {
     border-bottom-color: transparent;
   }
 
@@ -235,12 +227,6 @@ export const TableStyles = css`
   tbody tr:hover,
   tbody tr:hover + tr {
     border-color: transparent;
-  }
-
-  .divider {
-    height: var(--gds-sys-space-4xs);
-    width: 100%;
-    pointer-events: none;
   }
 
   /* Striped */
@@ -396,8 +382,10 @@ export const TableStyles = css`
 
   .responsive thead {
     position: sticky;
-    top: var(--gds-sys-space-l);
+    top: var(--gds-sys-space-s);
     z-index: 2;
+    box-shadow: var(--gds-sys-shadow-s-01), var(--gds-sys-shadow-s-02);
+    border-radius: var(--gds-sys-radius-s);
   }
 
   @media (max-width: 760px) {
