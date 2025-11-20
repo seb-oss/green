@@ -6,6 +6,7 @@ import { when } from 'lit/directives/when.js'
 import { GdsCardLinked } from '../../components/card-linked/card-linked.component'
 import { GdsCard } from '../../components/card/card.component'
 import { GdsFlex } from '../../components/flex/flex.component'
+import { dateTimeFormats } from '../../components/formatted-text/date/date-time-formatter'
 import { IconChainLink } from '../../components/icon/icons/chain-link'
 import { GdsImg } from '../../components/img/img.component'
 import { GdsText } from '../../components/text/text.component'
@@ -88,6 +89,14 @@ export class GdsCardPattern01 extends withSizeXProps(
    */
   @property({ reflect: false, attribute: 'aspect-ratio' })
   ratio: 'landscape' | 'square' = 'landscape'
+
+  /** Category */
+  @property({ reflect: false })
+  category = ''
+
+  /** Date */
+  @property({ reflect: false })
+  date = ''
 
   /**
    * Checks if footer content exists
@@ -242,6 +251,28 @@ export class GdsCardPattern01 extends withSizeXProps(
           this.title || this.excerpt,
           () => html`
             <gds-flex flex-direction="column" gap="xs">
+              ${when(
+                this.category || this.date,
+                () => html`
+                  <gds-flex gap="s" align-items="center">
+                    ${when(
+                      this.category,
+                      () =>
+                        html` <gds-text tag="p" font="detail-book-s">
+                          ${this.category}
+                        </gds-text>`,
+                    )}
+                    ${when(
+                      this.date,
+                      () => html`
+                        <gds-text font="detail-book-s" color="neutral-02">
+                          ${dateTimeFormats.dateShort(this.date, 'sv-SE')}
+                        </gds-text>
+                      `,
+                    )}
+                  </gds-flex>
+                `,
+              )}
               ${when(
                 this.title,
                 () => html`

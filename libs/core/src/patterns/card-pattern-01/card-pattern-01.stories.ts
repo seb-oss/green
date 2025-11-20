@@ -648,3 +648,94 @@ export const Theme: Story = {
     },
   },
 }
+
+export const Metadata: Story = {
+  render: () => html`
+    <gds-grid columns="1; m{3}" gap="xl">
+      <gds-card-pattern-01
+        title="Card title"
+        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+        src="https://api.seb.io/assets/launch-hero.jpg"
+        category="Components"
+        date="2025-11-20"
+        href="#"
+        label="Read more"
+      >
+      </gds-card-pattern-01>
+
+      <gds-card-pattern-01
+        title="Card title"
+        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+        src="https://api.seb.io/assets/launch-hero.jpg"
+        category="Accessibility"
+        date="2025-11-15"
+        href="#"
+        label="Read more"
+      >
+      </gds-card-pattern-01>
+
+      <gds-card-pattern-01
+        title="Card title"
+        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+        src="https://api.seb.io/assets/launch-hero.jpg"
+        category="Tokens"
+        date="2025-11-10"
+        href="#"
+        label="Read more"
+      >
+      </gds-card-pattern-01>
+    </gds-grid>
+  `,
+  parameters: {
+    docs: {
+      description: {
+        story: `
+Metadata attributes provide contextual information and help organize card content.
+
+**Category:** Classifies the content type for filtering and organization. Displayed as a visual label on the card.
+
+**Date:** Publication date in ISO 8601 format (YYYY-MM-DD). Automatically adapted with locale-specific display (e.g., "20 nov 2025" for Swedish locale, "Nov 20, 2025" for English).
+
+        `,
+      },
+      source: {
+        code: `
+<gds-card-pattern-01
+  title="Card title"
+  excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+  src="https://api.seb.io/assets/launch-hero.jpg"
+  category="Components"
+  date="2025-11-20"
+  href="#"
+  label="Read more"
+>
+</gds-card-pattern-01>
+
+<gds-card-pattern-01
+  title="Card title"
+  excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+  src="https://api.seb.io/assets/launch-hero.jpg"
+  category="Accessibility"
+  date="2025-11-15"
+  href="#"
+  label="Read more"
+>
+</gds-card-pattern-01>
+
+<gds-card-pattern-01
+  title="Card title"
+  excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+  src="https://api.seb.io/assets/launch-hero.jpg"
+  category="Tokens"
+  date="2025-11-10"
+  href="#"
+  label="Read more"
+>
+</gds-card-pattern-01>
+        `,
+        language: 'html',
+        type: 'code',
+      },
+    },
+  },
+}
