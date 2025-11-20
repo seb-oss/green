@@ -230,11 +230,11 @@ export const TableStyles = css`
   }
 
   /* Striped */
-  .striped tbody tr:not(.selected, :hover):nth-child(even) {
+  .striped tbody tr:not(.selected, :hover):nth-child(even) td {
     background-color: var(--gds-sys-color-l2-neutral-01);
   }
 
-  .striped tbody tr {
+  .striped tbody tr td {
     border-color: transparent;
   }
 
@@ -332,8 +332,12 @@ export const TableStyles = css`
     justify-content: flex-end;
   }
 
-  .justify-end .column-header {
+  .sortable.justify-end .column-header {
     flex-direction: row-reverse;
+  }
+
+  th.actions {
+    padding-inline: 0;
   }
 
   /* Align utilities */
