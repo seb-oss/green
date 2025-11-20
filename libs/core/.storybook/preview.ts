@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
-import { setCustomElementsManifest } from '@storybook/web-components'
+import { setCustomElementsManifest } from '@storybook/web-components-vite'
 
 import customElements from '../custom-elements.json'
 import { registerTransitionalStyles } from '../src/transitional-styles.ts'

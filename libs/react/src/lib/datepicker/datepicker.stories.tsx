@@ -1,5 +1,5 @@
 import React from 'react'
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/react-vite'
 
 import { GdsAlert } from '../../../../../dist/libs/core/src/components/alert/alert.component.js'
 import Datepicker from './datepicker'

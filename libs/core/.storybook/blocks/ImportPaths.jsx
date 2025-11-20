@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Source, useOf } from '@storybook/blocks'
+import { Source, useOf } from '@storybook/addon-docs/blocks'
 
 import {
   GdsDiv,

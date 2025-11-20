@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react'
+import { Meta, Story } from '@storybook/react-vite'
 
 import { Chart, ChartProps } from './chart'
 

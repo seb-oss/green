@@ -1,5 +1,5 @@
 import React from 'react'
-import { useOf } from '@storybook/blocks'
+import { useOf } from '@storybook/addon-docs/blocks'
 
 import {
   GdsButton,
