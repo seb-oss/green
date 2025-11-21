@@ -55,4 +55,22 @@ export const dateTimeFormats = {
     new Intl.DateTimeFormat(locale, { timeStyle: 'medium' }).format(
       convertValueToDate(value),
     ),
+  dateTimeLong: (value, locale) => {
+    return new Intl.DateTimeFormat(locale, {
+      dateStyle: 'long',
+      timeStyle: 'short',
+    }).format(convertValueToDate(value))
+  },
+  dateTimeLongWithWeekday: (value, locale) => {
+    return new Intl.DateTimeFormat(locale, {
+      dateStyle: 'full',
+      timeStyle: 'short',
+    }).format(convertValueToDate(value))
+  },
+  dateTimeShort: (value, locale) => {
+    return new Intl.DateTimeFormat(locale, {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+    }).format(convertValueToDate(value))
+  },
 } satisfies Record<string, DateTimeFormatter>
