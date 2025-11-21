@@ -9,26 +9,45 @@ const convertValueToDate = (value?: Date | string): Date | undefined => {
   return value
 }
 
+const normalizeFormatted = (formatted: string, locale?: string): string => {
+  const lowerLocale = locale?.toLowerCase()
+
+  if (lowerLocale === 'sv-se') {
+    return formatted.replace('.', '')
+  }
+
+  if (lowerLocale === 'sv-se') {
+    return formatted.replace(' kl ', ', ')
+  }
+
+  if (lowerLocale === 'en-gb' || lowerLocale === 'en-us') {
+    return formatted.replace(' at ', ', ')
+  }
+  return formatted
+}
+
 export const dateTimeFormats = {
   dateOnlyNumbers: (value, locale) =>
     new Intl.DateTimeFormat(locale, { dateStyle: 'short' }).format(
       convertValueToDate(value),
     ),
-  dateLong: (value, locale) =>
-    new Intl.DateTimeFormat(locale, { dateStyle: 'long' }).format(
-      convertValueToDate(value),
-    ),
-  dateLongWithWeekday: (value, locale) =>
-    new Intl.DateTimeFormat(locale, { dateStyle: 'full' }).format(
-      convertValueToDate(value),
-    ),
+  dateLong: (value, locale) => {
+    const formatted = new Intl.DateTimeFormat(locale, {
+      dateStyle: 'long',
+    }).format(convertValueToDate(value))
+    return normalizeFormatted(formatted, locale)
+  },
+  dateLongWithWeekday: (value, locale) => {
+    const formatted = new Intl.DateTimeFormat(locale, {
+      dateStyle: 'full',
+    }).format(convertValueToDate(value))
+    return normalizeFormatted(formatted, locale)
+  },
   dateShort: (value, locale) => {
-    const formatter = new Intl.DateTimeFormat(locale, { dateStyle: 'medium' })
-    if (locale?.toLowerCase() === 'sv-se') {
-      return formatter.format(convertValueToDate(value)).replace('.', '')
-    }
-
-    return formatter.format(convertValueToDate(value))
+    const formatted = new Intl.DateTimeFormat(locale, {
+      dateStyle: 'medium',
+    }).format(convertValueToDate(value))
+    return normalizeFormatted(formatted, locale)
   },
   dateShortWithWeekday: (value, locale) => {
     const formatted = new Intl.DateTimeFormat(locale, {
@@ -37,15 +56,7 @@ export const dateTimeFormats = {
       month: 'short',
       day: 'numeric',
     }).format(convertValueToDate(value))
-
-    if (locale?.toLowerCase() === 'sv-se') {
-      return formatted.replace('.', '')
-    }
-    if (locale?.toLowerCase() === 'en-gb') {
-      return formatted.replace(',', '')
-    }
-
-    return formatted
+    return normalizeFormatted(formatted, locale)
   },
   timeShort: (value, locale) =>
     new Intl.DateTimeFormat(locale, { timeStyle: 'short' }).format(
@@ -55,4 +66,25 @@ export const dateTimeFormats = {
     new Intl.DateTimeFormat(locale, { timeStyle: 'medium' }).format(
       convertValueToDate(value),
     ),
+  dateTimeLong: (value, locale) => {
+    const formatted = new Intl.DateTimeFormat(locale, {
+      dateStyle: 'long',
+      timeStyle: 'short',
+    }).format(convertValueToDate(value))
+    return normalizeFormatted(formatted, locale)
+  },
+  dateTimeLongWithWeekday: (value, locale) => {
+    const formatted = new Intl.DateTimeFormat(locale, {
+      dateStyle: 'full',
+      timeStyle: 'short',
+    }).format(convertValueToDate(value))
+    return normalizeFormatted(formatted, locale)
+  },
+  dateTimeShort: (value, locale) => {
+    const formatted = new Intl.DateTimeFormat(locale, {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+    }).format(convertValueToDate(value))
+    return normalizeFormatted(formatted, locale)
+  },
 } satisfies Record<string, DateTimeFormatter>

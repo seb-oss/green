@@ -654,36 +654,39 @@ export const Metadata: Story = {
     <gds-grid columns="1; m{3}" gap="xl">
       <gds-card-pattern-01
         title="Card title"
-        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         src="https://api.seb.io/assets/launch-hero.jpg"
         category="Components"
-        date="2025-11-20"
+        date="2025-11-04T10:22:00"
+        date-format="dateTimeLong"
+        locale="en-GB"
         href="#"
         label="Read more"
-      >
-      </gds-card-pattern-01>
+      ></gds-card-pattern-01>
 
       <gds-card-pattern-01
         title="Card title"
-        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         src="https://api.seb.io/assets/launch-hero.jpg"
         category="Accessibility"
-        date="2025-11-15"
+        date="2025-06-30T16:59:00"
+        date-format="dateTimeLong"
+        locale="en-GB"
         href="#"
         label="Read more"
-      >
-      </gds-card-pattern-01>
+      ></gds-card-pattern-01>
 
       <gds-card-pattern-01
         title="Card title"
-        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         src="https://api.seb.io/assets/launch-hero.jpg"
         category="Tokens"
-        date="2025-11-10"
+        date="2024-03-12T13:01:00"
+        date-format="dateTimeLong"
+        locale="en-GB"
         href="#"
         label="Read more"
-      >
-      </gds-card-pattern-01>
+      ></gds-card-pattern-01>
     </gds-grid>
   `,
   parameters: {
@@ -692,46 +695,28 @@ export const Metadata: Story = {
         story: `
 Metadata attributes provide contextual information and help organize card content.
 
-**Category:** Classifies the content type for filtering and organization. Displayed as a visual label on the card.
+**Category:** Classifies the content type for filtering and organization.
 
-**Date:** Publication date in ISO 8601 format (YYYY-MM-DD). Automatically adapted with locale-specific display (e.g., "20 nov 2025" for Swedish locale, "Nov 20, 2025" for English).
+**Date:** Publication date in ISO 8601 format. Formatted using \`gds-formatted-date\` component with configurable format and locale.
 
+**Date Format:** Controls the date and time display format (default: \`dateLong\`)
+
+**Locale:** Controls the language and regional formatting (default: \`sv-SE\`)
         `,
       },
       source: {
         code: `
 <gds-card-pattern-01
   title="Card title"
-  excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-  src="https://api.seb.io/assets/launch-hero.jpg"
+  excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  src="image.jpg"
   category="Components"
-  date="2025-11-20"
+  date="2025-11-04T10:22:00"
+  date-format="dateTimeLong"
+  locale="en-GB"
   href="#"
   label="Read more"
->
-</gds-card-pattern-01>
-
-<gds-card-pattern-01
-  title="Card title"
-  excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-  src="https://api.seb.io/assets/launch-hero.jpg"
-  category="Accessibility"
-  date="2025-11-15"
-  href="#"
-  label="Read more"
->
-</gds-card-pattern-01>
-
-<gds-card-pattern-01
-  title="Card title"
-  excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-  src="https://api.seb.io/assets/launch-hero.jpg"
-  category="Tokens"
-  date="2025-11-10"
-  href="#"
-  label="Read more"
->
-</gds-card-pattern-01>
+></gds-card-pattern-01>
         `,
         language: 'html',
         type: 'code',
