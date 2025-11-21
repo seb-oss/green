@@ -49,5 +49,6 @@
     "./react": "./generated/react/index.js",
     "./react/*": "./generated/react/*",
     "./patterns/*": "./patterns/*"
-  }
+  },
+  "customElements": "custom-elements.json"
 }
