@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common'
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import { moduleMetadata } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggvTooltipModule } from '../tooltip/tooltip.module'
 import { NggvInfoCircleComponent } from './info-circle.component'
 
-export default {
+const meta: Meta<NggvInfoCircleComponent> = {
   title: 'V-Angular/Info Circle',
   component: NggvInfoCircleComponent,
   decorators: [
@@ -13,23 +15,23 @@ export default {
       imports: [CommonModule, NggvTooltipModule],
     }),
   ],
-} as Meta
+}
 
-type StoryArgs = NggvInfoCircleComponent
+export default meta
+type Story = StoryObj<NggvInfoCircleComponent>
 
-const Template: StoryFn<StoryArgs> = (args: StoryArgs) => ({
-  template: /*html*/ `
+export const Primary: Story = {
+  render: (args: NggvInfoCircleComponent) => ({
+    template: /*html*/ `
   <div style="height:200px; display:grid; place-content: center;">
     <nggv-info-circle [attr.data-thook]="thook"
     [info]="info">
     </nggv-info-circle>
   </div>`,
-  props: { ...args },
-})
-
-export const Primary = Template.bind({})
-
-Primary.args = {
-  info: 'Very informative and supporting text',
-  thook: 'help-text',
+    props: { ...args },
+  }),
+  args: {
+    info: 'Very informative and supporting text',
+    thook: 'help-text',
+  },
 }

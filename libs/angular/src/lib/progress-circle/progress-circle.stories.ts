@@ -1,9 +1,11 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import { moduleMetadata } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggProgressCircleComponent } from './progress-circle.component'
 import { NggProgressCircleModule } from './progress-circle.module'
 
-export default {
+const meta: Meta<NggProgressCircleComponent> = {
   title: 'Components/Progress Circle',
   component: NggProgressCircleComponent,
   decorators: [
@@ -37,20 +39,23 @@ export default {
     },
   },
   parameters: {},
-} as Meta<NggProgressCircleComponent>
+}
 
-const Template: StoryFn<NggProgressCircleComponent> = (args) => ({
-  template: `
+export default meta
+type Story = StoryObj<NggProgressCircleComponent>
+
+export const Default: Story = {
+  render: (args) => ({
+    template: `
       <ngg-progress-circle [theme]="theme" [value]="value">
         <div>Current progress is</div>
         <div style="margin:6px 0;font-size:32px;font-weight:700;line-height:32px;">70%</div>
         <div>out of 100</div>
       </ngg-progress-circle>`,
-  props: args,
-})
-
-export const Default = Template.bind({})
-Default.args = {
-  theme: 'warning',
-  value: 70,
+    props: args,
+  }),
+  args: {
+    theme: 'warning',
+    value: 70,
+  },
 }

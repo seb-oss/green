@@ -14,13 +14,10 @@ import {
   Validators,
 } from '@angular/forms'
 import { TranslocoModule } from '@jsverse/transloco'
-import {
-  applicationConfig,
-  Meta,
-  moduleMetadata,
-  StoryFn,
-} from '@storybook/angular'
+import { applicationConfig, moduleMetadata, StoryFn } from '@storybook/angular'
 import { Subject } from 'rxjs'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggCoreWrapperModule } from '../../lib/shared'
 import { NggvI18nModule } from '../i18n'
@@ -40,7 +37,7 @@ registerLocaleData(localeSv, 'sv')
 registerLocaleData(localeEn, 'en-GB')
 registerLocaleData(localeEn, 'en')
 
-export default {
+const meta: Meta<DateInputComponent> = {
   title: 'V-Angular/Date Input',
   component: DateInputComponent,
   decorators: [
@@ -109,7 +106,10 @@ export default {
       },
     },
   },
-} as Meta
+}
+
+export default meta
+type Story = StoryObj<DateInputComponent>
 
 type DateStoryArgs = DateInputComponent
 

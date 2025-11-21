@@ -9,13 +9,10 @@ import {
   UntypedFormControl,
   UntypedFormGroup,
 } from '@angular/forms'
-import {
-  applicationConfig,
-  Meta,
-  moduleMetadata,
-  StoryFn,
-} from '@storybook/angular'
+import { applicationConfig, moduleMetadata } from '@storybook/angular'
 import { delay } from 'rxjs/operators'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import { NggvI18nModule } from '../i18n'
@@ -27,9 +24,10 @@ interface StoryInputListener {
   opt1: any
   opt2: any
   opt3: any
+  selected: string
 }
 
-export default {
+const meta: Meta<NggvCheckboxComponent> = {
   title: 'V-Angular/Checkbox',
   component: NggvCheckboxComponent,
   decorators: [
@@ -59,12 +57,14 @@ export default {
       },
     },
   },
-} as Meta
+}
 
-const Template: StoryFn<NggvCheckboxComponent & StoryInputListener> = (
-  args: any,
-) => ({
-  template: /*html*/ `
+export default meta
+type Story = StoryObj<NggvCheckboxComponent & StoryInputListener>
+
+export const Single: Story = {
+  render: (args: any) => ({
+    template: /*html*/ `
     <nggv-checkbox
       id='123'
       [label]="label"
@@ -77,13 +77,24 @@ const Template: StoryFn<NggvCheckboxComponent & StoryInputListener> = (
       [ngModel]="checked"
       (ngModelChange)="action($event)">
     </nggv-checkbox>`,
-  props: { ...args, size: args.size || 'large' },
-})
+    props: { ...args, size: args.size || 'large' },
+  }),
+  args: {
+    checked: false,
+    label: 'Field label',
+    value: 'option',
+    action: console.log,
+    required: true,
+    disabled: false,
+    invalid: false,
+    error: '',
+    locked: false,
+  },
+}
 
-const TemplateAlt: StoryFn<NggvCheckboxComponent & StoryInputListener> = (
-  args: any,
-) => ({
-  template: /*html*/ `
+export const Multiple: Story = {
+  render: (args: any) => ({
+    template: /*html*/ `
     <nggv-checkbox
       [id]="opt1.id" [name]="name" [label]="opt1.label" [value]="opt1.value"
       [size]="size"
@@ -102,35 +113,57 @@ const TemplateAlt: StoryFn<NggvCheckboxComponent & StoryInputListener> = (
       [ngModel]="opt3.ngModel"
       (ngModelChange)="action($event)">
     </nggv-checkbox>`,
-  props: args,
-})
+    props: args,
+  }),
+  args: {
+    name: 'options',
+    opt1: {
+      id: 'opt1',
+      checked: false,
+      label: 'Field label 1',
+      value: 'option1',
+    },
+    opt2: {
+      id: 'opt2',
+      checked: false,
+      label: 'Field label 2',
+      value: 'option2',
+    },
+    opt3: {
+      id: 'opt3',
+      checked: false,
+      label: 'Field label 3',
+      value: 'option3',
+    },
+    action: console.log,
+  },
+}
 
-const TemplateWithReactiveForm: StoryFn<NggvCheckboxComponent & any> = (
-  args: NggvCheckboxComponent & any,
-) => {
-  const grp = new UntypedFormGroup({
-    vanilla: new UntypedFormControl(
-      args.selected === 'vanilla' ? args.selected : null,
-    ),
-    strawberry: new UntypedFormControl(
-      args.selected === 'strawberry' ? args.selected : null,
-    ),
-    chocolate: new UntypedFormControl(
-      args.selected === 'chocolate' ? args.selected : null,
-    ),
-  })
-  grp.valueChanges.pipe(delay(0)).subscribe(console.log)
-  let disabled = true
-  const toggleDisableField = () => {
-    disabled = !disabled
-    if (disabled) {
-      Object.values(grp.controls).forEach((ctrl) => ctrl.enable())
-      return
+export const WithReactiveForm: Story = {
+  render: (args: any) => {
+    const grp = new UntypedFormGroup({
+      vanilla: new UntypedFormControl(
+        args.selected === 'vanilla' ? args.selected : null,
+      ),
+      strawberry: new UntypedFormControl(
+        args.selected === 'strawberry' ? args.selected : null,
+      ),
+      chocolate: new UntypedFormControl(
+        args.selected === 'chocolate' ? args.selected : null,
+      ),
+    })
+    grp.valueChanges.pipe(delay(0)).subscribe(console.log)
+    let disabled = true
+    const toggleDisableField = () => {
+      disabled = !disabled
+      if (disabled) {
+        Object.values(grp.controls).forEach((ctrl) => ctrl.enable())
+        return
+      }
+      Object.values(grp.controls).forEach((ctrl) => ctrl.disable())
     }
-    Object.values(grp.controls).forEach((ctrl) => ctrl.disable())
-  }
-  return {
-    template: /*html*/ `
+    return {
+      template: /*html*/ `
       <label class="gds-field-label" style="margin-bottom: 0.25em">Favorite flavours:</label>
       <div [formGroup]="formGroup">
         <nggv-checkbox id="opt1"
@@ -177,67 +210,33 @@ const TemplateWithReactiveForm: StoryFn<NggvCheckboxComponent & any> = (
         <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
       </div>
     `,
-    props: {
-      ...args,
-      formGroup: grp,
-      disableFn: toggleDisableField,
-      size: args.size || 'large',
-    },
-  }
-}
-
-export const Single = Template.bind({})
-Single.args = {
-  checked: false,
-  label: 'Field label',
-  value: 'option',
-  action: console.log,
-  required: true,
-  disabled: false,
-  invalid: false,
-  error: '',
-  locked: false,
-}
-
-export const Multiple = TemplateAlt.bind({})
-Multiple.args = {
-  name: 'options',
-  opt1: {
-    id: 'opt1',
-    checked: false,
-    label: 'Field label 1',
-    value: 'option1',
+      props: {
+        ...args,
+        formGroup: grp,
+        disableFn: toggleDisableField,
+        size: args.size || 'large',
+      },
+    }
   },
-  opt2: {
-    id: 'opt2',
-    checked: false,
-    label: 'Field label 2',
-    value: 'option2',
+  args: {
+    name: 'iceCream',
+    selected: 'chocolate',
   },
-  opt3: {
-    id: 'opt3',
-    checked: false,
-    label: 'Field label 3',
-    value: 'option3',
+}
+
+export const WithLockedInput: Story = {
+  render: WithReactiveForm.render,
+  args: {
+    ...WithReactiveForm.args,
+    locked: true,
   },
-  action: console.log,
 }
 
-export const WithReactiveForm = TemplateWithReactiveForm.bind({})
-WithReactiveForm.args = {
-  name: 'iceCream',
-  selected: 'chocolate',
-}
-
-export const WithLockedInput = TemplateWithReactiveForm.bind({})
-WithLockedInput.args = {
-  ...WithReactiveForm.args,
-  locked: true,
-}
-
-export const WithDisplayDisabledAsLocked = TemplateWithReactiveForm.bind({})
-WithDisplayDisabledAsLocked.args = {
-  ...WithReactiveForm.args,
-  locked: false,
-  displayDisabledAsLocked: true,
+export const WithDisplayDisabledAsLocked: Story = {
+  render: WithReactiveForm.render,
+  args: {
+    ...WithReactiveForm.args,
+    locked: false,
+    displayDisabledAsLocked: true,
+  },
 }

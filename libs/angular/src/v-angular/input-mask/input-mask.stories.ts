@@ -7,13 +7,10 @@ import {
   ReactiveFormsModule,
   UntypedFormControl,
 } from '@angular/forms'
+import { applicationConfig, moduleMetadata } from '@storybook/angular'
+
 // import { NggvI18nModule } from '@sebgroup/nggv-i18n';
-import {
-  applicationConfig,
-  Meta,
-  moduleMetadata,
-  StoryFn,
-} from '@storybook/angular'
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { createMask } from './constants'
 import { NggvInputMaskModule } from './input-mask.module'
@@ -27,8 +24,8 @@ interface WithExtras {
 }
 
 @Component({
-    selector: 'nggv-input-mask-story',
-    template: `
+  selector: 'nggv-input-mask-story',
+  template: `
     <div class="container">
       <div class="row">
         <div class="column">
@@ -103,8 +100,8 @@ interface WithExtras {
       </div>
     </div>
   `,
-    styles: [
-        `
+  styles: [
+    `
       * {
         box-sizing: border-box;
         width: 100%;
@@ -130,8 +127,8 @@ interface WithExtras {
         clear: both;
       }
     `,
-    ],
-    standalone: false
+  ],
+  standalone: false,
 })
 class NggvInputMaskStoryComponent {
   dateFC = new UntypedFormControl('')
@@ -167,7 +164,7 @@ class NggvInputMaskStoryComponent {
   ipAddressMask = createMask({ alias: 'ip' })
 }
 
-export default {
+const meta: Meta<NggvInputMaskStoryComponent> = {
   title: 'V-Angular/Input mask',
   component: NggvInputMaskStoryComponent,
   decorators: [
@@ -187,15 +184,14 @@ export default {
       ],
     }),
   ],
-} as Meta
+}
 
-const Template: StoryFn<NggvInputMaskStoryComponent & WithExtras> = (
-  args: NggvInputMaskStoryComponent & WithExtras,
-) => ({
-  props: args,
-})
+export default meta
+type Story = StoryObj<NggvInputMaskStoryComponent>
 
-export const Primary = Template.bind({})
-Primary.args = {
-  ...Primary.args,
+export const Primary: Story = {
+  render: (args) => ({
+    props: args,
+  }),
+  args: {},
 }

@@ -7,13 +7,15 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms'
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import { moduleMetadata } from '@storybook/angular'
 import { startOfYear, subYears } from 'date-fns'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { dateValidator, NggDatepickerComponent } from './datepicker.component'
 import { NggDatepickerModule } from './datepicker.module'
 
-export default {
+const meta: Meta<NggDatepickerComponent> = {
   title: 'Components/Datepicker',
   component: NggDatepickerComponent,
   decorators: [
@@ -35,49 +37,57 @@ export default {
       },
     },
   },
-} as Meta<NggDatepickerComponent>
-
-const Template: StoryFn<NggDatepickerComponent> = (args) => ({
-  props: args,
-})
-
-export const Simple = Template.bind({})
-Simple.args = {
-  value: '10/10/2021',
-  label: 'Date',
 }
 
-export const CustomOptions = Template.bind({})
-CustomOptions.args = {
-  label: 'Birthday',
-  disabledWeekends: true,
-  disabledDates: [new Date(2024, 1, 6), new Date(2023, 12, 4)],
-  options: {
-    minDate: startOfYear(subYears(new Date(), 100)),
-    maxDate: new Date(),
-    showWeeks: true,
-    dateFormat: 'd/m/y',
+export default meta
+type Story = StoryObj<NggDatepickerComponent>
+
+export const Simple: Story = {
+  render: (args) => ({
+    props: args,
+  }),
+  args: {
+    value: '10/10/2021',
+    label: 'Date',
   },
 }
 
-const FormControlTemplate: StoryFn<NggDatepickerComponent> = (args) => {
-  const validationForm = new FormGroup({
-    date: new FormControl(undefined, [
-      Validators.required,
-      dateValidator({
-        min: args.options?.minDate,
-        max: args.options?.maxDate,
-      }),
-    ]),
-  })
+export const CustomOptions: Story = {
+  render: (args) => ({
+    props: args,
+  }),
+  args: {
+    label: 'Birthday',
+    disabledWeekends: true,
+    disabledDates: [new Date(2024, 1, 6), new Date(2023, 12, 4)],
+    options: {
+      minDate: startOfYear(subYears(new Date(), 100)),
+      maxDate: new Date(),
+      showWeeks: true,
+      dateFormat: 'd/m/y',
+    },
+  },
+}
 
-  const save = (form: any) => {
-    console.log('Saved!', form)
-  }
+export const Form: Story = {
+  render: (args) => {
+    const validationForm = new FormGroup({
+      date: new FormControl(undefined, [
+        Validators.required,
+        dateValidator({
+          min: args.options?.minDate,
+          max: args.options?.maxDate,
+        }),
+      ]),
+    })
 
-  return {
-    component: NggDatepickerComponent,
-    template: `
+    const save = (form: any) => {
+      console.log('Saved!', form)
+    }
+
+    return {
+      component: NggDatepickerComponent,
+      template: `
 <form [formGroup]="validationForm" #ngForm="ngForm" (submit)="save(validationForm.value)">
   <ng-container *ngIf="validationForm.get('date') as date">
     <ngg-datepicker
@@ -128,20 +138,19 @@ const FormControlTemplate: StoryFn<NggDatepickerComponent> = (args) => {
   </code>
 </form>
     `,
-    props: {
-      ...args,
-      validationForm,
-      save,
+      props: {
+        ...args,
+        validationForm,
+        save,
+      },
+    }
+  },
+  args: {
+    label: 'Birthday',
+    options: {
+      minDate: startOfYear(subYears(new Date(), 100)),
+      maxDate: new Date(),
+      showWeeks: true,
     },
-  }
-}
-
-export const Form = FormControlTemplate.bind({})
-Form.args = {
-  label: 'Birthday',
-  options: {
-    minDate: startOfYear(subYears(new Date(), 100)),
-    maxDate: new Date(),
-    showWeeks: true,
   },
 }

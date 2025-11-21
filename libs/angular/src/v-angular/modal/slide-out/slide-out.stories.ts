@@ -2,12 +2,9 @@
 import { CommonModule } from '@angular/common'
 import { importProvidersFrom } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import {
-  applicationConfig,
-  Meta,
-  moduleMetadata,
-  StoryFn,
-} from '@storybook/angular'
+import { applicationConfig, moduleMetadata } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import { DropdownUtils } from '../../core'
@@ -20,7 +17,7 @@ interface WithExtras {
   outsideContent: boolean
 }
 
-export default {
+const meta: Meta<NggvSlideOutComponent & WithExtras> = {
   title: 'V-Angular/Slide Out',
   component: NggvSlideOutComponent,
   decorators: [
@@ -55,7 +52,10 @@ export default {
       },
     },
   },
-} as Meta
+}
+
+export default meta
+type Story = StoryObj<NggvSlideOutComponent & WithExtras>
 
 const options = [
   { key: 'opt1', label: 'label.defaultlabel', accountNumber: '345345' },
@@ -91,8 +91,9 @@ const dropdownArgs = {
   options,
 }
 
-const Template: StoryFn<NggvSlideOutComponent & WithExtras> = (args: any) => ({
-  template: /* html */ `
+export const Primary: Story = {
+  render: (args: any) => ({
+    template: /* html */ `
     <nggv-slideout-modal #slideOut
       [initiallyShown]="initiallyShown"
       [closable]="closable"
@@ -132,36 +133,39 @@ const Template: StoryFn<NggvSlideOutComponent & WithExtras> = (args: any) => ({
     </nggv-slideout-modal>
     <button class="gds-button" (click)="slideOut.open()">Open slide-out</button>
     `,
-  props: args,
-})
-
-export const Primary = Template.bind({})
-Primary.args = {
-  initiallyShown: true,
-  autoWidth: false,
-  closable: true,
-  buttons: {
-    negative: 'button_cancel',
-    neutral: 'button_apply',
-    positive: 'button_save',
+    props: args,
+  }),
+  args: {
+    initiallyShown: true,
+    autoWidth: false,
+    closable: true,
+    buttons: {
+      negative: 'button_cancel',
+      neutral: 'button_apply',
+      positive: 'button_save',
+    },
+    side: 'right',
+    title: 'Modal title',
+    content: 'Some content in the content div.\n\nSupports line breaks',
+    ...dropdownArgs,
+    action: ((closed: boolean) => console.log('is closed?', closed)) as any,
   },
-  side: 'right',
-  title: 'Modal title',
-  content: 'Some content in the content div.\n\nSupports line breaks',
-  ...dropdownArgs,
-  action: ((closed: boolean) => console.log('is closed?', closed)) as any,
 }
 
-export const WithSlottedContent = Template.bind({})
-WithSlottedContent.args = {
-  ...Primary.args,
-  title: 'Modal title for with slotted content',
-  outsideContent: true,
+export const WithSlottedContent: Story = {
+  render: Primary.render,
+  args: {
+    ...Primary.args,
+    title: 'Modal title for with slotted content',
+    outsideContent: true,
+  },
 }
 
-export const WithAutoWidthEnabled = Template.bind({})
-WithAutoWidthEnabled.args = {
-  ...Primary.args,
-  title: 'Modal title for wider modal',
-  autoWidth: true,
+export const WithAutoWidthEnabled: Story = {
+  render: Primary.render,
+  args: {
+    ...Primary.args,
+    title: 'Modal title for wider modal',
+    autoWidth: true,
+  },
 }

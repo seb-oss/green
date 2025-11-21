@@ -3,7 +3,12 @@ import '../core/core.globals'
 import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
 
 import { CommonModule } from '@angular/common'
-import { CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom, inject, provideAppInitializer } from '@angular/core'
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  importProvidersFrom,
+  inject,
+  provideAppInitializer,
+} from '@angular/core'
 import {
   AbstractControl,
   ReactiveFormsModule,
@@ -103,9 +108,11 @@ const meta: Meta<NggvInputComponent> = {
       providers: [
         importProvidersFrom(NggvI18nModule),
         provideAppInitializer(() => {
-        const initializerFn = (translocoStorybookInitializer)(inject(TranslocoService));
-        return initializerFn();
-      }),
+          const initializerFn = translocoStorybookInitializer(
+            inject(TranslocoService),
+          )
+          return initializerFn()
+        }),
         DropdownUtils,
       ],
     }),
@@ -271,9 +278,9 @@ WithCustomLabel.args = {
 }
 
 const resettime = 3000
-const resetObservable$ = new Observable((subscriber) => {
+const resetObservable$ = new Observable<void>((subscriber) => {
   setInterval(() => {
-    subscriber.next()
+    subscriber.next(undefined)
   }, resettime)
 })
 
@@ -717,7 +724,7 @@ const TemplateWithTypeAhead: StoryFn<NggvInputComponent & WithExtras> = (
         [size]="size"
         [autocomplete]="'off'">
       </nggv-input>
-      
+
     `,
     styles: [
       /*css*/ `

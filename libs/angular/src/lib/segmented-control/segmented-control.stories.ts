@@ -6,22 +6,23 @@ import { RouterModule, Routes } from '@angular/router'
 import {
   applicationConfig,
   componentWrapperDecorator,
-  Meta,
   moduleMetadata,
 } from '@storybook/angular'
 import { of } from 'rxjs'
 
+import type { Meta, StoryObj } from '@storybook/angular'
+
 import { NggSegmentedControlComponent } from './segmented-control.component'
 
 @Component({
-    template: ` <p class="mt-4">Option A</p> `,
-    standalone: false
+  template: ` <p class="mt-4">Option A</p> `,
+  standalone: false,
 })
 class OptionAComponent {}
 
 @Component({
-    template: ` <p class="mt-4">Option B</p> `,
-    standalone: false
+  template: ` <p class="mt-4">Option B</p> `,
+  standalone: false,
 })
 class OptionBComponent {}
 
@@ -36,7 +37,7 @@ const routes: Routes = [
   },
 ]
 
-export default {
+const meta: Meta = {
   title: 'Components/Segmented control',
   component: NggSegmentedControlComponent,
   parameters: {
@@ -54,13 +55,18 @@ export default {
       (story) => `${story}<router-outlet></router-outlet>`,
     ),
   ],
-} as Meta
+}
 
-export const WithRouter = () => ({
-  props: {
-    $controls: of([
-      { text: 'Option A', url: '/option-a' },
-      { text: 'Option B', url: '/option-b' },
-    ]),
-  },
-})
+export default meta
+type Story = StoryObj
+
+export const WithRouter: Story = {
+  render: () => ({
+    props: {
+      $controls: of([
+        { text: 'Option A', url: '/option-a' },
+        { text: 'Option B', url: '/option-b' },
+      ]),
+    },
+  }),
+}

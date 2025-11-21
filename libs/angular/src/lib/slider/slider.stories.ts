@@ -1,9 +1,15 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import { moduleMetadata } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggSliderComponent } from './slider.component'
 import { NggSliderModule } from './slider.module'
 
-export default {
+interface SliderStoryArgs {
+  defaultValue: number
+}
+
+const meta: Meta<NggSliderComponent & SliderStoryArgs> = {
   title: 'Components/Slider',
   component: NggSliderComponent,
   decorators: [
@@ -88,10 +94,22 @@ export default {
       },
     },
   },
-} as Meta<NggSliderComponent>
+}
 
-const Template: StoryFn<NggSliderComponent> = (args) => {
-  return {
+export default meta
+type Story = StoryObj<NggSliderComponent>
+
+const DefaultArgs = {
+  label: 'Slider label text in one line',
+  instruction: 'Element instruction',
+  defaultValue: 50,
+  min: 0,
+  max: 100,
+  step: 1,
+}
+
+export const Default: Story = {
+  render: (args) => ({
     template: `
       <ngg-slider
         [label]="label"
@@ -111,46 +129,123 @@ const Template: StoryFn<NggSliderComponent> = (args) => {
     props: {
       ...args,
     },
-  }
+  }),
+  args: {
+    ...DefaultArgs,
+  },
 }
 
-const DefaultArgs = {
-  label: 'Slider label text in one line',
-  instruction: 'Element instruction',
-  defaultValue: 50,
-  min: 0,
-  max: 100,
-  step: 1,
+export const Textbox: Story = {
+  render: (args) => ({
+    template: `
+      <ngg-slider
+        [label]="label"
+        [instruction]="instruction"
+        placeholder="%"
+        [value]="defaultValue"
+        [min]="min"
+        [max]="max"
+        [step]="step"
+        [hasTextbox]="hasTextbox"
+        [unitLabel]="unitLabel"
+        [disabled]="disabled"
+        [errorMessage]="errorMessage"
+      >
+      </ngg-slider>
+    `,
+    props: {
+      ...args,
+    },
+  }),
+  args: {
+    hasTextbox: true,
+    ...DefaultArgs,
+  },
 }
 
-export const Default = Template.bind({})
-Default.args = {
-  ...DefaultArgs,
+export const UnitTextbox: Story = {
+  render: (args) => ({
+    template: `
+      <ngg-slider
+        [label]="label"
+        [instruction]="instruction"
+        placeholder="%"
+        [value]="defaultValue"
+        [min]="min"
+        [max]="max"
+        [step]="step"
+        [hasTextbox]="hasTextbox"
+        [unitLabel]="unitLabel"
+        [disabled]="disabled"
+        [errorMessage]="errorMessage"
+      >
+      </ngg-slider>
+    `,
+    props: {
+      ...args,
+    },
+  }),
+  args: {
+    hasTextbox: true,
+    unitLabel: 'kr',
+    ...DefaultArgs,
+  },
 }
 
-export const Textbox = Template.bind({})
-Textbox.args = {
-  hasTextbox: true,
-  ...DefaultArgs,
+export const Error: Story = {
+  render: (args) => ({
+    template: `
+      <ngg-slider
+        [label]="label"
+        [instruction]="instruction"
+        placeholder="%"
+        [value]="defaultValue"
+        [min]="min"
+        [max]="max"
+        [step]="step"
+        [hasTextbox]="hasTextbox"
+        [unitLabel]="unitLabel"
+        [disabled]="disabled"
+        [errorMessage]="errorMessage"
+      >
+      </ngg-slider>
+    `,
+    props: {
+      ...args,
+    },
+  }),
+  args: {
+    hasTextbox: true,
+    errorMessage: 'Error text can be quite long',
+    ...DefaultArgs,
+  },
 }
 
-export const UnitTextbox = Template.bind({})
-UnitTextbox.args = {
-  hasTextbox: true,
-  unitLabel: 'kr',
-  ...DefaultArgs,
-}
-
-export const Error = Template.bind({})
-Error.args = {
-  hasTextbox: true,
-  errorMessage: 'Error text can be quite long',
-  ...DefaultArgs,
-}
-
-export const Disabled = Template.bind({})
-Disabled.args = {
-  hasTextbox: true,
-  disabled: true,
-  ...DefaultArgs,
+export const Disabled: Story = {
+  render: (args) => ({
+    template: `
+      <ngg-slider
+        [label]="label"
+        [instruction]="instruction"
+        placeholder="%"
+        [value]="defaultValue"
+        [min]="min"
+        [max]="max"
+        [step]="step"
+        [hasTextbox]="hasTextbox"
+        [unitLabel]="unitLabel"
+        [disabled]="disabled"
+        [errorMessage]="errorMessage"
+      >
+      </ngg-slider>
+    `,
+    props: {
+      ...args,
+    },
+  }),
+  args: {
+    hasTextbox: true,
+    disabled: true,
+    ...DefaultArgs,
+  },
 }
