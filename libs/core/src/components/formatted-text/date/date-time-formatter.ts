@@ -13,7 +13,7 @@ const normalizeDateTime = (formatted: string, locale?: string): string => {
   const lowerLocale = locale?.toLowerCase()
 
   if (lowerLocale === 'sv-se') {
-    return formatted.replace(' kl ', ', ')
+    return formatted.replace(' kl. ', ', ').replace(' kl ', ', ')
   }
 
   if (lowerLocale === 'en-gb' || lowerLocale === 'en-us') {

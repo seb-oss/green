@@ -119,10 +119,10 @@ export class GdsCardPattern01 extends withSizeXProps(
 
   /**
    * Locale for date formatting (e.g., 'sv-SE', 'en-GB', 'en-US')
-   * @default 'sv-SE'
+   * @default 'en-GB'
    */
   @property({ reflect: false })
-  locale = 'sv-SE'
+  locale = 'en-GB'
 
   /**
    * Checks if footer content exists

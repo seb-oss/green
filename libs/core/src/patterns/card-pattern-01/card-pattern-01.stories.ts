@@ -658,8 +658,6 @@ export const Metadata: Story = {
         src="https://api.seb.io/assets/launch-hero.jpg"
         category="Components"
         date="2025-11-04T10:22:00"
-        date-format="dateTimeLong"
-        locale="en-GB"
         href="#"
         label="Read more"
       ></gds-card-pattern-01>
@@ -670,8 +668,6 @@ export const Metadata: Story = {
         src="https://api.seb.io/assets/launch-hero.jpg"
         category="Accessibility"
         date="2025-06-30T16:59:00"
-        date-format="dateTimeLong"
-        locale="en-GB"
         href="#"
         label="Read more"
       ></gds-card-pattern-01>
@@ -682,8 +678,6 @@ export const Metadata: Story = {
         src="https://api.seb.io/assets/launch-hero.jpg"
         category="Tokens"
         date="2024-03-12T13:01:00"
-        date-format="dateTimeLong"
-        locale="en-GB"
         href="#"
         label="Read more"
       ></gds-card-pattern-01>
@@ -701,7 +695,7 @@ Metadata attributes provide contextual information and help organize card conten
 
 **Date Format:** Controls the date and time display format (default: \`dateLong\`)
 
-**Locale:** Controls the language and regional formatting (default: \`sv-SE\`)
+**Locale:** Controls the language and regional formatting (default: \`en-GB\`)
         `,
       },
       source: {
@@ -712,8 +706,6 @@ Metadata attributes provide contextual information and help organize card conten
   src="image.jpg"
   category="Components"
   date="2025-11-04T10:22:00"
-  date-format="dateTimeLong"
-  locale="en-GB"
   href="#"
   label="Read more"
 ></gds-card-pattern-01>
