@@ -9,20 +9,6 @@ const convertValueToDate = (value?: Date | string): Date | undefined => {
   return value
 }
 
-const normalizeDateTime = (formatted: string, locale?: string): string => {
-  const lowerLocale = locale?.toLowerCase()
-
-  if (lowerLocale === 'sv-se') {
-    return formatted.replace(' kl. ', ', ').replace(' kl ', ', ')
-  }
-
-  if (lowerLocale === 'en-gb' || lowerLocale === 'en-us') {
-    return formatted.replace(' at ', ', ')
-  }
-
-  return formatted
-}
-
 export const dateTimeFormats = {
   dateOnlyNumbers: (value, locale) =>
     new Intl.DateTimeFormat(locale, { dateStyle: 'short' }).format(
@@ -70,24 +56,21 @@ export const dateTimeFormats = {
       convertValueToDate(value),
     ),
   dateTimeLong: (value, locale) => {
-    const formatted = new Intl.DateTimeFormat(locale, {
+    return new Intl.DateTimeFormat(locale, {
       dateStyle: 'long',
       timeStyle: 'short',
     }).format(convertValueToDate(value))
-    return normalizeDateTime(formatted, locale)
   },
   dateTimeLongWithWeekday: (value, locale) => {
-    const formatted = new Intl.DateTimeFormat(locale, {
+    return new Intl.DateTimeFormat(locale, {
       dateStyle: 'full',
       timeStyle: 'short',
     }).format(convertValueToDate(value))
-    return normalizeDateTime(formatted, locale)
   },
   dateTimeShort: (value, locale) => {
-    const formatted = new Intl.DateTimeFormat(locale, {
+    return new Intl.DateTimeFormat(locale, {
       dateStyle: 'medium',
       timeStyle: 'short',
     }).format(convertValueToDate(value))
-    return normalizeDateTime(formatted, locale)
   },
 } satisfies Record<string, DateTimeFormatter>

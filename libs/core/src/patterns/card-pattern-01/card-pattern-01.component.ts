@@ -109,17 +109,13 @@ export class GdsCardPattern01 extends withSizeXProps(
   date = ''
 
   /**
-   * Date format to use for displaying the date
-   * Available formats: dateLong, dateLongWithWeekday, dateShort, dateShortWithWeekday,
-   * dateOnlyNumbers, timeShort, timeLong, dateTimeLong, dateTimeLongWithWeekday, dateTimeShort
-   * @default 'dateTimeLong'
+   * Date format to use for displaying the date. Check the GdsFormattedDate component for more details on accepted formats.
    */
   @property({ reflect: false, attribute: 'date-format' })
   dateFormat: DateTimeFormat = 'dateTimeLong'
 
   /**
    * Locale for date formatting (e.g., 'sv-SE', 'en-GB', 'en-US')
-   * @default 'en-GB'
    */
   @property({ reflect: false })
   locale = 'en-GB'
