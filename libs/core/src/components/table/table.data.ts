@@ -361,20 +361,17 @@ export const Feedback = {
     {
       key: 'feedback',
       label: 'Feedback',
-      sortable: true,
       width: '350px',
     },
     {
       key: 'notes',
       label: 'Notes',
-      sortable: true,
       align: 'start',
       width: '300px',
     },
     {
       key: 'department',
       label: 'Department',
-      sortable: true,
       align: 'start',
       width: '120px',
     },

@@ -163,10 +163,6 @@ export const Formatting: Story = {
     docs: {
       description: {
         story: `
-Provides granular control over table layout and content presentation while keeping the benefits of a semantic table.
-
----
-
 **Column justification** <br />
 Default alignment is left (start), with options to justify content to the right (end), and supports space-between layouts. <br /> Example: in email columns where cell value and action buttons need clear distinction and consistent alignment across rows.
 
