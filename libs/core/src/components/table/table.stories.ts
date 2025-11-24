@@ -106,6 +106,40 @@ export const Selection: Story = {
     data: Users.Data,
     selectable: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+The \`selectable\` property enables row-level selection with a checkbox column. Provides comprehensive selection control:
+- Individual row selection
+- Select/deselect all rows via header checkbox
+- Partial selection state indication
+
+---
+
+#### Selection Events
+When rows are selected, the table emits a \`gds-table-selection\` event containing:
+- Selected row indices
+- Selected row data
+- Total selection count
+
+---
+
+#### Footer Selection Summary
+- Displays number of selected rows
+- Provides a "Clear" button to reset selection
+
+---
+
+#### Methods
+- \`selectAll()\`: Select all rows
+- \`clearSelection()\`: Deselect all rows
+- \`setSelection(indices)\`: Select specific rows
+- \`getSelection()\`: Retrieve selected rows
+        `,
+      },
+    },
+  },
   render: (args) => html`
     <gds-table
       ?selectable="${args.selectable}"
@@ -119,15 +153,62 @@ export const Selection: Story = {
 // FEATURES - SEARCH & FILTERING
 // ============================================================================
 
-export const searchable: Story = {
+export const Filtering: Story = {
   args: {
     columns: Users.Columns,
     data: Users.Data,
     searchable: true,
     settings: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+#### Search Functionality
+The \`searchable\` property adds a search input to the table, enabling real-time filtering across all columns.
+
+#### Column Settings
+The \`settings\` property adds a column visibility dropdown, allowing users to show/hide specific columns.
+        `,
+      },
+    },
+  },
   render: (args) => html`
     <gds-table
+      ?searchable="${args.searchable}"
+      ?settings="${args.settings}"
+      .columns="${args.columns}"
+      .data="${args.data}"
+    ></gds-table>
+  `,
+}
+
+// ============================================================================
+// FEATURES - Caching
+// ============================================================================
+
+export const Caching: Story = {
+  args: {
+    columns: Users.Columns,
+    data: Users.Data,
+    searchable: true,
+    settings: true,
+    nocache: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+The \`nocache\` property provides direct control over data retrieval. When set to \`true\`, the table bypasses its internal caching mechanism, fetching fresh data on each request. By default, the table caches sorted and filtered results for 5 minutes to improve performance.
+
+> Note: The example is simulated with a mock data provider introducing a 1000ms delay to demonstrate real-world data fetching scenarios.
+        `,
+      },
+    },
+  },
+  render: (args) => html`
+    <gds-table
+      ?nocache="${args.nocache}"
       ?searchable="${args.searchable}"
       ?settings="${args.settings}"
       .columns="${args.columns}"
@@ -145,8 +226,29 @@ export const Sorting: Story = {
     columns: Users.Columns,
     data: Users.Data,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+Sorting is enabled by setting \`sortable: true\` on column configuration. <br />
+Clicking a sortable column header toggles between ascending and descending order, resetting the table to the first page. <br />
+The sorting mechanism generates a unique cache key, caching sorted results for 5 minutes, and emits a \`gds-table-data-loaded\` event with the sorted data.
+        `,
+      },
+    },
+  },
   render: (args) => html`
-    <gds-table .columns="${args.columns}" .data="${args.data}"></gds-table>
+    <gds-table .columns="${args.columns}" .data="${args.data}">
+      <template name="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
+      <template name="download-image">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
+      </template>
+    </gds-table>
   `,
 }
 
@@ -180,9 +282,6 @@ Cells can be vertically aligned to start (default centered). Recommended to alig
 
 **Sortable columns** <br />
 When justified to the right, sorting indicator appears on the left. Column label positioned to the right of the indicator.
-
-
-
         `,
       },
     },

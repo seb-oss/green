@@ -28,44 +28,94 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   #cacheDuration = 5 * 60 * 1000
   #templateCache = new Map<string, HTMLTemplateElement>()
 
+  /**
+   * Configurable options for rows per page.
+   * Accepts: number array (e.g., `[5, 10, 20, 50, 100]`)
+   */
   @property({ type: Array })
   options = [5, 10, 20, 50, 100]
 
+  /**
+   * Current page number in pagination.
+   */
   @property({ type: Number })
   page = 1
 
+  /**
+   * Number of rows displayed per page.
+   */
   @property({ type: Number })
   rows = 10
 
+  /**
+   * Defines table column structure.
+   * Accepts: array of column configurations with keys, labels, etc.
+   */
   @property({ type: Array })
   columns: Types.Column[] = []
 
+  /**
+   * Asynchronous data provider function.
+   * Accepts: function that returns Promise with rows and total count
+   */
   @property()
   data!: (request: Types.Request) => Promise<Types.Response<T>>
 
+  /**
+   * Controls row density.
+   * Accepts: `comfortable`, `compact`, `spacious`
+   */
   @property({ reflect: false })
   density: Types.Density = 'comfortable'
 
+  /**
+   * Enables row selection functionality.
+   */
   @property({ type: Boolean, reflect: false })
   selectable = false
 
+  /**
+   * Transforms table layout for mobile screens.
+   */
   @property({ type: Boolean, reflect: false })
   responsive = false
 
+  /**
+   * Removes table header and footer.
+   */
   @property({ type: Boolean, reflect: false })
   plain = false
 
+  /**
+   * Adds search input for data filtering.
+   */
   @property({ type: Boolean, reflect: false })
   searchable = false
 
+  /**
+   * Enables column visibility settings.
+   */
   @property({ type: Boolean, reflect: false })
   settings = false
 
+  /**
+   * Applies alternating row background colors.
+   */
   @property({ type: Boolean, reflect: false })
   striped = false
 
+  /**
+   * Defines row-level actions.
+   * Accepts: action configuration or custom rendering function
+   */
   @property()
   actions?: Types.Actions | ((row: T, index: number) => any)
+
+  /**
+   * Disables data caching mechanism.
+   */
+  @property({ type: Boolean, reflect: false })
+  nocache = false
 
   @state()
   private view: Types.State = {
@@ -135,14 +185,16 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   async #loadData() {
     if (!this.data) return
 
-    const cacheKey = this.#getCacheKey()
-    const cachedData = this.#cache[cacheKey]
+    if (!this.nocache) {
+      const cacheKey = this.#getCacheKey()
+      const cachedData = this.#cache[cacheKey]
 
-    if (cachedData && this.#isCacheValid(cachedData)) {
-      this.rowsState = cachedData.rows
-      this.total = cachedData.total
-      this.loaded = false
-      return
+      if (cachedData && this.#isCacheValid(cachedData)) {
+        this.rowsState = cachedData.rows
+        this.total = cachedData.total
+        this.loaded = false
+        return
+      }
     }
 
     this.loading = true
@@ -157,10 +209,19 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         searchQuery: this.view.searchQuery,
       })
 
-      this.#cache[cacheKey] = {
+      /*  this.#cache[cacheKey] = {
         rows: response.rows,
         total: response.total,
         timestamp: Date.now(),
+      } */
+
+      if (!this.nocache) {
+        const cacheKey = this.#getCacheKey()
+        this.#cache[cacheKey] = {
+          rows: response.rows,
+          total: response.total,
+          timestamp: Date.now(),
+        }
       }
 
       this.rowsState = response.rows
