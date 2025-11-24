@@ -101,7 +101,8 @@ export const TableStyles = css`
 
   thead tr th:first-child,
   tbody tr:hover td:first-child,
-  tbody tr.selected td:first-child {
+  tbody tr.selected td:first-child,
+  .striped tbody tr td:first-child {
     border-top-left-radius: var(--gds-sys-radius-s);
     border-bottom-left-radius: var(--gds-sys-radius-s);
   }
@@ -109,7 +110,8 @@ export const TableStyles = css`
   thead tr th:last-child,
   tbody tr td:last-child,
   tbody tr:hover td:last-child,
-  tbody tr.selected td:last-child {
+  tbody tr.selected td:last-child,
+  .striped tbody tr td:last-child {
     border-top-right-radius: var(--gds-sys-radius-s);
     border-bottom-right-radius: var(--gds-sys-radius-s);
   }
@@ -274,6 +276,7 @@ export const TableStyles = css`
     display: flex;
     align-items: center;
     gap: calc(var(--table-gap) * 0.8);
+    width: max-content;
   }
 
   /* Footer specific styling */
@@ -338,6 +341,10 @@ export const TableStyles = css`
 
   th.actions {
     padding-inline: 0;
+  }
+
+  th.actions.justify-end .column-header {
+    justify-content: flex-end;
   }
 
   /* Align utilities */

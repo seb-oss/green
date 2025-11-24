@@ -312,13 +312,47 @@ export const Slots: Story = {
   args: {
     columns: Users.Columns,
     data: Users.Data,
-    responsive: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+-  **Header Lead**: Add dropdowns or buttons for filtering/sorting.
+-  **Header Trail**: Include actions like export buttons.
+-  **Footer**: This slot is recommended for displaying string-based context information. <br />By default it shows pagination details and indicate selected rows with a clearable button.
+
+
+> Avoid overloading the table slots with multiple components to maintain a clean interface.
+          `,
+      },
+    },
   },
   render: (args) => html`
     <gds-table
-      ?responsive="${args.responsive}"
       .columns="${args.columns}"
       .data="${args.data}"
-    ></gds-table>
+      rows="4"
+      settings
+      searchable
+    >
+      <gds-dropdown size="small" slot="header-lead" plain searchable>
+        <span slot="trigger">Sorting</span>
+        <gds-option value="by-name"> Sort by Name </gds-option>
+        <gds-option value="by-status"> Sort by Status </gds-option>
+      </gds-dropdown>
+      <gds-button slot="header-trail" rank="secondary" size="small">
+        Export
+      </gds-button>
+      <gds-text slot="footer-lead"> Last updated: November 2025 </gds-text>
+      <template slot="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
+      <template slot="download-image">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
+      </template>
+    </gds-table>
   `,
 }

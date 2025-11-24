@@ -397,6 +397,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
                 @input=${this.#handleSearch}
                 @gds-input-cleared=${this.#handleSearchClear}
                 width="100%; l{240px}"
+                min-width="240px"
               >
                 <gds-icon-magnifying-glass
                   slot="lead"
@@ -476,7 +477,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     const classes = classMap({
       actions: true,
-      'column-header': true,
       [`align-${this.actions.align}`]: !!this.actions.align,
       [`justify-${this.actions.justify}`]: !!this.actions.justify,
     })
