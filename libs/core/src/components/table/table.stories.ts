@@ -1,5 +1,4 @@
 import { html } from 'lit'
-import { Source, useOf } from '@storybook/blocks'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
@@ -146,7 +145,17 @@ When rows are selected, the table emits a \`gds-table-selection\` event containi
       ?selectable="${args.selectable}"
       .columns="${args.columns}"
       .data="${args.data}"
-    ></gds-table>
+    >
+      <template name="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
+      <template name="download-image">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
+      </template>
+    </gds-table>
   `,
 }
 
@@ -180,7 +189,17 @@ The \`settings\` property adds a column visibility dropdown, allowing users to s
       ?settings="${args.settings}"
       .columns="${args.columns}"
       .data="${args.data}"
-    ></gds-table>
+    >
+      <template name="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
+      <template name="download-image">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
+      </template>
+    </gds-table>
   `,
 }
 
@@ -214,7 +233,17 @@ The \`nocache\` property provides direct control over data retrieval. When set t
       ?settings="${args.settings}"
       .columns="${args.columns}"
       .data="${args.data}"
-    ></gds-table>
+    >
+      <template name="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
+      <template name="download-image">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
+      </template>
+    </gds-table>
   `,
 }
 
@@ -653,7 +682,7 @@ export const DynamicContent: Story = {
         story: `
 - Templates can be defined within the table to provide custom content for specific cell types
 - Templates are referenced using \`name\` attribute
-- Can be used to inject custom icons into cell configurations
+- Can be used to inject for example icons into cell types such as button on \`main\`, \`lead\` or \`trail\` slot.
 
 \`\`\`typescript
 {
@@ -675,8 +704,17 @@ export const DynamicContent: Story = {
 **Template definition**
 
 \`\`\`html
+<!-- Used as icon button -->
 <template name="email-copy">
   <gds-icon-copy size="s"></gds-icon-copy>
+</template>
+
+<!-- Used as trail icon on link -->
+<template name="download-image">
+  <gds-icon-cloud-download
+    size="m"
+    slot="trail" <!-- Slots can be defined here -->
+></gds-icon-cloud-download>
 </template>
 \`\`\`
           `,
