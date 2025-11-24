@@ -1,6 +1,6 @@
 ---
 '@sebgroup/green-angular': major
-'@sebgroup/green-charts-angular': major
+'@sebgroup/green-angular-charts': major
 ---
 
 **Angular:** Update minimum Angular version to 19.
