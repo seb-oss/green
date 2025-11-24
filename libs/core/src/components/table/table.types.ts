@@ -110,13 +110,13 @@ export interface Image extends CellProps<Omit<GdsImg, keyof GdsElement>> {
 
 export interface Button extends CellProps<Omit<GdsButton, keyof GdsElement>> {
   type: 'button'
-  slot?: string | ((row: any) => string)
+  template?: string | ((row: any) => string)
   onClick: (row: any) => void
 }
 
 export interface Link extends CellProps<Omit<GdsLink, keyof GdsElement>> {
   type: 'link'
-  slot?: string | ((row: any) => string)
+  template?: string | ((row: any) => string)
   onClick?: (row: any) => void
 }
 

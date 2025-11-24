@@ -84,10 +84,10 @@ export const Overview: Story = {
       .data="${args.data}"
       .actions="${args.actions}"
     >
-      <template slot="email-copy">
+      <template name="email-copy">
         <gds-icon-copy size="s"></gds-icon-copy>
       </template>
-      <template slot="download-image">
+      <template name="download-image">
         <gds-icon-cloud-download
           size="m"
           slot="trail"
@@ -193,10 +193,10 @@ When justified to the right, sorting indicator appears on the left. Column label
   },
   render: (args) => html`
     <gds-table .columns="${args.columns}" .data="${args.data}">
-      <template slot="email-copy">
+      <template name="email-copy">
         <gds-icon-copy size="m" slot="trail"></gds-icon-copy>
       </template>
-      <template slot="role-link">
+      <template name="role-link">
         <gds-icon-cloud-download
           size="m"
           slot="trail"
@@ -244,10 +244,10 @@ Alignment varies by action type:
       .data="${args.data}"
       .actions="${args.actions}"
     >
-      <template slot="actions-activate">
+      <template name="actions-activate">
         <gds-icon-pin></gds-icon-pin>
       </template>
-      <template slot="actions-delete">
+      <template name="actions-delete">
         <gds-icon-cross-small></gds-icon-cross-small>
       </template>
     </gds-table>
@@ -308,10 +308,10 @@ Ideal for embedding tables within other components or creating minimalist data p
       .columns="${args.columns}"
       .data="${args.data}"
     >
-      <template slot="email-copy">
+      <template name="email-copy">
         <gds-icon-copy size="s"></gds-icon-copy>
       </template>
-      <template slot="download-image">
+      <template name="download-image">
         <gds-icon-cloud-download
           size="m"
           slot="trail"
@@ -346,10 +346,10 @@ Helps distinguish between adjacent rows, especially in dense data tables.
       .data="${args.data}"
       rows="20"
     >
-      <template slot="email-copy">
+      <template name="email-copy">
         <gds-icon-copy size="s"></gds-icon-copy>
       </template>
-      <template slot="download-image">
+      <template name="download-image">
         <gds-icon-cloud-download
           size="m"
           slot="trail"
@@ -390,10 +390,10 @@ Adjust density to optimize the table's visual hierarchy and information presenta
       .columns="${args.columns}"
       .data="${args.data}"
     >
-      <template slot="email-copy">
+      <template name="email-copy">
         <gds-icon-copy size="s"></gds-icon-copy>
       </template>
-      <template slot="download-image">
+      <template name="download-image">
         <gds-icon-cloud-download
           size="m"
           slot="trail"
@@ -436,10 +436,10 @@ This approach enhances readability and usability across different device sizes, 
       .columns="${args.columns}"
       .data="${args.data}"
     >
-      <template slot="email-copy">
+      <template name="email-copy">
         <gds-icon-copy size="s"></gds-icon-copy>
       </template>
-      <template slot="download-image">
+      <template name="download-image">
         <gds-icon-cloud-download
           size="m"
           slot="trail"
@@ -490,10 +490,10 @@ export const Slots: Story = {
         Export
       </gds-button>
       <gds-text slot="footer-lead"> Last updated: November 2025 </gds-text>
-      <template slot="email-copy">
+      <template name="email-copy">
         <gds-icon-copy size="s"></gds-icon-copy>
       </template>
-      <template slot="download-image">
+      <template name="download-image">
         <gds-icon-cloud-download
           size="m"
           slot="trail"

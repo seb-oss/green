@@ -196,7 +196,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     if (!this.#templateCache.has(slot)) {
       const template = this.querySelector(
-        `template[slot="${slot}"]`,
+        `template[name="${slot}"]`,
       ) as HTMLTemplateElement
       this.#templateCache.set(slot, template)
     }
@@ -255,8 +255,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         const variant = resolve(config.variant)
         const rank = resolve(config.rank)
         const label = resolve(config.label)
-        const slot = resolve(config.slot) as string | undefined
-        const clonedSlot = this.#getSlotContent(slot)
+        const template = resolve(config.template) as string | undefined
+        const clonedSlot = this.#getSlotContent(template)
         const content = [label, clonedSlot]
 
         return html`
@@ -280,8 +280,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         const label = resolve(config.label)
         const target = resolve(config.target)
         const download = resolve(config.download)
-        const slot = resolve(config.slot) as string | undefined
-        const clonedSlot = this.#getSlotContent(slot)
+        const template = resolve(config.template) as string | undefined
+        const clonedSlot = this.#getSlotContent(template)
         const content = [label, clonedSlot]
 
         return html`
