@@ -1,15 +1,8 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
 
-import { IconArrowRight } from '@sebgroup/green-core/components/icon/icons/arrow-right.js'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { IconArrowRight } from '@sebgroup/green-core/react'
 import Link from './link'
-
-const GdsIconArrowRight = createComponent({
-  tagName: getScopedTagName('gds-icon-arrow-right'),
-  elementClass: IconArrowRight,
-  react: React,
-})
 
 const Template = ({ ...props }) => <Link {...props} />
 
