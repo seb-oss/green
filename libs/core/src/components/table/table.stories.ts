@@ -1,4 +1,5 @@
 import { html } from 'lit'
+import { Source, useOf } from '@storybook/blocks'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
@@ -233,6 +234,48 @@ export const Sorting: Story = {
 Sorting is enabled by setting \`sortable: true\` on column configuration. <br />
 Clicking a sortable column header toggles between ascending and descending order, resetting the table to the first page. <br />
 The sorting mechanism generates a unique cache key, caching sorted results for 5 minutes, and emits a \`gds-table-data-loaded\` event with the sorted data.
+        `,
+      },
+    },
+  },
+  render: (args) => html`
+    <gds-table .columns="${args.columns}" .data="${args.data}">
+      <template name="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
+      <template name="download-image">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
+      </template>
+    </gds-table>
+  `,
+}
+
+// ============================================================================
+// FEATURES - CELL TYPES
+// ============================================================================
+
+export const Cell: Story = {
+  args: {
+    columns: Users.Columns,
+    data: Users.Data,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+
+The table supports multiple cell types for flexible data rendering:
+- Badge
+- Image 
+- Button
+- Link
+- Context menu (intended for actions)
+- Formatted text: \`formatted-number\`, \`formatted-account\` and \`formatted-date\`
+
+**Note**: Most cell types (badge, image, button) accept standard component properties, allowing full customization.
         `,
       },
     },
