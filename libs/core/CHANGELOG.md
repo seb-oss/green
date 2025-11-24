@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.16.0
+
+### Minor Changes
+
+- 4add05e: **Formatted text:** Date added `dateTimeLong`, `dateTimeLongWithWeekday`, `dateTimeShort` formats to support CP01
+- 4add05e: **Card Pattern 01:** Add metadata props for category and date
+
 ## 2.15.0
 
 ### Minor Changes
