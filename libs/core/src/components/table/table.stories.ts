@@ -159,6 +159,38 @@ export const Formatting: Story = {
     columns: Feedback.Columns,
     data: Feedback.Data,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+Provides granular control over table layout and content presentation while keeping the benefits of a semantic table.
+
+---
+
+**Column justification** <br />
+Default alignment is left (start), with options to justify content to the right (end), and supports space-between layouts. <br /> Example: in email columns where cell value and action buttons need clear distinction and consistent alignment across rows.
+
+---
+
+**Column width and wrapping** <br />
+Columns can have custom width. When width is set, content will wrap within the cell.
+
+---
+
+**Cell vertical alignment** <br />
+Cells can be vertically aligned to start (default centered). Recommended to align to start when long or wrapped content is present, ensuring consistent top alignment for labels or values across rows.
+
+---
+
+**Sortable columns** <br />
+When justified to the right, sorting indicator appears on the left. Column label positioned to the right of the indicator.
+
+
+
+        `,
+      },
+    },
+  },
   render: (args) => html`
     <gds-table .columns="${args.columns}" .data="${args.data}">
       <template slot="email-copy">
@@ -183,6 +215,25 @@ export const Actions: Story = {
     columns: Feedback.Columns,
     actions: Feedback.MultipleActions,
     data: Feedback.Data,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+The \`actions\` property enables flexible interaction methods for each table row:
+
+**Action Types**:
+- **Buttons**: Direct, immediate actions (limit to two buttons maximum)
+- **Links**: Navigate to detailed views or download files
+- **Context Menu**: Multiple related actions in a popover
+
+Actions will always appear at the end of the row. 
+Alignment varies by action type: 
+- Two buttons align to the left 
+- All other actions justify to the end of the cell
+        `,
+      },
+    },
   },
   render: (args) => html`
     <gds-table

@@ -368,6 +368,7 @@ export const Feedback = {
       key: 'notes',
       label: 'Notes',
       sortable: true,
+      align: 'start',
       width: '300px',
     },
     {
@@ -382,6 +383,7 @@ export const Feedback = {
       label: 'Status',
       sortable: true,
       align: 'start',
+      justify: 'end',
       width: '100px',
       cell: {
         value: {
