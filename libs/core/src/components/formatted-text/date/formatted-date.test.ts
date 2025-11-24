@@ -62,6 +62,15 @@ const formats: Record<
   },
 }
 
+var formats_webkit = {
+  dateLongWithWeekday: {
+    expected: {
+      'sv-SE': 'tisdag 25 februari 2025',
+      'en-GB': 'Tuesday, 25 February 2025',
+    },
+  },
+}
+
 describe('GdsFormattedDate', () => {
   describe('Handles all date time formats', () => {
     for (const [format, { expected }] of Object.entries(formats)) {
@@ -77,7 +86,14 @@ describe('GdsFormattedDate', () => {
             )
             await element.updateComplete
 
-            expect(element.formattedValue).to.equal(expected[locale])
+            expect(element.formattedValue).to.satisfy((val: string) => {
+              return (
+                val === expected[locale as (typeof locales)[number]] ||
+                val ===
+                  formats_webkit[format as keyof typeof formats_webkit]
+                    ?.expected?.[locale as (typeof locales)[number]]
+              )
+            })
           })
         }
       }
