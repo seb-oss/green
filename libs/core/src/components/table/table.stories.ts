@@ -241,12 +241,32 @@ export const Plain: Story = {
     data: Users.Data,
     plain: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+When \`plain\` boolean is set, the table is stripped of pagination and header elements, displaying only the core table content.<br/>
+Ideal for embedding tables within other components or creating minimalist data presentations.
+        `,
+      },
+    },
+  },
   render: (args) => html`
     <gds-table
       ?plain="${args.plain}"
       .columns="${args.columns}"
       .data="${args.data}"
-    ></gds-table>
+    >
+      <template slot="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
+      <template slot="download-image">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
+      </template>
+    </gds-table>
   `,
 }
 
@@ -255,13 +275,36 @@ export const Striped: Story = {
     columns: Users.Columns,
     data: Users.Data,
     striped: true,
+    density: 'compact',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+When \`striped\` boolean is set, alternating row colors improve visual scanning and readability.<br/>
+Helps distinguish between adjacent rows, especially in dense data tables.
+        `,
+      },
+    },
   },
   render: (args) => html`
     <gds-table
+      .density="${args.density}"
       ?striped="${args.striped}"
       .columns="${args.columns}"
       .data="${args.data}"
-    ></gds-table>
+      rows="20"
+    >
+      <template slot="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
+      <template slot="download-image">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
+      </template>
+    </gds-table>
   `,
 }
 
@@ -275,12 +318,37 @@ export const Density: Story = {
     data: Users.Data,
     density: 'compact',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+The \`density\` property allows customizing the table's visual spacing with three distinct options:
+
+- **\`comfortable\`** (Default) · Standard spacing for balanced readability
+- **\`compact\`** · Reduced spacing to maximize information density
+- **\`spacious\`** · Increased spacing for enhanced readability
+
+Adjust density to optimize the table's visual hierarchy and information presentation based on your specific data.
+        `,
+      },
+    },
+  },
   render: (args) => html`
     <gds-table
       .density="${args.density}"
       .columns="${args.columns}"
       .data="${args.data}"
-    ></gds-table>
+    >
+      <template slot="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
+      <template slot="download-image">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
+      </template>
+    </gds-table>
   `,
 }
 
@@ -294,12 +362,39 @@ export const Responsive: Story = {
     data: Users.Data,
     responsive: true,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+When the \`responsive\` boolean is set to \`true\`, the table transforms its layout for smaller screens:
+
+- **Mobile Layout**: Rows are restructured into a card-like format
+- **Column Presentation**: 
+  - Column names are displayed on the left side
+  - Corresponding cell values are shown on the right side
+- **Header Behavior**: On larger screens table header becomes sticky, ensuring column labels remain visible during scrolling.
+
+This approach enhances readability and usability across different device sizes, providing an optimal viewing experience on mobile and tablet devices.
+        `,
+      },
+    },
+  },
   render: (args) => html`
     <gds-table
       ?responsive="${args.responsive}"
       .columns="${args.columns}"
       .data="${args.data}"
-    ></gds-table>
+    >
+      <template slot="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
+      <template slot="download-image">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
+      </template>
+    </gds-table>
   `,
 }
 
