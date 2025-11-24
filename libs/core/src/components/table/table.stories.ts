@@ -469,6 +469,7 @@ export const Slots: Story = {
 
 
 > Avoid overloading the table slots with multiple components to maintain a clean interface.
+
           `,
       },
     },
@@ -490,6 +491,62 @@ export const Slots: Story = {
         Export
       </gds-button>
       <gds-text slot="footer-lead"> Last updated: November 2025 </gds-text>
+      <template name="email-copy">
+        <gds-icon-copy size="s"></gds-icon-copy>
+      </template>
+      <template name="download-image">
+        <gds-icon-cloud-download
+          size="m"
+          slot="trail"
+        ></gds-icon-cloud-download>
+      </template>
+    </gds-table>
+  `,
+}
+
+export const DynamicContent: Story = {
+  args: {
+    columns: Users.Columns,
+    data: Users.Data,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+- Templates can be defined within the table to provide custom content for specific cell types
+- Templates are referenced using \`name\` attribute
+- Can be used to inject custom icons into cell configurations
+
+\`\`\`typescript
+{
+  key: 'email',
+  label: 'Email',
+  sortable: true,
+  justify: 'space-between',
+  cell: {
+    trail: {
+      type: 'button',
+      value: (row: UserData) => row.email,
+      size: 'xs',
+      template: 'email-copy',  // References template content
+    },
+  },
+}
+\`\`\`
+
+**Template definition**
+
+\`\`\`html
+<template name="email-copy">
+  <gds-icon-copy size="s"></gds-icon-copy>
+</template>
+\`\`\`
+          `,
+      },
+    },
+  },
+  render: (args) => html`
+    <gds-table .columns="${args.columns}" .data="${args.data}" rows="4" plain>
       <template name="email-copy">
         <gds-icon-copy size="s"></gds-icon-copy>
       </template>
