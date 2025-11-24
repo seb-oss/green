@@ -17,8 +17,9 @@ export const enum DateCss {
 }
 
 @Directive({
-    selector: '[calendarDate]',
-    standalone: false
+  // eslint-disable-next-line @angular-eslint/directive-selector
+  selector: '[calendarDate]',
+  standalone: false,
 })
 export class CalendarDateDirective implements OnInit, OnChanges {
   @Input() calendarDate!: Date

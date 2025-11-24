@@ -1,6 +1,7 @@
 // This file has been automatically migrated to valid ESM format by Storybook.
 import { createRequire } from 'node:module'
 import { dirname, join } from 'node:path'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 import type { StorybookConfig } from '@storybook/react-vite'
