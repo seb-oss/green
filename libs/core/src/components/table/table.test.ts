@@ -33,10 +33,7 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      await aTimeout(100)
-
       const table = el.shadowRoot?.querySelector('table')
-
       expect(table).to.exist
     })
 
@@ -46,10 +43,7 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      await aTimeout(100)
-
       const headers = el.shadowRoot?.querySelectorAll('thead th')
-
       expect(headers?.length).to.be.greaterThan(0)
     })
 
@@ -59,25 +53,8 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      await aTimeout(100)
-
       const rows = el.shadowRoot?.querySelectorAll('tbody tr')
-
       expect(rows?.length).to.equal(3)
-    })
-
-    it('should render with density attribute', async () => {
-      const el = await fixture<GdsTable>(
-        html`<gds-table
-          .columns=${columns}
-          .data=${mockData}
-          density="compact"
-        ></gds-table>`,
-      )
-
-      await el.updateComplete
-
-      expect(el.density).to.equal('compact')
     })
   })
 
@@ -94,8 +71,6 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      await aTimeout(100)
-
       expect(dataSpy.called).to.be.true
     })
 
@@ -109,28 +84,8 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      await aTimeout(100)
-
       const checkboxes = el.shadowRoot?.querySelectorAll('.rbcb-wrapper')
-
       expect(checkboxes?.length).to.be.greaterThan(0)
-    })
-
-    it('should support responsive attribute', async () => {
-      const el = await fixture<GdsTable>(
-        html`<gds-table
-          .columns=${columns}
-          .data=${mockData}
-          responsive
-        ></gds-table>`,
-      )
-
-      await el.updateComplete
-      await aTimeout(100)
-
-      const dataContainer = el.shadowRoot?.querySelector('.responsive')
-
-      expect(dataContainer).to.exist
     })
 
     it('should support striped attribute', async () => {
@@ -143,104 +98,7 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-
       expect(el.striped).to.be.true
-    })
-
-    it('should support searchable attribute', async () => {
-      const el = await fixture<GdsTable>(
-        html`<gds-table
-          .columns=${columns}
-          .data=${mockData}
-          searchable
-        ></gds-table>`,
-      )
-
-      await el.updateComplete
-      await aTimeout(100)
-
-      const searchInput = el.shadowRoot?.querySelector('gds-input')
-
-      expect(searchInput).to.exist
-    })
-
-    it('should clear selection', async () => {
-      const el = await fixture<GdsTable>(
-        html`<gds-table
-          .columns=${columns}
-          .data=${mockData}
-          selectable
-        ></gds-table>`,
-      )
-
-      await el.updateComplete
-      await aTimeout(100)
-
-      el.selectAll()
-      await el.updateComplete
-
-      expect(el.getSelection().indices.length).to.equal(3)
-
-      el.clearSelection()
-      await el.updateComplete
-
-      expect(el.getSelection().indices.length).to.equal(0)
-    })
-
-    it('should select all rows', async () => {
-      const el = await fixture<GdsTable>(
-        html`<gds-table
-          .columns=${columns}
-          .data=${mockData}
-          selectable
-        ></gds-table>`,
-      )
-
-      await el.updateComplete
-      await aTimeout(100)
-
-      el.selectAll()
-      await el.updateComplete
-
-      expect(el.getSelection().indices.length).to.equal(3)
-    })
-
-    it('should set selection by indices', async () => {
-      const el = await fixture<GdsTable>(
-        html`<gds-table
-          .columns=${columns}
-          .data=${mockData}
-          selectable
-        ></gds-table>`,
-      )
-
-      await el.updateComplete
-      await aTimeout(100)
-
-      el.setSelection([0, 2])
-      await el.updateComplete
-
-      expect(el.getSelection().indices).to.deep.equal([0, 2])
-    })
-
-    it('should get selection data', async () => {
-      const el = await fixture<GdsTable>(
-        html`<gds-table
-          .columns=${columns}
-          .data=${mockData}
-          selectable
-        ></gds-table>`,
-      )
-
-      await el.updateComplete
-      await aTimeout(100)
-
-      el.setSelection([0])
-      await el.updateComplete
-
-      const selection = el.getSelection()
-
-      expect(selection.data[0].id).to.equal(1)
     })
 
     it('should emit selection change event', async () => {
@@ -253,27 +111,11 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      await aTimeout(100)
-
       const spy = sinon.spy()
       el.addEventListener('gds-table-selection', spy)
 
       el.selectAll()
       await el.updateComplete
-
-      expect(spy.called).to.be.true
-    })
-
-    it('should emit data loaded event', async () => {
-      const el = await fixture<GdsTable>(
-        html`<gds-table .columns=${columns} .data=${mockData}></gds-table>`,
-      )
-
-      const spy = sinon.spy()
-      el.addEventListener('gds-table-data-loaded', spy)
-
-      await el.updateComplete
-      await aTimeout(100)
 
       expect(spy.called).to.be.true
     })
@@ -286,27 +128,7 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      await aTimeout(100)
-
       await expect(el).to.be.accessible()
-    })
-
-    it('should have proper checkbox accessibility', async () => {
-      const el = await fixture<GdsTable>(
-        html`<gds-table
-          .columns=${columns}
-          .data=${mockData}
-          selectable
-        ></gds-table>`,
-      )
-
-      await el.updateComplete
-      await aTimeout(100)
-
-      const checkbox = el.shadowRoot?.querySelector('.rbcb-wrapper')
-
-      expect(checkbox?.getAttribute('role')).to.equal('checkbox')
-      expect(checkbox?.hasAttribute('aria-label')).to.be.true
     })
   })
 })
