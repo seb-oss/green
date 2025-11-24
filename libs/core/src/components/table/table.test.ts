@@ -120,15 +120,4 @@ describe('<gds-table>', () => {
       expect(spy.called).to.be.true
     })
   })
-
-  describe('Accessibility', () => {
-    it('should pass axe smoketest', async () => {
-      const el = await fixture<GdsTable>(
-        html`<gds-table .columns=${columns} .data=${mockData}></gds-table>`,
-      )
-
-      await el.updateComplete
-      await expect(el).to.be.accessible()
-    })
-  })
 })

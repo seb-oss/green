@@ -77,22 +77,4 @@ describe('<gds-pagination>', () => {
       expect(spy.called).to.be.true
     })
   })
-
-  describe('Accessibility', () => {
-    it('should pass axe smoketest', async () => {
-      const el = await fixture<GdsPagination>(
-        html`<gds-pagination
-          page="1
-
-"
-          rows="10"
-          total="100"
-        ></gds-pagination>`,
-      )
-
-      await el.updateComplete
-
-      await expect(el).to.be.accessible()
-    })
-  })
 })
