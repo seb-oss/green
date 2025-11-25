@@ -1,0 +1,1 @@
+const i=e=>{switch(e){case"success":return"is-valid";case"error":return"is-invalid";default:return""}},r=(e,s)=>{let t;return(...a)=>{clearTimeout(t),t=window.setTimeout(()=>{e.apply(void 0,a)},s)}},o=e=>new Promise(s=>setTimeout(s,e));export{o as a,r as d,i as v};
