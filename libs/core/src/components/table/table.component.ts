@@ -5,6 +5,7 @@ import { styleMap } from 'lit/directives/style-map.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
+import { watchMediaQuery } from '../../utils/decorators'
 import {
   gdsCustomElement,
   html,
@@ -116,6 +117,13 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    */
   @property({ type: Boolean, reflect: false })
   nocache = false
+
+  @state() private _isMobile = false
+
+  @watchMediaQuery('(max-width: 768px)')
+  _handleMobile(matches: boolean) {
+    this._isMobile = matches
+  }
 
   @state()
   private view: Types.State = {
@@ -406,10 +414,20 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     const { cell } = column
     const value = this.#renderCell(cell?.value, row) ?? row[column.key]
     const processedValue = column.justify ? html`<span>${value}</span>` : value
+    const isResponsive = this._isMobile && this.responsive
+
+    const mobileLabel = isResponsive
+      ? html`<span class="column-label" aria-hidden="true"
+          >${column.label}:</span
+        >`
+      : null
+
+    const ariaLabel = isResponsive ? `${column.label}: ` : ''
 
     return html`
-      <div class="cell-content">
+      <div class="cell-content" aria-label="${ariaLabel}">
         ${[
+          mobileLabel,
           this.#renderCell(cell?.lead, row),
           processedValue,
           this.#renderCell(cell?.trail, row),
@@ -598,11 +616,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     })
 
     return html`
-      <td
-        data-label=${ifDefined(this.responsive ? column.label : undefined)}
-        style=${style}
-        class=${classes}
-      >
+      <td style=${style} class=${classes}>
         ${this.#renderCellContent(row, column)}
       </td>
     `
