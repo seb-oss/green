@@ -1,9 +1,11 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import { moduleMetadata } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggAccordionComponent } from './accordion.component'
 import { NggAccordionModule } from './accordion.module'
 
-export default {
+const meta: Meta<NggAccordionComponent> = {
   title: 'Components/Accordion',
   component: NggAccordionComponent,
   decorators: [
@@ -14,10 +16,13 @@ export default {
   parameters: {
     componentIds: ['component-accordion'],
   },
-} as Meta<NggAccordionComponent>
+}
 
-const Template: StoryFn<NggAccordionComponent> = () => {
-  return {
+export default meta
+type Story = StoryObj<NggAccordionComponent>
+
+export const Simple: Story = {
+  render: () => ({
     template: `
         <ngg-accordion [closeOthers]=false>
             <div ngg-accordion-list-item listItemHeader="First accordion heading" listItemSubHeader="First accordion sublabel">
@@ -31,11 +36,11 @@ const Template: StoryFn<NggAccordionComponent> = () => {
             </div>
         </ngg-accordion>
         `,
-  }
+  }),
 }
 
-const NoSubHeadersTemplate: StoryFn<NggAccordionComponent> = () => {
-  return {
+export const Nosubheaders: Story = {
+  render: () => ({
     template: `
         <ngg-accordion [closeOthers]=false>
             <div ngg-accordion-list-item listItemHeader="First accordion heading">
@@ -49,11 +54,11 @@ const NoSubHeadersTemplate: StoryFn<NggAccordionComponent> = () => {
             </div>
         </ngg-accordion>
         `,
-  }
+  }),
 }
 
-const CheckBoxTemplate: StoryFn<NggAccordionComponent> = () => {
-  return {
+export const Closeothers: Story = {
+  render: () => ({
     template: `
       <ngg-accordion [closeOthers]=true>
           <div ngg-accordion-list-item listItemHeader="First accordion accordion" listItemSubHeader="First accordion with just one option">
@@ -100,9 +105,5 @@ const CheckBoxTemplate: StoryFn<NggAccordionComponent> = () => {
           </div>
       </ngg-accordion>
       `,
-  }
+  }),
 }
-
-export const Simple = Template.bind({})
-export const Nosubheaders = NoSubHeadersTemplate.bind({})
-export const Closeothers = CheckBoxTemplate.bind({})

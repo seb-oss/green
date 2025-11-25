@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@nx/webpack:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
@@ -15,8 +17,10 @@
         "index": "apps/colors/src/index.html",
         "main": "apps/colors/src/main.tsx",
         "tsConfig": "apps/colors/tsconfig.app.json",
-        "assets": ["apps/colors/src/favicon.ico", "apps/colors/src/assets"],
-        "styles": ["apps/colors/src/assets/styles.scss"],
+        "assets": [
+          "apps/colors/src/favicon.ico",
+          "apps/colors/src/assets"
+        ],
         "scripts": [],
         "isolatedConfig": true,
         "webpackConfig": "apps/colors/webpack.config.js"

@@ -1,4 +1,6 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import { moduleMetadata } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggCellTableComponent } from './cell-table.component'
 import { NggCellTableModule } from './cell-table.module'
@@ -30,7 +32,7 @@ const tmp = [
   },
 ]
 
-export default {
+const meta: Meta<NggCellTableComponent> = {
   title: 'Components/Cell Table',
   component: NggCellTableComponent,
   decorators: [
@@ -48,45 +50,46 @@ export default {
     clickableRows: { control: 'boolean' },
     clickLabel: { control: 'text' },
   },
-} as Meta<NggCellTableComponent>
+}
 
-const Template: StoryFn<NggCellTableComponent> = (args) => {
-  return {
+export default meta
+type Story = StoryObj<NggCellTableComponent>
+
+export const Default: Story = {
+  render: (args) => ({
     template: `
       <ngg-cell-table [rows]="rows" [headerList]="headerList" [className]="className" [clickableRows]="clickableRows" [clickLabel]="clickLabel">
       </ngg-cell-table>
     `,
     props: args,
-  }
-}
-
-export const Default = Template.bind({})
-Default.args = {
-  rows: tmp,
-  className: 'cell-table-container d-block stacked-stock-list stacked-indent',
-  headerList: [
-    {
-      tableKeySelector: 'FullName',
-      label: 'Namn',
-      valueType: 'custom-html',
-      main: true,
-    },
-    {
-      tableKeySelector: 'PreLastTradedAt',
-      label: 'Senast',
-      valueType: 'streamSign',
-    },
-    {
-      tableKeySelector: 'ChangePercent',
-      label: 'Utv. %',
-      valueType: 'sign',
-    },
-    {
-      tableKeySelector: 'Change',
-      label: 'Utv. (SEK)',
-      valueType: 'sign',
-    },
-  ],
-  clickableRows: true,
-  clickLabel: 'View details',
+  }),
+  args: {
+    rows: tmp,
+    className: 'cell-table-container d-block stacked-stock-list stacked-indent',
+    headerList: [
+      {
+        tableKeySelector: 'FullName',
+        label: 'Namn',
+        valueType: 'custom-html',
+        main: true,
+      },
+      {
+        tableKeySelector: 'PreLastTradedAt',
+        label: 'Senast',
+        valueType: 'streamSign',
+      },
+      {
+        tableKeySelector: 'ChangePercent',
+        label: 'Utv. %',
+        valueType: 'sign',
+      },
+      {
+        tableKeySelector: 'Change',
+        label: 'Utv. (SEK)',
+        valueType: 'sign',
+      },
+    ],
+    clickableRows: true,
+    clickLabel: 'View details',
+  },
 }

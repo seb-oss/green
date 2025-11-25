@@ -7,7 +7,7 @@ import { RouterTestingHarness } from '@angular/router/testing'
 import { NggCoreRouterLinkDirective } from './core-router-link.directive'
 
 @Component({
-  template: `
+    template: `
     <gds-link
       [routerLink]="['/test1']"
       nggCoreRouterLink
@@ -27,6 +27,7 @@ import { NggCoreRouterLinkDirective } from './core-router-link.directive'
       >Test Anchor</a
     >
   `,
+    standalone: false
 })
 class TestComponent {}
 

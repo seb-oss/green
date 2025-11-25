@@ -15,19 +15,19 @@ import { NggvInputComponent } from '../../../input/input.component'
 import { NggvTypeaheadInputComponent } from './typeahead-input.component'
 
 @Component({
-  template: '',
-
-  selector: 'nggv-dropdown',
-  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: [
-    'placeholder',
-    'options',
-    'scrollOffset',
-    'allowNullishOption',
-    'selectOnSingleOption',
-  ],
-  // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
-  outputs: ['expandedChange'],
+    template: '',
+    selector: 'nggv-dropdown',
+    // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+    inputs: [
+        'placeholder',
+        'options',
+        'scrollOffset',
+        'allowNullishOption',
+        'selectOnSingleOption',
+    ],
+    // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
+    outputs: ['expandedChange'],
+    standalone: false
 })
 export class DropdownStubComponent {
   @Input() selectOnSingleOption?: boolean

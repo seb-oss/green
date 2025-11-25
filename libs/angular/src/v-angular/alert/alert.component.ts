@@ -3,9 +3,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { AlertType } from './alert.models'
 
 @Component({
-  selector: 'nggv-alert',
-  templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.scss'],
+    selector: 'nggv-alert',
+    templateUrl: './alert.component.html',
+    styleUrls: ['./alert.component.scss'],
+    standalone: false
 })
 export class AlertComponent {
   @Input() type: AlertType = AlertType.Success

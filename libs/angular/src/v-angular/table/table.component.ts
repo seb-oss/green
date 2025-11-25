@@ -117,9 +117,10 @@ function objectFromEntries(entryMap: Map<any, any>): { [key: string]: any } {
  *
  */
 @Component({
-  selector: 'nggv-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+    selector: 'nggv-table',
+    templateUrl: './table.component.html',
+    styleUrls: ['./table.component.scss'],
+    standalone: false
 })
 export class TableComponent<T extends TableRow>
   implements OnInit, OnChanges, AfterContentInit, OnDestroy {

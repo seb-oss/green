@@ -42,9 +42,10 @@ import '@sebgroup/green-core/components/icon/icons/checkmark.js'
 export type DragDropState = 'normal' | 'over' | 'uploading' | 'done'
 
 @Component({
-  selector: 'nggv-drag-drop',
-  templateUrl: './drag-drop.component.html',
-  styleUrls: ['./drag-drop.component.scss'],
+    selector: 'nggv-drag-drop',
+    templateUrl: './drag-drop.component.html',
+    styleUrls: ['./drag-drop.component.scss'],
+    standalone: false
 })
 export class NggvDragDropComponent implements OnInit, OnDestroy {
   /** @internal */

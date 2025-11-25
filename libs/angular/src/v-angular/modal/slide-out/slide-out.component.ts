@@ -33,62 +33,35 @@ import { DialogButtons } from '../modal.types'
  * The backdrop is selectable using 'slideout-backdrop'.
  */
 @Component({
-  selector: 'nggv-slideout-modal',
-  templateUrl: './slide-out.component.html',
-  styleUrls: ['./slide-out.component.scss'],
-  animations: [
-    trigger('modalAnimation', [
-      transition(':enter', [
-        query('.gds-slide-out', style({ transform: 'translateX(100%)' }), {
-          optional: true,
-        }),
-        query('.gds-backdrop, [role=dialog]', style({ opacity: '0' }), {
-          optional: true,
-        }),
-        group([
-          query(
-            '.gds-slide-out',
-            animate(
-              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
-              style({ transform: 'translateX(0)' }),
-            ),
-            { optional: true },
-          ),
-          query(
-            '.gds-backdrop, [role=dialog]',
-            animate(
-              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
-              style({ opacity: '1' }),
-            ),
-            { optional: true },
-          ),
+    selector: 'nggv-slideout-modal',
+    templateUrl: './slide-out.component.html',
+    styleUrls: ['./slide-out.component.scss'],
+    animations: [
+        trigger('modalAnimation', [
+            transition(':enter', [
+                query('.gds-slide-out', style({ transform: 'translateX(100%)' }), {
+                    optional: true,
+                }),
+                query('.gds-backdrop, [role=dialog]', style({ opacity: '0' }), {
+                    optional: true,
+                }),
+                group([
+                    query('.gds-slide-out', animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ transform: 'translateX(0)' })), { optional: true }),
+                    query('.gds-backdrop, [role=dialog]', animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ opacity: '1' })), { optional: true }),
+                ]),
+            ]),
+            transition(':leave', [
+                query('.gds-slide-out', style({ transform: 'translateX(0)' }), {
+                    optional: true,
+                }),
+                group([
+                    query('.gds-slide-out', animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ transform: 'translateX(100%)' })), { optional: true }),
+                    query('.gds-backdrop, [role=dialog]', animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ opacity: '0' })), { optional: true }),
+                ]),
+            ]),
         ]),
-      ]),
-      transition(':leave', [
-        query('.gds-slide-out', style({ transform: 'translateX(0)' }), {
-          optional: true,
-        }),
-        group([
-          query(
-            '.gds-slide-out',
-            animate(
-              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
-              style({ transform: 'translateX(100%)' }),
-            ),
-            { optional: true },
-          ),
-          query(
-            '.gds-backdrop, [role=dialog]',
-            animate(
-              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
-              style({ opacity: '0' }),
-            ),
-            { optional: true },
-          ),
-        ]),
-      ]),
-    ]),
-  ],
+    ],
+    standalone: false
 })
 export class NggvSlideOutComponent implements OnInit {
   /** @internal */

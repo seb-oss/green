@@ -33,63 +33,36 @@ import { NggModalHeaderDirective } from './modal-header.directive'
  * @deprecated use <gds-dialog> from green-core instead.
  */
 @Component({
-  selector: 'ngg-modal',
-  styleUrls: ['./modal.component.scss'],
-  templateUrl: './modal.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('modalAnimation', [
-      transition(':enter', [
-        query('aside', style({ transform: 'translateX(100%)' }), {
-          optional: true,
-        }),
-        query('.backdrop, [role=dialog]', style({ opacity: '0' }), {
-          optional: true,
-        }),
-        group([
-          query(
-            'aside',
-            animate(
-              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
-              style({ transform: 'translateX(0)' }),
-            ),
-            { optional: true },
-          ),
-          query(
-            '.backdrop, [role=dialog]',
-            animate(
-              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
-              style({ opacity: '1' }),
-            ),
-            { optional: true },
-          ),
+    selector: 'ngg-modal',
+    styleUrls: ['./modal.component.scss'],
+    templateUrl: './modal.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('modalAnimation', [
+            transition(':enter', [
+                query('aside', style({ transform: 'translateX(100%)' }), {
+                    optional: true,
+                }),
+                query('.backdrop, [role=dialog]', style({ opacity: '0' }), {
+                    optional: true,
+                }),
+                group([
+                    query('aside', animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ transform: 'translateX(0)' })), { optional: true }),
+                    query('.backdrop, [role=dialog]', animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ opacity: '1' })), { optional: true }),
+                ]),
+            ]),
+            transition(':leave', [
+                query('aside', style({ transform: 'translateX(0)' }), {
+                    optional: true,
+                }),
+                group([
+                    query('aside', animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ transform: 'translateX(100%)' })), { optional: true }),
+                    query('.backdrop, [role=dialog]', animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ opacity: '0' })), { optional: true }),
+                ]),
+            ]),
         ]),
-      ]),
-      transition(':leave', [
-        query('aside', style({ transform: 'translateX(0)' }), {
-          optional: true,
-        }),
-        group([
-          query(
-            'aside',
-            animate(
-              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
-              style({ transform: 'translateX(100%)' }),
-            ),
-            { optional: true },
-          ),
-          query(
-            '.backdrop, [role=dialog]',
-            animate(
-              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
-              style({ opacity: '0' }),
-            ),
-            { optional: true },
-          ),
-        ]),
-      ]),
-    ]),
-  ],
+    ],
+    standalone: false
 })
 export class NggModalComponent implements OnDestroy, OnInit {
   @Input() public modalType?: ModalType
@@ -229,10 +202,10 @@ export class NggModalComponent implements OnDestroy, OnInit {
 }
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[ngg-modal-header]',
-  styleUrls: ['./modal.component.scss'],
-  template: `
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[ngg-modal-header]',
+    styleUrls: ['./modal.component.scss'],
+    template: `
     <h3 data-testid="modal-header-text">{{ header }}</h3>
     <button
       data-testid="modal-close-button"
@@ -243,6 +216,7 @@ export class NggModalComponent implements OnDestroy, OnInit {
       <i></i>
     </button>
   `,
+    standalone: false
 })
 export class NggModalHeaderComponent {
   @Input() header?: string
@@ -255,18 +229,19 @@ export class NggModalHeaderComponent {
 }
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[ngg-modal-body]',
-  styleUrls: ['./modal.component.scss'],
-  template: `<ng-content></ng-content>`,
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[ngg-modal-body]',
+    styleUrls: ['./modal.component.scss'],
+    template: `<ng-content></ng-content>`,
+    standalone: false
 })
 export class NggModalBodyComponent {}
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[ngg-modal-footer]',
-  styleUrls: ['./modal.component.scss'],
-  template: `
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[ngg-modal-footer]',
+    styleUrls: ['./modal.component.scss'],
+    template: `
     <button
       data-testid="modal-dismiss-button"
       *ngIf="dismissLabel"
@@ -284,6 +259,7 @@ export class NggModalBodyComponent {}
       {{ confirmLabel }}
     </button>
   `,
+    standalone: false
 })
 export class NggModalFooterComponent {
   @Input() dismissLabel?: string

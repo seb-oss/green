@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/web-components'
+import { Meta, StoryObj } from '@storybook/web-components-vite'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 import { html } from '../../utils/helpers/custom-element-scoping'

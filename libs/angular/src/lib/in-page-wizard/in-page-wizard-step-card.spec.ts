@@ -410,8 +410,8 @@ describe('Upcoming', () => {
 })
 
 @Component({
-  selector: 'ngg-fake-step-card',
-  template: `
+    selector: 'ngg-fake-step-card',
+    template: `
     <ngg-in-page-wizard-step-card
       [isActive]="isActive"
       [isCompleted]="isCompleted"
@@ -427,6 +427,7 @@ describe('Upcoming', () => {
       <h2 data-testid="fake-step-card-content">Content</h2>
     </ngg-in-page-wizard-step-card>
   `,
+    standalone: false
 })
 class NggFakeInPageWizardStepCardComponent {
   @Input() public stepText = ''

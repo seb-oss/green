@@ -1,7 +1,8 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core'
 
 @Directive({
-  selector: '[nggvCharacterCountdown]',
+    selector: '[nggvCharacterCountdown]',
+    standalone: false
 })
 export class CharacterCountdownDirective {
   @Input('nggvCharacterCountdown')

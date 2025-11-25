@@ -8,8 +8,8 @@ import { NggvI18nTestModule } from '../i18n'
 import { PaginationComponent } from './pagination.component'
 
 @Component({
-  selector: 'nggv-pagination-test',
-  template: `
+    selector: 'nggv-pagination-test',
+    template: `
     <nggv-pagination
       [value]="value"
       [className]="className"
@@ -26,6 +26,7 @@ import { PaginationComponent } from './pagination.component'
       [previousText]="previousText"
     ></nggv-pagination>
   `,
+    standalone: false
 })
 class PaginationTestComponent {
   size = 60
