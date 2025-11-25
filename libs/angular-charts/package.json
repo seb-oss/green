@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/green-angular-charts",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "peerDependencies": {
     "@angular/common": ">=19",
     "@angular/core": ">=19",
