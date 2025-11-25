@@ -105,6 +105,7 @@ export const Selection: Story = {
     columns: Users.Columns,
     data: Users.Data,
     selectable: true,
+    density: 'comfortable',
   },
   parameters: {
     docs: {
@@ -142,18 +143,16 @@ When rows are selected, the table emits a \`gds-table-selection\` event containi
   },
   render: (args) => html`
     <gds-table
+      .density="${args.density}"
       ?selectable="${args.selectable}"
       .columns="${args.columns}"
       .data="${args.data}"
     >
       <template name="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy></gds-icon-copy>
       </template>
       <template name="download-image">
-        <gds-icon-cloud-download
-          size="m"
-          slot="trail"
-        ></gds-icon-cloud-download>
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
