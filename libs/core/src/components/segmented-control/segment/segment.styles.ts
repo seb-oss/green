@@ -26,9 +26,9 @@ const style = css`
       white-space: nowrap;
       width: 100%;
       transition:
-        background-color var(--gds-sys-motion-fast),
-        border-color var(--gds-sys-motion-fast),
-        color var(--gds-sys-motion-fast);
+        background-color var(--gds-sys-motion-duration-fast),
+        border-color var(--gds-sys-motion-duration-fast),
+        color var(--gds-sys-motion-duration-fast);
       outline-width: var(--gds-sys-space-4xs);
       outline-style: solid;
       outline-offset: -2px;
