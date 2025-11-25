@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.16.1
+
+### Patch Changes
+
+- cfac6d4: **Segmented control:** Fix unselected control from `neutral-01` to `neutral-02`
+
 ## 2.16.0
 
 ### Minor Changes
