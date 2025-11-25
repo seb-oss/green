@@ -9,7 +9,10 @@
     "strict": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "paths": {
+      "@sebgroup/green-charts": ["dist/libs/charts"]
+    }
   },
   "files": [],
   "include": [],
