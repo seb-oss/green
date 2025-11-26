@@ -26,8 +26,5 @@
     "@angular/core": ">=18",
     "@sebgroup/green-core": ">=2.13.2"
   },
-  "peerDependenciesMeta": {},
-  "exports": {
-    ".": "./index.js"
-  }
+  "peerDependenciesMeta": {}
 }

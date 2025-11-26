@@ -19,6 +19,7 @@
         "core"
       ],
       "dependsOn": [
+        "^core:build",
         "generate-wrappers"
       ],
       "options": {

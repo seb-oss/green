@@ -1,36 +1,20 @@
 {
   "extends": "../../tsconfig.base.json",
   "files": [],
-  "include": ["**/*.css"],
-  "references": [
-    {
-      "path": "./tsconfig.lib.json"
-    }
-  ],
+  "include": [],
   "compilerOptions": {
-    // Treat files as modules even if it doesn't use import/export
-    "moduleDetection": "force",
-
-    "moduleResolution": "bundler",
-    "importHelpers": true,
-
-    // Ignore module structure
-    "module": "Preserve",
-
-    // Allow JSON modules to be imported
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "target": "es2020",
     "resolveJsonModule": true,
-
-    // Allow JS files to be imported from TS and vice versa
-    "allowJs": true,
-
-    // Use correct ESM import behavior
-    "esModuleInterop": true,
-
-    // Disallow features that require cross-file awareness
-    "isolatedModules": true,
-
-    "skipLibCheck": true,
-    "target": "es2022",
-    "baseUrl": "."
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true
+  },
+  "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }

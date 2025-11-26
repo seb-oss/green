@@ -126,6 +126,8 @@ export class AngularBuildOrchestrator {
         }
       }
 
+      // Generate index.ts file for all components
+      await this.generateIndexFile(components, outputDir)
       console.log(
         `> Generation complete! ${successCount}/${components.length} components generated successfully`,
       )
@@ -215,9 +217,22 @@ export class AngularBuildOrchestrator {
  * Auto-generated from Custom Elements Manifest
  */
 
-export { ${AngularGenerator.toAngularComponentName(
-      componentData.className,
-    )} } from './${componentFileName}.component';
+export * from './${componentFileName}.component';
+//export * from './${componentFileName}.module';
+`
+  }
+
+  /**
+   * Generate a ng-package.json file for the root output directory
+   */
+  private static generateRootNgPackageJson(): string {
+    return `{
+  "lib": {
+    "entryFile": "index.ts"
+  }
+}
+`
+  }
 `
   }
 
@@ -245,6 +260,35 @@ export { ${AngularGenerator.toAngularComponentName(
       console.error(`Failed to list components: ${error}`)
       return []
     }
+  }
+
+  /**
+   * Generates an index file that exports all generated components
+   */
+  private static async generateIndexFile(
+    components: ComponentData[],
+    outputDir: string,
+  ): Promise<void> {
+    const exports = components
+      .map((component) => {
+        const componentFileName = this.getComponentFileName(component.tagName)
+        const componentDirName = this.getComponentDirectoryName(
+          component.tagName,
+        )
+        return `export * from './${componentDirName}'`
+      })
+      .join('\n')
+
+    const indexContent = `/**
+ * Generated Angular wrapper components for web components
+ * Auto-generated from Custom Elements Manifest
+ */
+
+${exports}
+`
+
+    const indexPath = path.join(outputDir, 'index.ts')
+    await fs.promises.writeFile(indexPath, indexContent, 'utf8')
   }
 
   /**
