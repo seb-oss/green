@@ -650,14 +650,6 @@ class Datepicker extends GdsFormControlElement<Date> {
     )
   }
 
-  #handleFieldFocusOut = (e: FocusEvent) => {
-    this._elTrigger.then((_) => {
-      const parent = (e.relatedTarget as HTMLElement)?.parentElement
-      if (parent === e.target) return
-      document.getSelection()?.removeAllRanges()
-    })
-  }
-
   #handleSpinnerFocus = (e: FocusEvent) => {
     this._elTrigger.then((field) => {
       document.getSelection()?.removeAllRanges()

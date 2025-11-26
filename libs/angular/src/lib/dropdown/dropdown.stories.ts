@@ -7,14 +7,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms'
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import { moduleMetadata } from '@storybook/angular'
 import { of } from 'rxjs'
 import { delay } from 'rxjs/operators'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggDropdownComponent } from './dropdown.component'
 import { NggDropdownModule } from './dropdown.module'
 
-export default {
+const meta: Meta<NggDropdownComponent> = {
   title: 'Components/Dropdown',
   component: NggDropdownComponent,
   decorators: [
@@ -25,141 +27,170 @@ export default {
   parameters: {
     componentIds: ['component-dropdown'],
   },
-} as Meta<NggDropdownComponent>
-
-const Template: StoryFn<NggDropdownComponent> = (args) => ({
-  template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [useValue]="useValue" [display]="display" [size]="size" [id]="id"></ngg-dropdown>`,
-  props: args,
-})
-
-export const Select = Template.bind({})
-Select.args = {
-  id: '',
-  texts: { placeholder: 'Select meal' },
-  value: '',
-  loop: true,
-  multiSelect: false,
-  searchable: false,
-  display: 'label',
-  useValue: 'value',
-  options: [
-    { label: 'Tacos', value: 'tacos' },
-    { label: 'Pizza', value: 'pizza' },
-    { label: 'Sushi', value: 'sushi' },
-  ],
 }
 
-export const Small = Template.bind({})
-Small.args = {
-  id: '',
-  texts: { placeholder: 'Select meal' },
-  value: '',
-  loop: true,
-  multiSelect: false,
-  searchable: false,
-  display: 'label',
-  useValue: 'value',
-  size: 'small',
-  options: [
-    { label: 'Tacos', value: 'tacos' },
-    { label: 'Pizza', value: 'pizza' },
-    { label: 'Sushi', value: 'sushi' },
-  ],
+export default meta
+type Story = StoryObj<NggDropdownComponent>
+
+export const Select: Story = {
+  render: (args) => ({
+    template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [useValue]="useValue" [display]="display" [size]="size" [id]="id"></ngg-dropdown>`,
+    props: args,
+  }),
+  args: {
+    id: '',
+    texts: { placeholder: 'Select meal' },
+    value: '',
+    loop: true,
+    multiSelect: false,
+    searchable: false,
+    display: 'label',
+    useValue: 'value',
+    options: [
+      { label: 'Tacos', value: 'tacos' },
+      { label: 'Pizza', value: 'pizza' },
+      { label: 'Sushi', value: 'sushi' },
+    ],
+  },
 }
 
-export const RenderWithSelectedOption = Template.bind({})
-RenderWithSelectedOption.args = {
-  id: '',
-  texts: { placeholder: 'Not needed...' },
-  value: '',
-  loop: true,
-  multiSelect: false,
-  searchable: false,
-  display: 'label',
-  useValue: 'value',
-  options: [
-    { label: 'Tacos', value: 'tacos' },
-    { label: 'Pizza', value: 'pizza' },
-    { label: 'Im selected', value: 'sushi', selected: true },
-  ],
+export const Small: Story = {
+  render: (args) => ({
+    template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [useValue]="useValue" [display]="display" [size]="size" [id]="id"></ngg-dropdown>`,
+    props: args,
+  }),
+  args: {
+    id: '',
+    texts: { placeholder: 'Select meal' },
+    value: '',
+    loop: true,
+    multiSelect: false,
+    searchable: false,
+    display: 'label',
+    useValue: 'value',
+    size: 'small',
+    options: [
+      { label: 'Tacos', value: 'tacos' },
+      { label: 'Pizza', value: 'pizza' },
+      { label: 'Sushi', value: 'sushi' },
+    ],
+  },
 }
 
-export const Test = Template.bind({})
-Test.args = {
-  id: '',
-  texts: { placeholder: 'Select meal' },
-  value: '',
-  loop: true,
-  multiSelect: false,
-  searchable: false,
-  display: 'label',
-  useValue: 'value',
-  options: [
-    { label: 'Lunch', value: 'lunch', heading: true },
-    { label: 'Tacos', value: 'tacos' },
-    { label: 'Pizza', value: 'pizza' },
-    { label: 'Sushi', value: 'sushi' },
-    { label: 'Dinner', value: 'dinner', heading: true },
-    { label: 'Ramen', value: 'ramen' },
-    { label: 'Tori Ramen', value: 'tori' },
-    { label: 'Tokyo Ramen', value: 'tokyo' },
-    { label: 'Kyoto Ramen', value: 'kyoto' },
-    { label: 'Sriracha Ramen', value: 'sriracha' },
-    { label: 'Kimchi Ramen', value: 'kimchi' },
-    { label: 'Hakodate Ramen', value: 'hakodate' },
-  ],
+export const RenderWithSelectedOption: Story = {
+  render: (args) => ({
+    template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [useValue]="useValue" [display]="display" [size]="size" [id]="id"></ngg-dropdown>`,
+    props: args,
+  }),
+  args: {
+    id: '',
+    texts: { placeholder: 'Not needed...' },
+    value: '',
+    loop: true,
+    multiSelect: false,
+    searchable: false,
+    display: 'label',
+    useValue: 'value',
+    options: [
+      { label: 'Tacos', value: 'tacos' },
+      { label: 'Pizza', value: 'pizza' },
+      { label: 'Im selected', value: 'sushi', selected: true },
+    ],
+  },
 }
 
-export const MultiSelect = Template.bind({})
-MultiSelect.args = {
-  id: '',
-  texts: { placeholder: 'Select meal(s)' },
-  value: '',
-  loop: true,
-  multiSelect: true,
-  searchable: false,
-  display: 'name',
-  useValue: 'value',
-  options: [
-    { name: 'Tacos', value: 'tacos' },
-    { name: 'Pizza', value: 'pizza' },
-    { name: 'Sushi', value: 'sushi' },
-  ],
+export const Test: Story = {
+  render: (args) => ({
+    template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [useValue]="useValue" [display]="display" [size]="size" [id]="id"></ngg-dropdown>`,
+    props: args,
+  }),
+  args: {
+    id: '',
+    texts: { placeholder: 'Select meal' },
+    value: '',
+    loop: true,
+    multiSelect: false,
+    searchable: false,
+    display: 'label',
+    useValue: 'value',
+    options: [
+      { label: 'Lunch', value: 'lunch', heading: true },
+      { label: 'Tacos', value: 'tacos' },
+      { label: 'Pizza', value: 'pizza' },
+      { label: 'Sushi', value: 'sushi' },
+      { label: 'Dinner', value: 'dinner', heading: true },
+      { label: 'Ramen', value: 'ramen' },
+      { label: 'Tori Ramen', value: 'tori' },
+      { label: 'Tokyo Ramen', value: 'tokyo' },
+      { label: 'Kyoto Ramen', value: 'kyoto' },
+      { label: 'Sriracha Ramen', value: 'sriracha' },
+      { label: 'Kimchi Ramen', value: 'kimchi' },
+      { label: 'Hakodate Ramen', value: 'hakodate' },
+    ],
+  },
 }
 
-export const Searchable = Template.bind({})
-Searchable.args = {
-  id: '',
-  texts: { placeholder: 'Select meal(s)' },
-  value: '',
-  loop: true,
-  multiSelect: false,
-  searchable: true,
-  display: 'name',
-  useValue: 'value',
-  options: [
-    { name: 'Tacos', value: 'tacos' },
-    { name: 'Pizza', value: 'pizza' },
-    { name: 'Sushi', value: 'sushi' },
-    { name: 'Ramen', value: 'ramen' },
-    { name: 'Tori Ramen', value: 'tori' },
-    { name: 'Tokyo Ramen', value: 'tokyo' },
-    { name: 'Kyoto Ramen', value: 'kyoto' },
-    { name: 'Sriracha Ramen', value: 'sriracha' },
-    { name: 'Kimchi Ramen', value: 'kimchi' },
-    { name: 'Hakodate Ramen', value: 'hakodate' },
-  ],
+export const MultiSelect: Story = {
+  render: (args) => ({
+    template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [useValue]="useValue" [display]="display" [size]="size" [id]="id"></ngg-dropdown>`,
+    props: args,
+  }),
+  args: {
+    id: '',
+    texts: { placeholder: 'Select meal(s)' },
+    value: '',
+    loop: true,
+    multiSelect: true,
+    searchable: false,
+    display: 'name',
+    useValue: 'value',
+    options: [
+      { name: 'Tacos', value: 'tacos' },
+      { name: 'Pizza', value: 'pizza' },
+      { name: 'Sushi', value: 'sushi' },
+    ],
+  },
 }
 
-const CustomOptionTemplate: StoryFn<NggDropdownComponent> = (args) => {
-  args.compareWith = (o1: any, o2: any) => o1.id === o2.id
-  args.searchFilter = (search: string, value: any) =>
-    ['kitchen', 'id'].some((key) =>
-      value[key].toLowerCase().includes(search.toLowerCase()),
-    )
-  return {
-    component: NggDropdownComponent,
-    template: `
+export const Searchable: Story = {
+  render: (args) => ({
+    template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [useValue]="useValue" [display]="display" [size]="size" [id]="id"></ngg-dropdown>`,
+    props: args,
+  }),
+  args: {
+    id: '',
+    texts: { placeholder: 'Select meal(s)' },
+    value: '',
+    loop: true,
+    multiSelect: false,
+    searchable: true,
+    display: 'name',
+    useValue: 'value',
+    options: [
+      { name: 'Tacos', value: 'tacos' },
+      { name: 'Pizza', value: 'pizza' },
+      { name: 'Sushi', value: 'sushi' },
+      { name: 'Ramen', value: 'ramen' },
+      { name: 'Tori Ramen', value: 'tori' },
+      { name: 'Tokyo Ramen', value: 'tokyo' },
+      { name: 'Kyoto Ramen', value: 'kyoto' },
+      { name: 'Sriracha Ramen', value: 'sriracha' },
+      { name: 'Kimchi Ramen', value: 'kimchi' },
+      { name: 'Hakodate Ramen', value: 'hakodate' },
+    ],
+  },
+}
+
+export const CustomOption: Story = {
+  render: (args) => {
+    args.compareWith = (o1: any, o2: any) => o1.id === o2.id
+    args.searchFilter = (search: string, value: any) =>
+      ['kitchen', 'id'].some((key) =>
+        value[key].toLowerCase().includes(search.toLowerCase()),
+      )
+    return {
+      component: NggDropdownComponent,
+      template: `
     <ngg-dropdown
       [texts]="texts"
       [options]="options"
@@ -186,140 +217,140 @@ const CustomOptionTemplate: StoryFn<NggDropdownComponent> = (args) => {
       </ng-template>
     </ngg-dropdown>
     `,
-    props: args,
-  }
+      props: args,
+    }
+  },
+  args: {
+    id: '',
+    texts: { placeholder: 'Select meal' },
+    value: '',
+    loop: true,
+    multiSelect: false,
+    searchable: true,
+    useValue: 'val',
+    display: 'name',
+    options: [
+      {
+        name: 'Tacos',
+        val: {
+          id: 'tacos',
+          kitchen: 'mexican',
+        },
+      },
+      {
+        name: 'Pizza',
+        val: {
+          id: 'pizza',
+          kitchen: 'italian',
+        },
+      },
+      {
+        name: 'Sushi',
+        val: {
+          id: 'sushi',
+          kitchen: 'japanese',
+        },
+      },
+    ],
+  },
 }
 
-export const CustomOption = CustomOptionTemplate.bind({})
-CustomOption.args = {
-  id: '',
-  texts: { placeholder: 'Select meal' },
-  value: '',
-  loop: true,
-  multiSelect: false,
-  searchable: true,
-  useValue: 'val',
-  display: 'name',
-  options: [
-    {
-      name: 'Tacos',
-      val: {
-        id: 'tacos',
-        kitchen: 'mexican',
+export const FormWithValidation: Story = {
+  render: (args) => {
+    const validationForm = new FormGroup({
+      country: new FormControl(undefined, [Validators.required]),
+    })
+
+    const options$ = of([
+      {
+        label: 'Sweden',
+        value: 'sweden',
       },
-    },
-    {
-      name: 'Pizza',
-      val: {
-        id: 'pizza',
-        kitchen: 'italian',
+      {
+        label: 'Denmark',
+        value: 'denmark',
       },
-    },
-    {
-      name: 'Sushi',
-      val: {
-        id: 'sushi',
-        kitchen: 'japanese',
+      {
+        label: 'Finland',
+        value: 'Finland',
       },
-    },
-  ],
-}
+      {
+        label: 'Norway',
+        value: 'norway',
+      },
+      {
+        label: 'England',
+        value: 'england',
+      },
+      {
+        label: 'Germany',
+        value: 'germany',
+      },
+      {
+        label: 'Estonia',
+        value: 'estonia',
+      },
+      {
+        label: 'Lithuania',
+        value: 'lithuania',
+      },
+      {
+        label: 'Belarus',
+        value: 'belarus',
+      },
+      {
+        label: 'Latvia',
+        value: 'latvia',
+      },
+      {
+        label: 'Greece',
+        value: 'greece',
+      },
+      {
+        label: 'Italy',
+        value: 'italy',
+      },
+      {
+        label: 'Austria',
+        value: 'austria',
+      },
+      {
+        label: 'Switzerland',
+        value: 'switzerland',
+      },
+      {
+        label: 'Netherlands',
+        value: 'netherlands',
+      },
+      {
+        label: 'Belgium',
+        value: 'belgium',
+      },
+      {
+        label: 'France',
+        value: 'france',
+      },
+      {
+        label: 'Spain',
+        value: 'spain',
+      },
+      {
+        label: 'Portugal',
+        value: 'portugal',
+      },
+      {
+        label: 'Poland',
+        value: 'poland',
+      },
+    ]).pipe(delay(3000))
 
-const FormControlTemplate: StoryFn<NggDropdownComponent> = (args) => {
-  const validationForm = new FormGroup({
-    country: new FormControl(undefined, [Validators.required]),
-  })
+    const save = (form: any) => {
+      console.log('Saved!', form)
+    }
 
-  const options$ = of([
-    {
-      label: 'Sweden',
-      value: 'sweden',
-    },
-    {
-      label: 'Denmark',
-      value: 'denmark',
-    },
-    {
-      label: 'Finland',
-      value: 'Finland',
-    },
-    {
-      label: 'Norway',
-      value: 'norway',
-    },
-    {
-      label: 'England',
-      value: 'england',
-    },
-    {
-      label: 'Germany',
-      value: 'germany',
-    },
-    {
-      label: 'Estonia',
-      value: 'estonia',
-    },
-    {
-      label: 'Lithuania',
-      value: 'lithuania',
-    },
-    {
-      label: 'Belarus',
-      value: 'belarus',
-    },
-    {
-      label: 'Latvia',
-      value: 'latvia',
-    },
-    {
-      label: 'Greece',
-      value: 'greece',
-    },
-    {
-      label: 'Italy',
-      value: 'italy',
-    },
-    {
-      label: 'Austria',
-      value: 'austria',
-    },
-    {
-      label: 'Switzerland',
-      value: 'switzerland',
-    },
-    {
-      label: 'Netherlands',
-      value: 'netherlands',
-    },
-    {
-      label: 'Belgium',
-      value: 'belgium',
-    },
-    {
-      label: 'France',
-      value: 'france',
-    },
-    {
-      label: 'Spain',
-      value: 'spain',
-    },
-    {
-      label: 'Portugal',
-      value: 'portugal',
-    },
-    {
-      label: 'Poland',
-      value: 'poland',
-    },
-  ]).pipe(delay(3000))
-
-  const save = (form: any) => {
-    console.log('Saved!', form)
-  }
-
-  return {
-    component: NggDropdownComponent,
-    template: `
+    return {
+      component: NggDropdownComponent,
+      template: `
       <form [formGroup]="validationForm" #ngForm="ngForm" (submit)="save(validationForm.value)">
     <div class="form-group" *ngIf="validationForm.get('country') as dropdown">
     <ngg-dropdown
@@ -345,41 +376,41 @@ const FormControlTemplate: StoryFn<NggDropdownComponent> = (args) => {
   </button>
   </form>
     `,
-    props: {
-      ...args,
-      validationForm,
-      options$,
-      save,
-    },
-  }
+      props: {
+        ...args,
+        validationForm,
+        options$,
+        save,
+      },
+    }
+  },
+  args: {},
 }
 
-export const FormWithValidation = FormControlTemplate.bind({})
-FormWithValidation.args = {}
+export const FormWithReset: Story = {
+  render: (args) => {
+    const validationFormAdvance = new FormGroup({
+      country: new FormControl(undefined, [Validators.required]),
+    })
 
-const FormControlWithResetTemplate: StoryFn<NggDropdownComponent> = (args) => {
-  const validationFormAdvance = new FormGroup({
-    country: new FormControl(undefined, [Validators.required]),
-  })
+    const options$ = of([
+      {
+        label: 'Sweden',
+        value: { country: 'sweden', id: '1' },
+      },
+      {
+        label: 'Australia',
+        value: { country: 'Australia', id: '2' },
+      },
+    ]).pipe(delay(3000))
 
-  const options$ = of([
-    {
-      label: 'Sweden',
-      value: { country: 'sweden', id: '1' },
-    },
-    {
-      label: 'Australia',
-      value: { country: 'Australia', id: '2' },
-    },
-  ]).pipe(delay(3000))
+    const save = (form: any) => {
+      console.log('Saved!', form)
+    }
 
-  const save = (form: any) => {
-    console.log('Saved!', form)
-  }
-
-  return {
-    component: NggDropdownComponent,
-    template: `
+    return {
+      component: NggDropdownComponent,
+      template: `
     <form [formGroup]="validationFormAdvance" #ngForm="ngForm" (submit)="save(validationFormAdvance.value)">
     <div class="form-group" *ngIf="validationFormAdvance.get('country') as dropdown">
       <ngg-dropdown
@@ -406,14 +437,13 @@ const FormControlWithResetTemplate: StoryFn<NggDropdownComponent> = (args) => {
     </button>
     </form>
     `,
-    props: {
-      ...args,
-      validationFormAdvance,
-      options$,
-      save,
-    },
-  }
+      props: {
+        ...args,
+        validationFormAdvance,
+        options$,
+        save,
+      },
+    }
+  },
+  args: {},
 }
-
-export const FormWithReset = FormControlWithResetTemplate.bind({})
-FormWithReset.args = {}

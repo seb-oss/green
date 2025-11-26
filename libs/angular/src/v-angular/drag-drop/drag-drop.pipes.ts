@@ -8,7 +8,10 @@ import {
   PipeTransform,
 } from '@angular/core'
 
-@Pipe({ name: 'value', pure: false })
+@Pipe({
+    name: 'value', pure: false,
+    standalone: false
+})
 export class ValuePipe implements PipeTransform {
   constructor(private readonly differs: KeyValueDiffers) {}
 

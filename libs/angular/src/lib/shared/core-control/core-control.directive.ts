@@ -14,7 +14,7 @@ import {
 } from '@angular/forms'
 
 @Directive({
-  selector: `gds-input[formControlName]:not([ngDefaultControl]),
+    selector: `gds-input[formControlName]:not([ngDefaultControl]),
       gds-input[formControl]:not([ngDefaultControl]),
 
      gds-textarea[formControlName]:not([ngDefaultControl]),
@@ -36,13 +36,14 @@ import {
      gds-checkbox-group[formControl]:not([ngDefaultControl]),
 
      [nggCoreControl]`,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NggCoreControlDirective),
-      multi: true,
-    },
-  ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => NggCoreControlDirective),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class NggCoreControlDirective
   implements ControlValueAccessor, AfterViewInit

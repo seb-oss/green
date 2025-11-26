@@ -1,9 +1,10 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core'
 
 @Component({
-  selector: 'nggv-typeahead-highlight',
-  templateUrl: './typeahead-highlight.component.html',
-  styleUrls: ['./typeahead-highlight.component.scss'],
+    selector: 'nggv-typeahead-highlight',
+    templateUrl: './typeahead-highlight.component.html',
+    styleUrls: ['./typeahead-highlight.component.scss'],
+    standalone: false
 })
 export class NggvTypeaheadHighlightComponent implements OnChanges {
   /** The text that is displayed in the dropdown list */

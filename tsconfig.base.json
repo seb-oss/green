@@ -29,6 +29,7 @@
       "@sebgroup/green-core/everything": [
         "dist/libs/core/src/components/index.ts"
       ],
+      "@sebgroup/green-core/metadata": ["libs/core/custom-elements.json"],
       "@sebgroup/green-core": ["dist/libs/core/src"],
       "@sebgroup/green-core/*": ["dist/libs/core/src/*"],
       "@sebgroup/green-react": ["libs/react/src/index.ts"],

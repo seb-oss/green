@@ -1,6 +1,6 @@
 import { html } from 'lit'
 
-import type { Meta, StoryObj } from '@storybook/web-components'
+import type { Meta, StoryObj } from '@storybook/web-components-vite'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
@@ -642,6 +642,74 @@ export const Theme: Story = {
     label="Learn more"
   ></gds-card-pattern-01>
 </gds-theme>`,
+        language: 'html',
+        type: 'code',
+      },
+    },
+  },
+}
+
+export const Metadata: Story = {
+  render: () => html`
+    <gds-grid columns="1; m{3}" gap="xl">
+      <gds-card-pattern-01
+        title="Card title"
+        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+        category="Components"
+        date="2025-11-04T10:22:00"
+        href="#"
+        label="Read more"
+      ></gds-card-pattern-01>
+
+      <gds-card-pattern-01
+        title="Card title"
+        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+        category="Accessibility"
+        date="2025-06-30T16:59:00"
+        href="#"
+        label="Read more"
+      ></gds-card-pattern-01>
+
+      <gds-card-pattern-01
+        title="Card title"
+        excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        src="https://api.seb.io/assets/launch-hero.jpg"
+        category="Tokens"
+        date="2024-03-12T13:01:00"
+        href="#"
+        label="Read more"
+      ></gds-card-pattern-01>
+    </gds-grid>
+  `,
+  parameters: {
+    docs: {
+      description: {
+        story: `
+Metadata attributes provide contextual information and help organize card content.
+
+**Category:** Classifies the content type for filtering and organization.
+
+**Date:** Publication date in ISO 8601 format. Formatted using \`gds-formatted-date\` component with configurable format and locale.
+
+**Date Format:** Controls the date and time display format (default: \`dateLong\`)
+
+**Locale:** Controls the language and regional formatting (default: \`en-GB\`)
+        `,
+      },
+      source: {
+        code: `
+<gds-card-pattern-01
+  title="Card title"
+  excerpt="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  src="image.jpg"
+  category="Components"
+  date="2025-11-04T10:22:00"
+  href="#"
+  label="Read more"
+></gds-card-pattern-01>
+        `,
         language: 'html',
         type: 'code',
       },

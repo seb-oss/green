@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import { moduleMetadata } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggContextMenuComponent } from './context-menu.component'
 import { NggContextMenuModule } from './context-menu.module'
 
-export default {
+const meta: Meta<NggContextMenuComponent> = {
   title: 'Components/Context Menu',
   component: NggContextMenuComponent,
   decorators: [
@@ -22,34 +24,38 @@ export default {
   parameters: {
     componentIds: ['component-context-menu'],
   },
-} as Meta<NggContextMenuComponent>
+}
 
-const Template: StoryFn<NggContextMenuComponent> = (args) => ({
-  component: NggContextMenuComponent,
-  props: args,
-  template: `
+export default meta
+type Story = StoryObj<NggContextMenuComponent>
+
+export const Default: Story = {
+  render: (args) => ({
+    component: NggContextMenuComponent,
+    props: args,
+    template: `
   <div style="display:flex;justify-content:space-between">
     <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
     <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
     <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
   </div>
   `,
-})
-
-export const Default = Template.bind({})
-Default.args = {
-  direction: 'ltr',
-  menuItems: [
-    { label: 'Option 1', value: 'option1' },
-    { label: 'Option 2', value: 'option2' },
-    { label: 'Option 3', value: 'option3' },
-  ],
+  }),
+  args: {
+    direction: 'ltr',
+    menuItems: [
+      { label: 'Option 1', value: 'option1' },
+      { label: 'Option 2', value: 'option2' },
+      { label: 'Option 3', value: 'option3' },
+    ],
+  },
 }
 
-const WithLabelTemplate: StoryFn<NggContextMenuComponent> = (args) => ({
-  component: NggContextMenuComponent,
-  props: args,
-  template: `
+export const WithLabel: Story = {
+  render: (args) => ({
+    component: NggContextMenuComponent,
+    props: args,
+    template: `
     <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems" [menuAnchorTemplate]="menuAnchorTemplate">
     </ngg-context-menu>
 
@@ -58,32 +64,44 @@ const WithLabelTemplate: StoryFn<NggContextMenuComponent> = (args) => ({
         <i class="sg-icon sg-icon-ellipsis"></i>
     </ng-template>
     `,
-})
-
-export const WithLabel = WithLabelTemplate.bind({})
-WithLabel.args = {
-  direction: 'rtl',
-  menuItems: [
-    { label: 'Key 1', value: 'option1' },
-    { label: 'Key 2', value: 'option2' },
-    { label: 'Key 3', value: 'option3' },
-  ],
+  }),
+  args: {
+    direction: 'rtl',
+    menuItems: [
+      { label: 'Key 1', value: 'option1' },
+      { label: 'Key 2', value: 'option2' },
+      { label: 'Key 3', value: 'option3' },
+    ],
+  },
 }
 
-export const RightToLeft = Template.bind({})
-RightToLeft.args = {
-  direction: 'rtl',
-  menuItems: [
-    { label: 'Key 1', value: 'option1' },
-    { label: 'Key 2', value: 'option2' },
-    { label: 'Key 3', value: 'option3' },
-  ],
+export const RightToLeft: Story = {
+  render: (args) => ({
+    component: NggContextMenuComponent,
+    props: args,
+    template: `
+  <div style="display:flex;justify-content:space-between">
+    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
+    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
+    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
+  </div>
+  `,
+  }),
+  args: {
+    direction: 'rtl',
+    menuItems: [
+      { label: 'Key 1', value: 'option1' },
+      { label: 'Key 2', value: 'option2' },
+      { label: 'Key 3', value: 'option3' },
+    ],
+  },
 }
 
-const CustomTemplate: StoryFn<NggContextMenuComponent> = (args) => ({
-  component: NggContextMenuComponent,
-  props: args,
-  template: `
+export const CustomTemplateDefault: Story = {
+  render: (args) => ({
+    component: NggContextMenuComponent,
+    props: args,
+    template: `
     <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems" [menuItemTemplate]="menuItemTemplate" [menuAnchorTemplate]="menuAnchorTemplate">
     </ngg-context-menu>
 
@@ -105,22 +123,22 @@ const CustomTemplate: StoryFn<NggContextMenuComponent> = (args) => ({
       </div>
     </ng-template>
     `,
-})
-
-export const CustomTemplateDefault = CustomTemplate.bind({})
-CustomTemplateDefault.args = {
-  direction: 'rtl',
-  menuItems: [
-    { label: 'Key 1', value: 'option1' },
-    { label: 'Key 2', value: 'option2' },
-    { label: 'Delete', value: 'delete' },
-  ],
+  }),
+  args: {
+    direction: 'rtl',
+    menuItems: [
+      { label: 'Key 1', value: 'option1' },
+      { label: 'Key 2', value: 'option2' },
+      { label: 'Delete', value: 'delete' },
+    ],
+  },
 }
 
-const TemplatePositionRelative: StoryFn<NggContextMenuComponent> = (args) => ({
-  component: NggContextMenuComponent,
-  props: args,
-  template: `
+export const PositionRelative: Story = {
+  render: (args) => ({
+    component: NggContextMenuComponent,
+    props: args,
+    template: `
   <div style="position: relative; width: 50%; margin: 20px auto;">
     <div style="display:flex;justify-content:space-between;">
       <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
@@ -129,14 +147,13 @@ const TemplatePositionRelative: StoryFn<NggContextMenuComponent> = (args) => ({
     </div>
   </div>
   `,
-})
-
-export const PositionRelative = TemplatePositionRelative.bind({})
-PositionRelative.args = {
-  direction: 'ltr',
-  menuItems: [
-    { label: 'Option 1', value: 'option1' },
-    { label: 'Option 2', value: 'option2' },
-    { label: 'Option 3', value: 'option3' },
-  ],
+  }),
+  args: {
+    direction: 'ltr',
+    menuItems: [
+      { label: 'Option 1', value: 'option1' },
+      { label: 'Option 2', value: 'option2' },
+      { label: 'Option 3', value: 'option3' },
+    ],
+  },
 }

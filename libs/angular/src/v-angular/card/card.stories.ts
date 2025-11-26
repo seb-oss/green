@@ -1,15 +1,12 @@
 import { CommonModule } from '@angular/common'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import {
-  componentWrapperDecorator,
-  Meta,
-  moduleMetadata,
-  StoryFn,
-} from '@storybook/angular'
+import { componentWrapperDecorator, moduleMetadata } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggvCardComponent } from './card.component'
 
-export default {
+const meta: Meta<NggvCardComponent> = {
   title: 'V-Angular/Card',
   component: NggvCardComponent,
   decorators: [
@@ -21,17 +18,23 @@ export default {
       (story) => `<div style="width: 20rem">${story}</div>`,
     ),
   ],
-} as Meta
+}
 
-const BasicTemplate: StoryFn<NggvCardComponent> = () => ({
-  template: /*html*/ `
+export default meta
+type Story = StoryObj<NggvCardComponent>
+
+export const Basic: Story = {
+  render: () => ({
+    template: /*html*/ `
     <nggv-card>
       Basic card
     </nggv-card>`,
-})
+  }),
+}
 
-const TemplateWithColumns: StoryFn<NggvCardComponent> = () => ({
-  template: /*html*/ `
+export const WithColumns: Story = {
+  render: () => ({
+    template: /*html*/ `
     <nggv-card>
       <div class="card-row">
         <div class="card-column"> Column 1 </div>
@@ -40,10 +43,12 @@ const TemplateWithColumns: StoryFn<NggvCardComponent> = () => ({
         <div class="card-column"> Column 4 </div>
       </div>
     </nggv-card>`,
-})
+  }),
+}
 
-const TemplateWithDivider: StoryFn<NggvCardComponent> = () => ({
-  template: /*html*/ `
+export const Divider: Story = {
+  render: () => ({
+    template: /*html*/ `
     <nggv-card>
       <div class="card-row">
         <div class="card-column"> <b>Expenses</b> </div>
@@ -62,10 +67,5 @@ const TemplateWithDivider: StoryFn<NggvCardComponent> = () => ({
         <div class="card-column"> 33,00 € </div>
       </div>
     </nggv-card>`,
-})
-
-export const Basic = BasicTemplate.bind({})
-
-export const WithColumns = TemplateWithColumns.bind({})
-
-export const Divider = TemplateWithDivider.bind({})
+  }),
+}

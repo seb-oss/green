@@ -8,7 +8,8 @@ import {
 } from '@angular/core'
 
 @Directive({
-  selector: '[nggSlidingUnderline]',
+    selector: '[nggSlidingUnderline]',
+    standalone: false
 })
 export class SlidingUnderlineDirective implements OnInit, OnChanges {
   constructor(private element: ElementRef<HTMLElement>) {}

@@ -8,10 +8,11 @@ import {
 import { ButtonSize, ButtonVariant } from '@sebgroup/extract'
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[ngg-button]',
-  template: `<ng-content></ng-content>`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[ngg-button]',
+    template: `<ng-content></ng-content>`,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NggButtonComponent {
   @Input() variant?: ButtonVariant

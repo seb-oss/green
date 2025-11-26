@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.16.1
+
+### Patch Changes
+
+- cfac6d4: **Segmented control:** Fix unselected control from `neutral-01` to `neutral-02`
+
+## 2.16.0
+
+### Minor Changes
+
+- 4add05e: **Formatted text:** Date added `dateTimeLong`, `dateTimeLongWithWeekday`, `dateTimeShort` formats to support CP01
+- 4add05e: **Card Pattern 01:** Add metadata props for category and date
+
 ## 2.15.0
 
 ### Minor Changes

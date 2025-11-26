@@ -2,12 +2,9 @@ import '../modal.globals'
 
 import { CommonModule } from '@angular/common'
 import { CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom } from '@angular/core'
-import {
-  applicationConfig,
-  Meta,
-  moduleMetadata,
-  StoryFn,
-} from '@storybook/angular'
+import { applicationConfig, moduleMetadata } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import { DropdownUtils } from '../../core'
@@ -15,7 +12,7 @@ import { NggvDropdownModule } from '../../dropdown/dropdown.module'
 import { NggvI18nModule } from '../../i18n/i18n.module'
 import { NggvDialogComponent } from './dialog.component'
 
-export default {
+const meta: Meta<NggvDialogComponent> = {
   title: 'V-Angular/Dialog',
   component: NggvDialogComponent,
   decorators: [
@@ -32,7 +29,10 @@ export default {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
-} as Meta
+}
+
+export default meta
+type Story = StoryObj<NggvDialogComponent>
 
 const options = [
   { key: 'opt1', label: 'label.defaultlabel', accountNumber: '345345' },
@@ -68,33 +68,33 @@ const dropdownArgs = {
   options,
 }
 
-const Template: StoryFn<NggvDialogComponent> = (args: any) => {
-  return {
-    template: `<button (click)="isOpen = !isOpen">Open dialog</button><nggv-dialog [heading]="heading" [shown]="isOpen" [initiallyShown]="initiallyShown" [closeButtonAriaLabel]="closeButtonAriaLabel" [buttons]="buttons" [content]="content" (nggvCloseEvent)="isOpen = false"><nggv-dropdown [required]="required"
+export const Primary: Story = {
+  render: (args: any) => {
+    return {
+      template: `<button (click)="isOpen = !isOpen">Open dialog</button><nggv-dialog [heading]="heading" [shown]="isOpen" [initiallyShown]="initiallyShown" [closeButtonAriaLabel]="closeButtonAriaLabel" [buttons]="buttons" [content]="content" (nggvCloseEvent)="isOpen = false"><nggv-dropdown [required]="required"
 [invalid]="invalid"
 [label]="label"
 [placeholder]="placeholder"
 [description]="description"
 [ngModel]="ngModel"
 [options]="options"></nggv-dropdown></nggv-dialog>`,
-    props: {
-      ...args,
-      isOpen: false,
-    },
-  }
-}
-
-export const Primary = Template.bind({})
-Primary.args = {
-  initiallyShown: false,
-  closeButtonAriaLabel: 'Close dialog',
-  buttons: {
-    negative: 'button_cancel',
-    neutral: 'button_apply',
-    positive: 'button_save',
-    danger: 'button_delete',
+      props: {
+        ...args,
+        isOpen: false,
+      },
+    }
   },
-  content:
-    'You can supply the content seen here either through the <code>[content]="string"</code> property or</br>by passing children between the opening and closing tags <code>&lt;c-dialog&gt; ...children &lt;/c-dialog&gt;</code>',
-  ...dropdownArgs,
+  args: {
+    initiallyShown: false,
+    closeButtonAriaLabel: 'Close dialog',
+    buttons: {
+      negative: 'button_cancel',
+      neutral: 'button_apply',
+      positive: 'button_save',
+      danger: 'button_delete',
+    },
+    content:
+      'You can supply the content seen here either through the <code>[content]="string"</code> property or</br>by passing children between the opening and closing tags <code>&lt;c-dialog&gt; ...children &lt;/c-dialog&gt;</code>',
+    ...dropdownArgs,
+  },
 }

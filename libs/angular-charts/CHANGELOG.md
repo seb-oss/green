@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.0.0
+
+### Major Changes
+
+- b634df2: **Angular:** Update minimum Angular version to 19.
+  BREAKING CHANGE: Consumers on earlier Angular versions will need to update to 19.x
+
 ## 3.0.0
 
 ### Major Changes

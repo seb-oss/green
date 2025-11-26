@@ -1,7 +1,8 @@
 import { Directive, ViewContainerRef } from '@angular/core'
 
 @Directive({
-  selector: '[nggModalHeader]',
+    selector: '[nggModalHeader]',
+    standalone: false
 })
 export class NggModalHeaderDirective {
   constructor(public viewContainerRef: ViewContainerRef) {}

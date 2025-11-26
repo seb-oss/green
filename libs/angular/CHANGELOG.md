@@ -1,5 +1,18 @@
 # Changelog
 
+## 7.0.0
+
+### Major Changes
+
+- b634df2: **Angular:** Update minimum Angular version to 19.
+  BREAKING CHANGE: Consumers on earlier Angular versions will need to update to 19.x
+
+## 6.8.0
+
+### Minor Changes
+
+- fa7db49: **V-Angular:** Radio: Create nggv-radio-group. Fixes #2468
+
 ## 6.7.1
 
 ### Patch Changes
@@ -517,7 +530,6 @@
 - 0213060: **V-Angular:** Migrating V-Angular remaining components to Green and closing the gap on already exsisting components.
 
   ## Migrated components
-
   - AccountNumber
   - Alert
   - BaseControlValueAccessor
@@ -869,11 +881,9 @@
 ### Minor Changes
 
 - 7820e8c: **Dropdown**
-
   - Add `maxHeight` input
 
 - bb83849: **Datepicker:** Added support for disabling dates
-
   - `disabled-weekends` will disable all weekend days in the calendar view
   - `disabled-dates` allows to specify an array of dates that should be disabled in the calendar view
 
@@ -902,7 +912,6 @@
 ### Minor Changes
 
 - 007f8ac: **Datepicker and Dropdown**
-
   - Add small variant
   - Add attribute for hiding label
   - Align style with Figma

@@ -1,56 +1,35 @@
 {
-    "extends": [
-        "plugin:@nx/react-typescript",
-        "next",
-        "next/core-web-vitals",
-        "../../.eslintrc.json"
-    ],
-    "rules": {
-        "import/no-extraneous-dependencies": "off"
+  "extends": [
+    "plugin:@nx/react-typescript",
+    "next",
+    "next/core-web-vitals",
+    "../../.eslintrc.json"
+  ],
+  "rules": {
+    "import/no-extraneous-dependencies": "off"
+  },
+  "ignorePatterns": ["!**/*", ".next/**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@next/next/no-html-link-for-pages": ["error", "apps/docs/pages"],
+        "@typescript-eslint/no-extra-semi": "off"
+      }
     },
-    "ignorePatterns": [
-        "!**/*",
-        ".next/**/*"
-    ],
-    "overrides": [
-        {
-            "files": [
-                "*.ts",
-                "*.tsx",
-                "*.js",
-                "*.jsx"
-            ],
-            "rules": {
-                "@next/next/no-html-link-for-pages": [
-                    "error",
-                    "apps/docs/pages"
-                ]
-            }
-        },
-        {
-            "files": [
-                "*.ts",
-                "*.tsx"
-            ],
-            "rules": {}
-        },
-        {
-            "files": [
-                "*.js",
-                "*.jsx"
-            ],
-            "rules": {}
-        },
-        {
-            "files": [
-                "*.spec.ts",
-                "*.spec.tsx",
-                "*.spec.js",
-                "*.spec.jsx"
-            ],
-            "env": {
-                "jest": true
-            }
-        }
-    ]
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }

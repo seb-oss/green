@@ -4,9 +4,9 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { TableHeaderListValueType } from './cell-table.types'
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[nggCellTableItem]',
-  template: `
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[nggCellTableItem]',
+    template: `
     <ng-container [ngSwitch]="valueType">
       <span *ngSwitchCase="'string'">{{ row || '–' }}</span>
       <span *ngSwitchCase="'number'">{{ (row | number) || '–' }}</span>
@@ -30,6 +30,7 @@ import { TableHeaderListValueType } from './cell-table.types'
       <span *ngSwitchDefault>–</span>
     </ng-container>
   `,
+    standalone: false
 })
 export class CellTableItemComponent {
   @Input() row: any

@@ -16,7 +16,7 @@ import { provideCoreRenderer } from '../core-renderer'
 import { NggCoreFormsModule } from './core-control.module'
 
 @Component({
-  template: `
+    template: `
     <form [formGroup]="form">
       <input formControlName="name" nggCoreControl required />
       <gds-input formControlName="email" name="email" required></gds-input>
@@ -34,6 +34,7 @@ import { NggCoreFormsModule } from './core-control.module'
       ></gds-input>
     </form>
   `,
+    standalone: false
 })
 class TestComponent {
   form = new FormGroup({

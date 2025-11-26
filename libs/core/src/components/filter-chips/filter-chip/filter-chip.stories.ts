@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/web-components'
+import type { Meta, StoryObj } from '@storybook/web-components-vite'
 
 import { argTablePropsFor } from '../../../../.storybook/argTableProps.ts'
 

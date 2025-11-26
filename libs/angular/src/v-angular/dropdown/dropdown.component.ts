@@ -35,9 +35,10 @@ import {
  * https://designlibrary.sebgroup.com/components/component-dropdown
  */
 @Component({
-  selector: 'nggv-dropdown',
-  templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.scss'],
+    selector: 'nggv-dropdown',
+    templateUrl: './dropdown.component.html',
+    styleUrls: ['./dropdown.component.scss'],
+    standalone: false
 })
 export class NggvDropdownComponent<
     K = string | null | undefined,

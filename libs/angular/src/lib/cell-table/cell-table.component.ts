@@ -16,10 +16,11 @@ import {
 } from './cell-table.types'
 
 @Component({
-  selector: 'ngg-cell-table',
-  templateUrl: './cell-table.component.html',
-  styleUrls: ['./cell-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'ngg-cell-table',
+    templateUrl: './cell-table.component.html',
+    styleUrls: ['./cell-table.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NggCellTableComponent {
   @ViewChildren('items') items: QueryList<ElementRef> =
