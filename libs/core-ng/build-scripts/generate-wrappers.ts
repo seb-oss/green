@@ -218,7 +218,6 @@ export class AngularBuildOrchestrator {
  */
 
 export * from './${componentFileName}.component';
-//export * from './${componentFileName}.module';
 `
   }
 
@@ -231,8 +230,6 @@ export * from './${componentFileName}.component';
     "entryFile": "index.ts"
   }
 }
-`
-  }
 `
   }
 
