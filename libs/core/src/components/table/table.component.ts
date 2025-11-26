@@ -190,7 +190,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   @watch('dataLoadKey')
   @watch('data')
-  private _onDataRenderKeyChange() {
+  private _onDataChange() {
     this.#cache = {}
     this.#loadData()
   }
