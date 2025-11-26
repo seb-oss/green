@@ -188,10 +188,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return Date.now() - entry.timestamp < this.#cacheDuration
   }
 
-  @watch('dataRenderKey')
+  @watch('dataLoadKey')
   @watch('data')
   private _onDataRenderKeyChange() {
-    console.log('Data render key changed, reloading data...')
     this.#cache = {}
     this.#loadData()
   }
