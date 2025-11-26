@@ -136,6 +136,7 @@ export const Users = {
       cell: {
         trail: {
           type: 'button',
+          rank: 'tertiary',
           value: (row: UserData) => row.email,
           size: 'xs',
           template: 'email-copy',
