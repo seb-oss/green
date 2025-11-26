@@ -118,6 +118,15 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   @property({ type: Boolean, reflect: false })
   nocache = false
 
+  /**
+   * Key to trigger data reloading when changed. Setting this to a new value
+   * forces the table to clear the cache and request new data from the data provider.
+   *
+   * The value can be any string that is not equal to the previous value.
+   */
+  @property()
+  dataLoadKey?: string
+
   @state()
   private view: Types.State = {
     page: this.page,
@@ -172,8 +181,10 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return Date.now() - entry.timestamp < this.#cacheDuration
   }
 
+  @watch('dataRenderKey')
   @watch('data')
   private _onDataRenderKeyChange() {
+    console.log('Data render key changed, reloading data...')
     this.#cache = {}
     this.#loadData()
   }

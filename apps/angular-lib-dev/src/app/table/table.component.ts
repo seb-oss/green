@@ -77,7 +77,7 @@ export class TableComponent {
     { key: 'Change', label: 'Utv. (SEK)' },
   ]
 
-  dataRenderKey = 'initial'
+  dataLoadKey = 'initial'
 
   addTableRow(): void {
     this.rows = [
@@ -92,7 +92,7 @@ export class TableComponent {
       },
     ]
 
-    this.dataRenderKey = `key-${Date.now()}`
+    this.dataLoadKey = `key-${Date.now()}`
   }
 
   selectedRows: TableRow[] = []
@@ -104,7 +104,8 @@ export class TableComponent {
   coreTableDataProvider = async (
     request: TableRequest,
   ): Promise<TableResponse<TableRow>> => {
-    let preparedData = [...tableData]
+    console.log('Data request', request)
+    let preparedData = [...this.rows]
     if (request.sortColumn) {
       preparedData = preparedData.sort((a, b) => {
         const aValue = a[request.sortColumn as keyof TableRow]
