@@ -66,7 +66,7 @@ export const TableStyles = css`
     overflow-x: auto;
     overflow-y: visible;
     box-sizing: border-box;
-    border-radius: var(--gds-sys-space-m);
+    border-radius: var(--gds-sys-radius-m);
     border: var(--gds-sys-space-5xs) solid var(--gds-sys-color-border-subtle-01);
     padding: var(--table-data-padding);
   }
@@ -95,7 +95,6 @@ export const TableStyles = css`
   }
 
   thead tr th:last-child,
-  tbody tr td:last-child,
   tbody tr:hover td:last-child,
   tbody tr.selected td:last-child,
   .striped tbody tr td:last-child {
@@ -467,20 +466,6 @@ export const TableStyles = css`
       background: none;
     }
 
-    /* .responsive td::before {
-      content: attr(data-label);
-      font-weight: var(--gds-sys-text-weight-book);
-      margin-right: var(--gds-sys-space-s);
-    } */
-
-    /* .responsive .checkbox-label {
-      display: none;
-    }
-
-    .responsive .actions-label {
-      display: none;
-    } */
-
     .responsive .cell-content {
       justify-content: flex-end;
     }
@@ -520,13 +505,13 @@ export const TableStyles = css`
   .skeleton-checkbox {
     height: 18px;
     width: 18px;
-    border-radius: var(--gds-sys-space-3xs);
+    border-radius: var(--gds-sys-radius-3xs);
   }
 
   .skeleton-action {
     height: 24px;
     width: 24px;
-    border-radius: var(--gds-sys-space-max);
+    border-radius: var(--gds-sys-radius-max);
   }
 
   /* Skeleton row styling */
@@ -539,7 +524,7 @@ export const TableStyles = css`
     padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
   }
 
-  /* Vary skeleton text widths for more natural look */
+  /* Different skeleton text widths for more natural look */
   .skeleton-row:nth-child(odd) .skeleton-text {
     width: 70%;
   }
