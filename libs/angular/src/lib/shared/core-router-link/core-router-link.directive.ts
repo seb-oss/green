@@ -10,7 +10,8 @@ import {
 import { RouterLink, RouterLinkActive } from '@angular/router'
 
 @Directive({
-  selector: '[nggCoreRouterLink]',
+    selector: '[nggCoreRouterLink]',
+    standalone: false
 })
 export class NggCoreRouterLinkDirective implements OnChanges {
   constructor(

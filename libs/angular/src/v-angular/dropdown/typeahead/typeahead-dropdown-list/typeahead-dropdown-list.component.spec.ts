@@ -14,13 +14,13 @@ import { NggvInputComponent } from '../../../input/input.component'
 import { NggvTypeaheadDropdownListComponent } from './typeahead-dropdown-list.component'
 
 @Component({
-  template: ` <ng-container>
+    template: ` <ng-container>
     <input #input id="input" />
   </ng-container>`,
-
-  selector: 'nggv-input',
-  // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
-  outputs: ['nggvFocus'],
+    selector: 'nggv-input',
+    // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
+    outputs: ['nggvFocus'],
+    standalone: false
 })
 export class InputStubComponent {
   @Output() nggvFocus: EventEmitter<boolean> = new EventEmitter()

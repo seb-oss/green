@@ -3,7 +3,8 @@ import { Component } from '@angular/core'
 import { TableHeaderListItem, TableRow } from '@sebgroup/green-angular'
 
 @Component({
-  templateUrl: './table.component.html',
+    templateUrl: './table.component.html',
+    standalone: false
 })
 export class TableComponent {
   rows: TableRow[] = [

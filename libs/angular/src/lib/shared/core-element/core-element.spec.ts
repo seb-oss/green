@@ -5,7 +5,8 @@ import { SCOPE_RESOLVER } from '../scope-resolver'
 import { NggCoreElementDirective } from './core-element.directive'
 
 @Component({
-  template: '<div *nggCoreElement></div>',
+    template: '<div *nggCoreElement></div>',
+    standalone: false
 })
 class TestComponent {}
 

@@ -161,12 +161,13 @@ describe(NggAccordionComponent.name, () => {
 })
 
 @Component({
-  selector: 'ngg-fake-accordion',
-  template: `
+    selector: 'ngg-fake-accordion',
+    template: `
     <ngg-accordion>
       <div ngg-accordion-list-item listItemHeader="1"></div>
       <div ngg-accordion-list-item listItemHeader="2"></div>
     </ngg-accordion>
   `,
+    standalone: false
 })
 class NggFakeAccordionComponent {}

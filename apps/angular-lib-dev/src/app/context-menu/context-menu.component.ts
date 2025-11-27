@@ -4,9 +4,10 @@ import { FormBuilder } from '@angular/forms'
 import { DropdownOption } from '@sebgroup/green-angular'
 
 @Component({
-  selector: 'green-context-menu',
-  templateUrl: './context-menu.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'green-context-menu',
+    templateUrl: './context-menu.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ContextMenuComponent {
   menuItems: DropdownOption[] = [

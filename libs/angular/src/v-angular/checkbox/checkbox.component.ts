@@ -21,9 +21,10 @@ import { NggvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/s
  * https://designlibrary.sebgroup.com/components/component-checkbox
  */
 @Component({
-  selector: 'nggv-checkbox',
-  templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.scss'],
+    selector: 'nggv-checkbox',
+    templateUrl: './checkbox.component.html',
+    styleUrls: ['./checkbox.component.scss'],
+    standalone: false
 })
 export class NggvCheckboxComponent extends NggvBaseControlValueAccessorComponent {
   /**

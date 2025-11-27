@@ -24,10 +24,11 @@ export interface DialogEvent<T = any> {
 }
 
 @Component({
-  selector: 'nggv-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss'],
-  exportAs: 'dialog',
+    selector: 'nggv-dialog',
+    templateUrl: './dialog.component.html',
+    styleUrls: ['./dialog.component.scss'],
+    exportAs: 'dialog',
+    standalone: false
 })
 export class NggvDialogComponent implements OnInit, OnDestroy {
   private configurableFocusTrap: ConfigurableFocusTrap

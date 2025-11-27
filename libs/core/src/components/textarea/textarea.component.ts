@@ -478,10 +478,6 @@ class Textarea extends GdsFormControlElement<string> {
       `
     else return nothing
   }
-
-  get #shouldShowRemainingChars() {
-    return this.#charCounterComputed[1] !== false
-  }
 }
 
 /**

@@ -21,16 +21,17 @@ interface SliderStyle {
 }
 
 @Component({
-  selector: 'ngg-slider',
-  templateUrl: './slider.component.html',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: NggSliderComponent,
-      multi: true,
-    },
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'ngg-slider',
+    templateUrl: './slider.component.html',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: NggSliderComponent,
+            multi: true,
+        },
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NggSliderComponent
   implements ControlValueAccessor, OnInit, OnChanges

@@ -16,9 +16,10 @@ import {
 } from '@sebgroup/extract'
 
 @Component({
-  selector: 'ngg-pagination',
-  templateUrl: './pagination.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'ngg-pagination',
+    templateUrl: './pagination.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NggPaginationComponent implements OnChanges {
   /** Internationalization labels */

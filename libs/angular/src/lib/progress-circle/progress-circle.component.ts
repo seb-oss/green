@@ -7,8 +7,9 @@ import {
 } from '@sebgroup/extract'
 
 @Component({
-  selector: 'ngg-progress-circle',
-  templateUrl: './progress-circle.component.html',
+    selector: 'ngg-progress-circle',
+    templateUrl: './progress-circle.component.html',
+    standalone: false
 })
 export class NggProgressCircleComponent {
   @HostBinding('style.--start-value') private _startValue = '0deg'

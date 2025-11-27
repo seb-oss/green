@@ -22,9 +22,10 @@ import { getSortedWeekDays, isValid } from '../../datepicker.utils'
 import type { CalendarType } from '../../datepicker.models'
 
 @Component({
-  selector: 'nggv-datepicker',
-  templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.scss'],
+    selector: 'nggv-datepicker',
+    templateUrl: './datepicker.component.html',
+    styleUrls: ['./datepicker.component.scss'],
+    standalone: false
 })
 export class DatepickerComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('calendarTemplate') calendarTemplate: TemplateRef<any> | null =

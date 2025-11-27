@@ -15,7 +15,7 @@ import { NggCoreCheckboxDirective } from './core-checkbox.directive'
 import { NggCoreFormsModule } from './core-control.module'
 
 @Component({
-  template: `
+    template: `
     <form [formGroup]="form">
       <gds-checkbox
         formControlName="checkbox"
@@ -24,6 +24,7 @@ import { NggCoreFormsModule } from './core-control.module'
       ></gds-checkbox>
     </form>
   `,
+    standalone: false
 })
 class TestComponent {
   form = new FormGroup({

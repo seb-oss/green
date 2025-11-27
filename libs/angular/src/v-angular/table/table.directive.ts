@@ -10,8 +10,9 @@ const enum ColumnCSSClass {
 }
 
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[columnType]',
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[columnType]',
+    standalone: false
 })
 export class TableDirective {
   @Input() columnType: 'numeric' | 'text' | undefined = 'text'
@@ -48,8 +49,9 @@ export class TableDirective {
 }
 
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[tableColumn]',
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[tableColumn]',
+    standalone: false
 })
 export class TableTemplateDirective<K = string> {
   @Input() tableColumn!: K
@@ -59,16 +61,18 @@ export class TableTemplateDirective<K = string> {
 }
 
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[tableFooter]',
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[tableFooter]',
+    standalone: false
 })
 export class TableFooterTemplateDirective {
   constructor(public templateRef: TemplateRef<any>) {}
 }
 
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[tableAppendableRows]',
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[tableAppendableRows]',
+    standalone: false
 })
 export class TableAppendableRowsTemplateDirective {
   constructor(public templateRef: TemplateRef<any>) {}

@@ -348,10 +348,6 @@ class Input extends GdsFormControlElement<string> {
       </gds-button>`
     else return nothing
   }
-
-  get #shouldShowRemainingChars() {
-    return this.#charCounterComputed[1] !== false
-  }
 }
 
 /**

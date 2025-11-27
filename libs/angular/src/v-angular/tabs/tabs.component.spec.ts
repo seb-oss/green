@@ -8,14 +8,15 @@ import { TabDirective } from './tab.directive'
 import { TabsComponent } from './tabs.component'
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'tab-test-wrapper',
-  template: `<nggv-tabs>
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'tab-test-wrapper',
+    template: `<nggv-tabs>
     <article tab="Tab title 1"><!-- Content --></article>
     <article tab="Tab title 2" [active]="true"><!-- Content --></article>
     <article tab="Tab title 3" disabled><!-- Content --></article>
     <article tab="<strong>Tab title 4</strong>"><!-- Content --></article>
   </nggv-tabs>`,
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 class TabsTestWrapper {}

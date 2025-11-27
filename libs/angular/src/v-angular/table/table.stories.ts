@@ -1,12 +1,9 @@
 /* eslint-disable no-console */
 import { importProvidersFrom } from '@angular/core'
 import { TranslocoLoader, TranslocoModule } from '@jsverse/transloco'
-import {
-  applicationConfig,
-  Meta,
-  moduleMetadata,
-  StoryFn,
-} from '@storybook/angular'
+import { applicationConfig, moduleMetadata } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggvI18nModule } from '../i18n'
 import { TableComponent } from './table.component'
@@ -36,7 +33,7 @@ class TranslocoInlineLoader implements TranslocoLoader {
   }
 }
 
-export default {
+const meta: Meta<TableComponent<ColumnData>> = {
   title: 'V-Angular/Table',
   component: TableComponent,
   parameters: {
@@ -50,7 +47,10 @@ export default {
       imports: [NggvTableModule, TranslocoModule],
     }),
   ],
-} as Meta
+}
+
+export default meta
+type Story = StoryObj<TableComponent<ColumnData>>
 
 const mockActions = {
   ngvRowClick: (value?: any) =>
@@ -65,8 +65,9 @@ const mockActions = {
     console.log('%cngvOrderBy:', 'color: purple; font-weight: bold', value),
 }
 
-const TableStory: StoryFn<TableComponent<ColumnData>> = (args) => ({
-  template: /*html*/ `
+export const Primary: Story = {
+  render: (args) => ({
+    template: /*html*/ `
     <nggv-table
       [selectable]="selectable"
       [hiddenCheckboxRowIds]="hiddenCheckboxRowIds"
@@ -80,11 +81,41 @@ const TableStory: StoryFn<TableComponent<ColumnData>> = (args) => ({
       (ngvRowSelect)="ngvRowSelect($event)"
       (ngvOrderBy)="ngvOrderBy($event)">
     </nggv-table>`,
-  props: args,
-})
+    props: args,
+  }),
+  args: {
+    tableData: data,
+    rowId: 'id',
+    selectable: false,
+    allowLocalSort: true,
+    ngvRowClick: mockActions.ngvRowClick as any,
+    ngvRowSelect: mockActions.ngvRowSelect as any,
+    ngvOrderBy: mockActions.ngvOrderBy as any,
+    tableColumns: columns.primary,
+    ariaLabelsOrderBy: mockedAriaLabelsOrderBy,
+    trThookFn: undefined,
+  },
+  parameters: {
+    docs: { source: { code: examplePrimary } },
+  },
+}
 
-const TableStoryAlt: StoryFn<TableComponent<ColumnData>> = (args) => ({
-  template: /*html*/ `
+export const Selectable: Story = {
+  render: Primary.render,
+  args: {
+    ...Primary.args,
+    selectable: true,
+    hiddenCheckboxRowIds: ['1', '2', '4'],
+    trThookFn: (row: any) => {
+      console.log('Using custom thook function')
+      return `id_${row.id}_${row.currency}`
+    },
+  },
+}
+
+export const WithTemplateRef: Story = {
+  render: (args) => ({
+    template: /*html*/ `
     <nggv-table
       [selectable]="selectable"
       [tableColumns]="tableColumns"
@@ -126,13 +157,20 @@ const TableStoryAlt: StoryFn<TableComponent<ColumnData>> = (args) => ({
       </ng-template>
 
     </nggv-table>`,
-  props: args,
-})
+    props: args,
+  }),
+  args: {
+    ...Primary.args,
+    tableColumns: columns.alt,
+  },
+  parameters: {
+    docs: { source: { code: exampleAlt } },
+  },
+}
 
-const TableStoryWithAppendedRows: StoryFn<
-  TableComponent<ColumnDataWithErrorMessages>
-> = (args) => ({
-  template: /*html*/ `
+export const WithAppendedRows: Story = {
+  render: (args) => ({
+    template: /*html*/ `
     <nggv-table
       [selectable]="selectable"
       [tableColumns]="tableColumns"
@@ -152,13 +190,26 @@ const TableStoryWithAppendedRows: StoryFn<
       </ng-template>
 
     </nggv-table>`,
-  props: args,
-})
+    props: args,
+  }),
+  args: {
+    rowId: 'id',
+    selectable: true,
+    allowLocalSort: true,
+    tableColumns: columns.primary,
+    ngvRowClick: mockActions.ngvRowClick as any,
+    ngvRowSelect: mockActions.ngvRowSelect as any,
+    ngvOrderBy: mockActions.ngvOrderBy as any,
+    tableData: dataWithErrorMessages,
+  },
+  parameters: {
+    docs: { source: { code: exampleWithAppendedRows } },
+  },
+}
 
-const TableStoryWithExpandableRows: StoryFn<
-  TableComponent<ColumnDataWithListItems<'subItems'>>
-> = (args) => ({
-  template: /*html*/ `
+export const WithExpandableRows: Story = {
+  render: (args) => ({
+    template: /*html*/ `
     <nggv-table
       rowId="id"
       [selectable]="selectable"
@@ -187,90 +238,38 @@ const TableStoryWithExpandableRows: StoryFn<
           {{ unauthorizedUsage | number:'1.2-2' }}
         </ng-template>
     </nggv-table>`,
-  props: args,
-})
-
-export const Primary = TableStory.bind({})
-Primary.args = {
-  tableData: data,
-  rowId: 'id',
-  selectable: false,
-  allowLocalSort: true,
-  ngvRowClick: mockActions.ngvRowClick as any,
-  ngvRowSelect: mockActions.ngvRowSelect as any,
-  ngvOrderBy: mockActions.ngvOrderBy as any,
-  tableColumns: columns.primary,
-  ariaLabelsOrderBy: mockedAriaLabelsOrderBy,
-  trThookFn: undefined,
-}
-Primary.parameters = {
-  docs: { source: { code: examplePrimary } },
-}
-
-export const Selectable = TableStory.bind({})
-Selectable.args = {
-  ...Primary.args,
-  selectable: true,
-  hiddenCheckboxRowIds: ['1', '2', '4'],
-  trThookFn: (row: any) => {
-    console.log('Using custom thook function')
-    return `id_${row.id}_${row.currency}`
+    props: args,
+  }),
+  args: {
+    rowId: 'id',
+    subItemsProp: 'subItems',
+    selectable: false,
+    expandable: true,
+    tableColumns: columns.withExpandableRows,
+    tableData: dataWithListItems,
+    ngvRowClick: mockActions.ngvRowClick as any,
+  },
+  parameters: {
+    docs: { source: { code: exampleWithExpandableRows } },
   },
 }
 
-export const WithTemplateRef = TableStoryAlt.bind({})
-WithTemplateRef.args = {
-  ...Primary.args,
-  tableColumns: columns.alt,
-}
-WithTemplateRef.parameters = {
-  docs: { source: { code: exampleAlt } },
-}
-
-export const WithAppendedRows = TableStoryWithAppendedRows.bind({})
-WithAppendedRows.args = {
-  rowId: Selectable.args.rowId,
-  selectable: Selectable.args.selectable,
-  allowLocalSort: Selectable.args.allowLocalSort,
-  tableColumns: Selectable.args.tableColumns,
-  ngvRowClick: mockActions.ngvRowClick as any,
-  ngvRowSelect: mockActions.ngvRowSelect as any,
-  ngvOrderBy: mockActions.ngvOrderBy as any,
-  tableData: dataWithErrorMessages,
-}
-WithAppendedRows.parameters = {
-  docs: { source: { code: exampleWithAppendedRows } },
-}
-
-export const WithExpandableRows = TableStoryWithExpandableRows.bind({})
-WithExpandableRows.args = {
-  rowId: 'id',
-  subItemsProp: 'subItems',
-  selectable: false,
-  expandable: true,
-  tableColumns: columns.withExpandableRows,
-  tableData: dataWithListItems,
-  ngvRowClick: mockActions.ngvRowClick as any,
-}
-WithExpandableRows.parameters = {
-  docs: { source: { code: exampleWithExpandableRows } },
-}
-
-const GlobalSortTableStory: StoryFn<TableComponent<ColumnData>> = (args) => {
-  // is never reassigned. Use 'const' instead  prefer-const
-  const tableData = [...args.tableData]
-  const filterData = (value: any) => {
-    console.log('Using custom sort function')
-    const { property, order } = value
-    if (order === 'asc') {
-      tableData.sort((a: any, b: any) => (a[property] > b[property] ? 1 : -1))
-    } else {
-      tableData.sort((a: any, b: any) => (a[property] > b[property] ? -1 : 1))
+export const GlobalSort: Story = {
+  render: (args) => {
+    // is never reassigned. Use 'const' instead  prefer-const
+    const tableData = [...args.tableData]
+    const filterData = (value: any) => {
+      console.log('Using custom sort function')
+      const { property, order } = value
+      if (order === 'asc') {
+        tableData.sort((a: any, b: any) => (a[property] > b[property] ? 1 : -1))
+      } else {
+        tableData.sort((a: any, b: any) => (a[property] > b[property] ? -1 : 1))
+      }
     }
-  }
 
-  return {
-    template: /*html*/ `
+    return {
+      template: /*html*/ `
     <nggv-table
       [selectable]="selectable"
       [tableColumns]="tableColumns"
@@ -281,16 +280,15 @@ const GlobalSortTableStory: StoryFn<TableComponent<ColumnData>> = (args) => {
       (ngvRowSelect)="ngvRowSelect($event)"
       (ngvOrderBy)="ngvOrderBy($event)">
     </nggv-table>`,
-    props: {
-      ...args,
-      ngvOrderBy: (value?: any) => filterData(value),
-      tableData: tableData,
-    },
-  }
-}
-
-export const GlobalSort = GlobalSortTableStory.bind({})
-GlobalSort.args = {
-  ...Primary.args,
-  allowLocalSort: false,
+      props: {
+        ...args,
+        ngvOrderBy: (value?: any) => filterData(value),
+        tableData: tableData,
+      },
+    }
+  },
+  args: {
+    ...Primary.args,
+    allowLocalSort: false,
+  },
 }

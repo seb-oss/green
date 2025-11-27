@@ -3,7 +3,7 @@ import React, { createElement } from 'react'
 
 import '../../../.storybook/manager'
 
-import { addons } from '@storybook/manager-api'
+import { addons } from 'storybook/manager-api'
 
 const betaItems = {
   Alert: true,

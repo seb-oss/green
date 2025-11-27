@@ -1,16 +1,9 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
+import { Meta, Story, Canvas, Controls } from '@storybook/addon-docs/blocks'
 import Link from './link'
 import { createComponent } from '@lit/react'
 import { IconArrowRight } from '../../../../../dist/libs/core/src/components/icon/icons/arrow-right.js'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import * as LinkStories from './link.stories';
 import * as Core from '../../../../../dist/libs/core/src/generated/react/index.js'
-
-export const GdsIconArrowRight = createComponent({
-  tagName: getScopedTagName('gds-icon-arrow-right'),
-  elementClass: IconArrowRight,
-  react: React,
-})
 
 export const Template = ({ ...props }) => <Link {...props} />
 

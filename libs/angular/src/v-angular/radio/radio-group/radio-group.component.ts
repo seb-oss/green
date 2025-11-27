@@ -20,9 +20,10 @@ import { NggvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/s
  * If there is an error to the form control connected to the radio buttons, it will be shown once below instead of below every individual radio button
  */
 @Component({
-  selector: 'nggv-radio-group',
-  templateUrl: './radio-group.component.html',
-  styleUrls: ['./radio-group.component.scss'],
+    selector: 'nggv-radio-group',
+    templateUrl: './radio-group.component.html',
+    styleUrls: ['./radio-group.component.scss'],
+    standalone: false
 })
 export class NggvRadioGroupComponent
   extends NggvBaseControlValueAccessorComponent
