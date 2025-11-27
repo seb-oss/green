@@ -51,7 +51,9 @@ export class AngularGenerator {
 
     // Add web component decorator import if we have inputs
     if (componentData.inputs.length > 0) {
-      imports.push(`import { ProxyInputs } from '../proxy-inputs.decorator';`)
+      imports.push(
+        `import { ProxyInputs } from '../../proxy-inputs.decorator';`,
+      )
     }
 
     // Add web component class import
