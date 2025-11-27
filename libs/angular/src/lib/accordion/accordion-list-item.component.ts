@@ -3,9 +3,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { randomId } from '@sebgroup/extract'
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'div[ngg-accordion-list-item]',
-  templateUrl: './accordion-list-item.component.html',
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'div[ngg-accordion-list-item]',
+    templateUrl: './accordion-list-item.component.html',
+    standalone: false
 })
 export class NggAccordionListItemComponent {
   @Input() public id: string = randomId()

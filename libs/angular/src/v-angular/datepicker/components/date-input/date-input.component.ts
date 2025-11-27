@@ -48,6 +48,7 @@ import type { CalendarType } from '../../datepicker.models'
   selector: 'nggv-dateinput,nggv-input[type=date]',
   templateUrl: './date-input.component.html',
   styleUrls: ['./date-input.component.scss'],
+  standalone: false,
 })
 export class DateInputComponent
   extends DateControlValueAccessorComponent
@@ -159,7 +160,7 @@ export class DateInputComponent
    */
   onValueChange(eventTarget: any): void {
     // Will be in the format selected in inputMask
-    const value = `${eventTarget.inputmask.undoValue}` ?? ''
+    const value = `${eventTarget.inputmask.undoValue}`
 
     // Use parserfunction from inputMask to parse to a date object since value can be in multiple formats
     // Then ontrol value accessor will ensure correct formatting of state

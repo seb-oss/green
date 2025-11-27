@@ -9,10 +9,11 @@ import { ToastComponent } from './toast.component'
 import { MessageType, ToastMessage } from './toast.models'
 
 @Component({
-  template: `
+    template: `
     <ng-template #div1>Something here</ng-template>
     <nggv-toast />
   `,
+    standalone: false
 })
 class WrapperComponent {
   @ViewChild('div1', { static: true }) template!: TemplateRef<any>

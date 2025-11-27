@@ -49,17 +49,18 @@ export interface DropdownOption<T = any> {
  * https://storybook.seb.io/latest/core/?path=/docs/components-dropdown--docs
  */
 @Component({
-  selector: 'ngg-dropdown',
-  templateUrl: 'dropdown.component.html',
-  styleUrls: ['dropdown.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: NggDropdownComponent,
-      multi: true,
-    },
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'ngg-dropdown',
+    templateUrl: 'dropdown.component.html',
+    styleUrls: ['dropdown.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: NggDropdownComponent,
+            multi: true,
+        },
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NggDropdownComponent
   implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit

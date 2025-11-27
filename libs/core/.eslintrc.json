@@ -10,12 +10,15 @@
     "*.stories.ts",
     "*.tsx",
     "*.stories.tsx",
+    "*.test.ts",
     ".storybook/*"
   ],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {}
+      "rules": {
+        "@typescript-eslint/no-unused-expressions": "off"
+      }
     },
     {
       "files": ["*.ts", "*.tsx"],

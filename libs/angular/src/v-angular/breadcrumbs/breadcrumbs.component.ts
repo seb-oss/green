@@ -10,9 +10,10 @@ type Breadcrumb = {
 }
 
 @Component({
-  selector: 'nggv-breadcrumbs',
-  templateUrl: './breadcrumbs.component.html',
-  styleUrls: ['./breadcrumbs.component.scss'],
+    selector: 'nggv-breadcrumbs',
+    templateUrl: './breadcrumbs.component.html',
+    styleUrls: ['./breadcrumbs.component.scss'],
+    standalone: false
 })
 export class NggvBreadcrumbsComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */

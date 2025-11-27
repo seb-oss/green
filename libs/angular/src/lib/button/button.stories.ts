@@ -1,9 +1,11 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import { moduleMetadata } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggButtonComponent } from './button.component'
 import { NggButtonModule } from './button.module'
 
-export default {
+const meta: Meta<NggButtonComponent> = {
   title: 'Components/Form/Button',
   component: NggButtonComponent,
   decorators: [
@@ -14,20 +16,21 @@ export default {
   parameters: {
     componentIds: ['component-button'],
   },
-} as Meta<NggButtonComponent>
+}
 
-const Template: StoryFn = () => {
-  return {
+export default meta
+type Story = StoryObj<NggButtonComponent>
+
+export const Default: Story = {
+  render: () => ({
     template: `
     <button ngg-button>Button</button>
     `,
-  }
+  }),
 }
 
-export const Default = Template.bind({})
-
-const TemplateTypes: StoryFn = () => {
-  return {
+export const Types: Story = {
+  render: () => ({
     template: `
     <div class="horizontal">
       <button ngg-button type="button">Button</button>
@@ -35,12 +38,11 @@ const TemplateTypes: StoryFn = () => {
       <button ngg-button type="reset">Reset</button>
     </div>
     `,
-  }
+  }),
 }
-export const Types = TemplateTypes.bind({})
 
-const TemplateVariants: StoryFn = () => {
-  return {
+export const Variants: Story = {
+  render: () => ({
     template: `
     <div class="horizontal">
       <button ngg-button variant="primary">Primary</button>
@@ -48,12 +50,11 @@ const TemplateVariants: StoryFn = () => {
       <button ngg-button variant="ghost">Ghost</button>
     </div>
     `,
-  }
+  }),
 }
-export const Variants = TemplateVariants.bind({})
 
-const TemplateSizes: StoryFn = () => {
-  return {
+export const Sizes: Story = {
+  render: () => ({
     template: `
     <div class="horizontal">
       <button ngg-button>Default</button>
@@ -61,6 +62,5 @@ const TemplateSizes: StoryFn = () => {
       <button ngg-button size="large">Large</button>
     </div>
     `,
-  }
+  }),
 }
-export const Sizes = TemplateSizes.bind({})

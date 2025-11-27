@@ -7,7 +7,8 @@ import { Subject } from 'rxjs'
 import { NggOnScrollDirective, ON_SCROLL_TOKEN } from './on-scroll.directive'
 
 @Component({
-  template: '<div nggOnScroll><</div>',
+    template: '<div nggOnScroll><</div>',
+    standalone: false
 })
 class TestComponent {}
 

@@ -21,9 +21,10 @@ import { CalendarDateDirective } from '../../directives/calendar-date.directive'
 import type { CalendarType, DisableDateConfig } from '../../datepicker.models'
 
 @Component({
-  selector: 'nggv-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
+    selector: 'nggv-calendar',
+    templateUrl: './calendar.component.html',
+    styleUrls: ['./calendar.component.scss'],
+    standalone: false
 })
 export class CalendarComponent implements OnChanges {
   @Output() dateClick = new EventEmitter<Date>()

@@ -16,10 +16,10 @@ import { BadgeType } from '@sebgroup/extract'
  * https://storybook.seb.io/latest/core/?path=/docs/components-badge--docs
  */
 @Component({
-  // we need to disable this warning since we don't want the badge component to create a new element
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[ngg-badge]',
-  template: `
+    // we need to disable this warning since we don't want the badge component to create a new element
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[ngg-badge]',
+    template: `
     <strong>
       <ng-content></ng-content>
     </strong>
@@ -28,7 +28,8 @@ import { BadgeType } from '@sebgroup/extract'
       <i></i>
     </button>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NggBadgeComponent implements OnInit {
   /** The color of the component */

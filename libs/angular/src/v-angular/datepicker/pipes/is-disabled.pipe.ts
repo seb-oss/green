@@ -10,7 +10,10 @@ import {
 
 const TODAY = new Date()
 
-@Pipe({ name: 'isDisabled' })
+@Pipe({
+    name: 'isDisabled',
+    standalone: false
+})
 export class IsDisabledPipe implements PipeTransform {
   // transform(value: Date, firstValid: Date | undefined, lastValid: Date | undefined, excludeDates: Date[] | undefined, excludeDays: WeekDay[] | undefined): boolean {
   transform(value: Date, config: DisableDateConfig = {}): boolean {

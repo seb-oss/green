@@ -26,10 +26,11 @@ interface MenuItems extends DropdownOption {
  * https://storybook.seb.io/latest/core/?path=/docs/components-context-menu--docs
  */
 @Component({
-  selector: 'ngg-context-menu',
-  templateUrl: './context-menu.component.html',
-  styleUrls: ['context-menu.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'ngg-context-menu',
+    templateUrl: './context-menu.component.html',
+    styleUrls: ['context-menu.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NggContextMenuComponent {
   /**

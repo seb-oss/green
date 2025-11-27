@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
 
 @Component({
-  selector: 'ngg-in-page-wizard-step-card',
-  templateUrl: './in-page-wizard-step-card.component.html',
+    selector: 'ngg-in-page-wizard-step-card',
+    templateUrl: './in-page-wizard-step-card.component.html',
+    standalone: false
 })
 export class NggInPageWizardStepCardComponent {
   @Output()

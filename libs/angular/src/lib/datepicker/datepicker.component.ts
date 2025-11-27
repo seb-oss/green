@@ -49,16 +49,17 @@ export interface DatepickerOptions {
  * https://storybook.seb.io/latest/core/?path=/docs/components-datepicker--docs
  */
 @Component({
-  selector: 'ngg-datepicker',
-  templateUrl: 'datepicker.component.html',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: NggDatepickerComponent,
-      multi: true,
-    },
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'ngg-datepicker',
+    templateUrl: 'datepicker.component.html',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: NggDatepickerComponent,
+            multi: true,
+        },
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NggDatepickerComponent
   implements ControlValueAccessor, AfterViewInit

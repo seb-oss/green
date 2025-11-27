@@ -20,9 +20,10 @@ import { NggvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
 import { NggvDropdownComponent } from '../../dropdown.component'
 
 @Component({
-  selector: 'nggv-typeahead-input',
-  templateUrl: './typeahead-input.component.html',
-  styleUrls: ['./typeahead-input.component.scss'],
+    selector: 'nggv-typeahead-input',
+    templateUrl: './typeahead-input.component.html',
+    styleUrls: ['./typeahead-input.component.scss'],
+    standalone: false
 })
 export class NggvTypeaheadInputComponent
   extends NggvInputComponent

@@ -10,7 +10,8 @@ const InputmaskStatic =
   _Inputmask
 
 @Pipe({
-  name: 'nggvInputMaskFormat',
+    name: 'nggvInputMaskFormat',
+    standalone: false
 })
 export class InputMaskFormatPipe implements PipeTransform {
   transform<T = any>(value: any, options: InputmaskOptions<T>): any {

@@ -16,8 +16,9 @@ import { NggAccordionListItemComponent } from './accordion-list-item.component'
  * https://storybook.seb.io/latest/core/?path=/docs/components-details--docs
  */
 @Component({
-  selector: 'ngg-accordion',
-  templateUrl: './accordion.component.html',
+    selector: 'ngg-accordion',
+    templateUrl: './accordion.component.html',
+    standalone: false
 })
 export class NggAccordionComponent implements AfterContentChecked, OnDestroy {
   @ContentChildren(NggAccordionListItemComponent) private items:

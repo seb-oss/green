@@ -9,9 +9,10 @@ import {
 } from '@sebgroup/green-angular/src/lib/dropdown'
 
 @Component({
-  selector: 'green-dropdown',
-  templateUrl: './dropdown.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'green-dropdown',
+    templateUrl: './dropdown.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DropdownComponent {
   texts: DropdownTexts = {

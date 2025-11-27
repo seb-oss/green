@@ -24,7 +24,9 @@
             "prefix": "ngg",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@angular-eslint/prefer-standalone": "off",
+        "@typescript-eslint/no-unused-expressions": "off"
       }
     },
     {

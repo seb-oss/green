@@ -5,11 +5,12 @@ import { By } from '@angular/platform-browser'
 import { CalendarDateDirective, DateCss } from './calendar-date.directive'
 
 @Component({
-  selector: 'nggv-directive-host', // eslint-disable-line @angular-eslint/component-selector
-  template: /*html*/ `<button
+    selector: 'nggv-directive-host', // eslint-disable-line @angular-eslint/component-selector
+    template: /*html*/ `<button
     [calendarDate]="date"
     [disabled]="disable"
   ></button>`,
+    standalone: false
 })
 class TestHostComponent {
   @ViewChild(CalendarDateDirective, { static: true })

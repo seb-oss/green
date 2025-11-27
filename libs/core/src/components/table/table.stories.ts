@@ -19,7 +19,7 @@ import '../icon/icons/circle-check'
 import '../icon/icons/cross-small'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
-import { Feedback, Users } from './table.data'
+import { Feedback, Users } from './table.stories.data'
 
 const meta: Meta = {
   title: 'Components/Table',

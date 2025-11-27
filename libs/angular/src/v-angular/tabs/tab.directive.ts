@@ -13,8 +13,9 @@ import { Directive, HostBinding, Input } from '@angular/core'
  * </nggv-tabs>
  */
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[tab]',
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[tab]',
+    standalone: false
 })
 export class TabDirective {
   /** @internal */
