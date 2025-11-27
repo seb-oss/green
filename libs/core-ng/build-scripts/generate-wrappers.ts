@@ -128,6 +128,9 @@ export class AngularBuildOrchestrator {
 
       // Generate index.ts file for all components
       await this.generateIndexFile(components, outputDir)
+
+      // Generate convenience module
+      await this.generateConvenienceModule(components, outputDir)
       console.log(
         `> Generation complete! ${successCount}/${components.length} components generated successfully`,
       )
@@ -282,10 +285,79 @@ export * from './${componentFileName}.component';
  */
 
 ${exports}
+
+// Optional convenience module for bulk imports
+export * from './green-core-ng.module'
 `
 
     const indexPath = path.join(outputDir, 'index.ts')
     await fs.promises.writeFile(indexPath, indexContent, 'utf8')
+  }
+
+  /**
+   * Generates a convenience NgModule for bulk imports
+   */
+  private static async generateConvenienceModule(
+    components: ComponentData[],
+    outputDir: string,
+  ): Promise<void> {
+    const componentImports = components
+      .map((component) => {
+        const componentName = AngularGenerator.toAngularComponentName(
+          component.className,
+        )
+        const componentDirName = this.getComponentDirectoryName(
+          component.tagName,
+        )
+        return `import { ${componentName} } from './${componentDirName}';`
+      })
+      .join('\n')
+
+    const componentList = components
+      .map((component) => {
+        return `    ${AngularGenerator.toAngularComponentName(component.className)},`
+      })
+      .join('\n')
+
+    const moduleContent = `import { NgModule } from '@angular/core';
+
+${componentImports}
+
+/**
+ * Optional convenience module for importing all green-core-ng wrapper components at once.
+ *
+ * For standalone usage (recommended), import components directly:
+ * \`\`\`typescript
+ * import { GdsButtonComponent } from '@sebgroup/green-core-ng';
+ *
+ * @Component({
+ *   imports: [GdsButtonComponent]
+ * })
+ * \`\`\`
+ *
+ * For module-based usage:
+ * \`\`\`typescript
+ * import { GreenCoreNgModule } from '@sebgroup/green-core-ng';
+ *
+ * @NgModule({
+ *   imports: [GreenCoreNgModule]
+ * })
+ * \`\`\`
+ */
+@NgModule({
+  imports: [
+${componentList}
+  ],
+  exports: [
+${componentList}
+  ]
+})
+export class GreenCoreNgModule {}
+`
+
+    const modulePath = path.join(outputDir, 'green-core-ng.module.ts')
+    await fs.promises.writeFile(modulePath, moduleContent, 'utf8')
+    console.log('> Generated GreenCoreNgModule')
   }
 
   /**
