@@ -23,6 +23,8 @@
       "@sebgroup/green-angular-dev/*": ["apps/angular-lib-dev/*"],
       "@sebgroup/green-angular/*": ["libs/angular/*"],
       "@sebgroup/green-charts": ["libs/charts/src/index.ts"],
+      "@sebgroup/green-core-ng": ["dist/libs/core-ng"],
+      "@sebgroup/green-core-ng/*": ["dist/libs/core-ng/*"],
       "@sebgroup/green-core/react": ["dist/libs/core/src/generated/react"],
       "@sebgroup/green-core/react/*": ["dist/libs/core/src/generated/react/*"],
       "@sebgroup/green-core/pure": ["dist/libs/core/src/pure.ts"],
