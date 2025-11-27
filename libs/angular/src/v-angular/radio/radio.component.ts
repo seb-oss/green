@@ -61,10 +61,11 @@ export class NggvRadioControlRegistry {
  * https://designlibrary.sebgroup.com/components/component-radiobutton
  */
 @Component({
-  selector: 'nggv-radio',
-  templateUrl: './radio.component.html',
-  styleUrls: ['./radio.component.scss'],
-  providers: [NggvRadioControlRegistry],
+    selector: 'nggv-radio',
+    templateUrl: './radio.component.html',
+    styleUrls: ['./radio.component.scss'],
+    providers: [NggvRadioControlRegistry],
+    standalone: false
 })
 export class NggvRadioComponent
   extends NggvBaseControlValueAccessorComponent

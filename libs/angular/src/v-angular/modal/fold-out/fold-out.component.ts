@@ -17,9 +17,10 @@ import { filter, takeWhile } from 'rxjs/operators'
 import { KeyboardKey } from './keyboard-key.enum'
 
 @Component({
-  selector: 'nggv-fold-out',
-  templateUrl: './fold-out.component.html',
-  styleUrls: ['./fold-out.component.scss'],
+    selector: 'nggv-fold-out',
+    templateUrl: './fold-out.component.html',
+    styleUrls: ['./fold-out.component.scss'],
+    standalone: false
 })
 export class NggvFoldOutComponent implements OnDestroy, AfterViewInit {
   /** Special property used for selecting DOM elements during automated UI testing. */

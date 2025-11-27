@@ -1,6 +1,6 @@
 import { html } from 'lit'
 
-import type { Meta, StoryObj } from '@storybook/web-components'
+import type { Meta, StoryObj } from '@storybook/web-components-vite'
 
 import { argTablePropsFor } from '../../../../.storybook/argTableProps'
 import { DateTimeFormat, dateTimeFormats } from './date-time-formatter'

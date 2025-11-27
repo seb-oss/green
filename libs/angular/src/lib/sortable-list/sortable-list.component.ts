@@ -28,9 +28,10 @@ export interface SortableListGroup {
 }
 
 @Component({
-  selector: 'ngg-sortable-list',
-  templateUrl: './sortable-list.component.html',
-  styleUrls: ['./sortable-list.component.scss'],
+    selector: 'ngg-sortable-list',
+    templateUrl: './sortable-list.component.html',
+    styleUrls: ['./sortable-list.component.scss'],
+    standalone: false
 })
 export class NggSortableListComponent {
   @Input() groups: SortableListGroup[] = []

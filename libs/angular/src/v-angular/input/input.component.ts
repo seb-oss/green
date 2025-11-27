@@ -26,9 +26,10 @@ import { NggvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/s
  * https://designlibrary.sebgroup.com/components/component-input
  */
 @Component({
-  selector: 'nggv-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+    selector: 'nggv-input',
+    templateUrl: './input.component.html',
+    styleUrls: ['./input.component.scss'],
+    standalone: false
 })
 export class NggvInputComponent
   extends NggvBaseControlValueAccessorComponent

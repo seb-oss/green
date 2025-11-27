@@ -1,6 +1,6 @@
 import { html, nothing } from 'lit'
 
-import type { Meta, StoryObj } from '@storybook/web-components'
+import type { Meta, StoryObj } from '@storybook/web-components-vite'
 
 import './index.ts'
 import '../grid/index.js'

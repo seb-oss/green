@@ -11,8 +11,8 @@ import {
 import { Chart, ChartArgs, ChartSettings, create } from '@sebgroup/green-charts'
 
 @Component({
-  selector: 'ngg-chart',
-  template: ` <div
+    selector: 'ngg-chart',
+    template: ` <div
     class="chart"
     [class.fit-height]="chart?.settings?.style?.fitHeightToParent"
   >
@@ -37,7 +37,8 @@ import { Chart, ChartArgs, ChartSettings, create } from '@sebgroup/green-charts'
       </div>
     </ng-container>
   </div>`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NggChartComponent implements AfterViewInit {
   @ViewChild('chartRef') _chartElementRef: ElementRef | undefined

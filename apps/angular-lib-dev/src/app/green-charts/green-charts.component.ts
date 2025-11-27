@@ -3,13 +3,14 @@ import { Component } from '@angular/core'
 import { ChartSettings } from '@sebgroup/green-charts'
 
 @Component({
-  selector: 'green-green-charts',
-  template: `<div class="card d-block" style="height: 270px;">
+    selector: 'green-green-charts',
+    template: `<div class="card d-block" style="height: 270px;">
       <ngg-chart [settings]="settings"></ngg-chart>
     </div>
     <div class="card d-block mt-5">
       <ngg-chart [settings]="hideAxis"></ngg-chart>
     </div>`,
+    standalone: false
 })
 export class GreenChartsComponent {
   settings: ChartSettings = {

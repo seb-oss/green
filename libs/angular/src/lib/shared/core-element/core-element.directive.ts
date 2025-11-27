@@ -13,7 +13,8 @@ import {
 import { SCOPE_RESOLVER } from '../scope-resolver'
 
 @Directive({
-  selector: '[nggCoreElement]',
+    selector: '[nggCoreElement]',
+    standalone: false
 })
 export class NggCoreElementDirective implements OnInit {
   private viewRef: EmbeddedViewRef<any> | null = null

@@ -21,9 +21,10 @@ import { TabDirective } from './tab.directive'
 import { EventTabChange, Tab } from './tabs.models'
 
 @Component({
-  selector: 'nggv-tabs',
-  templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.scss'],
+    selector: 'nggv-tabs',
+    templateUrl: './tabs.component.html',
+    styleUrls: ['./tabs.component.scss'],
+    standalone: false
 })
 export class TabsComponent
   implements OnChanges, OnInit, AfterContentInit, OnDestroy

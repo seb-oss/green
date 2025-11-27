@@ -8,26 +8,21 @@ import { ToastMessage } from './toast.models'
 import '@sebgroup/green-core/components/icon/icons/cross-small.js'
 
 @Component({
-  selector: 'nggv-toast',
-  templateUrl: './toast.component.html',
-  styleUrls: ['./toast.component.scss'],
-  animations: [
-    trigger('toastAnimation', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(100%)' }),
-        animate(
-          '300ms ease-in',
-          style({ opacity: 1, transform: 'translateY(0)' }),
-        ),
-      ]),
-      transition(':leave', [
-        animate(
-          '300ms ease-out',
-          style({ opacity: 0, transform: 'translateY(100%)' }),
-        ),
-      ]),
-    ]),
-  ],
+    selector: 'nggv-toast',
+    templateUrl: './toast.component.html',
+    styleUrls: ['./toast.component.scss'],
+    animations: [
+        trigger('toastAnimation', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateY(100%)' }),
+                animate('300ms ease-in', style({ opacity: 1, transform: 'translateY(0)' })),
+            ]),
+            transition(':leave', [
+                animate('300ms ease-out', style({ opacity: 0, transform: 'translateY(100%)' })),
+            ]),
+        ]),
+    ],
+    standalone: false
 })
 export class ToastComponent implements OnInit, OnDestroy {
   @Input() closeButtonAriaLabel?: string

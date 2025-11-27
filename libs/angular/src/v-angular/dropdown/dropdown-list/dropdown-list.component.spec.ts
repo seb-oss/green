@@ -5,16 +5,17 @@ import { NggvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import { NggvDropdownListComponent } from './dropdown-list.component'
 
 @Directive({
-  selector: '[nggvTooltip]',
-  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: [
-    'nggvTooltip',
-    'thook',
-    'placement',
-    'shown',
-    'offset',
-    'resizeThrottle',
-  ],
+    selector: '[nggvTooltip]',
+    // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+    inputs: [
+        'nggvTooltip',
+        'thook',
+        'placement',
+        'shown',
+        'offset',
+        'resizeThrottle',
+    ],
+    standalone: false
 })
 class TooltipStubDirective {}
 

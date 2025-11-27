@@ -11,15 +11,15 @@ import { takeUntil, throttle } from 'rxjs/operators'
 export const ON_SCROLL_TOKEN = new InjectionToken<string>('ON_SCROLL_TOKEN')
 
 @Directive({
-  selector: '[nggOnScroll]',
-  providers: [
-    {
-      provide: ON_SCROLL_TOKEN,
-      useFactory: (component: NggOnScrollDirective): Subject<unknown> =>
-        component?.onScroll$,
-      deps: [NggOnScrollDirective],
-    },
-  ],
+    selector: '[nggOnScroll]',
+    providers: [
+        {
+            provide: ON_SCROLL_TOKEN,
+            useFactory: (component: NggOnScrollDirective): Subject<unknown> => component?.onScroll$,
+            deps: [NggOnScrollDirective],
+        },
+    ],
+    standalone: false
 })
 export class NggOnScrollDirective implements AfterViewInit, OnDestroy {
   onScroll$ = new Subject()

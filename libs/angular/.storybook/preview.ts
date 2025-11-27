@@ -1,5 +1,6 @@
 /* eslint-disable @nx/enforce-module-boundaries */
-import '../../../.storybook/preview'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import '!style-loader!css-loader!postcss-loader!sass-loader!../../../.storybook/preview.scss'
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { componentWrapperDecorator } from '@storybook/angular'
