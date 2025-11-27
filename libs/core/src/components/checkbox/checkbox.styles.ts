@@ -18,14 +18,6 @@ const style = css`
     outline: none;
   }
 
-  input[type='checkbox'] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-    pointer-events: none;
-  }
-
   #message {
     display: none;
   }

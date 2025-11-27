@@ -1,5 +1,19 @@
 <h2>Tables</h2>
 <div class="container">
+  <h3 class="mb-4">Core table</h3>
+  <gds-table
+    [data]="coreTableDataProvider"
+    [columns]="coreTableColumns"
+    (gds-table-selection)="handleTableSelect($event)"
+    [dataLoadKey]="dataLoadKey"
+    selectable
+  ></gds-table>
+
+  <button (click)="addTableRow()">Add row</button>
+
+  <h4>Selected rows:</h4>
+  <pre>{{ selectedRows | json }}</pre>
+
   <h3 class="mb-4">Cell table</h3>
 
   <ngg-cell-table

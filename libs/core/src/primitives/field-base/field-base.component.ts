@@ -60,6 +60,9 @@ export class GdsFieldBase extends GdsElement {
   private _leadSlotOccupied = false
 
   @state()
+  private _leadHasBadge = false
+
+  @state()
   private _trailSlotOccupied = false
 
   @state()
@@ -80,6 +83,7 @@ export class GdsFieldBase extends GdsElement {
       multiline: this.multiline,
       disabled: this.disabled,
       'lead-slot-occupied': this._leadSlotOccupied,
+      'lead-has-badge': this._leadHasBadge,
       'trail-slot-occupied': this._trailSlotOccupied,
       'action-slot-occupied': this._actionSlotOccupied,
       small: this.size === 'small',
@@ -107,6 +111,12 @@ export class GdsFieldBase extends GdsElement {
       )
     if (slotName === 'lead') {
       this._leadSlotOccupied = slotOccupied
+      this._leadHasBadge =
+        slotOccupied &&
+        assignedNodes.some(
+          (node) =>
+            (node as HTMLElement).getAttribute?.('gds-element') === 'gds-badge',
+        )
     } else if (slotName === 'trail') {
       this._trailSlotOccupied = slotOccupied
     } else if (slotName === 'action') {
