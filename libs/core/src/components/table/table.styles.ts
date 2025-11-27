@@ -406,7 +406,7 @@ export const TableStyles = css`
       justify-content: center;
       width: 100%;
       min-height: var(--gds-sys-space-xl);
-      border-width: 0 0 var(--gds-sys-space-4xs) 0;
+      border-width: 0 0 var(--gds-sys-space-5xs) 0;
       border-style: solid;
       border-color: var(--gds-sys-color-border-subtle-02);
       padding-bottom: var(--gds-sys-space-l);

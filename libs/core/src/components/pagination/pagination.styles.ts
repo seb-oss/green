@@ -6,11 +6,7 @@ export const PaginationStyles = css`
     align-items: center;
     justify-content: center;
     gap: var(--gds-sys-space-xl);
-  }
-
-  .pages {
-    display: flex;
-    gap: var(--gds-sys-space-2xs);
+    --_appearance-spin-button: none;
   }
 
   .pages ::part(_button) {

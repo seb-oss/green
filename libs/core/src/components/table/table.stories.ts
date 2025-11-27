@@ -18,8 +18,31 @@ import '../icon/icons/pin'
 import '../icon/icons/circle-check'
 import '../icon/icons/cross-small'
 
+import { Source } from '@storybook/addon-docs/blocks'
+
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 import { Feedback, Users } from './table.stories.data'
+
+const Welcome = () => {
+  return html`
+    <gds-card>
+      <gds-flex flex-direction="column" gap="xl">
+        <gds-text tag="h1" font="heading-xl">Green Design System</gds-text>
+
+        <gds-text font="body-regular-l">
+          Welcome to the Green Design System documentation.
+        </gds-text>
+
+        <gds-flex gap="m">
+          <gds-button href="#" rank="primary"> Get Started </gds-button>
+          <gds-button href="#" rank="secondary"> View Components </gds-button>
+        </gds-flex>
+
+        <gds-text font="detail-book-m"> Version: 1.0.0 </gds-text>
+      </gds-flex>
+    </gds-card>
+  `
+}
 
 const meta: Meta = {
   title: 'Components/Table',
@@ -733,4 +756,8 @@ export const DynamicContent: Story = {
       </template>
     </gds-table>
   `,
+}
+
+export const WelcomePage: Story = {
+  render: () => html`<${Welcome} />`,
 }
