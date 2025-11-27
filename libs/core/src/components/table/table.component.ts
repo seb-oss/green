@@ -6,6 +6,7 @@ import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
 import { watchMediaQuery } from '../../utils/decorators'
+import { watch } from '../../utils/decorators/watch'
 import {
   gdsCustomElement,
   html,
@@ -118,6 +119,14 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   @property({ type: Boolean, reflect: false })
   nocache = false
 
+  /**
+   * Key to trigger data reloading when changed. Setting this to a new value
+   * forces the table to clear the cache and request new data from the data provider.
+   *
+   * The value can be any string that is not equal to the previous value.
+   */
+  @property()
+  dataLoadKey?: string
   @state() private _isMobile = false
 
   @watchMediaQuery('(max-width: 768px)')
@@ -151,17 +160,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   @state()
   private error: Error | null = null
 
-  async connectedCallback() {
-    super.connectedCallback()
-    this.view = {
-      ...this.view,
-      page: Number(this.page ?? 1),
-      rows: Number(this.rows ?? 10),
-      visibleColumns: new Set(this.columns.map((col) => col.key)),
-    }
-    await this.#loadData()
-  }
-
   get #hasSelection(): boolean {
     return this.selected.size > 0
   }
@@ -188,6 +186,24 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   #isCacheValid(entry: Types.CacheEntry<T>): boolean {
     return Date.now() - entry.timestamp < this.#cacheDuration
+  }
+
+  @watch('dataLoadKey')
+  @watch('data')
+  private _onDataChange() {
+    this.#cache = {}
+    this.#loadData()
+  }
+
+  @watch('columns')
+  private _onColumnsChange() {
+    this.#cache = {}
+    this.view = {
+      ...this.view,
+      page: Number(this.page ?? 1),
+      rows: Number(this.rows ?? 10),
+      visibleColumns: new Set(this.columns.map((col) => col.key)),
+    }
   }
 
   async #loadData() {
