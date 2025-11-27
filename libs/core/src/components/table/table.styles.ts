@@ -98,7 +98,6 @@ export const TableStyles = css`
 
   tbody td {
     font-weight: normal;
-    font: var(--gds-sys-text-detail-regular-s);
     padding-block: var(--table-cell-padding-y);
     padding-inline: var(--table-cell-padding-x);
   }
