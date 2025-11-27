@@ -12,18 +12,6 @@ export const TableStyles = css`
   }
 
   /* Density Modes */
-  /* Default (comfortable) density */
-  .table {
-    --table-cell-padding-y: var(--gds-sys-space-s);
-    --table-cell-padding-x: var(--gds-sys-space-m);
-    --table-header-padding-y: var(--gds-sys-space-s);
-    --table-header-padding-x: var(--gds-sys-space-m);
-    --table-row-min-height: var(--gds-sys-space-4xl);
-    --table-font-size: var(--gds-sys-text-detail-book-s);
-    --table-gap: var(--gds-sys-space-xl);
-    --table-border-spacing: 0 var(--gds-sys-space-4xs);
-  }
-
   /* Compact density */
   .table.compact {
     --table-cell-padding-y: var(--gds-sys-space-xs);
@@ -34,9 +22,10 @@ export const TableStyles = css`
     --table-font-size: var(--gds-sys-text-detail-book-xs);
     --table-gap: var(--gds-sys-space-m);
     --table-border-spacing: 0 var(--gds-sys-space-5xs);
+    --table-data-padding: var(--gds-sys-space-5xs) var(--gds-sys-space-4xs);
   }
 
-  /* Comfortable density (explicit) */
+  /* Comfortable default */
   .table.comfortable {
     --table-cell-padding-y: var(--gds-sys-space-s);
     --table-cell-padding-x: var(--gds-sys-space-m);
@@ -46,18 +35,20 @@ export const TableStyles = css`
     --table-font-size: var(--gds-sys-text-detail-book-s);
     --table-gap: var(--gds-sys-space-xl);
     --table-border-spacing: 0 var(--gds-sys-space-4xs);
+    --table-data-padding: var(--gds-sys-space-3xs) var(--gds-sys-space-2xs);
   }
 
   /* Spacious density */
   .table.spacious {
-    --table-cell-padding-y: var(--gds-sys-space-m);
+    --table-cell-padding-y: var(--gds-sys-space-l);
     --table-cell-padding-x: var(--gds-sys-space-l);
-    --table-header-padding-y: var(--gds-sys-space-m);
+    --table-header-padding-y: var(--gds-sys-space-l);
     --table-header-padding-x: var(--gds-sys-space-l);
     --table-row-min-height: var(--gds-sys-space-5xl);
     --table-font-size: var(--gds-sys-text-detail-book-m);
     --table-gap: var(--gds-sys-space-2xl);
     --table-border-spacing: 0 var(--gds-sys-space-3xs);
+    --table-data-padding: var(--gds-sys-space-3xs) var(--gds-sys-space-xs);
   }
 
   /* Apply density variables */
@@ -77,15 +68,8 @@ export const TableStyles = css`
     box-sizing: border-box;
     border-radius: var(--gds-sys-space-m);
     border: var(--gds-sys-space-5xs) solid var(--gds-sys-color-border-subtle-01);
-    padding: var(--gds-sys-space-3xs);
+    padding: var(--table-data-padding);
   }
-
-  /*   .data:not(.responsive) {
-    border-radius: var(--gds-sys-space-m);
-    border: var(--gds-sys-space-5xs) solid var(--gds-sys-color-border-subtle-01);
-    padding: var(--gds-sys-space-3xs);
-  }
- */
 
   table {
     width: max-content;
