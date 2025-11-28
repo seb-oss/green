@@ -49,8 +49,32 @@ export class AngularGenerator {
       reExportPath: string
     }[] = [],
   ): string {
+    const hasBooleanInputs = componentData.properties.some((p) =>
+      this.isBooleanType(p.type),
+    )
+
+    const coreImports = [
+      'Component',
+      'ElementRef',
+      'Input',
+      'Output',
+      'EventEmitter',
+      'ChangeDetectionStrategy',
+      'OnInit',
+      'OnChanges',
+      'AfterViewInit',
+      'SimpleChanges',
+      'inject',
+      'NgZone',
+      'ChangeDetectorRef',
+    ]
+
+    if (hasBooleanInputs) {
+      coreImports.push('booleanAttribute')
+    }
+
     const imports = [
-      `import { Component, ElementRef, Output, EventEmitter, ChangeDetectionStrategy, OnInit, OnChanges, AfterViewInit, SimpleChanges, inject, NgZone, ChangeDetectorRef } from '@angular/core';`,
+      `import { ${coreImports.join(', ')} } from '@angular/core';`,
     ]
 
     // Add web component decorator import if we have inputs
@@ -161,11 +185,6 @@ export class AngularGenerator {
             .map((property) => `'${property.name.replace(/\'/g, '')}'`)
             .join(', ')}])`
         : '',
-      inputsArray: hasInputs
-        ? `\n  inputs: [${validInputs
-            .map((property) => `'${property.name.replace(/\'/g, '')}'`)
-            .join(', ')}],`
-        : '',
 
       // Interface implementation
       implementsClause: hasInputs
@@ -195,7 +214,6 @@ ${data.proxyInputsDecorator}
 @Component({
   selector: '${data.tagName}',
   standalone: true,
-  ${data.inputsArray}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: \`<ng-content></ng-content>\`
 })
@@ -221,7 +239,8 @@ ${data.lifecycleMethods}
 
   /**
    * Generates input properties for the component class
-   * Properties are declared without @Input decorators since @ProxyInputs handles the binding
+   * Boolean properties use @Input with booleanAttribute transform to support attribute syntax
+   * Non-boolean properties use regular @Input decorators
    */
   private static generateInputs(
     inputs: ComponentProperty[],
@@ -235,12 +254,26 @@ ${data.lifecycleMethods}
           ? `\n  /** ${input.description} */`
           : ''
 
+        const isBoolean = this.isBooleanType(input.type)
+        const inputDecorator = isBoolean
+          ? `@Input({ transform: booleanAttribute })`
+          : `@Input()`
+
         return `${comment}
+  ${inputDecorator}
   ${input.name}${
     input.required ? '!' : '?'
   }: ${className}['${input.name?.replace(/\'/g, '')}'];`
       })
       .join('\n')
+  }
+
+  /**
+   * Helper to check if a type is boolean
+   */
+  private static isBooleanType(type: string): boolean {
+    // Check for exact 'boolean' or 'boolean | ...' or '... | boolean'
+    return /\bboolean\b/.test(type)
   }
 
   /**
