@@ -120,7 +120,7 @@ export class AngularBuildOrchestrator {
         } catch (error) {
           const errorMsg = `Failed to generate ${AngularGenerator.toAngularComponentName(
             componentData.className,
-          )}: ${error}`
+          )}: ${error.stack || ''}`
           errors.push(errorMsg)
           console.error(`! ${errorMsg}`)
         }
@@ -251,8 +251,8 @@ export * from './${componentFileName}.component';
           component.className,
         ),
         description: component.description,
-        inputCount: component.inputs.length,
-        outputCount: component.outputs.length,
+        inputCount: component.properties.length,
+        outputCount: component.events.length,
         slotCount: component.slots.length,
         methodCount: component.methods.length,
       }))

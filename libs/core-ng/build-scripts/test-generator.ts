@@ -1,5 +1,5 @@
-import { ComponentData, InputProperty, OutputEvent } from '../types';
-import { AngularGenerator } from './generator';
+import { ComponentData, InputProperty, OutputEvent } from '../types'
+import { AngularGenerator } from './generator'
 
 /**
  * Generates Angular test files for web component wrappers
@@ -9,7 +9,7 @@ export class TestGenerator {
    * Converts kebab-case to camelCase for Angular event names
    */
   private static toCamelCase(str: string): string {
-    return str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+    return str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())
   }
 
   /**
@@ -17,13 +17,13 @@ export class TestGenerator {
    */
   static generateTest(componentData: ComponentData): string {
     const componentName = AngularGenerator.toAngularComponentName(
-      componentData.className
-    );
+      componentData.className,
+    )
 
     return `import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ${componentName} } from './${componentData.tagName.replace(
       /^gds-/,
-      ''
+      '',
     )}.component';
 
 describe('${componentName}', () => {
@@ -49,21 +49,21 @@ describe('${componentName}', () => {
       componentData.tagName
     }');
   });
-${this.generateInputValidationTest(componentData.inputs)}
-${this.generateInputTests(componentData.inputs)}
-${this.generateOutputTests(componentData.outputs)}
-});`;
+${this.generateInputValidationTest(componentData.properties)}
+${this.generateInputTests(componentData.properties)}
+${this.generateOutputTests(componentData.events)}
+});`
   }
 
   /**
    * Generates a test that validates all expected inputs are present
    */
   private static generateInputValidationTest(inputs: InputProperty[]): string {
-    if (inputs.length === 0) return '';
+    if (inputs.length === 0) return ''
 
     const inputList = inputs
       .map((input) => `'${input.name.replace(/\'/g, '')}'`)
-      .join(', ');
+      .join(', ')
 
     return `
   it('should have all expected input properties from manifest', () => {
@@ -75,19 +75,19 @@ ${this.generateOutputTests(componentData.outputs)}
 
     // Verify we have the correct number of inputs
     expect(expectedInputs.length).toBe(${inputs.length});
-  });`;
+  });`
   }
 
   /**
    * Generates test cases for input properties
    */
   private static generateInputTests(inputs: InputProperty[]): string {
-    if (inputs.length === 0) return '';
+    if (inputs.length === 0) return ''
 
     const inputList = inputs.map((input) => [
       `'${input.name.replace(/\'/g, '')}'`,
       input.type,
-    ]);
+    ])
 
     return inputList
       .slice(0, 3) // Only test first 3 inputs to keep tests concise
@@ -99,16 +99,16 @@ ${this.generateOutputTests(componentData.outputs)}
     fixture.detectChanges();
 
     expect(component[${input[0]}]).toBe(testValue);
-  });`
+  });`,
       )
-      .join('');
+      .join('')
   }
 
   /**
    * Generates test cases for output events
    */
   private static generateOutputTests(outputs: OutputEvent[]): string {
-    if (outputs.length === 0) return '';
+    if (outputs.length === 0) return ''
 
     return outputs
       .map(
@@ -120,11 +120,11 @@ ${this.generateOutputTests(componentData.outputs)}
     fixture.nativeElement.dispatchEvent(event);
 
     expect(component.${this.toCamelCase(
-      output.name
+      output.name,
     )}.emit).toHaveBeenCalledWith(event);
-  });`
+  });`,
       )
-      .join('');
+      .join('')
   }
 
   /**
@@ -137,8 +137,8 @@ ${this.generateOutputTests(componentData.outputs)}
       boolean: 'true',
       any: "'test'",
       void: 'undefined',
-    };
+    }
 
-    return typeMap[type] || "'test'";
+    return typeMap[type] || "'test'"
   }
 }

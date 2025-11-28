@@ -50,7 +50,7 @@ export class AngularGenerator {
     ]
 
     // Add web component decorator import if we have inputs
-    if (componentData.inputs.length > 0) {
+    if (componentData.properties.length > 0) {
       imports.push(
         `import { ProxyInputs } from '../../proxy-inputs.decorator';`,
       )
@@ -122,9 +122,11 @@ export class AngularGenerator {
    * Prepares all data needed for the component template
    */
   private static prepareTemplateData(componentData: ComponentData) {
-    const hasInputs = componentData.inputs.length > 0
-    const hasOutputs = componentData.outputs.length > 0
-    const validInputs = componentData.inputs.filter((input) => input.name)
+    const hasInputs = componentData.properties.length > 0
+    const hasOutputs = componentData.events.length > 0
+    const validInputs = componentData.properties.filter(
+      (property) => property.name,
+    )
 
     return {
       // Component metadata
@@ -138,12 +140,12 @@ export class AngularGenerator {
       // Decorator configuration
       proxyInputsDecorator: hasInputs
         ? `@ProxyInputs([${validInputs
-            .map((input) => `'${input.name.replace(/\'/g, '')}'`)
+            .map((property) => `'${property.name.replace(/\'/g, '')}'`)
             .join(', ')}])`
         : '',
       inputsArray: hasInputs
         ? `\n  inputs: [${validInputs
-            .map((input) => `'${input.name.replace(/\'/g, '')}'`)
+            .map((property) => `'${property.name.replace(/\'/g, '')}'`)
             .join(', ')}],`
         : '',
 
@@ -154,10 +156,10 @@ export class AngularGenerator {
 
       // Properties and methods
       inputProperties: this.generateInputs(
-        componentData.inputs,
+        componentData.events,
         componentData.className,
       ),
-      outputProperties: this.generateOutputs(componentData.outputs),
+      outputProperties: this.generateOutputs(componentData.events),
       lifecycleMethods: this.generateLifecycle(componentData),
     }
   }
@@ -248,11 +250,11 @@ ${data.lifecycleMethods}
    * Generates lifecycle hooks for property initialization and event handling
    */
   private static generateLifecycle(componentData: ComponentData): string {
-    const customEventOutputs = componentData.outputs.filter((output) =>
+    const customEventOutputs = componentData.events.filter((output) =>
       output.name.startsWith('gds-'),
     )
     const hasOutputs = customEventOutputs.length > 0
-    const hasInputs = componentData.inputs.length > 0
+    const hasInputs = componentData.properties.length > 0
 
     let lifecycleContent = ''
 
