@@ -370,11 +370,11 @@ export class GreenCoreNgModule {}
   }
 
   private static getComponentDirectoryName(tagName: string): string {
-    return tagName.replace(/^gds-/, '').replace(/-/g, '-')
+    return tagName.replace(/^gds-/, '')
   }
 
   private static getComponentFileName(tagName: string): string {
-    return tagName.replace(/^gds-/, '').replace(/-/g, '-')
+    return tagName.replace(/^gds-/, '')
   }
 }
 
