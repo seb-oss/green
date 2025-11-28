@@ -6,7 +6,7 @@
 import { Type } from 'custom-elements-manifest'
 
 /**
- * Processed component data for framework wrapper generation
+ * Processed component meta data
  */
 export interface ComponentData {
   /** Original component class name (e.g., 'GdsAlert') */
@@ -20,19 +20,19 @@ export interface ComponentData {
   /** Original source file path from the manifest (e.g., 'src/components/alert/alert.component.ts') */
   sourcePath: string
   /** Input properties from attributes and reflected fields */
-  inputs: InputProperty[]
+  properties: ComponentProperty[]
   /** Output events */
-  outputs: OutputEvent[]
+  events: ComponentEvent[]
   /** Content projection slots */
   slots: SlotInfo[]
   /** Public methods that should be exposed */
   methods: MethodInfo[]
 }
 
-export interface InputProperty {
-  /** Property name in Angular (camelCase) */
+export interface ComponentProperty {
+  /** Property name in Javascript */
   name: string
-  /** Attribute name in HTML (kebab-case) */
+  /** Attribute name in HTML */
   attributeName?: string
   /** TypeScript type */
   type: string
@@ -44,7 +44,7 @@ export interface InputProperty {
   required?: boolean
 }
 
-export interface OutputEvent {
+export interface ComponentEvent {
   /** Original event name from web component (e.g., 'gds-close') */
   name: string
   /** Event type (e.g., 'CustomEvent<string>') */

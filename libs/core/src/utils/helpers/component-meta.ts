@@ -8,9 +8,9 @@ import type {
 
 import {
   ComponentData,
-  InputProperty,
+  ComponentEvent,
+  ComponentProperty,
   MethodInfo,
-  OutputEvent,
   SlotInfo,
 } from './component-meta.types'
 
@@ -70,8 +70,8 @@ export class CemParser {
       description: declaration.description,
       outputPath: mod.path,
       sourcePath: mod.path,
-      inputs: this.extractProperties(declaration),
-      outputs: this.extractEvents(declaration),
+      properties: this.extractProperties(declaration),
+      events: this.extractEvents(declaration),
       slots: this.extractSlots(declaration),
       methods: this.extractMethods(declaration),
     }
@@ -105,7 +105,7 @@ export class CemParser {
    */
   private static extractProperties(
     declaration: CustomElementDeclaration,
-  ): InputProperty[] {
+  ): ComponentProperty[] {
     if (!declaration.members) return []
 
     return declaration.members
@@ -132,7 +132,7 @@ export class CemParser {
    */
   private static extractEvents(
     declaration: CustomElementDeclaration,
-  ): OutputEvent[] {
+  ): ComponentEvent[] {
     if (!declaration.events) return []
 
     return declaration.events
@@ -283,8 +283,8 @@ export class CemParser {
 
       for (const exportDecl of JavaScriptModule.exports) {
         // Look for wildcard exports that point to primitives
-        if (exportDecl.declaration?.package?.includes('primitives/')) {
-          const primitivePackage = exportDecl.declaration.package
+        if (exportDecl.declaration?.module?.includes('primitives/')) {
+          const primitivePackage = exportDecl.declaration.module
 
           // Find the primitive JavaScriptModule to get class information
           const primitiveModule = manifest.modules.find((m) =>
