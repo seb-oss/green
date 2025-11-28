@@ -1,0 +1,3 @@
+import{j as n,M as s}from"./WithTooltip-SK46ZJ2J-BqBj9YUi.js";import{useMDXComponents as r}from"./index-CwPMOufD.js";import"./preload-helper-Dp1pzeXC.js";import"./iframe-Bi3z28Tk.js";function e(t){const o={h1:"h1",p:"p",...r(),...t.components};return n.jsxs(n.Fragment,{children:[n.jsx(s,{title:"Components/Form/Introduction"}),`
+`,n.jsx(o.h1,{id:"form",children:"Form"}),`
+`,n.jsx(o.p,{children:"Introduction text about how to use forms with links and references and to concepts and available elements"})]})}function d(t={}){const{wrapper:o}={...r(),...t.components};return o?n.jsx(o,{...t,children:n.jsx(e,{...t})}):e(t)}export{d as default};
