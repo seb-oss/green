@@ -24,7 +24,7 @@ export class NggCoreRenderer implements Renderer2 {
 
   createElement(name: string, namespace?: string | null): any {
     const scopedName = name.startsWith('gds-')
-      ? this.scopeResolver.getScopedTagName(name)
+      ? this.scopeResolver.getScopedTagName(name, true)
       : name
     return this.delegate.createElement(scopedName, namespace)
   }

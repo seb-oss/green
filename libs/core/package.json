@@ -47,7 +47,6 @@
     "./pure": "./pure.js",
     "./_primitives/*": "./primitives/*",
     "./react": "./generated/react/index.js",
-    "./react/*": "./generated/react/*",
     "./patterns/*": "./patterns/*"
   },
   "customElements": "custom-elements.json"
