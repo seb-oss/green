@@ -330,6 +330,143 @@ describe('component-meta', () => {
           CemParser.loadManifest = originalLoadManifest
         }
       })
+
+      it('should deduplicate primitives re-exported from multiple locations', async () => {
+        // Create a manifest where the same primitive is re-exported from multiple components
+        const manifestWithDuplicateReExports: Package = {
+          schemaVersion: '1.0.0',
+          readme: '',
+          modules: [
+            // Primitive module
+            {
+              kind: 'javascript-module',
+              path: 'src/primitives/listbox/option.ts',
+              declarations: [
+                {
+                  kind: 'class',
+                  name: 'GdsOption',
+                  tagName: 'gds-option',
+                  customElement: true,
+                  description: 'A listbox option primitive',
+                  members: [],
+                },
+              ],
+              exports: [],
+            },
+            // Component 1 that re-exports the primitive
+            {
+              kind: 'javascript-module',
+              path: 'src/components/dropdown/dropdown.ts',
+              declarations: [
+                {
+                  kind: 'class',
+                  name: 'GdsDropdown',
+                  tagName: 'gds-dropdown',
+                  customElement: true,
+                  members: [],
+                },
+              ],
+              exports: [],
+            },
+            {
+              kind: 'javascript-module',
+              path: 'src/components/dropdown/index.ts',
+              declarations: [],
+              exports: [
+                {
+                  kind: 'js',
+                  name: '*',
+                  declaration: {
+                    name: '*',
+                    module: 'src/primitives/listbox/option',
+                  },
+                },
+              ],
+            },
+            // Component 2 that also re-exports the same primitive
+            {
+              kind: 'javascript-module',
+              path: 'src/components/select/select.ts',
+              declarations: [
+                {
+                  kind: 'class',
+                  name: 'GdsSelect',
+                  tagName: 'gds-select',
+                  customElement: true,
+                  members: [],
+                },
+              ],
+              exports: [],
+            },
+            {
+              kind: 'javascript-module',
+              path: 'src/components/select/index.ts',
+              declarations: [],
+              exports: [
+                {
+                  kind: 'js',
+                  name: '*',
+                  declaration: {
+                    name: '*',
+                    module: 'src/primitives/listbox/option',
+                  },
+                },
+              ],
+            },
+            // Root components index that also re-exports the primitive
+            {
+              kind: 'javascript-module',
+              path: 'src/components/index.ts',
+              declarations: [],
+              exports: [
+                {
+                  kind: 'js',
+                  name: '*',
+                  declaration: {
+                    name: '*',
+                    module: 'src/primitives/listbox/option',
+                  },
+                },
+              ],
+            },
+          ],
+        }
+
+        const originalLoadManifest = CemParser.loadManifest
+        CemParser.loadManifest = async () => manifestWithDuplicateReExports
+
+        try {
+          const { components, reExportedPrimitives } =
+            await CemParser.parseAllComponents()
+
+          // Should find 3 re-export declarations (from dropdown, select, and root index)
+          expect(reExportedPrimitives).to.have.lengthOf(3)
+
+          // But should only include GdsOption ONCE in components array (deduplicated)
+          const optionComponents = components.filter(
+            (c) => c.tagName === 'gds-option',
+          )
+          expect(optionComponents).to.have.lengthOf(
+            1,
+            'GdsOption should appear exactly once',
+          )
+
+          // Should also have the two regular components (dropdown and select)
+          expect(components).to.have.lengthOf(
+            3,
+            'Should have dropdown, select, and option (once)',
+          )
+
+          const componentNames = components.map((c) => c.tagName).sort()
+          expect(componentNames).to.deep.equal([
+            'gds-dropdown',
+            'gds-option',
+            'gds-select',
+          ])
+        } finally {
+          CemParser.loadManifest = originalLoadManifest
+        }
+      })
     })
   })
 })

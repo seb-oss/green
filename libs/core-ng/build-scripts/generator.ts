@@ -1,4 +1,8 @@
-import { ComponentData, InputProperty, OutputEvent } from '../types'
+import {
+  ComponentData,
+  ComponentEvent,
+  ComponentProperty,
+} from '../../core/src/utils/helpers/component-meta.types'
 import { TestGenerator } from './test-generator'
 
 /**
@@ -63,14 +67,28 @@ export class AngularGenerator {
     )
 
     // Add type imports for re-exported primitives (but not for the component's own class)
+    // Deduplicate by primitiveClass to avoid importing the same type multiple times
     if (reExportedPrimitives.length > 0) {
+      const uniquePrimitives = new Map<string, string>()
+
       for (const primitive of reExportedPrimitives) {
         // Don't import type for the component's own class
         if (primitive.primitiveClass !== componentData.className) {
-          imports.push(
-            `import type { ${primitive.primitiveClass} } from '@sebgroup/green-core/${primitive.reExportPath}';`,
-          )
+          // Only add if we haven't seen this primitive class before
+          if (!uniquePrimitives.has(primitive.primitiveClass)) {
+            uniquePrimitives.set(
+              primitive.primitiveClass,
+              primitive.reExportPath,
+            )
+          }
         }
+      }
+
+      // Generate import statements for unique primitives
+      for (const [primitiveClass, reExportPath] of uniquePrimitives) {
+        imports.push(
+          `import type { ${primitiveClass} } from '@sebgroup/green-core/${reExportPath}';`,
+        )
       }
     }
 
@@ -156,7 +174,7 @@ export class AngularGenerator {
 
       // Properties and methods
       inputProperties: this.generateInputs(
-        componentData.events,
+        componentData.properties,
         componentData.className,
       ),
       outputProperties: this.generateOutputs(componentData.events),
@@ -206,7 +224,7 @@ ${data.lifecycleMethods}
    * Properties are declared without @Input decorators since @ProxyInputs handles the binding
    */
   private static generateInputs(
-    inputs: InputProperty[],
+    inputs: ComponentProperty[],
     className: string,
   ): string {
     if (inputs.length === 0) return ''
@@ -228,7 +246,7 @@ ${data.lifecycleMethods}
   /**
    * Generates output event emitters
    */
-  private static generateOutputs(outputs: OutputEvent[]): string {
+  private static generateOutputs(outputs: ComponentEvent[]): string {
     if (outputs.length === 0) return ''
 
     const eventEmitters = outputs

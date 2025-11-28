@@ -1,10 +1,10 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
-import { CemParser } from '../../../dist/libs/core/src/utils/helpers/component-meta'
+import { CemParser } from '../../../libs/core/src/utils/helpers/component-meta'
 import { AngularGenerator } from './generator'
 
-import type { ComponentData } from '../../../dist/libs/core/src/utils/helpers/component-meta.types.d.ts'
+import type { ComponentData } from '../../../libs/core/src/utils/helpers/component-meta.types.d.ts'
 
 export interface GeneratorOptions {
   cemPath?: string
@@ -84,7 +84,7 @@ export class AngularBuildOrchestrator {
       console.log('> Parsing CEM file...')
 
       const { components, reExportedPrimitives } =
-        await CemParser.parseAllComponents()
+        await CemParser.parseAllComponents('../../../custom-elements.json') // Path relative to the component-meta.ts file in the core lib
 
       if (components.length === 0) {
         console.log('> No components found in CEM file')

@@ -351,7 +351,15 @@ export class CemParser {
     }
 
     // Generate component data for re-exported primitives
+    // Use a map to deduplicate primitives that are re-exported from multiple locations
+    const primitiveMap = new Map<string, ComponentData>()
+
     for (const reExported of reExportedPrimitives) {
+      // Skip if we've already processed this primitive
+      if (primitiveMap.has(reExported.primitiveClass)) {
+        continue
+      }
+
       // Find the original primitive JavaScriptModule
       const primitiveModule = manifest.modules.find((m) =>
         m.declarations?.some((d) => d.name === reExported.primitiveClass),
@@ -369,10 +377,13 @@ export class CemParser {
           )
           // Override the source path to point to the re-export JavaScriptModule
           componentData.sourcePath = reExported.reExportModule
-          components.push(componentData)
+          primitiveMap.set(reExported.primitiveClass, componentData)
         }
       }
     }
+
+    // Add deduplicated primitives to components array
+    components.push(...primitiveMap.values())
 
     return { components, reExportedPrimitives }
   }
