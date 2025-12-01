@@ -174,12 +174,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return this.#hasSelection && !this.#isAllSelected
   }
 
-  /*   get #paginationSize() {
-    if (this.density === 'compact') return 'small'
-    if (this.density === 'spacious') return 'medium'
-    return 'medium'
-  } */
-
   #getCacheKey(): string {
     return JSON.stringify({
       page: this.view.page,

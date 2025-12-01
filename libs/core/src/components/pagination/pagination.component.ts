@@ -1,6 +1,5 @@
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
@@ -38,24 +37,30 @@ import { PaginationStyles } from './pagination.styles'
 const DENSITY_CONFIG = {
   compact: {
     size: 'small',
-    input: 'small',
     font: 'detail-book-s',
     gap: 'xl',
     navGap: 'xs',
+    input: 'small',
+    inputWidth: '140px',
+    inputPadding: 'm',
   },
   comfortable: {
     size: 'small',
-    input: 'small',
     font: 'detail-book-s',
     gap: '2xl',
     navGap: 's',
+    input: 'small',
+    inputWidth: '140px',
+    inputPadding: 'm',
   },
   spacious: {
     size: 'medium',
-    input: 'large',
     font: 'detail-book-m',
     gap: '2xl',
     navGap: 's',
+    input: 'large',
+    inputWidth: '200px',
+    inputPadding: 'xl',
   },
 } as const
 
@@ -192,8 +197,8 @@ export class GdsPagination extends withMarginProps(
           </gds-button>
           <gds-flex
             flex-direction="column"
-            padding="s"
-            width="140px"
+            padding="${this.#config.inputPadding}"
+            width="${this.#config.inputWidth}"
             max-height="280px"
           >
             <gds-input
