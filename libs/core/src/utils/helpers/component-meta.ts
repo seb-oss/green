@@ -33,12 +33,8 @@ export class CemParser {
   static async loadManifest(
     cemPath = '../../custom-elements.json',
   ): Promise<Package> {
-    try {
-      const cemModule = await import(cemPath)
-      return cemModule.default as Package
-    } catch (error) {
-      throw error
-    }
+    const cemModule = await import(cemPath)
+    return cemModule.default as Package
   }
 
   /**
