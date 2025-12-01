@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "nx": "nx",
-    "build:libs": "nx run-many -p core,angular,angular-charts,charts,chlorophyll,extract,react,react-charts,tokens,fonts  --target=build",
+    "build:libs": "nx run-many -p core,core-ng,angular,angular-charts,charts,chlorophyll,extract,react,react-charts,tokens,fonts  --target=build",
     "build:apps": "nx run-many -p colors --target=build",
     "build:all": "npm run build:libs && npm run build:apps",
     "test": "nx test",
