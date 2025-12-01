@@ -130,7 +130,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   @property()
   dataLoadKey?: string
 
-  @state() private _isMobile = false
+  @state()
+  private _isMobile = false
 
   @watchMediaQuery('(max-width: 768px)')
   _handleMobile(matches: boolean) {
@@ -145,7 +146,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   @state()
-  private view: Types.State = {
+  private _view: Types.State = {
     page: this.page,
     rows: this.rows,
     searchQuery: '',
@@ -153,30 +154,31 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   @state()
-  private loaded = true
+  private _loaded = true
 
   @state()
-  private loading = false
+  private _loading = false
 
   @state()
-  private rowsState: T[] = []
+  private _rowsState: T[] = []
 
   @state()
-  private total = 0
+  private _total = 0
 
   @state()
-  private selected = new Set<number>()
+  private _selected = new Set<number>()
 
   @state()
-  private error: Error | null = null
+  private _error: Error | null = null
 
   get #hasSelection(): boolean {
-    return this.selected.size > 0
+    return this._selected.size > 0
   }
 
   get #isAllSelected(): boolean {
     return (
-      this.rowsState.length > 0 && this.selected.size === this.rowsState.length
+      this._rowsState.length > 0 &&
+      this._selected.size === this._rowsState.length
     )
   }
 
@@ -186,11 +188,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   #getCacheKey(): string {
     return JSON.stringify({
-      page: this.view.page,
-      rows: this.view.rows,
-      sortColumn: this.view.sortColumn,
-      sortDirection: this.view.sortDirection,
-      searchQuery: this.view.searchQuery,
+      page: this._view.page,
+      rows: this._view.rows,
+      sortColumn: this._view.sortColumn,
+      sortDirection: this._view.sortDirection,
+      searchQuery: this._view.searchQuery,
     })
   }
 
@@ -208,8 +210,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   @watch('columns')
   private _onColumnsChange() {
     this.#cache = {}
-    this.view = {
-      ...this.view,
+    this._view = {
+      ...this._view,
       page: Number(this.page ?? 1),
       rows: Number(this.rows ?? 10),
       visibleColumns: new Set(this.columns.map((col) => col.key)),
@@ -224,23 +226,23 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       const cachedData = this.#cache[cacheKey]
 
       if (cachedData && this.#isCacheValid(cachedData)) {
-        this.rowsState = cachedData.rows
-        this.total = cachedData.total
-        this.loaded = false
+        this._rowsState = cachedData.rows
+        this._total = cachedData.total
+        this._loaded = false
         return
       }
     }
 
-    this.loading = true
-    this.error = null
+    this._loading = true
+    this._error = null
 
     try {
       const response = await this.data({
-        page: this.view.page,
-        rows: this.view.rows,
-        sortColumn: this.view.sortColumn,
-        sortDirection: this.view.sortDirection,
-        searchQuery: this.view.searchQuery,
+        page: this._view.page,
+        rows: this._view.rows,
+        sortColumn: this._view.sortColumn,
+        sortDirection: this._view.sortDirection,
+        searchQuery: this._view.searchQuery,
       })
 
       if (!this.nocache) {
@@ -252,10 +254,10 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         }
       }
 
-      this.rowsState = response.rows
-      this.total = response.total
-      this.selected.clear()
-      this.loaded = false
+      this._rowsState = response.rows
+      this._total = response.total
+      this._selected.clear()
+      this._loaded = false
 
       this.dispatchEvent(
         new CustomEvent('gds-table-data-loaded', {
@@ -264,7 +266,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         }),
       )
     } catch (error) {
-      this.error = error as Error
+      this._error = error as Error
       this.dispatchEvent(
         new CustomEvent('gds-table-data-error', {
           detail: error,
@@ -272,7 +274,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         }),
       )
     } finally {
-      this.loading = false
+      this._loading = false
     }
   }
 
@@ -462,8 +464,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   #renderSortIcon(column: Types.Column) {
-    const isSorted = this.view.sortColumn === column.key
-    const sortDirection = this.view.sortDirection
+    const isSorted = this._view.sortColumn === column.key
+    const sortDirection = this._view.sortDirection
 
     if (isSorted) {
       return sortDirection === 'asc'
@@ -497,7 +499,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
                 plain
                 clearable
                 label="${msg('Search table')}"
-                .value=${this.view.searchQuery}
+                .value=${this._view.searchQuery}
                 @input=${this.#handleSearch}
                 @gds-input-cleared=${this.#handleSearchClear}
                 width="100%; l{240px}"
@@ -522,7 +524,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
                 size="${this.#Density.dropdown}"
                 label="${msg('Select visible columns')}"
                 searchable
-                .value=${Array.from(this.view.visibleColumns) as any}
+                .value=${Array.from(this._view.visibleColumns) as any}
                 @change=${this.#handleColumnVisibility}
               >
                 <span slot="trigger">${msg('Columns')}</span>
@@ -530,7 +532,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
                   (column) => html`
                     <gds-option
                       value=${column.key}
-                      ?selected=${this.view.visibleColumns.has(column.key)}
+                      ?selected=${this._view.visibleColumns.has(column.key)}
                     >
                       ${column.label}
                     </gds-option>
@@ -545,8 +547,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   #renderColumnHeader(column: Types.Column) {
-    const isSorted = this.view.sortColumn === column.key
-    const sortDirection = this.view.sortDirection
+    const isSorted = this._view.sortColumn === column.key
+    const sortDirection = this._view.sortDirection
 
     let ariaLabel = column.label
     if (column.sortable) {
@@ -630,7 +632,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   #renderColumnHeaders() {
     return this.columns
-      .filter((column) => this.view.visibleColumns.has(column.key))
+      .filter((column) => this._view.visibleColumns.has(column.key))
       .map((column) => this.#renderColumnHeader(column))
   }
 
@@ -672,12 +674,12 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return html`
       <td class="checkbox-cell">
         ${this.#renderCheckbox({
-          checked: this.selected.has(index),
+          checked: this._selected.has(index),
           indeterminate: false,
           ariaLabel: msg(`Select row ${index + 1}`),
           onToggle: () =>
             this.#handleRowSelect(index, {
-              detail: { checked: !this.selected.has(index) },
+              detail: { checked: !this._selected.has(index) },
             } as CustomEvent),
         })}
       </td>
@@ -686,7 +688,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   #renderRowCells(row: T) {
     return this.columns
-      .filter((column) => this.view.visibleColumns.has(column.key))
+      .filter((column) => this._view.visibleColumns.has(column.key))
       .map((column) => this.#renderTableCell(row, column))
   }
 
@@ -720,8 +722,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return html`
       <tr
         class=${classMap({
-          selected: this.selected.has(index),
-          loading: this.loading,
+          selected: this._selected.has(index),
+          loading: this._loading,
         })}
       >
         ${[
@@ -807,7 +809,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           `,
         )}
         ${this.columns
-          .filter((column) => this.view.visibleColumns.has(column.key))
+          .filter((column) => this._view.visibleColumns.has(column.key))
           .map(() => html` <td>${this.#renderSkeletonCell()}</td> `)}
         ${when(
           this.actions,
@@ -825,8 +827,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   #renderTableBody() {
     // Show the skeleton only on the initial load
-    if (this.loading && this.loaded) {
-      const skeletonRows = Array.from({ length: this.view.rows }, (_, i) =>
+    if (this._loading && this._loaded) {
+      const skeletonRows = Array.from({ length: this._view.rows }, (_, i) =>
         this.#renderSkeletonRow(i),
       )
       return html`<tbody aria-busy="true" aria-live="polite">
@@ -836,7 +838,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     return html`
       <tbody aria-live="polite">
-        ${this.rowsState.map((row, index) => this.#renderTableRow(row, index))}
+        ${this._rowsState.map((row, index) => this.#renderTableRow(row, index))}
       </tbody>
     `
   }
@@ -846,7 +848,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       responsive: this.responsive,
       data: true,
     })
-    const caption = `${msg('Data table with')} ${this.total} ${msg('rows')}`
+    const caption = `${msg('Data table with')} ${this._total} ${msg('rows')}`
 
     return html`
       <div class=${CLASSES}>
@@ -880,7 +882,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   #renderEmptyState() {
-    const hasSearch = this.view.searchQuery.length > 0
+    const hasSearch = this._view.searchQuery.length > 0
 
     if (hasSearch) {
       return html`
@@ -892,12 +894,12 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
                   ${msg('No results found')}
                 </gds-text>
                 <gds-text tag="p" font="detail-book-s">
-                  ${msg('No results for')} "${this.view.searchQuery}"
+                  ${msg('No results for')} "${this._view.searchQuery}"
                 </gds-text>
               </gds-flex>
               <gds-button
                 size="small"
-                label="${msg('Clear search for')} ${this.view.searchQuery}"
+                label="${msg('Clear search for')} ${this._view.searchQuery}"
                 @click=${this.#handleSearchClear}
               >
                 ${msg('Clear search')}
@@ -922,18 +924,18 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   #renderFooter() {
-    if (this.plain || this.total < 1) return null
+    if (this.plain || this._total < 1) return null
 
-    const start = (this.view.page - 1) * this.view.rows + 1
-    const end = Math.min(this.view.page * this.view.rows, this.total)
-    const summaryString = `${start} - ${end} ${msg('of')} ${this.total}`
+    const start = (this._view.page - 1) * this._view.rows + 1
+    const end = Math.min(this._view.page * this._view.rows, this._total)
+    const summaryString = `${start} - ${end} ${msg('of')} ${this._total}`
 
     return html`
       <gds-pagination
-        .page=${this.view.page}
-        .rows=${this.view.rows}
+        .page=${this._view.page}
+        .rows=${this._view.rows}
         .options=${this.options}
-        .total=${this.total}
+        .total=${this._total}
         .density=${this.density}
         .label=${summaryString}
         @gds-page-change=${this.#handlePageChange}
@@ -956,11 +958,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         ${[
           this.#renderHeaderControls(),
           when(
-            this.error,
+            this._error,
             () => this.#renderErrorState(),
             () =>
               when(
-                this.rowsState.length === 0 && !this.loading,
+                this._rowsState.length === 0 && !this._loading,
                 () => this.#renderEmptyState(),
                 () => this.#renderTable(),
               ),
@@ -977,8 +979,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    */
   async #handleSearch(e: Event) {
     const input = e.target as HTMLInputElement
-    this.view = {
-      ...this.view,
+    this._view = {
+      ...this._view,
       searchQuery: input.value,
       page: 1,
     }
@@ -990,8 +992,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Resets search query and reloads data
    */
   async #handleSearchClear() {
-    this.view = {
-      ...this.view,
+    this._view = {
+      ...this._view,
       searchQuery: '',
       page: 1,
     }
@@ -1003,11 +1005,12 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Toggles sort direction if same column, otherwise sets new sort column
    */
   async #handleSort(columnKey: string) {
-    this.view = {
-      ...this.view,
+    this._view = {
+      ...this._view,
       sortColumn: columnKey,
       sortDirection:
-        this.view.sortColumn === columnKey && this.view.sortDirection === 'asc'
+        this._view.sortColumn === columnKey &&
+        this._view.sortDirection === 'asc'
           ? 'desc'
           : 'asc',
       page: 1,
@@ -1019,8 +1022,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Handles pagination page change
    */
   async #handlePageChange(e: CustomEvent) {
-    this.view = {
-      ...this.view,
+    this._view = {
+      ...this._view,
       page: e.detail.page,
     }
     await this.#loadData()
@@ -1031,8 +1034,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Resets to first page when page size changes
    */
   async #handlePageSizeChange(e: CustomEvent) {
-    this.view = {
-      ...this.view,
+    this._view = {
+      ...this._view,
       rows: e.detail.rows,
       page: 1,
     }
@@ -1045,8 +1048,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    */
   #handleColumnVisibility(e: CustomEvent) {
     const selectedColumns = e.detail.value as string[]
-    this.view = {
-      ...this.view,
+    this._view = {
+      ...this._view,
       visibleColumns: new Set(selectedColumns),
     }
     this.requestUpdate()
@@ -1072,9 +1075,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     const isChecked = e.detail.checked
 
     if (isChecked) {
-      this.selected.add(index)
+      this._selected.add(index)
     } else {
-      this.selected.delete(index)
+      this._selected.delete(index)
     }
 
     this.#emitSelectionChange()
@@ -1085,7 +1088,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Internal method to select all rows
    */
   #selectAllInternal(): void {
-    this.selected = new Set(this.rowsState.map((_, i) => i))
+    this._selected = new Set(this._rowsState.map((_, i) => i))
     this.requestUpdate()
   }
 
@@ -1093,7 +1096,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Internal method to clear all selections
    */
   #clearSelectionInternal(): void {
-    this.selected.clear()
+    this._selected.clear()
     this.requestUpdate()
   }
 
@@ -1104,9 +1107,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     this.dispatchEvent(
       new CustomEvent('gds-table-selection', {
         detail: {
-          selectedIndices: Array.from(this.selected),
-          selectedData: Array.from(this.selected).map((i) => this.rowsState[i]),
-          count: this.selected.size,
+          selectedIndices: Array.from(this._selected),
+          selectedData: Array.from(this._selected).map(
+            (i) => this._rowsState[i],
+          ),
+          count: this._selected.size,
         },
         bubbles: true,
       }),
@@ -1135,9 +1140,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    */
   setSelection(indices: number[]): void {
     const validIndices = indices.filter(
-      (i) => i >= 0 && i < this.rowsState.length,
+      (i) => i >= 0 && i < this._rowsState.length,
     )
-    this.selected = new Set(validIndices)
+    this._selected = new Set(validIndices)
     this.#emitSelectionChange()
     this.requestUpdate()
   }
@@ -1146,10 +1151,10 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Get selected row data
    */
   getSelection(): { indices: number[]; data: T[] } {
-    const indices = Array.from(this.selected)
+    const indices = Array.from(this._selected)
     return {
       indices,
-      data: indices.map((i) => this.rowsState[i]),
+      data: indices.map((i) => this._rowsState[i]),
     }
   }
 }
