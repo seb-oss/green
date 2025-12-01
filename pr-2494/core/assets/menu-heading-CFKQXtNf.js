@@ -1,1 +1,0 @@
-import{G as e}from"./menu-heading.component-C2AI0ql4.js";e.define();
