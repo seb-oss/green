@@ -1,3 +1,4 @@
+import { localized, msg } from '@lit/localize'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
@@ -36,7 +37,7 @@ import { PaginationStyles } from './pagination.styles'
  */
 const DENSITY_CONFIG = {
   compact: {
-    size: 'small',
+    button: 'small',
     font: 'detail-book-s',
     gap: 'xl',
     navGap: 'xs',
@@ -45,7 +46,7 @@ const DENSITY_CONFIG = {
     inputPadding: 'm',
   },
   comfortable: {
-    size: 'small',
+    button: 'small',
     font: 'detail-book-s',
     gap: '2xl',
     navGap: 's',
@@ -54,7 +55,7 @@ const DENSITY_CONFIG = {
     inputPadding: 'm',
   },
   spacious: {
-    size: 'medium',
+    button: 'medium',
     font: 'detail-book-m',
     gap: '2xl',
     navGap: 's',
@@ -70,6 +71,7 @@ type DensityMode = keyof typeof DENSITY_CONFIG
  * @element gds-pagination
  * @status beta
  */
+@localized()
 @gdsCustomElement('gds-pagination', {
   dependsOn: [
     GdsButton,
@@ -92,9 +94,15 @@ export class GdsPagination extends withMarginProps(
 ) {
   static styles = [tokens, PaginationStyles]
 
+  /**
+   * Sets the active page, initially the first page.
+   */
   @property({ type: Number })
   page = 1
 
+  /**
+   * Sets the numbers of rows to show, defaults to 10
+   */
   @property({ type: Number })
   rows = 10
 
@@ -189,7 +197,7 @@ export class GdsPagination extends withMarginProps(
           @gds-ui-state=${this.#handlePopoverStateChange}
         >
           <gds-button
-            size="${this.#config.size}"
+            size="${this.#config.button}"
             rank="tertiary"
             slot="trigger"
           >
@@ -228,7 +236,7 @@ export class GdsPagination extends withMarginProps(
 
     return html`
       <gds-button
-        size="${this.#config.size}"
+        size="${this.#config.button}"
         rank="${isActive ? 'primary' : 'tertiary'}"
         @click=${() => this.#handlePageChange(pageNum)}
       >
@@ -247,7 +255,7 @@ export class GdsPagination extends withMarginProps(
   #renderJumpFirstButton() {
     return html`
       <gds-button
-        size="${this.#config.size}"
+        size="${this.#config.button}"
         rank="secondary"
         ?disabled=${this.page === 1}
         @click=${() => this.#handlePageChange(1)}
@@ -260,7 +268,7 @@ export class GdsPagination extends withMarginProps(
   #renderPreviousButton() {
     return html`
       <gds-button
-        size="${this.#config.size}"
+        size="${this.#config.button}"
         rank="secondary"
         ?disabled=${this.page === 1}
         @click=${() => this.#handlePageChange(this.page - 1)}
@@ -275,7 +283,7 @@ export class GdsPagination extends withMarginProps(
 
     return html`
       <gds-button
-        size="${this.#config.size}"
+        size="${this.#config.button}"
         rank="secondary"
         ?disabled=${this.page === pageCount}
         @click=${() => this.#handlePageChange(this.page + 1)}
@@ -290,7 +298,7 @@ export class GdsPagination extends withMarginProps(
 
     return html`
       <gds-button
-        size="${this.#config.size}"
+        size="${this.#config.button}"
         rank="secondary"
         ?disabled=${this.page === pageCount}
         @click=${() => this.#handlePageChange(pageCount)}
@@ -331,7 +339,7 @@ export class GdsPagination extends withMarginProps(
       <gds-menu-item
         data-value=${size}
         class=${classMap({ selected: isSelected })}
-        size="${this.#config.size}"
+        size="${this.#config.button}"
       >
         ${size}
       </gds-menu-item>
@@ -344,12 +352,12 @@ export class GdsPagination extends withMarginProps(
     return html`
       <gds-flex align-items="center" gap="s">
         <gds-text font="${this.#config.font}" color="neutral-01">
-          Rows per page
+          ${msg('Rows per page')}
         </gds-text>
         <gds-context-menu @gds-menu-item-click=${this.#handlePageSizeMenuClick}>
           <gds-button
             slot="trigger"
-            size="${this.#config.size}"
+            size="${this.#config.button}"
             rank="secondary"
           >
             ${this.rows}

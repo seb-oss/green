@@ -1,3 +1,4 @@
+import { localized, msg } from '@lit/localize'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
@@ -20,6 +21,7 @@ import * as Types from './table.types'
  *
  * ⚠️ Declare events
  */
+@localized()
 @gdsCustomElement('gds-table', {
   dependsOn: Table.Dependencies,
 })
@@ -570,7 +572,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   #renderActionsHeader() {
     if (!this.actions || typeof this.actions === 'function') return null
 
-    const label = this.actions.label || 'Actions'
+    const label = this.actions.label || msg('Actions')
 
     const classes = classMap({
       actions: true,
@@ -595,7 +597,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         ${this.#renderCheckbox({
           checked: this.#isAllSelected,
           indeterminate: this.#isPartialSelection,
-          ariaLabel: 'Select all rows',
+          ariaLabel: msg('Select all rows'),
           onToggle: () => this.#handleSelectAll({} as CustomEvent),
         })}
       </th>
@@ -644,11 +646,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     if (!this.selectable) return null
 
     return html`
-      <td class="checkbox-cell" data-label="Select">
+      <td class="checkbox-cell">
         ${this.#renderCheckbox({
           checked: this.selected.has(index),
           indeterminate: false,
-          ariaLabel: `Select row ${index + 1}`,
+          ariaLabel: msg(`Select row ${index + 1}`),
           onToggle: () =>
             this.#handleRowSelect(index, {
               detail: { checked: !this.selected.has(index) },
@@ -669,7 +671,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     if (typeof this.actions === 'function') {
       return html`
-        <td class="actions-cell" data-label="Actions">
+        <td class="actions-cell">
           <div class="cell-content">${this.actions(row, index)}</div>
         </td>
       `
@@ -684,7 +686,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     })
 
     return html`
-      <td class="${classes}" data-label="Actions">
+      <td class="${classes}">
         <div class="cell-content">${content}</div>
       </td>
     `
@@ -874,7 +876,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     const start = (this.view.page - 1) * this.view.rows + 1
     const end = Math.min(this.view.page * this.view.rows, this.total)
-    const summaryString = `${start} - ${end} of ${this.total}`
+    const summaryString = `${start} - ${end} ${msg('of')} ${this.total}`
 
     return html`
       <gds-pagination
