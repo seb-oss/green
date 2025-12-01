@@ -1,7 +1,7 @@
+import { CustomElementField } from 'custom-elements-manifest'
 import {
   ComponentData,
   ComponentEvent,
-  ComponentProperty,
 } from '../../core/src/utils/helpers/component-meta.types'
 import { TestGenerator } from './test-generator'
 
@@ -50,7 +50,7 @@ export class AngularGenerator {
     }[] = [],
   ): string {
     const hasBooleanInputs = componentData.properties.some((p) =>
-      this.isBooleanType(p.type),
+      this.isBooleanType(p.type?.text),
     )
 
     const coreImports = [
@@ -243,7 +243,7 @@ ${data.lifecycleMethods}
    * Non-boolean properties use regular @Input decorators
    */
   private static generateInputs(
-    inputs: ComponentProperty[],
+    inputs: CustomElementField[],
     className: string,
   ): string {
     if (inputs.length === 0) return ''
@@ -254,16 +254,18 @@ ${data.lifecycleMethods}
           ? `\n  /** ${input.description} */`
           : ''
 
-        const isBoolean = this.isBooleanType(input.type)
+        const isBoolean = this.isBooleanType(input.type?.text)
         const inputDecorator = isBoolean
           ? `@Input({ transform: booleanAttribute })`
           : `@Input()`
 
+        // Note: All inputs are marked as optional, since any properties in the underlying
+        // web component that does not have `undefined` in the type will have a default value
+        // set by the web component itself. There shouldn't be any need to replicate that in
+        // the Angular wrapper, so we can keep it simple and mark all inputs as optional.
         return `${comment}
   ${inputDecorator}
-  ${input.name}${
-    input.required ? '!' : '?'
-  }: ${className}['${input.name?.replace(/\'/g, '')}'];`
+  ${input.name}?: ${className}['${input.name?.replace(/\'/g, '')}'];`
       })
       .join('\n')
   }
@@ -271,9 +273,9 @@ ${data.lifecycleMethods}
   /**
    * Helper to check if a type is boolean
    */
-  private static isBooleanType(type: string): boolean {
+  private static isBooleanType(type?: string): boolean {
     // Check for exact 'boolean' or 'boolean | ...' or '... | boolean'
-    return /\bboolean\b/.test(type)
+    return /\bboolean\b/.test(type || '')
   }
 
   /**

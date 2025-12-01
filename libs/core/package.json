@@ -29,10 +29,14 @@
     "lit": "^3.1.0"
   },
   "peerDependencies": {
-    "react": ">=18"
+    "react": ">=18",
+    "custom-elements-manifest": ">=2"
   },
   "peerDependenciesMeta": {
     "react": {
+      "optional": true
+    },
+    "custom-elements-manifest": {
       "optional": true
     }
   },

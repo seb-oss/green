@@ -2,6 +2,7 @@ import type {
   ClassField,
   ClassMethod,
   CustomElementDeclaration,
+  CustomElementField,
   JavaScriptModule,
   Package,
 } from 'custom-elements-manifest'
@@ -9,7 +10,6 @@ import type {
 import {
   ComponentData,
   ComponentEvent,
-  ComponentProperty,
   MethodInfo,
   SlotInfo,
 } from './component-meta.types'
@@ -31,13 +31,12 @@ export class CemParser {
    * Loads and parses the CEM file
    */
   static async loadManifest(
-    cemPath: string = '../../custom-elements.json',
+    cemPath = '../../custom-elements.json',
   ): Promise<Package> {
     try {
       const cemModule = await import(cemPath)
       return cemModule.default as Package
     } catch (error) {
-      console.error('Failed to load CEM file:', error)
       throw error
     }
   }
@@ -78,34 +77,11 @@ export class CemParser {
   }
 
   /**
-   * Normalizes and sanitizes TypeScript type references from the CEM
-   *
-   * Handles missing or complex types by providing safer alternatives:
-   * - Returns 'any' for undefined types
-   * - Maps custom Green Core types to their literal equivalents
-   * - Provides generic interfaces for complex types to avoid import issues
-   *
-   * @param typeText - Raw type string from Custom Elements Manifest
-   * @returns Sanitized TypeScript type string safe for code generation
-   */
-  private static normalizeType(typeText: string | undefined): string {
-    if (!typeText) return 'any'
-
-    // Handle known custom types that aren't properly exported
-    const typeMap: Record<string, string> = {
-      DetailsSize: `'small' | 'medium' | 'large'`,
-      GdsOption: '{ value: any; [key: string]: any }', // Generic option interface to avoid import complexity
-    }
-
-    return typeMap[typeText] || typeText
-  }
-
-  /**
    * Extracts properties
    */
   private static extractProperties(
     declaration: CustomElementDeclaration,
-  ): ComponentProperty[] {
+  ): CustomElementField[] {
     if (!declaration.members) return []
 
     return declaration.members
@@ -119,11 +95,11 @@ export class CemParser {
           !member.static,
       )
       .map((field) => ({
+        kind: 'field',
         name: field.name,
-        type: this.normalizeType(field.type?.text),
+        type: field.type,
         defaultValue: field.default,
         description: field.description,
-        required: false,
       }))
   }
 

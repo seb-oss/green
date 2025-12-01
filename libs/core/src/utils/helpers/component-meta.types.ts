@@ -3,7 +3,7 @@
  * Based on the schema used in custom-elements.json
  */
 
-import { Type } from 'custom-elements-manifest'
+import { CustomElementField, Type } from 'custom-elements-manifest'
 
 /**
  * Processed component meta data
@@ -20,28 +20,13 @@ export interface ComponentData {
   /** Original source file path from the manifest (e.g., 'src/components/alert/alert.component.ts') */
   sourcePath: string
   /** Input properties from attributes and reflected fields */
-  properties: ComponentProperty[]
+  properties: CustomElementField[]
   /** Output events */
   events: ComponentEvent[]
   /** Content projection slots */
   slots: SlotInfo[]
   /** Public methods that should be exposed */
   methods: MethodInfo[]
-}
-
-export interface ComponentProperty {
-  /** Property name in Javascript */
-  name: string
-  /** Attribute name in HTML */
-  attributeName?: string
-  /** TypeScript type */
-  type: string
-  /** Default value */
-  defaultValue?: string
-  /** Property description */
-  description?: string
-  /** Whether the property is required */
-  required?: boolean
 }
 
 export interface ComponentEvent {
