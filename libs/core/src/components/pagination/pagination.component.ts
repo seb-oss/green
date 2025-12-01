@@ -200,6 +200,7 @@ export class GdsPagination extends withMarginProps(
             size="${this.#config.button}"
             rank="tertiary"
             slot="trigger"
+            label="${msg('Jump to page')}"
           >
             ...
           </gds-button>
@@ -211,7 +212,7 @@ export class GdsPagination extends withMarginProps(
           >
             <gds-input
               size="${this.#config.input}"
-              label="Go to page"
+              label="${msg('Go to page')}"
               type="number"
               min="1"
               max="${this.#pageCount}"
@@ -219,6 +220,7 @@ export class GdsPagination extends withMarginProps(
             >
               <gds-button
                 size="xs"
+                label="${msg('Go')}"
                 rank="secondary"
                 @click=${this.#handleCustomPageInput}
                 slot="trail"
@@ -233,11 +235,16 @@ export class GdsPagination extends withMarginProps(
 
     const pageNum = page as number
     const isActive = this.page === pageNum
+    const currentPageLabel = `${msg('Current page')}, ${msg('page')} ${pageNum}`
+    const goToPageLabel = `${msg('Go to page')} ${pageNum}`
+    const label = isActive ? currentPageLabel : goToPageLabel
 
     return html`
       <gds-button
         size="${this.#config.button}"
         rank="${isActive ? 'primary' : 'tertiary'}"
+        label="${label}"
+        aria-current="${isActive ? 'page' : 'false'}"
         @click=${() => this.#handlePageChange(pageNum)}
       >
         ${pageNum}
@@ -257,6 +264,7 @@ export class GdsPagination extends withMarginProps(
       <gds-button
         size="${this.#config.button}"
         rank="secondary"
+        label="${msg('Go to first page')}"
         ?disabled=${this.page === 1}
         @click=${() => this.#handlePageChange(1)}
       >
@@ -270,6 +278,7 @@ export class GdsPagination extends withMarginProps(
       <gds-button
         size="${this.#config.button}"
         rank="secondary"
+        label="${msg('Go to previous page')}"
         ?disabled=${this.page === 1}
         @click=${() => this.#handlePageChange(this.page - 1)}
       >
@@ -285,6 +294,7 @@ export class GdsPagination extends withMarginProps(
       <gds-button
         size="${this.#config.button}"
         rank="secondary"
+        label="${msg('Go to next page')}"
         ?disabled=${this.page === pageCount}
         @click=${() => this.#handlePageChange(this.page + 1)}
       >
@@ -300,6 +310,7 @@ export class GdsPagination extends withMarginProps(
       <gds-button
         size="${this.#config.button}"
         rank="secondary"
+        label="${msg('Go to last page')}"
         ?disabled=${this.page === pageCount}
         @click=${() => this.#handlePageChange(pageCount)}
       >
@@ -348,10 +359,15 @@ export class GdsPagination extends withMarginProps(
 
   #renderPageSizeMenu() {
     if (this._isMobile) return null
+    const rowsLabel = `${msg('Rows per page')}, ${this.rows} ${msg('selected')}`
 
     return html`
       <gds-flex align-items="center" gap="s">
-        <gds-text font="${this.#config.font}" color="neutral-01">
+        <gds-text
+          font="${this.#config.font}"
+          color="neutral-01"
+          id="rows-per-page-label"
+        >
           ${msg('Rows per page')}
         </gds-text>
         <gds-context-menu @gds-menu-item-click=${this.#handlePageSizeMenuClick}>
@@ -359,6 +375,8 @@ export class GdsPagination extends withMarginProps(
             slot="trigger"
             size="${this.#config.button}"
             rank="secondary"
+            label="${rowsLabel}"
+            aria-labelledby="rows-per-page-label"
           >
             ${this.rows}
             <gds-icon-chevron-bottom
@@ -375,7 +393,12 @@ export class GdsPagination extends withMarginProps(
   #renderLabel() {
     if (this._isMobile || !this.label) return null
     return html`
-      <gds-text font="${this.#config.font}" color="neutral-02">
+      <gds-text
+        font="${this.#config.font}"
+        color="neutral-02"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         ${this.label}
       </gds-text>
     `

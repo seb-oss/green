@@ -390,7 +390,12 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         const size = this.#Density.button
         return html`
           <gds-context-menu>
-            <gds-button slot="trigger" size="${size}" rank="tertiary">
+            <gds-button
+              slot="trigger"
+              size="${size}"
+              rank="tertiary"
+              label="${msg('Actions')}"
+            >
               <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
             </gds-button>
             ${items.map((item) => {
@@ -491,7 +496,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
                 size="${this.#Density.input}"
                 plain
                 clearable
-                placeholder="Search..."
+                label="${msg('Search table')}"
                 .value=${this.view.searchQuery}
                 @input=${this.#handleSearch}
                 @gds-input-cleared=${this.#handleSearchClear}
@@ -515,11 +520,12 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
                 multiple
                 plain
                 size="${this.#Density.dropdown}"
+                label="${msg('Select visible columns')}"
                 searchable
                 .value=${Array.from(this.view.visibleColumns) as any}
                 @change=${this.#handleColumnVisibility}
               >
-                <span slot="trigger">Columns</span>
+                <span slot="trigger">${msg('Columns')}</span>
                 ${this.columns.map(
                   (column) => html`
                     <gds-option
@@ -542,6 +548,17 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     const isSorted = this.view.sortColumn === column.key
     const sortDirection = this.view.sortDirection
 
+    let ariaLabel = column.label
+    if (column.sortable) {
+      if (isSorted) {
+        const direction =
+          sortDirection === 'asc' ? msg('ascending') : msg('descending')
+        ariaLabel = `${column.label}, ${msg('sorted')} ${direction}`
+      } else {
+        ariaLabel = `${column.label}, ${msg('sortable')}`
+      }
+    }
+
     const classes = classMap({
       sortable: !!column.sortable,
       sorted: isSorted,
@@ -554,10 +571,17 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return html`
       <th
         class=${classes}
+        aria-sort="${isSorted
+          ? sortDirection === 'asc'
+            ? 'ascending'
+            : 'descending'
+          : 'none'}"
         @click=${column.sortable ? () => this.#handleSort(column.key) : null}
       >
         <div class="column-header">
-          <span class="column-label">${column.label}</span>
+          <span class="column-label" aria-label="${ariaLabel}">
+            ${column.label}
+          </span>
           ${when(
             column.sortable,
             () => html`
@@ -805,13 +829,13 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       const skeletonRows = Array.from({ length: this.view.rows }, (_, i) =>
         this.#renderSkeletonRow(i),
       )
-      return html`<tbody>
+      return html`<tbody aria-busy="true" aria-live="polite">
         ${skeletonRows}
       </tbody>`
     }
 
     return html`
-      <tbody>
+      <tbody aria-live="polite">
         ${this.rowsState.map((row, index) => this.#renderTableRow(row, index))}
       </tbody>
     `
@@ -822,9 +846,14 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       responsive: this.responsive,
       data: true,
     })
+    const caption = `${msg('Data table with')} ${this.total} ${msg('rows')}`
+
     return html`
       <div class=${CLASSES}>
-        <table>
+        <table aria-label="${caption}">
+          <caption class="visually-hidden">
+            ${caption}
+          </caption>
           ${this.#renderTableHeader()} ${this.#renderTableBody()}
         </table>
       </div>
@@ -834,10 +863,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   #renderErrorState() {
     return html`
       <gds-card justify-content="center" align-items="flex-start">
-        <gds-text tag="p">Error loading data</gds-text>
+        ERROR STATE REPLACE WITH SLOT
+        <!--   <gds-text tag="p">Error loading data</gds-text>
         <gds-button size="small" @click=${() => this.#loadData()}>
           Retry
-        </gds-button>
+        </gds-button> -->
       </gds-card>
     `
   }
@@ -847,17 +877,18 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     return html`
       <gds-card justify-content="space-between" align-items="flex-start">
-        <gds-flex flex-direction="column">
+        EMPTY STATE REPLACE WITH SLOT
+        <!--  <gds-flex flex-direction="column">
           <gds-text tag="p" font="heading-s">
             ${hasSearch ? 'No results found' : 'No data available'}
           </gds-text>
           ${hasSearch
-            ? html`
-                <gds-text tag="p" font="detail-book-s">
-                  No results for "${this.view.searchQuery}"
-                </gds-text>
-              `
-            : ''}
+          ? html`
+              <gds-text tag="p" font="detail-book-s">
+                No results for "${this.view.searchQuery}"
+              </gds-text>
+            `
+          : ''}
         </gds-flex>
 
         ${hasSearch
@@ -866,7 +897,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
                 Clear search
               </gds-button>
             `
-          : ''}
+          : ''} -->
       </gds-card>
     `
   }
