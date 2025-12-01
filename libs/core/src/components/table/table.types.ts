@@ -66,7 +66,24 @@ export interface Response<T> {
   total: number
 }
 
+// The density mode content config
+export const DENSITY_CONFIG = {
+  compact: {
+    button: 'small',
+    badge: 'small',
+  },
+  comfortable: {
+    button: 'small',
+    badge: 'small',
+  },
+  spacious: {
+    button: 'medium',
+    badge: 'default',
+  },
+} as const
+
 export type Density = 'comfortable' | 'compact' | 'spacious'
+export type DensityConfig = (typeof DENSITY_CONFIG)[Density]
 
 export interface CacheEntry<T> {
   rows: T[]
@@ -85,6 +102,7 @@ export type TableState = State
 export type TableRequest = Request
 export type TableResponse<T> = Response<T>
 export type TableDensity = Density
+export type TableDensityConfig = DensityConfig
 export type TableCache<T> = Cache<T>
 export type TableCacheEntry<T> = CacheEntry<T>
 

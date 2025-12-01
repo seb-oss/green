@@ -138,7 +138,7 @@ export const Users = {
           type: 'button',
           rank: 'tertiary',
           value: (row: UserData) => row.email,
-          size: 'xs',
+          /*  size: 'xs', */
           template: 'email-copy',
         },
       },
@@ -163,7 +163,7 @@ export const Users = {
           value: (row: UserData) => row.status,
           variant: (row: UserData) =>
             row.status === 'Active' ? 'positive' : 'negative',
-          size: 'small',
+          /*  size: 'small', */
         },
       },
     },
@@ -180,7 +180,7 @@ export const Users = {
         trail: {
           type: 'badge',
           value: 'SEK',
-          size: 'small',
+          /*     size: 'small', */
         },
       },
     },

@@ -134,6 +134,13 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     this._isMobile = matches
   }
 
+  /**
+   * Get the current density configuration
+   */
+  get #densityConfig() {
+    return Types.DENSITY_CONFIG[this.density]
+  }
+
   @state()
   private view: Types.State = {
     page: this.page,
@@ -233,12 +240,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         searchQuery: this.view.searchQuery,
       })
 
-      /*  this.#cache[cacheKey] = {
-        rows: response.rows,
-        total: response.total,
-        timestamp: Date.now(),
-      } */
-
       if (!this.nocache) {
         const cacheKey = this.#getCacheKey()
         this.#cache[cacheKey] = {
@@ -304,7 +305,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     switch (config.type) {
       case 'badge': {
         const variant = resolve(config.variant) || 'information'
-        const size = resolve(config.size) || 'small'
+        const size = resolve(config.size) || this.#densityConfig.badge
         return html`
           <gds-badge size="${size}" variant="${variant}">
             ${resolve(config.value)}
@@ -336,7 +337,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       }
 
       case 'button': {
-        const size = resolve(config.size)
+        const size = resolve(config.size) || this.#densityConfig.button
         const variant = resolve(config.variant)
         const rank = resolve(config.rank)
         const label = resolve(config.label)
@@ -346,7 +347,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
         return html`
           <gds-button
-            size="${size || 'small'}"
+            size="${size}"
             variant="${variant || 'neutral'}"
             rank="${rank || 'secondary'}"
             @click="${(e: Event) => {
