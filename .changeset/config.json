@@ -2,7 +2,12 @@
   "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
   "changelog": "@changesets/cli/changelog",
   "commit": false,
-  "fixed": [],
+  "fixed": [
+    [
+      "@sebgroup/green-core",
+      "@sebgroup/green-core-ng"
+    ]
+  ],
   "linked": [],
   "access": "restricted",
   "baseBranch": "origin/main",

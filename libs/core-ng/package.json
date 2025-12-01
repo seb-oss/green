@@ -1,7 +1,7 @@
 {
   "name": "@sebgroup/green-core-ng",
   "description": "Angular wrappers for @sebgroup/green-core web components.",
-  "version": "2.13.2",
+  "version": "2.16.1",
   "main": "src/index.js",
   "module": "src/index.js",
   "type": "module",
@@ -22,7 +22,7 @@
     "directory": "../../dist/libs/core-ng"
   },
   "dependencies": {
-    "@sebgroup/green-core": "2.13.2"
+    "@sebgroup/green-core": "2.16.1"
   },
   "peerDependencies": {
     "@angular/core": ">=18"
