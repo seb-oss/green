@@ -1,0 +1,683 @@
+import { Meta, Markdown } from '@storybook/addon-docs/blocks'
+
+<Meta title="Components/Table/Model" />
+
+# Table Data Model Guide
+
+This guide explains how to implement the table component with proper data handling, pagination, and filtering.
+
+## Table of Contents
+
+1. [Data Model Structure](#data-model-structure)
+2. [Data Provider Function](#data-provider-function)
+3. [Column Configuration](#column-configuration)
+4. [Framework Integration](#framework-integration)
+5. [Complete Examples](#complete-examples)
+
+---
+
+## Data Model Structure
+
+### Request Interface
+
+The table sends a request object to your data provider:
+
+```typescript
+interface TableRequest {
+  page: number              // Current page (1-indexed)
+  rows: number              // Rows per page
+  sortColumn?: string       // Column key to sort by
+  sortDirection?: 'asc' | 'desc'
+  searchQuery?: string      // Search term from search input
+}
+```
+
+### Response Interface
+
+Your data provider must return:
+
+```typescript
+interface TableResponse<T> {
+  rows: T[]                 // Array of data rows
+  total: number             // Total count (for pagination)
+}
+```
+
+### Row Type
+
+Define your data structure:
+
+```typescript
+interface UserRow {
+  id: number
+  name: string
+  email: string
+  role: 'Admin' | 'User' | 'Editor'
+  status: 'Active' | 'Inactive'
+  lastLogin: string
+}
+```
+
+---
+
+## Data Provider Function
+
+The data provider is an async function that handles fetching, filtering, sorting, and pagination.
+
+### Basic Implementation
+
+```typescript
+const dataProvider = async (
+  request: TableRequest
+): Promise<TableResponse<UserRow>> => {
+  // 1. Fetch data from your API
+  const response = await fetch('/api/users', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(request),
+  })
+  
+  const data = await response.json()
+  
+  return {
+    rows: data.users,
+    total: data.totalCount,
+  }
+}
+```
+
+### Client-Side Implementation
+
+If you have all data client-side and want to handle filtering/sorting locally:
+
+```typescript
+const allUsers: UserRow[] = [
+  // Your complete dataset
+]
+
+const dataProvider = async (
+  request: TableRequest
+): Promise<TableResponse<UserRow>> => {
+  // Simulate network delay
+  await new Promise(resolve => setTimeout(resolve, 300))
+  
+  let processedData = [...allUsers]
+  
+  // 1. Apply search filter
+  if (request.searchQuery) {
+    const query = request.searchQuery.toLowerCase()
+    processedData = processedData.filter(row =>
+      Object.values(row).some(value =>
+        String(value).toLowerCase().includes(query)
+      )
+    )
+  }
+  
+  // 2. Apply sorting
+  if (request.sortColumn) {
+    processedData.sort((a, b) => {
+      const aValue = String(a[request.sortColumn as keyof UserRow])
+      const bValue = String(b[request.sortColumn as keyof UserRow])
+      
+      return request.sortDirection === 'asc'
+        ? aValue.localeCompare(bValue)
+        : bValue.localeCompare(aValue)
+    })
+  }
+  
+  // 3. Apply pagination
+  const startIndex = (request.page - 1) * request.rows
+  const endIndex = startIndex + request.rows
+  const paginatedData = processedData.slice(startIndex, endIndex)
+  
+  return {
+    rows: paginatedData,
+    total: processedData.length,
+  }
+}
+```
+
+---
+
+## Column Configuration
+
+### Basic Column
+
+```typescript
+const columns: TableColumn[] = [
+  {
+    key: 'name',           // Property key in your data
+    label: 'Name',         // Column header text
+    sortable: true,        // Enable sorting
+  }
+]
+```
+
+### Column with Cell Configuration
+
+```typescript
+{
+  key: 'status',
+  label: 'Status',
+  sortable: true,
+  cell: {
+    value: {
+      type: 'badge',
+      value: (row: UserRow) => row.status,
+      variant: (row: UserRow) => 
+        row.status === 'Active' ? 'positive' : 'negative',
+    }
+  }
+}
+```
+
+### Available Cell Types
+
+#### Badge
+```typescript
+cell: {
+  value: {
+    type: 'badge',
+    value: (row) => row.status,
+    variant: (row) => 'positive' | 'negative' | 'information',
+    size: 'small' | 'medium',
+  }
+}
+```
+
+#### Button
+```typescript
+cell: {
+  value: {
+    type: 'button',
+    label: 'Edit',
+    size: 'small',
+    rank: 'secondary',
+    onClick: (row) => console.log('Edit', row),
+  }
+}
+```
+
+#### Link
+```typescript
+cell: {
+  value: {
+    type: 'link',
+    label: 'View',
+    href: (row) => `/users/${row.id}`,
+    target: '_blank',
+  }
+}
+```
+
+#### Image
+```typescript
+cell: {
+  lead: {
+    type: 'image',
+    src: (row) => row.avatarUrl,
+    alt: (row) => row.name,
+    width: 'xl',
+    height: 'xl',
+  }
+}
+```
+
+#### Context Menu
+```typescript
+cell: {
+  value: {
+    type: 'context-menu',
+    items: [
+      {
+        label: 'Edit',
+        onClick: (row) => console.log('Edit', row),
+      },
+      {
+        label: 'Delete',
+        onClick: (row) => console.log('Delete', row),
+      },
+    ]
+  }
+}
+```
+
+#### Formatted Number
+```typescript
+cell: {
+  value: {
+    type: 'formatted-number',
+    value: (row) => row.amount,
+    format: 'decimalsAndThousands',
+    locale: 'sv-SE',
+    currency: 'SEK',
+  }
+}
+```
+
+#### Formatted Date
+```typescript
+cell: {
+  value: {
+    type: 'formatted-date',
+    value: (row) => row.lastLogin,
+    format: 'dateLong',
+    locale: 'sv-SE',
+  }
+}
+```
+
+### Cell Slots
+
+You can add content before (lead) or after (trail) the main cell value:
+
+```typescript
+{
+  key: 'email',
+  label: 'Email',
+  cell: {
+    trail: {
+      type: 'button',
+      size: 'xs',
+      rank: 'tertiary',
+      template: 'copy-icon',
+      onClick: (row) => navigator.clipboard.writeText(row.email),
+    }
+  }
+}
+```
+
+---
+
+## Framework Integration
+
+### Lit
+
+```typescript
+import { html } from 'lit'
+import '@sebgroup/green-core/components/table'
+
+const columns = [
+  { key: 'name', label: 'Name', sortable: true },
+  { key: 'email', label: 'Email', sortable: true },
+]
+
+const dataProvider = async (request) => {
+  // Your implementation
+}
+
+html`
+  <gds-table
+    .columns=${columns}
+    .data=${dataProvider}
+    rows="10"
+    searchable
+    settings
+  ></gds-table>
+`
+```
+
+### React
+
+```tsx
+import '@sebgroup/green-core/components/table'
+
+function UserTable() {
+  const columns = [
+    { key: 'name', label: 'Name', sortable: true },
+    { key: 'email', label: 'Email', sortable: true },
+  ]
+
+  const dataProvider = async (request) => {
+    // Your implementation
+  }
+
+  return (
+    <gds-table
+      columns={columns}
+      data={dataProvider}
+      rows={10}
+      searchable
+      settings
+    />
+  )
+}
+```
+
+### Angular
+
+```typescript
+import { Component } from '@angular/core'
+import '@sebgroup/green-core/components/table'
+
+@Component({
+  selector: 'app-user-table',
+  template: `
+    <gds-table
+      [columns]="columns"
+      [data]="dataProvider"
+      [rows]="10"
+      searchable
+      settings
+    ></gds-table>
+  `
+})
+export class UserTableComponent {
+  columns = [
+    { key: 'name', label: 'Name', sortable: true },
+    { key: 'email', label: 'Email', sortable: true },
+  ]
+
+  dataProvider = async (request: any) => {
+    // Your implementation
+  }
+}
+```
+
+---
+
+## Complete Examples
+
+### Full User Table with All Features
+
+```typescript
+interface UserRow {
+  id: number
+  name: string
+  email: string
+  role: 'Admin' | 'User' | 'Editor'
+  status: 'Active' | 'Inactive'
+  amount: number
+  lastLogin: string
+  avatarUrl: string
+}
+
+const columns: TableColumn[] = [
+  {
+    key: 'id',
+    label: 'ID',
+    sortable: false,
+  },
+  {
+    key: 'name',
+    label: 'Name',
+    sortable: true,
+    cell: {
+      lead: {
+        type: 'image',
+        src: (row: UserRow) => row.avatarUrl,
+        alt: (row: UserRow) => row.name,
+        width: 'xl',
+        height: 'xl',
+      }
+    }
+  },
+  {
+    key: 'email',
+    label: 'Email',
+    sortable: true,
+    justify: 'space-between',
+    cell: {
+      trail: {
+        type: 'button',
+        size: 'xs',
+        rank: 'tertiary',
+        template: 'copy-icon',
+        onClick: (row: UserRow) => 
+          navigator.clipboard.writeText(row.email),
+      }
+    }
+  },
+  {
+    key: 'role',
+    label: 'Role',
+    sortable: true,
+  },
+  {
+    key: 'status',
+    label: 'Status',
+    sortable: true,
+    cell: {
+      value: {
+        type: 'badge',
+        value: (row: UserRow) => row.status,
+        variant: (row: UserRow) =>
+          row.status === 'Active' ? 'positive' : 'negative',
+      }
+    }
+  },
+  {
+    key: 'amount',
+    label: 'Amount',
+    sortable: true,
+    justify: 'end',
+    cell: {
+      value: {
+        type: 'formatted-number',
+        value: (row: UserRow) => row.amount,
+      },
+      trail: {
+        type: 'badge',
+        value: 'SEK',
+      }
+    }
+  },
+  {
+    key: 'lastLogin',
+    label: 'Last Login',
+    sortable: true,
+    cell: {
+      value: {
+        type: 'formatted-date',
+        value: (row: UserRow) => row.lastLogin,
+        locale: 'sv-SE',
+        format: 'dateLong',
+      }
+    }
+  },
+]
+
+const actions = {
+  label: 'Actions',
+  justify: 'end',
+  cell: {
+    type: 'context-menu',
+    items: [
+      {
+        label: (row: UserRow) =>
+          row.status === 'Active' ? 'Deactivate' : 'Activate',
+        onClick: (row: UserRow) => console.log('Toggle status', row),
+      },
+      {
+        label: 'View Details',
+        onClick: (row: UserRow) => console.log('View user', row),
+      },
+      {
+        label: 'Edit Profile',
+        onClick: (row: UserRow) => console.log('Edit user', row),
+      },
+      {
+        divider: true,
+        label: 'Delete User',
+        onClick: (row: UserRow) => {
+          if (confirm(`Delete ${row.name}?`)) {
+            console.log('Delete user', row)
+          }
+        },
+      },
+    ]
+  }
+}
+
+const dataProvider = async (
+  request: TableRequest
+): Promise<TableResponse<UserRow>> => {
+  const response = await fetch('/api/users', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(request),
+  })
+  
+  const data = await response.json()
+  
+  return {
+    rows: data.users,
+    total: data.totalCount,
+  }
+}
+
+// Usage
+html`
+  <gds-table
+    .columns=${columns}
+    .actions=${actions}
+    .data=${dataProvider}
+    rows="10"
+    options="[5, 10, 25, 50]"
+    searchable
+    settings
+    selectable
+    striped
+    density="comfortable"
+  >
+    <template name="copy-icon">
+      <gds-icon-copy></gds-icon-copy>
+    </template>
+  </gds-table>
+`
+```
+
+### With Selection Handling
+
+```typescript
+// Listen to selection changes
+const table = document.querySelector('gds-table')
+
+table.addEventListener('gds-table-selection', (e) => {
+  console.log('Selected indices:', e.detail.selectedIndices)
+  console.log('Selected data:', e.detail.selectedData)
+  console.log('Count:', e.detail.count)
+})
+
+// Programmatic selection
+table.setSelection([0, 2, 5])  // Select rows by index
+table.selectAll()               // Select all rows
+table.clearSelection()          // Clear selection
+
+// Get current selection
+const selection = table.getSelection()
+console.log(selection.indices)  // [0, 2, 5]
+console.log(selection.data)     // [row0, row2, row5]
+```
+
+### With Custom State Slots
+
+```typescript
+html`
+  <gds-table
+    .columns=${columns}
+    .data=${dataProvider}
+    searchable
+  >
+    <gds-flex slot="error" flex-direction="column" gap="s">
+      <gds-text font="heading-s">Connection Error</gds-text>
+      <gds-text font="detail-book-m">
+        Unable to reach the server. Check your connection.
+      </gds-text>
+      <gds-button size="small" @click=${retry}>
+        Retry
+      </gds-button>
+    </gds-flex>
+
+    <gds-flex slot="empty" flex-direction="column" gap="s">
+      <gds-text font="heading-s">No users yet</gds-text>
+      <gds-text font="detail-book-m">
+        Get started by adding your first user.
+      </gds-text>
+      <gds-button size="small" @click=${openAddDialog}>
+        Add User
+      </gds-button>
+    </gds-flex>
+
+    <gds-flex slot="no-results" flex-direction="column" gap="s">
+      <gds-text font="heading-s">No matches</gds-text>
+      <gds-text font="detail-book-m">
+        Try different search terms.
+      </gds-text>
+      <gds-button size="small" @click=${clearSearch}>
+        Clear Search
+      </gds-button>
+    </gds-flex>
+  </gds-table>
+`
+```
+
+---
+
+## Best Practices
+
+### 1. Data Provider Performance
+
+- Implement server-side pagination for large datasets (>1000 rows)
+- Use debouncing for search queries
+- Cache responses when appropriate
+- Show loading states
+
+### 2. Column Configuration
+
+- Keep column count reasonable (5-10 visible columns)
+- Use `width` property for columns with long content
+- Enable sorting only on indexed database columns
+- Use `justify` for numeric columns (align right)
+
+### 3. User Experience
+
+- Always provide `searchable` for tables with >20 rows
+- Use `settings` to let users customize visible columns
+- Implement `selectable` for bulk actions
+- Provide clear empty and error states
+
+### 4. Accessibility
+
+- Column labels are automatically used as headers
+- Search input has proper ARIA labels
+- Sortable columns announce sort state
+- Selection checkboxes have descriptive labels
+
+---
+
+## Troubleshooting
+
+### Table not loading data
+
+Check that your data provider:
+- Returns a Promise
+- Returns an object with `rows` and `total`
+- Handles errors properly
+
+### Sorting not working
+
+Ensure:
+- Column has `sortable: true`
+- Data provider handles `sortColumn` and `sortDirection`
+- Column `key` matches your data property names
+
+### Search not working
+
+Verify:
+- Table has `searchable` attribute
+- Data provider handles `searchQuery` parameter
+- Search logic covers relevant fields
+
+### Pagination issues
+
+Confirm:
+- `total` in response matches actual total count
+- Pagination calculations use 1-indexed pages
+- `rows` parameter is respected in data provider
+
+---
+
+## API Reference
+
+For complete API documentation, see the main Table component documentation.
