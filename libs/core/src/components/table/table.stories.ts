@@ -108,13 +108,10 @@ export const Overview: Story = {
       .actions="${args.actions}"
     >
       <template name="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy></gds-icon-copy>
       </template>
       <template name="download-image">
-        <gds-icon-cloud-download
-          size="m"
-          slot="trail"
-        ></gds-icon-cloud-download>
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
       </template>
     </gds-table>`,
 }
@@ -213,13 +210,10 @@ The \`settings\` property adds a column visibility dropdown, allowing users to s
       .data="${args.data}"
     >
       <template name="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy></gds-icon-copy>
       </template>
       <template name="download-image">
-        <gds-icon-cloud-download
-          size="m"
-          slot="trail"
-        ></gds-icon-cloud-download>
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
@@ -257,13 +251,10 @@ The \`nocache\` property provides direct control over data retrieval. When set t
       .data="${args.data}"
     >
       <template name="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy></gds-icon-copy>
       </template>
       <template name="download-image">
-        <gds-icon-cloud-download
-          size="m"
-          slot="trail"
-        ></gds-icon-cloud-download>
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
@@ -292,13 +283,10 @@ The sorting mechanism generates a unique cache key, caching sorted results for 5
   render: (args) => html`
     <gds-table .columns="${args.columns}" .data="${args.data}">
       <template name="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy></gds-icon-copy>
       </template>
       <template name="download-image">
-        <gds-icon-cloud-download
-          size="m"
-          slot="trail"
-        ></gds-icon-cloud-download>
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
@@ -334,13 +322,10 @@ The table supports multiple cell types for flexible data rendering:
   render: (args) => html`
     <gds-table .columns="${args.columns}" .data="${args.data}">
       <template name="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy></gds-icon-copy>
       </template>
       <template name="download-image">
-        <gds-icon-cloud-download
-          size="m"
-          slot="trail"
-        ></gds-icon-cloud-download>
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
@@ -383,13 +368,10 @@ When justified to the right, sorting indicator appears on the left. Column label
   render: (args) => html`
     <gds-table .columns="${args.columns}" .data="${args.data}">
       <template name="email-copy">
-        <gds-icon-copy size="m" slot="trail"></gds-icon-copy>
+        <gds-icon-copy slot="trail"></gds-icon-copy>
       </template>
       <template name="role-link">
-        <gds-icon-cloud-download
-          size="m"
-          slot="trail"
-        ></gds-icon-cloud-download>
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
@@ -498,13 +480,10 @@ Ideal for embedding tables within other components or creating minimalist data p
       .data="${args.data}"
     >
       <template name="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy></gds-icon-copy>
       </template>
       <template name="download-image">
-        <gds-icon-cloud-download
-          size="m"
-          slot="trail"
-        ></gds-icon-cloud-download>
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
@@ -536,13 +515,10 @@ Helps distinguish between adjacent rows, especially in dense data tables.
       rows="20"
     >
       <template name="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy></gds-icon-copy>
       </template>
       <template name="download-image">
-        <gds-icon-cloud-download
-          size="m"
-          slot="trail"
-        ></gds-icon-cloud-download>
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
@@ -580,13 +556,10 @@ Adjust density to optimize the table's visual hierarchy and information presenta
       .data="${args.data}"
     >
       <template name="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy></gds-icon-copy>
       </template>
       <template name="download-image">
-        <gds-icon-cloud-download
-          size="m"
-          slot="trail"
-        ></gds-icon-cloud-download>
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
@@ -626,13 +599,10 @@ This approach enhances readability and usability across different device sizes, 
       .data="${args.data}"
     >
       <template name="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy></gds-icon-copy>
       </template>
       <template name="download-image">
-        <gds-icon-cloud-download
-          size="m"
-          slot="trail"
-        ></gds-icon-cloud-download>
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
@@ -678,13 +648,10 @@ export const Slots: Story = {
         Export
       </gds-button>
       <template name="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy></gds-icon-copy>
       </template>
       <template name="download-image">
-        <gds-icon-cloud-download
-          size="m"
-          slot="trail"
-        ></gds-icon-cloud-download>
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
@@ -725,13 +692,13 @@ export const DynamicContent: Story = {
 \`\`\`html
 <!-- Used as icon button -->
 <template name="email-copy">
-  <gds-icon-copy size="s"></gds-icon-copy>
+  <gds-icon-copy></gds-icon-copy>
 </template>
 
 <!-- Used as trail icon on link -->
 <template name="download-image">
   <gds-icon-cloud-download
-    size="m"
+    
     slot="trail" <!-- Slots can be defined here -->
 ></gds-icon-cloud-download>
 </template>
@@ -743,13 +710,10 @@ export const DynamicContent: Story = {
   render: (args) => html`
     <gds-table .columns="${args.columns}" .data="${args.data}" rows="4" plain>
       <template name="email-copy">
-        <gds-icon-copy size="s"></gds-icon-copy>
+        <gds-icon-copy></gds-icon-copy>
       </template>
       <template name="download-image">
-        <gds-icon-cloud-download
-          size="m"
-          slot="trail"
-        ></gds-icon-cloud-download>
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,
