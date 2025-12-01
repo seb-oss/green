@@ -127,6 +127,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    */
   @property()
   dataLoadKey?: string
+
   @state() private _isMobile = false
 
   @watchMediaQuery('(max-width: 768px)')
@@ -137,7 +138,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   /**
    * Get the current density configuration
    */
-  get #densityConfig() {
+  get #Density() {
     return Types.DENSITY_CONFIG[this.density]
   }
 
@@ -305,7 +306,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     switch (config.type) {
       case 'badge': {
         const variant = resolve(config.variant) || 'information'
-        const size = resolve(config.size) || this.#densityConfig.badge
+        const size = resolve(config.size) || this.#Density.badge
         return html`
           <gds-badge size="${size}" variant="${variant}">
             ${resolve(config.value)}
@@ -337,7 +338,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       }
 
       case 'button': {
-        const size = resolve(config.size) || this.#densityConfig.button
+        const size = resolve(config.size) || this.#Density.button
         const variant = resolve(config.variant)
         const rank = resolve(config.rank)
         const label = resolve(config.label)
@@ -384,10 +385,10 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
       case 'context-menu': {
         const items = config.items
-
+        const size = this.#Density.button
         return html`
           <gds-context-menu>
-            <gds-button slot="trigger" size="xs" rank="tertiary">
+            <gds-button slot="trigger" size="${size}" rank="tertiary">
               <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
             </gds-button>
             ${items.map((item) => {
@@ -485,7 +486,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             () => html`
               <gds-input
                 type="text"
-                size="small"
+                size="${this.#Density.input}"
                 plain
                 clearable
                 placeholder="Search..."
@@ -511,7 +512,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
               <gds-dropdown
                 multiple
                 plain
-                size="small"
+                size="${this.#Density.dropdown}"
                 searchable
                 .value=${Array.from(this.view.visibleColumns) as any}
                 @change=${this.#handleColumnVisibility}

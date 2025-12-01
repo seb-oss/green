@@ -70,14 +70,20 @@ export interface Response<T> {
 export const DENSITY_CONFIG = {
   compact: {
     button: 'small',
+    input: 'small',
+    dropdown: 'small',
     badge: 'small',
   },
   comfortable: {
     button: 'small',
+    input: 'small',
+    dropdown: 'small',
     badge: 'small',
   },
   spacious: {
     button: 'medium',
+    input: 'large',
+    dropdown: 'medium',
     badge: 'default',
   },
 } as const
