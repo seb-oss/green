@@ -494,4 +494,13 @@ export const TableStyles = css`
       transition: none;
     }
   }
+
+  /* Visually hidden */
+  .visually-hidden {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
 `
