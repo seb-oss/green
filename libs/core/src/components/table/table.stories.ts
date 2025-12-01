@@ -654,8 +654,6 @@ export const Slots: Story = {
         story: `
 -  **Header Lead**: Add dropdowns or buttons for filtering/sorting.
 -  **Header Trail**: Include actions like export buttons.
--  **Footer**: This slot is recommended for displaying string-based context information. <br />By default it shows pagination details and indicate selected rows with a clearable button.
-
 
 > Avoid overloading the table slots with multiple components to maintain a clean interface.
 
@@ -679,7 +677,6 @@ export const Slots: Story = {
       <gds-button slot="header-trail" rank="secondary" size="small">
         Export
       </gds-button>
-      <gds-text slot="footer-lead"> Last updated: November 2025 </gds-text>
       <template name="email-copy">
         <gds-icon-copy size="s"></gds-icon-copy>
       </template>

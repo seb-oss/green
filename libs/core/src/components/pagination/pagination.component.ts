@@ -1,5 +1,6 @@
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
@@ -30,6 +31,35 @@ import { GdsInput } from '../input/input.component'
 import { GdsPopover } from '../popover/popover.component'
 import { GdsText } from '../text/text.component'
 import { PaginationStyles } from './pagination.styles'
+
+/**
+ * Centralized density configuration
+ */
+const DENSITY_CONFIG = {
+  compact: {
+    size: 'small',
+    input: 'small',
+    font: 'detail-book-s',
+    gap: 'xl',
+    navGap: 'xs',
+  },
+  comfortable: {
+    size: 'small',
+    input: 'small',
+    font: 'detail-book-s',
+    gap: '2xl',
+    navGap: 's',
+  },
+  spacious: {
+    size: 'medium',
+    input: 'large',
+    font: 'detail-book-m',
+    gap: '2xl',
+    navGap: 's',
+  },
+} as const
+
+type DensityMode = keyof typeof DENSITY_CONFIG
 
 /**
  * @element gds-pagination
@@ -66,11 +96,32 @@ export class GdsPagination extends withMarginProps(
   @property({ type: Number })
   total = 0
 
+  /**
+   * Options array to set the nunber of items per page.
+   * Defaults to `[5, 10, 25, 50]`
+   */
   @property({ type: Array })
   options = [5, 10, 25, 50]
 
+  /**
+   * Enables first and last button
+   */
   @property({ type: Boolean })
   jump = false
+
+  /**
+   * Controls density mode on pagination
+   * Accepts: `comfortable`, `compact`, `spacious`
+   */
+  @property({ reflect: false })
+  density: DensityMode = 'comfortable'
+
+  /**
+   * The text summary to display on the left side (e.g. "1-10 of 100").
+   * If a slot named "label" is provided, this property is ignored.
+   */
+  @property()
+  label = ''
 
   @query('#page-input')
   private _elInput?: HTMLElement
@@ -84,6 +135,10 @@ export class GdsPagination extends withMarginProps(
 
   get #pageCount() {
     return Math.ceil(this.total / this.rows)
+  }
+
+  get #config() {
+    return DENSITY_CONFIG[this.density]
   }
 
   #getVisiblePages(pageCount: number): (number | string)[] {
@@ -128,7 +183,11 @@ export class GdsPagination extends withMarginProps(
           disableMobileStyles
           @gds-ui-state=${this.#handlePopoverStateChange}
         >
-          <gds-button size="small" rank="tertiary" slot="trigger">
+          <gds-button
+            size="${this.#config.size}"
+            rank="tertiary"
+            slot="trigger"
+          >
             ...
           </gds-button>
           <gds-flex
@@ -138,7 +197,7 @@ export class GdsPagination extends withMarginProps(
             max-height="280px"
           >
             <gds-input
-              size="small"
+              size="${this.#config.input}"
               label="Go to page"
               type="number"
               min="1"
@@ -164,7 +223,7 @@ export class GdsPagination extends withMarginProps(
 
     return html`
       <gds-button
-        size="small"
+        size="${this.#config.size}"
         rank="${isActive ? 'primary' : 'tertiary'}"
         @click=${() => this.#handlePageChange(pageNum)}
       >
@@ -177,13 +236,13 @@ export class GdsPagination extends withMarginProps(
     const pageCount = this.#pageCount
     const visiblePages = this.#getVisiblePages(pageCount)
 
-    return html` ${visiblePages.map((page) => this.#renderPageButton(page))} `
+    return html`${visiblePages.map((page) => this.#renderPageButton(page))}`
   }
 
   #renderJumpFirstButton() {
     return html`
       <gds-button
-        size="small"
+        size="${this.#config.size}"
         rank="secondary"
         ?disabled=${this.page === 1}
         @click=${() => this.#handlePageChange(1)}
@@ -196,7 +255,7 @@ export class GdsPagination extends withMarginProps(
   #renderPreviousButton() {
     return html`
       <gds-button
-        size="small"
+        size="${this.#config.size}"
         rank="secondary"
         ?disabled=${this.page === 1}
         @click=${() => this.#handlePageChange(this.page - 1)}
@@ -211,7 +270,7 @@ export class GdsPagination extends withMarginProps(
 
     return html`
       <gds-button
-        size="small"
+        size="${this.#config.size}"
         rank="secondary"
         ?disabled=${this.page === pageCount}
         @click=${() => this.#handlePageChange(this.page + 1)}
@@ -226,7 +285,7 @@ export class GdsPagination extends withMarginProps(
 
     return html`
       <gds-button
-        size="small"
+        size="${this.#config.size}"
         rank="secondary"
         ?disabled=${this.page === pageCount}
         @click=${() => this.#handlePageChange(pageCount)}
@@ -238,10 +297,25 @@ export class GdsPagination extends withMarginProps(
 
   #renderNavigationControls() {
     return html`
-      ${when(this.jump, () => this.#renderJumpFirstButton())}
-      ${this.#renderPreviousButton()} ${this.#renderPageButtons()}
-      ${this.#renderNextButton()}
-      ${when(this.jump, () => this.#renderJumpLastButton())}
+      <gds-flex
+        gap="${this.#config.navGap}"
+        align-items="center"
+        class="navigation-controls"
+        justify-content="center; m{flex-end}"
+        flex="1"
+      >
+        ${[
+          when(this.jump, () => this.#renderJumpFirstButton()),
+          this.#renderPreviousButton(),
+        ]}
+        <gds-flex gap="4xs" align-items="center">
+          ${this.#renderPageButtons()}
+        </gds-flex>
+        ${[
+          this.#renderNextButton(),
+          when(this.jump, () => this.#renderJumpLastButton()),
+        ]}
+      </gds-flex>
     `
   }
 
@@ -252,6 +326,7 @@ export class GdsPagination extends withMarginProps(
       <gds-menu-item
         data-value=${size}
         class=${classMap({ selected: isSelected })}
+        size="${this.#config.size}"
       >
         ${size}
       </gds-menu-item>
@@ -263,11 +338,15 @@ export class GdsPagination extends withMarginProps(
 
     return html`
       <gds-flex align-items="center" gap="s">
-        <gds-text font="detail-book-s" color="neutral-01">
-          Items per page
+        <gds-text font="${this.#config.font}" color="neutral-01">
+          Rows per page
         </gds-text>
         <gds-context-menu @gds-menu-item-click=${this.#handlePageSizeMenuClick}>
-          <gds-button slot="trigger" size="small" rank="secondary">
+          <gds-button
+            slot="trigger"
+            size="${this.#config.size}"
+            rank="secondary"
+          >
             ${this.rows}
             <gds-icon-chevron-bottom
               slot="trail"
@@ -280,13 +359,27 @@ export class GdsPagination extends withMarginProps(
     `
   }
 
+  #renderLabel() {
+    if (this._isMobile || !this.label) return null
+    return html`
+      <gds-text font="${this.#config.font}" color="neutral-02">
+        ${this.label}
+      </gds-text>
+    `
+  }
+
   render() {
     return html`
-      <gds-flex align-items="center" align-items="center" gap="xl">
-        <gds-flex gap="2xs" align-items="center" class="pages">
-          ${this.#renderNavigationControls()}
+      <gds-flex
+        align-items="center"
+        justify-content="space-between"
+        width="100%"
+        gap="${this.#config.gap}"
+      >
+        ${this.#renderLabel()}
+        <gds-flex aling-items="center" gap="${this.#config.gap}" flex="1">
+          ${[this.#renderNavigationControls(), this.#renderPageSizeMenu()]}
         </gds-flex>
-        ${this.#renderPageSizeMenu()}
       </gds-flex>
     `
   }

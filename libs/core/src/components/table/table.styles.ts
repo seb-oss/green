@@ -240,42 +240,13 @@ export const TableStyles = css`
     }
   }
 
-  .footer {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    transition-property: opacity, translate;
-    transition-duration: var(--gds-sys-motion-duration-fast);
-    transition-timing-function: var(--gds-sys-motion-easing-ease);
-
-    @starting-style {
-      opacity: 0;
-      translate: 0 2px;
-    }
-  }
-
   /* Shared layout for header and footer sections */
   .header .lead,
-  .header .trail,
-  .footer .lead,
-  .footer .trail {
+  .header .trail {
     display: flex;
     align-items: center;
     gap: calc(var(--table-gap) * 0.8);
     width: max-content;
-  }
-
-  /* Footer specific styling */
-  .footer .lead {
-    padding-left: var(--gds-sys-space-s);
-    font: var(--gds-sys-text-detail-book-xs);
-    color: var(--gds-sys-color-content-neutral-02);
-  }
-
-  .selection-info {
-    display: flex;
-    align-items: center;
-    gap: var(--gds-sys-space-s);
   }
 
   /* Cell Content & Alignment */
@@ -381,35 +352,12 @@ export const TableStyles = css`
       border-radius: var(--gds-sys-radius-s);
     }
 
-    .header,
-    .footer {
+    .header {
       flex-direction: column;
     }
 
     .header {
       gap: calc(var(--table-gap) / 2);
-    }
-
-    .footer {
-      justify-content: center;
-      align-items: center;
-      gap: var(--table-gap);
-    }
-
-    .footer .trail {
-      display: contents;
-    }
-
-    .footer .lead {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      min-height: var(--gds-sys-space-xl);
-      border-width: 0 0 var(--gds-sys-space-5xs) 0;
-      border-style: solid;
-      border-color: var(--gds-sys-color-border-subtle-02);
-      padding-bottom: var(--gds-sys-space-l);
     }
 
     .responsive thead {
@@ -542,8 +490,7 @@ export const TableStyles = css`
     tbody tr,
     .sort-icon,
     .column-header,
-    .header,
-    .footer {
+    .header {
       transition: none;
     }
   }

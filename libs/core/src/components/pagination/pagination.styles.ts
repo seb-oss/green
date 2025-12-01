@@ -9,7 +9,7 @@ export const PaginationStyles = css`
     --_appearance-spin-button: none;
   }
 
-  .pages ::part(_button) {
+  .navigation-controls ::part(_button) {
     padding: 0;
     aspect-ratio: 1/1;
   }

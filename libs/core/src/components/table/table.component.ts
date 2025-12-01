@@ -174,6 +174,12 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return this.#hasSelection && !this.#isAllSelected
   }
 
+  /*   get #paginationSize() {
+    if (this.density === 'compact') return 'small'
+    if (this.density === 'spacious') return 'medium'
+    return 'medium'
+  } */
+
   #getCacheKey(): string {
     return JSON.stringify({
       page: this.view.page,
@@ -869,49 +875,24 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   #renderFooter() {
     if (this.plain || this.total < 1) return null
+
+    const start = (this.view.page - 1) * this.view.rows + 1
+    const end = Math.min(this.view.page * this.view.rows, this.total)
+    const summaryString = `${start} - ${end} of ${this.total}`
+
     return html`
-      <div class="footer">
-        <div class="lead">
-          <slot name="footer-lead">
-            ${when(
-              this.selectable && this.#hasSelection,
-              () => html`
-                <div class="selection-info">
-                  <span>
-                    ${this.selected.size} of ${this.rowsState.length} selected
-                  </span>
-                  <gds-button
-                    size="xs"
-                    rank="secondary"
-                    @click=${this.clearSelection}
-                  >
-                    <gds-icon-cross-small></gds-icon-cross-small>
-                  </gds-button>
-                </div>
-              `,
-              () => html`
-                <span>
-                  Showing ${(this.view.page - 1) * this.view.rows + 1} to
-                  ${Math.min(this.view.page * this.view.rows, this.total)} of
-                  ${this.total} entries
-                </span>
-              `,
-            )}
-          </slot>
-        </div>
-        <div class="trail">
-          <slot name="footer-trail"></slot>
-          <gds-pagination
-            .page=${this.view.page}
-            .rows=${this.view.rows}
-            .options=${this.options}
-            .total=${this.total}
-            @gds-page-change=${this.#handlePageChange}
-            @gds-rows-change=${this.#handlePageSizeChange}
-            width="100%"
-          ></gds-pagination>
-        </div>
-      </div>
+      <gds-pagination
+        .page=${this.view.page}
+        .rows=${this.view.rows}
+        .options=${this.options}
+        .total=${this.total}
+        .density=${this.density}
+        .label=${summaryString}
+        @gds-page-change=${this.#handlePageChange}
+        @gds-rows-change=${this.#handlePageSizeChange}
+        width="100%"
+      >
+      </gds-pagination>
     `
   }
 
@@ -924,18 +905,20 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     }
     return html`
       <div class="${classMap(classes)}">
-        ${this.#renderHeaderControls()}
-        ${when(
-          this.error,
-          () => this.#renderErrorState(),
-          () =>
-            when(
-              this.rowsState.length === 0 && !this.loading,
-              () => this.#renderEmptyState(),
-              () => this.#renderTable(),
-            ),
-        )}
-        ${this.#renderFooter()}
+        ${[
+          this.#renderHeaderControls(),
+          when(
+            this.error,
+            () => this.#renderErrorState(),
+            () =>
+              when(
+                this.rowsState.length === 0 && !this.loading,
+                () => this.#renderEmptyState(),
+                () => this.#renderTable(),
+              ),
+          ),
+          this.#renderFooter(),
+        ]}
       </div>
     `
   }
