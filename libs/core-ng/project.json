@@ -32,10 +32,22 @@
     "generate-wrappers": {
       "executor": "nx:run-commands",
       "dependsOn": [
-        "^core:build-custom-elements-json"
+        "core:build-custom-elements-json"
       ],
       "options": {
         "command": "tsx --tsconfig libs/core-ng/tsconfig.json libs/core-ng/build-scripts/generate-wrappers.ts"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/core-ng"
+      ],
+      "dependsOn": [
+        "generate-wrappers"
+      ],
+      "options": {
+        "jestConfig": "libs/core-ng/jest.config.ts"
       }
     },
     "version-as-snapshot": {
