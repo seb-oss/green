@@ -1,10 +1,12 @@
 import { html } from 'lit'
+import { createRef, ref } from 'lit/directives/ref.js'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './table'
 import '../card'
 import '../dropdown/dropdown'
+import '../segmented-control/segmented-control'
 import '../context-menu/context-menu'
 import '../input/input'
 import '../img/img'
@@ -18,31 +20,8 @@ import '../icon/icons/pin'
 import '../icon/icons/circle-check'
 import '../icon/icons/cross-small'
 
-import { Source } from '@storybook/addon-docs/blocks'
-
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 import { Feedback, Users } from './table.stories.data'
-
-const Welcome = () => {
-  return html`
-    <gds-card>
-      <gds-flex flex-direction="column" gap="xl">
-        <gds-text tag="h1" font="heading-xl">Green Design System</gds-text>
-
-        <gds-text font="body-regular-l">
-          Welcome to the Green Design System documentation.
-        </gds-text>
-
-        <gds-flex gap="m">
-          <gds-button href="#" rank="primary"> Get Started </gds-button>
-          <gds-button href="#" rank="secondary"> View Components </gds-button>
-        </gds-flex>
-
-        <gds-text font="detail-book-m"> Version: 1.0.0 </gds-text>
-      </gds-flex>
-    </gds-card>
-  `
-}
 
 const meta: Meta = {
   title: 'Components/Table',
@@ -622,12 +601,13 @@ export const Slots: Story = {
     docs: {
       description: {
         story: `
--  **Header Lead**: Add dropdowns or buttons for filtering/sorting.
--  **Header Trail**: Include actions like export buttons.
+Use slots to add custom controls to the table header and footer areas.
 
-> Avoid overloading the table slots with multiple components to maintain a clean interface.
+- **header-lead**: Add filtering/sorting controls at the start of the header.
+- **header-trail**: Add actions (e.g., export buttons) at the end of the header.
 
-          `,
+> Avoid overloading slots to maintain clarity.
+        `,
       },
     },
   },
@@ -641,20 +621,154 @@ export const Slots: Story = {
     >
       <gds-dropdown size="small" slot="header-lead" plain searchable>
         <span slot="trigger">Sorting</span>
-        <gds-option value="by-name"> Sort by Name </gds-option>
-        <gds-option value="by-status"> Sort by Status </gds-option>
+        <gds-option value="by-name">Sort by Name</gds-option>
+        <gds-option value="by-status">Sort by Status</gds-option>
       </gds-dropdown>
       <gds-button slot="header-trail" rank="secondary" size="small">
         Export
       </gds-button>
-      <template name="email-copy">
-        <gds-icon-copy></gds-icon-copy>
-      </template>
-      <template name="download-image">
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </template>
     </gds-table>
   `,
+}
+
+export const StateSlots: Story = {
+  args: {
+    columns: Users.Columns,
+    data: Users.Data,
+    simulatedState: 'normal',
+  },
+  argTypes: {
+    simulatedState: {
+      control: 'select',
+      options: ['normal', 'error', 'empty', 'no-results'],
+      description: 'Simulate different table states',
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+Override default error, empty, and no-results states with custom content.
+
+- **error**: Displayed when data loading fails.
+- **empty**: Displayed when no data is available.
+- **no-results**: Displayed when search returns no results.
+
+Each slot provides a default fallback if not specified.
+
+Use the **Simulated State** control below to switch between states.
+        `,
+      },
+    },
+  },
+  render: (args) => {
+    const tableRef = createRef<any>()
+
+    const dataProvider = async (request: any) => {
+      await new Promise((resolve) => setTimeout(resolve, 500))
+
+      if (args.simulatedState === 'error') {
+        throw new Error('Simulated error state')
+      }
+
+      if (args.simulatedState === 'empty') {
+        return { rows: [], total: 0 }
+      }
+
+      if (args.simulatedState === 'no-results') {
+        // Simulate that there's a search query active
+        return { rows: [], total: 0 }
+      }
+
+      return args.data(request)
+    }
+
+    const handleRetry = () => {
+      args.simulatedState = 'normal'
+      if (tableRef.value) {
+        tableRef.value.dataLoadKey = `retry-${Date.now()}`
+      }
+    }
+
+    const handleClearSearch = () => {
+      args.simulatedState = 'normal'
+      if (tableRef.value) {
+        tableRef.value.dataLoadKey = `clear-${Date.now()}`
+        // Clear the search input
+        const searchInput =
+          tableRef.value.shadowRoot?.querySelector('gds-input')
+        if (searchInput) {
+          searchInput.value = ''
+        }
+      }
+    }
+
+    // Simulate search query for no-results state
+    setTimeout(() => {
+      if (args.simulatedState === 'no-results' && tableRef.value) {
+        const searchInput =
+          tableRef.value.shadowRoot?.querySelector('gds-input')
+        if (searchInput) {
+          searchInput.value = 'test search'
+          searchInput.dispatchEvent(new Event('input', { bubbles: true }))
+        }
+      }
+    }, 100)
+
+    return html`
+      <gds-table
+        ${ref(tableRef)}
+        .columns="${args.columns}"
+        .data="${dataProvider}"
+        .dataLoadKey="${args.simulatedState}"
+        rows="4"
+        searchable
+        settings
+      >
+        <gds-flex
+          slot="error"
+          flex-direction="column"
+          gap="s"
+          align-items="flex-start"
+        >
+          <gds-text font="heading-s">Unable to load data</gds-text>
+          <gds-text font="detail-book-m">
+            An error occurred while loading the data. Please try again.
+          </gds-text>
+          <gds-button rank="secondary" size="small" @click=${handleRetry}>
+            Retry
+          </gds-button>
+        </gds-flex>
+
+        <gds-flex
+          slot="empty"
+          flex-direction="column"
+          gap="s"
+          align-items="flex-start"
+        >
+          <gds-text font="heading-s">No data available</gds-text>
+          <gds-text font="detail-book-m">
+            There are currently no records to display in this table.
+          </gds-text>
+        </gds-flex>
+
+        <gds-flex
+          slot="no-results"
+          flex-direction="column"
+          gap="s"
+          align-items="flex-start"
+        >
+          <gds-text font="heading-s">No search results</gds-text>
+          <gds-text font="detail-book-m">
+            Your search did not match any records. Try different keywords.
+          </gds-text>
+          <gds-button rank="secondary" size="small" @click=${handleClearSearch}>
+            Clear search
+          </gds-button>
+        </gds-flex>
+      </gds-table>
+    `
+  },
 }
 
 export const DynamicContent: Story = {
@@ -717,8 +831,4 @@ export const DynamicContent: Story = {
       </template>
     </gds-table>
   `,
-}
-
-export const WelcomePage: Story = {
-  render: () => html`<${Welcome} />`,
 }

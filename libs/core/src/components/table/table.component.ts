@@ -862,43 +862,62 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   #renderErrorState() {
     return html`
-      <gds-card justify-content="center" align-items="flex-start">
-        ERROR STATE REPLACE WITH SLOT
-        <!--   <gds-text tag="p">Error loading data</gds-text>
-        <gds-button size="small" @click=${() => this.#loadData()}>
-          Retry
-        </gds-button> -->
-      </gds-card>
+      <div class="data">
+        <gds-card variant="tertiary">
+          <slot name="error">
+            <gds-text tag="p">${msg('Error loading data')}</gds-text>
+            <gds-button
+              size="small"
+              label="${msg('Retry loading data')}"
+              @click=${() => this.#loadData()}
+            >
+              ${msg('Retry')}
+            </gds-button>
+          </slot>
+        </gds-card>
+      </div>
     `
   }
 
   #renderEmptyState() {
     const hasSearch = this.view.searchQuery.length > 0
 
-    return html`
-      <gds-card justify-content="space-between" align-items="flex-start">
-        EMPTY STATE REPLACE WITH SLOT
-        <!--  <gds-flex flex-direction="column">
-          <gds-text tag="p" font="heading-s">
-            ${hasSearch ? 'No results found' : 'No data available'}
-          </gds-text>
-          ${hasSearch
-          ? html`
-              <gds-text tag="p" font="detail-book-s">
-                No results for "${this.view.searchQuery}"
-              </gds-text>
-            `
-          : ''}
-        </gds-flex>
-
-        ${hasSearch
-          ? html`
-              <gds-button size="small" @click=${this.#handleSearchClear}>
-                Clear search
+    if (hasSearch) {
+      return html`
+        <div class="data">
+          <gds-card variant="tertiary">
+            <slot name="no-results">
+              <gds-flex flex-direction="column">
+                <gds-text tag="p" font="heading-s">
+                  ${msg('No results found')}
+                </gds-text>
+                <gds-text tag="p" font="detail-book-s">
+                  ${msg('No results for')} "${this.view.searchQuery}"
+                </gds-text>
+              </gds-flex>
+              <gds-button
+                size="small"
+                label="${msg('Clear search for')} ${this.view.searchQuery}"
+                @click=${this.#handleSearchClear}
+              >
+                ${msg('Clear search')}
               </gds-button>
-            `
-          : ''} -->
-      </gds-card>
+            </slot>
+          </gds-card>
+        </div>
+      `
+    }
+
+    return html`
+      <div class="data">
+        <gds-card variant="tertiary">
+          <slot name="empty">
+            <gds-text tag="p" font="heading-s">
+              ${msg('No data available')}
+            </gds-text>
+          </slot>
+        </gds-card>
+      </div>
     `
   }
 
