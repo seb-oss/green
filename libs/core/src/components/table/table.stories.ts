@@ -676,7 +676,6 @@ Use the **Simulated State** control below to switch between states.
       }
 
       if (args.simulatedState === 'no-results') {
-        // Simulate that there's a search query active
         return { rows: [], total: 0 }
       }
 
@@ -694,7 +693,7 @@ Use the **Simulated State** control below to switch between states.
       args.simulatedState = 'normal'
       if (tableRef.value) {
         tableRef.value.dataLoadKey = `clear-${Date.now()}`
-        // Clear the search input
+
         const searchInput =
           tableRef.value.shadowRoot?.querySelector('gds-input')
         if (searchInput) {
