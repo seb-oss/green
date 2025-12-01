@@ -670,13 +670,13 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   #renderSelectableCell(index: number) {
     if (!this.selectable) return null
-
+    const selectRowLabel = `${msg('Select row')} ${index + 1}`
     return html`
       <td class="checkbox-cell">
         ${this.#renderCheckbox({
           checked: this._selected.has(index),
           indeterminate: false,
-          ariaLabel: msg(`Select row ${index + 1}`),
+          ariaLabel: selectRowLabel,
           onToggle: () =>
             this.#handleRowSelect(index, {
               detail: { checked: !this._selected.has(index) },
