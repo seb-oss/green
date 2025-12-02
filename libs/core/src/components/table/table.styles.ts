@@ -650,7 +650,7 @@ export const TableStyles = css`
   .data {
     --_scrollbar-color-thumb: var(--gds-sys-color-l3-neutral-01);
     --_scrollbar-color-track: var(--gds-sys-color-l3-neutral-02);
-    --_scrollbar-width: 10px;
+    --_scrollbar-width: var(--gds-sys-space-2xs);
   }
 
   @supports (scrollbar-width: auto) {
@@ -662,9 +662,8 @@ export const TableStyles = css`
 
   @supports selector(::-webkit-scrollbar) {
     .data::-webkit-scrollbar {
-      max-width: var(--_scrollbar-width);
-      max-height: var(--_scrollbar-width);
-      cursor: grab;
+      width: var(--_scrollbar-width);
+      height: var(--_scrollbar-width);
     }
 
     .data::-webkit-scrollbar-track {
