@@ -17,7 +17,8 @@
         "tsConfig": "libs/core-ng/tsconfig.lib.prod.json"
       },
       "dependsOn": [
-        "generate-wrappers"
+        "generate-wrappers",
+        "core:build"
       ],
       "configurations": {
         "production": {
@@ -44,7 +45,8 @@
         "{workspaceRoot}/coverage/libs/core-ng"
       ],
       "dependsOn": [
-        "generate-wrappers"
+        "generate-wrappers",
+        "core:build"
       ],
       "options": {
         "jestConfig": "libs/core-ng/jest.config.ts"
