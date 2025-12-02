@@ -7,7 +7,9 @@ import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
 import { watchMediaQuery } from '../../utils/decorators'
+import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { watch } from '../../utils/decorators/watch'
+import { forSpaceTokensAndCustomValues } from '../../utils/helpers'
 import {
   gdsCustomElement,
   html,
@@ -129,6 +131,17 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    */
   @property()
   dataLoadKey?: string
+
+  /**
+   * Sets the height of the table content area. When set, enables vertical scrolling
+   * with a sticky header that remains visible while scrolling through rows
+   */
+  @styleExpressionProperty({
+    ...forSpaceTokensAndCustomValues,
+    property: '--_table-height',
+    selector: '.data',
+  })
+  height?: string
 
   @state()
   private _isMobile = false

@@ -85,6 +85,7 @@ export const Overview: Story = {
       .columns="${args.columns}"
       .data="${args.data}"
       .actions="${args.actions}"
+      rows="60"
     >
       <template name="email-copy">
         <gds-icon-copy></gds-icon-copy>
@@ -576,6 +577,7 @@ This approach enhances readability and usability across different device sizes, 
       ?responsive="${args.responsive}"
       .columns="${args.columns}"
       .data="${args.data}"
+      height="80vh"
     >
       <template name="email-copy">
         <gds-icon-copy></gds-icon-copy>

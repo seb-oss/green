@@ -9,6 +9,7 @@ export const TableStyles = css`
     text-align: left;
     --table-border: var(--gds-sys-space-5xs) solid
       var(--gds-sys-color-border-subtle-01);
+    --_table-height: 80vh;
   }
 
   /* Density Modes */
@@ -64,7 +65,8 @@ export const TableStyles = css`
   .data {
     width: 100%;
     overflow-x: auto;
-    overflow-y: visible;
+    overflow-y: auto;
+    max-height: var(--_table-height);
     box-sizing: border-box;
     border-radius: var(--gds-sys-radius-m);
     border: var(--gds-sys-space-5xs) solid var(--gds-sys-color-border-subtle-01);
@@ -103,6 +105,12 @@ export const TableStyles = css`
   }
 
   /* Table Header */
+
+  thead {
+    position: sticky;
+    top: 2px;
+    z-index: 10;
+  }
 
   thead tr th {
     padding-block: var(--gds-sys-space-3xs);
@@ -485,16 +493,6 @@ export const TableStyles = css`
     width: 60%;
   }
 
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    tbody tr,
-    .sort-icon,
-    .column-header,
-    .header {
-      transition: none;
-    }
-  }
-
   /* Visually hidden */
   .visually-hidden {
     position: absolute;
@@ -502,5 +500,88 @@ export const TableStyles = css`
     width: 0;
     height: 0;
     pointer-events: none;
+  }
+
+  /* Scroll driven animation */
+  @supports (animation-timeline: scroll()) {
+    /* Vertical scroll on rows */
+    tbody tr {
+      animation-name: ROW_ANIMATION_VERTICAL, ROW_ANIMATION_VERTICAL;
+      animation-fill-mode: both;
+      animation-timing-function: ease-in-out;
+      animation-direction: normal, reverse;
+      animation-timeline: view(block);
+      animation-range: entry, exit;
+    }
+
+    @keyframes ROW_ANIMATION_VERTICAL {
+      0% {
+        opacity: 0;
+        filter: blur(12px);
+        translate: 0 12px;
+        /* scale: 0.98; */
+      }
+    }
+
+    /* Horizontal scroll on cells */
+    tbody td .cell-content,
+    thead th .column-header {
+      animation-name: CELL_ANIMATION_HORIZONTAL, CELL_ANIMATION_HORIZONTAL;
+      animation-fill-mode: both;
+      animation-timing-function: ease-in-out;
+      animation-direction: normal, reverse;
+      animation-timeline: view(inline);
+      animation-range: entry, exit;
+    }
+
+    @keyframes CELL_ANIMATION_HORIZONTAL {
+      0% {
+        opacity: 0.8;
+        filter: blur(12px);
+        translate: 4px 0px;
+      }
+    }
+
+    @media (prefers-reduced-transparency: no-preference) {
+      thead tr th {
+        backdrop-filter: blur(12px);
+        background: color-mix(
+          in srgb,
+          var(--gds-sys-color-l2-neutral-01),
+          transparent 40%
+        );
+      }
+    }
+
+    thead tr {
+      box-shadow: var(--gds-sys-shadow-m-01), var(--gds-sys-shadow-m-02);
+      border-radius: var(--gds-sys-radius-xl);
+    }
+  }
+
+  @supports not (animation-timeline: scroll()) {
+    tbody tr {
+      will-change: opacity, filter, translate;
+      transition: all 842ms cubic-bezier(0.22, 0.61, 0.36, 1);
+
+      @starting-style {
+        opacity: 0;
+        filter: blur(20px);
+        translate: 0 10px;
+      }
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    tbody tr,
+    tbody td .cell-content,
+    thead th .column-header,
+    .sort-icon,
+    .column-header,
+    .header {
+      transition: none;
+      animation: none;
+    }
   }
 `
