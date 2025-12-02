@@ -98,7 +98,7 @@ export default css`
 
   .--indeterminate .rbcb__toggle {
     box-shadow: inset 0 0 0 var(--_toggle-border-width-checked)
-      var(--gds-sys-color-border-interactive);
+      var(--gds-sys-color-l3-neutral-01);
   }
 
   .--invalid.--indeterminate .rbcb__toggle {

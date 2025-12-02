@@ -580,7 +580,6 @@ export const TableStyles = css`
         opacity: 0;
         filter: blur(12px);
         translate: 0 12px;
-        /* scale: 0.98; */
       }
     }
 
@@ -605,18 +604,19 @@ export const TableStyles = css`
 
     @media (prefers-reduced-transparency: no-preference) {
       thead tr th {
-        backdrop-filter: blur(12px);
-        background: color-mix(
-          in srgb,
-          var(--gds-sys-color-l2-neutral-01),
-          transparent 40%
-        );
+        background: transparent;
       }
     }
 
     thead tr {
-      box-shadow: var(--gds-sys-shadow-m-01), var(--gds-sys-shadow-m-02);
+      box-shadow: var(--gds-sys-shadow-s-01), var(--gds-sys-shadow-s-02);
       border-radius: var(--gds-sys-radius-s);
+      backdrop-filter: blur(12px);
+      background: color-mix(
+        in srgb,
+        var(--gds-sys-color-l2-neutral-01),
+        transparent 20%
+      );
     }
   }
 
