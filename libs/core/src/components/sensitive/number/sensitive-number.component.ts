@@ -23,7 +23,8 @@ import { GdsFormattedNumber } from '../../formatted-text/number/formatted-number
  * <gds-sensitive-number
  *   hide
  *   value="1234"
- *   locale="sv-SE">
+ *   locale="sv-SE"
+ *   decimals={3}>
  * </gds-sensitive-number>
  */
 @gdsCustomElement('gds-sensitive-number', { dependsOn: [GdsBlur] })
@@ -37,7 +38,12 @@ export class GdsSensitiveNumber extends GdsFormattedNumber {
 
   get formattedValue() {
     if (this.hide) {
-      return numberFormats[this.format](0, this.locale, this.currency)
+      return numberFormats[this.format](
+        0,
+        this.locale,
+        this.currency,
+        this.decimals,
+      )
     }
 
     return super.formattedValue
