@@ -47,6 +47,7 @@ ${this.generateInputValidationTest(componentData.properties, componentName)}
 ${this.generateInputTests(componentData.properties, componentName)}
 ${this.generateOutputTests(componentData.events, componentName, componentData.tagName)}
 ${this.generateFormControlTests(componentData, componentName)}
+${this.generateRouterLinkTests(componentData, componentName)}
 });`
   }
 
@@ -189,7 +190,7 @@ ${this.generateFormControlTests(componentData, componentName)}
 
     it('should work with FormControl', async () => {
       const control = new FormControl('initial-value');
-      
+
       const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
         imports: [ReactiveFormsModule, ${componentName}],
         componentProperties: {
@@ -209,7 +210,7 @@ ${this.generateFormControlTests(componentData, componentName)}
 
     it('should update FormControl when value changes', async () => {
       const control = new FormControl('');
-      
+
       const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
         imports: [ReactiveFormsModule, ${componentName}],
         componentProperties: {
@@ -221,11 +222,11 @@ ${this.generateFormControlTests(componentData, componentName)}
       fixture.detectChanges();
 
       const element = fixture.nativeElement.querySelector('${tagName}');
-      
+
       // Simulate user input
       element.value = 'new-value';
       element.dispatchEvent(new Event('input', { bubbles: true }));
-      
+
       fixture.detectChanges();
       await fixture.whenStable();
 
@@ -234,7 +235,7 @@ ${this.generateFormControlTests(componentData, componentName)}
 
     it('should update value when FormControl value changes', async () => {
       const control = new FormControl('initial');
-      
+
       const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
         imports: [ReactiveFormsModule, ${componentName}],
         componentProperties: {
@@ -246,7 +247,7 @@ ${this.generateFormControlTests(componentData, componentName)}
       fixture.detectChanges();
 
       const element = fixture.nativeElement.querySelector('${tagName}');
-      
+
       // Update the FormControl programmatically
       control.setValue('updated-value');
       fixture.detectChanges();
@@ -257,7 +258,7 @@ ${this.generateFormControlTests(componentData, componentName)}
 
     it('should mark as touched on blur', async () => {
       const control = new FormControl('');
-      
+
       const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
         imports: [ReactiveFormsModule, ${componentName}],
         componentProperties: {
@@ -269,12 +270,12 @@ ${this.generateFormControlTests(componentData, componentName)}
       fixture.detectChanges();
 
       const element = fixture.nativeElement.querySelector('${tagName}');
-      
+
       expect(control.touched).toBe(false);
 
       // Simulate blur event
       element.dispatchEvent(new Event('blur', { bubbles: true }));
-      
+
       fixture.detectChanges();
       await fixture.whenStable();
 
@@ -283,7 +284,7 @@ ${this.generateFormControlTests(componentData, componentName)}
 
     it('should handle disabled state', async () => {
       const control = new FormControl({ value: 'test', disabled: true });
-      
+
       const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
         imports: [ReactiveFormsModule, ${componentName}],
         componentProperties: {
@@ -295,7 +296,7 @@ ${this.generateFormControlTests(componentData, componentName)}
       fixture.detectChanges();
 
       const element = fixture.nativeElement.querySelector('${tagName}');
-      
+
       expect(element.disabled).toBe(true);
 
       // Enable the control
@@ -308,7 +309,7 @@ ${this.generateFormControlTests(componentData, componentName)}
 
     it('should sync validation state to invalid property', async () => {
       const control = new FormControl('', { validators: [(c) => c.value ? null : { required: true }] });
-      
+
       const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
         imports: [ReactiveFormsModule, ${componentName}],
         componentProperties: {
@@ -320,13 +321,13 @@ ${this.generateFormControlTests(componentData, componentName)}
       fixture.detectChanges();
 
       const element = fixture.nativeElement.querySelector('${tagName}');
-      
+
       // Mark as touched to trigger validation
       control.markAsTouched();
       control.updateValueAndValidity();
       fixture.detectChanges();
       await fixture.whenStable();
-      
+
       // Wait for the subscription to update the element
       await new Promise(resolve => setTimeout(resolve, 50));
 
@@ -338,13 +339,66 @@ ${this.generateFormControlTests(componentData, componentName)}
       control.setValue('valid-value');
       fixture.detectChanges();
       await fixture.whenStable();
-      
+
       // Wait for the subscription to update the element
       await new Promise(resolve => setTimeout(resolve, 50));
 
       expect(control.valid).toBe(true);
       expect(element.invalid).toBe(false);
     });
+  });`
+  }
+
+  /**
+   * Generates test cases for RouterLink integration
+   */
+  private static generateRouterLinkTests(
+    componentData: ComponentData,
+    componentName: string,
+  ): string {
+    if (!componentData.isLinkComponent) return ''
+
+    const tagName = componentData.tagName
+    const isMenuButton = tagName === 'gds-menu-button'
+
+    return `
+  describe('RouterLink Integration', () => {
+    it('should work with RouterLink directive', async () => {
+      const { fixture } = await render(\`<${tagName} [routerLink]="['/test']"></${tagName}>\`, {
+        imports: [${componentName}],
+        providers: []
+      });
+
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const element = fixture.nativeElement.querySelector('${tagName}');
+
+      // The href should be set by the RouterLink integration
+      expect(element.getAttribute('href')).toBeTruthy();
+    });${
+      isMenuButton
+        ? `
+
+    it('should sync selected state with RouterLinkActive for menu-button', async () => {
+      const { fixture } = await render(
+        \`<${tagName} [routerLink]="['/test']" routerLinkActive></${tagName}>\`,
+        {
+          imports: [${componentName}],
+          providers: []
+        }
+      );
+
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const element = fixture.nativeElement.querySelector('${tagName}');
+
+      // The selected property should be synced with RouterLinkActive
+      expect(element.hasOwnProperty('selected')).toBe(true);
+    });`
+        : ''
+    }
   });`
   }
 

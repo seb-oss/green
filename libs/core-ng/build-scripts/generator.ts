@@ -53,6 +53,7 @@ export class AngularGenerator {
       this.isBooleanType(p.type?.text),
     )
     const isFormControl = componentData.isFormControl || false
+    const isLinkComponent = componentData.isLinkComponent || false
 
     const coreImports = [
       'Component',
@@ -79,6 +80,11 @@ export class AngularGenerator {
       coreImports.push('forwardRef')
     }
 
+    // Add dependency injection decorators for link components
+    if (isLinkComponent) {
+      coreImports.push('Self', 'Optional', 'Renderer2')
+    }
+
     const imports = [
       `import { ${coreImports.join(', ')} } from '@angular/core';`,
     ]
@@ -87,6 +93,13 @@ export class AngularGenerator {
     if (isFormControl) {
       imports.push(
         `import { NG_VALUE_ACCESSOR } from '@angular/forms';`,
+      )
+    }
+
+    // Add router imports for link components
+    if (isLinkComponent) {
+      imports.push(
+        `import { RouterLink, RouterLinkActive } from '@angular/router';`,
       )
     }
 
@@ -181,6 +194,7 @@ export class AngularGenerator {
     const hasInputs = componentData.properties.length > 0
     const hasOutputs = componentData.events.length > 0
     const isFormControl = componentData.isFormControl || false
+    const isLinkComponent = componentData.isLinkComponent || false
     const validInputs = componentData.properties.filter(
       (property) => property.name,
     )
@@ -196,6 +210,7 @@ export class AngularGenerator {
       ),
       description: componentData.description || '',
       isFormControl,
+      isLinkComponent,
 
       // Decorator configuration
       proxyInputsDecorator: hasInputs
@@ -240,6 +255,51 @@ export class AngularGenerator {
   ]`
       : ''
 
+    // Router link integration for link components
+    // Note: For form controls, renderer is already in the base class (protected)
+    // So we only inject renderer for non-form-control link components
+    const routerLinkInjections = data.isLinkComponent
+      ? `${data.isFormControl ? '' : '\n  private renderer = inject(Renderer2);'}
+  private routerLink = inject(RouterLink, { optional: true, self: true });
+  private routerLinkActive = inject(RouterLinkActive, { optional: true, self: true });`
+      : ''
+
+    const routerLinkMethods = data.isLinkComponent
+      ? `
+
+  /**
+   * Updates the href attribute from RouterLink
+   * @internal
+   */
+  private updateHref(): void {
+    if (!this.routerLink) return;
+
+    // Trick RouterLink into thinking we are an anchor element
+    (this.routerLink as any).isAnchorElement = true;
+    (this.routerLink as any).updateHref();
+
+    // Set the href attribute on our element
+    this.renderer.setAttribute(
+      this.elementRef.nativeElement,
+      'href',
+      this.routerLink.href || '',
+    );
+  }
+
+  /**
+   * Updates the active state for menu-button components
+   * @internal
+   */
+  private setActive(): void {
+    if (!this.routerLinkActive) return;
+
+    // Special handling for gds-menu-button
+    if (this.elementRef.nativeElement?.tagName === 'GDS-MENU-BUTTON') {
+      this.elementRef.nativeElement.selected = this.routerLinkActive.isActive;
+    }
+  }`
+      : ''
+
     // For form controls, we override ngOnInit but still need to define the element
     const formControlBody = data.isFormControl
       ? `
@@ -256,14 +316,17 @@ ${
     ? `
   ngOnChanges(changes: SimpleChanges): void {
     // Implementation added by @ProxyInputs decorator
+${data.isLinkComponent ? `    if (changes['routerLink']) {\n      this.updateHref();\n    }` : ''}
   }
 
   override ngAfterViewInit(): void {
     super.ngAfterViewInit();
+${data.isLinkComponent ? `    this.updateHref();\n    this.setActive();\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}
   }`
     : `
   override ngAfterViewInit(): void {
     super.ngAfterViewInit();
+${data.isLinkComponent ? `    this.updateHref();\n    this.setActive();\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}
   }`
 }
 `
@@ -274,7 +337,7 @@ ${
       ? `
   private elementRef = inject(ElementRef<${data.className}>);
   private zone = inject(NgZone);
-  private cdr = inject(ChangeDetectorRef);
+  private cdr = inject(ChangeDetectorRef);${routerLinkInjections}
 
   get element(): ${data.className} {
     return this.elementRef.nativeElement;
@@ -282,14 +345,18 @@ ${
 
   constructor() {
     this.cdr.detach();
+${data.isLinkComponent ? `    // Subscribe to router link active changes\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}
   }
 
 ${data.inputProperties}
 ${data.outputProperties}
+${routerLinkMethods}
 ${data.lifecycleMethods}`
       : `
+${routerLinkInjections}
 ${data.inputProperties}
 ${data.outputProperties}
+${routerLinkMethods}
 ${formControlBody}`
 
     return `
@@ -423,10 +490,26 @@ ${lifecycleContent}
 
   ngOnChanges(changes: SimpleChanges): void {
     // Implementation added by @ProxyInputs decorator
+${componentData.isLinkComponent ? `    if (changes['routerLink']) {\n      this.updateHref();\n    }` : ''}
   }
 
   ngAfterViewInit(): void {
     // Implementation added by @ProxyInputs decorator
+${componentData.isLinkComponent ? `    this.updateHref();\n    this.setActive();\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}
+  }`
+      : componentData.isLinkComponent
+      ? `
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['routerLink']) {
+      this.updateHref();
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.updateHref();
+    this.setActive();
+    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());
   }`
       : ''
   }`

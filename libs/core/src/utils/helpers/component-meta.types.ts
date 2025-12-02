@@ -29,6 +29,8 @@ export interface ComponentData {
   methods: MethodInfo[]
   /** Whether this component is a form control (extends GdsFormControlElement) */
   isFormControl?: boolean
+  /** Whether this component supports routing (has an href property) */
+  isLinkComponent?: boolean
 }
 
 export interface ComponentEvent {

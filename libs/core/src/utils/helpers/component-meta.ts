@@ -70,6 +70,7 @@ export class CemParser {
       slots: this.extractSlots(declaration),
       methods: this.extractMethods(declaration),
       isFormControl: this.isFormControl(declaration),
+      isLinkComponent: this.isLinkComponent(declaration),
     }
   }
 
@@ -85,6 +86,23 @@ export class CemParser {
       (member: any) =>
         member.inheritedFrom?.name === 'GdsFormControlElement' &&
         member.inheritedFrom?.module === 'src/components/form/form-control.ts',
+    )
+  }
+
+  /**
+   * Checks if a component supports routing by looking for an 'href' property
+   */
+  private static isLinkComponent(
+    declaration: CustomElementDeclaration,
+  ): boolean {
+    if (!declaration.members) return false
+
+    return declaration.members.some(
+      (member: any) =>
+        member.kind === 'field' &&
+        member.name === 'href' &&
+        member.privacy !== 'private' &&
+        member.privacy !== 'protected',
     )
   }
 
