@@ -24,12 +24,17 @@ export class TestGenerator {
       componentData.className,
     )
 
+    const formControlImports = componentData.isFormControl
+      ? `import { FormControl, ReactiveFormsModule } from '@angular/forms';`
+      : ''
+
     return `import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { ${componentName} } from './${componentData.tagName.replace(
       /^gds-/,
       '',
     )}.component';
+${formControlImports}
 
 describe('${componentName}', () => {
   it('should render', async () => {
@@ -41,6 +46,7 @@ describe('${componentName}', () => {
 ${this.generateInputValidationTest(componentData.properties, componentName)}
 ${this.generateInputTests(componentData.properties, componentName)}
 ${this.generateOutputTests(componentData.events, componentName, componentData.tagName)}
+${this.generateFormControlTests(componentData, componentName)}
 });`
   }
 
@@ -153,6 +159,193 @@ ${this.generateOutputTests(componentData.events, componentName, componentData.ta
   });`
       })
       .join('')
+  }
+
+  /**
+   * Generates test cases for ControlValueAccessor implementation
+   */
+  private static generateFormControlTests(
+    componentData: ComponentData,
+    componentName: string,
+  ): string {
+    if (!componentData.isFormControl) return ''
+
+    const tagName = componentData.tagName
+
+    return `
+  describe('ControlValueAccessor', () => {
+    it('should implement ControlValueAccessor', async () => {
+      const { fixture } = await render(${componentName}, {
+        imports: [ReactiveFormsModule]
+      });
+      const component = fixture.componentInstance;
+
+      // Check that the component has the required ControlValueAccessor methods
+      expect(typeof component.writeValue).toBe('function');
+      expect(typeof component.registerOnChange).toBe('function');
+      expect(typeof component.registerOnTouched).toBe('function');
+      expect(typeof component.setDisabledState).toBe('function');
+    });
+
+    it('should work with FormControl', async () => {
+      const control = new FormControl('initial-value');
+      
+      const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
+        imports: [ReactiveFormsModule, ${componentName}],
+        componentProperties: {
+          control
+        }
+      });
+
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const element = fixture.nativeElement.querySelector('${tagName}');
+      expect(element).toBeTruthy();
+
+      // Check that the initial value is set
+      expect(element.value).toBe('initial-value');
+    });
+
+    it('should update FormControl when value changes', async () => {
+      const control = new FormControl('');
+      
+      const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
+        imports: [ReactiveFormsModule, ${componentName}],
+        componentProperties: {
+          control
+        }
+      });
+
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const element = fixture.nativeElement.querySelector('${tagName}');
+      
+      // Simulate user input
+      element.value = 'new-value';
+      element.dispatchEvent(new Event('input', { bubbles: true }));
+      
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(control.value).toBe('new-value');
+    });
+
+    it('should update value when FormControl value changes', async () => {
+      const control = new FormControl('initial');
+      
+      const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
+        imports: [ReactiveFormsModule, ${componentName}],
+        componentProperties: {
+          control
+        }
+      });
+
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const element = fixture.nativeElement.querySelector('${tagName}');
+      
+      // Update the FormControl programmatically
+      control.setValue('updated-value');
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(element.value).toBe('updated-value');
+    });
+
+    it('should mark as touched on blur', async () => {
+      const control = new FormControl('');
+      
+      const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
+        imports: [ReactiveFormsModule, ${componentName}],
+        componentProperties: {
+          control
+        }
+      });
+
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const element = fixture.nativeElement.querySelector('${tagName}');
+      
+      expect(control.touched).toBe(false);
+
+      // Simulate blur event
+      element.dispatchEvent(new Event('blur', { bubbles: true }));
+      
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(control.touched).toBe(true);
+    });
+
+    it('should handle disabled state', async () => {
+      const control = new FormControl({ value: 'test', disabled: true });
+      
+      const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
+        imports: [ReactiveFormsModule, ${componentName}],
+        componentProperties: {
+          control
+        }
+      });
+
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const element = fixture.nativeElement.querySelector('${tagName}');
+      
+      expect(element.disabled).toBe(true);
+
+      // Enable the control
+      control.enable();
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(element.disabled).toBe(false);
+    });
+
+    it('should sync validation state to invalid property', async () => {
+      const control = new FormControl('', { validators: [(c) => c.value ? null : { required: true }] });
+      
+      const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
+        imports: [ReactiveFormsModule, ${componentName}],
+        componentProperties: {
+          control
+        }
+      });
+
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const element = fixture.nativeElement.querySelector('${tagName}');
+      
+      // Mark as touched to trigger validation
+      control.markAsTouched();
+      control.updateValueAndValidity();
+      fixture.detectChanges();
+      await fixture.whenStable();
+      
+      // Wait for the subscription to update the element
+      await new Promise(resolve => setTimeout(resolve, 50));
+
+      // Control should be invalid initially (empty value)
+      expect(control.invalid).toBe(true);
+      expect(element.invalid).toBe(true);
+
+      // Set a valid value
+      control.setValue('valid-value');
+      fixture.detectChanges();
+      await fixture.whenStable();
+      
+      // Wait for the subscription to update the element
+      await new Promise(resolve => setTimeout(resolve, 50));
+
+      expect(control.valid).toBe(true);
+      expect(element.invalid).toBe(false);
+    });
+  });`
   }
 
   /**

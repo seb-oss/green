@@ -27,6 +27,8 @@ export interface ComponentData {
   slots: SlotInfo[]
   /** Public methods that should be exposed */
   methods: MethodInfo[]
+  /** Whether this component is a form control (extends GdsFormControlElement) */
+  isFormControl?: boolean
 }
 
 export interface ComponentEvent {

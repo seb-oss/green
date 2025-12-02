@@ -52,6 +52,7 @@ export class AngularGenerator {
     const hasBooleanInputs = componentData.properties.some((p) =>
       this.isBooleanType(p.type?.text),
     )
+    const isFormControl = componentData.isFormControl || false
 
     const coreImports = [
       'Component',
@@ -73,14 +74,33 @@ export class AngularGenerator {
       coreImports.push('booleanAttribute')
     }
 
+    // Add forwardRef for form controls
+    if (isFormControl) {
+      coreImports.push('forwardRef')
+    }
+
     const imports = [
       `import { ${coreImports.join(', ')} } from '@angular/core';`,
     ]
+
+    // Add forms import for form controls
+    if (isFormControl) {
+      imports.push(
+        `import { NG_VALUE_ACCESSOR } from '@angular/forms';`,
+      )
+    }
 
     // Add web component decorator import if we have inputs
     if (componentData.properties.length > 0) {
       imports.push(
         `import { ProxyInputs } from '../../proxy-inputs.decorator';`,
+      )
+    }
+
+    // Add form control base class import
+    if (isFormControl) {
+      imports.push(
+        `import { GdsFormControlBase } from '../../form-control-base';`,
       )
     }
 
@@ -160,9 +180,12 @@ export class AngularGenerator {
   private static prepareTemplateData(componentData: ComponentData) {
     const hasInputs = componentData.properties.length > 0
     const hasOutputs = componentData.events.length > 0
+    const isFormControl = componentData.isFormControl || false
     const validInputs = componentData.properties.filter(
       (property) => property.name,
     )
+
+    const lifecycle = this.generateLifecycle(componentData)
 
     return {
       // Component metadata
@@ -172,6 +195,7 @@ export class AngularGenerator {
         componentData.className,
       ),
       description: componentData.description || '',
+      isFormControl,
 
       // Decorator configuration
       proxyInputsDecorator: hasInputs
@@ -180,8 +204,11 @@ export class AngularGenerator {
             .join(', ')}])`
         : '',
 
-      // Interface implementation
-      implementsClause: hasInputs
+      // Base class and interface implementation
+      baseClass: isFormControl ? 'GdsFormControlBase' : '',
+      implementsClause: isFormControl
+        ? '' // Base class already implements the interfaces
+        : hasInputs
         ? ' implements OnInit, OnChanges, AfterViewInit'
         : ' implements OnInit',
 
@@ -191,7 +218,9 @@ export class AngularGenerator {
         componentData.className,
       ),
       outputProperties: this.generateOutputs(componentData.events),
-      lifecycleMethods: this.generateLifecycle(componentData),
+      lifecycleMethods: lifecycle.fullMethods,
+      ngOnInitContent: lifecycle.ngOnInitContent,
+      hasInputs,
     }
   }
 
@@ -199,20 +228,50 @@ export class AngularGenerator {
    * Renders the component using a single template literal
    */
   private static renderComponentTemplate(data: any): string {
-    return `
-/**
- * Angular wrapper for the ${data.tagName} web component
- * ${data.description}
- */
-${data.proxyInputsDecorator}
-@Component({
-  selector: '${data.tagName}',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: \`<ng-content></ng-content>\`
-})
-export class ${data.angularComponentName}${data.implementsClause} {
+    const extendsClause = data.baseClass ? ` extends ${data.baseClass}` : ''
+    const providers = data.isFormControl
+      ? `,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ${data.angularComponentName}),
+      multi: true,
+    },
+  ]`
+      : ''
 
+    // For form controls, we override ngOnInit but still need to define the element
+    const formControlBody = data.isFormControl
+      ? `
+  get element(): ${data.className} {
+    return this.elementRef.nativeElement;
+  }
+
+  override ngOnInit(): void {
+    super.ngOnInit();
+${data.ngOnInitContent}
+  }
+${
+  data.hasInputs
+    ? `
+  ngOnChanges(changes: SimpleChanges): void {
+    // Implementation added by @ProxyInputs decorator
+  }
+
+  override ngAfterViewInit(): void {
+    super.ngAfterViewInit();
+  }`
+    : `
+  override ngAfterViewInit(): void {
+    super.ngAfterViewInit();
+  }`
+}
+`
+      : ''
+
+    // For non-form controls, use the standard pattern
+    const standardBody = !data.isFormControl
+      ? `
   private elementRef = inject(ElementRef<${data.className}>);
   private zone = inject(NgZone);
   private cdr = inject(ChangeDetectorRef);
@@ -227,7 +286,26 @@ export class ${data.angularComponentName}${data.implementsClause} {
 
 ${data.inputProperties}
 ${data.outputProperties}
-${data.lifecycleMethods}
+${data.lifecycleMethods}`
+      : `
+${data.inputProperties}
+${data.outputProperties}
+${formControlBody}`
+
+    return `
+/**
+ * Angular wrapper for the ${data.tagName} web component
+ * ${data.description}
+ */
+${data.proxyInputsDecorator}
+@Component({
+  selector: '${data.tagName}',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: \`<ng-content></ng-content>\`${providers}
+})
+export class ${data.angularComponentName}${extendsClause}${data.implementsClause} {
+${standardBody}
 }`
   }
 
@@ -296,7 +374,10 @@ ${data.lifecycleMethods}
   /**
    * Generates lifecycle hooks for property initialization and event handling
    */
-  private static generateLifecycle(componentData: ComponentData): string {
+  private static generateLifecycle(componentData: ComponentData): {
+    fullMethods: string
+    ngOnInitContent: string
+  } {
     const customEventOutputs = componentData.events.filter((output) =>
       output.name.startsWith('gds-'),
     )
@@ -333,7 +414,7 @@ ${data.lifecycleMethods}
       ${eventListeners}`
     }
 
-    return `
+    const fullMethods = `
   ngOnInit(): void {
 ${lifecycleContent}
   }${
@@ -349,6 +430,11 @@ ${lifecycleContent}
   }`
       : ''
   }`
+
+    return {
+      fullMethods,
+      ngOnInitContent: lifecycleContent,
+    }
   }
 
   /**

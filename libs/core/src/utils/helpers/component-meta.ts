@@ -69,7 +69,23 @@ export class CemParser {
       events: this.extractEvents(declaration),
       slots: this.extractSlots(declaration),
       methods: this.extractMethods(declaration),
+      isFormControl: this.isFormControl(declaration),
     }
+  }
+
+  /**
+   * Checks if a component is a form control by looking for properties inherited from GdsFormControlElement
+   */
+  private static isFormControl(
+    declaration: CustomElementDeclaration,
+  ): boolean {
+    if (!declaration.members) return false
+
+    return declaration.members.some(
+      (member: any) =>
+        member.inheritedFrom?.name === 'GdsFormControlElement' &&
+        member.inheritedFrom?.module === 'src/components/form/form-control.ts',
+    )
   }
 
   /**
