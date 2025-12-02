@@ -123,21 +123,15 @@ export class AngularGenerator {
    * Generates the import path for the web component class
    */
   private static getWebComponentImportPath(component: ComponentData): string {
-    // Special handling for pattern components - import from pure index
-    if (component.sourcePath.includes('/patterns/')) {
-      return '@sebgroup/green-core/pure'
-    }
-
     // Transform the source path from manifest:
     // src/components/alert/alert.component.ts -> components/alert/alert.component.js
-    // src/patterns/card-pattern-01/index.ts -> components/patterns/card-pattern-01/index.js
+    // src/patterns/card-pattern-01/index.ts -> patterns/card-pattern-01/index.js
 
     const pathParts = component.sourcePath.split('/')
 
-    // Replace first two components (src/components or src/patterns) with 'components'
-    if (pathParts.length >= 2) {
-      pathParts[0] = 'components'
-      pathParts.splice(1, 1) // Remove the second part (components/patterns)
+    // Remove src from the path
+    if (pathParts.length >= 1) {
+      pathParts.splice(0, 1) // Remove the first part (src)
     }
 
     // Replace .ts with .js
