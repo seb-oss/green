@@ -32,8 +32,10 @@ describe('<gds-pagination>', () => {
 
       await el.updateComplete
 
-      const pagesContainer = el.shadowRoot?.querySelector('.pages')
-      expect(pagesContainer).to.exist
+      const navigationControls = el.shadowRoot?.querySelector(
+        '.navigation-controls',
+      )
+      expect(navigationControls).to.exist
     })
 
     it('should render page buttons', async () => {

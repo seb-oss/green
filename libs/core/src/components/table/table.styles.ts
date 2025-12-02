@@ -360,14 +360,6 @@ export const TableStyles = css`
       border-radius: var(--gds-sys-radius-s);
     }
 
-    .header {
-      flex-direction: column;
-    }
-
-    .header {
-      gap: calc(var(--table-gap) / 2);
-    }
-
     .responsive thead {
       display: none;
     }
@@ -424,6 +416,75 @@ export const TableStyles = css`
 
     .responsive .cell-content {
       justify-content: flex-end;
+    }
+  }
+
+  /* Medium screens: input and dropdown side by side */
+  /* Medium screens: side by side layout */
+  @media (max-width: 760px) and (min-width: 480px) {
+    .header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        'input dropdown'
+        'lead trail';
+      gap: calc(var(--table-gap) / 2);
+    }
+
+    .header .lead [gds-element='gds-input'] {
+      grid-area: input;
+    }
+
+    .header .trail [gds-element='gds-dropdown'] {
+      grid-area: dropdown;
+    }
+
+    .header .lead ::slotted(*:not([gds-element='gds-input'])) {
+      grid-area: lead;
+    }
+
+    .header .trail ::slotted(*:not([gds-element='gds-dropdown'])) {
+      grid-area: trail;
+    }
+
+    .header .lead,
+    .header .trail {
+      display: contents;
+    }
+  }
+
+  /* Small screens: fully stacked */
+  @media (max-width: 479px) {
+    .header {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'input'
+        'dropdown'
+        'lead'
+        'trail';
+      gap: calc(var(--table-gap) / 2);
+    }
+
+    .header .lead [gds-element='gds-input'] {
+      grid-area: input;
+    }
+
+    .header .trail [gds-element='gds-dropdown'] {
+      grid-area: dropdown;
+    }
+
+    .header .lead ::slotted(*:not([gds-element='gds-input'])) {
+      grid-area: lead;
+    }
+
+    .header .trail ::slotted(*:not([gds-element='gds-dropdown'])) {
+      grid-area: trail;
+    }
+
+    .header .lead,
+    .header .trail {
+      display: contents;
     }
   }
 
@@ -555,7 +616,7 @@ export const TableStyles = css`
 
     thead tr {
       box-shadow: var(--gds-sys-shadow-m-01), var(--gds-sys-shadow-m-02);
-      border-radius: var(--gds-sys-radius-xl);
+      border-radius: var(--gds-sys-radius-s);
     }
   }
 
@@ -582,6 +643,37 @@ export const TableStyles = css`
     .header {
       transition: none;
       animation: none;
+    }
+  }
+
+  /* Scrollbar */
+  .data {
+    --_scrollbar-color-thumb: var(--gds-sys-color-l3-neutral-01);
+    --_scrollbar-color-track: var(--gds-sys-color-l3-neutral-02);
+    --_scrollbar-width: 10px;
+  }
+
+  @supports (scrollbar-width: auto) {
+    .data {
+      scrollbar-color: var(--_scrollbar-color-thumb) transparent;
+      scrollbar-width: var(--_scrollbar-width);
+    }
+  }
+
+  @supports selector(::-webkit-scrollbar) {
+    .data::-webkit-scrollbar {
+      max-width: var(--_scrollbar-width);
+      max-height: var(--_scrollbar-width);
+      cursor: grab;
+    }
+
+    .data::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .data::-webkit-scrollbar-thumb {
+      background: var(--_scrollbar-color-thumb);
+      border-radius: var(--gds-sys-radius-max);
     }
   }
 `
