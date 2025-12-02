@@ -112,14 +112,18 @@ ${this.generateOutputTests(componentData.events, componentName, componentData.ta
   ): string {
     if (outputs.length === 0) return ''
 
-    return outputs
+    // Only test custom events (gds-*) since standard DOM events
+    // are handled automatically by Angular and don't need explicit listeners
+    const customEvents = outputs.filter((output) =>
+      output.name.startsWith('gds-'),
+    )
+
+    if (customEvents.length === 0) return ''
+
+    return customEvents
       .map((output) => {
         const eventName = this.toCamelCase(output.name)
-        // Check if it's a custom event (starts with 'gds-') or a standard DOM event
-        const isCustomEvent = output.name.startsWith('gds')
-        const eventConstructor = isCustomEvent
-          ? `new CustomEvent('${output.name}', { detail: 'test-data' })`
-          : `new Event('${output.name}', { bubbles: true })`
+        const eventConstructor = `new CustomEvent('${output.name}', { detail: 'test-data' })`
 
         return `
   it('should emit ${eventName} event', async () => {
