@@ -195,6 +195,7 @@ export class AngularGenerator {
     const hasOutputs = componentData.events.length > 0
     const isFormControl = componentData.isFormControl || false
     const isLinkComponent = componentData.isLinkComponent || false
+    const isMenuButton = componentData.tagName === 'gds-menu-button'
     const validInputs = componentData.properties.filter(
       (property) => property.name,
     )
@@ -211,6 +212,7 @@ export class AngularGenerator {
       description: componentData.description || '',
       isFormControl,
       isLinkComponent,
+      isMenuButton,
 
       // Decorator configuration
       proxyInputsDecorator: hasInputs
@@ -284,19 +286,19 @@ export class AngularGenerator {
       'href',
       this.routerLink.href || '',
     );
-  }
+  }${
+    data.isMenuButton
+      ? `
 
   /**
-   * Updates the active state for menu-button components
+   * Updates the selected state based on RouterLinkActive
    * @internal
    */
   private setActive(): void {
     if (!this.routerLinkActive) return;
-
-    // Special handling for gds-menu-button
-    if (this.elementRef.nativeElement?.tagName === 'GDS-MENU-BUTTON') {
-      this.elementRef.nativeElement.selected = this.routerLinkActive.isActive;
-    }
+    this.elementRef.nativeElement.selected = this.routerLinkActive.isActive;
+  }`
+      : ''
   }`
       : ''
 
@@ -321,12 +323,12 @@ ${data.isLinkComponent ? `    if (changes['routerLink']) {\n      this.updateHre
 
   override ngAfterViewInit(): void {
     super.ngAfterViewInit();
-${data.isLinkComponent ? `    this.updateHref();\n    this.setActive();\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}
+${data.isLinkComponent ? `    this.updateHref();${data.isMenuButton ? `\n    this.setActive();\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}` : ''}
   }`
     : `
   override ngAfterViewInit(): void {
     super.ngAfterViewInit();
-${data.isLinkComponent ? `    this.updateHref();\n    this.setActive();\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}
+${data.isLinkComponent ? `    this.updateHref();${data.isMenuButton ? `\n    this.setActive();\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}` : ''}
   }`
 }
 `
@@ -345,7 +347,7 @@ ${data.isLinkComponent ? `    this.updateHref();\n    this.setActive();\n    thi
 
   constructor() {
     this.cdr.detach();
-${data.isLinkComponent ? `    // Subscribe to router link active changes\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}
+${data.isMenuButton ? `    // Subscribe to router link active changes\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}
   }
 
 ${data.inputProperties}
@@ -481,6 +483,8 @@ ${standardBody}
       ${eventListeners}`
     }
 
+    const isMenuButton = componentData.tagName === 'gds-menu-button'
+
     const fullMethods = `
   ngOnInit(): void {
 ${lifecycleContent}
@@ -495,7 +499,7 @@ ${componentData.isLinkComponent ? `    if (changes['routerLink']) {\n      this.
 
   ngAfterViewInit(): void {
     // Implementation added by @ProxyInputs decorator
-${componentData.isLinkComponent ? `    this.updateHref();\n    this.setActive();\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}
+${componentData.isLinkComponent ? `    this.updateHref();${isMenuButton ? `\n    this.setActive();\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}` : ''}
   }`
       : componentData.isLinkComponent
       ? `
@@ -507,9 +511,7 @@ ${componentData.isLinkComponent ? `    this.updateHref();\n    this.setActive();
   }
 
   ngAfterViewInit(): void {
-    this.updateHref();
-    this.setActive();
-    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());
+    this.updateHref();${isMenuButton ? `\n    this.setActive();\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}
   }`
       : ''
   }`
