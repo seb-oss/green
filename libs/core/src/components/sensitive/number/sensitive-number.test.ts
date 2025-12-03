@@ -15,18 +15,20 @@ describe('GdsSensitiveNumber', () => {
     const format = 'decimalsAndThousands'
     const value = 1234
     const locale = 'sv-SE'
+    const decimals = 3
 
     const element: GdsSensitiveNumber = await fixture(
       html`<gds-sensitive-number
         .locale=${locale}
         .value=${value}
         .format=${format}
+        .decimals=${decimals}
         .hide=${true}
       ></gds-sensitive-number>`,
     )
     await element.updateComplete
     expect(element.formattedValue).not.to.equal(
-      numberFormats[format](value, locale),
+      numberFormats[format](value, locale, undefined, decimals),
     )
   })
 })
