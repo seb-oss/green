@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.17.0
+
+### Minor Changes
+
+- 51496ea: **Formatted Number:** Add decimal property to gds formatted number component.
+
 ## 2.16.1
 
 ### Patch Changes
@@ -313,7 +319,6 @@
 - d9b0006: **Theme:** `gds-theme` now sets the `color` CSS property by default.
 - d9b0006: **Removd deprecations:** `gds-container` and `gds-spacer`. Use `gds-div` instead.
 - d9b0006: **Everything:** Using new state color tokens and shadow tokens.
-
   - **Card:** Removed `shadow` prop from `gds-card`, use `box-shadow` prop instead.
 
 ### Minor Changes
@@ -502,7 +507,6 @@
 
 - 44dff87: **Dialog:** Close when click outside, unless event is cancelled
 - 73e0759: **Form Summary:** Update design and functionality
-
   - Design updated to latest draft in Figma (not yet final)
   - Make reactive mode optional, so that the behavior can be more easily adapted to different contexts
   - Make it possible to use with native form controls by using data-attributes
@@ -633,7 +637,6 @@
 - 30d27ef: **Icon:** New icons, new sizing method, metadata, documentation and accessibility improvements.
 
   The following props have been deprecated and will be removed on the next major release:
-
   1. `width`
   2. `height`
   3. `box` - the viewbox property
@@ -869,7 +872,6 @@
 - 4cdaf5f: **`gds-grid`**: `auto-columns` now support any CSS units. If no unit is specified, `px` is assumed.
 - 4cdaf5f: **Divider:** Add propagation of role attribute
 - 4cdaf5f: ### Declarative Layout updates
-
   - Add `gds-div` as the base container for declarative layout
   - Refactor implementation for easier reuse of properties in various components. Several component now support style expression properties for common things like margin, width and flex item properties.
   - Colors now only support tokens from Green, no custom values except `transparent` and `currentColor`. This simplifies implementation and makes color properties more consistent.
@@ -882,7 +884,6 @@
   #### Removed
 
   The following style expression properties have been removed:
-
   - `pointer-events`
   - `user-select`
   - `cursor`
@@ -894,7 +895,6 @@
   #### Deprecated
 
   The followind elements have been deprecated
-
   - `gds-container` is deprecated in favor of `gds-div`
   - `gds-spacer` is deprecated in favor of `gds-div`
 
@@ -1310,7 +1310,6 @@
 - 7410021: **Segmented Control:** Add support for variable width segments. Fixes #1603
 
   This change refactors a large chunk of the Segmented Control implementation:
-
   - Rewrite layout code to use `css-scroll-snap`
   - Remove `seg-min-width`
   - Add style expression properties to `gds-segment` for size control
@@ -1651,12 +1650,10 @@
 ### Minor Changes
 
 - 4fef270: **Changes Made:**
-
   - Refactored the `gds-icon` component to import individual icons for improved modularity.
   - Implemented a command to generate all icons from the SVG versions for both types (`regular` and `solid`).
 
   **Features Added:**
-
   - Icons can now be resized using the `width` and `height` properties.
   - Color inheritance from `currentColor` on the path and stroke for consistent coloring across icons.
   - All icons are copied for importing as SVG files.
@@ -1664,7 +1661,6 @@
   - Added label for accessibility to the pass a label to the svg icon.
 
   **Updates Made:**
-
   - Ensured all components using `gds-icon` were updated to reflect the changes.
   - Implemented tests to validate the functionality.
 
@@ -1722,13 +1718,11 @@
 ### Minor Changes
 
 - 5b84660: # New tokens
-
   - Motion
   - Size scale
   - Spacing, Margin, Padding
 
   # New component: Button
-
   - Built on tokens
   - Transitional styles
 
@@ -1761,7 +1755,6 @@
 ### Minor Changes
 
 - a43b1bf: **Testing:**
-
   - Export a Jest preset which can be used to make it easier to configure Jest for test apps that use Green Core web components
 
 ## 1.13.0
@@ -1804,7 +1797,6 @@
 
 - f4d7fe7: fixed value change when browsing months
 - 80c0cdf: **Datepicker, Dropdown**
-
   - Fix broken dark mode styles
 
 ## 1.9.0
@@ -1812,18 +1804,15 @@
 ### Minor Changes
 
 - bb83849: **Datepicker:** Added support for disabling dates
-
   - `disabled-weekends` will disable all weekend days in the calendar view
   - `disabled-dates` allows to specify an array of dates that should be disabled in the calendar view
 
 - 7820e8c: **Dropdown**
-
   - Add `max-height` attrbute for controlling maximum height of dropdown popover box.
 
 ### Patch Changes
 
 - 7820e8c: **Datepicker**
-
   - Limit height of month and year dropdowns to less than height of calendar popover to prevent them getting cut off outside viewport.
 
 ## 1.8.0
@@ -1837,7 +1826,6 @@
 ### Minor Changes
 
 - 007f8ac: **Datepicker and Dropdown**
-
   - Add small variant
   - Add attribute for hiding label
   - Align style with Figma
