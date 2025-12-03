@@ -2,4 +2,4 @@
 '@sebgroup/green-core': minor
 ---
 
-Add decimal property to gds formatted number component.
+**Formatted Number:** Add decimal property to gds formatted number component.
