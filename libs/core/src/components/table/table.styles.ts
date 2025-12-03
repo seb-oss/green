@@ -356,7 +356,7 @@ export const TableStyles = css`
       position: sticky;
       top: var(--gds-sys-space-s);
       z-index: 2;
-      box-shadow: var(--gds-sys-shadow-s-01), var(--gds-sys-shadow-s-02);
+      /*       box-shadow: var(--gds-sys-shadow-s-01), var(--gds-sys-shadow-s-02); */
       border-radius: var(--gds-sys-radius-s);
     }
 
@@ -609,7 +609,7 @@ export const TableStyles = css`
     }
 
     thead tr {
-      box-shadow: var(--gds-sys-shadow-s-01), var(--gds-sys-shadow-s-02);
+      box-shadow: var(--gds-sys-shadow-l-01), var(--gds-sys-shadow-l-02);
       border-radius: var(--gds-sys-radius-s);
       backdrop-filter: blur(12px);
       background: color-mix(
