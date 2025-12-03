@@ -12,7 +12,6 @@ import { FormComponent } from './form.component'
 @NgModule({
   declarations: [FormComponent],
   imports: [
-    NggCoreFormsModule, // This allows us to use Green Core form controls just like native HTML form controls
     CommonModule,
     GreenCoreNgModule,
     FormRoutingModule,
