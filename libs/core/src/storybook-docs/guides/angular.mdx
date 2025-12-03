@@ -134,6 +134,10 @@ Use the web component in your template with the `*gdsCoreElement` directive.
 <gds-button *gdsCoreElement (click)="handleEvent($event)">Click me!</gds-button>
 ```
 
+## Form controls
+
+The wrappers for Green Core form controls, such as `<gds-input>`, `<gds-select>`, and `<gds-checkbox>`, implement Angular's `ControlValueAccessor` interface. This means that they can be used seamlessly with Angular forms, both template-driven and reactive forms. No additional directives or configuration is needed.
+
 ## Routing
 
 The wrapper library also provides support for Angular's `RouterLink` directive. This allows you to use Green Core link components, such as `<gds-link>`, `<gds-menu-button>`, and `<gds-breadcrumb>`, with Angular's router.
