@@ -15,7 +15,8 @@ import { NumberFormats, numberFormats } from '../formatters'
  * <gds-formatted-number
  *   value="1234.5"
  *   locale="sv-SE"
- *   currency="SEK">
+ *   currency="SEK"
+ *   decimals={3}>
  * </gds-formatted-number>
  */
 @gdsCustomElement('gds-formatted-number')
@@ -32,6 +33,10 @@ export class GdsFormattedNumber extends GdsFormattedText {
   @property({ type: String })
   currency?: string
 
+  /** The number of decimal places to display. */
+  @property({ type: Number })
+  decimals?: number
+
   /**
    * Specifies the number format.
    * @default 'decimalsAndThousands'
@@ -40,7 +45,12 @@ export class GdsFormattedNumber extends GdsFormattedText {
   protected format: NumberFormats = 'decimalsAndThousands'
 
   get formattedValue() {
-    return numberFormats[this.format](this.value, this.locale, this.currency)
+    return numberFormats[this.format](
+      this.value,
+      this.locale,
+      this.currency,
+      this.decimals,
+    )
   }
 
   protected firstUpdated(_changedProperties: PropertyValues): void {

@@ -29,6 +29,9 @@ const meta: Meta = {
     currency: {
       type: 'string',
     },
+    decimals: {
+      type: 'number',
+    },
   },
 }
 
@@ -57,6 +60,7 @@ export const Default: Story = {
         .value=${args.value}
         .locale=${args.locale}
         .currency=${args.currency}
+        .decimals=${args.decimals}
       ></gds-formatted-number
       ><gds-formatted-number .locale=${args.locale} .currency=${args.currency}
         >${args.value}</gds-formatted-number
@@ -79,6 +83,31 @@ export const Currencies: Story = {
                 .value=${args.value}
                 .locale=${args.locale}
                 .currency=${currency}
+                .decimals=${args.decimals}
+              ></gds-formatted-number>
+            </gds-flex>
+
+            <gds-divider></gds-divider>`,
+      )}
+    </gds-flex>`,
+}
+
+const decimals = [0, 2, 4]
+
+export const Decimals: Story = {
+  ...DefaultParams,
+  name: 'Decimals',
+  render: (args) =>
+    html`<gds-flex flex-direction="column" gap="m">
+      ${decimals.map(
+        (currency) =>
+          html`<gds-flex gap="l" justify-content="space-between">
+              <gds-text>${currency}:</gds-text>
+              <gds-formatted-number
+                .value=${args.value}
+                .locale=${args.locale}
+                .currency=${args.currency}
+                .decimals=${decimals}
               ></gds-formatted-number>
             </gds-flex>
 
