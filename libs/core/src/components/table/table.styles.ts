@@ -645,34 +645,4 @@ export const TableStyles = css`
       animation: none;
     }
   }
-
-  /* Scrollbar */
-  .data {
-    --_scrollbar-color-thumb: var(--gds-sys-color-l3-neutral-01);
-    --_scrollbar-color-track: var(--gds-sys-color-l3-neutral-02);
-    --_scrollbar-width: var(--gds-sys-space-2xs);
-  }
-
-  @supports (scrollbar-width: auto) {
-    .data {
-      scrollbar-color: var(--_scrollbar-color-thumb) transparent;
-      scrollbar-width: var(--_scrollbar-width);
-    }
-  }
-
-  @supports selector(::-webkit-scrollbar) {
-    .data::-webkit-scrollbar {
-      width: var(--_scrollbar-width);
-      height: var(--_scrollbar-width);
-    }
-
-    .data::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .data::-webkit-scrollbar-thumb {
-      background: var(--_scrollbar-color-thumb);
-      border-radius: var(--gds-sys-radius-max);
-    }
-  }
 `
