@@ -13,10 +13,10 @@ import {
 import { SCOPE_RESOLVER } from '../scope-resolver'
 
 @Directive({
-    selector: '[gdsCoreElement]',
+    selector: '[gdsCoreScope]',
     standalone: false
 })
-export class GdsCoreElementDirective implements OnInit {
+export class GdsCoreScopeDirective implements OnInit {
   private viewRef: EmbeddedViewRef<any> | null = null
   private readonly document = inject(DOCUMENT)
   private readonly renderer = inject(Renderer2)

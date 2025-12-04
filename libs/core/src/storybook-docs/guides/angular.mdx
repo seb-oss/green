@@ -104,19 +104,19 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 })
 ```
 
-### Using `GdsCoreWrapperModule`
+### Using `GdsCoreScopeModule`
 
-The `GdsCoreWrapperModule` is a module that provides a directive, `*gdsCoreElement`, that you can use to apply scoping to individual elements in your template. This can be useful if you need more explicit control over which elements are scoped, or if the `GdsCoreRenderer` is causing any issues.
+The `GdsCoreScopeModule` is a module that provides a directive, `*gdsCoreScope`, that you can use to only apply scoping to individual sections in your template. This can be useful if you need more explicit control over which elements are scoped, or if the `GdsCoreRenderer` is causing any issues.
 
 **In your module:**
 
 ```ts
-import { GdsCoreWrapperModule, SCOPE_RESOLVER } from '@sebgroup/green-angular/src/lib/shared'
+import { GdsCoreScopeModule, SCOPE_RESOLVER } from '@sebgroup/green-core-ng'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 @NgModule({
-    // Add the GdsCoreWrapperModule to the `imports` array
-    imports: [GdsCoreWrapperModule],
+    // Add the GdsCoreScopeModule to the `imports` array
+    imports: [GdsCoreScopeModule],
     // Optional, but recommended, provide a local reference to the `getScopedTagName` function
     providers: [
         {
@@ -126,12 +126,18 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
       ],
 })
 ```
-Use the web component in your template with the `*gdsCoreElement` directive.
+Use the web component in your template with the `*gdsCoreScope` directive.
 
 **In your template:**
 
 ```html
-<gds-button *gdsCoreElement (click)="handleEvent($event)">Click me!</gds-button>
+<gds-button *gdsCoreScope (click)="handleEvent($event)">Click me!</gds-button>
+
+// Or, to scope a whole section:
+<div *gdsCoreScope>
+  <gds-input label="Name"></gds-input>
+  <gds-button (click)="submit()">Submit</gds-button>
+</div>
 ```
 
 ## Form controls
