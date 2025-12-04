@@ -43,16 +43,7 @@ const meta: Meta = {
     docs: {
       description: {
         component: `
-A comprehensive table component with enterprise features:
-
-- **Data Management**: Async data loading with pagination
-- **Search & Filter**: Built-in search functionality
-- **Sorting**: Column-based sorting (ascending/descending)
-- **Selection**: Row selection with select all capability
-- **Responsive**: Mobile-friendly responsive design
-- **Customization**: Flexible column rendering with slots
-- **Actions**: Row-level actions via context menu
-- **Performance**: Client-side caching for better UX
+A data table component that handles asynchronous data loading, pagination, sorting, and filtering through a provider function. Supports row selection, searchable columns, responsive layouts, and customizable cell rendering including badges, buttons, links, and formatted values.
         `,
       },
     },
@@ -123,12 +114,6 @@ When rows are selected, the table emits a \`gds-table-selection\` event containi
 - Selected row indices
 - Selected row data
 - Total selection count
-
----
-
-#### Footer Selection Summary
-- Displays number of selected rows
-- Provides a "Clear" button to reset selection
 
 ---
 
