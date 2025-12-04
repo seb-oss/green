@@ -43,22 +43,6 @@ interface TableResponse<T> {
 }
 ```
 
-### Row Type Example
-
-Define your data structure:
-
-```typescript
-interface DataRow {
-  id: number
-  title: string
-  description: string
-  category: string
-  status: 'Active' | 'Inactive'
-  amount: number
-  date: string
-}
-```
-
 ---
 
 ## Data Provider Function
@@ -138,6 +122,18 @@ const dataProvider = async (
 
 ## Column Configuration
 
+### Type Imports
+
+All table-related TypeScript types are exported from the component for use in your application:
+
+```typescript
+import { Types } from '@sebgroup/green-core/components/table'
+
+// Use the types
+const columns: Types.Column[] = [...]
+const dataProvider = async (request: Types.Request): Promise<Types.Response<DataRow>> => {...}
+```
+
 ### Basic Column
 
 ```typescript
@@ -168,7 +164,64 @@ const columns: TableColumn[] = [
 }
 ```
 
-### Available Cell Types
+### Cell Slots
+
+Cell configuration supports three slots: `lead`, `value`, and `trail`. Each slot accepts any of the predefined cell types (badge, button, link, image, context-menu, formatted values) and can contain single or multiple cell definitions.
+
+Cell types correspond to Green Design System components (`gds-badge`, `gds-button`, `gds-link`, `gds-img`, etc.). Most component properties are available in the cell configuration, with the exception of layout and positioning properties which are handled by the table.
+
+**Structure:**
+
+```typescript
+cell: {
+  lead?: Cell | Cell[]    // Content before main value
+  value?: Cell | Cell[]   // Main cell content
+  trail?: Cell | Cell[]   // Content after main value
+}
+```
+
+**Example with trail slot:**
+```typescript
+{
+  key: 'description',
+  label: 'Description',
+  cell: {
+    trail: {
+      type: 'button',
+      size: 'xs',
+      rank: 'tertiary',
+      template: 'copy-icon',
+      onClick: (row) => navigator.clipboard.writeText(row.description),
+    }
+  }
+}
+```
+
+**Example with multiple slots:**
+```typescript
+{
+  key: 'email',
+  label: 'Email',
+  cell: {
+    lead: {
+      type: 'image',
+      src: (row) => row.avatar,
+      width: '32px',
+      height: '32px',
+    },
+    value: (row) => row.email,  // Plain text
+    trail: {
+      type: 'badge',
+      value: (row) => row.verified ? 'Verified' : 'Pending',
+      variant: (row) => row.verified ? 'positive' : 'information',
+    }
+  }
+}
+```
+
+> The same cell slot structure applies to the `actions` configuration.
+
+### Cell Types
 
 #### Badge
 ```typescript
@@ -177,6 +230,19 @@ cell: {
     type: 'badge',
     value: (row) => row.status,
     variant: (row) => 'positive' | 'negative' | 'information',
+  }
+}
+```
+
+#### Image
+```typescript
+cell: {
+  value: {
+    type: 'image',
+    src: (row) => row.imageUrl,
+    alt: (row) => row.title,
+    width: '48px', // supports all sizing tokens
+    height: '48px', // supports all sizing tokens
   }
 }
 ```
@@ -236,6 +302,17 @@ cell: {
 }
 ```
 
+#### Formatted Account
+```typescript
+cell: {
+  value: {
+    type: 'formatted-account',
+    value: (row) => row.accountNumber,
+    format: 'seb-account',
+  }
+}
+```
+
 #### Formatted Date
 ```typescript
 cell: {
@@ -248,24 +325,43 @@ cell: {
 }
 ```
 
-### Cell Slots
+#### Dynamic Content
 
-Add content before (lead) or after (trail) the main value:
+- Templates can be defined within the table to provide custom content for specific cell types
+- Templates are referenced using `name` attribute
+- Can be used to inject for example icons into cell types such as button on `main`, `lead` or `trail` slot.
 
 ```typescript
 {
-  key: 'description',
-  label: 'Description',
+  key: 'email',
+  label: 'Email',
+  sortable: true,
+  justify: 'space-between',
   cell: {
     trail: {
       type: 'button',
+      value: (row: UserData) => row.email,
       size: 'xs',
-      rank: 'tertiary',
-      template: 'copy-icon',
-      onClick: (row) => navigator.clipboard.writeText(row.description),
-    }
-  }
+      template: 'email-copy',  // References template content
+    },
+  },
 }
+```
+
+**Template definition**
+
+```html
+<!-- Used as icon button -->
+<template name="email-copy">
+  <gds-icon-copy></gds-icon-copy>
+</template>
+
+<!-- Used as trail icon on link -->
+<template name="download-image">
+  <gds-icon-cloud-download
+    slot="trail" <!-- Slots can be defined here -->
+></gds-icon-cloud-download>
+</template>
 ```
 
 ---
@@ -275,81 +371,17 @@ Add content before (lead) or after (trail) the main value:
 ### Lit
 
 ```typescript
-import { html } from 'lit'
-import '@sebgroup/green-core/components/table'
-
-const columns = [
-  { key: 'title', label: 'Title', sortable: true },
-  { key: 'description', label: 'Description', sortable: true },
-]
-
-const dataProvider = async (request) => {
-  // Your implementation
-}
-
-html`
-  <gds-table
-    .columns=${columns}
-    .data=${dataProvider}
-    rows="10"
-    searchable
-  ></gds-table>
-`
 ```
 
 ### React
 
 ```tsx
-import '@sebgroup/green-core/components/table'
-
-function DataTable() {
-  const columns = [
-    { key: 'title', label: 'Title', sortable: true },
-    { key: 'description', label: 'Description', sortable: true },
-  ]
-
-  const dataProvider = async (request) => {
-    // Your implementation
-  }
-
-  return (
-    <gds-table
-      columns={columns}
-      data={dataProvider}
-      rows={10}
-      searchable
-    />
-  )
-}
 ```
 
 ### Angular
 
 ```typescript
-import { Component } from '@angular/core'
-import '@sebgroup/green-core/components/table'
-
-@Component({
-  selector: 'app-data-table',
-  template: `
-    <gds-table
-      [columns]="columns"
-      [data]="dataProvider"
-      [rows]="10"
-      searchable
-    ></gds-table>
-  `
-})
-export class DataTableComponent {
-  columns = [
-    { key: 'title', label: 'Title', sortable: true },
-    { key: 'description', label: 'Description', sortable: true },
-  ]
-
-  dataProvider = async (request: any) => {
-    // Your implementation
-  }
-}
+ 
 ```
 
 ---
@@ -489,55 +521,80 @@ html`
 `
 ```
 
-### Selection Handling
+---
+
+## Selection Handling
+The `selectable` property enables row selection with checkbox controls.
+
+### Selection Events
+
+The table emits `gds-table-selection` events when selection changes:
+
+```typescript
+table.addEventListener('gds-table-selection', (e) => {
+  console.log('Selected indices:', e.detail.selectedIndices)  // [0, 2, 5]
+  console.log('Selected data:', e.detail.selectedData)        // [row0, row2, row5]
+  console.log('Count:', e.detail.count)                       // 3
+})
+```
+
+### Selection Methods
 
 ```typescript
 const table = document.querySelector('gds-table')
 
-// Listen to selection changes
-table.addEventListener('gds-table-selection', (e) => {
-  console.log('Selected:', e.detail.selectedData)
-  console.log('Count:', e.detail.count)
-})
-
 // Programmatic selection
-table.setSelection([0, 2, 5])
-table.selectAll()
-table.clearSelection()
+table.setSelection([0, 2, 5])  // Select specific rows by index
+table.selectAll()               // Select all rows
+table.clearSelection()          // Clear all selections
 
 // Get current selection
 const selection = table.getSelection()
+console.log(selection.indices)  // [0, 2, 5]
+console.log(selection.data)     // [row0, row2, row5]
 ```
 
-### Custom State Slots
+---
 
+## Custom State Slots
+The table provides three slots to customize empty and error states. Each slot has a default fallback that displays if no custom content is provided.
+
+**Available slots:**
+- `error` - Shown when the data provider throws an error
+- `empty` - Shown when the data provider returns zero rows with no active search
+- `no-results` - Shown when the data provider returns zero rows with an active search query
+
+**Example:**
 ```html
-  <gds-table .columns=${columns} .data=${dataProvider} searchable>
-    <gds-flex slot="error" flex-direction="column" gap="s">
-      <gds-text font="heading-s">Unable to load data</gds-text>
-      <gds-text font="detail-book-m">
-        An error occurred. Please try again.
-      </gds-text>
-      <gds-button size="small" @click=${retry}>Retry</gds-button>
-    </gds-flex>
+<gds-table .columns=${columns} .data=${dataProvider} searchable>
+  <!-- Error state -->
+  <gds-flex slot="error" flex-direction="column" gap="s">
+    <gds-text font="heading-s">Unable to load data</gds-text>
+    <gds-text font="detail-book-m">
+      An error occurred. Please try again.
+    </gds-text>
+    <gds-button size="small" @click=${retry}>Retry</gds-button>
+  </gds-flex>
 
-    <gds-flex slot="empty" flex-direction="column" gap="s">
-      <gds-text font="heading-s">No data available</gds-text>
-      <gds-text font="detail-book-m">
-        There are no records to display.
-      </gds-text>
-    </gds-flex>
+  <!-- Empty state (no data at all) -->
+  <gds-flex slot="empty" flex-direction="column" gap="s">
+    <gds-text font="heading-s">No data available</gds-text>
+    <gds-text font="detail-book-m">
+      There are no records to display.
+    </gds-text>
+  </gds-flex>
 
-    <gds-flex slot="no-results" flex-direction="column" gap="s">
-      <gds-text font="heading-s">No matches found</gds-text>
-      <gds-text font="detail-book-m">
-        Try different search terms.
-      </gds-text>
-      <gds-button size="small" @click=${clearSearch}>
-        Clear Search
-      </gds-button>
-    </gds-flex>
-  </gds-table>
+  <!-- No results state (search returned nothing) -->
+  <gds-flex slot="no-results" flex-direction="column" gap="s">
+    <gds-text font="heading-s">No matches found</gds-text>
+    <gds-text font="detail-book-m">
+      Try different search terms.
+    </gds-text>
+    <gds-button size="small" @click=${clearSearch}>
+      Clear Search
+    </gds-button>
+  </gds-flex>
+</gds-table>
 ```
 
 ---
@@ -566,4 +623,3 @@ const selection = table.getSelection()
 ## API Reference
 
 For complete API documentation, see the main Table component documentation.
- 

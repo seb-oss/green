@@ -599,7 +599,7 @@ export const TableStyles = css`
       animation-direction: normal, reverse;
       animation-timeline: view(block);
       animation-range:
-        entry,
+        entry -40px,
         exit -40px;
     }
 

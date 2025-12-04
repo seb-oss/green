@@ -109,7 +109,8 @@ export const Selection: Story = {
     docs: {
       description: {
         story: `
-The \`selectable\` property enables row-level selection with a checkbox column. Provides comprehensive selection control:
+The \`selectable\` property enables row-level selection with a checkbox column.<br/>
+Supports the following selection controls:
 - Individual row selection
 - Select/deselect all rows via header checkbox
 - Partial selection state indication
@@ -363,17 +364,10 @@ export const Actions: Story = {
     docs: {
       description: {
         story: `
-The \`actions\` property enables flexible interaction methods for each table row:
+The \`actions\` property defines row interactions shown as the last cell of each row.
 
-**Action Types**:
-- **Buttons**: Direct, immediate actions (limit to two buttons maximum)
-- **Links**: Navigate to detailed views or download files
-- **Context Menu**: Multiple related actions in a popover
+Supports all cell types (button, link, context-menu, badge, etc.) and can contain multiple actions. Column content justification can be controlled via the \`justify\` property.
 
-Actions will always appear at the end of the row. 
-Alignment varies by action type: 
-- Two buttons align to the left 
-- All other actions justify to the end of the cell
         `,
       },
     },
@@ -439,8 +433,7 @@ export const Plain: Story = {
     docs: {
       description: {
         story: `
-When \`plain\` boolean is set, the table is stripped of pagination and header elements, displaying only the core table content.<br/>
-Ideal for embedding tables within other components or creating minimalist data presentations.
+When \`plain\` boolean is set, the table header and footer are removed, rendering only the data table.
         `,
       },
     },
@@ -472,8 +465,7 @@ export const Striped: Story = {
     docs: {
       description: {
         story: `
-When \`striped\` boolean is set, alternating row colors improve visual scanning and readability.<br/>
-Helps distinguish between adjacent rows, especially in dense data tables.
+When \`striped\` boolean is set, alternating row background colors are applied to even-numbered rows.
         `,
       },
     },
@@ -510,13 +502,11 @@ export const Density: Story = {
     docs: {
       description: {
         story: `
-The \`density\` property allows customizing the table's visual spacing with three distinct options:
+The \`density\` property allows customizing the table's visual spacing with these options:
 
 - **\`comfortable\`** (Default) · Standard spacing for balanced readability
 - **\`compact\`** · Reduced spacing to maximize information density
 - **\`spacious\`** · Increased spacing for enhanced readability
-
-Adjust density to optimize the table's visual hierarchy and information presentation based on your specific data.
         `,
       },
     },
@@ -558,8 +548,7 @@ export const Variant: Story = {
       description: {
         story: `
 The \`variant\` property controls the visual style of the table container card.
-
-\`primary\`, \`secondary\` (Default), \`tertiary\` 
+These variants can be used: \`primary\`, \`secondary\` (Default), \`tertiary\` 
 
 > Variant naming subject to change on the next major release
         `,
@@ -613,8 +602,6 @@ When the \`responsive\` boolean is set to \`true\`, the table transforms its lay
   - Column names are displayed on the left side
   - Corresponding cell values are shown on the right side
 - **Header Behavior**: On larger screens table header becomes sticky, ensuring column labels remain visible during scrolling.
-
-This approach enhances readability and usability across different device sizes, providing an optimal viewing experience on mobile and tablet devices.
         `,
       },
     },
@@ -828,43 +815,9 @@ export const DynamicContent: Story = {
     docs: {
       description: {
         story: `
-- Templates can be defined within the table to provide custom content for specific cell types
-- Templates are referenced using \`name\` attribute
-- Can be used to inject for example icons into cell types such as button on \`main\`, \`lead\` or \`trail\` slot.
+Templates provide reusable content for cell types. Reference them using the \`template\` property with the template's \`name\` attribute.
 
-\`\`\`typescript
-{
-  key: 'email',
-  label: 'Email',
-  sortable: true,
-  justify: 'space-between',
-  cell: {
-    trail: {
-      type: 'button',
-      value: (row: UserData) => row.email,
-      size: 'xs',
-      template: 'email-copy',  // References template content
-    },
-  },
-}
-\`\`\`
-
-**Template definition**
-
-\`\`\`html
-<!-- Used as icon button -->
-<template name="email-copy">
-  <gds-icon-copy></gds-icon-copy>
-</template>
-
-<!-- Used as trail icon on link -->
-<template name="download-image">
-  <gds-icon-cloud-download
-    
-    slot="trail" <!-- Slots can be defined here -->
-></gds-icon-cloud-download>
-</template>
-\`\`\`
+See Developer Guide for complete documentation.
           `,
       },
     },
