@@ -33,6 +33,11 @@ const meta: Meta = {
       options: ['comfortable', 'compact', 'spacious'],
       defaultValue: 'comfortable',
     },
+    variant: {
+      control: { type: 'select' },
+      options: ['primary', 'secondary', 'tertiary'],
+      defaultValue: 'secondary',
+    },
     selectable: {
       control: { type: 'boolean' },
       defaultValue: true,
@@ -62,6 +67,7 @@ export const Overview: Story = {
     columns: Users.Columns,
     actions: Users.Actions,
     density: 'comfortable',
+    variant: 'secondary',
     data: Users.Data,
     selectable: true,
     searchable: true,
@@ -70,6 +76,7 @@ export const Overview: Story = {
   render: (args) =>
     html` <gds-table
       density="${args.density}"
+      variant="${args.variant}"
       ?searchable="${args.searchable}"
       ?settings="${args.settings}"
       ?selectable="${args.selectable}"
