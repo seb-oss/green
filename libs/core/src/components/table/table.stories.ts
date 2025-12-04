@@ -109,27 +109,11 @@ export const Selection: Story = {
     docs: {
       description: {
         story: `
-The \`selectable\` property enables row-level selection with a checkbox column.<br/>
-Supports the following selection controls:
-- Individual row selection
-- Select/deselect all rows via header checkbox
-- Partial selection state indication
+The \`selectable\` boolean enables row selection with checkboxes. Supports individual row selection, select all via header checkbox, and partial selection indication.
 
----
+Emits \`gds-table-selection\` event with selected row data and indices. Provides methods for programmatic selection control.
 
-#### Selection Events
-When rows are selected, the table emits a \`gds-table-selection\` event containing:
-- Selected row indices
-- Selected row data
-- Total selection count
-
----
-
-#### Methods
-- \`selectAll()\`: Select all rows
-- \`clearSelection()\`: Deselect all rows
-- \`setSelection(indices)\`: Select specific rows
-- \`getSelection()\`: Retrieve selected rows
+See Developer Guide for complete selection API documentation.
         `,
       },
     },
@@ -278,16 +262,9 @@ export const Cell: Story = {
     docs: {
       description: {
         story: `
+The table supports multiple cell types: badge, image, button, link, context menu, and formatted text (number, account, date).
 
-The table supports multiple cell types for flexible data rendering:
-- Badge
-- Image 
-- Button
-- Link
-- Context menu (intended for actions)
-- Formatted text: \`formatted-number\`, \`formatted-account\` and \`formatted-date\`
-
-**Note**: Most cell types (badge, image, button) accept standard component properties, allowing full customization.
+Cell types correspond to their respective Green Design System components and accept their available properties for customization.
         `,
       },
     },
