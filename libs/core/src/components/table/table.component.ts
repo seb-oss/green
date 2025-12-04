@@ -431,7 +431,14 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         const value = resolve(config.value)
         const formatter =
           Table.FormatNumber[config.format || 'decimalsAndThousands']
-        return formatter(value, config.locale, config.currency)
+        return formatter(value, config.locale, config.currency, config.decimals)
+      }
+
+      case 'formatted-number': {
+        const value = resolve(config.value)
+        const formatter =
+          Table.FormatNumber[config.format || 'decimalsAndThousands']
+        return formatter(value, config.locale, config.currency, config.decimals)
       }
 
       case 'formatted-account': {

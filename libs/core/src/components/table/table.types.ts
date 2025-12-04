@@ -159,6 +159,7 @@ export interface FormattedNumber {
   value: number | string | ((row: any) => number | string)
   locale?: string
   currency?: string
+  decimals?: number
   format?: NumberFormats
 }
 
