@@ -292,6 +292,51 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     }
   }
 
+  connectedCallback(): void {
+    super.connectedCallback()
+
+    this.updateComplete.then(() => {
+      const dataContainer = this.shadowRoot?.querySelector('.data')
+      if (dataContainer) {
+        const updateScrollState = () => {
+          const { scrollTop, scrollLeft, scrollWidth, clientWidth } =
+            dataContainer
+
+          // Vertical scroll
+          if (scrollTop > 0) {
+            dataContainer.classList.add('scrolled')
+          } else {
+            dataContainer.classList.remove('scrolled')
+          }
+
+          // Horizontal scroll
+          const maxScrollLeft = scrollWidth - clientWidth
+
+          if (scrollLeft <= 0) {
+            dataContainer.classList.add('scrolled-x-start')
+            dataContainer.classList.remove(
+              'scrolled-x-middle',
+              'scrolled-x-end',
+            )
+          } else if (scrollLeft >= maxScrollLeft - 1) {
+            dataContainer.classList.add('scrolled-x-end')
+            dataContainer.classList.remove(
+              'scrolled-x-start',
+              'scrolled-x-middle',
+            )
+          } else {
+            dataContainer.classList.add('scrolled-x-middle')
+            dataContainer.classList.remove('scrolled-x-start', 'scrolled-x-end')
+          }
+        }
+
+        dataContainer.addEventListener('scroll', updateScrollState)
+        // Initial check
+        updateScrollState()
+      }
+    })
+  }
+
   /**
    * Retrieves template content for the given slot name.
    * Uses caching to prevent repeated DOM queries for better performance in large tables.
@@ -865,13 +910,15 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     const caption = `${msg('Data table with')} ${this._total} ${msg('rows')}`
 
     return html`
-      <div class=${CLASSES}>
-        <table aria-label="${caption}">
-          <caption class="visually-hidden">
-            ${caption}
-          </caption>
-          ${this.#renderTableHeader()} ${this.#renderTableBody()}
-        </table>
+      <div class="data-container">
+        <div class=${CLASSES}>
+          <table aria-label="${caption}">
+            <caption class="visually-hidden">
+              ${caption}
+            </caption>
+            ${this.#renderTableHeader()} ${this.#renderTableBody()}
+          </table>
+        </div>
       </div>
     `
   }

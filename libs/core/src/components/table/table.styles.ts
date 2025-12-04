@@ -62,15 +62,21 @@ export const TableStyles = css`
   }
 
   /* Container that enables horizontal scroll */
+  .data-container {
+    border-radius: var(--gds-sys-radius-m);
+    border-width: var(--gds-sys-space-5xs);
+    border-style: solid;
+    border-color: var(--gds-sys-color-border-subtle-01);
+  }
+
   .data {
     width: 100%;
     overflow-x: auto;
     overflow-y: auto;
     max-height: var(--_table-height);
     box-sizing: border-box;
-    border-radius: var(--gds-sys-radius-m);
-    border: var(--gds-sys-space-5xs) solid var(--gds-sys-color-border-subtle-01);
     padding: var(--table-data-padding);
+    position: relative;
   }
 
   table {
@@ -105,12 +111,6 @@ export const TableStyles = css`
   }
 
   /* Table Header */
-
-  thead {
-    position: sticky;
-    top: 2px;
-    z-index: 10;
-  }
 
   thead tr th {
     padding-block: var(--gds-sys-space-3xs);
@@ -565,14 +565,15 @@ export const TableStyles = css`
 
   /* Scroll driven animation */
   @supports (animation-timeline: scroll()) {
-    /* Vertical scroll on rows */
     tbody tr {
       animation-name: ROW_ANIMATION_VERTICAL, ROW_ANIMATION_VERTICAL;
       animation-fill-mode: both;
       animation-timing-function: ease-in-out;
       animation-direction: normal, reverse;
       animation-timeline: view(block);
-      animation-range: entry, exit;
+      animation-range:
+        entry,
+        exit -40px;
     }
 
     @keyframes ROW_ANIMATION_VERTICAL {
@@ -583,9 +584,8 @@ export const TableStyles = css`
       }
     }
 
-    /* Horizontal scroll on cells */
-    tbody td .cell-content,
-    thead th .column-header {
+    /* tbody td .cell-content,
+    thead th .column-header { 
       animation-name: CELL_ANIMATION_HORIZONTAL, CELL_ANIMATION_HORIZONTAL;
       animation-fill-mode: both;
       animation-timing-function: ease-in-out;
@@ -600,30 +600,88 @@ export const TableStyles = css`
         filter: blur(12px);
         translate: 4px 0px;
       }
+    } */
+
+    thead {
+      position: sticky;
+      top: 4px;
+      z-index: 10;
+      transition: box-shadow 200ms ease;
+      border-radius: var(--gds-sys-radius-s);
+      will-change: transform;
+    }
+
+    thead {
+      background-color: var(--gds-sys-color-l1-neutral-01);
+    }
+
+    .data.scrolled thead {
+      box-shadow:
+        var(--gds-sys-shadow-l-01),
+        var(--gds-sys-shadow-l-02),
+        inset 0 -4px 6px var(--gds-sys-color-l1-neutral-01);
+      backdrop-filter: blur(8px);
+      background: color-mix(
+        in srgb,
+        var(--gds-sys-color-l2-neutral-01),
+        transparent 30%
+      );
     }
 
     @media (prefers-reduced-transparency: no-preference) {
-      thead tr th {
+      .data.scrolled thead tr th {
         background: transparent;
       }
     }
 
-    thead tr {
-      box-shadow: var(--gds-sys-shadow-l-01), var(--gds-sys-shadow-l-02);
-      border-radius: var(--gds-sys-radius-s);
-      backdrop-filter: blur(12px);
-      background: color-mix(
-        in srgb,
-        var(--gds-sys-color-l2-neutral-01),
-        transparent 20%
+    /* Horizontal scroll */
+    @property --left-fade {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 0;
+    }
+
+    @property --right-fade {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 0;
+    }
+
+    @keyframes scrollfade {
+      0% {
+        --left-fade: 0;
+      }
+      10%,
+      100% {
+        --left-fade: 3rem;
+      }
+      0%,
+      90% {
+        --right-fade: 3rem;
+      }
+      100% {
+        --right-fade: 0;
+      }
+    }
+
+    .data {
+      overflow-x: scroll;
+      mask: linear-gradient(
+        to right,
+        #0000,
+        #ffff var(--left-fade) calc(100% - var(--right-fade)),
+        #0000
       );
+      animation: scrollfade;
+      animation-timeline: --scrollfade;
+      scroll-timeline: --scrollfade x;
     }
   }
 
   @supports not (animation-timeline: scroll()) {
     tbody tr {
       will-change: opacity, filter, translate;
-      transition: all 842ms cubic-bezier(0.22, 0.61, 0.36, 1);
+      transition: all 242ms cubic-bezier(0.22, 0.61, 0.36, 1);
 
       @starting-style {
         opacity: 0;
