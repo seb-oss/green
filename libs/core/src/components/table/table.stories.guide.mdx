@@ -134,14 +134,21 @@ const columns: Types.Column[] = [...]
 const dataProvider = async (request: Types.Request): Promise<Types.Response<DataRow>> => {...}
 ```
 
+ 
 ### Basic Column
+
+A column configuration maps data properties to table columns with display and behavior options.
 
 ```typescript
 const columns: TableColumn[] = [
   {
-    key: 'title',          // Property key in your data
-    label: 'Title',        // Column header text
-    sortable: true,        // Enable sorting
+    key: 'title',     // Property key in your data row object
+    label: 'Title',   // Column header text displayed to users
+    sortable: true,   // Enables click-to-sort on column header
+    align: 'start',   // Vertical alignment: 'start' | 'center' | 'stretch' | 'end'
+    justify: 'start', // Justify content horizontally: 'start' | 'center' | 'space-between' | 'end'
+    visible: true,    // Controls column visibility (used on the settings dropdown)
+    width: '200px',   // Fixed column width (When set content wraps automatically)
   }
 ]
 ```

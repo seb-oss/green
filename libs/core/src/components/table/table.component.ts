@@ -238,7 +238,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       ...this._view,
       page: Number(this.page ?? 1),
       rows: Number(this.rows ?? 10),
-      visibleColumns: new Set(this.columns.map((col) => col.key)),
+      visibleColumns: new Set(
+        this.columns
+          .filter((col) => col.visible !== false)
+          .map((col) => col.key),
+      ),
     }
   }
 

@@ -147,6 +147,7 @@ export const Users = {
       key: 'role',
       label: 'Role',
       sortable: true,
+      visible: false,
     },
     {
       key: 'department',
