@@ -7,9 +7,9 @@ export const TableStyles = css`
     font: var(--gds-sys-text-detail-book-s);
     color: var(--gds-sys-color-content-neutral-01);
     text-align: left;
-    --table-border: var(--gds-sys-space-5xs) solid
-      var(--gds-sys-color-border-subtle-01);
     --_table-height: 80vh;
+    --_table-border-width: var(--gds-sys-space-5xs);
+    --_table-border-color: var(--gds-sys-color-border-subtle-01);
   }
 
   /* Density Modes */
@@ -52,6 +52,31 @@ export const TableStyles = css`
     --table-data-padding: var(--gds-sys-space-3xs) var(--gds-sys-space-xs);
   }
 
+  /* Secondary and Tertiary */
+  .data.variant-secondary,
+  .data.variant-tertiary {
+    --_table-header-bg: var(--gds-sys-color-l2-neutral-01);
+    --_table-header-hover: var(--gds-sys-color-l3-neutral-02);
+    --_table-header-active: var(--gds-sys-color-l3-neutral-03);
+    --_table-row-hover: var(--gds-sys-color-l2-neutral-01);
+    --_table-row-selected-hover: var(--gds-sys-color-l3-neutral-03);
+    --_table-row-striped: var(--gds-sys-color-l2-neutral-01);
+  }
+
+  /* Primary variant */
+  .data.variant-primary {
+    --_table-header-bg: var(--gds-sys-color-l2-neutral-02);
+    --_table-header-hover: var(--gds-sys-color-l3-neutral-02);
+    --_table-header-active: var(--gds-sys-color-l3-neutral-03);
+    --_table-row-hover: color-mix(
+      in srgb,
+      var(--gds-sys-color-l3-neutral-02),
+      var(--gds-sys-color-state-neutral-01)
+    );
+    --_table-row-selected-hover: var(--gds-sys-color-l3-neutral-03);
+    --_table-row-striped: var(--gds-sys-color-l2-neutral-01);
+  }
+
   /* Apply density variables */
   .table {
     display: flex;
@@ -62,12 +87,6 @@ export const TableStyles = css`
   }
 
   /* Container that enables horizontal scroll */
-  .data-container {
-    border-radius: var(--gds-sys-radius-m);
-    border-width: var(--gds-sys-space-5xs);
-    border-style: solid;
-    border-color: var(--gds-sys-color-border-subtle-01);
-  }
 
   .data {
     width: 100%;
@@ -114,7 +133,8 @@ export const TableStyles = css`
 
   thead tr th {
     padding-block: var(--gds-sys-space-3xs);
-    background: var(--gds-sys-color-l2-neutral-01);
+    /*  background: var(--gds-sys-color-l2-neutral-01); */
+    background: var(--_table-header-bg);
   }
 
   thead th.sortable {
@@ -136,11 +156,13 @@ export const TableStyles = css`
   }
 
   th.sortable .column-header:hover {
-    background-color: var(--gds-sys-color-l3-neutral-02);
+    /* background-color: var(--gds-sys-color-l3-neutral-02); */
+    background-color: var(--_table-header-hover);
   }
 
   th.sortable:active .column-header {
-    background-color: var(--gds-sys-color-l3-neutral-03);
+    /*     background-color: var(--gds-sys-color-l3-neutral-03); */
+    background-color: var(--_table-header-active);
   }
 
   .column-label {
@@ -170,7 +192,9 @@ export const TableStyles = css`
   /* Table Body */
 
   tbody tr td {
-    border-top: var(--table-border);
+    border-top-style: solid;
+    border-top-width: var(--_table-border-width);
+    border-top-color: var(--_table-border-color);
   }
 
   tbody tr.loading {
@@ -212,11 +236,13 @@ export const TableStyles = css`
 
   @media (hover: hover) and (min-width: 768px) {
     tbody tr.selected:hover {
-      background-color: var(--gds-sys-color-l3-neutral-03);
+      /*     background-color: var(--gds-sys-color-l3-neutral-03); */
+      background-color: var(--_table-row-selected-hover);
     }
 
     tbody tr:hover:not(.selected) {
-      background-color: var(--gds-sys-color-l2-neutral-01);
+      /*       background-color: var(--gds-sys-color-l2-neutral-01); */
+      background-color: var(--_table-row-hover);
     }
   }
 
@@ -227,7 +253,8 @@ export const TableStyles = css`
 
   /* Striped */
   .striped tbody tr:not(.selected, :hover):nth-child(even) td {
-    background-color: var(--gds-sys-color-l2-neutral-01);
+    /*  background-color: var(--gds-sys-color-l2-neutral-01); */
+    background-color: var(--_table-row-striped);
   }
 
   .striped tbody tr td {
@@ -653,11 +680,11 @@ export const TableStyles = css`
       }
       10%,
       100% {
-        --left-fade: 3rem;
+        --left-fade: var(--gds-sys-space-4xl);
       }
       0%,
       90% {
-        --right-fade: 3rem;
+        --right-fade: var(--gds-sys-space-4xl);
       }
       100% {
         --right-fade: 0;

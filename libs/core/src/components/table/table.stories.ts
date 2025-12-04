@@ -531,6 +531,61 @@ Adjust density to optimize the table's visual hierarchy and information presenta
 }
 
 // ============================================================================
+// STYLING - VARIANT
+// ============================================================================
+
+export const Variant: Story = {
+  args: {
+    columns: Users.Columns,
+    data: Users.Data,
+    variant: 'secondary',
+  },
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'tertiary'],
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+The \`variant\` property controls the visual style of the table container card:
+
+**\`primary\`**, **\`secondary\`** (Default), **\`tertiary\`**  
+
+> Variant naming subject to change on the next major release
+        `,
+      },
+    },
+  },
+  render: (args) => {
+    const wrapperVariant = args.variant === 'tertiary' ? 'primary' : 'tertiary'
+
+    return html`
+      <gds-card variant="${wrapperVariant}" padding="l" border-radius="m">
+        <gds-table
+          .variant="${args.variant}"
+          .columns="${args.columns}"
+          .data="${args.data}"
+          searchable
+          settings
+          selectable
+          rows="5"
+        >
+          <template name="email-copy">
+            <gds-icon-copy></gds-icon-copy>
+          </template>
+          <template name="download-image">
+            <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
+          </template>
+        </gds-table>
+      </gds-card>
+    `
+  },
+}
+
+// ============================================================================
 // RESPONSIVE
 // ============================================================================
 

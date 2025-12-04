@@ -144,6 +144,16 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   })
   height?: string
 
+  /**
+   * Sets the visual variant of the table container card.
+   * Forwards to the underlying `gds-card` component.
+   * Accepts: `primary`, `secondary` (default), `tertiary`.
+   *
+   * > Variant naming will change in the next major release.
+   */
+  @property()
+  variant: 'primary' | 'secondary' | 'tertiary' = 'secondary'
+
   @state()
   private _isMobile = false
 
@@ -906,11 +916,12 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     const CLASSES = classMap({
       responsive: this.responsive,
       data: true,
+      [`variant-${this.variant}`]: true,
     })
     const caption = `${msg('Data table with')} ${this._total} ${msg('rows')}`
 
     return html`
-      <div class="data-container">
+      <gds-card variant="${this.variant}" padding="0" border-radius="m">
         <div class=${CLASSES}>
           <table aria-label="${caption}">
             <caption class="visually-hidden">
@@ -919,7 +930,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             ${this.#renderTableHeader()} ${this.#renderTableBody()}
           </table>
         </div>
-      </div>
+      </gds-card>
     `
   }
 
