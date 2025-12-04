@@ -1,3 +1,3 @@
 export * from './generated'
-export * from './core-renderer'
+export * from './scoping'
 export { GdsFormControlBase } from './form-control-base'

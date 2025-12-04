@@ -14,7 +14,7 @@ import {
 import { ɵDomRendererFactory2 as DomRendererFactory2 } from '@angular/platform-browser'
 
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
-import { SCOPE_RESOLVER, ScopeResolver } from './scope-resolver'
+import { SCOPE_RESOLVER, ScopeResolver } from '../scope-resolver'
 
 export class GdsCoreRenderer implements Renderer2 {
   constructor(
