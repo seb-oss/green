@@ -426,7 +426,7 @@ Alignment varies by action type:
 }
 
 // ============================================================================
-// STYLING - VARIANTS
+// STYLING - Plain
 // ============================================================================
 
 export const Plain: Story = {
@@ -557,9 +557,9 @@ export const Variant: Story = {
     docs: {
       description: {
         story: `
-The \`variant\` property controls the visual style of the table container card:
+The \`variant\` property controls the visual style of the table container card.
 
-**\`primary\`**, **\`secondary\`** (Default), **\`tertiary\`**  
+\`primary\`, \`secondary\` (Default), \`tertiary\` 
 
 > Variant naming subject to change on the next major release
         `,
