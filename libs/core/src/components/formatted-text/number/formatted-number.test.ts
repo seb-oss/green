@@ -14,6 +14,7 @@ const values = ['1234.5', 1234.5]
 
 const locales = ['sv-SE', 'en-GB'] as const
 const currencies = ['SEK', 'EUR'] as const
+const decimals = 3
 
 const formats: Record<
   NumberFormats,
@@ -27,14 +28,14 @@ const formats: Record<
   decimalsAndThousands: {
     expected: {
       'sv-SE': {
-        'No Currency': '1 234,50',
-        SEK: '1 234,50 kr',
-        EUR: '1 234,50 €',
+        'No Currency': '1 234,500',
+        SEK: '1 234,500 kr',
+        EUR: '1 234,500 €',
       },
       'en-GB': {
-        'No Currency': '1,234.50',
-        SEK: 'SEK 1,234.50',
-        EUR: '€1,234.50',
+        'No Currency': '1,234.500',
+        SEK: 'SEK 1,234.500',
+        EUR: '€1,234.500',
       },
     },
   },
@@ -48,13 +49,14 @@ describe('GdsFormattedNumber', () => {
           const currencyLabel = currency ?? 'No Currency'
 
           for (const value of values) {
-            it(`Value type: ${typeof value} Format: ${format} Locale: ${locale} Currency: ${currencyLabel}`, async () => {
+            it(`Value type: ${typeof value} Format: ${format} Locale: ${locale} Currency: ${currencyLabel} Decimals: ${decimals}`, async () => {
               const element: GdsFormattedNumber = await fixture(
                 html`<gds-formatted-number
                   .value=${value}
                   .locale=${locale}
                   .currency=${currency}
                   .format=${format}
+                  .decimals=${decimals}
                 ></gds-formatted-number>`,
               )
               await element.updateComplete
