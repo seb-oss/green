@@ -19,11 +19,9 @@ You also need to handle Green Core's [element name scoping](/docs/concepts-scopi
 - **Use the `GdsCoreRenderer` custom renderer** (preferred)<br/>
   This renderer automatically applies scoping to all Green Core elements in your template.
 - **Use the `GdsCoreWrapperModule` module**<br/>
-  This module provides a directive, `*gdsCoreElement` that you can use to apply scoping to individual elements in your template.
+  This module provides a directive, `*gdsCoreScope` that you can use to apply scoping to individual sections of your template.
 
 The renderer is the most convenient way to use Green Core components with Angular, but the directive can provide more explicit control when needed, or should the renderer conflict with other custom renderers, or cause any other unexpected side effects.
-
-With both the renderer and the directive, you can provide a local reference of the `getScopedTagName` function from `@sebgroup/green-core/scoping`. By doing that, you ensure that the scope resolver comes from the same package version that you import the components from.
 
 ### Using `GdsCoreRenderer`
 
@@ -33,13 +31,10 @@ The `GdsCoreRenderer` is a custom renderer that automatically applies scoping to
 
 ```ts
 import { provideCoreRenderer } from '@sebgroup/green-core-ng'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 @NgModule({
-    // Provides `GdsCoreRenderer` as a custom renderer, with a local reference to the `getScopedTagName` function
-    providers: [provideCoreRenderer(getScopedTagName)],
-    // CUSTOM_ELEMENTS_SCHEMA is still needed
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    // Provides `GdsCoreRenderer` as a custom renderer
+    providers: [provideCoreRenderer()],
 })
 ```
 
@@ -111,19 +106,11 @@ The `GdsCoreScopeModule` is a module that provides a directive, `*gdsCoreScope`,
 **In your module:**
 
 ```ts
-import { GdsCoreScopeModule, SCOPE_RESOLVER } from '@sebgroup/green-core-ng'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { GdsCoreScopeModule } from '@sebgroup/green-core-ng'
 
 @NgModule({
     // Add the GdsCoreScopeModule to the `imports` array
     imports: [GdsCoreScopeModule],
-    // Optional, but recommended, provide a local reference to the `getScopedTagName` function
-    providers: [
-        {
-          provide: SCOPE_RESOLVER,
-          useValue: { getScopedTagName },
-        },
-      ],
 })
 ```
 Use the web component in your template with the `*gdsCoreScope` directive.
