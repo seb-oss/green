@@ -12,6 +12,8 @@ Angular has support for using web components directly by using [`CUSTOM_ELEMENTS
 
 To improve this situation, Green provides a wrapper library for Angular. To use it, install `@sebgroup/green-core-ng` instead of `@sebgroup/green-core` in your project. The wrapper library is automatically built, versioned and published alongside Core, and has `@sebgroup/green-core` defined as a sub-dependency, so you typically only need to have `@sebgroup/green-core-ng` as a direct dependency. Since the wrapper components are tightly mapped to their underlying counterparts, it's important that the versions of these two packages are always in sync in your project.
 
+To migrate existing code from using `@sebgroup/green-core` with `CUSTOM_ELEMENTS_SCHEMA`, check out the [migration section](#migrating-from-custom_elements_schema) at the end of this document.
+
 ## Scoping
 
 You also need to handle Green Core's [element name scoping](/docs/concepts-scoping--docs). There are two ways to do this:
@@ -43,7 +45,7 @@ Or, if you are only using standalone components, you can either create a root ap
 ```ts
 // app.config.ts
 const appConfig: ApplicationConfig = {
-  providers: [...other providers..., provideCoreRenderer(getScopedTagName)],
+  providers: [...other providers..., provideCoreRenderer()],
 };
 
 // main.ts
@@ -91,11 +93,10 @@ All you need to do on your end is to use `provideCoreRendererWithAnimations()` i
 ```ts
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { provideCoreRendererWithAnimations } from '@sebgroup/green-core-ng'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 @NgModule({
     imports: [BrowserAnimationsModule] // You also need to make sure you have imported the `BrowserAnimationsModule` module
-    providers: [provideCoreRendererWithAnimations(getScopedTagName)],
+    providers: [provideCoreRendererWithAnimations()],
 })
 ```
 
@@ -149,3 +150,25 @@ This assumes you have routes already defined in `routes`.
 ```
 
 This should work as expected, with the `href` attribute being set automatically based on the `routerLink` value, and the `selected` property being set based on the active route.
+
+## Migrating from CUSTOM_ELEMENTS_SCHEMA
+
+To migrate an existing Angular project that uses Green Core components with `CUSTOM_ELEMENTS_SCHEMA`, you need to do the following steps:
+
+1. **Remove `CUSTOM_ELEMENTS_SCHEMA`** from your module or component schemas.
+2. **Install `@sebgroup/green-core-ng`** and replace any imports of `@sebgroup/green-core` with `@sebgroup/green-core-ng`.\
+   Example:
+   ```ts
+    // Before
+    import { GdsButton } from '@sebgroup/green-core'
+
+    // After
+    import { GdsButtonComponent } from '@sebgroup/green-core-ng'
+
+    @Component({
+        imports: [GdsButtonComponent], // Add to imports array
+    })
+    // ...
+    ```
+3. **Set up scoping** using either the `GdsCoreRenderer` or the `GdsCoreScopeModule` as described above.
+4. You can also remove any usages of `NggCoreFormsModule` and `NggCoreRoutingModule`, as these aspects are now handled out of the box.
