@@ -513,6 +513,7 @@ export const Variant: Story = {
     columns: Users.Columns,
     data: Users.Data,
     variant: 'secondary',
+    density: 'comfortable',
   },
   argTypes: {
     variant: {
@@ -538,6 +539,7 @@ These variants can be used: \`primary\`, \`secondary\` (Default), \`tertiary\`
     return html`
       <gds-card variant="${wrapperVariant}" padding="l" border-radius="m">
         <gds-table
+          .density="${args.density}"
           .variant="${args.variant}"
           .columns="${args.columns}"
           .data="${args.data}"

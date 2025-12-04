@@ -921,6 +921,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       responsive: this.responsive,
       data: true,
       [`variant-${this.variant}`]: true,
+      loading: this._loading,
+      loaded: !this._loading && !this._loaded,
     })
     const caption = `${msg('Data table with')} ${this._total} ${msg('rows')}`
 

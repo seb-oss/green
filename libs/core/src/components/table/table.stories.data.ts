@@ -164,7 +164,6 @@ export const Users = {
           value: (row: UserData) => row.status,
           variant: (row: UserData) =>
             row.status === 'Active' ? 'positive' : 'negative',
-          /*  size: 'small', */
         },
       },
     },
@@ -181,7 +180,6 @@ export const Users = {
         trail: {
           type: 'badge',
           value: 'SEK',
-          /*     size: 'small', */
         },
       },
     },
