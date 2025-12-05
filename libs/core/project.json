@@ -37,7 +37,7 @@
             "glob": "**/*.svg",
             "input": "libs/core/src/components/icon/assets",
             "output": "assets/icons"
-          },
+          }
         ]
       }
     },
@@ -144,6 +144,18 @@
       ],
       "options": {
         "command": "node libs/core/build-scripts/generate-react.cjs"
+      }
+    },
+    "generate-mcp-data": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "build-custom-elements-json"
+      ],
+      "outputs": [
+        "{workspaceRoot}/libs/core/src/generated/mcp"
+      ],
+      "options": {
+        "command": "tsx libs/core/build-scripts/generate-mcp-data.ts"
       }
     },
     "test": {

@@ -12,6 +12,7 @@ import {
   ComponentEvent,
   MethodInfo,
   SlotInfo,
+  SubcomponentInfo,
 } from './component-meta.types'
 
 export type { ComponentData }
@@ -72,6 +73,7 @@ export class CemParser {
       isFormControl: this.isFormControl(declaration),
       isLinkComponent: this.isLinkComponent(declaration),
       isCheckboxComponent: this.isCheckboxComponent(tagName),
+      subcomponents: this.extractSubcomponents(declaration),
     }
   }
 
@@ -201,6 +203,25 @@ export class CemParser {
             optional: param.optional || false,
           })) || [],
       }))
+  }
+
+  /**
+   * Extracts subcomponent information from custom @subcomponent JSDoc tags
+   */
+  private static extractSubcomponents(
+    declaration: CustomElementDeclaration,
+  ): SubcomponentInfo[] | undefined {
+    // Check if the declaration has subcomponents (added by CEM plugin)
+    const subcomponents = (declaration as any).subcomponents
+
+    if (!subcomponents || !Array.isArray(subcomponents) || subcomponents.length === 0) {
+      return undefined
+    }
+
+    return subcomponents.map((sub: any) => ({
+      tagName: sub.tagName,
+      description: sub.description,
+    }))
   }
 
   /**

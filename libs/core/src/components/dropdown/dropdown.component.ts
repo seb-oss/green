@@ -736,6 +736,9 @@ class Dropdown extends GdsFormControlElement implements OptionsContainer {
  * @slot message - ***(deprecated - use `errorMessage` property instead)*** Error message to show below the input field whem there is a validation error.
  * @slot sub-label - ***(deprecated - use `supporting-text` property instead)*** Renders between the label and the trigger button.
  *
+ * @subcomponent gds-option - Defines an option in the dropdown
+ * @subcomponent gds-menu-heading - Defines a non-selectable heading in the dropdown options list
+ *
  * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
  * @event input - Fired when the value of the dropdown is changed through user interaction.
  * @event gds-ui-state - Fired when the dropdown is opened or closed by the user. Can be cancelled to prevent the dropdown from opening or closing.
