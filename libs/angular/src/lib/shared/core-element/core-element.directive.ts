@@ -12,6 +12,9 @@ import {
 
 import { SCOPE_RESOLVER } from '../scope-resolver'
 
+/**
+ * @deprecated Use `GdsCoreScopeDirective` from `@sebgroup/green-core-ng` instead.
+ */
 @Directive({
     selector: '[nggCoreElement]',
     standalone: false

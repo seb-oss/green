@@ -12,26 +12,29 @@ export const Focusable = <T extends Constructor<LitElement>>(superClass: T) => {
       super.focus(options)
     }
 
-    onblur = (e: FocusEvent) => {
-      this.setAttribute('tabindex', '-1')
-      this.dispatchEvent(
-        new FocusEvent('gds-blur', {
-          bubbles: false,
-          composed: true,
-          relatedTarget: e.relatedTarget,
-        }),
-      )
+    connectedCallback(): void {
+      super.connectedCallback()
+      this.addEventListener('blur', (e: FocusEvent) => {
+        this.setAttribute('tabindex', '-1')
+        this.dispatchEvent(
+          new FocusEvent('gds-blur', {
+            bubbles: false,
+            composed: true,
+            relatedTarget: e.relatedTarget,
+          }),
+        )
+      })
+      this.addEventListener('focus', (e: FocusEvent) => {
+        this.dispatchEvent(
+          new FocusEvent('gds-focus', {
+            bubbles: false,
+            composed: true,
+            relatedTarget: e.relatedTarget,
+          }),
+        )
+      })
     }
 
-    onfocus = (e: FocusEvent) => {
-      this.dispatchEvent(
-        new FocusEvent('gds-focus', {
-          bubbles: false,
-          composed: true,
-          relatedTarget: e.relatedTarget,
-        }),
-      )
-    }
   }
 
   return HighlightableElement as Constructor<LitElement> & T

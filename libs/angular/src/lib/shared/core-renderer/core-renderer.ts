@@ -16,6 +16,9 @@ import { ɵDomRendererFactory2 as DomRendererFactory2 } from '@angular/platform-
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { SCOPE_RESOLVER, ScopeResolver } from '../scope-resolver'
 
+/**
+ * @deprecated NggCoreRenderer is moving to `@sebgroup/green-core-ng` and changing name to GdsCoreRenderer.
+ */
 export class NggCoreRenderer implements Renderer2 {
   constructor(
     private delegate: Renderer2,
@@ -24,7 +27,7 @@ export class NggCoreRenderer implements Renderer2 {
 
   createElement(name: string, namespace?: string | null): any {
     const scopedName = name.startsWith('gds-')
-      ? this.scopeResolver.getScopedTagName(name)
+      ? this.scopeResolver.getScopedTagName(name, true)
       : name
     return this.delegate.createElement(scopedName, namespace)
   }
@@ -125,6 +128,9 @@ export class NggCoreRenderer implements Renderer2 {
   }
 }
 
+/**
+ * @deprecated NggCoreRendererFactory is moving to `@sebgroup/green-core-ng` and changing name to GdsCoreRendererFactory.
+ */
 @Injectable()
 export class NggCoreRendererFactory implements RendererFactory2 {
   private readonly scopeResolver = inject(SCOPE_RESOLVER)
@@ -139,6 +145,7 @@ export class NggCoreRendererFactory implements RendererFactory2 {
 
 /**
  * Returns a AnimationRendererFactory configured to use the NggCoreRendererFactory as a delegate.
+ * @deprecated import from `@sebgroup/green-core-ng` instead
  */
 export function animationsCoreRendererFactory(
   delegate: DomRendererFactory2,
@@ -161,6 +168,8 @@ export function animationsCoreRendererFactory(
  * })
  * export class AppModule {}
  * ```
+ *
+ * @deprecated import from `@sebgroup/green-core-ng` instead
  */
 export const provideCoreRenderer = (resolver = getScopedTagName) => [
   {
@@ -189,6 +198,8 @@ export const provideCoreRenderer = (resolver = getScopedTagName) => [
  * })
  * export class AppModule {}
  * ```
+ *
+ * @deprecated import from `@sebgroup/green-core-ng` instead
  */
 export const provideCoreRendererWithAnimations = (
   resolver = getScopedTagName,

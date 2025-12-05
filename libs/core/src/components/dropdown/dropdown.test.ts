@@ -354,6 +354,7 @@ describe('<gds-dropdown>', () => {
     const option3 = el.querySelectorAll(getScopedTagName('gds-option'))[2]
     option3.textContent = 'Option 3 (updated)'
     await el.updateComplete
+    await aTimeout(0)
     await expect(el.displayValue).to.equal('Option 3 (updated)')
   })
 

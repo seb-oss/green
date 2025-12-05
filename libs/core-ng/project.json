@@ -1,0 +1,64 @@
+{
+  "name": "core-ng",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/core-ng/src",
+  "projectType": "library",
+  "tags": [
+    "lib"
+  ],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core-ng"
+      ],
+      "options": {
+        "project": "libs/core-ng/ng-package.json",
+        "tsConfig": "libs/core-ng/tsconfig.lib.prod.json"
+      },
+      "dependsOn": [
+        "generate-wrappers",
+        "core:build"
+      ],
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/core-ng/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/core-ng/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "generate-wrappers": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "core:build-custom-elements-json"
+      ],
+      "options": {
+        "command": "tsx --tsconfig libs/core-ng/tsconfig.json libs/core-ng/build-scripts/generate-wrappers.ts"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/core-ng"
+      ],
+      "dependsOn": [
+        "generate-wrappers",
+        "core:build"
+      ],
+      "options": {
+        "jestConfig": "libs/core-ng/jest.config.ts"
+      }
+    },
+    "version-as-snapshot": {
+      "executor": "@sebgroup/repo-tools:version-as-snapshot",
+      "options": {}
+    },
+    "publish-snapshot": {
+      "executor": "@sebgroup/repo-tools:publish-snapshot",
+      "options": {}
+    }
+  }
+}
