@@ -1,5 +1,5 @@
 ---
-'@sebgroup/green-core': patch
+'@sebgroup/green-core': minor
 ---
 
-Adding possibility to provide the ping attribute to GdsLink
+Adding possibility to provide the ping attribute to GdsLink and CardLinked
