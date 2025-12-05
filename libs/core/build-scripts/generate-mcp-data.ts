@@ -68,6 +68,23 @@ interface MCPIndex {
   }>
 }
 
+interface MCPGlobalIndex {
+  version: string
+  generatedAt: string
+  components: Array<{
+    name: string
+    tagName: string
+    className: string
+    description?: string
+    path: string
+    files: string[]
+    subcomponents?: Array<{
+      tagName: string
+      description?: string
+    }>
+  }>
+}
+
 /**
  * Normalizes a component name for matching with API slugs
  * Removes 'gds-' prefix and all dashes
@@ -540,6 +557,61 @@ async function processComponent(
 }
 
 /**
+ * Generates the global MCP index listing all components
+ */
+async function generateGlobalIndex(processedComponents: Array<{ component: ComponentData, dirName: string }>): Promise<void> {
+  console.log('\n📋 Generating global index...')
+
+  const indexComponents: MCPGlobalIndex['components'] = []
+
+  // Build index from processed components
+  for (const { component, dirName } of processedComponents) {
+    try {
+      const componentDir = path.join(OUTPUT_DIR, dirName)
+      const indexPath = path.join(componentDir, 'index.json')
+
+      const indexContent = await fs.readFile(indexPath, 'utf-8')
+      const componentIndex = JSON.parse(indexContent) as MCPIndex
+
+      // Build file list
+      const files: string[] = []
+      if (componentIndex.files.api) files.push('api')
+      if (componentIndex.files.guidelines) files.push('guidelines')
+      if (componentIndex.files.instructions) files.push('instructions')
+      if (componentIndex.files.angular) files.push('angular')
+      if (componentIndex.files.react) files.push('react')
+
+      indexComponents.push({
+        name: componentIndex.name,
+        tagName: component.tagName,
+        className: component.className,
+        description: component.description,
+        path: `${dirName}/`,
+        files,
+        subcomponents: componentIndex.subcomponents
+      })
+    } catch (error) {
+      console.warn(`  ⚠️  Error reading index for ${component.tagName}:`, error)
+    }
+  }
+
+  // Sort components alphabetically by tag name
+  indexComponents.sort((a, b) => a.tagName.localeCompare(b.tagName))
+
+  const globalIndex: MCPGlobalIndex = {
+    version: '1.0.0',
+    generatedAt: new Date().toISOString(),
+    components: indexComponents
+  }
+
+  // Write global index
+  const globalIndexPath = path.join(OUTPUT_DIR, 'index.json')
+  await fs.writeFile(globalIndexPath, JSON.stringify(globalIndex, null, 2), 'utf-8')
+
+  console.log(`✅ Generated global index with ${indexComponents.length} components`)
+}
+
+/**
  * Main execution
  */
 async function main() {
@@ -561,15 +633,32 @@ async function main() {
     // Process each component
     let successCount = 0
     let errorCount = 0
+    const processedComponents: Array<{ component: ComponentData, dirName: string }> = []
 
     for (const componentDir of componentDirs) {
       try {
         await processComponent(componentDir, components, guidelinesMap)
+
+        // Find the component data for this directory
+        const tagName = `gds-${componentDir}`
+        const component = components.find(c => c.tagName === tagName)
+        if (component) {
+          processedComponents.push({ component, dirName: componentDir })
+        }
+
         successCount++
       } catch (error) {
         console.error(`❌ Failed to process ${componentDir}:`, error)
         errorCount++
       }
+    }
+
+    // Generate global index
+    try {
+      await generateGlobalIndex(processedComponents)
+    } catch (error) {
+      console.error('❌ Failed to generate global index:', error)
+      errorCount++
     }
 
     // Summary
