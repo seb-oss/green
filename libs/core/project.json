@@ -37,6 +37,11 @@
             "glob": "**/*.svg",
             "input": "libs/core/src/components/icon/assets",
             "output": "assets/icons"
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/core/src/generated/mcp",
+            "output": "mcp"
           }
         ]
       }
