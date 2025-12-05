@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.18.0
+
+### Minor Changes
+
+- d0f643c: Adding possibility to provide the ping attribute to GdsLink and CardLinked
+
 ## 2.17.0
 
 ### Minor Changes
