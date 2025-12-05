@@ -662,32 +662,32 @@ export const TableStyles = css`
     }
 
     /* Horizontal scroll */
-    @property --left-fade {
+    @property --_inline-start-fade {
       syntax: '<length>';
       inherits: false;
       initial-value: 0;
     }
 
-    @property --right-fade {
+    @property --_inline-end-fade {
       syntax: '<length>';
       inherits: false;
       initial-value: 0;
     }
 
-    @keyframes scrollfade {
+    @keyframes table-scroll-inline-fade {
       0% {
-        --left-fade: 0;
+        --_inline-start-fade: 0;
       }
       10%,
       100% {
-        --left-fade: var(--gds-sys-space-4xl);
+        --_inline-start-fade: var(--gds-sys-space-4xl);
       }
       0%,
       90% {
-        --right-fade: var(--gds-sys-space-4xl);
+        --_inline-end-fade: var(--gds-sys-space-4xl);
       }
       100% {
-        --right-fade: 0;
+        --_inline-end-fade: 0;
       }
     }
 
@@ -696,12 +696,12 @@ export const TableStyles = css`
       mask: linear-gradient(
         to right,
         #0000,
-        #ffff var(--left-fade) calc(100% - var(--right-fade)),
+        #ffff var(--_inline-start-fade) calc(100% - var(--_inline-end-fade)),
         #0000
       );
-      animation: scrollfade;
-      animation-timeline: --scrollfade;
-      scroll-timeline: --scrollfade x;
+      animation: table-scroll-inline-fade;
+      animation-timeline: --table-scroll-inline-fade;
+      scroll-timeline: --table-scroll-inline-fade x;
     }
   }
 
@@ -715,6 +715,36 @@ export const TableStyles = css`
         filter: blur(20px);
         translate: 0 10px;
       }
+    }
+  }
+
+  /* Scrollbar */
+  .data {
+    --_scrollbar-color-thumb: var(--gds-sys-color-l3-neutral-01);
+    --_scrollbar-color-track: var(--gds-sys-color-l3-neutral-02);
+    --_scrollbar-width: var(--gds-sys-space-2xs);
+  }
+
+  @supports (scrollbar-width: auto) {
+    .data {
+      scrollbar-color: var(--_scrollbar-color-thumb) transparent;
+      scrollbar-width: var(--_scrollbar-width);
+    }
+  }
+
+  @supports selector(::-webkit-scrollbar) {
+    .data::-webkit-scrollbar {
+      width: var(--_scrollbar-width);
+      height: var(--_scrollbar-width);
+    }
+
+    .data::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .data::-webkit-scrollbar-thumb {
+      background: var(--_scrollbar-color-thumb);
+      border-radius: var(--gds-sys-radius-max);
     }
   }
 
