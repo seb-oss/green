@@ -13,6 +13,7 @@ export interface LinkProps {
   target?: '_self' | '_blank' | '_parent' | '_top'
   rel?: string
   download?: string | boolean
+  ping?: string
 }
 
 /**
@@ -57,6 +58,13 @@ export function withLinkProps<T extends Constructor<GdsElement>>(
      */
     @property({ type: String })
     download?: string | boolean
+
+    /**
+     * Specifies a space-separated list of URLs to which, when the link is followed,
+     * POST requests with the body ping will be sent by the browser.
+     */
+    @property()
+    ping?: string
   }
 
   return LinkPropsMixin as Constructor<LinkProps> & T

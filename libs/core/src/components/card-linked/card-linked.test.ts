@@ -44,4 +44,14 @@ describe('<gds-card-linked>', () => {
     const link = element.shadowRoot?.querySelector('a')
     expect(link?.getAttribute('download')).to.equal('file.pdf')
   })
+
+  it('handles ping attribute', async () => {
+    element = await fixture(
+      html`<gds-card-linked href="#" ping="pingUrl"
+        >Ping Link</gds-card-linked
+      >`,
+    )
+    const link = element.shadowRoot?.querySelector('a')
+    expect(link?.getAttribute('ping')).to.equal('pingUrl')
+  })
 })
