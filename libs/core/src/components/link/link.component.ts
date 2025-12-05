@@ -85,6 +85,7 @@ export class GdsLink extends withMarginProps(
         target=${ifDefined(this.target)}
         rel=${ifDefined(this.rel || this.#defaultRel)}
         download=${ifDefined(this.download)}
+        ping=${ifDefined(this.ping)}
         aria-label=${this.label || nothing}
       >
         <slot name="lead"></slot>

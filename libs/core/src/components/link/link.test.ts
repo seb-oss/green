@@ -77,6 +77,7 @@ describe('<gds-link>', () => {
           href="javascript:;"
           target="_self"
           rel="noopener"
+          ping="pingUrl"
           download
           >Link</gds-link
         >`,
@@ -88,6 +89,7 @@ describe('<gds-link>', () => {
       expect(shadowLink?.getAttribute('rel')).to.equal('noopener')
       expect(shadowLink?.getAttribute('target')).to.equal('_self')
       expect(shadowLink?.hasAttribute('download')).to.equal(true)
+      expect(shadowLink?.hasAttribute('ping')).to.equal('pingUrl')
     })
   })
 
