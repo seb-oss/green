@@ -40,6 +40,10 @@ export default function RootLayout({
         <App>
           <Root>{children}</Root>
         </App>
+        {/*  <script
+          crossOrigin="anonymous"
+          src="//unpkg.com/react-scan/dist/auto.global.js"
+        /> */}
         <Script id="data-layer">
           {`window["dataLayer"] = {
             "pageName":"seb.io",

@@ -76,6 +76,8 @@ export default {
           'Concepts',
           'Contributing',
         ],
+        method: 'alphabetical',
+        locales: 'en-US',
       },
     },
   },
