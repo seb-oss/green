@@ -13,7 +13,14 @@ export default function TableEdit() {
     if (!columnName) return
     setCustomColumns([
       ...customColumns,
-      { key: columnName, label: columnName, align: '', justify: '', width: '' },
+      {
+        key: columnName,
+        label: columnName,
+        sortable: false,
+        align: '',
+        justify: '',
+        width: '',
+      },
     ])
     setColumnName('')
   }
@@ -39,10 +46,17 @@ export default function TableEdit() {
         onInput={(e: any) => setColumnName(e.target.value)}
       />
       <Core.GdsButton size="small" onClick={addColumn}>
+        <Core.IconPlusSmall slot="lead" />
         Add Column
       </Core.GdsButton>
 
       <Core.GdsDivider />
+
+      {customColumns.length === 0 && (
+        <Core.GdsText font-size="detail" color="secondary" text-align="center">
+          No columns added yet. Add your first column above.
+        </Core.GdsText>
+      )}
 
       {customColumns.map((col, index) => (
         <Core.GdsCard key={index} variant="tertiary" padding="s">
@@ -66,29 +80,45 @@ export default function TableEdit() {
               onInput={(e: any) => updateColumn(index, 'label', e.target.value)}
             />
 
+            <Core.GdsCheckbox
+              label="Sortable"
+              checked={col.sortable}
+              onChange={(e: any) =>
+                updateColumn(index, 'sortable', e.target.checked)
+              }
+            />
+
             <Core.GdsDropdown
               label="Align"
               size="small"
-              value={col.align}
-              onChange={(e: any) =>
-                updateColumn(index, 'align', e.target.value)
-              }
+              value={col.align || ''}
+              onChange={(e: React.FormEvent<HTMLElement>) => {
+                const customElement = e.target as HTMLElement & {
+                  value: string
+                }
+                updateColumn(index, 'align', customElement.value || undefined)
+              }}
             >
               <Core.GdsOption value="">None</Core.GdsOption>
               <Core.GdsOption value="start">Start</Core.GdsOption>
+              <Core.GdsOption value="center">Center</Core.GdsOption>
               <Core.GdsOption value="end">End</Core.GdsOption>
             </Core.GdsDropdown>
 
             <Core.GdsDropdown
               label="Justify"
               size="small"
-              value={col.justify}
-              onChange={(e: any) =>
-                updateColumn(index, 'justify', e.target.value)
-              }
+              value={col.justify || ''}
+              onChange={(e: React.FormEvent<HTMLElement>) => {
+                const customElement = e.target as HTMLElement & {
+                  value: string
+                }
+                updateColumn(index, 'justify', customElement.value || undefined)
+              }}
             >
               <Core.GdsOption value="">None</Core.GdsOption>
               <Core.GdsOption value="start">Start</Core.GdsOption>
+              <Core.GdsOption value="center">Center</Core.GdsOption>
               <Core.GdsOption value="end">End</Core.GdsOption>
               <Core.GdsOption value="space-between">
                 Space Between
@@ -98,8 +128,10 @@ export default function TableEdit() {
             <Core.GdsInput
               label="Width"
               size="small"
-              value={col.width}
-              onInput={(e: any) => updateColumn(index, 'width', e.target.value)}
+              value={col.width || ''}
+              onInput={(e: any) =>
+                updateColumn(index, 'width', e.target.value || undefined)
+              }
             />
           </Core.GdsFlex>
         </Core.GdsCard>

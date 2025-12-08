@@ -21,8 +21,14 @@ const FEEDBACK_DATA = Array.from({ length: 50 }, (_, i) => ({
 }))
 
 export default function TablePreview() {
-  const { activePreset, customColumns, tableSettings, updateSetting } =
-    useTable()
+  const {
+    activePreset,
+    customColumns,
+    tableSettings,
+    updateSetting,
+    searchQuery,
+    setSearchQuery,
+  } = useTable()
   const tableRef = useRef<any>(null)
 
   useEffect(() => {
@@ -40,6 +46,40 @@ export default function TablePreview() {
     }
   }, [updateSetting])
 
+  // Sync search input with URL
+  useEffect(() => {
+    const table = tableRef.current
+    if (!table) return
+
+    const searchInput = table.shadowRoot?.querySelector(
+      'gds-input[type="text"]',
+    )
+    if (searchInput && searchQuery) {
+      searchInput.value = searchQuery
+    }
+  }, [searchQuery])
+
+  // Listen to search input changes
+  useEffect(() => {
+    const table = tableRef.current
+    if (!table) return
+
+    const handleSearch = (e: Event) => {
+      const input = e.target as HTMLInputElement
+      setSearchQuery(input.value)
+    }
+
+    const searchInput = table.shadowRoot?.querySelector(
+      'gds-input[type="text"]',
+    )
+    if (searchInput) {
+      searchInput.addEventListener('input', handleSearch)
+      return () => {
+        searchInput.removeEventListener('input', handleSearch)
+      }
+    }
+  }, [setSearchQuery])
+
   const dataProvider = async (request: any) => {
     const data =
       activePreset === 'users'
@@ -47,9 +87,23 @@ export default function TablePreview() {
         : activePreset === 'feedback'
           ? FEEDBACK_DATA
           : []
+
+    let filteredData = [...data]
+
+    // Apply search filter
+    const query = searchQuery || request.searchQuery
+    if (query) {
+      const lowerQuery = query.toLowerCase()
+      filteredData = filteredData.filter((item) =>
+        Object.values(item).some((value) =>
+          String(value).toLowerCase().includes(lowerQuery),
+        ),
+      )
+    }
+
     const start = (request.page - 1) * request.rows
     const end = start + request.rows
-    return { rows: data.slice(start, end), total: data.length }
+    return { rows: filteredData.slice(start, end), total: filteredData.length }
   }
 
   const columns =
@@ -84,9 +138,22 @@ export default function TablePreview() {
       : []
 
   const customDataProvider = async (request: any) => {
+    let filteredData = [...customData]
+
+    // Apply search filter
+    const query = searchQuery || request.searchQuery
+    if (query) {
+      const lowerQuery = query.toLowerCase()
+      filteredData = filteredData.filter((item) =>
+        Object.values(item).some((value) =>
+          String(value).toLowerCase().includes(lowerQuery),
+        ),
+      )
+    }
+
     const start = (request.page - 1) * request.rows
     const end = start + request.rows
-    return { rows: customData.slice(start, end), total: customData.length }
+    return { rows: filteredData.slice(start, end), total: filteredData.length }
   }
 
   if (columns.length === 0) {

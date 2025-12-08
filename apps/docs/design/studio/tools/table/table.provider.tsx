@@ -28,6 +28,8 @@ interface TableContextType {
   tableSettings: TableSettings
   setTableSettings: (settings: TableSettings) => void
   updateSetting: (key: string, value: any) => void
+  searchQuery: string
+  setSearchQuery: (query: string) => void
 }
 
 const TableContext = createContext<TableContextType | undefined>(undefined)
@@ -46,11 +48,22 @@ export const TableProvider = ({ children }: { children: ReactNode }) => {
   const getInitialState = () => {
     const preset = (searchParams.get('preset') as any) || 'users'
     const columnsParam = searchParams.get('columns')
+    const search = searchParams.get('search') || ''
 
     let columns: any[] = []
     if (columnsParam) {
       try {
-        columns = JSON.parse(columnsParam)
+        columns = columnsParam.split('|').map((col) => {
+          const [key, label, sortable, align, justify, width] = col.split(':')
+          return {
+            key,
+            label: label || key,
+            sortable: sortable === 'true',
+            align: align || undefined,
+            justify: justify || undefined,
+            width: width || undefined,
+          }
+        })
       } catch (e) {
         console.error('Failed to parse columns:', e)
       }
@@ -59,6 +72,7 @@ export const TableProvider = ({ children }: { children: ReactNode }) => {
     return {
       preset,
       columns,
+      search,
       settings: {
         density: (searchParams.get('density') as any) || 'comfortable',
         variant: (searchParams.get('variant') as any) || 'secondary',
@@ -82,56 +96,78 @@ export const TableProvider = ({ children }: { children: ReactNode }) => {
   const [tableSettings, setTableSettingsState] = useState<TableSettings>(
     initial.settings,
   )
+  const [searchQuery, setSearchQueryState] = useState<string>(initial.search)
 
   const updateURL = (
     preset: string,
     columns: any[],
     settings: TableSettings,
+    search: string,
   ) => {
-    const params = new URLSearchParams()
+    const parts: string[] = []
 
-    params.set('preset', preset)
+    parts.push(`preset=${preset}`)
 
     if (preset === 'custom' && columns.length > 0) {
-      params.set('columns', JSON.stringify(columns))
+      const columnsString = columns
+        .map((col) => {
+          const colParts = [
+            col.key,
+            col.label || col.key,
+            col.sortable ? 'true' : '',
+            col.align || '',
+            col.justify || '',
+            col.width || '',
+          ]
+          while (colParts[colParts.length - 1] === '') colParts.pop()
+          return colParts.join(':')
+        })
+        .join('|')
+
+      parts.push(`columns=${columnsString}`)
     }
 
+    if (search) parts.push(`search=${encodeURIComponent(search)}`)
     if (settings.density !== 'comfortable')
-      params.set('density', settings.density)
+      parts.push(`density=${settings.density}`)
     if (settings.variant !== 'secondary')
-      params.set('variant', settings.variant)
-    if (settings.rows !== 10) params.set('rows', String(settings.rows))
-    if (settings.height) params.set('height', settings.height)
-    if (settings.selectable) params.set('selectable', 'true')
-    if (settings.searchable) params.set('searchable', 'true')
-    if (settings.settings) params.set('settings', 'true')
-    if (settings.striped) params.set('striped', 'true')
+      parts.push(`variant=${settings.variant}`)
+    if (settings.rows !== 10) parts.push(`rows=${settings.rows}`)
+    if (settings.height) parts.push(`height=${settings.height}`)
+    if (settings.selectable) parts.push('selectable=true')
+    if (settings.searchable) parts.push('searchable=true')
+    if (settings.settings) parts.push('settings=true')
+    if (settings.striped) parts.push('striped=true')
 
-    const url = `${pathname}?${params.toString()}`
+    const url = `${pathname}?${parts.join('&')}`
     router.replace(url, { scroll: false })
   }
 
   const setActivePreset = (preset: 'users' | 'feedback' | 'custom') => {
     setActivePresetState(preset)
-    updateURL(preset, customColumns, tableSettings)
+    updateURL(preset, customColumns, tableSettings, searchQuery)
   }
 
   const setCustomColumns = (columns: any[]) => {
     setCustomColumnsState(columns)
-    // Auto-switch to custom when editing columns
     setActivePresetState('custom')
-    updateURL('custom', columns, tableSettings)
+    updateURL('custom', columns, tableSettings, searchQuery)
   }
 
   const setTableSettings = (settings: TableSettings) => {
     setTableSettingsState(settings)
-    updateURL(activePreset, customColumns, settings)
+    updateURL(activePreset, customColumns, settings, searchQuery)
   }
 
   const updateSetting = (key: string, value: any) => {
     const newSettings = { ...tableSettings, [key]: value }
     setTableSettingsState(newSettings)
-    updateURL(activePreset, customColumns, newSettings)
+    updateURL(activePreset, customColumns, newSettings, searchQuery)
+  }
+
+  const setSearchQuery = (query: string) => {
+    setSearchQueryState(query)
+    updateURL(activePreset, customColumns, tableSettings, query)
   }
 
   useEffect(() => {
@@ -139,6 +175,7 @@ export const TableProvider = ({ children }: { children: ReactNode }) => {
     setActivePresetState(newState.preset)
     setCustomColumnsState(newState.columns)
     setTableSettingsState(newState.settings)
+    setSearchQueryState(newState.search)
   }, [searchParams])
 
   return (
@@ -151,6 +188,8 @@ export const TableProvider = ({ children }: { children: ReactNode }) => {
         tableSettings,
         setTableSettings,
         updateSetting,
+        searchQuery,
+        setSearchQuery,
       }}
     >
       {children}
