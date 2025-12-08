@@ -71,10 +71,28 @@ export class CemParser {
       slots: this.extractSlots(declaration),
       methods: this.extractMethods(declaration),
       isFormControl: this.isFormControl(declaration),
+      isIconComponent: this.isIconComponent(declaration),
       isLinkComponent: this.isLinkComponent(declaration),
       isCheckboxComponent: this.isCheckboxComponent(tagName),
       subcomponents: this.extractSubcomponents(declaration),
     }
+  }
+
+  /**
+   * Checks if a component inherits from a specific base class
+   */
+  private static inheritsMembersFrom(
+    declaration: CustomElementDeclaration,
+    className: string,
+    modulePath: string,
+  ): boolean {
+    if (!declaration.members) return false
+
+    return declaration.members.some(
+      (member: any) =>
+        member.inheritedFrom?.name === className &&
+        member.inheritedFrom?.module === modulePath,
+    )
   }
 
   /**
@@ -83,12 +101,23 @@ export class CemParser {
   private static isFormControl(
     declaration: CustomElementDeclaration,
   ): boolean {
-    if (!declaration.members) return false
+    return this.inheritsMembersFrom(
+      declaration,
+      'GdsFormControlElement',
+      'src/components/form/form-control.ts',
+    )
+  }
 
-    return declaration.members.some(
-      (member: any) =>
-        member.inheritedFrom?.name === 'GdsFormControlElement' &&
-        member.inheritedFrom?.module === 'src/components/form/form-control.ts',
+  /**
+   * Checks if a component is an icon by looking for properties inherited from GdsIcon
+   */
+  private static isIconComponent(
+    declaration: CustomElementDeclaration,
+  ): boolean {
+    return this.inheritsMembersFrom(
+      declaration,
+      'GdsIcon',
+      'src/components/icon/icon.component.ts',
     )
   }
 
