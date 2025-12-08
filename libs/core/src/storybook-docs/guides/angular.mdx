@@ -20,7 +20,7 @@ You also need to handle Green Core's [element name scoping](/docs/concepts-scopi
 
 - **Use the `GdsCoreRenderer` custom renderer** (preferred)<br/>
   This renderer automatically applies scoping to all Green Core elements in your template.
-- **Use the `GdsCoreWrapperModule` module**<br/>
+- **Use the `GdsCoreScopeModule` module**<br/>
   This module provides a directive, `*gdsCoreScope` that you can use to apply scoping to individual sections of your template.
 
 The renderer is the most convenient way to use Green Core components with Angular, but the directive can provide more explicit control when needed, or should the renderer conflict with other custom renderers, or cause any other unexpected side effects.
