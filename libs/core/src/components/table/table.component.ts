@@ -862,9 +862,16 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  #renderSkeletonCell() {
+  #renderSkeletonCell(column?: Types.Column) {
+    const isResponsive = this._isMobile && this.responsive
+
+    const mobileLabel = isResponsive
+      ? html`<span class="skeleton skeleton-text"></span>`
+      : null
+
     return html`
       <div class="cell-content">
+        ${mobileLabel}
         <span class="skeleton skeleton-text"></span>
       </div>
     `
@@ -883,7 +890,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         )}
         ${this.columns
           .filter((column) => this._view.visibleColumns.has(column.key))
-          .map(() => html` <td>${this.#renderSkeletonCell()}</td> `)}
+          .map((column) => html`<td>${this.#renderSkeletonCell(column)}</td>`)}
         ${when(
           this.actions,
           () => html`
@@ -927,7 +934,12 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     const caption = `${msg('Data table with')} ${this._total} ${msg('rows')}`
 
     return html`
-      <gds-card variant="${this.variant}" padding="0" border-radius="m">
+      <gds-card
+        variant="${this.variant}"
+        padding="0"
+        border-radius="m"
+        border-width="0; s{5xs}"
+      >
         <div class=${CLASSES}>
           <table aria-label="${caption}">
             <caption class="visually-hidden">

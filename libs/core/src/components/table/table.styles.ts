@@ -383,7 +383,6 @@ export const TableStyles = css`
       position: sticky;
       top: var(--gds-sys-space-s);
       z-index: 2;
-      /*       box-shadow: var(--gds-sys-shadow-s-01), var(--gds-sys-shadow-s-02); */
       border-radius: var(--gds-sys-radius-s);
     }
 
@@ -421,15 +420,15 @@ export const TableStyles = css`
       max-width: 100%;
       box-sizing: border-box;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
       padding: var(--gds-sys-space-xs) 0;
       border: none;
     }
 
     .responsive td .column-label {
-      flex: 1;
       text-align: left;
+      margin-right: auto;
     }
 
     .responsive td .cell-content {
@@ -439,10 +438,6 @@ export const TableStyles = css`
     .responsive tr:hover,
     .responsive tr td:hover {
       background: none;
-    }
-
-    .responsive .cell-content {
-      justify-content: flex-end;
     }
   }
 
@@ -705,6 +700,13 @@ export const TableStyles = css`
     }
   }
 
+  @media (max-width: 760px) {
+    .responsive,
+    .responsive tbody tr {
+      animation: none;
+    }
+  }
+
   @supports not (animation-timeline: scroll()) {
     tbody tr {
       will-change: opacity, filter, translate;
@@ -760,4 +762,12 @@ export const TableStyles = css`
       animation: none;
     }
   }
+
+  /*  Performance consideration: Use content-visibility for efficient rendering of large tables, it should nto be used if scroll driven animations are present */
+  /*  @supports (content-visibility: auto) {
+    tbody tr {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 50px;
+    }
+  } */
 `
