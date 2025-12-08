@@ -510,32 +510,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     }
   }
 
-  /*  #renderCellContent(row: T, column: Types.Column) {
-    const { cell } = column
-    const value = this.#renderCell(cell?.value, row) ?? row[column.key]
-    const processedValue = column.justify ? html`<span>${value}</span>` : value
-    const isResponsive = this._isMobile && this.responsive
-
-    const mobileLabel = isResponsive
-      ? html`<span class="column-label" aria-hidden="true"
-          >${column.label}:</span
-        >`
-      : null
-
-    const ariaLabel = isResponsive ? `${column.label}: ` : ''
-
-    return html`
-      <div class="cell-content" aria-label="${ariaLabel}">
-        ${[
-          mobileLabel,
-          this.#renderCell(cell?.lead, row),
-          processedValue,
-          this.#renderCell(cell?.trail, row),
-        ]}
-      </div>
-    `
-  } */
-
   /**
    * Renders the content of a table cell with support for custom transformations,
    * cell types, and responsive mobile labels.
