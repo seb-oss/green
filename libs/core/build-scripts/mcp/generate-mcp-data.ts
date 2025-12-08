@@ -15,16 +15,17 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { CemParser, ComponentData } from '../src/utils/helpers/component-meta.js'
-import { kebabToCamelCase, toPascalCase, reactEventHandlerName } from '../src/utils/helpers/casing.js'
+import { CemParser, ComponentData } from '../../src/utils/helpers/component-meta.js'
+import { kebabToCamelCase, toPascalCase, reactEventHandlerName } from '../../src/utils/helpers/casing.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const COMPONENTS_DIR = path.join(__dirname, '../src/components')
-const OUTPUT_DIR = path.join(__dirname, '../src/generated/mcp')
+const COMPONENTS_DIR = path.join(__dirname, '../../src/components')
+const OUTPUT_DIR = path.join(__dirname, '../../src/generated/mcp')
 const GUIDELINES_API_URL = 'https://api.seb.io/components/components.json'
 const GUIDELINES_BASE_URL = 'https://api.seb.io/'
+const DOCS_CONFIG_PATH = path.join(__dirname, 'mcp-docs.config.json')
 
 interface GuidelineEntry {
   title: string
@@ -71,6 +72,20 @@ interface MCPIndex {
 interface MCPGlobalIndex {
   version: string
   generatedAt: string
+  components: string // Reference to components.json file
+  icons: string // Reference to icons.json file
+  guides: Array<{
+    title: string
+    path: string
+    category: string
+    description: string
+    tags: string[]
+  }>
+}
+
+interface MCPComponentsIndex {
+  version: string
+  generatedAt: string
   components: Array<{
     name: string
     tagName: string
@@ -83,7 +98,6 @@ interface MCPGlobalIndex {
       description?: string
     }>
   }>
-  icons: string // Reference to icons.json file
 }
 
 interface MCPIconsIndex {
@@ -99,12 +113,64 @@ interface MCPIconsIndex {
   }>
 }
 
+interface GuideConfig {
+  source: string
+  output: string
+  title: string
+  description: string
+  category: string
+  tags: string[]
+}
+
+interface DocsConfig {
+  guides: GuideConfig[]
+  concepts: GuideConfig[]
+}
+
 /**
  * Normalizes a component name for matching with API slugs
  * Removes 'gds-' prefix and all dashes
  */
 function normalizeComponentName(name: string): string {
   return name.replace(/^gds-/, '').replace(/-/g, '')
+}
+
+/**
+ * Converts MDX content to plain Markdown
+ * Removes MDX-specific syntax like imports and JSX elements
+ */
+function convertMdxToMarkdown(mdxContent: string): string {
+  let markdown = mdxContent
+
+  // Remove import statements
+  markdown = markdown.replace(/^import\s+.*?from\s+['"].*?['"]\s*$/gm, '')
+
+  // Remove JSX-style comments
+  markdown = markdown.replace(/\{\/\*[\s\S]*?\*\/\}/g, '')
+
+  // Remove <Meta> tags
+  markdown = markdown.replace(/<Meta\s+[^>]*\/>/g, '')
+  markdown = markdown.replace(/<Meta\s+[^>]*>[\s\S]*?<\/Meta>/g, '')
+
+  // Remove other common Storybook components (keep content where applicable)
+  markdown = markdown.replace(/<Markdown>([\s\S]*?)<\/Markdown>/g, '$1')
+
+  // Remove custom JSX components but keep their content
+  markdown = markdown.replace(/<[A-Z][a-zA-Z0-9]*[^>]*>([\s\S]*?)<\/[A-Z][a-zA-Z0-9]*>/g, '$1')
+
+  // Remove self-closing custom JSX components
+  markdown = markdown.replace(/<[A-Z][a-zA-Z0-9]*[^>]*\/>/g, '')
+
+  // Remove JSX attributes from HTML-like tags
+  markdown = markdown.replace(/<(\w+)\s+[^>]*?={{[^}]*}}[^>]*?>/g, '<$1>')
+
+  // Clean up excessive blank lines (more than 2)
+  markdown = markdown.replace(/\n{3,}/g, '\n\n')
+
+  // Trim leading/trailing whitespace
+  markdown = markdown.trim()
+
+  return markdown
 }
 
 /**
@@ -557,10 +623,10 @@ async function processComponent(
 /**
  * Generates the global MCP index listing all components
  */
-async function generateGlobalIndex(processedComponents: Array<{ component: ComponentData, dirName: string }>): Promise<void> {
+async function generateGlobalIndex(processedComponents: Array<{ component: ComponentData, dirName: string }>, guides: MCPGlobalIndex['guides']): Promise<void> {
   console.log('\n📋 Generating global index...')
 
-  const indexComponents: MCPGlobalIndex['components'] = []
+  const indexComponents: MCPComponentsIndex['components'] = []
   const indexIcons: MCPIconsIndex['icons'] = []
 
   // Build index from processed components
@@ -609,6 +675,15 @@ async function generateGlobalIndex(processedComponents: Array<{ component: Compo
 
   const timestamp = new Date().toISOString()
 
+  // Write components index
+  const componentsIndex: MCPComponentsIndex = {
+    version: '1.0.0',
+    generatedAt: timestamp,
+    components: indexComponents
+  }
+  const componentsIndexPath = path.join(OUTPUT_DIR, 'components.json')
+  await fs.writeFile(componentsIndexPath, JSON.stringify(componentsIndex, null, 2), 'utf-8')
+
   // Write icons index
   const iconsIndex: MCPIconsIndex = {
     version: '1.0.0',
@@ -618,18 +693,71 @@ async function generateGlobalIndex(processedComponents: Array<{ component: Compo
   const iconsIndexPath = path.join(OUTPUT_DIR, 'icons.json')
   await fs.writeFile(iconsIndexPath, JSON.stringify(iconsIndex, null, 2), 'utf-8')
 
-  // Write global index with reference to icons
+  // Write global index with references
   const globalIndex: MCPGlobalIndex = {
     version: '1.0.0',
     generatedAt: timestamp,
-    components: indexComponents,
-    icons: './icons.json'
+    components: './components.json',
+    icons: './icons.json',
+    guides
   }
   const globalIndexPath = path.join(OUTPUT_DIR, 'index.json')
   await fs.writeFile(globalIndexPath, JSON.stringify(globalIndex, null, 2), 'utf-8')
 
-  console.log(`✅ Generated global index with ${indexComponents.length} components`)
+  console.log(`✅ Generated components index with ${indexComponents.length} components`)
   console.log(`✅ Generated icons index with ${indexIcons.length} icons`)
+  console.log(`✅ Generated global index with ${guides.length} guides`)
+}
+
+/**
+ * Processes documentation guides from MDX to Markdown
+ */
+async function processGuides(): Promise<MCPGlobalIndex['guides']> {
+  console.log('\n📚 Processing documentation guides...')
+
+  try {
+    // Read the docs config
+    const configContent = await fs.readFile(DOCS_CONFIG_PATH, 'utf-8')
+    const docsConfig: DocsConfig = JSON.parse(configContent)
+
+    const allGuides = [...docsConfig.guides, ...docsConfig.concepts]
+    const guideMetadata: MCPGlobalIndex['guides'] = []
+
+    for (const guide of allGuides) {
+      try {
+        // Read MDX source
+        const sourcePath = path.join(__dirname, '../..', guide.source)
+        const mdxContent = await fs.readFile(sourcePath, 'utf-8')
+
+        // Convert to Markdown
+        const markdownContent = convertMdxToMarkdown(mdxContent)
+
+        // Write Markdown output
+        const outputPath = path.join(OUTPUT_DIR, guide.output)
+        await fs.mkdir(path.dirname(outputPath), { recursive: true })
+        await fs.writeFile(outputPath, markdownContent, 'utf-8')
+
+        // Add to metadata
+        guideMetadata.push({
+          title: guide.title,
+          path: guide.output,
+          category: guide.category,
+          description: guide.description,
+          tags: guide.tags
+        })
+
+        console.log(`  ✅ ${guide.title}`)
+      } catch (error) {
+        console.warn(`  ⚠️  Failed to process ${guide.title}:`, error)
+      }
+    }
+
+    console.log(`✅ Processed ${guideMetadata.length} guides`)
+    return guideMetadata
+  } catch (error) {
+    console.warn('⚠️  Error processing guides:', error)
+    return []
+  }
 }
 
 /**
@@ -667,9 +795,18 @@ async function main() {
       }
     }
 
+    // Process documentation guides
+    let guides: MCPGlobalIndex['guides'] = []
+    try {
+      guides = await processGuides()
+    } catch (error) {
+      console.error('❌ Failed to process guides:', error)
+      errorCount++
+    }
+
     // Generate global index
     try {
-      await generateGlobalIndex(processedComponents)
+      await generateGlobalIndex(processedComponents, guides)
     } catch (error) {
       console.error('❌ Failed to generate global index:', error)
       errorCount++

@@ -160,7 +160,7 @@
         "{workspaceRoot}/libs/core/src/generated/mcp"
       ],
       "options": {
-        "command": "tsx libs/core/build-scripts/generate-mcp-data.ts"
+        "command": "tsx libs/core/build-scripts/mcp/generate-mcp-data.ts"
       }
     },
     "test": {
