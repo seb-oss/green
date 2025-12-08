@@ -1014,21 +1014,21 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       return html`
         <gds-card variant="secondary" border-radius="m">
           <slot name="no-results">
-            <gds-flex flex-direction="column">
+            <gds-flex flex-direction="column" align-items="flex-start" gap="s">
               <gds-text tag="p" font="heading-s">
                 ${msg('No results found')}
               </gds-text>
               <gds-text tag="p" font="detail-book-s">
                 ${msg('No results for')} "${this._view.searchQuery}"
               </gds-text>
+              <gds-button
+                size="small"
+                label="${msg('Clear search for')} ${this._view.searchQuery}"
+                @click=${this.#handleSearchClear}
+              >
+                ${msg('Clear search')}
+              </gds-button>
             </gds-flex>
-            <gds-button
-              size="small"
-              label="${msg('Clear search for')} ${this._view.searchQuery}"
-              @click=${this.#handleSearchClear}
-            >
-              ${msg('Clear search')}
-            </gds-button>
           </slot>
         </gds-card>
       `
