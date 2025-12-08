@@ -69,6 +69,8 @@ export class ExampleComponent {
 
 ### Code Generation Pipeline
 
+**Pipeline Steps:**
+
 1. **Source**: Web components in `@sebgroup/green-core` are built with [Lit](https://lit.dev)
 2. **Manifest**: The build process for Core generates a [Custom Elements Manifest](https://custom-elements-manifest.open-wc.org/) (CEM) describing all components. The information is then by the `component-meta` module i Core, and accessed by this libarary from there.
 3. **Analysis**: The generator (`generate-wrappers.ts`) fetches the component-meta data to determine:
@@ -83,6 +85,49 @@ export class ExampleComponent {
    - Unit test file (`.component.spec.ts`)
    - Barrel export (`index.ts`)
 5. **Build**: The generated code is compiled and packaged using `ng-packagr`
+
+```mermaid
+graph TB
+    subgraph "1. @sebgroup/green-core"
+        A[Web Components TypeScript Source Files<br/>libs/core/src/components/]
+        A --> B[CEM Analyzer<br/>npx cem analyze --litelement]
+        B --> C[custom-elements.json<br/>Custom Elements Manifest]
+        C --> D[CemParser.parseAllComponents]
+        D --> E{Analyze Each Component}
+        E --> F[Extract Properties]
+        E --> G[Extract Events]
+        E --> H[Extract Slots]
+        E --> I[Extract Methods]
+        E --> J[Detect Special Types<br/>Form Controls, Links]
+        F & G & H & I & J --> K[ComponentData Objects]
+    end
+    
+    subgraph "2. @sebgroup/green-core-ng"
+        K --> L[AngularGenerator]
+        L --> M[Generate Imports<br/>Angular decorators, base classes]
+        L --> N[Generate Component Class<br/>@Component decorator + metadata]
+        L --> O[Generate Properties<br/>@Input with transformations]
+        L --> P[Generate Events<br/>@Output EventEmitters]
+        L --> Q[Generate Lifecycle Hooks<br/>OnInit, OnChanges, AfterViewInit]
+        M & N & O & P & Q --> R[Component Files]
+        
+        K --> S[TestGenerator]
+        S --> T[Test Files<br/>.component.spec.ts]
+        
+        R --> U[Barrel Exports<br/>index.ts per component]
+    end
+    
+    subgraph "3. Output Structure"
+        R --> V["src/generated/*"]
+    end
+    
+    subgraph "4. Build & Package"
+        V --> W["ng-packagr<br/>nx/angular:package"]
+        W --> X["dist/libs/core-ng/<br/>Published NPM Package"]
+    end
+
+    class B,D,L,S,W process
+```
 
 ### Runtime Behavior
 
