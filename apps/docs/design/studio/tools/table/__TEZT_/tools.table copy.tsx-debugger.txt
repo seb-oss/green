@@ -1,0 +1,452 @@
+'use client'
+
+import { createContext, Suspense, useContext, useEffect, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+
+import * as Core from '@sebgroup/green-core/react'
+
+// --- 1. INTERNAL TYPES ---
+
+type CellType =
+  | 'none'
+  | 'text'
+  | 'badge'
+  | 'image'
+  | 'icon'
+  | 'button'
+  | 'link'
+  | 'context-menu'
+  | 'formatted-number'
+  | 'formatted-account'
+  | 'formatted-date'
+
+export interface ColumnConfig {
+  id: string
+  label: string
+  key: string
+  sortable: boolean
+  slots: {
+    lead: CellType
+    value: CellType
+    trail: CellType
+  }
+}
+
+interface TableConfig {
+  searchable: boolean
+  selectable: boolean
+  settings: boolean
+  striped: boolean
+  plain: boolean
+  responsive: boolean
+  nocache: boolean
+  density: 'compact' | 'comfortable' | 'spacious'
+  variant: 'primary' | 'secondary' | 'tertiary'
+  rows: number
+  height: string
+}
+
+// --- 2. CONTEXT ---
+
+interface TableContextState {
+  config: TableConfig
+  setConfig: React.Dispatch<React.SetStateAction<TableConfig>>
+  columns: ColumnConfig[]
+  setColumns: React.Dispatch<React.SetStateAction<ColumnConfig[]>>
+}
+
+const TableContext = createContext<TableContextState | undefined>(undefined)
+
+const DEFAULT_CONFIG: TableConfig = {
+  searchable: true,
+  selectable: true,
+  settings: true,
+  striped: false,
+  plain: false,
+  responsive: true,
+  nocache: false,
+  density: 'comfortable',
+  variant: 'secondary',
+  rows: 10,
+  height: '',
+}
+
+// --- 3. PROVIDER ---
+
+function TableProviderInternal({ children }: { children: React.ReactNode }) {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const [isInitialized, setIsInitialized] = useState(false)
+
+  // State
+  const [config, setConfig] = useState<TableConfig>(DEFAULT_CONFIG)
+  const [columns, setColumns] = useState<ColumnConfig[]>([
+    {
+      id: 'init-1',
+      label: 'Example',
+      key: 'name',
+      sortable: true,
+      slots: { lead: 'none', value: 'text', trail: 'none' },
+    },
+  ])
+
+  // 1. Load from URL on Mount
+  useEffect(() => {
+    if (isInitialized) return
+
+    const newConfig = { ...DEFAULT_CONFIG }
+    let hasUrlState = false
+
+    // Parse Config
+    Object.keys(DEFAULT_CONFIG).forEach((k) => {
+      const key = k as keyof TableConfig
+      const val = searchParams.get(key)
+      if (val !== null) {
+        hasUrlState = true
+        if (typeof DEFAULT_CONFIG[key] === 'boolean') {
+          ;(newConfig as any)[key] = val === 'true'
+        } else if (typeof DEFAULT_CONFIG[key] === 'number') {
+          ;(newConfig as any)[key] = parseInt(val)
+        } else {
+          ;(newConfig as any)[key] = val
+        }
+      }
+    })
+
+    // Parse Columns
+    const colParam = searchParams.get('cols')
+    if (colParam) {
+      try {
+        setColumns(JSON.parse(atob(colParam)))
+        hasUrlState = true
+      } catch (e) {
+        console.error('Failed to parse columns from URL', e)
+      }
+    }
+
+    if (hasUrlState) {
+      setConfig(newConfig)
+    }
+
+    setIsInitialized(true)
+  }, [searchParams])
+
+  // 2. Sync to URL on Change
+  useEffect(() => {
+    if (!isInitialized) return
+
+    const params = new URLSearchParams()
+
+    // Serialize Config
+    Object.entries(config).forEach(([key, val]) => {
+      if (val !== DEFAULT_CONFIG[key as keyof TableConfig]) {
+        params.set(key, String(val))
+      }
+    })
+
+    // Serialize Columns (Base64 to keep URL clean-ish)
+    if (columns.length > 0) {
+      params.set('cols', btoa(JSON.stringify(columns)))
+    }
+
+    router.replace(`?${params.toString()}`, { scroll: false })
+  }, [config, columns, isInitialized, router])
+
+  return (
+    <TableContext.Provider value={{ config, setConfig, columns, setColumns }}>
+      {children}
+    </TableContext.Provider>
+  )
+}
+
+export function TableProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TableProviderInternal>{children}</TableProviderInternal>
+    </Suspense>
+  )
+}
+
+// --- 4. COLUMN CONFIGURATOR (CELLS UI) ---
+
+function CellsConfig() {
+  const ctx = useContext(TableContext)
+  if (!ctx) return null
+  const { columns, setColumns } = ctx
+
+  const updateColumn = (id: string, updates: Partial<ColumnConfig>) => {
+    setColumns((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, ...updates } : c)),
+    )
+  }
+
+  const updateSlot = (
+    id: string,
+    slot: keyof ColumnConfig['slots'],
+    type: string,
+  ) => {
+    setColumns((prev) =>
+      prev.map((c) =>
+        c.id === id ? { ...c, slots: { ...c.slots, [slot]: type } } : c,
+      ),
+    )
+  }
+
+  const addColumn = () => {
+    setColumns((prev) => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        label: 'New Column',
+        key: 'key',
+        sortable: false,
+        slots: { lead: 'none', value: 'text', trail: 'none' },
+      },
+    ])
+  }
+
+  const removeColumn = (id: string) => {
+    setColumns((prev) => prev.filter((c) => c.id !== id))
+  }
+
+  const moveColumn = (index: number, dir: 'up' | 'down') => {
+    if (
+      (dir === 'up' && index === 0) ||
+      (dir === 'down' && index === columns.length - 1)
+    )
+      return
+    const newCols = [...columns]
+    const target = dir === 'up' ? index - 1 : index + 1
+    const [moved] = newCols.splice(index, 1)
+    newCols.splice(target, 0, moved)
+    setColumns(newCols)
+  }
+
+  return (
+    <Core.GdsFlex flex-direction="column" gap="s">
+      <Core.GdsFlex justify-content="space-between" align-items="center">
+        <Core.GdsText font-weight="book">Columns Configuration</Core.GdsText>
+        <Core.GdsButton size="small" rank="secondary" onClick={addColumn}>
+          <Core.IconPlusSmall slot="lead" /> Add Column
+        </Core.GdsButton>
+      </Core.GdsFlex>
+
+      <Core.GdsDivider color="subtle-02" />
+
+      {columns.map((col, idx) => (
+        <Core.GdsFlex key={col.id} gap="s" data-column>
+          <Core.GdsCard width="100%" padding="xs" gap="s" border-radius="m">
+            <Core.GdsCard variant="secondary" padding="m">
+              <Core.GdsInput
+                value={col.label}
+                label="Column Label"
+                size="small"
+                onInput={(e: any) =>
+                  updateColumn(col.id, { label: e.target.value })
+                }
+              >
+                <Core.IconAi slot="lead" />
+              </Core.GdsInput>
+
+              <Core.GdsFlex gap="s" margin="s 0 0 0">
+                {/* LEAD SLOT */}
+                <Core.GdsDropdown
+                  label="Lead"
+                  size="small"
+                  value={col.slots.lead}
+                  onchange={(e: any) =>
+                    updateSlot(col.id, 'lead', e.target.value)
+                  }
+                >
+                  <span slot="trigger">{col.slots.lead}</span>
+                  <Core.GdsOption value="none">None</Core.GdsOption>
+                  <Core.GdsOption value="image">
+                    <Core.GdsFlex align-items="center" gap="s">
+                      <Core.IconImages /> Image
+                    </Core.GdsFlex>
+                  </Core.GdsOption>
+                  <Core.GdsOption value="icon">
+                    <Core.GdsFlex align-items="center" gap="s">
+                      <Core.IconStore /> Icon
+                    </Core.GdsFlex>
+                  </Core.GdsOption>
+                </Core.GdsDropdown>
+
+                {/* VALUE SLOT */}
+                <Core.GdsDropdown
+                  label="Value"
+                  size="small"
+                  value={col.slots.value}
+                  onchange={(e: any) =>
+                    updateSlot(col.id, 'value', e.target.value)
+                  }
+                >
+                  <span slot="trigger">{col.slots.value}</span>
+                  <Core.GdsOption value="text">Text</Core.GdsOption>
+                  <Core.GdsOption value="badge">
+                    <Core.GdsFlex align-items="center" gap="s">
+                      <Core.IconTag /> Badge
+                    </Core.GdsFlex>
+                  </Core.GdsOption>
+                  <Core.GdsOption value="formatted-number">
+                    <Core.GdsFlex align-items="center" gap="s">
+                      <Core.IconPostcard /> Number
+                    </Core.GdsFlex>
+                  </Core.GdsOption>
+                  <Core.GdsOption value="formatted-date">
+                    <Core.GdsFlex align-items="center" gap="s">
+                      <Core.IconPostcard /> Date
+                    </Core.GdsFlex>
+                  </Core.GdsOption>
+                </Core.GdsDropdown>
+
+                {/* TRAIL SLOT */}
+                <Core.GdsDropdown
+                  label="Trail"
+                  size="small"
+                  value={col.slots.trail}
+                  onchange={(e: any) =>
+                    updateSlot(col.id, 'trail', e.target.value)
+                  }
+                >
+                  <span slot="trigger">{col.slots.trail}</span>
+                  <Core.GdsOption value="none">None</Core.GdsOption>
+                  <Core.GdsOption value="badge">
+                    <Core.GdsFlex align-items="center" gap="s">
+                      <Core.IconTag /> Badge
+                    </Core.GdsFlex>
+                  </Core.GdsOption>
+                  <Core.GdsOption value="button">
+                    <Core.GdsFlex align-items="center" gap="s">
+                      <Core.IconCursor /> Button
+                    </Core.GdsFlex>
+                  </Core.GdsOption>
+                  <Core.GdsOption value="context-menu">
+                    <Core.GdsFlex align-items="center" gap="s">
+                      <Core.IconDotGridOneHorizontal /> Menu
+                    </Core.GdsFlex>
+                  </Core.GdsOption>
+                </Core.GdsDropdown>
+              </Core.GdsFlex>
+            </Core.GdsCard>
+
+            <Core.GdsFlex
+              gap="s"
+              align-items="center"
+              justify-content="space-between"
+              padding="0 m"
+            >
+              <Core.GdsCheckbox
+                label="Sorting"
+                checked={col.sortable}
+                onInput={(e: any) =>
+                  updateColumn(col.id, { sortable: e.target.checked })
+                }
+              />
+              <Core.GdsButton
+                size="xs"
+                rank="secondary"
+                variant="negative"
+                onClick={() => removeColumn(col.id)}
+              >
+                Remove
+              </Core.GdsButton>
+            </Core.GdsFlex>
+          </Core.GdsCard>
+
+          <Core.GdsFlex flex-direction="column">
+            <Core.GdsButton
+              label="Up"
+              rank="tertiary"
+              size="small"
+              disabled={idx === 0}
+              onClick={() => moveColumn(idx, 'up')}
+            >
+              <Core.IconChevronTop />
+            </Core.GdsButton>
+            <Core.GdsButton
+              label="Down"
+              rank="tertiary"
+              size="small"
+              disabled={idx === columns.length - 1}
+              onClick={() => moveColumn(idx, 'down')}
+            >
+              <Core.IconChevronBottom />
+            </Core.GdsButton>
+          </Core.GdsFlex>
+        </Core.GdsFlex>
+      ))}
+    </Core.GdsFlex>
+  )
+}
+
+// --- 5. DEBUG VIEW (Static Text) ---
+
+function DebugView() {
+  const ctx = useContext(TableContext)
+  if (!ctx) return null
+  const { config, columns } = ctx
+
+  return (
+    <Core.GdsCard variant="secondary" padding="m">
+      <Core.GdsText tag="h3" font-size="body-l">
+        Current Configuration (Static Data)
+      </Core.GdsText>
+      <Core.GdsDivider margin="m 0" />
+      <Core.GdsGrid columns="2" gap="l">
+        <div>
+          <Core.GdsText tag="h4" font-weight="bold">
+            Table Config
+          </Core.GdsText>
+          <pre
+            style={{
+              fontSize: '12px',
+              background: '#eee',
+              padding: '10px',
+              borderRadius: '4px',
+            }}
+          >
+            {JSON.stringify(config, null, 2)}
+          </pre>
+        </div>
+        <div>
+          <Core.GdsText tag="h4" font-weight="bold">
+            Columns
+          </Core.GdsText>
+          <pre
+            style={{
+              fontSize: '12px',
+              background: '#eee',
+              padding: '10px',
+              borderRadius: '4px',
+            }}
+          >
+            {JSON.stringify(columns, null, 2)}
+          </pre>
+        </div>
+      </Core.GdsGrid>
+    </Core.GdsCard>
+  )
+}
+
+// --- 6. MAIN COMPONENT ---
+
+export default function TableTool() {
+  return (
+    <Core.GdsTheme>
+      <TableProvider>
+        <Core.GdsGrid columns="12" gap="m" width="100%" padding="m">
+          {/* Left: Config UI */}
+          <Core.GdsFlex grid-column="1/6" flex-direction="column" gap="m">
+            <CellsConfig />
+          </Core.GdsFlex>
+
+          {/* Right: Static Text Preview */}
+          <Core.GdsFlex grid-column="6/-1" flex-direction="column">
+            <DebugView />
+          </Core.GdsFlex>
+        </Core.GdsGrid>
+      </TableProvider>
+    </Core.GdsTheme>
+  )
+}

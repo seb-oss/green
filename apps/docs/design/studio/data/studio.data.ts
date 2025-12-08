@@ -29,7 +29,7 @@ export const studioData: StudioCategory[] = [
         type: 'asset',
         slug: '/studio/icons',
         label: 'Icons',
-        title: 'Icon Library',
+        title: 'Icons',
         description: 'Browse and use our collection of icons',
         icon: 'IconShapes',
         category: 'tools',

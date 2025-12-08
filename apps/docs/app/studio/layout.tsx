@@ -14,15 +14,16 @@ export default function PlayLayout({
 }>) {
   const PATH = usePathname()
   const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
-  const ACTIVE = getPageBySlug(MAIN)
-
-  if (!ACTIVE) return null
-
+  /*   const ACTIVE = getPageBySlug(MAIN) */
+  const SECTION = getPageBySlug(MAIN)
+  if (!SECTION) return null
+  const SUBPAGE = SECTION.pages?.find((p: any) => p.slug === PATH)
+  const ACTIVE = SUBPAGE || SECTION
   return (
     <SearchProvider>
       <Studio
         page={ACTIVE.key}
-        title={ACTIVE.label}
+        title={ACTIVE.title}
         description={ACTIVE.description}
       >
         {children}
