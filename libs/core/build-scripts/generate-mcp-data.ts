@@ -429,36 +429,20 @@ function generateReactMarkdown(component: ComponentData): string {
 }
 
 /**
- * Gets all component directories
- */
-async function getComponentDirectories(): Promise<string[]> {
-  const entries = await fs.readdir(COMPONENTS_DIR, { withFileTypes: true })
-  return entries
-    .filter(entry => entry.isDirectory() && !entry.name.startsWith('.'))
-    .map(entry => entry.name)
-}
-
-/**
  * Processes a single component
  */
 async function processComponent(
-  componentName: string,
-  allComponents: ComponentData[],
+  component: ComponentData,
   guidelinesMap: Map<string, GuidelineEntry>
 ): Promise<void> {
-  console.log(`\n📦 Processing: ${componentName}`)
+  console.log(`\n📦 Processing: ${component.tagName}`)
 
-  const componentDir = path.join(COMPONENTS_DIR, componentName)
-  const outputDir = path.join(OUTPUT_DIR, componentName)
+  // Derive output directory name from tag name (e.g., 'gds-button' -> 'button')
+  const dirName = component.tagName.replace(/^gds-/, '')
+  const outputDir = path.join(OUTPUT_DIR, dirName)
 
-  // Find matching component data by tag name
-  const tagName = `gds-${componentName}`
-  const component = allComponents.find(c => c.tagName === tagName)
-
-  if (!component) {
-    console.warn(`⚠️  No component metadata found for ${tagName}`)
-    return
-  }
+  // Get the directory where the component source file is located
+  const componentSourceDir = path.join(__dirname, '..', path.dirname(component.sourcePath))
 
   // Create output directory
   await fs.mkdir(outputDir, { recursive: true })
@@ -487,9 +471,9 @@ async function processComponent(
     console.error('  ❌ Failed to generate api.md:', error)
   }
 
-  // Check for agents.md and copy as instructions.md
+  // Check for agents.md in the component source directory and copy as instructions.md
   try {
-    const agentsPath = path.join(componentDir, 'agents.md')
+    const agentsPath = path.join(componentSourceDir, 'agents.md')
     await fs.access(agentsPath)
 
     const content = await fs.readFile(agentsPath, 'utf-8')
@@ -626,29 +610,22 @@ async function main() {
     // Fetch guidelines
     const guidelinesMap = await fetchGuidelines()
 
-    // Get component directories
-    const componentDirs = await getComponentDirectories()
-    console.log(`📁 Found ${componentDirs.length} component directories\n`)
-
     // Process each component
     let successCount = 0
     let errorCount = 0
     const processedComponents: Array<{ component: ComponentData, dirName: string }> = []
 
-    for (const componentDir of componentDirs) {
+    for (const component of components) {
       try {
-        await processComponent(componentDir, components, guidelinesMap)
+        await processComponent(component, guidelinesMap)
 
-        // Find the component data for this directory
-        const tagName = `gds-${componentDir}`
-        const component = components.find(c => c.tagName === tagName)
-        if (component) {
-          processedComponents.push({ component, dirName: componentDir })
-        }
+        // Derive directory name from tag name (e.g., 'gds-button' -> 'button')
+        const dirName = component.tagName.replace(/^gds-/, '')
+        processedComponents.push({ component, dirName })
 
         successCount++
       } catch (error) {
-        console.error(`❌ Failed to process ${componentDir}:`, error)
+        console.error(`❌ Failed to process ${component.tagName}:`, error)
         errorCount++
       }
     }
