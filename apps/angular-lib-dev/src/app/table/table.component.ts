@@ -4,11 +4,7 @@ import { TableHeaderListItem, TableRow } from '@sebgroup/green-angular'
 
 import '@sebgroup/green-core/components/table/index.js'
 
-import {
-  Column,
-  TableRequest,
-  TableResponse,
-} from '@sebgroup/green-core/components/table/table.types'
+import { Types } from '@sebgroup/green-core/components/table/table.component'
 
 const tableData: TableRow[] = [
   {
@@ -38,8 +34,8 @@ const tableData: TableRow[] = [
 ]
 
 @Component({
-    templateUrl: './table.component.html',
-    standalone: false
+  templateUrl: './table.component.html',
+  standalone: false,
 })
 export class TableComponent {
   rows: TableRow[] = tableData
@@ -72,7 +68,7 @@ export class TableComponent {
 
   arrow = true
 
-  coreTableColumns: Column[] = [
+  coreTableColumns: Types.Column[] = [
     { key: 'PreLastTradedAt', label: 'Senast', sortable: true },
     { key: 'ChangePercent', label: 'Utv. %' },
     { key: 'Change', label: 'Utv. (SEK)' },
@@ -103,8 +99,8 @@ export class TableComponent {
   }
 
   coreTableDataProvider = async (
-    request: TableRequest,
-  ): Promise<TableResponse<TableRow>> => {
+    request: Types.TableRequest,
+  ): Promise<Types.TableResponse<TableRow>> => {
     console.log('Data request', request)
     let preparedData = [...this.rows]
     if (request.sortColumn) {

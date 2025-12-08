@@ -59,10 +59,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "angular-lib-dev:build:production"
+          "buildTarget": "angular-lib-dev:build:production"
         },
         "development": {
-          "browserTarget": "angular-lib-dev:build:development"
+          "buildTarget": "angular-lib-dev:build:development"
         }
       },
       "defaultConfiguration": "development",
@@ -74,7 +74,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "angular-lib-dev:build"
+        "buildTarget": "angular-lib-dev:build"
       }
     },
     "lint": {

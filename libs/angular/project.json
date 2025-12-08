@@ -4,18 +4,12 @@
   "projectType": "library",
   "sourceRoot": "libs/angular/src",
   "prefix": "green",
-  "tags": [
-    "lib"
-  ],
+  "tags": ["lib"],
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
-      "outputs": [
-        "{workspaceRoot}/dist/libs/angular"
-      ],
-      "inputs": [
-        "core"
-      ],
+      "outputs": ["{workspaceRoot}/dist/libs/angular"],
+      "inputs": ["core"],
       "options": {
         "project": "libs/angular/ng-package.json",
         "tsConfig": "libs/angular/tsconfig.lib.prod.json"
@@ -32,12 +26,8 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/angular"
-      ],
-      "dependsOn": [
-        "core:build"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/libs/angular"],
+      "dependsOn": ["core:build"],
       "options": {
         "jestConfig": "libs/angular/jest.config.ts"
       }
@@ -50,12 +40,10 @@
       "options": {
         "port": 4402,
         "configDir": "libs/angular/.storybook",
-        "browserTarget": "angular:build-storybook",
+        "buildTarget": "angular:build-storybook",
         "compodoc": false,
         "stylePreprocessorOptions": {
-          "includePaths": [
-            "libs/fonts/*"
-          ]
+          "includePaths": ["libs/fonts/*"]
         }
       },
       "configurations": {
@@ -63,25 +51,18 @@
           "quiet": true
         }
       },
-      "dependsOn": [
-        "core:build",
-        "core:build-with-types"
-      ]
+      "dependsOn": ["core:build", "core:build-with-types"]
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
-      "outputs": [
-        "{options.outputDir}"
-      ],
+      "outputs": ["{options.outputDir}"],
       "options": {
         "outputDir": "dist/storybook/angular",
         "configDir": "libs/angular/.storybook",
-        "browserTarget": "angular:build-storybook",
+        "buildTarget": "angular:build-storybook",
         "compodoc": false,
         "stylePreprocessorOptions": {
-          "includePaths": [
-            "libs/fonts/*"
-          ]
+          "includePaths": ["libs/fonts/*"]
         }
       },
       "configurations": {
@@ -89,10 +70,7 @@
           "quiet": true
         }
       },
-      "dependsOn": [
-        "core:build",
-        "core:build-with-types"
-      ]
+      "dependsOn": ["core:build", "core:build-with-types"]
     },
     "copy-designlibrary-json": {
       "executor": "nx:run-commands",

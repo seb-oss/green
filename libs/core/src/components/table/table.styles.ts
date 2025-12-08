@@ -763,7 +763,7 @@ export const TableStyles = css`
     }
   }
 
-  /*  Performance consideration: Use content-visibility for efficient rendering of large tables, it should nto be used if scroll driven animations are present */
+  /*  Performance consideration: Use content-visibility for efficient rendering of large tables, it should not be used if scroll driven animations are present */
   /*  @supports (content-visibility: auto) {
     tbody tr {
       content-visibility: auto;
