@@ -20,6 +20,7 @@ import type {
  */
 export interface Column {
   key: string
+  value?: (row: any) => string
   label: string
   sortable?: boolean
   align?: 'start' | 'center' | 'stretch' | 'end'

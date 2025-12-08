@@ -148,6 +148,7 @@ export const Users = {
       label: 'Role',
       sortable: true,
       visible: false,
+      value: (row) => `${row.role.toUpperCase()} (${row.department || 'N/A'})`,
     },
     {
       key: 'department',

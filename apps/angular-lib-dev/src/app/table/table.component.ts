@@ -4,7 +4,7 @@ import { TableHeaderListItem, TableRow } from '@sebgroup/green-angular'
 
 import '@sebgroup/green-core/components/table/index.js'
 
-import { Types } from '@sebgroup/green-core/components/table/table.component'
+import { Types } from '@sebgroup/green-core/components/table'
 
 const tableData: TableRow[] = [
   {
@@ -105,8 +105,8 @@ export class TableComponent {
     let preparedData = [...this.rows]
     if (request.sortColumn) {
       preparedData = preparedData.sort((a, b) => {
-        const aValue = a[request.sortColumn as keyof TableRow]
-        const bValue = b[request.sortColumn as keyof TableRow]
+        const aValue = a[request.sortColumn!]
+        const bValue = b[request.sortColumn!]
         if (aValue < bValue) return request.sortDirection === 'asc' ? -1 : 1
         if (aValue > bValue) return request.sortDirection === 'asc' ? 1 : -1
         return 0
