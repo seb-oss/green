@@ -113,17 +113,14 @@ graph TB
         
         K --> S[TestGenerator]
         S --> T[Test Files<br/>.component.spec.ts]
-        
-        R --> U[Barrel Exports<br/>index.ts per component]
-    end
-    
-    subgraph "3. Output Structure"
-        R --> V["src/generated/*"]
-    end
-    
-    subgraph "4. Build & Package"
-        V --> W["ng-packagr<br/>nx/angular:package"]
-        W --> X["dist/libs/core-ng/<br/>Published NPM Package"]
+
+        R --Output--> V["src/generated/*"]
+      
+          V --> W["ng-packagr<br/>nx/angular:package"]
+        subgraph "Build & package"
+          W --> X["dist/libs/core-ng/<br/>Published NPM Package"]
+        end
+
     end
 
     class B,D,L,S,W process
