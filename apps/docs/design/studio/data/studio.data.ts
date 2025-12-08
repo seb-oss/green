@@ -54,6 +54,16 @@ export const studioData: StudioCategory[] = [
         icon: 'IconLab',
         category: 'tools',
         component: 'Playground',
+        pages: [
+          {
+            key: 'table',
+            interactive: true,
+            slug: '/studio/playground/table',
+            title: 'Table',
+            description: 'Try out the table configuration',
+            component: 'Table',
+          },
+        ],
       },
       {
         key: 'compose',
