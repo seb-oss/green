@@ -796,7 +796,23 @@ export const DynamicContent: Story = {
         story: `
 Templates provide reusable content for cell types. Reference them using the \`template\` property with the template's \`name\` attribute.
 
+**Icon properties:** Icon size and color can be specified either in the column configuration or directly in the template. Column configuration takes precedence.
+
+\`\`\`typescript
+{
+  cell: {
+    lead: {
+      type: 'icon',
+      template: 'department-icon',
+      size: 'm',      // Overrides template size
+      color: 'primary' // Overrides template color
+    }
+  }
+}
+\`\`\`
+
 See Developer Guide for complete documentation.
+
           `,
       },
     },
@@ -808,6 +824,9 @@ See Developer Guide for complete documentation.
       </template>
       <template name="download-image">
         <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
+      </template>
+      <template name="department-icon">
+        <gds-icon-cloud-download></gds-icon-cloud-download>
       </template>
     </gds-table>
   `,

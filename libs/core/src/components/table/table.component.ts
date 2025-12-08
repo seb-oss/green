@@ -414,6 +414,25 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         `
       }
 
+      case 'icon': {
+        const template = resolve(config.template) as string | undefined
+        const size = resolve(config.size)
+        const color = resolve(config.color)
+        const clonedSlot = this.#getSlotContent(template)
+
+        if (!clonedSlot) return null
+
+        if (clonedSlot instanceof DocumentFragment) {
+          const iconElement = clonedSlot.firstElementChild
+          if (iconElement) {
+            if (size) iconElement.setAttribute('size', size)
+            if (color) iconElement.setAttribute('color', color)
+          }
+        }
+
+        return clonedSlot
+      }
+
       case 'button': {
         const size = resolve(config.size) || this.#Density.button
         const variant = resolve(config.variant)

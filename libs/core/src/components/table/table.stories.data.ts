@@ -154,6 +154,12 @@ export const Users = {
       key: 'department',
       label: 'Department',
       sortable: true,
+      cell: {
+        lead: {
+          type: 'icon',
+          template: 'department-icon',
+        },
+      },
     },
     {
       key: 'status',

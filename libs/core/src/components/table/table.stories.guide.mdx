@@ -355,6 +355,21 @@ cell: {
 }
 ```
 
+#### Icon
+
+Icons can be used in any cell slot (lead, value, trail) via templates.
+
+```typescript
+cell: {
+  lead: {
+    type: 'icon',
+    template: 'department-icon',
+    size: 'm',        // All the sizing tokens
+    color: 'neutral-02', // Optional: Any valid color token
+  }
+}
+
+
 **Template definition**
 
 ```html
@@ -369,6 +384,16 @@ cell: {
     slot="trail" <!-- Slots can be defined here -->
 ></gds-icon-cloud-download>
 </template>
+
+<template name="department-icon">
+  <gds-icon-cloud-download></gds-icon-cloud-download>
+</template>
+
+<!-- Or with default size/color in template -->
+<template name="status-icon">
+  <gds-icon-check size="l" color="positive"></gds-icon-check>
+</template>
+
 ```
 
 ---

@@ -4,6 +4,7 @@ import type {
   GdsBadge,
   GdsButton,
   GdsContextMenu,
+  GdsIcon,
   GdsImg,
   GdsLink,
 } from '../../pure'
@@ -133,6 +134,11 @@ export interface Image extends CellProps<Omit<GdsImg, keyof GdsElement>> {
   src: string | ((row: any) => string)
 }
 
+export interface Icon extends CellProps<Omit<GdsIcon, keyof GdsElement>> {
+  type: 'icon'
+  template: string | ((row: any) => string)
+}
+
 export interface Button extends CellProps<Omit<GdsButton, keyof GdsElement>> {
   type: 'button'
   template?: string | ((row: any) => string)
@@ -179,6 +185,7 @@ export interface FormattedDate {
 
 export type Cell =
   | Image
+  | Icon
   | Button
   | Link
   | Badge
