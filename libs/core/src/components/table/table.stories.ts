@@ -17,6 +17,7 @@ import '../icon/icons/settings-slider-hor'
 import '../icon/icons/cloud-download'
 import '../icon/icons/copy'
 import '../icon/icons/pin'
+import '../icon/icons/buildings'
 import '../icon/icons/circle-check'
 import '../icon/icons/cross-small'
 
@@ -826,7 +827,7 @@ See Developer Guide for complete documentation.
         <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
       </template>
       <template name="department-icon">
-        <gds-icon-cloud-download></gds-icon-cloud-download>
+        <gds-icon-buildings></gds-icon-buildings>
       </template>
     </gds-table>
   `,

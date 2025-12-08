@@ -151,17 +151,6 @@ export const Users = {
       value: (row) => `${row.role.toUpperCase()} (${row.department || 'N/A'})`,
     },
     {
-      key: 'department',
-      label: 'Department',
-      sortable: true,
-      cell: {
-        lead: {
-          type: 'icon',
-          template: 'department-icon',
-        },
-      },
-    },
-    {
       key: 'status',
       label: 'Status',
       sortable: true,
@@ -171,6 +160,17 @@ export const Users = {
           value: (row: UserData) => row.status,
           variant: (row: UserData) =>
             row.status === 'Active' ? 'positive' : 'negative',
+        },
+      },
+    },
+    {
+      key: 'department',
+      label: 'Department',
+      sortable: true,
+      cell: {
+        lead: {
+          type: 'icon',
+          template: 'department-icon',
         },
       },
     },
