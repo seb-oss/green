@@ -83,6 +83,20 @@ interface MCPGlobalIndex {
       description?: string
     }>
   }>
+  icons: string // Reference to icons.json file
+}
+
+interface MCPIconsIndex {
+  version: string
+  generatedAt: string
+  icons: Array<{
+    name: string
+    tagName: string
+    className: string
+    description?: string
+    path: string
+    files: string[]
+  }>
 }
 
 /**
@@ -547,6 +561,7 @@ async function generateGlobalIndex(processedComponents: Array<{ component: Compo
   console.log('\n📋 Generating global index...')
 
   const indexComponents: MCPGlobalIndex['components'] = []
+  const indexIcons: MCPIconsIndex['icons'] = []
 
   // Build index from processed components
   for (const { component, dirName } of processedComponents) {
@@ -565,34 +580,56 @@ async function generateGlobalIndex(processedComponents: Array<{ component: Compo
       if (componentIndex.files.angular) files.push('angular')
       if (componentIndex.files.react) files.push('react')
 
-      indexComponents.push({
+      const entry = {
         name: componentIndex.name,
         tagName: component.tagName,
         className: component.className,
         description: component.description,
         path: `${dirName}/`,
         files,
-        subcomponents: componentIndex.subcomponents
-      })
+      }
+
+      // Separate icons from regular components
+      if (component.isIconComponent) {
+        indexIcons.push(entry)
+      } else {
+        indexComponents.push({
+          ...entry,
+          subcomponents: componentIndex.subcomponents
+        })
+      }
     } catch (error) {
       console.warn(`  ⚠️  Error reading index for ${component.tagName}:`, error)
     }
   }
 
-  // Sort components alphabetically by tag name
+  // Sort both arrays alphabetically by tag name
   indexComponents.sort((a, b) => a.tagName.localeCompare(b.tagName))
+  indexIcons.sort((a, b) => a.tagName.localeCompare(b.tagName))
 
+  const timestamp = new Date().toISOString()
+
+  // Write icons index
+  const iconsIndex: MCPIconsIndex = {
+    version: '1.0.0',
+    generatedAt: timestamp,
+    icons: indexIcons
+  }
+  const iconsIndexPath = path.join(OUTPUT_DIR, 'icons.json')
+  await fs.writeFile(iconsIndexPath, JSON.stringify(iconsIndex, null, 2), 'utf-8')
+
+  // Write global index with reference to icons
   const globalIndex: MCPGlobalIndex = {
     version: '1.0.0',
-    generatedAt: new Date().toISOString(),
-    components: indexComponents
+    generatedAt: timestamp,
+    components: indexComponents,
+    icons: './icons.json'
   }
-
-  // Write global index
   const globalIndexPath = path.join(OUTPUT_DIR, 'index.json')
   await fs.writeFile(globalIndexPath, JSON.stringify(globalIndex, null, 2), 'utf-8')
 
   console.log(`✅ Generated global index with ${indexComponents.length} components`)
+  console.log(`✅ Generated icons index with ${indexIcons.length} icons`)
 }
 
 /**
