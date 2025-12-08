@@ -120,20 +120,6 @@ export const MyTable = () => html\`
 
   return (
     <Core.GdsFlex flex-direction="column" gap="s" height="100%">
-      <Core.GdsSegmentedControl
-        size="small"
-        width="100%"
-        value={framework}
-        onchange={(e: Event) => {
-          const target = e.target as HTMLSelectElement
-          setFramework(target.value as any)
-        }}
-      >
-        <Core.GdsSegment value="react">React</Core.GdsSegment>
-        <Core.GdsSegment value="angular">Angular</Core.GdsSegment>
-        <Core.GdsSegment value="lit">Lit</Core.GdsSegment>
-      </Core.GdsSegmentedControl>
-
       <Core.GdsCard
         variant="secondary"
         padding="m"
@@ -141,20 +127,46 @@ export const MyTable = () => html\`
         overflow="auto"
         border-radius="m"
       >
-        <pre
-          style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
-        >
-          <code>{code}</code>
-        </pre>
-      </Core.GdsCard>
+        <Core.GdsFlex flex-direction="column" gap="s" height="100%">
+          <Core.GdsFlex>
+            <Core.GdsDropdown
+              size="small"
+              plain
+              value={framework}
+              onChange={(e: React.FormEvent<HTMLElement>) => {
+                const customElement = e.target as HTMLElement & {
+                  value: string
+                }
+                setFramework(customElement.value as any)
+              }}
+            >
+              <Core.GdsOption value="react">React</Core.GdsOption>
+              <Core.GdsOption value="angular">Angular</Core.GdsOption>
+              <Core.GdsOption value="lit">Lit</Core.GdsOption>
+            </Core.GdsDropdown>
 
-      <Core.GdsButton
-        size="small"
-        onClick={() => navigator.clipboard.writeText(code)}
-      >
-        <Core.IconCopy slot="lead" />
-        Copy Code
-      </Core.GdsButton>
+            <Core.GdsButton
+              size="small"
+              rank="secondary"
+              onClick={() => navigator.clipboard.writeText(code)}
+            >
+              <Core.IconCopy slot="lead" />
+              Copy Code
+            </Core.GdsButton>
+          </Core.GdsFlex>
+
+          <pre
+            style={{
+              margin: 0,
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word',
+              flex: 1,
+            }}
+          >
+            <code>{code}</code>
+          </pre>
+        </Core.GdsFlex>
+      </Core.GdsCard>
     </Core.GdsFlex>
   )
 }
