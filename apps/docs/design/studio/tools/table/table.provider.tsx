@@ -16,6 +16,7 @@ interface TableSettings {
   searchable: boolean
   settings: boolean
   striped: boolean
+  plain: boolean
   rows: number
   height?: string
 }
@@ -80,6 +81,7 @@ export const TableProvider = ({ children }: { children: ReactNode }) => {
         searchable: searchParams.get('searchable') === 'true',
         settings: searchParams.get('settings') === 'true',
         striped: searchParams.get('striped') === 'true',
+        plain: searchParams.get('plain') === 'false',
         rows: Number(searchParams.get('rows')) || 10,
         height: searchParams.get('height') || undefined,
       },
@@ -138,6 +140,7 @@ export const TableProvider = ({ children }: { children: ReactNode }) => {
     if (settings.searchable) parts.push('searchable=true')
     if (settings.settings) parts.push('settings=true')
     if (settings.striped) parts.push('striped=true')
+    if (settings.plain) parts.push('plain=true')
 
     const url = `${pathname}?${parts.join('&')}`
     router.replace(url, { scroll: false })

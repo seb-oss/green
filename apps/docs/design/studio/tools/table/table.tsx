@@ -19,11 +19,12 @@ function TableContent() {
   const [fullscreen, setFullscreen] = useState(false)
 
   return (
-    <Core.GdsFlex
-      gap={fullscreen ? '0' : 'xs'}
+    <Core.GdsGrid
+      gap="s"
       min-height="100vh"
       padding="0"
       width="100%"
+      columns="12"
     >
       {/* Left Panel */}
       <Core.GdsCard
@@ -32,6 +33,7 @@ function TableContent() {
         position="relative"
         width="380px"
         max-width="380px"
+        grid-column="1/4"
         padding="0"
         gap="m"
         border-radius="l"
@@ -78,14 +80,7 @@ function TableContent() {
       </Core.GdsCard>
 
       {/* Right Panel */}
-      <Core.GdsCard
-        height="max-content"
-        background="none"
-        align-items="center"
-        gap="m"
-        padding="0"
-        border-radius={fullscreen ? '0' : 'l'}
-      >
+      <Core.GdsFlex grid-column="4/-1" flex-direction="column" gap="m">
         <Core.GdsFlex
           align-items="center"
           gap={fullscreen ? '0' : 's'}
@@ -131,11 +126,11 @@ function TableContent() {
             <Core.IconCodeBrackets size="m" />
           </Core.GdsButton> */}
         </Core.GdsFlex>
-        <Core.GdsCard padding="m" border-radius="l" flex="1">
+        <Core.GdsCard padding="l" border-radius="l">
           {rightTab === 'preview' ? <TablePreview /> : <TableCode />}
         </Core.GdsCard>
-      </Core.GdsCard>
-    </Core.GdsFlex>
+      </Core.GdsFlex>
+    </Core.GdsGrid>
   )
 }
 

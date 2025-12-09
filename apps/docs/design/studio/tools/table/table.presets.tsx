@@ -5,22 +5,22 @@ import { useMemo, useState } from 'react'
 import * as Core from '@sebgroup/green-core/react'
 import { useTable } from './table.provider'
 
+const PRESETS = [
+  { id: 'users', title: 'Users', description: '100 users with 5 columns' },
+  {
+    id: 'feedback',
+    title: 'Feedback',
+    description: '50 feedback entries with 4 columns',
+  },
+]
+
 export default function TablePresets() {
   const { setActivePreset } = useTable()
   const [searchQuery, setSearchQuery] = useState('')
 
-  const presets = [
-    { id: 'users', title: 'Users', description: '100 users with 5 columns' },
-    {
-      id: 'feedback',
-      title: 'Feedback',
-      description: '50 feedback entries with 4 columns',
-    },
-  ]
-
   const filteredPresets = useMemo(() => {
-    if (!searchQuery) return presets
-    return presets.filter(
+    if (!searchQuery) return PRESETS
+    return PRESETS.filter(
       (p) =>
         p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.description.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -58,7 +58,7 @@ export default function TablePresets() {
           <Core.GdsText font="detail-regular-xs" color="neutral-02">
             {searchQuery
               ? `Found ${filteredPresets.length} preset${filteredPresets.length !== 1 ? 's' : ''}`
-              : `${presets.length} total presets`}
+              : `${PRESETS.length} total presets`}
           </Core.GdsText>
         </Core.GdsFlex>
       </Core.GdsFlex>
@@ -66,13 +66,13 @@ export default function TablePresets() {
       <Core.GdsFlex flex-direction="column" gap="m">
         {filteredPresets.length === 0 && (
           <Core.GdsText color="neutral-02" text-align="center" padding="xl">
-            No presets found matching "{searchQuery}"
+            No presets found matching &quot;{searchQuery}&quot;
           </Core.GdsText>
         )}
 
         {filteredPresets.map((preset) => (
           <Core.GdsCardPattern01
-            key={preset.title + preset.description + preset.id}
+            key={preset.id}
             title={preset.title}
             excerpt={preset.description}
           >
@@ -81,7 +81,9 @@ export default function TablePresets() {
               rank="secondary"
               size="small"
               slot="footer"
-              onClick={() => setActivePreset(preset.id as any)}
+              onClick={() =>
+                setActivePreset(preset.id as 'users' | 'feedback' | 'custom')
+              }
             >
               <Core.IconPencilWave slot="lead" size="s" />
               Load
@@ -89,6 +91,7 @@ export default function TablePresets() {
           </Core.GdsCardPattern01>
         ))}
         <Core.GdsCardPattern01
+          key="custom"
           title="Custom"
           excerpt="Build your own table from scratch"
           variant="neutral-02"

@@ -12,6 +12,7 @@ export default function TableSettings() {
     if (tableSettings.searchable) features.push('searchable')
     if (tableSettings.settings) features.push('settings')
     if (tableSettings.striped) features.push('striped')
+    if (tableSettings.plain) features.push('plain')
     return features
   }
 
@@ -25,6 +26,7 @@ export default function TableSettings() {
       searchable: selectedFeatures.includes('searchable'),
       settings: selectedFeatures.includes('settings'),
       striped: selectedFeatures.includes('striped'),
+      plain: selectedFeatures.includes('plain'),
     }
 
     setTableSettings(newSettings)
@@ -43,6 +45,7 @@ export default function TableSettings() {
         <Core.GdsOption value="searchable">Searchable</Core.GdsOption>
         <Core.GdsOption value="settings">Settings</Core.GdsOption>
         <Core.GdsOption value="striped">Striped</Core.GdsOption>
+        <Core.GdsOption value="plain">Plain</Core.GdsOption>
       </Core.GdsDropdown>
 
       <Core.GdsDropdown
