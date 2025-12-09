@@ -42,6 +42,12 @@ export default function TableEdit() {
           plain
           value={columnName}
           onInput={(e: any) => setColumnName(e.target.value)}
+          onKeyDown={(e: React.KeyboardEvent) => {
+            if (e.key === 'Enter') {
+              e.preventDefault()
+              addColumn()
+            }
+          }}
         >
           <Core.IconPencelLine slot="lead" />
         </Core.GdsInput>
