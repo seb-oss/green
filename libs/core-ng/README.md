@@ -22,8 +22,7 @@ The wrappers eliminates the need to use `CUSTOM_ELEMENTS_SCHEMA`.
 - **Native Angular events** - Web component custom events are exposed as Angular `@Output` EventEmitters  
 - **Form integration** - Form controls implement `ControlValueAccessor` and work seamlessly with Angular forms  
 - **Router integration** - Link components work natively with Angular's `RouterLink` directive  
-- **Standalone components** - All components are standalone, compatible with modern Angular  
-- **OnPush change detection** - Optimized performance with `ChangeDetectionStrategy.OnPush`  
+- **Standalone components** - All components are standalone
 - **Auto-generated** - Components are generated from the web component manifest, ensuring consistency
 
 ## Installation
