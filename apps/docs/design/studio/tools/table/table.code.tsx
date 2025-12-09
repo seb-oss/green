@@ -89,6 +89,7 @@ export class MyTableComponent {
     }
 
     if (framework === 'lit') {
+      const dollarSign = '$'
       return `import { html } from 'lit'
 
 const columns = ${columnsStr}
@@ -100,14 +101,14 @@ const dataProvider = async (request) => {
 
 export const MyTable = () => html\`
   <gds-table
-    .columns=\${columns}
-    .data=\${dataProvider}
+    .columns=\${dollarSign}{columns}
+    .data=\${dollarSign}{dataProvider}
     density="${tableSettings.density}"
     variant="${tableSettings.variant}"
-    ${tableSettings.selectable ? '?selectable=\${true}' : ''}
-    ${tableSettings.searchable ? '?searchable=\${true}' : ''}
-    ${tableSettings.settings ? '?settings=\${true}' : ''}
-    ${tableSettings.striped ? '?striped=\${true}' : ''}
+    ${tableSettings.selectable ? `?selectable=\${dollarSign}{true}` : ''}
+    ${tableSettings.searchable ? `?searchable=\${dollarSign}{true}` : ''}
+    ${tableSettings.settings ? `?settings=\${dollarSign}{true}` : ''}
+    ${tableSettings.striped ? `?striped=\${dollarSign}{true}` : ''}
     rows="${tableSettings.rows}"
   ></gds-table>
 \``
@@ -127,9 +128,9 @@ export const MyTable = () => html\`
           value={framework}
           onChange={(e: React.FormEvent<HTMLElement>) => {
             const customElement = e.target as HTMLElement & {
-              value: string
+              value: 'react' | 'angular' | 'lit'
             }
-            setFramework(customElement.value as any)
+            setFramework(customElement.value)
           }}
         >
           <Core.GdsOption value="react">React</Core.GdsOption>

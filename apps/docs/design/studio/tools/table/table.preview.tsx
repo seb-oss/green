@@ -170,6 +170,7 @@ export default function TablePreview() {
       selectable={tableSettings.selectable}
       searchable={tableSettings.searchable}
       settings={tableSettings.settings}
+      plain={tableSettings.plain}
       striped={tableSettings.striped}
       rows={tableSettings.rows}
       height={tableSettings.height}
