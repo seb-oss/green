@@ -587,26 +587,27 @@ export const TableStyles = css`
 
   /* Scroll driven animation */
   @supports (animation-timeline: scroll()) {
-    tbody tr {
-      animation-name: ROW_ANIMATION_VERTICAL, ROW_ANIMATION_VERTICAL;
-      animation-fill-mode: both;
-      animation-timing-function: ease-in-out;
-      animation-direction: normal, reverse;
-      animation-timeline: view(block);
-      animation-range:
-        entry -40px,
-        exit -40px;
-    }
-
-    @keyframes ROW_ANIMATION_VERTICAL {
-      0% {
-        opacity: 0;
-        filter: blur(12px);
-        translate: 0 12px;
+    @media (prefers-reduced-motion: no-preference) {
+      tbody tr {
+        animation-name: ROW_ANIMATION_VERTICAL, ROW_ANIMATION_VERTICAL;
+        animation-fill-mode: both;
+        animation-timing-function: ease-in-out;
+        animation-direction: normal, reverse;
+        animation-timeline: view(block);
+        animation-range:
+          entry -40px,
+          exit -40px;
       }
-    }
 
-    /* tbody td .cell-content,
+      @keyframes ROW_ANIMATION_VERTICAL {
+        0% {
+          opacity: 0;
+          filter: blur(12px);
+          translate: 0 12px;
+        }
+      }
+
+      /* tbody td .cell-content,
     thead th .column-header { 
       animation-name: CELL_ANIMATION_HORIZONTAL, CELL_ANIMATION_HORIZONTAL;
       animation-fill-mode: both;
@@ -624,79 +625,80 @@ export const TableStyles = css`
       }
     } */
 
-    thead {
-      position: sticky;
-      top: 4px;
-      z-index: 10;
-      transition: box-shadow 200ms ease;
-      border-radius: var(--gds-sys-radius-s);
-      will-change: transform;
-    }
-
-    thead {
-      background-color: var(--gds-sys-color-l1-neutral-01);
-    }
-
-    .data.scrolled thead {
-      box-shadow:
-        var(--gds-sys-shadow-l-01),
-        var(--gds-sys-shadow-l-02),
-        inset 0 -4px 6px var(--gds-sys-color-l1-neutral-01);
-      backdrop-filter: blur(8px);
-      background: color-mix(
-        in srgb,
-        var(--gds-sys-color-l2-neutral-01),
-        transparent 30%
-      );
-    }
-
-    @media (prefers-reduced-transparency: no-preference) {
-      .data.scrolled thead tr th {
-        background: transparent;
+      thead {
+        position: sticky;
+        top: 4px;
+        z-index: 10;
+        transition: box-shadow 200ms ease;
+        border-radius: var(--gds-sys-radius-s);
+        will-change: transform;
       }
-    }
 
-    /* Horizontal scroll */
-    @property --_inline-start-fade {
-      syntax: '<length>';
-      inherits: false;
-      initial-value: 0;
-    }
+      thead {
+        background-color: var(--gds-sys-color-l1-neutral-01);
+      }
 
-    @property --_inline-end-fade {
-      syntax: '<length>';
-      inherits: false;
-      initial-value: 0;
-    }
+      .data.scrolled thead {
+        box-shadow:
+          var(--gds-sys-shadow-l-01),
+          var(--gds-sys-shadow-l-02),
+          inset 0 -4px 6px var(--gds-sys-color-l1-neutral-01);
+        backdrop-filter: blur(8px);
+        background: color-mix(
+          in srgb,
+          var(--gds-sys-color-l2-neutral-01),
+          transparent 30%
+        );
+      }
 
-    @keyframes table-scroll-inline-fade {
-      0% {
-        --_inline-start-fade: 0;
+      @media (prefers-reduced-transparency: no-preference) {
+        .data.scrolled thead tr th {
+          background: transparent;
+        }
       }
-      10%,
-      100% {
-        --_inline-start-fade: var(--gds-sys-space-4xl);
-      }
-      0%,
-      90% {
-        --_inline-end-fade: var(--gds-sys-space-4xl);
-      }
-      100% {
-        --_inline-end-fade: 0;
-      }
-    }
 
-    .data {
-      overflow-x: scroll;
-      mask: linear-gradient(
-        to right,
-        #0000,
-        #ffff var(--_inline-start-fade) calc(100% - var(--_inline-end-fade)),
-        #0000
-      );
-      animation: table-scroll-inline-fade;
-      animation-timeline: --table-scroll-inline-fade;
-      scroll-timeline: --table-scroll-inline-fade x;
+      /* Horizontal scroll */
+      @property --_inline-start-fade {
+        syntax: '<length>';
+        inherits: false;
+        initial-value: 0;
+      }
+
+      @property --_inline-end-fade {
+        syntax: '<length>';
+        inherits: false;
+        initial-value: 0;
+      }
+
+      @keyframes table-scroll-inline-fade {
+        0% {
+          --_inline-start-fade: 0;
+        }
+        10%,
+        100% {
+          --_inline-start-fade: var(--gds-sys-space-4xl);
+        }
+        0%,
+        90% {
+          --_inline-end-fade: var(--gds-sys-space-4xl);
+        }
+        100% {
+          --_inline-end-fade: 0;
+        }
+      }
+
+      .data {
+        overflow-x: scroll;
+        mask: linear-gradient(
+          to right,
+          #0000,
+          #ffff var(--_inline-start-fade) calc(100% - var(--_inline-end-fade)),
+          #0000
+        );
+        animation: table-scroll-inline-fade;
+        animation-timeline: --table-scroll-inline-fade;
+        scroll-timeline: --table-scroll-inline-fade x;
+      }
     }
   }
 
