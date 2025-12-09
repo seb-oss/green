@@ -91,8 +91,7 @@ graph TB
         A[Web Components TypeScript Source Files<br/>libs/core/src/components/]
         A --> B[CEM Analyzer<br/>npx cem analyze --litelement]
         B --> C[custom-elements.json<br/>Custom Elements Manifest]
-        C --> D[component-meta<br/>CemParser.parseAllComponents]
-        D --> E{Analyze Each Component}
+        C --> E[component-meta<br/>CemParser.parseAllComponents]
         E --> F[Extract Properties]
         E --> G[Extract Events]
         E --> H[Extract Slots]
