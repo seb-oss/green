@@ -43,6 +43,10 @@ const meta: Meta = {
       control: { type: 'boolean' },
       defaultValue: true,
     },
+    height: {
+      control: { type: 'string' },
+      defaultValue: false,
+    },
   },
   tags: ['autodocs'],
   parameters: {
@@ -73,6 +77,11 @@ export const Overview: Story = {
     selectable: true,
     searchable: true,
     settings: true,
+    plain: false,
+    height: '80vh',
+    responsive: false,
+    nocache: false,
+    striped: false,
   },
   render: (args) =>
     html` <gds-table
@@ -80,6 +89,11 @@ export const Overview: Story = {
       variant="${args.variant}"
       ?searchable="${args.searchable}"
       ?settings="${args.settings}"
+      ?plain="${args.plain}"
+      ?responsive="${args.responsive}"
+      ?nocache="${args.nocache}"
+      ?height="${args.height}"
+      ?striped="${args.striped}"
       ?selectable="${args.selectable}"
       .columns="${args.columns}"
       .data="${args.data}"

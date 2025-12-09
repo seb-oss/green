@@ -134,8 +134,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   dataLoadKey?: string
 
   /**
-   * Sets the height of the table content area. When set, enables vertical scrolling
-   * with a sticky header that remains visible while scrolling through rows
+   * Style Expression Property that controls the height property.
+   * Supports space tokens and all valid CSS width values.
+   *
+   * Sets the height of the table content area and enables vertical scrolling
+   * with a sticky header that remains visible.
    */
   @styleExpressionProperty({
     ...forSpaceTokensAndCustomValues,
