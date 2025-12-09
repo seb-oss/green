@@ -119,7 +119,7 @@ export const MyTable = () => html\`
   const code = generateCode()
 
   return (
-    <Core.GdsCard gap="s" width="100%">
+    <Core.GdsCard gap="s" width="100%" padding="0">
       <Core.GdsFlex align-items="center" gap="s">
         <Core.GdsDropdown
           size="small"

@@ -32,8 +32,6 @@ export default function TableSettings() {
 
   return (
     <Core.GdsFlex flex-direction="column" gap="m">
-      <Core.GdsText font="heading-s">Table Settings</Core.GdsText>
-
       <Core.GdsDropdown
         label="Features"
         size="small"

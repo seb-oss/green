@@ -161,19 +161,21 @@ export default function TablePreview() {
   }
 
   return (
-    <Core.GdsTable
-      ref={tableRef}
-      columns={columns as any}
-      data={activePreset === 'custom' ? customDataProvider : dataProvider}
-      density={tableSettings.density}
-      variant={tableSettings.variant}
-      selectable={tableSettings.selectable}
-      searchable={tableSettings.searchable}
-      settings={tableSettings.settings}
-      striped={tableSettings.striped}
-      rows={tableSettings.rows}
-      height={tableSettings.height}
-      options={[5, 10, 20, 50, 100]}
-    />
+    <Core.GdsFlex max-width="100%">
+      <Core.GdsTable
+        ref={tableRef}
+        columns={columns as any}
+        data={activePreset === 'custom' ? customDataProvider : dataProvider}
+        density={tableSettings.density}
+        variant={tableSettings.variant}
+        selectable={tableSettings.selectable}
+        searchable={tableSettings.searchable}
+        settings={tableSettings.settings}
+        striped={tableSettings.striped}
+        rows={tableSettings.rows}
+        height={tableSettings.height}
+        options={[5, 10, 20, 50, 100]}
+      />
+    </Core.GdsFlex>
   )
 }

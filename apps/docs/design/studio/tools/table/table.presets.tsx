@@ -35,6 +35,7 @@ export default function TablePresets() {
       border-radius="m"
       max-height="100vh"
       overflow="auto"
+      padding="m"
     >
       <Core.GdsFlex flex-direction="column" gap="xs">
         <Core.GdsInput
@@ -71,6 +72,7 @@ export default function TablePresets() {
 
         {filteredPresets.map((preset) => (
           <Core.GdsCardPattern01
+            key={preset.title + preset.description + preset.id}
             title={preset.title}
             excerpt={preset.description}
           >
@@ -95,11 +97,12 @@ export default function TablePresets() {
           <Core.GdsButton
             width="max-content"
             rank="secondary"
+            variant="notice"
             size="small"
             slot="footer"
             onClick={() => setActivePreset('custom')}
           >
-            <Core.IconPencilWave slot="lead" size="s" />
+            <Core.IconPencilSparkle slot="lead" size="s" />
             Customize
           </Core.GdsButton>
         </Core.GdsCardPattern01>
