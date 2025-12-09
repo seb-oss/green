@@ -119,54 +119,45 @@ export const MyTable = () => html\`
   const code = generateCode()
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="s" height="100%">
-      <Core.GdsCard
-        variant="secondary"
-        padding="m"
-        height="100%"
-        overflow="auto"
-        border-radius="m"
-      >
-        <Core.GdsFlex flex-direction="column" gap="s" height="100%">
-          <Core.GdsFlex>
-            <Core.GdsDropdown
-              size="small"
-              plain
-              value={framework}
-              onChange={(e: React.FormEvent<HTMLElement>) => {
-                const customElement = e.target as HTMLElement & {
-                  value: string
-                }
-                setFramework(customElement.value as any)
-              }}
-            >
-              <Core.GdsOption value="react">React</Core.GdsOption>
-              <Core.GdsOption value="angular">Angular</Core.GdsOption>
-              <Core.GdsOption value="lit">Lit</Core.GdsOption>
-            </Core.GdsDropdown>
+    <Core.GdsCard gap="s" width="100%">
+      <Core.GdsFlex align-items="center" gap="s">
+        <Core.GdsDropdown
+          size="small"
+          plain
+          value={framework}
+          onChange={(e: React.FormEvent<HTMLElement>) => {
+            const customElement = e.target as HTMLElement & {
+              value: string
+            }
+            setFramework(customElement.value as any)
+          }}
+        >
+          <Core.GdsOption value="react">React</Core.GdsOption>
+          <Core.GdsOption value="angular">Angular</Core.GdsOption>
+          <Core.GdsOption value="lit">Lit</Core.GdsOption>
+        </Core.GdsDropdown>
 
-            <Core.GdsButton
-              size="small"
-              rank="secondary"
-              onClick={() => navigator.clipboard.writeText(code)}
-            >
-              <Core.IconCopy slot="lead" />
-              Copy Code
-            </Core.GdsButton>
-          </Core.GdsFlex>
+        <Core.GdsButton
+          size="small"
+          rank="secondary"
+          onClick={() => navigator.clipboard.writeText(code)}
+        >
+          <Core.IconCopy />
+        </Core.GdsButton>
+      </Core.GdsFlex>
 
-          <pre
-            style={{
-              margin: 0,
-              whiteSpace: 'pre-wrap',
-              wordBreak: 'break-word',
-              flex: 1,
-            }}
-          >
-            <code>{code}</code>
-          </pre>
-        </Core.GdsFlex>
+      <Core.GdsCard variant="secondary">
+        <pre
+          style={{
+            margin: 0,
+            whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word',
+            flex: 1,
+          }}
+        >
+          <code>{code}</code>
+        </pre>
       </Core.GdsCard>
-    </Core.GdsFlex>
+    </Core.GdsCard>
   )
 }

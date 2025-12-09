@@ -88,14 +88,21 @@ function TableContent() {
         border-radius={fullscreen ? '0' : 'l'}
       >
         <Core.GdsFlex
-          flex-direction="row"
           align-items="center"
           gap={fullscreen ? '0' : 's'}
-          justify-content="space-between"
+          justify-content="flex-end"
           width="100%"
           height="3xl"
           padding={fullscreen ? '0' : '0 m'}
         >
+          <Core.GdsButton
+            rank="tertiary"
+            size="small"
+            onClick={() => setFullscreen(!fullscreen)}
+          >
+            <Core.IconFullscreen size="m" />
+          </Core.GdsButton>
+
           <Core.GdsSegmentedControl
             width="max-content"
             value={rightTab}
@@ -105,43 +112,28 @@ function TableContent() {
               setRightTab(target.value as any)
             }}
           >
-            <Core.GdsSegment value="preview">Preview</Core.GdsSegment>
-            <Core.GdsSegment value="code">Code</Core.GdsSegment>
+            <Core.GdsSegment value="preview">
+              <Core.GdsFlex>
+                <Core.IconEyeOpen />
+              </Core.GdsFlex>
+            </Core.GdsSegment>
+            <Core.GdsSegment value="code">
+              <Core.GdsFlex>
+                <Core.IconCodeBrackets />
+              </Core.GdsFlex>
+            </Core.GdsSegment>
           </Core.GdsSegmentedControl>
 
-          <Core.GdsFlex gap="s">
-            <Core.GdsButton
-              rank="tertiary"
-              size="small"
-              onClick={() => setShowLeft(!showLeft)}
-            >
-              <Core.IconCodeBrackets size="m" />
-            </Core.GdsButton>
-            <Core.GdsButton
-              rank="tertiary"
-              size="small"
-              onClick={() => setFullscreen(!fullscreen)}
-            >
-              <Core.IconFullscreen size="m" />
-            </Core.GdsButton>
-          </Core.GdsFlex>
+          {/*     <Core.GdsButton
+            rank="tertiary"
+            size="small"
+            onClick={() => setShowLeft(!showLeft)}
+          >
+            <Core.IconCodeBrackets size="m" />
+          </Core.GdsButton> */}
         </Core.GdsFlex>
 
-        <Core.GdsCard
-          variant="primary"
-          height="100%"
-          width="100%"
-          padding="l"
-          border-radius={fullscreen ? 'xs' : 'm'}
-          overflow="auto"
-          background="neutral-02"
-          border-color="subtle-01"
-          position="relative"
-          max-width="100%"
-          data-pattern
-        >
-          {rightTab === 'preview' ? <TablePreview /> : <TableCode />}
-        </Core.GdsCard>
+        {rightTab === 'preview' ? <TablePreview /> : <TableCode />}
       </Core.GdsCard>
     </Core.GdsGrid>
   )

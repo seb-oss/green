@@ -70,63 +70,39 @@ export default function TablePresets() {
         )}
 
         {filteredPresets.map((preset) => (
-          <Core.GdsFlex
-            key={preset.id}
-            flex-direction="column"
-            align-items="flex-end"
-            gap="xs"
+          <Core.GdsCardPattern01
+            title={preset.title}
+            excerpt={preset.description}
           >
-            <Core.GdsCard
-              variant="tertiary"
-              padding="m"
-              border-radius="l"
-              width="100%"
-            >
-              <Core.GdsFlex flex-direction="column" gap="s">
-                <Core.GdsText font-weight="bold">{preset.title}</Core.GdsText>
-                <Core.GdsText font-size="detail" color="secondary">
-                  {preset.description}
-                </Core.GdsText>
-              </Core.GdsFlex>
-            </Core.GdsCard>
             <Core.GdsButton
               width="max-content"
-              rank="tertiary"
+              rank="secondary"
               size="small"
+              slot="footer"
               onClick={() => setActivePreset(preset.id as any)}
             >
               <Core.IconPencilWave slot="lead" size="s" />
               Load
             </Core.GdsButton>
-          </Core.GdsFlex>
+          </Core.GdsCardPattern01>
         ))}
-
-        <Core.GdsDivider />
-
-        <Core.GdsFlex flex-direction="column" align-items="flex-end" gap="xs">
-          <Core.GdsCard
-            variant="tertiary"
-            padding="m"
-            border-radius="l"
-            width="100%"
-          >
-            <Core.GdsFlex flex-direction="column" gap="s">
-              <Core.GdsText font-weight="bold">Custom</Core.GdsText>
-              <Core.GdsText font-size="detail" color="secondary">
-                Build your own table from scratch
-              </Core.GdsText>
-            </Core.GdsFlex>
-          </Core.GdsCard>
+        <Core.GdsCardPattern01
+          title="Custom"
+          excerpt="Build your own table from scratch"
+          variant="neutral-02"
+          outlined
+        >
           <Core.GdsButton
             width="max-content"
-            rank="tertiary"
+            rank="secondary"
             size="small"
+            slot="footer"
             onClick={() => setActivePreset('custom')}
           >
             <Core.IconPencilWave slot="lead" size="s" />
-            Start Custom
+            Customize
           </Core.GdsButton>
-        </Core.GdsFlex>
+        </Core.GdsCardPattern01>
       </Core.GdsFlex>
     </Core.GdsCard>
   )
