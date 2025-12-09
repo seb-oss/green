@@ -31,8 +31,8 @@ export abstract class GdsFormControlBase<T = any>
 
   protected control?: NgControl
 
-  private _onChange: (value: T) => void = () => {}
-  private _onTouched: () => void = () => {}
+  protected _onChange: (value: T) => void = () => {}
+  protected _onTouched: () => void = () => {}
 
   ngOnInit(): void {
     // Subclasses should call super.ngOnInit() and add their own initialization
@@ -90,7 +90,7 @@ export abstract class GdsFormControlBase<T = any>
   /**
    * Updates the validation state of the underlying web component
    */
-  private updateControlState(): void {
+  protected updateControlState(): void {
     const control = this.control?.control
     if (control) {
       this.renderer.setProperty(

@@ -71,6 +71,7 @@ export class CemParser {
       methods: this.extractMethods(declaration),
       isFormControl: this.isFormControl(declaration),
       isLinkComponent: this.isLinkComponent(declaration),
+      isCheckboxComponent: this.isCheckboxComponent(tagName),
     }
   }
 
@@ -104,6 +105,14 @@ export class CemParser {
         member.privacy !== 'private' &&
         member.privacy !== 'protected',
     )
+  }
+
+  /**
+   * Checks if a component is a checkbox by checking the tag name
+   * Checkboxes need special handling to work with boolean checked state instead of string values
+   */
+  private static isCheckboxComponent(tagName: string): boolean {
+    return tagName === 'gds-checkbox'
   }
 
   /**

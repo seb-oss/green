@@ -31,6 +31,8 @@ export interface ComponentData {
   isFormControl?: boolean
   /** Whether this component supports routing (has an href property) */
   isLinkComponent?: boolean
+  /** Whether this component is a checkbox (gds-checkbox) that needs special boolean handling */
+  isCheckboxComponent?: boolean
 }
 
 export interface ComponentEvent {

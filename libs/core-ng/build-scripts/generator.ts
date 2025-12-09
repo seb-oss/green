@@ -53,6 +53,7 @@ export class AngularGenerator {
       this.isBooleanType(p.type?.text),
     )
     const isFormControl = componentData.isFormControl || false
+    const isCheckboxComponent = componentData.isCheckboxComponent || false
     const isLinkComponent = componentData.isLinkComponent || false
 
     const coreImports = [
@@ -112,9 +113,15 @@ export class AngularGenerator {
 
     // Add form control base class import
     if (isFormControl) {
-      imports.push(
-        `import { GdsFormControlBase } from '../../form-control-base';`,
-      )
+      if (isCheckboxComponent) {
+        imports.push(
+          `import { GdsCheckboxFormControlBase } from '../../checkbox-form-control-base';`,
+        )
+      } else {
+        imports.push(
+          `import { GdsFormControlBase } from '../../form-control-base';`,
+        )
+      }
     }
 
     // Add web component class import
@@ -194,6 +201,7 @@ export class AngularGenerator {
     const hasInputs = componentData.properties.length > 0
     const hasOutputs = componentData.events.length > 0
     const isFormControl = componentData.isFormControl || false
+    const isCheckboxComponent = componentData.isCheckboxComponent || false
     const isLinkComponent = componentData.isLinkComponent || false
     const isMenuButton = componentData.tagName === 'gds-menu-button'
     const validInputs = componentData.properties.filter(
@@ -211,6 +219,7 @@ export class AngularGenerator {
       ),
       description: componentData.description || '',
       isFormControl,
+      isCheckboxComponent,
       isLinkComponent,
       isMenuButton,
 
@@ -222,7 +231,11 @@ export class AngularGenerator {
         : '',
 
       // Base class and interface implementation
-      baseClass: isFormControl ? 'GdsFormControlBase' : '',
+      baseClass: isFormControl
+        ? isCheckboxComponent
+          ? 'GdsCheckboxFormControlBase'
+          : 'GdsFormControlBase'
+        : '',
       implementsClause: isFormControl
         ? '' // Base class already implements the interfaces
         : hasInputs
