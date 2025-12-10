@@ -172,6 +172,18 @@ ${this.generateRouterLinkTests(componentData, componentName)}
     if (!componentData.isFormControl) return ''
 
     const tagName = componentData.tagName
+    const isCheckbox = componentData.isCheckboxComponent || false
+
+    // For checkboxes, use boolean values and checked property
+    // For other form controls, use string values and value property
+    const initialValue = isCheckbox ? 'true' : "'initial-value'"
+    const emptyValue = isCheckbox ? 'false' : "''"
+    const newValue = isCheckbox ? 'true' : "'new-value'"
+    const updatedValue = isCheckbox ? 'true' : "'updated-value'"
+    const validValue = isCheckbox ? 'true' : "'valid-value'"
+    const propertyToSet = isCheckbox ? 'checked' : 'value'
+    const propertyToCheck = isCheckbox ? 'checked' : 'value'
+    const formControlType = isCheckbox ? '<boolean>' : ''
 
     return `
   describe('ControlValueAccessor', () => {
@@ -188,8 +200,8 @@ ${this.generateRouterLinkTests(componentData, componentName)}
       expect(typeof component.setDisabledState).toBe('function');
     });
 
-    it('should work with FormControl', async () => {
-      const control = new FormControl('initial-value');
+    it('should work with FormControl${formControlType}', async () => {
+      const control = new FormControl(${initialValue});
 
       const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
         imports: [ReactiveFormsModule, ${componentName}],
@@ -204,12 +216,12 @@ ${this.generateRouterLinkTests(componentData, componentName)}
       const element = fixture.nativeElement.querySelector('${tagName}');
       expect(element).toBeTruthy();
 
-      // Check that the initial value is set
-      expect(element.value).toBe('initial-value');
+      // Check that the initial ${propertyToCheck} is set
+      expect(element.${propertyToCheck}).toBe(${initialValue});
     });
 
-    it('should update FormControl when value changes', async () => {
-      const control = new FormControl('');
+    it('should update FormControl when ${propertyToSet} changes', async () => {
+      const control = new FormControl(${emptyValue});
 
       const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
         imports: [ReactiveFormsModule, ${componentName}],
@@ -224,17 +236,17 @@ ${this.generateRouterLinkTests(componentData, componentName)}
       const element = fixture.nativeElement.querySelector('${tagName}');
 
       // Simulate user input
-      element.value = 'new-value';
+      element.${propertyToSet} = ${newValue};
       element.dispatchEvent(new Event('input', { bubbles: true }));
 
       fixture.detectChanges();
       await fixture.whenStable();
 
-      expect(control.value).toBe('new-value');
+      expect(control.value).toBe(${newValue});
     });
 
-    it('should update value when FormControl value changes', async () => {
-      const control = new FormControl('initial');
+    it('should update ${propertyToCheck} when FormControl value changes', async () => {
+      const control = new FormControl(${emptyValue});
 
       const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
         imports: [ReactiveFormsModule, ${componentName}],
@@ -249,15 +261,15 @@ ${this.generateRouterLinkTests(componentData, componentName)}
       const element = fixture.nativeElement.querySelector('${tagName}');
 
       // Update the FormControl programmatically
-      control.setValue('updated-value');
+      control.setValue(${updatedValue});
       fixture.detectChanges();
       await fixture.whenStable();
 
-      expect(element.value).toBe('updated-value');
+      expect(element.${propertyToCheck}).toBe(${updatedValue});
     });
 
     it('should mark as touched on blur', async () => {
-      const control = new FormControl('');
+      const control = new FormControl(${emptyValue});
 
       const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
         imports: [ReactiveFormsModule, ${componentName}],
@@ -283,7 +295,7 @@ ${this.generateRouterLinkTests(componentData, componentName)}
     });
 
     it('should handle disabled state', async () => {
-      const control = new FormControl({ value: 'test', disabled: true });
+      const control = new FormControl({ value: ${initialValue}, disabled: true });
 
       const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
         imports: [ReactiveFormsModule, ${componentName}],
@@ -308,7 +320,7 @@ ${this.generateRouterLinkTests(componentData, componentName)}
     });
 
     it('should sync validation state to invalid property', async () => {
-      const control = new FormControl('', { validators: [(c) => c.value ? null : { required: true }] });
+      const control = new FormControl(${emptyValue}, { validators: [(c) => c.value ? null : { required: true }] });
 
       const { fixture } = await render(\`<${tagName} [formControl]="control"></${tagName}>\`, {
         imports: [ReactiveFormsModule, ${componentName}],
@@ -336,7 +348,7 @@ ${this.generateRouterLinkTests(componentData, componentName)}
       expect(element.invalid).toBe(true);
 
       // Set a valid value
-      control.setValue('valid-value');
+      control.setValue(${validValue});
       fixture.detectChanges();
       await fixture.whenStable();
 

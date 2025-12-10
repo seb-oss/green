@@ -39,7 +39,7 @@ describe('GdsFormControlBase', () => {
     describe('writeValue', () => {
       it('should set value on the element', () => {
         const setPropertySpy = jest.spyOn(renderer, 'setProperty')
-        
+
         component.writeValue('test-value')
 
         expect(setPropertySpy).toHaveBeenCalledWith(element, 'value', 'test-value')
@@ -47,7 +47,7 @@ describe('GdsFormControlBase', () => {
 
       it('should handle null value', () => {
         const setPropertySpy = jest.spyOn(renderer, 'setProperty')
-        
+
         component.writeValue(null as any)
 
         expect(setPropertySpy).toHaveBeenCalledWith(element, 'value', null)
@@ -57,7 +57,7 @@ describe('GdsFormControlBase', () => {
     describe('registerOnChange', () => {
       it('should register onChange callback', () => {
         const callback = jest.fn()
-        
+
         component.registerOnChange(callback)
         // Need to call ngAfterViewInit to set up event listeners
         component.ngAfterViewInit()
@@ -89,12 +89,29 @@ describe('GdsFormControlBase', () => {
 
         expect(callback).toHaveBeenCalledWith('typed-value')
       })
+
+      it('should call change detector markForCheck', () => {
+        const callback = jest.fn()
+        const markForCheckSpy = jest.spyOn((component as any).cdr, 'markForCheck')
+
+        component.registerOnChange(callback)
+        component.ngAfterViewInit()
+
+        const event = new Event('input', { bubbles: true })
+        Object.defineProperty(event, 'target', {
+          value: { value: 'test-value' },
+          writable: false,
+        })
+        element.dispatchEvent(event)
+
+        expect(markForCheckSpy).toHaveBeenCalled()
+      })
     })
 
     describe('registerOnTouched', () => {
       it('should register onTouched callback', () => {
         const callback = jest.fn()
-        
+
         component.registerOnTouched(callback)
         // Need to call ngAfterViewInit to set up event listeners
         component.ngAfterViewInit()
@@ -122,7 +139,7 @@ describe('GdsFormControlBase', () => {
     describe('setDisabledState', () => {
       it('should set disabled property to true', () => {
         const setPropertySpy = jest.spyOn(renderer, 'setProperty')
-        
+
         component.setDisabledState?.(true)
 
         expect(setPropertySpy).toHaveBeenCalledWith(element, 'disabled', true)
@@ -130,7 +147,7 @@ describe('GdsFormControlBase', () => {
 
       it('should set disabled property to false', () => {
         const setPropertySpy = jest.spyOn(renderer, 'setProperty')
-        
+
         component.setDisabledState?.(false)
 
         expect(setPropertySpy).toHaveBeenCalledWith(element, 'disabled', false)
@@ -220,6 +237,42 @@ describe('GdsFormControlBase', () => {
 
       expect(setPropertySpy).toHaveBeenCalledWith(element, 'invalid', false)
     })
+
+    it('should not show invalid state until touched or dirty', async () => {
+      const control = new FormControl('', {
+        validators: [(c) => (c.value ? null : { required: true })],
+      })
+
+      const mockNgControl = {
+        statusChanges: control.statusChanges,
+        valueChanges: control.valueChanges,
+        control: control,
+      } as unknown as NgControl
+
+      ;(component as any).injector = {
+        get: (token: any, notFoundValue?: any) => {
+          if (token === NgControl) return mockNgControl
+          return notFoundValue
+        },
+      }
+
+      component.registerOnChange(() => {})
+      component.registerOnTouched(() => {})
+
+      const setPropertySpy = jest.spyOn(renderer, 'setProperty')
+
+      component.ngAfterViewInit()
+
+      await new Promise(resolve => setTimeout(resolve, 10))
+
+      // Control is invalid but not touched/dirty
+      control.updateValueAndValidity()
+
+      await new Promise(resolve => setTimeout(resolve, 50))
+
+      // Should not show as invalid
+      expect(setPropertySpy).toHaveBeenCalledWith(element, 'invalid', false)
+    })
   })
 
   describe('Form submit handling', () => {
@@ -277,6 +330,104 @@ describe('GdsFormControlBase', () => {
 
     it('should call ngAfterViewInit and setup subscriptions', () => {
       expect(() => component.ngAfterViewInit()).not.toThrow()
+    })
+
+    it('should handle missing NgControl gracefully', () => {
+      ;(component as any).injector = {
+        get: (token: any, notFoundValue?: any) => {
+          if (token === NgControl) throw new Error('Not found')
+          return notFoundValue
+        },
+      }
+
+      expect(() => component.ngAfterViewInit()).not.toThrow()
+    })
+  })
+
+  describe('Integration with Angular forms', () => {
+    it('should work with reactive forms pattern', () => {
+      const callback = jest.fn()
+
+      component.registerOnChange(callback)
+      component.registerOnTouched(() => {})
+      component.ngAfterViewInit()
+
+      // Simulate user interaction
+      const firstEvent = new Event('input', { bubbles: true })
+      Object.defineProperty(firstEvent, 'target', {
+        value: { value: 'first-value' },
+        writable: false,
+      })
+      element.dispatchEvent(firstEvent)
+
+      expect(callback).toHaveBeenCalledWith('first-value')
+
+      const secondEvent = new Event('input', { bubbles: true })
+      Object.defineProperty(secondEvent, 'target', {
+        value: { value: 'second-value' },
+        writable: false,
+      })
+      element.dispatchEvent(secondEvent)
+
+      expect(callback).toHaveBeenCalledWith('second-value')
+    })
+
+    it('should properly reflect programmatic value changes', () => {
+      const setPropertySpy = jest.spyOn(renderer, 'setProperty')
+
+      // Programmatically set value (like formControl.setValue())
+      component.writeValue('value-1')
+      expect(setPropertySpy).toHaveBeenCalledWith(element, 'value', 'value-1')
+
+      component.writeValue('value-2')
+      expect(setPropertySpy).toHaveBeenCalledWith(element, 'value', 'value-2')
+    })
+  })
+
+  describe('Edge cases', () => {
+    it('should handle rapid consecutive changes', () => {
+      const callback = jest.fn()
+
+      component.registerOnChange(callback)
+      component.ngAfterViewInit()
+
+      // Trigger multiple rapid changes
+      const values = ['val1', 'val2', 'val3', 'val4', 'val5']
+      values.forEach((value) => {
+        const event = new Event('input', { bubbles: true })
+        Object.defineProperty(event, 'target', {
+          value: { value },
+          writable: false,
+        })
+        element.dispatchEvent(event)
+      })
+
+      expect(callback).toHaveBeenCalledTimes(5)
+      expect(callback).toHaveBeenLastCalledWith('val5')
+    })
+
+    it('should handle events before ngAfterViewInit gracefully', () => {
+      const callback = jest.fn()
+
+      component.registerOnChange(callback)
+
+      // Try to trigger event before ngAfterViewInit
+      const event = new Event('input', { bubbles: true })
+      Object.defineProperty(event, 'target', {
+        value: { value: 'early-value' },
+        writable: false,
+      })
+      element.dispatchEvent(event)
+
+      // Callback should not be called since listeners aren't set up yet
+      expect(callback).not.toHaveBeenCalled()
+
+      // Now initialize
+      component.ngAfterViewInit()
+
+      // Now events should work
+      element.dispatchEvent(event)
+      expect(callback).toHaveBeenCalledWith('early-value')
     })
   })
 })
