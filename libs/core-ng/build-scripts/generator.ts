@@ -226,13 +226,7 @@ export class AngularGenerator {
       // Decorator configuration
       proxyInputsDecorator: hasInputs
         ? `@ProxyInputs([${validInputs
-            .map((property) => {
-              const orig = property.name.replace(/\'/g, '')
-              const camel = orig.includes('-')
-                ? orig.replace(/-([a-z])/g, (_, l) => l.toUpperCase())
-                : orig
-              return `{ inputName: '${camel}', propName: '${orig}' }`
-            })
+            .map((property) => `'${property.name.replace(/\'/g, '')}'`)
             .join(', ')}])`
         : '',
 

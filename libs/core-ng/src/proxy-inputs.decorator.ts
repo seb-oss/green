@@ -12,12 +12,7 @@
  * }
  * ```
  */
-export type ProxyInputEntry =
-  | string
-  | {
-      inputName: string
-      propName: string
-    }
+export type ProxyInputEntry = string
 
 export function ProxyInputs(inputNames: ProxyInputEntry[]) {
   return (cls: any) => {
@@ -25,49 +20,50 @@ export function ProxyInputs(inputNames: ProxyInputEntry[]) {
     const originalNgAfterViewInit = cls.prototype.ngAfterViewInit
     const originalNgOnChanges = cls.prototype.ngOnChanges
 
+    // Build mapping at decorator time: map Angular inputName (camelCase) => element propName (kebab-case)
+    const mapping = inputNames.map((entry) => {
+      const kebab = entry.replace(/\'/g, '')
+      const camel = kebab.includes('-')
+        ? kebab.replace(/-([a-z])/g, (_, l) => l.toUpperCase())
+        : kebab
+      return { inputName: camel, propName: kebab }
+    })
+
+    // Quick lookup by Angular input name -> element prop name
+    const propLookup: Record<string, string> = mapping.reduce((acc, cur) => {
+      acc[cur.inputName] = cur.propName
+      return acc
+    }, {} as Record<string, string>)
+
     // Add ngAfterViewInit to set up initial values
-  cls.prototype.ngAfterViewInit = function () {
+    cls.prototype.ngAfterViewInit = function () {
       // Call original ngAfterViewInit first
       if (originalNgAfterViewInit) {
         originalNgAfterViewInit.call(this)
       }
 
-      // Sync all current property values to the web component
-      inputNames.forEach((entry) => {
-        const inputName = typeof entry === 'string' ? entry : entry.inputName
-        const propName = typeof entry === 'string' ? entry : entry.propName
+      // Sync all current property values to the web component using the mapping
+      mapping.forEach(({ inputName, propName }: { inputName: string; propName: string }) => {
         const currentValue = this[inputName]
         if (currentValue !== undefined && this.element) {
           this.zone.runOutsideAngular(() => {
-            // Prefer setting using the explicit propName (kebab-case) when provided
-            try {
-              this.element[propName] = currentValue
-            } catch {
-              // Fallback to inputName if propName is not a valid property on the element
-              this.element[inputName] = currentValue
-            }
+            // Use bracket notation so kebab-case prop names work as object properties
+            this.element[propName] = currentValue
           })
         }
       })
     }
 
     // Add ngOnChanges to sync property changes
-  cls.prototype.ngOnChanges = function (changes: any) {
+    cls.prototype.ngOnChanges = function (changes: any) {
       // Call original ngOnChanges first
       if (originalNgOnChanges) {
         originalNgOnChanges.call(this, changes)
       }
 
-      // Build a map of inputName -> propName for quick lookup
-      const mapping: Record<string, string> = {}
-      inputNames.forEach((entry) => {
-        if (typeof entry === 'string') mapping[entry] = entry
-        else mapping[entry.inputName] = entry.propName
-      })
-
-      // Sync changed properties to the web component
+      // Sync changed properties to the web component using the propLookup
       Object.keys(changes).forEach((propertyName) => {
-        const propName = mapping[propertyName]
+        const propName = propLookup[propertyName]
         if (propName && this.element) {
           const change = changes[propertyName]
           this.zone.runOutsideAngular(() => {
