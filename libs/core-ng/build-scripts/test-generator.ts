@@ -61,7 +61,13 @@ ${this.generateRouterLinkTests(componentData, componentName)}
     if (inputs.length === 0) return ''
 
     const inputList = inputs
-      .map((input) => `'${input.name.replace(/\'/g, '')}'`)
+      .map((input) => {
+        const origName = input.name.replace(/\'/g, '')
+        const camelName = origName.includes('-')
+          ? origName.replace(/-([a-z])/g, (_, l) => l.toUpperCase())
+          : origName
+        return `'${camelName}'`
+      })
       .join(', ')
 
     return `
@@ -92,18 +98,21 @@ ${this.generateRouterLinkTests(componentData, componentName)}
       .slice(0, 3) // Only test first 3 inputs to keep tests concise
       .map((input) => {
         const testValue = this.getTestValue(input.type?.text || 'undefined')
-        const propName = input.name.replace(/\'/g, '')
+        const origName = input.name.replace(/\'/g, '')
+        const camelName = origName.includes('-')
+          ? origName.replace(/-([a-z])/g, (_, l) => l.toUpperCase())
+          : origName
         return `
-  it("should accept ${propName} property", async () => {
+  it("should accept ${camelName} property", async () => {
     const testValue = ${testValue};
     const { fixture } = await render(${componentName}, {
       componentProperties: {
-        '${propName}': testValue
+        '${camelName}': testValue
       }
     });
 
     const component = fixture.componentInstance;
-    expect(component['${propName}']).toBe(testValue);
+    expect(component['${camelName}']).toBe(testValue);
   });`
       })
       .join('')

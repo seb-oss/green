@@ -238,6 +238,8 @@ This approach ensures:
 - Single source of truth: Types come from the web component definitions
 - Automatic updates: If web components change, wrappers reflect those changes after regeneration
 
+Kebab-case properties are converted to camelCase to align more with Angular conventions.
+
 ### Event Type Mapping
 
 `@Output` decorators are added for all events, and any kebab-cased events (like `gds-close`) will be automatically mapped to a camelCased output (`gdsClose`) for better alignment with Angular conventions.

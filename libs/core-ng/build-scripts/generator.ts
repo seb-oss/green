@@ -149,11 +149,11 @@ export class AngularGenerator {
       }
 
       // Generate import statements for unique primitives
-      for (const [primitiveClass, reExportPath] of uniquePrimitives) {
+      uniquePrimitives.forEach((reExportPath, primitiveClass) => {
         imports.push(
           `import type { ${primitiveClass} } from '@sebgroup/green-core/${reExportPath}';`,
         )
-      }
+      })
     }
 
     return imports.join('\n')
@@ -226,7 +226,13 @@ export class AngularGenerator {
       // Decorator configuration
       proxyInputsDecorator: hasInputs
         ? `@ProxyInputs([${validInputs
-            .map((property) => `'${property.name.replace(/\'/g, '')}'`)
+            .map((property) => {
+              const orig = property.name.replace(/\'/g, '')
+              const camel = orig.includes('-')
+                ? orig.replace(/-([a-z])/g, (_, l) => l.toUpperCase())
+                : orig
+              return `{ inputName: '${camel}', propName: '${orig}' }`
+            })
             .join(', ')}])`
         : '',
 
@@ -413,13 +419,17 @@ ${standardBody}
           ? `@Input({ transform: booleanAttribute })`
           : `@Input()`
 
-        // Note: All inputs are marked as optional, since any properties in the underlying
-        // web component that does not have `undefined` in the type will have a default value
-        // set by the web component itself. There shouldn't be any need to replicate that in
-        // the Angular wrapper, so we can keep it simple and mark all inputs as optional.
+        const origName = input.name?.replace(/\'/g, '') || ''
+        const camelName = origName.includes('-')
+          ? origName.replace(/-([a-z])/g, (_, l) => l.toUpperCase())
+          : origName
+
+        // Note: All inputs are marked as optional. Angular-facing property names are
+        // camelCase; the underlying web component property may be kebab-case. We
+        // type the input using the original property name on the web component class.
         return `${comment}
   ${inputDecorator}
-  ${input.name}?: ${className}['${input.name?.replace(/\'/g, '')}'];`
+  ${camelName}?: ${className}['${origName}'];`
       })
       .join('\n')
   }
