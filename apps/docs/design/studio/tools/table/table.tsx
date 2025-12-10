@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
+import { useSearch } from '../../context/search.context'
 import TableCode from './table.code'
 import TableEdit from './table.edit'
 import TablePresets from './table.presets'
@@ -17,7 +18,7 @@ function TableContent() {
   const [rightTab, setRightTab] = useState<'preview' | 'code'>('preview')
   const [showLeft, setShowLeft] = useState(true)
   const [fullscreen, setFullscreen] = useState(false)
-
+  const { setTakeover, takeover } = useSearch()
   return (
     <Core.GdsGrid
       gap="s"
@@ -92,7 +93,10 @@ function TableContent() {
           <Core.GdsButton
             rank="tertiary"
             size="small"
-            onClick={() => setFullscreen(!fullscreen)}
+            onClick={() => {
+              setTakeover(!takeover)
+            }}
+            /*  onClick={() => setFullscreen(!fullscreen)} */
           >
             <Core.IconFullscreen size="m" />
           </Core.GdsButton>

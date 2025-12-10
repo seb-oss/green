@@ -48,50 +48,53 @@ export default function TableSettings() {
         <Core.GdsOption value="plain">Plain</Core.GdsOption>
       </Core.GdsDropdown>
 
-      <Core.GdsDropdown
-        label="Density"
-        size="small"
-        value={tableSettings.density}
-        onChange={(e: React.FormEvent<HTMLElement>) => {
-          const customElement = e.target as HTMLElement & { value: string }
-          updateSetting('density', customElement.value)
-        }}
-      >
-        <Core.GdsOption value="comfortable">Comfortable</Core.GdsOption>
-        <Core.GdsOption value="compact">Compact</Core.GdsOption>
-        <Core.GdsOption value="spacious">Spacious</Core.GdsOption>
-      </Core.GdsDropdown>
+      <Core.GdsFlex gap="m">
+        <Core.GdsDropdown
+          label="Density"
+          size="small"
+          value={tableSettings.density}
+          onChange={(e: React.FormEvent<HTMLElement>) => {
+            const customElement = e.target as HTMLElement & { value: string }
+            updateSetting('density', customElement.value)
+          }}
+        >
+          <Core.GdsOption value="comfortable">Comfortable</Core.GdsOption>
+          <Core.GdsOption value="compact">Compact</Core.GdsOption>
+          <Core.GdsOption value="spacious">Spacious</Core.GdsOption>
+        </Core.GdsDropdown>
 
-      <Core.GdsDropdown
-        label="Variant"
-        size="small"
-        value={tableSettings.variant}
-        onChange={(e: React.FormEvent<HTMLElement>) => {
-          const customElement = e.target as HTMLElement & { value: string }
-          updateSetting('variant', customElement.value)
-        }}
-      >
-        <Core.GdsOption value="primary">Primary</Core.GdsOption>
-        <Core.GdsOption value="secondary">Secondary</Core.GdsOption>
-        <Core.GdsOption value="tertiary">Tertiary</Core.GdsOption>
-      </Core.GdsDropdown>
+        <Core.GdsDropdown
+          label="Variant"
+          size="small"
+          value={tableSettings.variant}
+          onChange={(e: React.FormEvent<HTMLElement>) => {
+            const customElement = e.target as HTMLElement & { value: string }
+            updateSetting('variant', customElement.value)
+          }}
+        >
+          <Core.GdsOption value="primary">Primary</Core.GdsOption>
+          <Core.GdsOption value="secondary">Secondary</Core.GdsOption>
+          <Core.GdsOption value="tertiary">Tertiary</Core.GdsOption>
+        </Core.GdsDropdown>
+      </Core.GdsFlex>
+      <Core.GdsFlex gap="m">
+        <Core.GdsInput
+          label="Rows per page"
+          size="small"
+          type="number"
+          value={String(tableSettings.rows)}
+          onInput={(e: any) => updateSetting('rows', Number(e.target.value))}
+        />
 
-      <Core.GdsInput
-        label="Rows per page"
-        size="small"
-        type="number"
-        value={String(tableSettings.rows)}
-        onInput={(e: any) => updateSetting('rows', Number(e.target.value))}
-      />
-
-      <Core.GdsInput
-        label="Height"
-        size="small"
-        value={tableSettings.height || ''}
-        onInput={(e: any) =>
-          updateSetting('height', e.target.value || undefined)
-        }
-      />
+        <Core.GdsInput
+          label="Height"
+          size="small"
+          value={tableSettings.height || ''}
+          onInput={(e: any) =>
+            updateSetting('height', e.target.value || undefined)
+          }
+        />
+      </Core.GdsFlex>
     </Core.GdsFlex>
   )
 }
