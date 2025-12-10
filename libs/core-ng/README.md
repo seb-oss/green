@@ -5,6 +5,8 @@ Angular wrappers for [@sebgroup/green-core](https://github.com/seb-oss/green/tre
 [![npm version](https://img.shields.io/npm/v/@sebgroup/green-core-ng/latest.svg)](https://www.npmjs.com/package/@sebgroup/green-core-ng)
 [![License](https://img.shields.io/badge/license-Apache2.0-005FAC)](https://github.com/seb-oss/green/blob/main/LICENSE)
 
+Status: Beta
+
 ## Overview
 
 `@sebgroup/green-core-ng` provides type-safe Angular component wrappers for all Green Design System web components. These wrappers are automatically generated from the Custom Elements Manifest, ensuring they stay in sync with the underlying web components while providing a native Angular development experience.
