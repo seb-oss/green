@@ -18,11 +18,22 @@ import * as Table from './table.imports'
 import * as Types from './table.types'
 
 export * as Types from './table.types'
+
 /**
  * @element gds-table
  * @status beta
  *
- * ⚠️ Declare events
+ * @summary A data table component with async data loading, pagination, sorting, filtering, and customizable cell rendering.
+ *
+ * @slot `header-lead` - Content displayed at the start of the table header (after search).
+ * @slot `header-trail` - Content displayed at the end of the table header (before settings).
+ * @slot `error` - Custom error state content when data loading fails.
+ * @slot `empty` - Custom empty state content when no data is available.
+ * @slot `no-results` - Custom no results content when search returns empty.
+ *
+ * @event gds-table-data-loaded - Fired when data is successfully loaded.
+ * @event gds-table-data-error - Fired when data loading fails.
+ * @event gds-table-selection - Fired when row selection changes.
  */
 @localized()
 @gdsCustomElement('gds-table', {
