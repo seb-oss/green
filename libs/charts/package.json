@@ -16,7 +16,7 @@
     "access": "public",
     "directory": "../../dist/libs/charts"
   },
-  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/seb-oss)",
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {
