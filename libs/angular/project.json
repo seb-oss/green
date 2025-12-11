@@ -59,7 +59,7 @@
       "options": {
         "outputDir": "dist/storybook/angular",
         "configDir": "libs/angular/.storybook",
-        "buildTarget": "angular:build-storybook",
+        "browserTarget": "angular:build-storybook",
         "compodoc": false,
         "stylePreprocessorOptions": {
           "includePaths": ["libs/fonts/*"]
