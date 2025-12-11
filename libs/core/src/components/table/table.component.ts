@@ -172,7 +172,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   private _isMobile = false
 
   @watchMediaQuery('(max-width: 768px)')
-  _handleMobile(matches: boolean) {
+  private _handleMobile(matches: boolean) {
     this._isMobile = matches
   }
 
