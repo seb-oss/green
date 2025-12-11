@@ -70,6 +70,11 @@ type DensityMode = keyof typeof DENSITY_CONFIG
 /**
  * @element gds-pagination
  * @status beta
+ *
+ * @summary A pagination component with page navigation, configurable rows per page, and responsive layout.
+ *
+ * @event gds-page-change - Fired when the active page changes.
+ * @event gds-rows-change - Fired when the rows per page value changes.
  */
 @localized()
 @gdsCustomElement('gds-pagination', {
