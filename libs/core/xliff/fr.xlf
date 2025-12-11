@@ -192,99 +192,131 @@
 </trans-unit>
 <trans-unit id="s22237cd4f966764d">
   <source>Jump to page</source>
+  <target>Accéder à la page</target>
 </trans-unit>
 <trans-unit id="se682f076f6506f9b">
   <source>Go to page</source>
+  <target>Aller à la page</target>
 </trans-unit>
 <trans-unit id="s09023907b59c38eb">
   <source>Go</source>
+  <target>Aller</target>
 </trans-unit>
 <trans-unit id="s023f114f575b5bd5">
   <source>Current page</source>
+  <target>Page actuelle</target>
 </trans-unit>
 <trans-unit id="s038b2a0deba58916">
   <source>page</source>
+  <target>page</target>
 </trans-unit>
 <trans-unit id="s8af6c50191c92781">
   <source>Go to first page</source>
+  <target>Aller à la première page</target>
 </trans-unit>
 <trans-unit id="s6a89bb10338369b4">
   <source>Go to previous page</source>
+  <target>Aller à la page précédente</target>
 </trans-unit>
 <trans-unit id="s7edad99c6b7bfe88">
   <source>Go to next page</source>
+  <target>Aller à la page suivante</target>
 </trans-unit>
 <trans-unit id="s7350bb367d5e09ab">
   <source>Go to last page</source>
+  <target>Aller à la dernière page</target>
 </trans-unit>
 <trans-unit id="s90a641043aa30c1e">
   <source>Rows per page</source>
+  <target>Lignes par page</target>
 </trans-unit>
 <trans-unit id="s03c44f5a1b0581d4">
   <source>selected</source>
+  <target>sélectionné</target>
 </trans-unit>
 <trans-unit id="s8af61807443f32a4">
   <source>Actions</source>
+  <target>Actions</target>
 </trans-unit>
 <trans-unit id="scfe20e6b9fcd18ad">
   <source>Search table</source>
+  <target>Rechercher dans le tableau</target>
 </trans-unit>
 <trans-unit id="s5068a6876795d628">
   <source>Select visible columns</source>
+  <target>Sélectionner les colonnes visibles</target>
 </trans-unit>
 <trans-unit id="sb0f3327210fe18fc">
   <source>Columns</source>
+  <target>Colonnes</target>
 </trans-unit>
 <trans-unit id="s8e68b824b99140a1">
   <source>ascending</source>
+  <target>ascendant</target>
 </trans-unit>
 <trans-unit id="s84d3dbcd121dd01b">
   <source>descending</source>
+  <target>descendant</target>
 </trans-unit>
 <trans-unit id="s31fc8b3aecbb26e8">
   <source>sorted</source>
+  <target>trié</target>
 </trans-unit>
 <trans-unit id="s6badfcac7ad931f1">
   <source>sortable</source>
+  <target>triable</target>
 </trans-unit>
 <trans-unit id="s909e876731a8febb">
   <source>Select all rows</source>
+  <target>Sélectionner toutes les lignes</target>
 </trans-unit>
 <trans-unit id="s3d195621e562d805">
   <source>Select row</source>
+  <target>Sélectionner la ligne</target>
 </trans-unit>
 <trans-unit id="sc9ba1c07c319d0ab">
   <source>Data table with</source>
+  <target>Tableau de données avec</target>
 </trans-unit>
 <trans-unit id="sa3a7061ff10a8138">
   <source>rows</source>
+  <target>lignes</target>
 </trans-unit>
 <trans-unit id="sbbea6041f19ec177">
   <source>Error loading data</source>
+  <target>Erreur lors du chargement des données</target>
 </trans-unit>
 <trans-unit id="s626a661dd5858d8f">
   <source>Retry loading data</source>
+  <target>Réessayer de charger les données</target>
 </trans-unit>
 <trans-unit id="s2c8189544e3ea679">
   <source>Retry</source>
+  <target>Réessayer</target>
 </trans-unit>
 <trans-unit id="s9094c0cde8fb5058">
   <source>No results found</source>
+  <target>Aucun résultat trouvé</target>
 </trans-unit>
 <trans-unit id="sd186574aa8a68ecb">
   <source>No results for</source>
+  <target>Aucun résultat pour</target>
 </trans-unit>
 <trans-unit id="s78e1e4c3066c51c1">
   <source>Clear search for</source>
+  <target>Effacer la recherche pour</target>
 </trans-unit>
 <trans-unit id="s5f4586bc1e2740e6">
   <source>Clear search</source>
+  <target>Effacer la recherche</target>
 </trans-unit>
 <trans-unit id="sa26d7a273074cbf9">
   <source>No data available</source>
+  <target>Aucune donnée disponible</target>
 </trans-unit>
 <trans-unit id="s08b06007b5567108">
   <source>of</source>
+  <target>sur</target>
 </trans-unit>
 </body>
 </file>

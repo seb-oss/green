@@ -192,99 +192,131 @@
 </trans-unit>
 <trans-unit id="s22237cd4f966764d">
   <source>Jump to page</source>
+  <target>Siirry sivulle</target>
 </trans-unit>
 <trans-unit id="se682f076f6506f9b">
   <source>Go to page</source>
+  <target>Siirry sivulle</target>
 </trans-unit>
 <trans-unit id="s09023907b59c38eb">
   <source>Go</source>
+  <target>Siirry</target>
 </trans-unit>
 <trans-unit id="s023f114f575b5bd5">
   <source>Current page</source>
+  <target>Nykyinen sivu</target>
 </trans-unit>
 <trans-unit id="s038b2a0deba58916">
   <source>page</source>
+  <target>sivu</target>
 </trans-unit>
 <trans-unit id="s8af6c50191c92781">
   <source>Go to first page</source>
+  <target>Siirry ensimmäiselle sivulle</target>
 </trans-unit>
 <trans-unit id="s6a89bb10338369b4">
   <source>Go to previous page</source>
+  <target>Siirry edelliselle sivulle</target>
 </trans-unit>
 <trans-unit id="s7edad99c6b7bfe88">
   <source>Go to next page</source>
+  <target>Siirry seuraavalle sivulle</target>
 </trans-unit>
 <trans-unit id="s7350bb367d5e09ab">
   <source>Go to last page</source>
+  <target>Siirry viimeiselle sivulle</target>
 </trans-unit>
 <trans-unit id="s90a641043aa30c1e">
   <source>Rows per page</source>
+  <target>Rivit sivulla</target>
 </trans-unit>
 <trans-unit id="s03c44f5a1b0581d4">
   <source>selected</source>
+  <target>valittu</target>
 </trans-unit>
 <trans-unit id="s8af61807443f32a4">
   <source>Actions</source>
+  <target>Toiminnot</target>
 </trans-unit>
 <trans-unit id="scfe20e6b9fcd18ad">
   <source>Search table</source>
+  <target>Etsi taulukosta</target>
 </trans-unit>
 <trans-unit id="s5068a6876795d628">
   <source>Select visible columns</source>
+  <target>Valitse näkyvät sarakkeet</target>
 </trans-unit>
 <trans-unit id="sb0f3327210fe18fc">
   <source>Columns</source>
+  <target>Sarakkeet</target>
 </trans-unit>
 <trans-unit id="s8e68b824b99140a1">
   <source>ascending</source>
+  <target>nouseva</target>
 </trans-unit>
 <trans-unit id="s84d3dbcd121dd01b">
   <source>descending</source>
+  <target>laskeva</target>
 </trans-unit>
 <trans-unit id="s31fc8b3aecbb26e8">
   <source>sorted</source>
+  <target>lajiteltu</target>
 </trans-unit>
 <trans-unit id="s6badfcac7ad931f1">
   <source>sortable</source>
+  <target>lajiteltavissa</target>
 </trans-unit>
 <trans-unit id="s909e876731a8febb">
   <source>Select all rows</source>
+  <target>Valitse kaikki rivit</target>
 </trans-unit>
 <trans-unit id="s3d195621e562d805">
   <source>Select row</source>
+  <target>Valitse rivi</target>
 </trans-unit>
 <trans-unit id="sc9ba1c07c319d0ab">
   <source>Data table with</source>
+  <target>Tietojen taulukko, jossa on</target>
 </trans-unit>
 <trans-unit id="sa3a7061ff10a8138">
   <source>rows</source>
+  <target>rivit</target>
 </trans-unit>
 <trans-unit id="sbbea6041f19ec177">
   <source>Error loading data</source>
+  <target>Virhe tietojen lataamisessa</target>
 </trans-unit>
 <trans-unit id="s626a661dd5858d8f">
   <source>Retry loading data</source>
+  <target>Yritä ladata tiedot uudelleen</target>
 </trans-unit>
 <trans-unit id="s2c8189544e3ea679">
   <source>Retry</source>
+  <target>Yritä uudelleen</target>
 </trans-unit>
 <trans-unit id="s9094c0cde8fb5058">
   <source>No results found</source>
+  <target>Tuloksia ei löytynyt</target>
 </trans-unit>
 <trans-unit id="sd186574aa8a68ecb">
   <source>No results for</source>
+  <target>Ei tuloksia kohteelle</target>
 </trans-unit>
 <trans-unit id="s78e1e4c3066c51c1">
   <source>Clear search for</source>
+  <target>Tyhjennä haku kohteelle</target>
 </trans-unit>
 <trans-unit id="s5f4586bc1e2740e6">
   <source>Clear search</source>
+  <target>Tyhjennä haku</target>
 </trans-unit>
 <trans-unit id="sa26d7a273074cbf9">
   <source>No data available</source>
+  <target>Ei tietoja saatavilla</target>
 </trans-unit>
 <trans-unit id="s08b06007b5567108">
   <source>of</source>
+  <target>/ </target>
 </trans-unit>
 </body>
 </file>
