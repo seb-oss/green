@@ -1,5 +1,4 @@
-import { GdsElement } from '../../gds-element'
-
+import type { GdsElement } from '../../gds-element'
 import type {
   GdsBadge,
   GdsButton,
