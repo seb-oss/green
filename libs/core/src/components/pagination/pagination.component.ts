@@ -139,10 +139,11 @@ export class GdsPagination extends withMarginProps(
   @query('#page-input')
   private _elInput?: HTMLElement
 
-  @state() private _isMobile = false
+  @state()
+  private _isMobile = false
 
   @watchMediaQuery('(max-width: 768px)')
-  _handleMobile(matches: boolean) {
+  private _handleMobile(matches: boolean) {
     this._isMobile = matches
   }
 
