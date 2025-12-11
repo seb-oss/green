@@ -287,7 +287,7 @@ function extractGuidelineText(content: GuidelineContent, guideline: GuidelineEnt
  * Escapes pipe characters and newlines for markdown table cells
  */
 function escapeTableCell(text: string): string {
-  return text.replace(/\|/g, '\\|').replace(/\n/g, ' ')
+  return text.replace(/\\/g, '\\\\').replace(/\|/g, '\\|').replace(/\n/g, ' ')
 }
 
 /**
