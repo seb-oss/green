@@ -3,7 +3,7 @@
   "version": "3.0.1",
   "description": "Font files and CSS for SEB SansSerif",
   "main": "fonts.scss",
-  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/seb-oss)",
   "scripts": {
     "build-css": "node-sass --source-map true --include-path scss scss/seb-fonts.scss css/seb-fonts.css",
     "autoprefix-css": "postcss -u autoprefixer -r css/seb-fonts.css",

@@ -84,8 +84,8 @@ jobs:
         with:
           github-token: ${{ steps.get_token.outputs.token }}
           script: |
-            const prNumber = github.event_name === 'workflow_dispatch' 
-              ? inputs.pr_number 
+            const prNumber = github.event_name === 'workflow_dispatch'
+              ? inputs.pr_number
               : context.issue.number;
 
             github.issues.createComment({
@@ -97,6 +97,7 @@ jobs:
               Version info:
 
                 @sebgroup/green-core: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_CORE }}
+                @sebgroup/green-core-ng: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_CORE_NG }}
                 @sebgroup/green-angular: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_ANGULAR }}
                 @sebgroup/green-react: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_REACT }}
                 @sebgroup/chlorophyll: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_CHLOROPHYLL }}

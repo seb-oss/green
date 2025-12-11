@@ -5,7 +5,7 @@
   "main": "index.js",
   "module": "index.js",
   "type": "module",
-  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/seb-oss)",
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {
@@ -29,10 +29,14 @@
     "lit": "^3.1.0"
   },
   "peerDependencies": {
-    "react": ">=18"
+    "react": ">=18",
+    "custom-elements-manifest": ">=2"
   },
   "peerDependenciesMeta": {
     "react": {
+      "optional": true
+    },
+    "custom-elements-manifest": {
       "optional": true
     }
   },
@@ -47,7 +51,6 @@
     "./pure": "./pure.js",
     "./_primitives/*": "./primitives/*",
     "./react": "./generated/react/index.js",
-    "./react/*": "./generated/react/*",
     "./patterns/*": "./patterns/*"
   },
   "customElements": "custom-elements.json"
