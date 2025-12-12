@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.19.0
+
+### Patch Changes
+
+- 100f03a: **Icon:** Don't define the GdsIcon base class as a custom element
+
 ## 2.18.0
 
 ### Minor Changes
