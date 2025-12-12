@@ -180,7 +180,8 @@
       "dependsOn": [
         "build-src",
         "tokens:build",
-        "build-custom-elements-json"
+        "build-custom-elements-json",
+        "generate-jsx-components"
       ],
       "options": {
         "outputDir": "dist/storybook/core",
