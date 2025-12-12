@@ -1,3 +1,0 @@
-.tooltip-container{position:relative;display:inline-block;cursor:pointer;overflow:visible}.tooltip-text{visibility:hidden;background-color:#333;color:#fff;text-align:center;border-radius:.3125rem;padding:.5rem;position:absolute;z-index:9999;top:-12px;left:50%;transform:translate(-50%, -100%);opacity:0;transition:opacity .3s}.tooltip-text::after{content:"";position:absolute;width:8px;height:8px;border:8px;background-color:#333;bottom:-4px;left:50%;transform:translateX(-50%) rotate(45deg)}.tooltip-container:hover .tooltip-text{visibility:visible;opacity:1}
-
-/*# sourceMappingURL=lib-tooltip-tooltip-stories-mdx.css.map*/

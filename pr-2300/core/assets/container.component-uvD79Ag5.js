@@ -1,1 +1,0 @@
-import{g as f}from"./gds-element-DKcDvDP5.js";import{G as v}from"./div.component-CLY16RHW.js";var l=Object.defineProperty,m=Object.getOwnPropertyDescriptor,_=(p,r,t,s)=>{for(var e=s>1?void 0:s?m(r,t):r,o=p.length-1,n;o>=0;o--)(n=p[o])&&(e=(s?n(r,t,e):n(e))||e);return s&&e&&l(r,t,e),e};let a=class extends v{};a=_([f("gds-container")],a);export{a as G};
