@@ -178,10 +178,10 @@
         "{options.outputDir}"
       ],
       "dependsOn": [
-        "build-src",
-        "tokens:build",
         "build-custom-elements-json",
-        "generate-jsx-components"
+        "generate-jsx-components",
+        "tokens:build",
+        "build-src"
       ],
       "options": {
         "outputDir": "dist/storybook/core",
