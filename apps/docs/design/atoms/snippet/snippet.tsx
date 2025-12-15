@@ -17,6 +17,22 @@ interface SnippetProps {
   slug: string
 }
 
+// Dummy table data for snippet previews
+const DUMMY_TABLE_DATA = [
+  { id: 1, name: 'John Doe', role: 'Developer' },
+  { id: 2, name: 'Jane Smith', role: 'Designer' },
+  { id: 3, name: 'Bob Johnson', role: 'Manager' },
+]
+
+const dummyDataProvider = async (request: any) => {
+  const start = (request.page - 1) * request.rows
+  const end = start + request.rows
+  return {
+    rows: DUMMY_TABLE_DATA.slice(start, end),
+    total: DUMMY_TABLE_DATA.length,
+  }
+}
+
 // Define components once at module level
 const defineComponents = () => {
   Object.values(Core).forEach((Component: any) => {
@@ -47,6 +63,19 @@ export function Snippet({ slug }: SnippetProps) {
 
     if (tagName === 'gds-text' && 'lines' in attribs) {
       props.lines = Number(attribs.lines)
+    }
+
+    // Add dummy data provider for tables
+    if (tagName === 'gds-table') {
+      props.data = dummyDataProvider
+      props.columns = [
+        { key: 'id', label: 'ID' },
+        { key: 'name', label: 'Name' },
+        { key: 'role', label: 'Role' },
+      ]
+      props.rows = 2
+      props.plain = true
+      props.selectable = true
     }
 
     for (const [key, value] of Object.entries(attribs)) {
