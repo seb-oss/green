@@ -84,7 +84,7 @@ export class AngularBuildOrchestrator {
       console.log('> Parsing CEM file...')
 
       const { components, reExportedPrimitives } =
-        await CemParser.parseAllComponents('../../../custom-elements.json') // Path relative to the component-meta.ts file in the core lib
+        await CemParser.parseAllComponents()
 
       if (components.length === 0) {
         console.log('> No components found in CEM file')

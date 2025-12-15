@@ -31,7 +31,7 @@ export class CemParser {
    * Loads and parses the CEM file
    */
   static async loadManifest(
-    cemPath = '../../custom-elements.json',
+    cemPath = '../../../custom-elements.json',
   ): Promise<Package> {
     const cemModule = await import(cemPath)
     return cemModule.default as Package
@@ -78,9 +78,7 @@ export class CemParser {
   /**
    * Checks if a component is a form control by looking for properties inherited from GdsFormControlElement
    */
-  private static isFormControl(
-    declaration: CustomElementDeclaration,
-  ): boolean {
+  private static isFormControl(declaration: CustomElementDeclaration): boolean {
     if (!declaration.members) return false
 
     return declaration.members.some(
