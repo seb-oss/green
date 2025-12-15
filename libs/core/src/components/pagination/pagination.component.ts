@@ -147,6 +147,9 @@ export class GdsPagination extends withMarginProps(
   @state()
   private _isMobile = false
 
+  @state()
+  private _jumpPopoverOpen = false
+
   @watchMediaQuery('(max-width: 768px)')
   private _handleMobile(matches: boolean) {
     this._isMobile = matches
@@ -207,6 +210,8 @@ export class GdsPagination extends withMarginProps(
             rank="tertiary"
             slot="trigger"
             label="${msg('Jump to page')}"
+            aria-expanded="${this._jumpPopoverOpen}"
+            aria-haspopup="dialog"
           >
             ...
           </gds-button>
@@ -450,6 +455,8 @@ export class GdsPagination extends withMarginProps(
   }
 
   #handlePopoverStateChange(e: CustomEvent) {
+    this._jumpPopoverOpen = e.detail.open
+
     if (e.detail.open) {
       const popover = e.target as HTMLElement
 
