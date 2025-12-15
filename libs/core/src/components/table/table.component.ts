@@ -954,6 +954,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         padding="0"
         border-radius="m"
         border-width="0; s{5xs}"
+        class="table-card"
       >
         <div class=${CLASSES} tabindex="0">
           <table aria-label="${caption}">

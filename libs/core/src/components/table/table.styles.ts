@@ -97,18 +97,25 @@ export const TableStyles = css`
     padding: var(--table-data-padding);
     position: relative;
     border-radius: var(--gds-sys-radius-m);
+  }
+
+  .data:focus {
+    outline: none;
+  }
+
+  .table-card {
     outline-color: transparent;
     outline-offset: var(--gds-sys-space-4xs);
     outline-style: solid;
     outline-width: var(--gds-sys-space-4xs);
+  }
 
-    &:focus {
-      outline-color: var(--gds-sys-color-content-neutral-01);
+  .table-card:has(.data:focus-visible) {
+    outline-color: var(--gds-sys-color-content-neutral-01);
+  }
 
-      &:not(:focus-visible) {
-        outline-color: transparent;
-      }
-    }
+  .table-card:has(.data:focus-within:not(:focus-visible)) {
+    outline-color: transparent;
   }
 
   table {
