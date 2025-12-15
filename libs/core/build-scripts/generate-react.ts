@@ -9,6 +9,53 @@ import type { ComponentData } from '../src/utils/helpers/component-meta.types'
 
 const reactDir = path.join('libs/core/src/generated/react')
 
+/**
+ * Converts a kebab-case event name to a React event handler name
+ * @example 'gds-close' -> 'onGdsClose'
+ * @example 'gds-ui-state' -> 'onGdsUiState'
+ */
+function toReactEventName(eventName: string): string {
+  // Split by hyphen and convert to PascalCase
+  const parts = eventName.split('-')
+  const pascalCase = parts
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join('')
+  return `on${pascalCase}`
+}
+
+/**
+ * Generates TypeScript type definitions for event handlers
+ */
+function generateEventHandlerTypes(component: ComponentData): string {
+  if (!component.events || component.events.length === 0) {
+    return ''
+  }
+
+  const eventHandlers = component.events
+    .map((event) => {
+      const handlerName = toReactEventName(event.name)
+      const eventType = event.type || 'Event'
+      return `  ${handlerName}?: (event: ${eventType}) => void;`
+    })
+    .join('\n')
+
+  return `
+type ${component.className}Props = React.ComponentProps<ReturnType<typeof getReactComponent<${component.className}Class>>> & {
+${eventHandlers}
+};
+`
+}
+
+/**
+ * Determines the props type to use based on whether the component has events
+ */
+function getPropsType(component: ComponentData): string {
+  if (component.events && component.events.length > 0) {
+    return `${component.className}Props`
+  }
+  return `React.ComponentProps<ReturnType<typeof getReactComponent<${component.className}Class>>>`
+}
+
 async function generateReactComponents() {
   // Clear build directory
   if (fs.existsSync(reactDir)) {
@@ -55,6 +102,8 @@ async function generateReactComponents() {
       : ''
 
     const levels = subDir.length > 0 ? '../../../..' : '../../..'
+    const eventHandlerTypes = generateEventHandlerTypes(component)
+    const propsType = getPropsType(component)
 
     // We allow the use of react as an extraneous dependency here because we expect any consumer
     // that imports React components from Green Core to already have React as a dependency.
@@ -66,8 +115,10 @@ async function generateReactComponents() {
         // eslint-disable-next-line import/no-extraneous-dependencies
         import { createElement } from 'react';
 
+        ${eventHandlerTypes}
+
         ${jsDoc}
-        export const ${component.className} = (props: React.ComponentProps<ReturnType<typeof getReactComponent<${component.className}Class>>>) => {
+        export const ${component.className} = (props: ${propsType}) => {
           ${component.className}Class.define();
           const JSXElement = getReactComponent<${component.className}Class>('${component.tagName}');
           const propsWithClass = {...props, class: props.className}
