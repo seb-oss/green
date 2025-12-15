@@ -1,5 +1,5 @@
 // part.page-actions.tsx
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Link } from '../../atoms/link/link'
@@ -7,6 +7,7 @@ import { studioData } from '../data/studio.data'
 
 export default function PageActions() {
   const pathname = usePathname()
+  const router = useRouter()
   const segments = pathname?.split('/').filter(Boolean) || []
   const currentPageKey = segments[1]
   const subPageKey = segments[2]
@@ -16,7 +17,41 @@ export default function PageActions() {
     .flatMap((category) => category.pages)
     .find((page) => page.key === currentPageKey)
 
-  // If we're on a sub-page, show back button
+  // If we're on a playground sub-page, show dropdown
+  if (subPageKey && currentPageKey === 'playground' && currentPage?.pages) {
+    const selectedPage = currentPage.pages.find(
+      (page: any) => page.key === subPageKey,
+    )
+
+    return (
+      <Core.GdsFlex align-items="center" gap="s" width="max-content">
+        <Core.GdsDropdown
+          plain
+          size="small"
+          width="200px"
+          value={selectedPage?.slug || ''}
+          onChange={(e: React.FormEvent<HTMLElement>) => {
+            const customElement = e.target as HTMLElement & {
+              value: string
+            }
+            router.push(customElement.value)
+          }}
+        >
+          {currentPage.pages.map((page: any) => (
+            <Core.GdsOption
+              key={page.key}
+              value={page.slug}
+              selected={page.key === subPageKey}
+            >
+              {page.title}
+            </Core.GdsOption>
+          ))}
+        </Core.GdsDropdown>
+      </Core.GdsFlex>
+    )
+  }
+
+  // If we're on a sub-page (but not playground), show back button
   if (subPageKey && currentPage) {
     return (
       <Core.GdsFlex align-items="center" gap="s" width="max-content">

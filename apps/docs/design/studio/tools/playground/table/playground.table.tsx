@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
-import { useSearch } from '../../context/search.context'
+import { useSearch } from '../../../context/search.context'
 import TableCode from './table.code'
 import TableEdit from './table.edit'
 import TablePresets from './table.presets'

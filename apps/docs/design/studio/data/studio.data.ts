@@ -63,6 +63,14 @@ export const studioData: StudioCategory[] = [
             description: 'Try out the table configuration',
             component: 'Table',
           },
+          {
+            key: 'button',
+            interactive: true,
+            slug: '/studio/playground/button',
+            title: 'Button',
+            description: 'Get to know the button component',
+            component: 'Button',
+          },
         ],
       },
       {
