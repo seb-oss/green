@@ -27,7 +27,7 @@ export default function Playground() {
 
   return (
     <Core.GdsFlex flex-direction="column" gap="xl" className="studio-page">
-      <Core.GdsGrid columns="1; m{2}" gap="l">
+      <Core.GdsGrid columns="1; m{2}" gap="xs">
         {filteredComponents.map((component) => (
           <Core.GdsCardPattern01
             href={`/studio/playground/${component.slug}`}

@@ -41,6 +41,7 @@ export default function TableSettings() {
         value={getSelectedFeatures()}
         onChange={handleFeaturesChange}
       >
+        <Core.IconChecklist slot="lead" />
         <Core.GdsOption value="selectable">Selectable</Core.GdsOption>
         <Core.GdsOption value="searchable">Searchable</Core.GdsOption>
         <Core.GdsOption value="settings">Settings</Core.GdsOption>
@@ -58,6 +59,7 @@ export default function TableSettings() {
             updateSetting('density', customElement.value)
           }}
         >
+          <Core.IconFiles slot="lead" />
           <Core.GdsOption value="comfortable">Comfortable</Core.GdsOption>
           <Core.GdsOption value="compact">Compact</Core.GdsOption>
           <Core.GdsOption value="spacious">Spacious</Core.GdsOption>
@@ -72,6 +74,7 @@ export default function TableSettings() {
             updateSetting('variant', customElement.value)
           }}
         >
+          <Core.IconCirclesThree slot="lead" />
           <Core.GdsOption value="primary">Primary</Core.GdsOption>
           <Core.GdsOption value="secondary">Secondary</Core.GdsOption>
           <Core.GdsOption value="tertiary">Tertiary</Core.GdsOption>
@@ -84,7 +87,9 @@ export default function TableSettings() {
           type="number"
           value={String(tableSettings.rows)}
           onInput={(e: any) => updateSetting('rows', Number(e.target.value))}
-        />
+        >
+          <Core.IconPostcard slot="lead" />
+        </Core.GdsInput>
 
         <Core.GdsInput
           label="Height"
@@ -93,7 +98,9 @@ export default function TableSettings() {
           onInput={(e: any) =>
             updateSetting('height', e.target.value || undefined)
           }
-        />
+        >
+          <Core.IconArrowBottomTop slot="lead" />
+        </Core.GdsInput>
       </Core.GdsFlex>
     </Core.GdsFlex>
   )
