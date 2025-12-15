@@ -63,7 +63,7 @@ const style = css`
 
     .field.small {
       gap: var(--gds-sys-space-3xs);
-      padding: calc(var(--gds-sys-space-xs) - 1px) var(--gds-sys-space-xs);
+      padding: var(--gds-sys-space-3xs) var(--gds-sys-space-xs);
       min-block-size: var(--gds-sys-space-2xl);
       block-size: var(--gds-sys-space-2xl);
       border-radius: var(--gds-sys-radius-2xs);
@@ -91,6 +91,14 @@ const style = css`
 
     .field.lead-slot-occupied {
       padding-inline-start: var(--gds-sys-space-s);
+    }
+
+    .field.lead-has-badge {
+      padding-inline-start: var(--gds-sys-space-2xs);
+    }
+
+    .field.small.lead-has-badge {
+      padding-inline-start: var(--gds-sys-space-2xs);
     }
 
     .field.trail-slot-occupied {

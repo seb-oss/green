@@ -3,25 +3,33 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/core/src",
   "projectType": "library",
-  "implicitDependencies": ["tokens"],
-  "tags": ["lib"],
+  "implicitDependencies": [
+    "tokens"
+  ],
+  "tags": [
+    "lib"
+  ],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
-      "outputs": ["{workspaceRoot}/dist/libs/core/src"],
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/src"
+      ],
       "options": {
         "command": "nx run core:generate-jsx-components && nx run core:build-with-types-and-scoping"
       }
     },
     "build-src": {
       "executor": "@sebgroup/repo-tools:build-core-lib",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/libs/core/src",
         "tsConfig": "libs/core/tsconfig.lib.json",
         "assets": [
           {
-            "glob": "(package.json|README.md|setup-jest.js|green-jest-config.cjs)",
+            "glob": "(package.json|README.md|setup-jest.js|green-jest-config.cjs|custom-elements.json)",
             "input": "libs/core",
             "output": "."
           },
@@ -29,28 +37,36 @@
             "glob": "**/*.svg",
             "input": "libs/core/src/components/icon/assets",
             "output": "assets/icons"
-          }
+          },
         ]
       }
     },
     "build-bundle-src": {
       "executor": "nx:run-commands",
-      "outputs": ["{workspaceRoot}/dist/libs/core/src"],
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/src"
+      ],
       "options": {
         "command": "node libs/core/build-scripts/bundle.cjs"
       },
-      "dependsOn": ["tokens:build"]
+      "dependsOn": [
+        "tokens:build"
+      ]
     },
     "build-with-types": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-src"],
+      "dependsOn": [
+        "build-src"
+      ],
       "options": {
         "command": "tsc --emitDeclarationOnly --declaration --project libs/core/tsconfig.lib.json"
       }
     },
     "build-with-types-and-scoping": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-with-types"],
+      "dependsOn": [
+        "build-with-types"
+      ],
       "options": {
         "command": "node libs/core/build-scripts/generate-scope-suffix.cjs"
       }
@@ -63,7 +79,9 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "dependsOn": ["css-lint"]
+      "dependsOn": [
+        "css-lint"
+      ]
     },
     "css-lint": {
       "executor": "nx:run-commands",
@@ -73,14 +91,18 @@
     },
     "build-tests": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "options": {
         "command": "node libs/core/build-scripts/build-tests"
       }
     },
     "test-local": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-tests"],
+      "dependsOn": [
+        "build-tests"
+      ],
       "options": {
         "command": "npx wtr --config libs/core/web-test-runner.config.mjs --playwright --browsers chromium firefox webkit"
       }
@@ -117,14 +139,18 @@
     },
     "generate-jsx-components": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-custom-elements-json"],
+      "dependsOn": [
+        "build-custom-elements-json"
+      ],
       "options": {
         "command": "node libs/core/build-scripts/generate-react.cjs"
       }
     },
     "test": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-tests"],
+      "dependsOn": [
+        "build-tests"
+      ],
       "options": {
         "command": "npx wtr --config libs/core/web-test-runner.config.mjs --playwright --browsers chromium webkit"
       }
@@ -135,7 +161,11 @@
         "port": 4400,
         "configDir": "libs/core/.storybook"
       },
-      "dependsOn": ["tokens:build", "build-src", "build-custom-elements-json"],
+      "dependsOn": [
+        "tokens:build",
+        "build-src",
+        "build-custom-elements-json"
+      ],
       "configurations": {
         "ci": {
           "quiet": true
@@ -144,8 +174,15 @@
     },
     "build-storybook": {
       "executor": "@nx/storybook:build",
-      "outputs": ["{options.outputDir}"],
-      "dependsOn": ["build-src", "tokens:build", "build-custom-elements-json"],
+      "outputs": [
+        "{options.outputDir}"
+      ],
+      "dependsOn": [
+        "build-custom-elements-json",
+        "generate-jsx-components",
+        "tokens:build",
+        "build-src"
+      ],
       "options": {
         "outputDir": "dist/storybook/core",
         "configDir": "libs/core/.storybook"

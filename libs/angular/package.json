@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/green-angular",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "peerDependencies": {
     "@angular/cdk": ">=19",
     "@angular/common": ">=19",
@@ -17,7 +17,7 @@
     "scroll-into-view-if-needed": "^2.2.31"
   },
   "dependencies": {
-    "@sebgroup/green-core": "^2.12.0",
+    "@sebgroup/green-core": "^2.19.0",
     "@sebgroup/chlorophyll": "^3.6.25",
     "@sebgroup/extract": "^3.0.2",
     "tslib": "^2.3.1"
@@ -32,7 +32,7 @@
     "access": "public",
     "directory": "../../dist/libs/angular"
   },
-  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/seb-oss)",
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {

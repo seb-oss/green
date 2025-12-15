@@ -1,5 +1,17 @@
 # Changelog
 
+## 7.1.0
+
+### Minor Changes
+
+- 100f03a: **Core helper modules:** Deprecate all core helper modules, since they are either made obsolete by Core NG, or have moved there.
+- 100f03a: **Core Renderer:** Compatibility fix for Core NG
+
+### Patch Changes
+
+- Updated dependencies [100f03a]
+  - @sebgroup/green-core@2.19.0
+
 ## 7.0.0
 
 ### Major Changes
