@@ -21,6 +21,7 @@ import * as Part from './parts'
 import { Preview } from './parts/preview'
 import { PreviewType } from './parts/preview/part.preview.types'
 import * as Tool from './tools'
+import * as Playground from './tools/playground'
 
 import './layout.studio.css'
 
@@ -35,6 +36,8 @@ interface StudioProps {
 const COMPONENTS = {
   Compose: Tool.Compose,
   Playground: Tool.Playground,
+  Table: Playground.Table,
+  Button: Playground.Button,
   Main: Part.Main,
   Migration: Interactive.Migration,
   Radius: Interactive.Radius,
@@ -257,9 +260,10 @@ const CONTENT = (
                 gap="l"
               >
                 {group.items.map((item) => (
-                  <Core.GdsCard
-                    padding="l"
+                  <Core.GdsCardLinked
                     key={item.key}
+                    href={`${page.slug}/${item.key}`}
+                    variant={ACTIVE === item.key ? 'primary' : 'secondary'}
                     onClick={() => router.push(`${page.slug}/${item.key}`)}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' || e.key === ' ') {
@@ -267,13 +271,6 @@ const CONTENT = (
                         router.push(`${page.slug}/${item.key}`)
                       }
                     }}
-                    justify-content="space-between"
-                    align-items="center"
-                    variant={ACTIVE === item.key ? 'primary' : 'secondary'}
-                    border-radius="m"
-                    className="linked-card"
-                    role="link"
-                    tabIndex={0}
                   >
                     {item.component && (
                       <Core.GdsFlex
@@ -281,7 +278,8 @@ const CONTENT = (
                         height="100%"
                         min-height="100px"
                         align-items="center"
-                        className="icon-preview"
+                        justify-content="center"
+                        width="100%"
                       >
                         <Icon
                           name={item.component}
@@ -297,7 +295,7 @@ const CONTENT = (
                     >
                       {item.name}
                     </Core.GdsText>
-                  </Core.GdsCard>
+                  </Core.GdsCardLinked>
                 ))}
               </Core.GdsGrid>
             </Core.GdsFlex>

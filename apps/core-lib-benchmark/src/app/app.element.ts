@@ -1,11 +1,12 @@
-import { Router, Routes } from '@lit-labs/router'
-import { css, LitElement } from 'lit'
+import { Router } from '@lit-labs/router'
+import { LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { html } from '@sebgroup/green-core/scoping.js'
 
 import './benches/decl-layout-1'
 import './benches/css-layout-1'
 import './benches/form-layout-1'
+import './benches/table-benchmark'
 
 @customElement('app-root')
 export class AppElement extends LitElement {
@@ -22,6 +23,10 @@ export class AppElement extends LitElement {
     {
       path: '/form-layout-1',
       render: () => html`<form-layout-1></form-layout-1>`,
+    },
+    {
+      path: '/table-benchmark',
+      render: () => html`<table-benchmark></table-benchmark>`,
     },
   ])
 

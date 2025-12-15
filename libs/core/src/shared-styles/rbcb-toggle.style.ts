@@ -31,7 +31,6 @@ export default css`
     position: relative;
     width: var(--_toggle-size);
     height: var(--_toggle-size);
-    margin-block-start: calc(var(--gds-sys-space-5xs) * 2);
     cursor: pointer;
   }
 
@@ -99,7 +98,7 @@ export default css`
 
   .--indeterminate .rbcb__toggle {
     box-shadow: inset 0 0 0 var(--_toggle-border-width-checked)
-      var(--gds-sys-color-border-interactive);
+      var(--gds-sys-color-l3-neutral-01);
   }
 
   .--invalid.--indeterminate .rbcb__toggle {
@@ -145,6 +144,19 @@ export default css`
     color: var(--gds-sys-color-content-negative-01);
   }
 
+  /* Visually hidden checkbox   */
+  .visually-hidden-checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+
+  .rbcb-wrapper {
+    position: relative;
+  }
+
   /*
    * When using the checkbox in a listbox, we need to remove the outline
    * from the checkbox since it exsist on the list item
@@ -153,29 +165,46 @@ export default css`
     outline: none;
   }
 
-  :host(:focus-visible) .rbcb__perimeter,
-  :host(:focus-within) .rbcb__perimeter {
+  :host([gds-element='gds-radio']:focus-visible) .rbcb__perimeter,
+  :host([gds-element='gds-radio']:focus-within) .rbcb__perimeter,
+  :host([gds-element='gds-checkbox']:focus-visible) .rbcb__perimeter,
+  :host([gds-element='gds-checkbox']:focus-within) .rbcb__perimeter,
+  .rbcb-wrapper:focus-visible .rbcb__perimeter,
+  .rbcb-wrapper:focus-within .rbcb__perimeter {
     outline-width: var(--gds-sys-space-4xs);
     scale: 1;
   }
 
   @media (hover: hover) {
-    .rbcb:hover:not(.--disabled) .rbcb__perimeter,
-    :host(:hover) .rbcb:not(.--disabled) .rbcb__perimeter {
+    :host([gds-element='gds-checkbox']:hover)
+      .rbcb:not(.--disabled)
+      .rbcb__perimeter,
+    :host([gds-element='gds-option']:hover)
+      .rbcb:not(.--disabled)
+      .rbcb__perimeter,
+    :host([gds-element='gds-radio']:hover)
+      .rbcb:not(.--disabled)
+      .rbcb__perimeter,
+    .rbcb:hover:not(.--disabled) .rbcb__perimeter {
       background-color: var(--_perimeter-bg-mix);
       scale: 1;
     }
+  }
+
+  :host([gds-element='gds-checkbox']:active)
+    .rbcb:not(.--disabled)
+    .rbcb__perimeter,
+  :host([gds-element='gds-radio']:active)
+    .rbcb:not(.--disabled)
+    .rbcb__perimeter,
+  .rbcb:active:not(.--disabled) .rbcb__perimeter {
+    background-color: var(--_perimeter-bg-mix-active);
+    scale: 0.9;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .rbcb__toggle {
       transition: none;
     }
-  }
-
-  .rbcb:active:not(.--disabled) .rbcb__perimeter,
-  :host(:active) .rbcb:not(.--disabled) .rbcb__perimeter {
-    background-color: var(--_perimeter-bg-mix-active);
-    scale: 0.9;
   }
 `
