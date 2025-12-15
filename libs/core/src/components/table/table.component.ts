@@ -324,44 +324,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     super.connectedCallback()
 
     this.updateComplete.then(() => {
-      const dataContainer = this.shadowRoot?.querySelector('.data')
-      if (dataContainer) {
-        const updateScrollState = () => {
-          const { scrollTop, scrollLeft, scrollWidth, clientWidth } =
-            dataContainer
-
-          // Vertical scroll
-          if (scrollTop > 0) {
-            dataContainer.classList.add('scrolled')
-          } else {
-            dataContainer.classList.remove('scrolled')
-          }
-
-          // Horizontal scroll
-          const maxScrollLeft = scrollWidth - clientWidth
-
-          if (scrollLeft <= 0) {
-            dataContainer.classList.add('scrolled-x-start')
-            dataContainer.classList.remove(
-              'scrolled-x-middle',
-              'scrolled-x-end',
-            )
-          } else if (scrollLeft >= maxScrollLeft - 1) {
-            dataContainer.classList.add('scrolled-x-end')
-            dataContainer.classList.remove(
-              'scrolled-x-start',
-              'scrolled-x-middle',
-            )
-          } else {
-            dataContainer.classList.add('scrolled-x-middle')
-            dataContainer.classList.remove('scrolled-x-start', 'scrolled-x-end')
-          }
-        }
-
-        dataContainer.addEventListener('scroll', updateScrollState)
-        // Initial check
-        updateScrollState()
-      }
+      this.#initializeScrollTracking()
     })
   }
 
@@ -1252,6 +1215,59 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         bubbles: true,
       }),
     )
+  }
+
+  /**
+   * Initializes scroll tracking for the table data container.
+   * Sets up event listeners and performs initial scroll state check.
+   */
+  #initializeScrollTracking() {
+    const dataContainer = this.shadowRoot?.querySelector('.data')
+    if (!dataContainer) return
+
+    const updateScrollState = () => {
+      this.#updateVerticalScrollState(dataContainer)
+      this.#updateHorizontalScrollState(dataContainer)
+    }
+
+    dataContainer.addEventListener('scroll', updateScrollState)
+    // Initial check
+    updateScrollState()
+  }
+
+  /**
+   * Updates CSS classes based on vertical scroll position.
+   * Adds 'scrolled' class when scrolled down from top.
+   */
+  #updateVerticalScrollState(container: Element) {
+    const { scrollTop } = container
+
+    if (scrollTop > 0) {
+      container.classList.add('scrolled')
+    } else {
+      container.classList.remove('scrolled')
+    }
+  }
+
+  /**
+   * Updates CSS classes based on horizontal scroll position.
+   * Manages 'scrolled-x-start', 'scrolled-x-middle', and 'scrolled-x-end' classes
+   * to indicate scroll position for styling purposes (e.g., shadows, sticky columns).
+   */
+  #updateHorizontalScrollState(container: Element) {
+    const { scrollLeft, scrollWidth, clientWidth } = container
+    const maxScrollLeft = scrollWidth - clientWidth
+
+    if (scrollLeft <= 0) {
+      container.classList.add('scrolled-x-start')
+      container.classList.remove('scrolled-x-middle', 'scrolled-x-end')
+    } else if (scrollLeft >= maxScrollLeft - 1) {
+      container.classList.add('scrolled-x-end')
+      container.classList.remove('scrolled-x-start', 'scrolled-x-middle')
+    } else {
+      container.classList.add('scrolled-x-middle')
+      container.classList.remove('scrolled-x-start', 'scrolled-x-end')
+    }
   }
 
   /**
