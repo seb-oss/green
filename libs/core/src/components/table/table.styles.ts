@@ -96,6 +96,19 @@ export const TableStyles = css`
     box-sizing: border-box;
     padding: var(--table-data-padding);
     position: relative;
+    border-radius: var(--gds-sys-radius-m);
+    outline-color: transparent;
+    outline-offset: var(--gds-sys-space-4xs);
+    outline-style: solid;
+    outline-width: var(--gds-sys-space-4xs);
+
+    &:focus {
+      outline-color: var(--gds-sys-color-content-neutral-01);
+
+      &:not(:focus-visible) {
+        outline-color: transparent;
+      }
+    }
   }
 
   table {
@@ -156,12 +169,10 @@ export const TableStyles = css`
   }
 
   th.sortable .column-header:hover {
-    /* background-color: var(--gds-sys-color-l3-neutral-02); */
     background-color: var(--_table-header-hover);
   }
 
   th.sortable:active .column-header {
-    /*     background-color: var(--gds-sys-color-l3-neutral-03); */
     background-color: var(--_table-header-active);
   }
 
@@ -764,12 +775,4 @@ export const TableStyles = css`
       animation: none;
     }
   }
-
-  /*  Performance consideration: Use content-visibility for efficient rendering of large tables, it should not be used if scroll driven animations are present */
-  /*  @supports (content-visibility: auto) {
-    tbody tr {
-      content-visibility: auto;
-      contain-intrinsic-size: auto 50px;
-    }
-  } */
 `

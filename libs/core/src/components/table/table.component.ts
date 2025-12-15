@@ -955,7 +955,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         border-radius="m"
         border-width="0; s{5xs}"
       >
-        <div class=${CLASSES}>
+        <div class=${CLASSES} tabindex="0">
           <table aria-label="${caption}">
             <caption class="visually-hidden">
               ${caption}
