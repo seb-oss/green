@@ -174,20 +174,20 @@ async function generateReactComponents() {
   }
   fs.mkdirSync(reactDir, { recursive: true })
 
-  console.log('> Parsing component metadata...')
+  console.info('> Parsing component metadata...')
 
   // Fetch component metadata using CemParser
   // No path needed - uses default path relative to component-meta.ts location
   const { components } = await CemParser.parseAllComponents()
 
-  console.log(`> Found ${components.length} components`)
+  console.info(`> Found ${components.length} components`)
 
   // Filter components that have tag names
   const filteredComponents = components.filter(
     (component: ComponentData) => component.tagName,
   )
 
-  console.log(
+  console.info(
     `> Generating React wrappers for ${filteredComponents.length} components...`,
   )
 
@@ -248,7 +248,7 @@ async function generateReactComponents() {
         index.join('\n'),
         'utf8',
       )
-      console.log(`> ✓ Generated ${completedCount} React components`)
+      console.info(`> ✓ Generated ${completedCount} React components`)
     }
   }
 }

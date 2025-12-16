@@ -27,6 +27,13 @@
     {
       "files": ["*.js", "*.jsx"],
       "rules": {}
+    },
+    {
+      "files": ["build-scripts/**/*.ts"],
+      "rules": {
+        "no-console": "off",
+        "@nx/enforce-module-boundaries": "off"
+      }
     }
   ]
 }
