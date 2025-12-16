@@ -111,9 +111,8 @@ function generateControlledFormComponent(
   const defaultValueProp = isCheckbox ? 'defaultChecked' : 'defaultValue'
 
   return `
-    import { getReactComponent } from '${levels}/utils/react';
+    import { getReactComponent, ${hookName} } from '${levels}/utils/react';
     import { ${component.className} as ${component.className}Class } from '${levels}/${importPath}';
-    import { ${hookName} } from '${levels}/utils/react-controlled-form';
 
     // eslint-disable-next-line import/no-extraneous-dependencies
     import { createElement, useRef } from 'react';
