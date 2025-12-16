@@ -5801,17 +5801,6 @@
   resolved "https://registry.yarnpkg.com/@sebgroup/fonts/-/fonts-1.1.0.tgz#97f6001aa61f9803c580b38c85f44c70c99bde72"
   integrity sha512-AkEmzHjRgs0KV1btGwrn+CTEP1uY7zoQGSEmBy6+ZbMlZPquTresdbbh5hvsQ1JYoMzy8hcLz8VPSsw07ZT8yQ==
 
-"@sebgroup/green-core@2.16.1":
-  version "2.16.1"
-  resolved "https://registry.yarnpkg.com/@sebgroup/green-core/-/green-core-2.16.1.tgz#f84421b1bdb693da89eb5a70a719a1b0171f9798"
-  integrity sha512-uVrYMbxjnTxW0dzuiEQ/p/TsNLgHD+Y0pFnER6FI547jdpzTy44D5xb1LzloXWb/ZJWY30RXqzdZOYlGK5F7cA==
-  dependencies:
-    "@floating-ui/dom" "^1.6.1"
-    "@lit/localize" "^0.12.1"
-    date-fns "^2.28.0"
-    lit "^3.1.0"
-    reflect-metadata "^0.1.13"
-
 "@sigstore/bundle@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@sigstore/bundle/-/bundle-3.1.0.tgz#74f8f3787148400ddd364be8a9a9212174c66646"
