@@ -16,6 +16,7 @@ export function Anatomy({ items }: AnatomyListProps) {
       padding="0 s"
       width="80%"
       margin="0 0 l 0"
+      className="anatomy-list"
     >
       {items.map((item, index) => (
         <Core.GdsFlex key={index} align-items="center" gap="xs">

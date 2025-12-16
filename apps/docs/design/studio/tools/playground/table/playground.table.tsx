@@ -28,8 +28,7 @@ function TableContent() {
       columns="12"
     >
       {/* Left Panel */}
-      <Core.GdsCard
-        variant="tertiary"
+      <Core.GdsFlex
         flex-direction="column"
         position="relative"
         width="380px"
@@ -78,7 +77,7 @@ function TableContent() {
           {leftTab === 'edit' && <TableEdit />}
           {leftTab === 'settings' && <TableSettings />}
         </Core.GdsCard>
-      </Core.GdsCard>
+      </Core.GdsFlex>
 
       {/* Right Panel */}
       <Core.GdsFlex grid-column="4/-1" flex-direction="column" gap="m">
@@ -96,7 +95,6 @@ function TableContent() {
             onClick={() => {
               setTakeover(!takeover)
             }}
-            /*  onClick={() => setFullscreen(!fullscreen)} */
           >
             <Core.IconFullscreen size="m" />
           </Core.GdsButton>
@@ -121,14 +119,6 @@ function TableContent() {
               </Core.GdsFlex>
             </Core.GdsSegment>
           </Core.GdsSegmentedControl>
-
-          {/*     <Core.GdsButton
-            rank="tertiary"
-            size="small"
-            onClick={() => setShowLeft(!showLeft)}
-          >
-            <Core.IconCodeBrackets size="m" />
-          </Core.GdsButton> */}
         </Core.GdsFlex>
         <Core.GdsCard padding="l" border-radius="l">
           {rightTab === 'preview' ? <TablePreview /> : <TableCode />}
@@ -141,9 +131,7 @@ function TableContent() {
 export default function Table() {
   return (
     <TableProvider>
-      <Core.GdsTheme>
-        <TableContent />
-      </Core.GdsTheme>
+      <TableContent />
     </TableProvider>
   )
 }

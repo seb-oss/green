@@ -85,26 +85,3 @@
   outline-offset: 8px;
   border-radius: 2px;
 }
-
-.linked-card {
-  cursor: pointer;
-  outline: 2px solid transparent;
-  outline-offset: 0px;
-  transition:
-    opacity 240ms,
-    transform 240ms;
-
-  &:focus-visible {
-    outline-color: currentColor;
-    outline-offset: 2px;
-  }
-
-  &:hover:not(:focus-visible) {
-    /* outline-color: color-mix(in srgb, currentColor, transparent 90%); */
-    background-color: var(--gds-sys-color-l2-neutral-01);
-
-    &:not(.icon-card) {
-      background-color: var(--gds-sys-color-l3-neutral-02);
-    }
-  }
-}
