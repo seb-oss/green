@@ -1,0 +1,17 @@
+.preview-card[data-anatomy-focus='icon'] [slot='lead'] {
+  outline: 2px solid var(--gds-sys-color-content-positive-01);
+  outline-offset: 2px;
+  border-radius: var(--gds-sys-radius-s);
+  scale: 2;
+}
+
+.preview-card[data-anatomy-focus='text'] {
+  outline: 2px solid var(--gds-sys-color-content-positive-01);
+  outline-offset: 2px;
+}
+
+.preview-card[data-anatomy-focus='badge'] [slot='trail'] {
+  outline: 2px solid var(--gds-sys-color-content-positive-01);
+  outline-offset: 2px;
+  border-radius: var(--gds-sys-radius-m);
+}

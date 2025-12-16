@@ -7,6 +7,7 @@ import { marked } from 'marked'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Anatomy } from '../../../design/atoms/anatomy/anatomy'
+import AnatomyInteractive from '../../../design/atoms/anatomy/anatomy.core'
 import Breadcrumbs from '../../../design/atoms/breadcrumb/breadcrumb'
 import { TableOfContents } from '../../../design/atoms/contents/contents'
 import Figure from '../../../design/atoms/figure/figure'
@@ -74,12 +75,12 @@ export function ComponentLayoutClient({
 
   const hasAdditionalContent = Boolean(
     (Array.isArray(component['ux-text']) && component['ux-text'].length > 0) ||
-      (component['ux-text']?.section &&
-        component['ux-text'].section.length > 0) ||
-      (Array.isArray(component.faq) && component.faq.length > 0) ||
-      (component.faq?.section && component.faq.section.length > 0) ||
-      (component.accessibility?.section &&
-        component.accessibility.section.length > 0),
+    (component['ux-text']?.section &&
+      component['ux-text'].section.length > 0) ||
+    (Array.isArray(component.faq) && component.faq.length > 0) ||
+    (component.faq?.section && component.faq.section.length > 0) ||
+    (component.accessibility?.section &&
+      component.accessibility.section.length > 0),
   )
 
   const anatomyImage = component.images?.find((img) => img.id === 'anatomy')
@@ -90,11 +91,19 @@ export function ComponentLayoutClient({
 
   const hasOverviewContent = Boolean(
     component.preamble ||
-      component.anatomy ||
-      component.overview?.length ||
-      component['anatomy-overview'] ||
-      component.compare,
+    component.anatomy ||
+    component.overview?.length ||
+    component['anatomy-overview'] ||
+    component.compare,
   )
+
+  // Anatomy
+
+  const anatomyItems = [
+    { id: 1, key: 'icon', label: 'Icon', selector: '[slot="lead"]' },
+    { id: 2, key: 'text', label: 'Button Text', selector: ':not([slot])' },
+    { id: 3, key: 'badge', label: 'Badge', selector: '[slot="trail"]' },
+  ]
 
   return (
     <Core.GdsFlex flex-direction="column" gap="l" width="100%">
@@ -286,6 +295,18 @@ export function ComponentLayoutClient({
                 )}
               </Core.GdsFlex>
             )}
+
+            <Core.GdsCard>
+              <AnatomyInteractive title="Button Anatomy" items={anatomyItems}>
+                <Core.GdsButton>
+                  <Core.IconAi slot="lead" />
+                  Button example
+                  <Core.GdsBadge slot="trail" size="small">
+                    2
+                  </Core.GdsBadge>
+                </Core.GdsButton>
+              </AnatomyInteractive>
+            </Core.GdsCard>
 
             {isLayoutComponent && section === 'overview' && (
               <Core.GdsAlert
