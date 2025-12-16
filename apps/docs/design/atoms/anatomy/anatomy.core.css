@@ -1,17 +1,100 @@
-.preview-card[data-anatomy-focus='icon'] [slot='lead'] {
-  outline: 2px solid var(--gds-sys-color-content-positive-01);
-  outline-offset: 2px;
-  border-radius: var(--gds-sys-radius-s);
-  scale: 2;
+/* Base active state - preparation */
+[data-anatomy-active] {
+  animation: anatomy-pulse 1.5s ease-in-out infinite;
 }
 
-.preview-card[data-anatomy-focus='text'] {
-  outline: 2px solid var(--gds-sys-color-content-positive-01);
+/* Element highlight - outline with offset (default) */
+[data-anatomy-active][data-anatomy-current-type='element'],
+[data-anatomy-active]:not([data-anatomy-current-type]) {
+  outline: 2px solid var(--gds-sys-color-content-positive-01) !important;
   outline-offset: 2px;
+  border-radius: inherit;
 }
 
-.preview-card[data-anatomy-focus='badge'] [slot='trail'] {
-  outline: 2px solid var(--gds-sys-color-content-positive-01);
-  outline-offset: 2px;
-  border-radius: var(--gds-sys-radius-m);
+/* Border highlight - colored border */
+[data-anatomy-active][data-anatomy-current-type='border'] {
+  border: 3px solid var(--gds-sys-color-content-positive-01) !important;
+  border-radius: inherit;
+}
+
+/* Background highlight - semi-transparent fill on specific element only */
+[data-anatomy-active][data-anatomy-current-type='background'] {
+  background-color: color-mix(
+    in srgb,
+    var(--gds-sys-color-content-positive-01) 20%,
+    transparent
+  ) !important;
+  border-radius: inherit;
+}
+
+/* Container highlight - outline inside wrapper */
+.preview-children[data-anatomy-active][data-anatomy-type='container'] {
+  outline: 3px solid var(--gds-sys-color-content-positive-01) !important;
+  outline-offset: -3px;
+  border-radius: inherit;
+}
+
+/* Pulse animation */
+@keyframes anatomy-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Anatomy list styling */
+.anatomy-item {
+  cursor: pointer;
+  padding: var(--gds-sys-space-xs);
+  border-radius: inherit;
+  transition: background-color 200ms ease;
+}
+
+.anatomy-item:hover {
+  background-color: var(--gds-sys-color-background-secondary-hover);
+}
+
+.anatomy-item-active {
+  background-color: var(
+    --gds-sys-color-background-secondary-selected
+  ) !important;
+}
+
+/* SVG Connectors */
+.anatomy-connectors {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.connector-line {
+  stroke: var(--gds-sys-color-content-positive-01);
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.connector-badge {
+  fill: var(--gds-sys-color-content-positive-01);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+.connector-badge-text {
+  fill: var(--gds-sys-color-background-primary);
+  font-size: 10px;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.preview-card {
+  position: relative;
 }

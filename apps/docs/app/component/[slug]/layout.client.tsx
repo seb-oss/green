@@ -97,14 +97,6 @@ export function ComponentLayoutClient({
     component.compare,
   )
 
-  // Anatomy
-
-  const anatomyItems = [
-    { id: 1, key: 'icon', label: 'Icon', selector: '[slot="lead"]' },
-    { id: 2, key: 'text', label: 'Button Text', selector: ':not([slot])' },
-    { id: 3, key: 'badge', label: 'Badge', selector: '[slot="trail"]' },
-  ]
-
   return (
     <Core.GdsFlex flex-direction="column" gap="l" width="100%">
       <Breadcrumbs
@@ -296,17 +288,30 @@ export function ComponentLayoutClient({
               </Core.GdsFlex>
             )}
 
-            <Core.GdsCard>
-              <AnatomyInteractive title="Button Anatomy" items={anatomyItems}>
-                <Core.GdsButton>
-                  <Core.IconAi slot="lead" />
-                  Button example
-                  <Core.GdsBadge slot="trail" size="small">
-                    2
-                  </Core.GdsBadge>
-                </Core.GdsButton>
-              </AnatomyInteractive>
-            </Core.GdsCard>
+            <AnatomyInteractive title="Button Anatomy">
+              <Core.GdsButton
+                data-anatomy="button"
+                data-anatomy-label="Button Container"
+                data-anatomy-type="container"
+              >
+                <Core.IconAi
+                  slot="lead"
+                  data-anatomy="icon"
+                  data-anatomy-label="Icon"
+                />
+                <span data-anatomy="text" data-anatomy-label="Button Text">
+                  Click me
+                </span>
+                <Core.GdsBadge
+                  slot="trail"
+                  data-anatomy="badge"
+                  data-anatomy-label="Badge"
+                  data-anatomy-type="background"
+                >
+                  2
+                </Core.GdsBadge>
+              </Core.GdsButton>
+            </AnatomyInteractive>
 
             {isLayoutComponent && section === 'overview' && (
               <Core.GdsAlert
