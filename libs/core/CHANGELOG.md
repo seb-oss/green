@@ -1,5 +1,21 @@
 # Changelog
 
+## 2.20.0
+
+### Minor Changes
+
+- 294c699: **Table:** Add new table component and all it's following elements
+- 294c699: **Input:** Add appearance variable to hide the spin button
+- 294c699: **Badge:** Refactor to improve performance and overcomplicated SEP:s
+- 294c699: **Pagination:** Add new pagination component
+
+### Patch Changes
+
+- 294c699: **RBCB:** Indeterminate shadow color fixed
+- 294c699: **Checkbox:** Use wrapper to apply perimeter style instead of host
+- 294c699: **RBCB:** Add wrapper instead of host hover
+- 294c699: **Field base:** Change to `min-block-size` to avoid element oversizing, also identify when leadslot is badge to reduce padding
+
 ## 2.19.0
 
 ### Patch Changes
