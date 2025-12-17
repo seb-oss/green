@@ -82,13 +82,18 @@ jobs:
         if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
         uses: actions/github-script@v4
         env:
-          PR_NUMBER: ${{ github.event.inputs.pr_number }}
+          PR_NUMBER: ${{ inputs.pr_number }}
         with:
           github-token: ${{ steps.get_token.outputs.token }}
           script: |
             const prNumber = github.event_name === 'workflow_dispatch'
-              ? process.env.PR_NUMBER
+              ? parseInt(process.env.PR_NUMBER, 10)
               : context.issue.number;
+
+            if (!prNumber) {
+              core.setFailed('PR number is required but not provided');
+              return;
+            }
 
             const commentBody = `Hello! New release candidate snapshots published to NPM! :rocket: :package: :tada:
 
