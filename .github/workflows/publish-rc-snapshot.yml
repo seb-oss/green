@@ -86,7 +86,11 @@ jobs:
         with:
           github-token: ${{ steps.get_token.outputs.token }}
           script: |
-            const prNumber = github.event_name === 'workflow_dispatch'
+            console.log('Event name:', context.eventName);
+            console.log('PR_NUMBER env:', process.env.PR_NUMBER);
+            console.log('context.issue.number:', context.issue.number);
+
+            const prNumber = context.eventName === 'workflow_dispatch'
               ? parseInt(process.env.PR_NUMBER, 10)
               : context.issue.number;
 
