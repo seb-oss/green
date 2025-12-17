@@ -133,9 +133,6 @@ export function useControlledChecked<
       element.checked = defaultChecked
     }
 
-    // Only intercept input events for controlled components
-    if (!isControlled) return
-
     // Intercept input events to implement controlled component behavior
     const handleInput = (e: Event) => {
       // Stop propagation to prevent React's event delegation from handling it
