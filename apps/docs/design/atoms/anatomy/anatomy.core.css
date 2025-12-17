@@ -1,100 +1,174 @@
-/* Base active state - preparation */
-[data-anatomy-active] {
-  animation: anatomy-pulse 1.5s ease-in-out infinite;
+/* anatomy.core.css */
+
+:root {
+  --blueprint-grid: rgba(0, 0, 0, 0.08);
+  --blueprint-bg: #f9f9f9;
+  --selection-color: #cceacc;
+  --trace-color: #cceacc;
 }
 
-/* Element highlight - outline with offset (default) */
-[data-anatomy-active][data-anatomy-current-type='element'],
-[data-anatomy-active]:not([data-anatomy-current-type]) {
-  outline: 2px solid var(--gds-sys-color-content-positive-01) !important;
-  outline-offset: 2px;
-  border-radius: inherit;
+/* --- Viewport --- */
+.anatomy-viewport {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  background-color: var(--blueprint-bg);
+  background-image:
+    linear-gradient(var(--blueprint-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--blueprint-grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 2500px;
+  border-radius: 8px;
 }
 
-/* Border highlight - colored border */
-[data-anatomy-active][data-anatomy-current-type='border'] {
-  border: 3px solid var(--gds-sys-color-content-positive-01) !important;
-  border-radius: inherit;
+.anatomy-viewport[data-grid='false'] {
+  background-image: none;
 }
 
-/* Background highlight - semi-transparent fill on specific element only */
-[data-anatomy-active][data-anatomy-current-type='background'] {
-  background-color: color-mix(
-    in srgb,
-    var(--gds-sys-color-content-positive-01) 20%,
-    transparent
-  ) !important;
-  border-radius: inherit;
+/* --- Canvas (Zoom Layer) --- */
+.anatomy-canvas {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center; /* Zoom from center */
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-style: preserve-3d;
 }
 
-/* Container highlight - outline inside wrapper */
-.preview-children[data-anatomy-active][data-anatomy-type='container'] {
-  outline: 3px solid var(--gds-sys-color-content-positive-01) !important;
-  outline-offset: -3px;
-  border-radius: inherit;
+/* --- Component Context (3D Rotation Layer) --- */
+.component-context {
+  position: relative;
+  pointer-events: auto;
+  /* Padding creates "air" for badges to float outside */
+  padding: 100px;
+  transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-style: preserve-3d;
 }
 
-/* Pulse animation */
-@keyframes anatomy-pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
+.component-context[data-exploded='false'] {
+  transform: rotateX(0deg);
+}
+.component-context[data-exploded='true'] {
+  transform: rotateX(50deg) rotateZ(-15deg);
 }
 
-/* Anatomy list styling */
-.anatomy-item {
-  cursor: pointer;
-  padding: var(--gds-sys-space-xs);
-  border-radius: inherit;
-  transition: background-color 200ms ease;
+/* --- Elements --- */
+[data-anatomy-target] {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
 }
 
-.anatomy-item:hover {
-  background-color: var(--gds-sys-color-background-secondary-hover);
+/* Highlight */
+[data-anatomy-active='true'] {
+  outline: 2px dashed var(--selection-color);
+  outline-offset: 4px;
+  z-index: 50;
 }
 
-.anatomy-item-active {
-  background-color: var(
-    --gds-sys-color-background-secondary-selected
-  ) !important;
+/* Exploded Lift */
+.component-context[data-exploded='true'] [data-anatomy-active='true'] {
+  transform: translateZ(120px);
+  box-shadow: -20px 20px 50px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
 }
 
-/* SVG Connectors */
-.anatomy-connectors {
+.component-context[data-exploded='true']:hover
+  [data-anatomy-target]:not([data-anatomy-active='true']) {
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+/* --- Floating Toolbar --- */
+.anatomy-toolbar {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 8px 16px;
+  border-radius: 99px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  z-index: 200;
+  border: 1px solid #e0e0e0;
+}
+
+/* --- Traces Layer --- */
+.anatomy-traces-layer {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 10;
+  overflow: visible;
+  z-index: 90;
+  transition: opacity 0.2s;
 }
 
-.connector-line {
-  stroke: var(--gds-sys-color-content-positive-01);
-  stroke-width: 2;
+.component-context[data-exploded='true'] .anatomy-traces-layer {
+  opacity: 0;
+}
+
+.trace-path {
   fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  stroke: var(--trace-color);
+  stroke-width: 1.5px;
+  vector-effect: non-scaling-stroke;
 }
 
-.connector-badge {
-  fill: var(--gds-sys-color-content-positive-01);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+.trace-anchor {
+  fill: var(--trace-color);
 }
 
-.connector-badge-text {
-  fill: var(--gds-sys-color-background-primary);
-  font-size: 10px;
-  font-weight: 600;
-  pointer-events: none;
+/* --- Badge --- */
+.anatomy-annotation {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  background: #e0e0e0;
+  color: #000;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #fff;
+  transition: all 0.2s;
 }
 
-.preview-card {
-  position: relative;
+.anatomy-annotation:hover,
+.anatomy-annotation[data-active='true'] {
+  background: #35723d;
+  color: #fff;
+  z-index: 110;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* --- Sidebar --- */
+.sidebar-item {
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.sidebar-item:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+.sidebar-item[data-active='true'] {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: #000;
 }

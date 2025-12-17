@@ -6,8 +6,8 @@ import { notFound, usePathname, useRouter } from 'next/navigation'
 import { marked } from 'marked'
 
 import * as Core from '@sebgroup/green-core/react'
-import { Anatomy } from '../../../design/atoms/anatomy/anatomy'
-import AnatomyInteractive from '../../../design/atoms/anatomy/anatomy.core'
+import { Anatomy as AnatomyIMG } from '../../../design/atoms/anatomy/anatomy'
+import Anatomy from '../../../design/atoms/anatomy/anatomy.core'
 import Breadcrumbs from '../../../design/atoms/breadcrumb/breadcrumb'
 import { TableOfContents } from '../../../design/atoms/contents/contents'
 import Figure from '../../../design/atoms/figure/figure'
@@ -281,14 +281,16 @@ export function ComponentLayoutClient({
                     )}
                     <Figure id={anatomyImage.svg} />
                     {component['anatomy-list']?.anatomyitems && (
-                      <Anatomy items={component['anatomy-list'].anatomyitems} />
+                      <AnatomyIMG
+                        items={component['anatomy-list'].anatomyitems}
+                      />
                     )}
                   </Core.GdsFlex>
                 )}
               </Core.GdsFlex>
             )}
 
-            <AnatomyInteractive title="Button Anatomy">
+            {/*    <Anatomy title="Button Anatomy">
               <Core.GdsButton
                 data-anatomy="button"
                 data-anatomy-label="Button Container"
@@ -311,7 +313,42 @@ export function ComponentLayoutClient({
                   2
                 </Core.GdsBadge>
               </Core.GdsButton>
-            </AnatomyInteractive>
+            </Anatomy>
+ */}
+            <Anatomy>
+              <Core.GdsFlex gap="s">
+                <Core.GdsButton>
+                  <Core.IconAi
+                    data-anatomy="icon"
+                    data-anatomy-label="Icon"
+                    data-anatomy-placement="left"
+                    data-component="gds-icon-ai"
+                    slot="lead"
+                  />
+                  <span
+                    data-anatomy="text"
+                    data-anatomy-label="Label"
+                    data-anatomy-placement="top"
+                  >
+                    Generate
+                  </span>
+                </Core.GdsButton>
+                <Core.GdsButton
+                  data-anatomy="btn-root"
+                  data-anatomy-label="Button Container"
+                  data-anatomy-placement="top"
+                  data-anatomy-desc="The main structural container."
+                >
+                  <Core.IconAi
+                    data-anatomy="icon"
+                    data-anatomy-label="Icon"
+                    data-anatomy-placement="right"
+                    slot="trail"
+                  />
+                  Generate
+                </Core.GdsButton>
+              </Core.GdsFlex>
+            </Anatomy>
 
             {isLayoutComponent && section === 'overview' && (
               <Core.GdsAlert
