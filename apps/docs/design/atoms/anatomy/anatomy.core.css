@@ -2,55 +2,88 @@
 
 :root {
   --blueprint-grid: rgba(0, 0, 0, 0.08);
-  --blueprint-bg: #f9f9f9;
-  --selection-color: #cceacc;
-  --trace-color: #cceacc;
+  --blueprint-bg: #fff;
+  --selection-color: #2e7d32;
+  --trace-color: #2e7d32;
+  --panel-width: 340px;
 }
 
-/* --- Viewport --- */
-.anatomy-viewport {
+/* --- Layout --- */
+.anatomy-layout-container {
+  display: flex;
   width: 100%;
   height: 600px;
   position: relative;
+  overflow: hidden;
   background-color: var(--blueprint-bg);
-  background-image:
+  border-radius: 8px;
+}
+
+/* --- Stage --- */
+.anatomy-stage {
+  flex: 1;
+  position: relative;
+  height: 100%;
+  transition: margin-right 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  /*   background-image:
     linear-gradient(var(--blueprint-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--blueprint-grid) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-size: 40px 40px; */
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   perspective: 2500px;
-  border-radius: 8px;
+  z-index: 1;
 }
 
-.anatomy-viewport[data-grid='false'] {
+.anatomy-stage[data-panel-open='true'] {
+  margin-right: var(--panel-width);
+}
+.anatomy-stage[data-grid='false'] {
   background-image: none;
 }
 
-/* --- Canvas (Zoom Layer) --- */
+/* --- Panel --- */
+.anatomy-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--panel-width);
+  background: #fff;
+  border-left: 1px solid #e0e0e0;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.05);
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+}
+.anatomy-panel[data-open='true'] {
+  transform: translateX(0);
+}
+
+/* --- Canvas --- */
 .anatomy-canvas {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transform-origin: center center; /* Zoom from center */
+  transform-origin: center center;
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   transform-style: preserve-3d;
 }
 
-/* --- Component Context (3D Rotation Layer) --- */
+/* --- Context --- */
 .component-context {
   position: relative;
   pointer-events: auto;
-  /* Padding creates "air" for badges to float outside */
   padding: 100px;
   transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
   transform-style: preserve-3d;
 }
-
 .component-context[data-exploded='false'] {
   transform: rotateX(0deg);
 }
@@ -63,42 +96,43 @@
   position: relative;
   transform-style: preserve-3d;
   transition: all 0.5s ease;
+  cursor: pointer;
+}
+[data-anatomy-target]:hover {
+  outline: 1px dashed rgba(0, 0, 0, 0.2);
 }
 
-/* Highlight */
 [data-anatomy-active='true'] {
   outline: 2px dashed var(--selection-color);
   outline-offset: 4px;
   z-index: 50;
 }
-
-/* Exploded Lift */
 .component-context[data-exploded='true'] [data-anatomy-active='true'] {
   transform: translateZ(120px);
   box-shadow: -20px 20px 50px rgba(0, 0, 0, 0.15);
   z-index: 1000;
 }
-
 .component-context[data-exploded='true']:hover
   [data-anatomy-target]:not([data-anatomy-active='true']) {
   opacity: 0.4;
   filter: grayscale(1);
 }
 
-/* --- Floating Toolbar --- */
+/* --- Toolbar --- */
 .anatomy-toolbar {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 24px;
+  right: 24px;
+  /*   left: 50%;
+  transform: translateX(-50%); */
   background: #fff;
-  padding: 8px 16px;
+  padding: 6px 24px 6px 6px;
   border-radius: 99px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   display: flex;
   gap: 12px;
   align-items: center;
-  z-index: 200;
+  z-index: 150;
   border: 1px solid #e0e0e0;
 }
 
@@ -109,14 +143,16 @@
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
+  pointer-events: none; /* BLOCKS CLICKS ON LAYER */
   overflow: visible;
   z-index: 90;
   transition: opacity 0.2s;
 }
 
+/* Properly hide in exploded mode */
 .component-context[data-exploded='true'] .anatomy-traces-layer {
   opacity: 0;
+  visibility: hidden;
 }
 
 .trace-path {
@@ -125,12 +161,11 @@
   stroke-width: 1.5px;
   vector-effect: non-scaling-stroke;
 }
-
 .trace-anchor {
   fill: var(--trace-color);
 }
 
-/* --- Badge --- */
+/* --- Badge & Tooltip --- */
 .anatomy-annotation {
   position: absolute;
   display: flex;
@@ -145,8 +180,12 @@
   font-size: 12px;
   font-weight: 700;
   transform: translate(-50%, -50%);
-  z-index: 100;
+
+  /* IMPORTANT: Re-enable clicks for the badge */
+  pointer-events: auto;
   cursor: pointer;
+
+  z-index: 100;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid #fff;
   transition: all 0.2s;
@@ -154,10 +193,51 @@
 
 .anatomy-annotation:hover,
 .anatomy-annotation[data-active='true'] {
-  background: #35723d;
+  background: var(--selection-color);
   color: #fff;
   z-index: 110;
-  transform: translate(-50%, -50%) scale(1.1);
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+/* Tooltip Logic */
+.anatomy-tooltip {
+  position: absolute;
+  /* Position to the right of the badge */
+  left: 100%;
+  margin-left: 10px;
+
+  background: #111;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-8px);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Tooltip Arrow */
+.anatomy-tooltip::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 4px 4px 4px 0;
+  border-style: solid;
+  border-color: transparent #111 transparent transparent;
+}
+
+.anatomy-annotation:hover .anatomy-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
 }
 
 /* --- Sidebar --- */
@@ -170,5 +250,5 @@
 }
 .sidebar-item[data-active='true'] {
   background: rgba(0, 0, 0, 0.06);
-  border-color: #000;
+  border-color: var(--selection-color);
 }
