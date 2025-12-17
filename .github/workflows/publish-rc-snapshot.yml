@@ -85,7 +85,7 @@ jobs:
           github-token: ${{ steps.get_token.outputs.token }}
           script: |
             const prNumber = github.event_name === 'workflow_dispatch'
-              ? inputs.pr_number
+              ? github.event.inputs.pr_number
               : context.issue.number;
 
             github.issues.createComment({
