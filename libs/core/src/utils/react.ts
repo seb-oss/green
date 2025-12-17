@@ -66,9 +66,6 @@ export function useControlledValue<TElement extends HTMLElement = HTMLElement>(
       element.value = defaultValue
     }
 
-    // Only intercept input events for controlled components
-    if (!isControlled) return
-
     // Intercept input events to implement controlled component behavior
     const handleInput = (e: Event) => {
       // Stop propagation to prevent React's event delegation from handling it
