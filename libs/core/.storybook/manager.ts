@@ -15,6 +15,7 @@ const betaItems = {
   Mask: true,
   Spinner: true,
   Video: true,
+  Table: true,
 }
 
 addons.setConfig({

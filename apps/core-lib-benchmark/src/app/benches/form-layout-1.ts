@@ -3,7 +3,6 @@ import { customElement } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { html } from '@sebgroup/green-core/scoping.js'
 
-import '@sebgroup/green-core/components/container/index.js'
 import '@sebgroup/green-core/components/flex/index.js'
 import '@sebgroup/green-core/components/card/index.js'
 import '@sebgroup/green-core/components/input/index.js'
@@ -15,7 +14,7 @@ export class FormLayout1 extends LitElement {
   render() {
     return html`${repeat(
       this.entries,
-      (e) =>
+      () =>
         html`<form>
           <gds-div margin="s" padding="s">
             <gds-flex gap="s">

@@ -60,7 +60,7 @@ export default function Main() {
             </Core.GdsText>
           </Core.GdsFlex>
           <Core.GdsGrid
-            columns="1; xs{4}"
+            columns="1; xs{3}"
             gap="l"
             width="100%"
             auto-columns="m{240}"
@@ -70,10 +70,11 @@ export default function Main() {
                 page.icon
               ] as React.ComponentType<IconProps>
               return (
-                <Core.GdsCard
+                <Core.GdsCardPattern01
                   key={page.key}
-                  padding="l"
-                  variant="primary"
+                  title={page.label}
+                  href={page.slug}
+                  excerpt={page.description}
                   onClick={() => router.push(page.slug)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -81,27 +82,9 @@ export default function Main() {
                       router.push(page.slug)
                     }
                   }}
-                  border-radius="m"
-                  role="link"
-                  tabIndex={0}
-                  className="linked-card"
                 >
-                  <Core.GdsFlex
-                    gap="m"
-                    align-items="flex-start"
-                    flex-direction="column"
-                  >
-                    {IconComponent && <IconComponent size="xl" />}
-                    <Core.GdsFlex flex-direction="column" gap="2xs">
-                      <Core.GdsText font="heading-xs">
-                        {page.label}
-                      </Core.GdsText>
-                      <Core.GdsText color="neutral-02">
-                        {page.description}
-                      </Core.GdsText>
-                    </Core.GdsFlex>
-                  </Core.GdsFlex>
-                </Core.GdsCard>
+                  {IconComponent && <IconComponent size="xl" slot="header" />}
+                </Core.GdsCardPattern01>
               )
             })}
           </Core.GdsGrid>

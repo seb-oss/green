@@ -148,7 +148,7 @@
         "build-custom-elements-json"
       ],
       "options": {
-        "command": "node libs/core/build-scripts/generate-react.cjs"
+        "command": "tsx libs/core/build-scripts/generate-react.ts"
       }
     },
     "generate-mcp-data": {
