@@ -1,0 +1,1 @@
+const e={fromAttribute(t){return new Date(t)},toAttribute(t){return t.toISOString()}},n={fromAttribute(t){return t.split(",").map(r=>new Date(r.trim()))},toAttribute(t){return JSON.stringify(t.map(r=>r.toISOString()))}},i={fromAttribute(t){return t.split(",")},toAttribute(t){return Array.isArray(t)?t.join(","):t}};export{n as a,e as d,i as s};
