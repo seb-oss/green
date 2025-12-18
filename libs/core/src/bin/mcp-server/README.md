@@ -1,6 +1,6 @@
 # Green Design System MCP Server
 
-This directory contains the Model Context Protocol (MCP) server for the Green Design System. The MCP server exposes Green component documentation, guides, and framework-specific implementation details to AI agents like GitHub Copilot.
+This directory contains the Model Context Protocol (MCP) server for the Green Core component library. The MCP server exposes Green component documentation, guides, and framework-specific implementation details to AI agents like GitHub Copilot.
 
 ## What is MCP?
 
@@ -36,28 +36,7 @@ npm install @sebgroup/green-core
 
 ### Configuration for GitHub Copilot in VS Code
 
-1. Create or edit the MCP configuration file:
-   - **macOS/Linux**: `~/.config/Code/User/globalStorage/github.copilot-chat/mcp.json`
-   - **Windows**: `%APPDATA%\Code\User\globalStorage\github.copilot-chat\mcp.json`
-
-2. Add the Green MCP server configuration:
-
-```json
-{
-  "mcpServers": {
-    "green-design-system": {
-      "command": "npx",
-      "args": ["--yes", "@sebgroup/green-core", "mcp-server"]
-    }
-  }
-}
-```
-
-3. Restart VS Code
-
-### Alternative Configuration
-
-If you experience issues with npx resolution, you can use a direct path:
+Add the following in `.vscode/mcp.json`
 
 ```json
 {
@@ -70,6 +49,8 @@ If you experience issues with npx resolution, you can use a direct path:
 }
 ```
 
+3. Restart VS Code
+
 ## Available Tools
 
 ### search_components
@@ -77,6 +58,7 @@ If you experience issues with npx resolution, you can use a direct path:
 Search for components or icons by name, description, or functionality.
 
 **Parameters:**
+
 - `query` (required): Search term (e.g., "button", "dropdown", "arrow icon")
 - `category` (optional): Filter by "component", "icon", or "all" (default: "all")
 
@@ -87,6 +69,7 @@ Search for components or icons by name, description, or functionality.
 Get complete documentation for a specific component.
 
 **Parameters:**
+
 - `componentName` (required): Component tag name (e.g., "gds-button") or short name (e.g., "button")
 - `framework` (required): "angular", "react", or "web-component"
 - `includeGuidelines` (optional): Include UX/design guidelines (default: true)
@@ -99,6 +82,7 @@ Get complete documentation for a specific component.
 List available setup guides and conceptual documentation.
 
 **Parameters:**
+
 - `category` (optional): Filter by category ("framework-setup", "getting-started", "concepts", "troubleshooting", "migration", "all")
 - `framework` (optional): Filter by framework ("angular", "react", "all")
 
@@ -126,18 +110,11 @@ Resources provide direct URI-based access to documentation:
 
 ### Building
 
-The server TypeScript files are compiled to JavaScript during the build process. The output is placed in `dist/libs/core/build-scripts/mcp/server/`.
+The server TypeScript files are compiled to JavaScript during the build process.
 
 ### Testing Locally
 
-You can test the MCP server locally:
-
-```bash
-# From the green-core directory
-node ./build-scripts/mcp/server/index.js
-```
-
-The server uses stdio transport, so it communicates via standard input/output. You can test it with MCP client tools or by configuring it in VS Code as described above.
+You can test the MCP server locally. The MCP config for this repo includes the path to the dist folder, you you can just ask copilot to test things by accessing the mcp.
 
 ### Debugging
 
