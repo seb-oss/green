@@ -41,7 +41,7 @@
           {
             "glob": "**/*",
             "input": "libs/core/src/generated/mcp",
-            "output": "mcp"
+            "output": "generated/mcp"
           }
         ]
       }
