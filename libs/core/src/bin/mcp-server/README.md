@@ -40,10 +40,11 @@ Add the following in `.vscode/mcp.json`
 
 ```json
 {
-  "mcpServers": {
-    "green-design-system": {
+  "servers": {
+    "Green Core MCP": {
+      "type": "stdio",
       "command": "node",
-      "args": ["./node_modules/@sebgroup/green-core/build-scripts/mcp/server/index.js"]
+      "args": ["./node_modules/@sebgroup/green-core/bin/mcp-server"]
     }
   }
 }

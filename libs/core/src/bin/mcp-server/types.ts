@@ -125,3 +125,7 @@ export interface ListGuidesInput {
   category?: GuideCategory
   framework?: 'angular' | 'react' | 'all'
 }
+
+export interface GetGuideInput {
+  name: string
+}

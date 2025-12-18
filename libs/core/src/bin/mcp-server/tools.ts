@@ -2,20 +2,24 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js'
+
 import type { Server } from '@modelcontextprotocol/sdk/server/index.js'
+
 import {
-  loadComponentsIndex,
-  loadIconsIndex,
-  loadGlobalIndex,
+  buildResourceUri,
   findComponent,
   findIcon,
+  loadComponentsIndex,
+  loadGlobalIndex,
+  loadIconsIndex,
   readMcpFile,
-  buildResourceUri,
 } from './utils.js'
+
 import type {
-  SearchComponentsInput,
   GetComponentDocsInput,
+  GetGuideInput,
   ListGuidesInput,
+  SearchComponentsInput,
   SearchResult,
 } from './types.js'
 
@@ -30,19 +34,19 @@ export function setupToolHandlers(server: Server): void {
         {
           name: 'search_components',
           description:
-            'Search for Green Design System components by name, description, or functionality. Use this when you don\'t know the exact component name or want to discover available components.',
+            "Search for Green Design System components by name, description, or functionality. Use this when you don't know the exact component name or want to discover available components.",
           inputSchema: {
             type: 'object',
             properties: {
               query: {
                 type: 'string',
                 description:
-                  'Component name or search term (e.g., \'button\', \'dropdown\', \'form input\', \'arrow icon\')',
+                  "Component name or search term (e.g., 'button', 'dropdown', 'form input', 'arrow icon')",
               },
               category: {
                 type: 'string',
                 enum: ['component', 'icon', 'all'],
-                description: 'Filter by type. Default: \'all\'',
+                description: "Filter by type. Default: 'all'",
                 default: 'all',
               },
             },
@@ -59,13 +63,13 @@ export function setupToolHandlers(server: Server): void {
               componentName: {
                 type: 'string',
                 description:
-                  'Component tag name (e.g., \'gds-button\') or short name (e.g., \'button\')',
+                  "Component tag name (e.g., 'gds-button') or short name (e.g., 'button')",
               },
               framework: {
                 type: 'string',
                 enum: ['angular', 'react', 'web-component'],
                 description:
-                  'REQUIRED: Framework you\'re using. Determines import paths and syntax. Use \'web-component\' for vanilla JS/framework-agnostic usage.',
+                  "REQUIRED: Framework you're using. Determines import paths and syntax. Use 'web-component' for vanilla JS/framework-agnostic usage.",
               },
               includeGuidelines: {
                 type: 'boolean',
@@ -99,7 +103,7 @@ export function setupToolHandlers(server: Server): void {
                   'migration',
                   'all',
                 ],
-                description: 'Filter by category. Default: \'all\'',
+                description: "Filter by category. Default: 'all'",
                 default: 'all',
               },
               framework: {
@@ -109,6 +113,22 @@ export function setupToolHandlers(server: Server): void {
               },
             },
             required: [],
+          },
+        },
+        {
+          name: 'get_guide',
+          description:
+            'Get the full content of a specific guide. Use list_guides first to discover available guides and their names.',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                description:
+                  "The guide name (e.g., 'angular', 'react', 'installing', 'troubleshooting'). Use list_guides to see available guides.",
+              },
+            },
+            required: ['name'],
           },
         },
       ],
@@ -122,13 +142,20 @@ export function setupToolHandlers(server: Server): void {
     try {
       switch (name) {
         case 'search_components':
-          return await handleSearchComponents(args as unknown as SearchComponentsInput)
+          return await handleSearchComponents(
+            args as unknown as SearchComponentsInput,
+          )
 
         case 'get_component_docs':
-          return await handleGetComponentDocs(args as unknown as GetComponentDocsInput)
+          return await handleGetComponentDocs(
+            args as unknown as GetComponentDocsInput,
+          )
 
         case 'list_guides':
           return await handleListGuides(args as unknown as ListGuidesInput)
+
+        case 'get_guide':
+          return await handleGetGuide(args as unknown as GetGuideInput)
 
         default:
           throw new Error(`Unknown tool: ${name}`)
@@ -184,7 +211,7 @@ async function handleSearchComponents(input: SearchComponentsInput) {
             resourceUris[docType] = buildResourceUri(
               'components',
               shortName,
-              docType
+              docType,
             )
           }
 
@@ -215,7 +242,11 @@ async function handleSearchComponents(input: SearchComponentsInput) {
           const resourceUris: { [key: string]: string } = {}
 
           for (const docType of icon.files) {
-            resourceUris[docType] = buildResourceUri('icons', shortName, docType)
+            resourceUris[docType] = buildResourceUri(
+              'icons',
+              shortName,
+              docType,
+            )
           }
 
           results.push({
@@ -255,7 +286,7 @@ async function handleSearchComponents(input: SearchComponentsInput) {
               results: limitedResults,
             },
             null,
-            2
+            2,
           ),
         },
       ],
@@ -294,7 +325,7 @@ async function handleGetComponentDocs(input: GetComponentDocsInput) {
 
     if (!found) {
       throw new Error(
-        `Component not found: ${componentName}. Try using the search_components tool to find available components.`
+        `Component not found: ${componentName}. Try using the search_components tool to find available components.`,
       )
     }
 
@@ -313,13 +344,17 @@ async function handleGetComponentDocs(input: GetComponentDocsInput) {
     }
 
     // Add framework-specific header
-    sections.push(`# ${found.tagName} - ${framework.charAt(0).toUpperCase() + framework.slice(1)}`)
+    sections.push(
+      `# ${found.tagName} - ${framework.charAt(0).toUpperCase() + framework.slice(1)}`,
+    )
     sections.push('')
 
     if (framework === 'angular' || framework === 'react') {
-      sections.push(`⚠️ **${framework.charAt(0).toUpperCase() + framework.slice(1)}-Specific Documentation**`)
       sections.push(
-        `The import paths and syntax below are for ${framework.charAt(0).toUpperCase() + framework.slice(1)} applications.`
+        `⚠️ **${framework.charAt(0).toUpperCase() + framework.slice(1)}-Specific Documentation**`,
+      )
+      sections.push(
+        `The import paths and syntax below are for ${framework.charAt(0).toUpperCase() + framework.slice(1)} applications.`,
       )
       sections.push('')
     }
@@ -419,10 +454,7 @@ async function handleListGuides(input: ListGuidesInput) {
       const guideCategory = guide.path.startsWith('guides/')
         ? 'guides'
         : 'concepts'
-      const uri = buildResourceUri(
-        guideCategory as 'guides' | 'concepts',
-        name
-      )
+      const uri = buildResourceUri(guideCategory as 'guides' | 'concepts', name)
 
       return {
         title: guide.title,
@@ -443,12 +475,55 @@ async function handleListGuides(input: ListGuidesInput) {
               guides: guidesWithUris,
             },
             null,
-            2
+            2,
           ),
         },
       ],
     }
   } catch (error) {
     throw new Error(`Failed to list guides: ${error}`)
+  }
+}
+
+/**
+ * Handle get_guide tool
+ */
+async function handleGetGuide(input: GetGuideInput) {
+  const { name } = input
+
+  try {
+    const globalIndex = await loadGlobalIndex()
+
+    if (!globalIndex) {
+      throw new Error('Failed to load global index')
+    }
+
+    // Find the guide in the index
+    const guide = globalIndex.guides.find((g) => {
+      const guideName = g.path
+        .replace(/^(guides|concepts)\//, '')
+        .replace(/\.md$/, '')
+      return guideName === name
+    })
+
+    if (!guide) {
+      throw new Error(
+        `Guide not found: ${name}. Use list_guides to see available guides.`,
+      )
+    }
+
+    // Read the guide content
+    const content = await readMcpFile(guide.path)
+
+    return {
+      content: [
+        {
+          type: 'text',
+          text: `# ${guide.title}\n\n${content}`,
+        },
+      ],
+    }
+  } catch (error) {
+    throw new Error(`Failed to get guide: ${error}`)
   }
 }
