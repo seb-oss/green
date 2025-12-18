@@ -33,23 +33,10 @@ All events in Green Core has a corresponding CamelCased version that you can use
 ### Web component quirks with React
 
 There are a few quirks to be aware of when using web components with React:
-- **Event handling**: React does not apply some of its regular conventions to web components, for example, when you use `<input>` in React, it will automatically map the `input` event to the `onChange` callback. When using a web component, you need to explicity listen to the events you are interested in. For example, if you want to listen to the `input` event of a web component, you need to use `onInput` instead of `onChange`.
-- **State synchronization**: React does not automatically enforce state synchronisation on form controls on dispatch of the input event, so to ensure that your state is in sync with the component, you need to use `onInput` and explicitly update your state there. In other words, web components do not act like fully controlled components in React, unless you explicitly set them up that way.
+- **Event handling**: React does not apply some of its regular conventions to web components, for example, when you use `<input>` in React, it will automatically map the `input` event to the `onChange` callback.
+- **State synchronization**: React does not automatically enforce state synchronisation on custom form controls.
 
-  Example:
-  ```tsx
-  const [email, setEmail] = useState('')
-  // ...
-  <GdsInput
-    label={'Email'}
-    value={email} // <-- Whenever `email` is changed, this will update, like you'd expect
-    validator={requiredValidator}
-    onInput={(e) => setEmail((e.target as HTMLInputElement).value)} // <-- But if the `setEmail` was omitted here,
-    // state would get out of sync when the user types, as React will not enforce it behind the scenes as it does
-    // with regular inputs
-  />
-  ```
-  Check out [this](https://github.com/seb-oss/green/blob/main/apps/react-lib-dev/src/app/green-core-form.tsx) for a full example of a form with validation in React.
+Both of these issues are handled in the generated React wrappers for Green Core components. The wrappers add some middle-layer logic to replicate this idiomatic behavior, so they should behave as you expect normal form controls to behave, but it's good to be aware that it's not React doing this natively and there may be edge cases where it does not work as expected.
 
 ## Transitional styles
 
@@ -62,7 +49,8 @@ ButtonStyles.register()
 
 ## React 18 and older
 
-React 18 and older versions do not have proper built-in support for web components. You can still use Green Core components in your React application, but you need to provide a wrapper for each component.
+It is strongly recommended to upgrade to React 19 to use Green Core. However, if you need to use React 18 or older, you can still use Green Core components in your React application, but you need to provide your own wrapper for each component.
+
 You can use the `createComponent` function from `@lit/react` to create these wrappers.
 
 Here is an example:
