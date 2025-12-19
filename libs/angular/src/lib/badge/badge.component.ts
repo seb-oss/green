@@ -49,7 +49,7 @@ export class NggBadgeComponent implements OnInit {
   @HostBinding('style.background-color') @Input() customBackgroundColor?: string
 
   @HostBinding('class') get class(): string {
-    return ['badge', this.badgeType].join(' ')
+    return ['gds-badge', this.badgeType].join(' ')
   }
 
   /** Callback when component is dismissed */

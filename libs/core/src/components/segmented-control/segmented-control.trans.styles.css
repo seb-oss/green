@@ -58,7 +58,7 @@
 
       @media (pointer: fine) {
         &:hover {
-          background-color: var(--grey-400);
+          background-color: var(--gds-sys-color-base-200);
         }
       }
     }

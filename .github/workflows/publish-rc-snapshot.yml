@@ -3,11 +3,11 @@ name: Publish Release Candidate snapshot to NPM
 on:
   pull_request:
     branches:
-      - 'main'
+      - "main"
   workflow_dispatch:
     inputs:
       pr_number:
-        description: 'Pull Request number to comment on when manually triggered'
+        description: "Pull Request number to comment on when manually triggered"
         required: true
         type: string
 
@@ -41,8 +41,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@sebgroup'
+          registry-url: "https://registry.npmjs.org"
+          scope: "@sebgroup"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -108,6 +108,9 @@ jobs:
                 @sebgroup/green-angular: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_ANGULAR }}
                 @sebgroup/green-react: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_REACT }}
                 @sebgroup/chlorophyll: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_CHLOROPHYLL }}
+                @sebgroup/green-charts: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_CHARTS }}
+                @sebgroup/green-angular-charts: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_ANGULAR_CHARTS }}
+                @sebgroup/green-react-charts: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_REACT_CHARTS }}
 
               Install latest RC snapshot by running:
 

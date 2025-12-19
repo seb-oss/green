@@ -1,0 +1,6 @@
+// load global styles used by storybook
+@use '@sebgroup/chlorophyll/src/scss' with (
+  $font-path: '@sebgroup/fonts/fonts'
+);
+
+@use '@sebgroup/green-charts/scss' as charts;

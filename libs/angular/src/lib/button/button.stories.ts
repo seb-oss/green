@@ -8,14 +8,8 @@ import { NggButtonModule } from './button.module'
 const meta: Meta<NggButtonComponent> = {
   title: 'Components/Form/Button',
   component: NggButtonComponent,
-  decorators: [
-    moduleMetadata({
-      imports: [NggButtonModule],
-    }),
-  ],
-  parameters: {
-    componentIds: ['component-button'],
-  },
+  decorators: [moduleMetadata({ imports: [NggButtonModule] })],
+  parameters: { componentIds: ['component-button'] },
 }
 
 export default meta
@@ -34,8 +28,8 @@ export const Types: Story = {
     template: `
     <div class="horizontal">
       <button ngg-button type="button">Button</button>
-      <button ngg-button type="submit">Submit</button>
-      <button ngg-button type="reset">Reset</button>
+      <button ngg-button type="submit" variant="secondary">Submit</button>
+      <button ngg-button type="reset" variant="tertiary">Reset</button>
     </div>
     `,
   }),
@@ -47,7 +41,9 @@ export const Variants: Story = {
     <div class="horizontal">
       <button ngg-button variant="primary">Primary</button>
       <button ngg-button variant="secondary">Secondary</button>
-      <button ngg-button variant="ghost">Ghost</button>
+      <button ngg-button variant="tertiary">Tertiary</button>
+      <button ngg-button variant="ghost-dark">Ghost dark</button>
+      <button ngg-button variant="ghost-light">Ghost light</button>
     </div>
     `,
   }),

@@ -49,7 +49,7 @@ export function Badge({
   return !isClosed ? (
     <span
       {...props}
-      className={`badge ${type}`}
+      className={`gds-badge ${type}`}
       style={{
         color: customColor,
         backgroundColor: customBackgroundColor,

@@ -41,7 +41,7 @@ describe('Component: Table header cell', () => {
       </TableContext.Provider>,
     )
     await user.click(
-      document.body.querySelector('.sg-table-sort') as HTMLElement,
+      document.body.querySelector('.gds-table-sort') as HTMLElement,
     )
     expect(setTableStateFn).toBeCalled()
     expect(sortFn).toBeCalled()
@@ -67,7 +67,7 @@ describe('Component: Table header cell', () => {
       </TableContext.Provider>,
     )
     await user.click(
-      document.body.querySelector('.sg-table-sort') as HTMLElement,
+      document.body.querySelector('.gds-table-sort') as HTMLElement,
     )
     expect(setTableStateFn).toBeCalledWith({
       ...mockProviderValue.tableState,

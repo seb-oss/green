@@ -1,0 +1,319 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:color';
+@use '../../common/functions';
+
+/* Mixin for adding themes,
+Themes such as dark-mode, high-contrast mode etc.
+Values for light mode are used by default.
+*/
+
+@mixin add-theme(
+  $black: #000,
+  $white: #fff /* greys */,
+  $grey-100: #f8f8f8,
+  $grey-200: #e9e9e9,
+  $grey-300: #dedede,
+  $grey-400: #cecece,
+  $grey-500: #adadad,
+  $grey-600: #868686,
+  $grey-700: #494949,
+  $grey-800: #333333,
+  $grey-900: #1a1a1a,
+  $_greys: (
+    '100': $grey-100,
+    '200': $grey-200,
+    '300': $grey-300,
+    '400': $grey-400,
+    '500': $grey-500,
+    '600': $grey-600,
+    '700': $grey-700,
+    '800': $grey-800,
+    '900': $grey-900,
+  ),
+  $bg-level-0: #eeeeee,
+  $bg-level-1: $white,
+  $bg-level-2: $white,
+  $bg-level-3: $white,
+  $_bg-level: (
+    '0': $bg-level-0,
+    '1': $bg-level-1,
+    '2': $bg-level-2,
+    '3': $bg-level-3,
+  )
+  /* colors */,
+  $blue-0: #41b0ee,
+  $blue-1: #0092e1,
+  $blue-2: #007ac7,
+  $green-0: #60cd18,
+  $green-1: #45b400,
+  $green-2: #308800,
+  $yellow-0: #ffc500,
+  $yellow-1: #ffb400,
+  $yellow-2: #f8a000,
+  $red-0: #f03529,
+  $red-1: #d81a1a,
+  $red-2: #bb000c,
+  $purple-0: #673ab6,
+  $purple-1: #4f2c99,
+  $purple-2: #3f2587,
+  $_colors: (
+    'contrast': functions.most-legible-color($bg-level-0),
+    'light': $grey-100,
+    'light-contrast': functions.most-legible-color($grey-100),
+    'dark': $grey-900,
+    'dark-contrast': functions.most-legible-color($grey-900),
+    'black': $black,
+    'white': $white,
+    'blue-0': $blue-0,
+    'blue-1': $blue-1,
+    'blue-2': $blue-2,
+    'green-0': $green-0,
+    'green-1': $green-1,
+    'green-2': $green-2,
+    'yellow-0': $yellow-0,
+    'yellow-1': $yellow-1,
+    'yellow-2': $yellow-2,
+    'red-0': $red-0,
+    'red-1': $red-1,
+    'red-2': $red-2,
+    'purple-0': $purple-0,
+    'purple-1': $purple-1,
+    'purple-2': $purple-2,
+  )
+  /* disabled */,
+  $disabled-background: $grey-100,
+  $disabled-color: $grey-500,
+  $_disabled: (
+    'background': $disabled-background,
+    'color': $disabled-color,
+  )
+  /* text */,
+  $text-primary: $grey-800,
+  $text-secondary: $grey-800,
+  $_text: (
+    'primary': $text-primary,
+    'secondary': $text-secondary,
+  )
+  /* form */,
+  $form-control-bg: $white,
+  $form-control-bg-disabled: #eeeeee,
+  $_form: (
+    control-bg: $form-control-bg,
+    control-bg-disabled: $form-control-bg-disabled,
+  )
+  /* border */,
+  $border-color: var(--gds-sys-color-base-600),
+  // color.adjust($black, $alpha: -0.83),
+  // #CECECE against white
+  $border-width: 1px,
+  $border-radius: 0.25rem,
+  $_border: (
+    'color': $border-color,
+    'width': $border-width,
+    'width-50': math.div($border-width, 2),
+    'radius': $border-radius,
+  )
+  /* intent */,
+  $intent-neutral:
+    list.nth(functions.desired-color-combination($white, $grey-200), 1),
+  $intent-info:
+    list.nth(functions.desired-color-combination($white, $blue-2), 1),
+  $intent-success:
+    list.nth(functions.desired-color-combination($white, $green-2), 1),
+  $intent-warning:
+    list.nth(functions.desired-color-combination($white, $yellow-0), 1),
+  $intent-critical:
+    list.nth(functions.desired-color-combination($white, $red-1), 1),
+  $_intent: (
+    'neutral-hsl': functions.stripped-hsl($intent-neutral),
+    'neutral-hsl-contrast':
+      functions.stripped-hsl(functions.most-legible-color($intent-neutral)),
+    'info-hsl': functions.stripped-hsl($intent-info),
+    'info-hsl-contrast':
+      functions.stripped-hsl(functions.most-legible-color($intent-info)),
+    'success-hsl': functions.stripped-hsl($intent-success),
+    'success-hsl-contrast': functions.stripped-hsl($white),
+    'warning-hsl': functions.stripped-hsl($intent-warning),
+    'warning-hsl-contrast':
+      functions.stripped-hsl(functions.most-legible-color($intent-warning)),
+    'critical-hsl': functions.stripped-hsl($intent-critical),
+    'critical-hsl-contrast':
+      functions.stripped-hsl(functions.most-legible-color($intent-critical)),
+  )
+  /* global */,
+  $box-shadow-0: 0,
+  $box-shadow-1: 0 0.125rem 0.375rem rgba($black, 0.15),
+  $box-shadow-2: 0 0.125rem 0.375rem rgba($black, 0.15),
+  $box-shadow-3: 0 0.125rem 0.375rem rgba($black, 0.15),
+  $backdrop-color: $black,
+  $backdrop-opacity: 0.5,
+  $z-index-dropdown-backdrop: 990,
+  $z-index-datepicker: 995,
+  $z-index-dropdown: 2000,
+  $z-index-sticky: 1020,
+  $z-index-fixed: 1030,
+  $z-index-modal-backdrop: 1040,
+  $z-index-modal: 1050,
+  $z-index-popover: 1060,
+  $z-index-tooltip: 1070,
+  $_z-index: (
+    'datepicker': $z-index-datepicker,
+    'dropdown-backdrop': $z-index-dropdown-backdrop,
+    'dropdown': $z-index-dropdown,
+    'sticky': $z-index-sticky,
+    'fixed': $z-index-fixed,
+    'modal-backdrop': $z-index-modal-backdrop,
+    'modal': $z-index-modal,
+    'popover': $z-index-popover,
+    'tooltip': $z-index-tooltip,
+  )
+  /* table */,
+  $table-header-background: $grey-900,
+  $table-header-color: functions.most-legible-color($table-header-background),
+  $table-cell-padding-x: 0.5rem,
+  $table-cell-padding-y: 0.6875rem,
+  $table-border-width: $border-width,
+  $table-border-color: $border-color,
+  $table-sort-icon-color: $border-color,
+  $table-sort-icon-color-active: $table-header-color,
+  $_table: (
+    'header-background': $table-header-background,
+    'header-color': $table-header-color,
+    'cell-padding-x': $table-cell-padding-x,
+    'cell-padding-y': $table-cell-padding-y,
+    'border-width': $table-border-width,
+    'border-color': $table-border-color,
+    'sort-icon-color': $table-sort-icon-color,
+    'sort-icon-color-active': $table-sort-icon-color-active,
+  )
+  /* skeleton-loader */,
+  $skeleton-loader-highlight: $grey-300,
+  $skeleton-loader-background: $grey-100,
+  $_skeleton-loader: (
+    highlight-color: $skeleton-loader-highlight,
+    background-color: $skeleton-loader-background,
+  )
+  /* modal */,
+  $modal-bg: $bg-level-2,
+  $modal-box-shadow: $box-shadow-2,
+  $modal-backdrop-background: rgba($backdrop-color, $backdrop-opacity),
+  $_modal: (
+    'background': $modal-bg,
+    'box-shadow': $modal-box-shadow,
+    'backdrop-background': $modal-backdrop-background,
+  )
+  /* popover */,
+  $popover-box-shadow: $box-shadow-1,
+  $popover-background: $bg-level-1,
+  $popover-border-color: $blue-2,
+  $_popover: (
+    'box-shadow': $popover-box-shadow,
+    'background': $popover-background,
+    'border-color': $popover-border-color,
+  )
+  /* card */,
+  $card-box-shadow: $box-shadow-1,
+  $card-background: $bg-level-1,
+  $card-heading-color: $text-primary,
+  $card-color: $text-primary,
+  $card-border: solid $border-width $card-background,
+  $card-border-radius: 4px,
+  $_card: (
+    'box-shadow': $card-box-shadow,
+    'background': $card-background,
+    'heading-color': $card-heading-color,
+    'color': $card-color,
+    'border': $card-border,
+    'border-radius': $card-border-radius,
+  )
+) {
+  /* generate css variables */
+  @include _generate-variables($_z-index, 'sg-z-index');
+  @include _generate-variables($_text, 'sg-text');
+  @include _generate-variables($_form, 'sg-form');
+  @include _generate-variables($_border, 'sg-border');
+  @include _generate-variables(functions.hsl-map($_colors), 'sg-hsl');
+  @include _generate-variables($_greys, 'sg-grey');
+  @include _generate-variables($_intent, 'sg-intent');
+  @include _generate-variables(
+    functions.hsl-map($_disabled),
+    'sg-hsl-disabled'
+  );
+  @include _generate-variables($_bg-level, 'sg-bg-level');
+  @include _generate-variables($_table, 'sg-table');
+  @include _generate-variables($_skeleton-loader, 'sg-skeleton-loader');
+  @include _generate-variables($_modal, 'sg-modal');
+  @include _generate-variables($_popover, 'sg-popover');
+  @include _generate-variables($_card, 'sg-card');
+}
+
+/* mixin for generating css variables from map with optional prefix */
+@mixin _generate-variables($map, $prefix: '') {
+  @if ($prefix != '') {
+    $prefix: #{$prefix}-;
+  }
+  @each $key, $value in $map {
+    --#{$prefix}#{$key}: #{$value};
+  }
+}
+
+@mixin dark-theme() {
+  $grey-100: #dedede;
+  $grey-200: #ababab;
+  $grey-300: #757575;
+  $grey-400: #494949;
+  $grey-500: #333333;
+  $grey-600: #2c2c2c;
+  $grey-700: #272727;
+  $grey-800: #222222;
+  $grey-900: #121212;
+  @include add-theme(
+    $bg-level-0: $grey-900,
+    $bg-level-1: $grey-800,
+    $bg-level-2: $grey-700,
+    $bg-level-3: $grey-600,
+    $grey-100: $grey-100,
+    $grey-200: $grey-200,
+    $grey-300: $grey-300,
+    $grey-400: $grey-400,
+    $grey-500: $grey-500,
+    $grey-600: $grey-600,
+    $grey-700: $grey-700,
+    $grey-800: $grey-800,
+    $grey-900: $grey-900,
+    $intent-neutral: $grey-500,
+    $disabled-background: $grey-500,
+    $disabled-color: $grey-300
+      /* ## DISABLED DARK MODE COLORS START ##
+    Colors defined here: https://www.figma.com/file/dX0HJ2MOaQyAOTziCD5fQ7/SEB-Design-System
+    are disabled since alerts, which rely on them have been updated to use same colors as light mode.
+    Enable to use custom colors for dark mode.
+
+    $blue-0: #58b8ee,
+    $blue-1: #00adff,
+    $blue-2: #2c9cd9,
+    $green-0: #60cd18,
+    $green-1: #75b44a,
+    $green-2: #308800,
+    $yellow-0: #ffe182,
+    $yellow-1: #f0be47,
+    $yellow-2: #ebab39,
+    $red-0: #f7706d,
+    $red-1: #c82a29,
+    $red-2: #9e2120,
+    $purple-0: #ad91dc,
+    $purple-1: #7e52cc,
+    $purple-2: #4a328f
+
+    ## DISABLED DARK MODE COLORS END ## */,
+    $text-primary: $grey-100,
+    $text-secondary: $grey-200,
+    $border-color: $grey-200,
+    $form-control-bg: #{color.adjust(#000000, $alpha: -0.9)},
+    $form-control-bg-disabled: color.adjust(#ffffff, $alpha: -0.98),
+    $skeleton-loader-highlight: $grey-400,
+    $skeleton-loader-background: $grey-600
+  );
+}

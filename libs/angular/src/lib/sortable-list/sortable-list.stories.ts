@@ -1,11 +1,13 @@
 /* eslint no-console: "off" */
 import { DragDropModule } from '@angular/cdk/drag-drop'
 import { CommonModule } from '@angular/common'
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { moduleMetadata } from '@storybook/angular'
 
 import type { Meta, StoryObj } from '@storybook/angular'
 
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import {
   NggSortableListComponent,
   SortableListItem,
@@ -26,7 +28,13 @@ const meta: Meta<NggSortableListComponent & SortableListStoryArgs> = {
   decorators: [
     moduleMetadata({
       declarations: [NggSortableListComponent],
-      imports: [CommonModule, BrowserAnimationsModule, DragDropModule],
+      imports: [
+        CommonModule,
+        BrowserAnimationsModule,
+        DragDropModule,
+        NggCoreWrapperModule,
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
   argTypes: {
