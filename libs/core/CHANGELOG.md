@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.21.0
+
+### Minor Changes
+
+- 727a4c0: **React:** Add Typescript support for custom events
+- 727a4c0: **React:** Implement controlled behaviour for form controls
+- 727a4c0: **React:** Add `displayName` to all components
+
 ## 2.20.0
 
 ### Minor Changes
