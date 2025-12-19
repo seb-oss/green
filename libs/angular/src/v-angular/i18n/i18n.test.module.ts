@@ -14,7 +14,10 @@ import {
   TranslocoTranspilerFunction,
 } from '@jsverse/transloco'
 
-@Pipe({ name: 'transloco' })
+@Pipe({
+    name: 'transloco',
+    standalone: false
+})
 export class TranslocoMockPipe implements PipeTransform {
   transform = (value: number): number => value
 }

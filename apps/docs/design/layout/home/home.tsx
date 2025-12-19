@@ -168,7 +168,7 @@ export function Home({
               href={`/component/${component.slug}`}
               key={component.slug}
             >
-              <GdsFlex flex-direction="column" height="240px">
+              <GdsFlex flex-direction="column" height="280px">
                 <GdsCard
                   width="100%"
                   padding="m"

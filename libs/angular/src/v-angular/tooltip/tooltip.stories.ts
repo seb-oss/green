@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common'
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import { moduleMetadata } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggvTooltipDirective } from './tooltip.directive'
 
-export default {
+const meta: Meta<NggvTooltipDirective> = {
   title: 'V-Angular/Tooltip',
   decorators: [
     moduleMetadata({
@@ -19,18 +21,20 @@ export default {
       },
     },
   },
-} as Meta
+}
+
+export default meta
+type Story = StoryObj<NggvTooltipDirective>
 
 const argsToAttr = (args: any) =>
   Object.keys(args)
     .map((attr) => `[${attr}]="${attr}"`)
     .join(' ')
 
-const Template: StoryFn<NggvTooltipDirective> = (
-  args: NggvTooltipDirective & any,
-) => ({
-  /* spell-checker: disable */
-  template: /*html*/ `
+export const Top: Story = {
+  render: (args: NggvTooltipDirective & any) => ({
+    /* spell-checker: disable */
+    template: /*html*/ `
     <p>Mauris tristique, nisi eu ultricies pellentesque, ligula neque ornare dolor, sit amet feugiat augue neque in dui.
       Curabitur euismod rhoncus magna, vitae pulvinar tellus dignissim vel. Etiam faucibus iaculis egestas. Quisque
       tristique nisi ut ex dignissim viverra. Nam massa justo, consequat sollicitudin accumsan eget, condimentum sed felis.
@@ -41,59 +45,62 @@ const Template: StoryFn<NggvTooltipDirective> = (
       Pellentesque a ante lacus. Donec vitae euismod lorem, ut tincidunt ex. Nam a fringilla
       lorem. Nulla et ornare quam.</p>
     `,
-  /* spell-checker: enable */
-  props: { ...args },
-})
+    /* spell-checker: enable */
+    props: { ...args },
+  }),
+  args: {
+    nggvTooltip:
+      'This is a tooltip with a really long text that should always be visible. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    placement: 'top',
+    offset: 10,
+    shown: true,
+    resizeThrottle: 50,
+  },
+}
 
-const TemplateAccessible: StoryFn<NggvTooltipDirective> = (
-  args: NggvTooltipDirective & any,
-) => ({
-  /* spell-checker: disable */
-  template: /*html*/ `
+export const Bottom: Story = {
+  render: Top.render,
+  args: {
+    ...Top.args,
+    placement: 'bottom',
+  },
+}
+
+export const Left: Story = {
+  render: Top.render,
+  args: {
+    ...Top.args,
+    nggvTooltip:
+      'This is a tooltip with a long text that should attempt to be visible',
+    placement: 'left',
+  },
+}
+
+export const Right: Story = {
+  render: Top.render,
+  args: {
+    ...Top.args,
+    nggvTooltip:
+      'This is a tooltip with a long text that should attempt to be visible',
+    placement: 'right',
+  },
+}
+
+export const Accessible: Story = {
+  render: (args: NggvTooltipDirective & any) => ({
+    /* spell-checker: disable */
+    template: /*html*/ `
   <button ${argsToAttr(args)} aria-describedby="accessible-tooltip">Hover me</button>
   `,
-  /* spell-checker: enable */
-  props: { ...args },
-})
-
-export const Top = Template.bind({})
-Top.args = {
-  nggvTooltip:
-    'This is a tooltip with a really long text that should always be visible. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  placement: 'top',
-  offset: 10,
-  shown: true,
-  resizeThrottle: 50,
-}
-
-export const Bottom = Template.bind({})
-Bottom.args = {
-  ...Top.args,
-  placement: 'bottom',
-}
-
-export const Left = Template.bind({})
-Left.args = {
-  ...Top.args,
-  nggvTooltip:
-    'This is a tooltip with a long text that should attempt to be visible',
-  placement: 'left',
-}
-
-export const Right = Template.bind({})
-Right.args = {
-  ...Top.args,
-  nggvTooltip:
-    'This is a tooltip with a long text that should attempt to be visible',
-  placement: 'right',
-}
-
-export const Accessible = TemplateAccessible.bind({})
-Accessible.args = {
-  ...Top.args,
-  nggvTooltip:
-    'This is a tooltip with a long text that should attempt to be visible',
-  placement: 'right',
-  shown: false,
-  tooltipId: 'accessible-tooltip',
+    /* spell-checker: enable */
+    props: { ...args },
+  }),
+  args: {
+    ...Top.args,
+    nggvTooltip:
+      'This is a tooltip with a long text that should attempt to be visible',
+    placement: 'right',
+    shown: false,
+    tooltipId: 'accessible-tooltip',
+  },
 }

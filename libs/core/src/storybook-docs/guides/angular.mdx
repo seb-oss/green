@@ -1,42 +1,46 @@
-import { Meta, Markdown } from '@storybook/addon-docs'
+import { Meta, Markdown } from '@storybook/addon-docs/blocks'
 
 <Meta title="Guides/Angular" />
 
 # Using Green Core components with Angular
 
-Angular has support for using web components directly. To enable this support, you need to add [`CUSTOM_ELEMENTS_SCHEMA`](https://angular.dev/guide/components/advanced-configuration#custom-element-schemas) to your module or component.
+There are a few things you need to know about and set up in order to use the Green Core web components with Angular. This document covers how to use the components, handle element name scoping, form controls and how to integrate with Angulars router. It is recommended to at least skim through this document before you begin.
 
-You also need to ensure that you handle Green Core's [element name scoping](/docs/concepts-scoping--docs), and if you use routing, make sure that `hrefs` are handled correctly. Read on to learn how to do all of this.
+## Wrappers 🌯
+
+Angular has support for using web components directly by using [`CUSTOM_ELEMENTS_SCHEMA`](https://angular.dev/guide/components/advanced-configuration#custom-element-schemas) in your module or component. However, this also disables type-checking for any non-angular components in your templates, which can lead to a frustrating developer experience.
+
+To improve this situation, Green provides a wrapper library for Angular. To use it, install `@sebgroup/green-core-ng` instead of `@sebgroup/green-core` in your project. The wrapper library is automatically built, versioned and published alongside Core, and has `@sebgroup/green-core` defined as a sub-dependency, so you typically only need to have `@sebgroup/green-core-ng` as a direct dependency. Since the wrapper components are tightly mapped to their underlying counterparts, it's important that the versions of these two packages are always in sync in your project.
+
+To migrate existing code from using `@sebgroup/green-core` with `CUSTOM_ELEMENTS_SCHEMA`, check out the [migration section](#migrating-from-custom_elements_schema) at the end of this document.
+
+### Status: Beta
+
+Even though `@sebgroup/green-core-ng` follows the same semantic version number as `@sebgroup/green-core`, it is still considered to be in beta for as long as this sentance remains here.
 
 ## Scoping
 
-In addition to the schema, you also need a way to handle Green Core's [element name scoping](/docs/concepts-scoping--docs). There are two ways to do this:
+You also need to handle Green Core's [element name scoping](/docs/concepts-scoping--docs). There are two ways to do this:
 
-- **Use the `NggCoreRenderer` custom renderer**<br/>
+- **Use the `GdsCoreRenderer` custom renderer** (preferred)<br/>
   This renderer automatically applies scoping to all Green Core elements in your template.
-- **Use the `NggCoreWrapperModule` module**<br/>
-  This module provides a directive, `*nggCoreElement` that you can use to apply scoping to individual elements in your template.
+- **Use the `GdsCoreScopeModule` module**<br/>
+  This module provides a directive, `*gdsCoreScope` that you can use to apply scoping to individual sections of your template.
 
 The renderer is the most convenient way to use Green Core components with Angular, but the directive can provide more explicit control when needed, or should the renderer conflict with other custom renderers, or cause any other unexpected side effects.
 
-With both the renderer and the directive, you can provide a local reference of the `getScopedTagName` function from `@sebgroup/green-core/scoping`. By doing that, you ensure that the scope resolver comes from the same package version that you import the components from.
+### Using `GdsCoreRenderer`
 
-### Using `NggCoreRenderer`
-
-The `NggCoreRenderer` is a custom renderer that automatically applies scoping to all Green Core elements in your template. It does this by overriding the call to `document.createElement()` and applying the scoping suffix to the element names before creation. This is the easiest way to use Green Core components in your Angular application.
+The `GdsCoreRenderer` is a custom renderer that automatically applies scoping to all Green Core elements in your template. It does this by overriding the call to `document.createElement()` and applying the scoping suffix to the element names before creation. This is the easiest way to use Green Core components in your Angular application.
 
 **In your module:**
 
 ```ts
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { provideCoreRenderer } from '@sebgroup/green-angular/src/lib/shared'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { provideCoreRenderer } from '@sebgroup/green-core-ng'
 
 @NgModule({
-    // Provides `NggCoreRenderer` as a custom renderer, with a local reference to the `getScopedTagName` function
-    providers: [provideCoreRenderer(getScopedTagName)],
-    // CUSTOM_ELEMENTS_SCHEMA is still needed
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    // Provides `GdsCoreRenderer` as a custom renderer
+    providers: [provideCoreRenderer()],
 })
 ```
 
@@ -45,7 +49,7 @@ Or, if you are only using standalone components, you can either create a root ap
 ```ts
 // app.config.ts
 const appConfig: ApplicationConfig = {
-  providers: [...other providers..., provideCoreRenderer(getScopedTagName)],
+  providers: [...other providers..., provideCoreRenderer()],
 };
 
 // main.ts
@@ -56,10 +60,29 @@ bootstrapApplication(AppComponent, appConfig)
 **In your component:**
 
 ```ts
-import '@sebgroup/green-core/components/button/index.js'
+// Import standalone wrapper component
+import { GdsButtonComponent } from '@sebgroup/green-core-ng'
+
+@Component({
+    standalone: true,
+    imports: [GdsButtonComponent],
+})
+export class MyComponent {}
 ```
-  
-Now you can use Green Core components in your template like any other elements:
+
+Or, you can get everything from a module:
+
+```ts
+import { GreenCoreNgModule } from '@sebgroup/green-core-ng'
+
+@Component({
+    standalone: true,
+    imports: [GreenCoreNgModule],
+})
+export class MyComponent {}
+```
+
+Now you can use Green Core components in your template like any other elements, and intellisense and type checking should work as expected.
 
 ```html
 <gds-button (click)="handleEvent($event)">Click me!</gds-button>
@@ -72,74 +95,50 @@ If you also need to use Angular animations, you need to use a special version of
 All you need to do on your end is to use `provideCoreRendererWithAnimations()` instead of `provideCoreRenderer()`.
 
 ```ts
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { provideCoreRendererWithAnimations } from '@sebgroup/green-angular/src/lib/shared'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { provideCoreRendererWithAnimations } from '@sebgroup/green-core-ng'
 
 @NgModule({
     imports: [BrowserAnimationsModule] // You also need to make sure you have imported the `BrowserAnimationsModule` module
-    providers: [provideCoreRendererWithAnimations(getScopedTagName)],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    providers: [provideCoreRendererWithAnimations()],
 })
 ```
 
-### Using `NggCoreWrapperModule`
+### Using `GdsCoreScopeModule`
 
-The `NggCoreWrapperModule` is a module that provides a directive, `*nggCoreElement`, that you can use to apply scoping to individual elements in your template. This can be useful if you need more explicit control over which elements are scoped, or if the `NggCoreRenderer` is causing any issues.
+The `GdsCoreScopeModule` is a module that provides a directive, `*gdsCoreScope`, that you can use to only apply scoping to individual sections in your template. This can be useful if you need more explicit control over which elements are scoped, or if the `GdsCoreRenderer` is causing any issues.
 
 **In your module:**
 
 ```ts
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { NggCoreWrapperModule, SCOPE_RESOLVER } from '@sebgroup/green-angular/src/lib/shared'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { GdsCoreScopeModule } from '@sebgroup/green-core-ng'
 
 @NgModule({
-    // Add the NggCoreWrapperModule to the `imports` array
-    imports: [NggCoreWrapperModule],
-    // Optional, but recommended, provide a local reference to the `getScopedTagName` function
-    providers: [
-        {
-          provide: SCOPE_RESOLVER,
-          useValue: { getScopedTagName },
-        },
-      ],
-    // Add the CUSTOM_ELEMENTS_SCHEMA to the `schemas` array
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    // Add the GdsCoreScopeModule to the `imports` array
+    imports: [GdsCoreScopeModule],
 })
 ```
-
-**In your component:**
-
-```ts
-import '@sebgroup/green-core/components/button/index.js'
-```
-
-Use the web component in your template with the `*nggCoreElement` directive.
+Use the web component in your template with the `*gdsCoreScope` directive.
 
 **In your template:**
 
 ```html
-<gds-button *nggCoreElement (click)="handleEvent($event)">Click me!</gds-button>
+<gds-button *gdsCoreScope (click)="handleEvent($event)">Click me!</gds-button>
+
+// Or, to scope a whole section:
+<div *gdsCoreScope>
+  <gds-input label="Name"></gds-input>
+  <gds-button (click)="submit()">Submit</gds-button>
+</div>
 ```
+
+## Form controls
+
+The wrappers for Green Core form controls, such as `<gds-input>`, `<gds-select>`, and `<gds-checkbox>`, implement Angular's `ControlValueAccessor` interface. This means that they can be used seamlessly with Angular forms, both template-driven and reactive forms. No additional directives or configuration is needed.
 
 ## Routing
 
-If you are using Angular's routing, you need to make sure that `hrefs` are handled correctly. The `routerLink` directive from Angular will apply `href` automatically to `a` tags, but not to custom elements. To make sure that `href` is applied to custom elements, you can use the `nggCoreRouterLink` directive from the Green Angular package.
-
-**In your module:**
-
-```ts
-import {
-  NggCoreRouterLinkModule
-} from '@sebgroup/green-angular/src/lib/shared'
-
-@NgModule({
-  imports: [NggCoreRouterLinkModule],
-})
-export class AppModule {}
-```
+The wrapper library also provides support for Angular's `RouterLink` directive. This allows you to use Green Core link components, such as `<gds-link>`, `<gds-menu-button>`, and `<gds-breadcrumb>`, with Angular's router.
 
 **In your template:**<br/>
 This assumes you have routes already defined in `routes`.
@@ -149,14 +148,31 @@ This assumes you have routes already defined in `routes`.
   *ngFor="let route of routes"
   [routerLink]="route.path"
   routerLinkActive
-  nggCoreRouterLink
 >
   {{ route.data?.name }}
 </gds-menu-button>
 ```
 
-`nggCoreRouterLink` will cause the href attribute to be added regardless of tag name, by telling the `routerLink` directive to treat the element as an anchor tag.
+This should work as expected, with the `href` attribute being set automatically based on the `routerLink` value, and the `selected` property being set based on the active route.
 
-In addition, if the element is a `<gds-menu-button>`, and Angular's `routerLinkActive` directive is also present, the `selected` property will automatically be set for active router links.
+## Migrating from CUSTOM_ELEMENTS_SCHEMA
 
-Add the `nggCoreRouterLink` directive whenever you use `routerLink` with a Green Core component.
+To migrate an existing Angular project that uses Green Core components with `CUSTOM_ELEMENTS_SCHEMA`, you need to do the following steps:
+
+1. **Remove `CUSTOM_ELEMENTS_SCHEMA`** from your module or component schemas.
+2. **Install `@sebgroup/green-core-ng`** and replace any imports of `@sebgroup/green-core` with `@sebgroup/green-core-ng`.\
+   Example:
+   ```ts
+    // Before
+    import { GdsButton } from '@sebgroup/green-core'
+
+    // After
+    import { GdsButtonComponent } from '@sebgroup/green-core-ng'
+
+    @Component({
+        imports: [GdsButtonComponent], // Add to imports array
+    })
+    // ...
+    ```
+3. **Set up scoping** using either the `GdsCoreRenderer` or the `GdsCoreScopeModule` as described above.
+4. You can also remove any usages of `NggCoreFormsModule` and `NggCoreRoutingModule`, as these aspects are now handled out of the box.

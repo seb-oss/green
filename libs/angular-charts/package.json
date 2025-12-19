@@ -1,10 +1,10 @@
 {
   "name": "@sebgroup/green-angular-charts",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "peerDependencies": {
-    "@angular/common": ">=16.2.12",
-    "@angular/core": ">=16.2.12",
-    "@angular/platform-browser": ">=16.2.12",
+    "@angular/common": ">=19",
+    "@angular/core": ">=19",
+    "@angular/platform-browser": ">=19",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {
@@ -21,7 +21,7 @@
     "access": "public",
     "directory": "../../dist/libs/angular-charts"
   },
-  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/seb-oss)",
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {

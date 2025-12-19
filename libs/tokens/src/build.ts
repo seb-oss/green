@@ -345,7 +345,7 @@ const themes = {
         ],
         files: [
           {
-            destination: `Colors/${capitalize(colorScheme)}ModeColors.kt`,
+            destination: `colors/${capitalize(colorScheme)}ModeColors.kt`,
             format: 'compose/color-scheme',
             filter: 'is-color-no-ref',
             options: {
@@ -357,7 +357,7 @@ const themes = {
             },
           },
           {
-            destination: 'Colors/GdsColorTokens.kt',
+            destination: 'colors/GdsColorTokens.kt',
             format: 'compose/class',
             filter: 'is-color-no-ref',
             options: {
@@ -368,7 +368,7 @@ const themes = {
             },
           },
           {
-            destination: 'Typography/GdsTypography.kt',
+            destination: 'typography/GdsTypographyTokens.kt',
             format: 'compose/typography',
             filter: 'is-typography',
             options: {
@@ -383,7 +383,7 @@ const themes = {
             },
           },
           {
-            destination: 'Typography/GdsFont.kt',
+            destination: 'typography/GdsFont.kt',
             format: 'compose/font',
             filter: 'is-font-weight',
             options: {
@@ -391,13 +391,12 @@ const themes = {
                 'androidx.compose.ui.text.font.Font',
                 'androidx.compose.ui.text.font.FontFamily',
                 'androidx.compose.ui.text.font.FontWeight',
-                'se.seb.gds.components.R',
               ],
               packageName: ['se.seb.gds.tokens'],
             },
           },
           {
-            destination: 'Colors/GdsColor.kt',
+            destination: 'colors/GdsColor.kt',
             format: 'jvm/enum-class',
             filter: 'is-color-no-ref',
             options: {

@@ -1,8 +1,7 @@
 /* eslint no-console: "off" */
 import React from 'react'
-import { useArgs } from '@storybook/preview-api'
-
-import type { Meta, StoryFn } from '@storybook/react'
+import { useArgs } from 'storybook/preview-api'
+import { Meta, Story } from '@storybook/react/types-6-0'
 
 import Modal, { ModalProps } from './modal'
 

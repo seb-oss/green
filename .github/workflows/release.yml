@@ -66,13 +66,17 @@ jobs:
           name: iostokens
           path: ./dist/libs/tokens/2023/ios/*
 
-      - name: Upload Android artifacts
+      - name: Upload Android color artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: androidtokens
-          path: |
-            ./dist/libs/tokens/2023/android/Colors/*
-            ./dist/libs/tokens/2023/android/Typography/*
+          name: androidcolortokens
+          path: ./dist/libs/tokens/2023/android/colors/*.kt
+
+      - name: Upload Android typography artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: androidtypographytokens
+          path: ./dist/libs/tokens/2023/android/typography/*.kt
 
       - name: Upload Android font resources
         uses: actions/upload-artifact@v4
@@ -169,10 +173,16 @@ jobs:
           ref: main
           token: ${{ steps.app-token.outputs.token }}
 
-      - name: Get artifact
+      - name: Get color tokens
         uses: actions/download-artifact@v4
         with:
-          name: androidtokens
+          name: androidcolortokens
+          path: lib/src/main/kotlin/se/seb/gds/tokens/
+
+      - name: Get typography tokens
+        uses: actions/download-artifact@v4
+        with:
+          name: androidtypographytokens
           path: lib/src/main/kotlin/se/seb/gds/tokens/
 
       - name: Get font resources

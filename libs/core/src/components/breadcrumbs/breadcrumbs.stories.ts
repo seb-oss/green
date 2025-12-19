@@ -1,6 +1,6 @@
 import { html } from 'lit'
 
-import type { Meta, StoryObj } from '@storybook/web-components'
+import type { Meta, StoryObj } from '@storybook/web-components-vite'
 
 import './breadcrumbs'
 import './breadcrumb/breadcrumb'
@@ -47,6 +47,7 @@ import '../icon/icons/folder'
 const meta: Meta = {
   title: 'Components/Breadcrumbs',
   component: 'gds-breadcrumbs',
+  subcomponents: { GdsBreadcrumb: 'gds-breadcrumb' },
   tags: ['autodocs'],
 }
 

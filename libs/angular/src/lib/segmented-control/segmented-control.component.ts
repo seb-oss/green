@@ -10,8 +10,8 @@ export interface SegmentedControl {
  * @deprecated use <gds-segmented-control> from green-core instead.
  */
 @Component({
-  selector: 'ngg-segmented-control',
-  template: `
+    selector: 'ngg-segmented-control',
+    template: `
     <div class="group">
       <a
         *ngFor="let control of $controls | async"
@@ -22,8 +22,9 @@ export interface SegmentedControl {
       >
     </div>
   `,
-  styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    styles: [],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NggSegmentedControlComponent {
   @Input() $controls: Observable<Array<SegmentedControl>> | undefined

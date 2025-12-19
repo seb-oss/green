@@ -1,11 +1,13 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import { moduleMetadata } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import '@sebgroup/green-core/components/filter-chips/index.js'
 
 import { NggCoreWrapperModule } from '../shared/core-element/core-element.module'
 
-export default {
+const meta: Meta = {
   title: 'Components/Filter Chips',
   decorators: [
     moduleMetadata({
@@ -14,10 +16,14 @@ export default {
     }),
   ],
   parameters: {},
-} as Meta
+}
 
-const Template: StoryFn = (args) => ({
-  template: `
+export default meta
+type Story = StoryObj
+
+export const Default: Story = {
+  render: (args) => ({
+    template: `
   <gds-filter-chips *nggCoreElement value="top-news" label="${args.label}">
     <gds-filter-chip *nggCoreElement value="all">All</gds-filter-chip>
     <gds-filter-chip *nggCoreElement value="top-news">Top news</gds-filter-chip>
@@ -29,11 +35,9 @@ const Template: StoryFn = (args) => ({
     </gds-filter-chip>
   </gds-filter-chips>
     `,
-  props: args,
-})
-
-export const Default = Template.bind({})
-
-Default.args = {
-  label: 'Select a category to filter results on',
+    props: args,
+  }),
+  args: {
+    label: 'Select a category to filter results on',
+  },
 }

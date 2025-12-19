@@ -16,6 +16,8 @@ export default {
         .replace(/[\s-]+/g, '_')
         // camelCase to snake_case
         .replace(/([a-z0-9])([A-Z])/g, '$1_$2')
+        // capitalized to snake_case
+        .replace(/([A-Z])([A-Z][a-z])/g, '$1_$2')
         // non-word to underscore
         .replace(/[^A-Za-z0-9_]+/g, '_')
         // collapse multiple underscores

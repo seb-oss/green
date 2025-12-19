@@ -1,6 +1,6 @@
 import { html } from 'lit'
 
-import type { Meta, StoryObj } from '@storybook/web-components'
+import type { Meta, StoryObj } from '@storybook/web-components-vite'
 
 import { argTablePropsFor } from '../../../../.storybook/argTableProps.ts'
 import { numberFormats } from '../../formatted-text/formatters.ts'
@@ -31,6 +31,9 @@ const meta: Meta = {
     currency: {
       type: 'string',
     },
+    decimals: {
+      type: 'number',
+    },
   },
 }
 
@@ -57,5 +60,6 @@ export const Default: Story = {
       .value=${args.value}
       .locale=${args.locale}
       .currency=${args.currency}
+      .decimals=${args.decimals}
     ></gds-sensitive-number>`,
 }

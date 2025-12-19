@@ -1,5 +1,3 @@
-import '../assets/styles.scss'
-
 import React, { ReactNode } from 'react'
 import {
   argbFromHex,

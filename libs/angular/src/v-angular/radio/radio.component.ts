@@ -61,10 +61,11 @@ export class NggvRadioControlRegistry {
  * https://designlibrary.sebgroup.com/components/component-radiobutton
  */
 @Component({
-  selector: 'nggv-radio',
-  templateUrl: './radio.component.html',
-  styleUrls: ['./radio.component.scss'],
-  providers: [NggvRadioControlRegistry],
+    selector: 'nggv-radio',
+    templateUrl: './radio.component.html',
+    styleUrls: ['./radio.component.scss'],
+    providers: [NggvRadioControlRegistry],
+    standalone: false
 })
 export class NggvRadioComponent
   extends NggvBaseControlValueAccessorComponent
@@ -83,6 +84,12 @@ export class NggvRadioComponent
    * Syncs a FormControl in an existing FormGroup to a form control element by name.
    */
   @Input() formControlName?: string
+  /**
+   * Decides if error should be connected to each individual radio button.
+   * If true, errors will be shown in nggv-radio-group component.
+   * If false, errors will be show below each radio button
+   */
+  isGroup = false
   /**
    * Creates a new RadioComponent
    * @param ngControl optional FormControl provided when component is used in a form, through dependency injection.
@@ -104,6 +111,16 @@ export class NggvRadioComponent
     super.ngOnInit()
     this._checkName()
     this.registry.add(this.ngControl, this)
+    // Check if nggv-radio-group is present connected to the same formControl
+    if (
+      Array.from(
+        document.querySelectorAll(
+          `nggv-radio-group[formcontrolname=${this.name}]`,
+        ),
+      ).length
+    ) {
+      this.isGroup = true
+    }
   }
 
   ngOnDestroy() {

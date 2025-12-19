@@ -7,13 +7,14 @@ const tableColumnVerifyProperty = 'testProperty'
 const tableColumnTargetVerifyProperty = 'td'
 
 @Component({
-  selector: 'nggv-directive-host',
-  template: /*html*/ `
+    selector: 'nggv-directive-host',
+    template: /*html*/ `
     <ng-template
       [tableColumn]="tableColumn"
       [tableColumnTarget]="tableColumnTarget"
     ></ng-template>
   `,
+    standalone: false
 })
 class TestHostComponent {
   @ViewChild(TableTemplateDirective, { static: true })

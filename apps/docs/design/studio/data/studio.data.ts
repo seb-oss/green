@@ -29,7 +29,7 @@ export const studioData: StudioCategory[] = [
         type: 'asset',
         slug: '/studio/icons',
         label: 'Icons',
-        title: 'Icon Library',
+        title: 'Icons',
         description: 'Browse and use our collection of icons',
         icon: 'IconShapes',
         category: 'tools',
@@ -54,6 +54,24 @@ export const studioData: StudioCategory[] = [
         icon: 'IconLab',
         category: 'tools',
         component: 'Playground',
+        pages: [
+          {
+            key: 'table',
+            interactive: true,
+            slug: '/studio/playground/table',
+            title: 'Table',
+            description: 'Try out the table configuration',
+            component: 'Table',
+          },
+          {
+            key: 'button',
+            interactive: true,
+            slug: '/studio/playground/button',
+            title: 'Button',
+            description: 'Get to know the button component',
+            component: 'Button',
+          },
+        ],
       },
       {
         key: 'compose',

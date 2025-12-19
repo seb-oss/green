@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.4.5
+
+### Patch Changes
+
+- 63af009: Update release of android artifacts
+
+## 2.4.4
+
+### Patch Changes
+
+- f1e9913: Fix font format for Android
+
 ## 2.4.3
 
 ### Patch Changes
@@ -218,13 +230,11 @@
 ### Minor Changes
 
 - 5b84660: # New tokens
-
   - Motion
   - Size scale
   - Spacing, Margin, Padding
 
   # New component: Button
-
   - Built on tokens
   - Transitional styles
 

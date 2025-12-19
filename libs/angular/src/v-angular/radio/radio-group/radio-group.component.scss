@@ -1,0 +1,40 @@
+:host {
+  .direction {
+    &-column {
+      display: flex;
+      flex-direction: column;
+    }
+    &-row {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  &.small {
+    .form-control {
+      padding: 0.25rem;
+    }
+
+    .form-control input[type='radio'] ~ i {
+      margin-right: 0.5rem;
+    }
+  }
+  .form-info {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 100%;
+    font-weight: 500;
+
+    &--error {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5em;
+      color: #9f000a;
+
+      .error-icon {
+        margin-top: 0.128rem;
+        align-items: center;
+      }
+    }
+  }
+}

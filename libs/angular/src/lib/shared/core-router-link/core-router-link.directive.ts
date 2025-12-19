@@ -9,8 +9,12 @@ import {
 } from '@angular/core'
 import { RouterLink, RouterLinkActive } from '@angular/router'
 
+/**
+ * @deprecated No longer needed when using components from `@sebgroup/green-core-ng`
+ */
 @Directive({
-  selector: '[nggCoreRouterLink]',
+    selector: '[nggCoreRouterLink]',
+    standalone: false
 })
 export class NggCoreRouterLinkDirective implements OnChanges {
   constructor(

@@ -4,9 +4,10 @@ import { ModalType } from '@sebgroup/extract'
 import { DropdownOption } from '@sebgroup/green-angular'
 
 @Component({
-  selector: 'green-modal',
-  templateUrl: './modals.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'green-modal',
+    templateUrl: './modals.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ModalsComponent {
   public defaultModalIsOpen = false

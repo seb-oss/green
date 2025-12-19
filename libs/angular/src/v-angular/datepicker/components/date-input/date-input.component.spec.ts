@@ -15,7 +15,8 @@ import { NggvDatepickerTestingModule } from '../../test/datepicker-testing.modul
 import { DateInputComponent } from './date-input.component'
 
 @Directive({
-  selector: '[nggvInputMask]',
+    selector: '[nggvInputMask]',
+    standalone: false
 })
 class NggvInputMaskStubDirective {
   @Input() nggvInputMask: any
@@ -31,7 +32,8 @@ describe('[NggvDatepicker]', () => {
     template: /*html*/ `
       <nggv-dateinput #dateInput [formControl]="fc"></nggv-dateinput>
     `,
-  })
+    standalone: false
+})
   class DateInputHostComponent {
     @ViewChild('dateInput', { static: true }) dateInput!: DateInputComponent
     fc = new FormControl()

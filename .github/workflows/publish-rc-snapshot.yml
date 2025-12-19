@@ -81,37 +81,30 @@ jobs:
       - name: Comment status
         if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
         uses: actions/github-script@v4
+        env:
+          PR_NUMBER: ${{ inputs.pr_number }}
         with:
           github-token: ${{ steps.get_token.outputs.token }}
           script: |
-            const prNumber = context.eventName === 'workflow_dispatch' 
-              ? ${{ inputs.pr_number }}
+            console.log('Event name:', context.eventName);
+            console.log('PR_NUMBER env:', process.env.PR_NUMBER);
+            console.log('context.issue.number:', context.issue.number);
+
+            const prNumber = context.eventName === 'workflow_dispatch'
+              ? parseInt(process.env.PR_NUMBER, 10)
               : context.issue.number;
 
             if (!prNumber) {
-              throw new Error('PR number is undefined. Ensure the workflow is triggered with a valid PR number.');
+              core.setFailed('PR number is required but not provided');
+              return;
             }
 
-            // Validate the PR number
-            const { data: pr } = await github.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: prNumber
-            });
-
-            if (!pr) {
-              throw new Error(`Pull request #${prNumber} does not exist in the repository.`);
-            }
-
-            github.issues.createComment({
-              issue_number: prNumber,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `Hello! New release candidate snapshots published to NPM! :rocket: :package: :tada:
+            const commentBody = `Hello! New release candidate snapshots published to NPM! :rocket: :package: :tada:
 
               Version info:
 
                 @sebgroup/green-core: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_CORE }}
+                @sebgroup/green-core-ng: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_CORE_NG }}
                 @sebgroup/green-angular: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_ANGULAR }}
                 @sebgroup/green-react: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_REACT }}
                 @sebgroup/chlorophyll: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_CHLOROPHYLL }}
@@ -129,8 +122,36 @@ jobs:
 
               :test_tube: The latest RC snapshot of Green Core will be autmatically tested for visual regressions in the Green Testbed project.<br />
               [![Visual Regression Tests on Browserstack](https://github.com/seb-oss/green-testbed/actions/workflows/run-tests.yml/badge.svg)](https://github.com/seb-oss/green-testbed/actions/workflows/run-tests.yml)
-              `
+              `;
+
+            // Find existing comment from this bot
+            const comments = await github.issues.listComments({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
             });
+
+            const botComment = comments.data.find(comment =>
+              comment.body.includes('New release candidate snapshots published to NPM!')
+            );
+
+            if (botComment) {
+              // Update existing comment
+              await github.issues.updateComment({
+                comment_id: botComment.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: commentBody
+              });
+            } else {
+              // Create new comment
+              await github.issues.createComment({
+                issue_number: prNumber,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: commentBody
+              });
+            }
 
       - name: Publish RC testbed
         run: |

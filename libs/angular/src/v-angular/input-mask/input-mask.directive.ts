@@ -33,7 +33,8 @@ const InputmaskConstructor =
   _Inputmask
 
 @Directive({
-  selector: '[nggvInputMask]',
+    selector: '[nggvInputMask]',
+    standalone: false
 })
 export class NggvInputMaskDirective<T = any>
   implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor, Validator

@@ -12,8 +12,12 @@ import {
 
 import { SCOPE_RESOLVER } from '../scope-resolver'
 
+/**
+ * @deprecated Use `GdsCoreScopeDirective` from `@sebgroup/green-core-ng` instead.
+ */
 @Directive({
-  selector: '[nggCoreElement]',
+    selector: '[nggCoreElement]',
+    standalone: false
 })
 export class NggCoreElementDirective implements OnInit {
   private viewRef: EmbeddedViewRef<any> | null = null

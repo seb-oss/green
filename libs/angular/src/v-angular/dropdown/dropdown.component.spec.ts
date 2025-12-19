@@ -19,10 +19,11 @@ import { NggvDropdownListComponent } from './dropdown-list/dropdown-list.compone
 import { NggvDropdownComponent } from './dropdown.component'
 
 @Component({
-  selector: 'nggv-dropdown-list',
-  template: '',
-  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['state', 'scrollOffset', 'options', 'expanded', 'optionContentTpl'],
+    selector: 'nggv-dropdown-list',
+    template: '',
+    // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+    inputs: ['state', 'scrollOffset', 'options', 'expanded', 'optionContentTpl'],
+    standalone: false
 })
 class DropdownListStubComponent {}
 

@@ -8,22 +8,6 @@ import {
   Validators,
 } from '@angular/forms'
 
-import '@sebgroup/green-core/components/button/index.js'
-import '@sebgroup/green-core/components/input/index.js'
-import '@sebgroup/green-core/components/textarea/index.js'
-import '@sebgroup/green-core/components/dropdown/index.js'
-import '@sebgroup/green-core/components/datepicker/index.js'
-import '@sebgroup/green-core/components/flex/index.js'
-import '@sebgroup/green-core/components/card/index.js'
-import '@sebgroup/green-core/components/rich-text/index.js'
-import '@sebgroup/green-core/components/text/index.js'
-import '@sebgroup/green-core/components/theme/index.js'
-import '@sebgroup/green-core/components/segmented-control/index.js'
-import '@sebgroup/green-core/components/select/index.js'
-import '@sebgroup/green-core/components/radio/index.js'
-import '@sebgroup/green-core/components/checkbox/index.js'
-import '@sebgroup/green-core/components/form-summary/index.js'
-
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 registerTransitionalStyles()
@@ -32,11 +16,12 @@ registerTransitionalStyles()
   selector: 'green-form',
   templateUrl: './form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class FormComponent {
   constructor(private fb: NonNullableFormBuilder) {}
 
-  designVersion = '2023'
+  designVersion: '2016' | '2023' = '2023'
 
   setDesignVersion(event: any) {
     this.designVersion = event.target.value

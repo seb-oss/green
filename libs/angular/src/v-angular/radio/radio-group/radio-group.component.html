@@ -1,0 +1,34 @@
+<!-- RADIO BUTTONS -->
+<div [ngClass]="direction === 'column' ? 'direction-column' : 'direction-row'">
+  <ng-content></ng-content>
+</div>
+<!-- ERRORS -->
+<ng-container *transloco="let t; read: scope">
+  <div
+    class="form-info form-info--error"
+    [attr.for]="ngControl?.name + '-radio-group'"
+    *ngIf="invalid && (error || ngControl?.invalid)"
+  >
+    <span class="error-icon">
+      <gds-icon-triangle-exclamation
+        size="16px"
+        [solid]="true"
+        *nggCoreElement
+      ></gds-icon-triangle-exclamation>
+    </span>
+    <span
+      *ngIf="error; else errorsRef"
+      [attr.data-thook]="thook + '-errorlabel'"
+    >
+      {{ error }}
+    </span>
+    <ng-template #errorsRef>
+      <span
+        *ngIf="firstError as error"
+        [attr.data-thook]="thook + '-errorlabel'"
+      >
+        {{ t('error.field' + error?.code, error?.params) }}
+      </span>
+    </ng-template>
+  </div>
+</ng-container>

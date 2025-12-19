@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Source, useOf } from '@storybook/blocks'
+import { Source, useOf } from '@storybook/addon-docs/blocks'
 
 import {
   GdsDiv,
@@ -40,7 +40,10 @@ export const ImportPaths = (props) => {
           onChange={(e) => setViewSource(e.target.value)}
         >
           <GdsSegment value="web">
-            Web component (Angular and others)
+            Web component
+          </GdsSegment>
+          <GdsSegment value="angular">
+            Angular
           </GdsSegment>
           <GdsSegment value="react">React JSX</GdsSegment>
         </GdsSegmentedControl>
@@ -48,7 +51,7 @@ export const ImportPaths = (props) => {
           .filter((info) => info.name !== '*')
           .map((info) => (
             <div key={info.name}>
-              {viewSource === 'web' ? (
+              {viewSource === 'web' && (
                 <Source
                   language="javascript"
                   dark
@@ -59,7 +62,15 @@ ${info.name}.define()
 import { ${info.name} } from '${info.path}'
 ${info.name}.define()`}
                 />
-              ) : (
+              )}
+              {viewSource === 'angular' && (
+                <Source
+                  language="javascript"
+                  dark
+                  code={`import { ${info.name}Component } from '@sebgroup/green-core-ng'`}
+                />
+              )}
+              { viewSource === 'react' && (
                 <Source
                   language="javascript"
                   dark

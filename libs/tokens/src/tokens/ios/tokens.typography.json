@@ -270,7 +270,7 @@
         "$value": {
           "fontFamily": "{sys.text.family}",
           "fontWeight": "{sys.text.weight.regular}",
-          "fontSize": 14,
+          "fontSize": 13,
           "lineHeight": 20
         },
         "attributes": {

@@ -6,13 +6,10 @@ import {
 } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { TranslocoLoader, TranslocoModule } from '@jsverse/transloco'
-import {
-  applicationConfig,
-  Meta,
-  moduleMetadata,
-  StoryFn,
-} from '@storybook/angular'
+import { applicationConfig, moduleMetadata } from '@storybook/angular'
 import { of } from 'rxjs'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggCoreWrapperModule } from '../../lib/shared'
 import { NggvI18nModule } from '../i18n'
@@ -26,7 +23,7 @@ class TranslocoInlineLoader implements TranslocoLoader {
   }
 }
 
-export default {
+const meta: Meta<PaginationComponent> = {
   title: 'V-Angular/Pagination',
   component: PaginationComponent,
   decorators: [
@@ -44,27 +41,34 @@ export default {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
-} as Meta
-
-const Template: StoryFn<PaginationComponent> = (args) => ({
-  props: args,
-})
-
-export const NumberNavigation = Template.bind({})
-NumberNavigation.args = {
-  size: 100,
-  value: 1,
-  offset: 10,
-  pagingLength: 5,
-  showGoToPage: true,
-  useFirstAndLast: true,
 }
 
-export const DotNavigation = Template.bind({})
-DotNavigation.args = {
-  size: 100,
-  value: 1,
-  offset: 10,
-  pagingLength: 5,
-  useDotNav: true,
+export default meta
+type Story = StoryObj<PaginationComponent>
+
+export const NumberNavigation: Story = {
+  render: (args) => ({
+    props: args,
+  }),
+  args: {
+    size: 100,
+    value: 1,
+    offset: 10,
+    pagingLength: 5,
+    showGoToPage: true,
+    useFirstAndLast: true,
+  },
+}
+
+export const DotNavigation: Story = {
+  render: (args) => ({
+    props: args,
+  }),
+  args: {
+    size: 100,
+    value: 1,
+    offset: 10,
+    pagingLength: 5,
+    useDotNav: true,
+  },
 }

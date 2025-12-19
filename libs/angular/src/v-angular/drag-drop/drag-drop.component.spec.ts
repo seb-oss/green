@@ -19,6 +19,7 @@ export const NggvDialogMock = Component({
   selector: 'nggv-dialog',
   template: '',
   inputs: ['title', 'content', 'payload', 'buttons'],
+  standalone: false,
 })(class _ {}) as any
 
 describe('[NggvDragDrop]', () => {

@@ -1,7 +1,0 @@
-// custom import of green
-@use './libs/chlorophyll/src/scss/components/button'; // button component(s)
-/* add the components you need here */
-@use './libs/chlorophyll/src/scss/components/fonts'; // font declaration
-
-@use './libs/charts/scss/mixins' as chart-mixins;
-@include chart-mixins.add-chart-styles; // add charts

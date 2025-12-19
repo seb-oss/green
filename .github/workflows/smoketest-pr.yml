@@ -41,3 +41,5 @@ jobs:
 
       - name: Run smoketest (lint, test and check if build passes)
         run: yarn smoketest
+        env:
+          LANG: en_US

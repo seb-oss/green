@@ -12,10 +12,10 @@ import {
 import {
   applicationConfig,
   componentWrapperDecorator,
-  Meta,
   moduleMetadata,
-  StoryFn,
 } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
 
 import { NggCoreWrapperModule } from '../../lib/shared'
 import { NggvI18nModule } from '../i18n'
@@ -43,6 +43,7 @@ import { MessageType } from './toast.models'
       Custom content with <a href="#">Link!</a>
     </ng-template>
     <button (click)="addCustomMessage(customToast)">Custom content</button>`,
+  standalone: false,
 })
 class NggvToastStoryComponent {
   constructor(public toastMessageService: ToastMessageService) {}
@@ -73,7 +74,7 @@ class NggvToastStoryComponent {
   }
 }
 
-export default {
+const meta: Meta<NggvToastStoryComponent> = {
   title: 'V-Angular/Toast',
   component: NggvToastStoryComponent,
   parameters: {
@@ -97,10 +98,13 @@ export default {
       (story) => `<div style="height:10rem">${story}</div>`,
     ),
   ],
-} as Meta
+}
 
-const Template: StoryFn<ToastComponent> = (args) => ({
-  props: args,
-})
+export default meta
+type Story = StoryObj<ToastComponent>
 
-export const Primary = Template.bind({})
+export const Primary: Story = {
+  render: (args) => ({
+    props: args,
+  }),
+}

@@ -1,14 +1,14 @@
 {
   "name": "@sebgroup/green-angular",
-  "version": "6.7.1",
+  "version": "7.1.0",
   "peerDependencies": {
-    "@angular/cdk": ">=18",
-    "@angular/common": ">=18",
-    "@angular/core": ">=18",
-    "@angular/forms": ">=18",
-    "@angular/platform-browser": ">=18",
-    "@angular/animations": ">=18",
-    "@angular/router": ">=18",
+    "@angular/cdk": ">=19",
+    "@angular/common": ">=19",
+    "@angular/core": ">=19",
+    "@angular/forms": ">=19",
+    "@angular/platform-browser": ">=19",
+    "@angular/animations": ">=19",
+    "@angular/router": ">=19",
     "rxjs": ">=6.6.7",
     "body-scroll-lock": "^3.1.5",
     "date-fns": "^2.28.0",
@@ -17,7 +17,7 @@
     "scroll-into-view-if-needed": "^2.2.31"
   },
   "dependencies": {
-    "@sebgroup/green-core": "^2.12.0",
+    "@sebgroup/green-core": "^2.19.0",
     "@sebgroup/chlorophyll": "^3.6.25",
     "@sebgroup/extract": "^3.0.2",
     "tslib": "^2.3.1"
@@ -32,7 +32,7 @@
     "access": "public",
     "directory": "../../dist/libs/angular"
   },
-  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/seb-oss)",
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {

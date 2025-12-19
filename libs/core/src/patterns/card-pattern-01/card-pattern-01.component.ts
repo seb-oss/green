@@ -6,6 +6,7 @@ import { when } from 'lit/directives/when.js'
 import { GdsCardLinked } from '../../components/card-linked/card-linked.component'
 import { GdsCard } from '../../components/card/card.component'
 import { GdsFlex } from '../../components/flex/flex.component'
+import { GdsFormattedDate } from '../../components/formatted-text/date/formatted-date.component'
 import { IconChainLink } from '../../components/icon/icons/chain-link'
 import { GdsImg } from '../../components/img/img.component'
 import { GdsText } from '../../components/text/text.component'
@@ -24,6 +25,8 @@ import { withImageProps } from '../../utils/mixins/props-image'
 import { withLinkProps } from '../../utils/mixins/props-link'
 import CardPattern01Styles from './card-pattern-01.styles'
 
+import type { DateTimeFormat } from '../../components/formatted-text/date/date-time-formatter'
+
 /**
  * @element gds-card-pattern-01
  * @status beta
@@ -34,7 +37,15 @@ import CardPattern01Styles from './card-pattern-01.styles'
  */
 
 @gdsCustomElement('gds-card-pattern-01', {
-  dependsOn: [GdsCard, GdsCardLinked, GdsImg, GdsText, GdsFlex, IconChainLink],
+  dependsOn: [
+    GdsCard,
+    GdsCardLinked,
+    GdsImg,
+    GdsText,
+    GdsFlex,
+    GdsFormattedDate,
+    IconChainLink,
+  ],
 })
 export class GdsCardPattern01 extends withSizeXProps(
   withMarginProps(
@@ -88,6 +99,26 @@ export class GdsCardPattern01 extends withSizeXProps(
    */
   @property({ reflect: false, attribute: 'aspect-ratio' })
   ratio: 'landscape' | 'square' = 'landscape'
+
+  /** Category */
+  @property({ reflect: false })
+  category = ''
+
+  /** Date */
+  @property({ reflect: false })
+  date = ''
+
+  /**
+   * Date format to use for displaying the date. Check the GdsFormattedDate component for more details on accepted formats.
+   */
+  @property({ reflect: false, attribute: 'date-format' })
+  dateFormat: DateTimeFormat = 'dateTimeLong'
+
+  /**
+   * Locale for date formatting (e.g., 'sv-SE', 'en-GB', 'en-US')
+   */
+  @property({ reflect: false })
+  locale = 'en-GB'
 
   /**
    * Checks if footer content exists
@@ -242,6 +273,32 @@ export class GdsCardPattern01 extends withSizeXProps(
           this.title || this.excerpt,
           () => html`
             <gds-flex flex-direction="column" gap="xs">
+              ${when(
+                this.category || this.date,
+                () => html`
+                  <gds-flex gap="s" align-items="center" flex-wrap="wrap">
+                    ${when(
+                      this.category,
+                      () =>
+                        html` <gds-text tag="p" font="detail-book-s">
+                          ${this.category}
+                        </gds-text>`,
+                    )}
+                    ${when(
+                      this.date,
+                      () => html`
+                        <gds-formatted-date
+                          .value=${this.date}
+                          .locale=${this.locale}
+                          .format=${this.dateFormat}
+                          font="detail-book-s"
+                          color="neutral-02"
+                        ></gds-formatted-date>
+                      `,
+                    )}
+                  </gds-flex>
+                `,
+              )}
               ${when(
                 this.title,
                 () => html`

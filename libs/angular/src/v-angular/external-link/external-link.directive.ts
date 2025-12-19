@@ -3,8 +3,9 @@ import { RouterLink } from '@angular/router'
 
 /** Directive overrides routerLink attribute to allow external links. */
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: 'a[routerLink]',
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: 'a[routerLink]',
+    standalone: false
 })
 export class NggvExternalLinkDirective implements OnInit {
   /** If set to true, links will trigger a location change rather than an internal history push. */

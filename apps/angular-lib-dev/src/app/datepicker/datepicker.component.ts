@@ -8,9 +8,10 @@ import { gdsInitLocalization } from '@sebgroup/green-core/localization'
 const { setLocale } = gdsInitLocalization()
 
 @Component({
-  selector: 'green-datepicker',
-  templateUrl: './datepicker.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'green-datepicker',
+    templateUrl: './datepicker.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DatepickerComponent {
   dateForm: FormGroup
