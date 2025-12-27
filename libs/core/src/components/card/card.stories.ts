@@ -6,6 +6,9 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps.js'
 
 import './card'
 import '../img'
+import '../button'
+import '../details'
+import '../input'
 import '../video'
 import '../div'
 import '../mask/index.js'
@@ -107,6 +110,52 @@ export const Variants: Story = {
             </gds-grid>
           </gds-flex>
         </gds-card>
+      </gds-theme>
+      <gds-theme color-scheme="light">
+        <gds-grid columns="2" gap="s">
+          <gds-card variant="neutral-01">
+            <gds-card variant="neutral-01-2" height="100%">
+              <gds-input plain></gds-input>
+              <gds-flex gap="s">
+                <gds-button>Button</gds-button>
+                <gds-button rank="secondary">Button</gds-button>
+              </gds-flex>
+            </gds-card>
+            <gds-details summary="test"></gds-details>
+          </gds-card>
+          <gds-card variant="neutral-02">
+            <gds-card variant="neutral-02-2" height="100%">
+              <gds-input plain></gds-input>
+              <gds-flex gap="s">
+                <gds-button>Button</gds-button>
+                <gds-button rank="secondary">Button</gds-button>
+              </gds-flex>
+            </gds-card>
+            <gds-details summary="test"></gds-details>
+          </gds-card>
+        </gds-grid>
+      </gds-theme>
+      <gds-theme color-scheme="dark">
+        <gds-grid columns="2" gap="s">
+          <gds-card variant="neutral-01" aspect-ratio="1/1">
+            <gds-card variant="neutral-01-2" height="100%">
+              <gds-input plain></gds-input>
+              <gds-flex gap="s">
+                <gds-button>Button</gds-button>
+                <gds-button rank="secondary">Button</gds-button>
+              </gds-flex>
+            </gds-card>
+          </gds-card>
+          <gds-card variant="neutral-02" aspect-ratio="1/1">
+            <gds-card variant="neutral-02-2" height="100%">
+              <gds-input plain></gds-input>
+              <gds-flex gap="s">
+                <gds-button>Button</gds-button>
+                <gds-button rank="secondary">Button</gds-button>
+              </gds-flex>
+            </gds-card>
+          </gds-card>
+        </gds-grid>
       </gds-theme>
     </gds-flex>
   `,
