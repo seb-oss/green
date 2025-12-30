@@ -50,7 +50,7 @@
       #optionRefs
       *ngIf="!optionContentTpl"
       tabindex="-1"
-      [id]="id + '-option-' + option.key"
+      [id]="id + '-option-' + (option.id ?? option.key)"
       class="gds-dropdown__options__label option"
       role="option"
       #liElem
@@ -76,7 +76,7 @@
       #optionRefs
       *ngIf="!!optionContentTpl"
       tabindex="-1"
-      [id]="id + '-option-' + option.key"
+      [id]="id + '-option-' + (option.id ?? option.key)"
       class="gds-dropdown__options__label option"
       role="option"
       #liElem

@@ -367,7 +367,7 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
   scrollToResult(option: any, focusElement?: boolean) {
     if (!this.optionRefs || !option) return
     const optionRef = this.optionRefs.find(
-      (li) => li.nativeElement.id === this.id + '-option-' + option.key,
+      (li) => li.nativeElement.id === this.id + '-option-' + (option.id ?? option.key),
     )
     const offset = this.scrollOffset
     if (optionRef) {
