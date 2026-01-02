@@ -8,10 +8,10 @@
     [attr.data-thook]="thook + '-options'"
     [attr.aria-labelledby]="id + '-label'"
     [attr.aria-activedescendant]="
-      state ? id + '-option-' + state?.key : undefined
+      state ? id + '-option-' + (state?.id ?? state?.key) : undefined
     "
   >
-    @for (item of options; track item.key) {
+    @for (item of options; track id + '-option-' + (item.id ?? item.key)) {
       <!-- OPTION -->
       <ng-container *ngIf="!isGroup(item)">
         <ng-template
