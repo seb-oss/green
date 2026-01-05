@@ -11,7 +11,7 @@
       state ? id + '-option-' + (state?.id ?? state?.key) : undefined
     "
   >
-    @for (item of options; track id + '-option-' + (item.id ?? item.key)) {
+    <ng-container *ngFor="let item of options">
       <!-- OPTION -->
       <ng-container *ngIf="!isGroup(item)">
         <ng-template
@@ -41,7 +41,7 @@
           </ng-container>
         </ul>
       </li>
-    }
+    </ng-container>
   </ul>
 
   <!-- TEMPLATE -->
