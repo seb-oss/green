@@ -8,7 +8,7 @@
     [attr.data-thook]="thook + '-options'"
     [attr.aria-labelledby]="id + '-label'"
     [attr.aria-activedescendant]="
-      state ? id + '-option-' + (state?.id ?? state?.key) : undefined
+      state ? id + '-option-' + state?.key : undefined
     "
   >
     <ng-container *ngFor="let item of options">
@@ -50,7 +50,7 @@
       #optionRefs
       *ngIf="!optionContentTpl"
       tabindex="-1"
-      [id]="id + '-option-' + (option.id ?? option.key)"
+      [id]="id + '-option-' + option.key"
       class="gds-dropdown__options__label option"
       role="option"
       #liElem
@@ -76,7 +76,7 @@
       #optionRefs
       *ngIf="!!optionContentTpl"
       tabindex="-1"
-      [id]="id + '-option-' + (option.id ?? option.key)"
+      [id]="id + '-option-' + option.key"
       class="gds-dropdown__options__label option"
       role="option"
       #liElem
