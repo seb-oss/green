@@ -209,7 +209,7 @@ export class NggModalComponent implements OnDestroy, OnInit {
     <h3 data-testid="modal-header-text">{{ header }}</h3>
     <button
       data-testid="modal-close-button"
-      class="close"
+      class="gds-close"
       [attr.aria-label]="closeText"
       (click)="this.handleClose($event)"
     >
@@ -245,7 +245,7 @@ export class NggModalBodyComponent {}
     <button
       data-testid="modal-dismiss-button"
       *ngIf="dismissLabel"
-      class="secondary"
+      class="gds-button secondary"
       (click)="this.handleDismiss($event)"
     >
       {{ dismissLabel }}
@@ -253,7 +253,7 @@ export class NggModalBodyComponent {}
     <button
       data-testid="modal-confirm-button"
       *ngIf="confirmLabel"
-      class="primary"
+      class="gds-button primary"
       (click)="this.handleConfirm($event)"
     >
       {{ confirmLabel }}

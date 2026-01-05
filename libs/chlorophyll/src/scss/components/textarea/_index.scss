@@ -1,0 +1,5 @@
+@use 'mixins';
+
+.gds-textarea {
+  @include mixins.add-textarea;
+}

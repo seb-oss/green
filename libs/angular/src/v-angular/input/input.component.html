@@ -24,7 +24,7 @@
 
 <!-- DESCRIPTION -->
 <div
-  class="form-info description hide-if-empty"
+  class="gds-form-info description hide-if-empty"
   *ngIf="description && descriptionIsVisible"
 >
   {{ description }}
@@ -133,7 +133,7 @@
     *transloco="let t; read: scope"
   >
     <span
-      class="form-info form-info--error"
+      class="gds-form-info gds-form-info--error"
       [attr.for]="id + '-input'"
       *ngIf="invalid && (error || ngControl?.invalid)"
     >
@@ -168,7 +168,7 @@
           currentLength: (inputRef?.nativeElement?.value ?? '').length;
           charactersLeft as charactersLeft
         "
-        class="form-info form-info--countdown"
+        class="gds-form-info gds-form-info--countdown"
         style="text-align: right"
       >
         {{ charactersLeft }} {{ t('label.maxlength') }}

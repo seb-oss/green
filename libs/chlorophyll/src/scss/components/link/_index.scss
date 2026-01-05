@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use 'mixins';
+
+a:not(:link, :visited, .gds-reset, .gds-link) {
+  @include mixins.disabled;
+}
+
+.gds-link:not(.gds-button) {
+  @include mixins.underline;
+  @include mixins.base;
+
+  &.link-underline {
+    @include mixins.underline;
+  }
+
+  &.link-icon {
+    @include mixins.icon;
+  }
+
+  &.link-arrow {
+    @include mixins.arrow;
+  }
+}
+
+a.gds-button {
+  @include mixins.button;
+}

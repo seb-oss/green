@@ -38,13 +38,13 @@ export function AlertRibbon({
     } else {
       if (closeText)
         setCloseButton(
-          <button className="close" aria-label={closeText}>
+          <button className="gds-close" aria-label={closeText}>
             <i></i>
           </button>,
         )
       else
         setCloseButton(
-          <button className="close" aria-label="Close">
+          <button className="gds-close" aria-label="Close">
             <i></i>
           </button>,
         )
@@ -76,7 +76,11 @@ export function AlertRibbon({
   }
 
   return (
-    <div className={`alert-ribbon ${type}`} role={role} aria-live={ariaLive}>
+    <div
+      className={`gds-alert-ribbon ${type}`}
+      role={role}
+      aria-live={ariaLive}
+    >
       <i aria-hidden="true">{renderIcon()}</i>
       <div className="alert-ribbon__content">
         {renderHeader()}
@@ -84,7 +88,7 @@ export function AlertRibbon({
       </div>
       {closeButton && (
         <button
-          className="close"
+          className="gds-close"
           type="button"
           aria-label={closeAriaLabel ?? closeText ?? 'Close alert'}
           onClick={(event) => {

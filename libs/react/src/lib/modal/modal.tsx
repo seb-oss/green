@@ -137,7 +137,7 @@ export const Modal = ({
   enableBodyScrollLock = true,
   ...props
 }: ModalProps) => {
-  const [uuid, _] = useState(id)
+  const [uuid] = useState(id)
   const [status, setStatus] = useState<string>(UNMOUNTED)
   const [shouldRender, setShouldRender] = useState<boolean | undefined>(false)
 

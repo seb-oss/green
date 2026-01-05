@@ -35,21 +35,27 @@ export const OnBackground = {
   render: () => (
     <div>
       <div className="bg-info p-4 my-4">
-        <Link href="https://seb.se" className="bg-info">
+        <Link href="https://seb.se" variant="white">
           Go to seb.se in blue
         </Link>
       </div>
 
       <div className="bg-success p-4 my-4">
-        <Link href="https://seb.se">Go to seb.se in green</Link>
+        <Link href="https://seb.se" variant="white">
+          Go to seb.se in green
+        </Link>
       </div>
 
       <div className="bg-warning p-4 my-4">
-        <Link href="https://seb.se">Go to seb.se in yellow</Link>
+        <Link href="https://seb.se" variant="black">
+          Go to seb.se in yellow
+        </Link>
       </div>
 
       <div className="bg-danger p-4 my-4">
-        <Link href="https://seb.se">Go to seb.se in red</Link>
+        <Link href="https://seb.se" variant="white">
+          Go to seb.se in red
+        </Link>
       </div>
     </div>
   ),
@@ -58,23 +64,23 @@ export const OnBackground = {
 export const AsButton = {
   render: () => (
     <div>
-      <Link button href="https://seb.se">
+      <Link button="secondary" href="https://seb.se">
         Go to seb.se as default button
       </Link>
       <Link button="primary" href="https://seb.se">
         Go to seb.se as primary button
       </Link>
-      <Link button="ghost" href="https://seb.se">
+      <Link button="ghost-dark" href="https://seb.se">
         Go to seb.se as ghost button
       </Link>
     </div>
   ),
 }
 
-export const Secondary = {
+export const WithIcon = {
   render: () => (
     <div>
-      <Link secondary href="#">
+      <Link variant="black" href="#">
         Go to page
         <GdsIconArrowRight />
       </Link>

@@ -1,0 +1,216 @@
+@use 'sass:map';
+@use '../../common';
+
+// alerts have a dependency to links
+@use '../../components/link/mixins' as link;
+@use '../../components/button/mixins' as button;
+
+$variants: (
+  'info': (
+    color: var(--gds-sys-color-text-black),
+    border-color: transparent,
+    background: var(--gds-sys-color-base-200),
+    ghost-button-type: 'light',
+  ),
+  'success': (
+    color: var(--gds-sys-color-text-inverted),
+    border-color: transparent,
+    background: var(--gds-sys-color-dark-green-2),
+    ghost-button-type: 'light',
+  ),
+  'warning': (
+    color: var(--gds-sys-color-text-black),
+    border-color: transparent,
+    background: var(--gds-sys-color-dark-yellow-1),
+    ghost-button-type: 'dark',
+  ),
+  'danger': (
+    color: var(--gds-sys-color-text-inverted),
+    border-color: transparent,
+    background: var(--gds-sys-color-dark-red-1),
+    ghost-button-type: 'light',
+  ),
+);
+
+$background: var(--gds-sys-color-base-200);
+$border-radius: 0;
+$border: solid 1px var(--border-color);
+$color: var(--gds-sys-color-text-primary);
+
+/**
+ * @mixin alert-ribbon
+ */
+@mixin alert-ribbon {
+  --background: #{$background};
+  --color: #{$color};
+  --border-color: #{$color};
+  background: var(--background);
+  border-radius: $border-radius;
+  border: $border;
+  color: var(--color);
+  @include common.padding-vertical(5);
+  @include common.padding-horizontal(5);
+  display: inline-grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: min-content 1fr;
+  grid-template-areas:
+    'icon content dismiss'
+    'footer footer footer';
+
+  @include common.media-breakpoint-up('sm') {
+    grid-template-areas:
+      'icon content dismiss'
+      'icon content footer';
+  }
+
+  > i {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-inline-end: 0.5rem;
+    grid-area: icon;
+
+    svg > * {
+      fill: $color;
+    }
+  }
+
+  > div:not(.alert-ribbon__footer),
+  .alert-ribbon__content {
+    grid-area: content;
+    max-width: 75ch;
+
+    &:has(+ button) {
+      @include common.padding-end(3);
+    }
+
+    > h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    .header {
+      display: inline;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5rem;
+      margin-right: 0.25rem;
+    }
+    > p {
+      display: inline;
+      line-height: 1.5rem;
+      @include common.margin-vertical(0);
+
+      a,
+      a:visited:not(.button, [role='tab']) {
+        color: var(--color);
+
+        &:hover {
+          color: var(--color);
+        }
+      }
+    }
+  }
+
+  // dismiss
+  button.gds-close {
+    padding: 0;
+    grid-area: dismiss;
+    justify-self: flex-end;
+    margin: -0.5rem -0.375rem 0 0.375rem;
+    background-color: transparent;
+    --color: #{$color};
+
+    & > i:after,
+    & > i:before {
+      background-color: var(--color);
+    }
+
+    &:hover > i:after,
+    &:hover > i:before {
+      background-color: var(--color);
+    }
+
+    @include common.media-breakpoint-up('sm') {
+      + footer,
+      .alert-ribbon__footer {
+        @include common.margin-top(4);
+      }
+    }
+  }
+
+  a {
+    text-decoration: underline !important;
+    transition: opacity 300ms ease-in-out;
+  }
+
+  > footer,
+  .alert-ribbon__footer {
+    grid-area: footer;
+    align-self: end;
+    @include common.media-breakpoint-only('xs') {
+      @include common.margin-top(4);
+    }
+    @include common.media-breakpoint-up('sm') {
+      @include common.margin-start(4);
+    }
+    > a {
+      display: flex;
+    }
+    > a,
+    > button,
+    > button[type='button'],
+    > .button {
+      min-height: 2rem;
+      padding: 0.4375rem 0.75rem;
+      line-height: 1.125rem;
+
+      + {
+        a,
+        button,
+        .button {
+          @include common.media-breakpoint-only('xs') {
+            @include common.margin-top(4);
+          }
+          @include common.media-breakpoint-up('sm') {
+            @include common.margin-start(4);
+          }
+        }
+      }
+    }
+  }
+  // add styles for each variant
+  @each $variant, $colors in $variants {
+    &.#{$variant} {
+      @include alert-variant(
+        map.get($colors, 'color'),
+        map.get($colors, 'background'),
+        map.get($colors, 'border-color'),
+        map.get($colors, 'ghost-button-type')
+      );
+    }
+  }
+}
+
+/**
+ * @mixin alert-variant
+ * @param {Color} $color - Text color
+ * @param {Color} $background - Background color
+ * @param {Color} $border-color - Border color
+ * @param {String} $ghost-button-type - Ghost button type
+ */
+@mixin alert-variant($color, $background, $border-color, $ghost-button-type) {
+  --background: #{$background};
+  --color: #{$color};
+  --border-color: #{$border-color};
+  --gds-sys-color-focus-outline: #{$color};
+
+  // alert-ribbon close
+  .gds-close {
+    --color: #{$color};
+  }
+
+  i > svg > * {
+    fill: $color;
+  }
+}

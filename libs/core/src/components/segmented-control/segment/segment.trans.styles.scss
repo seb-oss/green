@@ -1,4 +1,4 @@
-@use '../../../../../chlorophyll/scss/common';
+@use '../../../../../chlorophyll/src/scss/common';
 
 @layer base, reset, transitional-styles;
 
@@ -41,7 +41,7 @@
 
     @media (pointer: fine) {
       button:hover {
-        background-color: var(--grey-400);
+        background-color: var(--gds-sys-color-base-200);
       }
     }
 

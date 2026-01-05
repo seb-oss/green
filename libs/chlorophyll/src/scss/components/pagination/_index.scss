@@ -1,0 +1,5 @@
+@use './mixins';
+
+.gds-pagination {
+  @include mixins.add-pagination();
+}

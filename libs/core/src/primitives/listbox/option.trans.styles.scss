@@ -1,5 +1,5 @@
-@use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
-@use '../../../../chlorophyll/scss/common';
+@use '../../../../chlorophyll/src/scss/components/dropdown/mixins' as dropdown;
+@use '../../../../chlorophyll/src/scss/common';
 
 @layer base, reset, transitional-styles;
 
@@ -11,13 +11,13 @@
     user-select: none;
   }
 
-  :host(:hover) .item,
-  :host(:focus-visible) .item {
-    background-color: var(--grey-400);
+  :host(:hover) div,
+  :host(:focus-visible) div {
+    background-color: var(--gds-sys-color-base-200);
   }
 
-  :host(:active) .item {
-    background-color: var(--grey-500);
+  :host(:active) div {
+    background-color: var(--gds-sys-color-base-300);
   }
 
   :host(:focus-visible) {

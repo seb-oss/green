@@ -9,19 +9,19 @@
     <ng-template
       *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
     ></ng-template>
-    <ng-template #basicLabelContentTpl>
-      <!-- to trigger css:empty if no label was added -->
-      <ng-container *ngIf="label">
-        {{ label }}
-        <span
-          *ngIf="optional === true || (required !== true && optional !== false)"
-          class="gds-field-label--optional"
-        >
-          ({{ t('label.optional') }})
-        </span>
-      </ng-container>
-    </ng-template>
   </label>
+  <ng-template #basicLabelContentTpl>
+    <!-- to trigger css:empty if no label was added -->
+    <ng-container *ngIf="label">
+      {{ label }}
+      <span
+        *ngIf="optional === true || (required !== true && optional !== false)"
+        class="gds-field-label--optional"
+      >
+        ({{ t('label.optional') }})
+      </span>
+    </ng-container>
+  </ng-template>
 
   <!-- DESCRIPTION -->
   <div class="description" *ngIf="description">{{ description }}</div>

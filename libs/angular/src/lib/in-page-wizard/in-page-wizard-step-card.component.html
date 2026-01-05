@@ -1,5 +1,5 @@
 <section
-  class="gds-in-page-wizard-step-card card"
+  class="gds-in-page-wizard-step-card gds-card"
   data-testid="in-page-wizard-step-card-root"
   [class.active]="!!isActive"
   [class.completed]="!!isCompleted"
@@ -37,7 +37,9 @@
       *ngIf="isCompleted && !isActive"
     >
       <button
-        class="secondary small"
+        ngg-button
+        variant="secondary"
+        size="small"
         (click)="handleOnEditBtnClick($event)"
         data-testid="in-page-wizard-step-card-edit-btn"
       >
@@ -59,7 +61,8 @@
     *ngIf="isCompleted && !isActive"
   >
     <button
-      class="secondary"
+      ngg-button
+      variant="secondary"
       (click)="handleOnEditBtnClick($event)"
       data-testid="in-page-wizard-step-card-footer-edit-btn"
     >
@@ -73,7 +76,8 @@
     *ngIf="isActive"
   >
     <button
-      class="primary"
+      ngg-button
+      variant="primary"
       [disabled]="disableNext"
       (click)="handleOnNextBtnClick($event)"
       data-testid="in-page-wizard-step-card-next-btn"

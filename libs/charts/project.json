@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/charts/src",
   "projectType": "library",
+  "tags": ["lib"],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
@@ -10,7 +11,8 @@
         "commands": [
           "nx run charts:build-lib",
           "nx run charts:compile-scss",
-          "nx run charts:copy-scss"
+          "nx run charts:copy-scss",
+          "nx run charts:change-chlorophyll-use-paths"
         ],
         "parallel": false
       },
@@ -57,6 +59,19 @@
       },
       "outputs": ["{workspaceRoot}/dist/libs/chlorophyll"]
     },
+    "change-chlorophyll-use-paths": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "description": "change chlorophyll include paths in scss files",
+            "command": "node libs/charts/build-scripts/replace-use-path.js"
+          }
+        ],
+        "parallel": false
+      },
+      "outputs": []
+    },
     "copy-scss": {
       "executor": "nx:run-commands",
       "options": {
@@ -82,6 +97,14 @@
     },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
+      "options": {}
+    },
+    "version-as-snapshot": {
+      "executor": "@sebgroup/repo-tools:version-as-snapshot",
+      "options": {}
+    },
+    "publish-snapshot": {
+      "executor": "@sebgroup/repo-tools:publish-snapshot",
       "options": {}
     }
   }

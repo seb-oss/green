@@ -1,0 +1,13 @@
+@mixin add-tokens() {
+  --gds-z-index-deep: -9999;
+  --gds-z-index-dropdown-backdrop: 990;
+  --gds-z-index-datepicker: 995;
+  --gds-z-index-dropdown: 995;
+  --gds-z-index-sticky: 1020;
+  --gds-z-index-fixed: 1030;
+  --gds-z-index-modal-backdrop: 1040;
+  --gds-z-index-modal: 1050;
+  --gds-z-index-popover: 1060;
+  --gds-z-index-tooltip: 1070;
+  --gds-z-index-top: 9999;
+}

@@ -1,4 +1,4 @@
-.item-list {
+.gds-sortable-list {
   width: 100%;
   display: block;
 }
@@ -8,8 +8,8 @@ label.item {
 }
 
 .item-box {
-  background-color: var(--sg-card-background);
-  color: var(--text-primary-color);
+  background-color: var(--gds-sys-color-background-primary);
+  color: var(--gds-sys-color-text-primary);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -21,35 +21,35 @@ label.item {
   border-radius: 4px;
 }
 
-.form-control {
+.gds-form-control {
   line-height: 20px;
   font-size: 16px;
   font-weight: 500;
 }
 
-.item-list-header {
+.gds-sortable-list-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 1rem;
 }
 
-.item-list-header-title {
+.gds-sortable-list-header-title {
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.25rem;
   font-style: normal;
 }
 
-.item-list-header-subtitle {
+.gds-sortable-list-header-subtitle {
   font-size: 0.75rem;
-  color: var(--text-primary-color);
+  color: var(--gds-sys-color-text-primary);
   display: flex;
   justify-content: center;
   align-content: center;
 }
 
-.item-list-suffix {
+.gds-sortable-list-suffix {
   font-weight: 400;
   font-size: 0.85rem;
 }
@@ -90,7 +90,7 @@ label.item {
   outline-offset: 4px;
 }
 
-.item-list.cdk-drop-list-dragging .item-box:not(.cdk-drag-placeholder) {
+.gds-sortable-list.cdk-drop-list-dragging .item-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   pointer-events: all !important;
 }
@@ -115,7 +115,7 @@ label.item {
   justify-content: space-between;
 }
 
-.form-control.item-layout {
+.gds-form-control.item-layout {
   display: flex;
   justify-content: space-between;
 }

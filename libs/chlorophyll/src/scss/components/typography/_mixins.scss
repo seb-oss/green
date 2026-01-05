@@ -1,0 +1,21 @@
+@use 'sass:map';
+@use '../../common';
+@use '../../tokens/typography' as tokens;
+
+@mixin properties($map) {
+  @each $name, $value in $map {
+    #{$name}: $value;
+  }
+}
+
+@mixin add-heading-style($heading-map) {
+  @include properties(map.get($heading-map, mobile));
+
+  @include common.media-breakpoint-up('md') {
+    @include properties(map.get($heading-map, tablet));
+  }
+
+  @include common.media-breakpoint-up('lg') {
+    @include properties(map.get($heading-map, desktop));
+  }
+}

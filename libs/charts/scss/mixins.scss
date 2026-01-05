@@ -1,13 +1,12 @@
-@use '../../chlorophyll/scss/tokens/shame' as tokens;
-@use '../../chlorophyll/scss/common/spacing' as common;
-@use '../../chlorophyll/scss/common/breakpoints' as breakpoints;
-@use '../../chlorophyll/scss/components/list';
-$font-family: tokens.$font-family-sans-serif;
+@use '@sebgroup/chlorophyll/src/scss/common/spacing' as common;
+@use '@sebgroup/chlorophyll/src/scss/common/breakpoints' as breakpoints;
+@use '@sebgroup/chlorophyll/src/scss/components/list';
+$font-family: 'SEB SansSerif', sans-serif;
 $axis-color: #8c8c8c;
 
-$axis-text-color: tokens.$text-primary-color;
-$axis-text-size: tokens.$base-font-size;
-$axis-text-weight: tokens.$font-weight-normal;
+$axis-text-color: var(--gds-sys-color-text-primary);
+$axis-text-size: 16px;
+$axis-text-weight: 400;
 
 $y-axis-text-color: $axis-text-color;
 
@@ -18,18 +17,20 @@ $y-axis-tick-thickness: $y-axis-thickness;
 
 $x-axis-text-color: $axis-text-color;
 
-$x-axis-color: tokens.$border-secondary-color;
+$x-axis-color: var(--gds-sys-color-base-300);
 $x-axis-thickness: 1px;
 $x-axis-tick-color: $x-axis-color;
 $x-axis-tick-thickness: $x-axis-thickness;
 
-$grid-focus-line-color: tokens.get(tokens.$blue, 2);
-$grid-base-line-color: tokens.$border-secondary-color;
+$grid-focus-line-color: var(--gds-sys-color-dark-blue-1);
+$grid-base-line-color: var(--gds-sys-color-base-300);
 
 $min-height: 3.5rem;
 
+/**
+ * Add color palettes for charts.
+ */
 @mixin add-color-palettes() {
-  /*-- Default color pattern --*/
   .bb-color-pattern {
     background-image: url('#45B400;#0092E1;#FFB400;#4F2C99;#8AAEC7;#898EFE;#FFAC35;#70B0FF;');
 
@@ -42,6 +43,10 @@ $min-height: 3.5rem;
     }
   }
 }
+
+/**
+ * Chart series list item styles.
+ */
 @mixin _chart-series-list-item() {
   @include common.margin-end(3);
   align-items: center;
@@ -57,6 +62,10 @@ $min-height: 3.5rem;
     flex-shrink: 0;
   }
 }
+
+/**
+ * Add chart styles.
+ */
 @mixin add-chart-styles() {
   // layout using grid
   .chart {
@@ -392,12 +401,12 @@ $min-height: 3.5rem;
   }
 
   .bb-tooltip-list {
-    background: tokens.$black;
-    color: tokens.$white;
+    background: var(--gds-sys-color-black);
+    color: var(--gds-sys-color-white);
     padding: 0.5rem;
 
     dt {
-      font-weight: tokens.$font-weight-bold;
+      font-weight: 500;
       margin-bottom: 0.25rem;
     }
 

@@ -7,31 +7,31 @@ const Template = ({ children, ...props }) => (
 
 const Footer = () => (
   <>
-    <Button>Stäng</Button>
+    <Button variant="ghost-dark">Stäng</Button>
   </>
 )
 
 const FooterInfo = () => (
   <>
-    <Button>Info button</Button>
+    <Button variant="ghost-dark">Info button</Button>
   </>
 )
 
 const FooterSuccess = () => (
   <>
-    <Button>Success button</Button>
+    <Button variant="ghost-light">Success button</Button>
   </>
 )
 
 const FooterWarning = () => (
   <>
-    <Button>Warning button</Button>
+    <Button variant="ghost-dark">Warning button</Button>
   </>
 )
 
 const FooterDanger = () => (
   <>
-    <Button>Danger button</Button>
+    <Button variant="ghost-light">Danger button</Button>
   </>
 )
 
@@ -184,11 +184,7 @@ InfoWithCustomCloseButton.args = {
   type: '',
   header: 'Info',
   footer: null,
-  children: (
-    <>
-      This is an alert type with a custom close label.
-    </>
-  ),
+  children: <>This is an alert type with a custom close label.</>,
   isCloseable: true,
   closeText: 'Stäng',
 }

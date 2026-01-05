@@ -1,9 +1,4 @@
-@use '../../../../chlorophyll/scss/components/button/mixins' as button;
-@use '../../../../chlorophyll/scss/components/icon';
-@use '../../../../chlorophyll/scss/tokens/shame' as tokens;
-@use '../../../../chlorophyll/scss/common';
-
-$button-danger-border: tokens.get(tokens.$red, 0);
+@use '../../../../chlorophyll/src/scss/components/button/mixins' as button;
 
 @layer base, reset, transitional-styles;
 
@@ -60,7 +55,7 @@ $button-danger-border: tokens.get(tokens.$red, 0);
     }
 
     :host([variant='negative'][rank='secondary']) .button {
-      border-color: $button-danger-border;
+      border-color: var(--gds-sys-color-dark-red-2);
     }
 
     :host([variant='ghost']) .button {
@@ -76,7 +71,7 @@ $button-danger-border: tokens.get(tokens.$red, 0);
       color: currentColor;
       &:hover {
         color: currentColor;
-        background: var(--grey-500);
+        background: var(--gds-sys-color-base-300);
       }
       slot {
         display: contents;

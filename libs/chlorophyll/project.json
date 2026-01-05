@@ -6,7 +6,7 @@
   "tags": ["lib"],
   "targets": {
     "build": {
-      "executor": "./tools/executors/scss:build-lib",
+      "executor": "@sebgroup/repo-tools:build-chlorophyll",
       "options": {
         "packageJson": "libs/chlorophyll/package.json",
         "outputPath": "dist/libs/chlorophyll"
@@ -18,7 +18,7 @@
         "commands": [
           {
             "description": "compile scss",
-            "command": "npx sass --no-source-map --load-path=node_modules/ libs/chlorophyll/scss/index.scss dist/libs/chlorophyll/css/green-chlorophyll.css"
+            "command": "npx sass --no-source-map --load-path=node_modules/ libs/chlorophyll/src/scss/index.scss dist/libs/chlorophyll/css/green-chlorophyll.css"
           },
           {
             "description": "auto prefix compiled css overwrite file and output maps",
@@ -33,10 +33,17 @@
       },
       "outputs": ["{workspaceRoot}/dist/libs/chlorophyll"]
     },
+    "copy-tokens": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx copyfiles dist/libs/tokens/scss/_mixin-sys-*.scss libs/chlorophyll/src/scss/tokens -f"
+      },
+      "dependsOn": ["tokens:build"]
+    },
     "lint": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx stylelint libs/chlorophyll/**/*.scss"
+        "command": "npx stylelint libs/chlorophyll/src/**/*.scss"
       }
     },
     "test": {

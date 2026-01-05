@@ -132,7 +132,7 @@ export const Input = forwardRef(
       [`gds-expandable-info-${uuid}`]: !showSimpleInput && expandableInfo,
     })
 
-    const inputClassName = classNames(className, {
+    const inputClassName = classNames('gds-input', className, {
       [validateClassName(validator?.indicator)]: validator,
     })
 

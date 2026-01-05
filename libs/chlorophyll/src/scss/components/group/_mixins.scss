@@ -1,0 +1,182 @@
+@use '../../common';
+@use '../input';
+@use 'sass:math';
+
+$_border-width: 1px;
+$_border-width-negative: calc(1px * -1);
+$_border-width-50: 0.5px;
+$_border-width-50-negative: calc(0.5px * -1);
+$_border-color: var(--gds-sys-color-base-600);
+$_background: input.$background;
+
+@mixin add-group() {
+  display: flex;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  position: relative;
+
+  .is-invalid {
+    @include common.add-border-color();
+  }
+
+  @include common.media-breakpoint-down('sm') {
+    min-width: 100%;
+  }
+
+  > * {
+    flex: 1 1 auto;
+    margin: 0;
+    min-width: 0 !important;
+    @include common.media-breakpoint-up('sm') {
+      flex: 0 1 auto;
+    }
+  }
+
+  > span.form-text {
+    justify-content: flex-end;
+    flex-shrink: 0;
+  }
+
+  @include common.media-breakpoint-up('sm') {
+    > input {
+      flex: 1 1 auto;
+    }
+  }
+
+  > *:focus {
+    position: relative;
+  }
+
+  &:not(.gds-group-border) > * + *:not(:last-child) {
+    border-radius: 0 !important;
+    border-left-width: $_border-width-50;
+    border-right-width: $_border-width-50;
+  }
+
+  > *:first-child:not(:last-child) {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-right-width: $_border-width-50;
+  }
+
+  > *:last-child:not(:first-child) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-left-width: $_border-width-50;
+  }
+
+  &.gds-group-border {
+    @include common.add-border();
+    @include common.add-border-color();
+    @include common.add-border-radius();
+
+    > * + *:not(:last-child) {
+      border-left-color: transparent;
+      border-radius: 0;
+      border-right-color: transparent;
+    }
+
+    > *:first-child {
+      border-right-color: transparent;
+    }
+
+    > *:last-child:not(button) {
+      border-left-color: transparent;
+    }
+
+    > * {
+      border: 0;
+      box-shadow: none !important;
+    }
+
+    > button {
+      border-bottom: solid $_border-width $_border-color;
+      border-top: solid $_border-width $_border-color;
+      margin: $_border-width-negative $_border-width-50-negative;
+      min-width: auto !important;
+
+      &:first-child {
+        border-left: solid $_border-width $_border-color;
+        margin-left: $_border-width-negative;
+      }
+      &:last-child {
+        border-right: solid $_border-width $_border-color;
+        margin-right: $_border-width-negative;
+      }
+    }
+
+    .gds-form-text {
+      @include common.padding-end(5);
+
+      &.disabled {
+        background: var(--gds-sys-color-background-secondary);
+      }
+    }
+  }
+
+  &.gds-group-border.disabled {
+    @include common.add-disable(false, false, true);
+  }
+
+  /**
+  * Add this to shift the focus outline from the enclosed input the the enclosing group
+  *
+  * Use on groups with one input + static content.
+  * Do not use if there are more than one focusable element in the group!
+  */
+  &.gds-group-focus {
+    @include common.add-focus('within');
+
+    > *:focus {
+      outline: 0;
+      background-color: transparent;
+    }
+  }
+
+  .gds-form-text {
+    @include common.padding-vertical(4);
+    background: $_background;
+    border-radius: inherit;
+    flex-grow: 0;
+    padding-left: 1rem;
+  }
+
+  input ~ {
+    .gds-button,
+    button {
+      flex-grow: 0;
+    }
+  }
+
+  .button,
+  button {
+    &.ghost:not(.active):focus-visible {
+      color: var(--gds-sys-color-text-primary);
+    }
+
+    &.disabled,
+    &:disabled,
+    &[aria-disabled='true'] {
+      @include common.add-disable(true, true, true);
+    }
+  }
+
+  &.gds-group--small > * {
+    @include common.padding-vertical(2, true);
+    min-height: 2rem;
+
+    &:not(.form-text) {
+      @include common.padding-horizontal(3, true);
+    }
+  }
+
+  &.gds-group--large > * {
+    @include common.padding-vertical(5, true);
+    font-size: 1.5rem;
+    min-height: 4rem;
+
+    &:not(.form-text) {
+      @include common.padding-horizontal(6, true);
+    }
+  }
+}

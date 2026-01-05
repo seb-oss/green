@@ -1,0 +1,30 @@
+@use 'functions';
+@use 'sass:map';
+
+@mixin add-disable($background, $color, $border-color) {
+  @if ($background) {
+    @if ($background == true) {
+      $background: var(--gds-sys-color-base-300);
+    } @else {
+      $background: var(--gds-sys-color-background-primary);
+    }
+    background: $background !important;
+  }
+  @if ($color) {
+    @if ($color == true) {
+      $color: var(--gds-sys-color-text-disabled);
+    }
+    color: $color !important;
+  }
+  @if ($border-color) {
+    @if ($border-color == true) {
+      $border-color: var(--gds-sys-color-text-disabled);
+    }
+    border-color: $border-color !important;
+  }
+  cursor: not-allowed;
+
+  &::placeholder {
+    color: var(--gds-sys-color-text-disabled);
+  }
+}

@@ -1,7 +1,0 @@
-@use 'mixins';
-
-div[role='alert'],
-.alert-ribbon {
-  // add base styles for alert-ribbon
-  @include mixins.alert-ribbon();
-}

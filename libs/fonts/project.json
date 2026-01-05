@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/fonts/src",
   "projectType": "library",
-  "tags": [],
+  "tags": ["lib"],
   "targets": {
     "build-base": {
       "executor": "@nx/js:tsc",

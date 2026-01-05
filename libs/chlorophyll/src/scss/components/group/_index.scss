@@ -1,0 +1,10 @@
+@use '../../common';
+@use 'mixins';
+
+.gds-group {
+  @include mixins.add-group;
+}
+
+.gds-form-group > .gds-group {
+  @include common.margin-bottom(3);
+}

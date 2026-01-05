@@ -6,6 +6,8 @@ svg {
   display: block;
   width: 1.5rem;
   height: 1.5rem;
+  outline-color: var(--gds-sys-color-black);
+  outline-offset: 2px;
 }
 
 .gds-tooltip {

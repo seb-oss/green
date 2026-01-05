@@ -1,4 +1,4 @@
-<div class="alert-container" role="alert" [ngClass]="type">
+<div class="gds-alert-ribbon alert-container" role="alert" [ngClass]="type">
   <ng-container [ngSwitch]="type">
     <ng-container
       *ngSwitchCase="'success'"
@@ -26,7 +26,7 @@
   </div>
   <button
     *ngIf="closable && !actionText"
-    class="close"
+    class="gds-close"
     type="button"
     (click)="onClose($event)"
   >

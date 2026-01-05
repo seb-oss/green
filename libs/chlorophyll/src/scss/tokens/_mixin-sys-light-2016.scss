@@ -1,0 +1,86 @@
+/**
+ * Do not edit directly
+ * Generated on Thu, 06 Feb 2025 18:59:50 GMT
+ */
+
+@mixin add-variables {
+  --gds-sys-color-blue: #41b0ee;
+  --gds-sys-color-dark-blue-1: #0092e1;
+  --gds-sys-color-dark-blue-2: #007ac7;
+  --gds-sys-color-green: #60cd18;
+  --gds-sys-color-dark-green-1: #45b400;
+  --gds-sys-color-dark-green-2: #308800;
+  --gds-sys-color-yellow: #ffc500;
+  --gds-sys-color-dark-yellow-1: #ffb400;
+  --gds-sys-color-dark-yellow-2: #f8a000;
+  --gds-sys-color-text-primary: #333333;
+  --gds-sys-color-text-secondary: #ababab;
+  --gds-sys-color-text-white: #ffffff;
+  --gds-sys-color-text-black: #333333;
+  --gds-sys-color-text-inverted: #ffffff;
+  --gds-sys-color-text-link: #0062bc;
+  --gds-sys-color-text-error: #9f000a;
+  --gds-sys-color-text-disabled: #adadad;
+  --gds-sys-color-red: #f03529;
+  --gds-sys-color-dark-red-1: #d81a1a;
+  --gds-sys-color-dark-red-2: #bb000c;
+  --gds-sys-color-purple: #673ab6;
+  --gds-sys-color-dark-purple-1: #4f2C99;
+  --gds-sys-color-dark-purple-2: #3f2587;
+  --gds-sys-color-white: #ffffff;
+  --gds-sys-color-black: #000000;
+  --gds-sys-color-background-primary: #ffffff;
+  --gds-sys-color-background-secondary: #eeeeee;
+  --gds-sys-color-base-100: #f8f8f8;
+  --gds-sys-color-base-200: #e9e9e9;
+  --gds-sys-color-base-300: #dedede;
+  --gds-sys-color-base-400: #cecece;
+  --gds-sys-color-base-500: #adadad;
+  --gds-sys-color-base-600: #868686;
+  --gds-sys-color-base-700: #494949;
+  --gds-sys-color-base-800: #333333;
+  --gds-sys-color-base-900: #1a1a1a;
+  --gds-sys-color-hover-10: rgba(255, 255, 255, 0.1);
+  --gds-sys-color-hover-20: rgba(255, 255, 255, 0.2);
+}
+
+@mixin add-color-tokens-dark() {
+  --gds-sys-color-blue: #58b8ee;
+  --gds-sys-color-dark-blue-1: #00adff;
+  --gds-sys-color-dark-blue-2: #2c9cd9;
+  --gds-sys-color-green: #60cd18;
+  --gds-sys-color-dark-green-1: #75b44a;
+  --gds-sys-color-dark-green-2: #308800;
+  --gds-sys-color-yellow: #ffe182;
+  --gds-sys-color-dark-yellow-1: #f0be47;
+  --gds-sys-color-dark-yellow-2: #ebab39;
+  --gds-sys-color-text-primary: #dedede;
+  --gds-sys-color-text-secondary: #ababab;
+  --gds-sys-color-text-white: #ffffff;
+  --gds-sys-color-text-black: #333333;
+  --gds-sys-color-text-inverted: #333333;
+  --gds-sys-color-text-link: #2c9cd9;
+  --gds-sys-color-text-error: #ff594f;
+  --gds-sys-color-text-disabled: #464646;
+  --gds-sys-color-red: #f7706d;
+  --gds-sys-color-dark-red-1: #c82a29;
+  --gds-sys-color-dark-red-2: #9e2120;
+  --gds-sys-color-purple: #ad91dc;
+  --gds-sys-color-dark-purple-1: #7e52cc;
+  --gds-sys-color-dark-purple-2: #4a328f;
+  --gds-sys-color-white: #ffffff;
+  --gds-sys-color-black: #000000;
+  --gds-sys-color-background-primary: #222222;
+  --gds-sys-color-background-secondary: #1a1a1a;
+  --gds-sys-color-base-100: #121212;
+  --gds-sys-color-base-200: #222222;
+  --gds-sys-color-base-300: #272727;
+  --gds-sys-color-base-400: #2c2c2c;
+  --gds-sys-color-base-500: #333333;
+  --gds-sys-color-base-600: #494949;
+  --gds-sys-color-base-700: #757575;
+  --gds-sys-color-base-800: #ababab;
+  --gds-sys-color-base-900: #dedede;
+  --gds-sys-color-hover-10: rgba(0, 0, 0, 0.1);
+  --gds-sys-color-hover-20: rgba(0, 0, 0, 0.2);
+}

@@ -15,7 +15,7 @@ export const Breadcrumb: React.FC<PropsWithChildren<BreadcrumbProps>> = ({
   className,
 }) => {
   return (
-    <ul className={classNames('breadcrumb', className)}>
+    <ul className={classNames('gds-breadcrumb', className)}>
       {React.Children.map(
         children as ReactElement,
         (Child: ReactElement, childIndex: number) => {

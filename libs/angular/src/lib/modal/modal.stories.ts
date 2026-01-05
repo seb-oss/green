@@ -104,7 +104,7 @@ export const Custom = {
         </ng-container>
         <p>Modal Body</p>
         <ng-container nggModalFooter>
-            <button class="danger" (click)="isOpen = false">Close</button>
+            <button class="gds-button danger" (click)="isOpen = false">Close</button>
         </ng-container>
       </ngg-modal>
       <button (click)="isOpen = true">Open Modal</button>

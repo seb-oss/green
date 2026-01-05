@@ -1,24 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
-//@use './libs/chlorophyll/scss';
+//@use './libs/chlorophyll/src/scss';
 
-@use '@sebgroup/chlorophyll/scss/components/themes/' as themes;
-@use '@sebgroup/chlorophyll/scss/components/reset/' as reset;
+@use '@sebgroup/chlorophyll/src/scss/components/themes/' as themes;
+@use '@sebgroup/chlorophyll/src/scss/components/reset/' as reset;
 @use '@sebgroup/fonts/scss/seb-fonts';
 
-@use '@sebgroup/chlorophyll/scss/components/utility';
-@use '@sebgroup/chlorophyll/scss/components/grid';
-@use '@sebgroup/chlorophyll/scss/components/form';
-@use '@sebgroup/chlorophyll/scss/components/link';
+@use '@sebgroup/chlorophyll/src/scss/components/utility';
+@use '@sebgroup/chlorophyll/src/scss/components/grid';
+@use '@sebgroup/chlorophyll/src/scss/components/form';
+@use '@sebgroup/chlorophyll/src/scss/components/link';
 
-@use '@sebgroup/chlorophyll/scss/components/container';
-@use '@sebgroup/chlorophyll/scss/components/tabs-bar';
-@use '@sebgroup/chlorophyll/scss/components/navbar';
-@use '@sebgroup/chlorophyll/scss/components/dropdown';
-@use '@sebgroup/chlorophyll/scss/components/datepicker';
-@use '@sebgroup/chlorophyll/scss/components/context-menu';
-@use '@sebgroup/chlorophyll/scss/components/modal';
-@use '@sebgroup/chlorophyll/scss/components/badge';
-@use '@sebgroup/chlorophyll/scss/components/card';
+@use '@sebgroup/chlorophyll/src/scss/components/container';
+@use '@sebgroup/chlorophyll/src/scss/components/tabs-bar';
+
+@use '@sebgroup/chlorophyll/src/scss/components/dropdown';
+@use '@sebgroup/chlorophyll/src/scss/components/datepicker';
+// @use '@sebgroup/chlorophyll/src/scss/components/context-menu';
+@use '@sebgroup/chlorophyll/src/scss/components/modal';
+@use '@sebgroup/chlorophyll/src/scss/components/badge';
+@use '@sebgroup/chlorophyll/src/scss/components/card';
 
 @use '@sebgroup/green-charts/scss' as charts;

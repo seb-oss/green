@@ -1,0 +1,49 @@
+@use 'mixins';
+@use 'sass:map';
+@use '../../common';
+@use '../../tokens';
+
+@if tokens.$enable-grid-classes {
+  .gds-row {
+    @include mixins.make-row();
+
+    > * {
+      @include mixins.make-col-ready();
+    }
+  }
+}
+
+@if tokens.$enable-cssgrid {
+  .gds-grid {
+    display: grid;
+    gap: var(--#{tokens.$variable-prefix}gap, #{tokens.$grid-gutter-width});
+    grid-template-columns: repeat(
+      var(--#{tokens.$variable-prefix}columns, #{tokens.$grid-columns}),
+      1fr
+    );
+    grid-template-rows: repeat(var(--#{tokens.$variable-prefix}rows, 1), 1fr);
+    @include mixins.make-cssgrid();
+  }
+}
+
+@if tokens.$enable-grid-classes {
+  @include mixins.make-grid-columns();
+}
+
+.mw-xs {
+  @include common.media-breakpoint-up('xs') {
+    max-width: 375px;
+  }
+}
+
+.mw-sm {
+  @include common.media-breakpoint-up('sm') {
+    max-width: map.get(tokens.$grid-breakpoints, 'sm');
+  }
+}
+
+.mw-md {
+  @include common.media-breakpoint-up('md') {
+    max-width: map.get(tokens.$grid-breakpoints, 'md');
+  }
+}

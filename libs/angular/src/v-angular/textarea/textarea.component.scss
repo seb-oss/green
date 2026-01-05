@@ -1,15 +1,14 @@
-@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-group;
-@use '../../../../chlorophyll/scss/components/form/textarea/mixins' as mixins;
+@use '../../../../chlorophyll/src/scss/tokens/mixin-sys-light-2016' as
+  light-tokens;
+@use '../../../../chlorophyll/src/scss/components/form/mixins' as form-group;
+@use '../../../../chlorophyll/src/scss/components/textarea/mixins' as mixins;
 
 :host {
-  --sg-text-primary: #333;
-  --sg-form-control-bg: #fff;
-  --gds-ref-pallet-base100: hsl(0, 0%, 97%);
-  --sg-border-radius: 4px;
-  --sg-border-width: 1px;
-  --sg-border-color: #868686;
+  @include light-tokens.add-variables();
 
-  @include mixins.add-textarea();
+  .gds-textarea {
+    @include mixins.add-textarea();
+  }
 
   label:not(.gds-field-notice) {
     @include form-group.add-label;

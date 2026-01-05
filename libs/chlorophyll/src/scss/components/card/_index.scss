@@ -1,0 +1,6 @@
+@use '../../common/spacing';
+@use 'mixins' as mixins;
+
+.gds-card {
+  @include mixins.card;
+}

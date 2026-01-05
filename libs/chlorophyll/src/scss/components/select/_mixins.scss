@@ -1,0 +1,43 @@
+@use '../../common' as mixins;
+@use '../validation/mixins' as validation;
+
+@mixin add-select {
+  display: flex;
+  position: relative;
+
+  select {
+    @include mixins.padding-horizontal(5);
+    @include mixins.padding-vertical(4);
+    @include mixins.add-border-radius();
+    @include mixins.add-border();
+    @include mixins.add-border-color();
+    @include mixins.add-focus();
+
+    color: var(--gds-sys-color-text-primary);
+    background: var(--gds-sys-color-background-primary);
+    padding-right: 3rem;
+    flex: 1;
+    display: block;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  svg {
+    pointer-events: none;
+    position: absolute;
+    inset: 0 1rem 0 auto;
+    margin: auto;
+    transform: scale(0.5766666667);
+    transform-origin: 50%;
+  }
+
+  &.is-invalid {
+    @include validation.add-feedback-element(false);
+    @include validation.add-feedback(var(--gds-sys-color-text-error));
+
+    &::before {
+      bottom: 0;
+    }
+  }
+}

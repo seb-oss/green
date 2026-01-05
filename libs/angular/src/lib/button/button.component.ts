@@ -5,7 +5,7 @@ import {
   Input,
 } from '@angular/core'
 
-import { ButtonSize, ButtonVariant } from '@sebgroup/extract'
+import { ButtonSize, ButtonVariant } from '@sebgroup/extract/src'
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -16,10 +16,11 @@ import { ButtonSize, ButtonVariant } from '@sebgroup/extract'
 })
 export class NggButtonComponent {
   @Input() variant?: ButtonVariant
+
   @Input() size?: ButtonSize
 
   @HostBinding('class') get classes(): string {
-    return [this.variant, this.size ? this.size : false]
+    return ['gds-button', this.variant, this.size ? this.size : false]
       .filter(Boolean)
       .join(' ')
   }
