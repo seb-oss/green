@@ -98,10 +98,19 @@ const options = [
   {
     label: 'Group',
     options: [
-      { key: 'group-opt1', label: null, accountNumber: '3453245' },
-      { key: 'group-opt2', label: 'Option 2' },
+      { key: 'group-opt1', label: null, accountNumber: '3453245', id: 'go01' },
+      { key: 'group-opt2', label: 'Option 2', id: 'go02' },
       { key: 'group-opt3', label: 'Option 3' },
       { key: 'group-opt4', label: 'Option 4' },
+    ],
+  },
+  {
+    label: 'Group2',
+    options: [
+      { key: 'group-opt21', label: null, accountNumber: '3453245', id: 'go21' },
+      { key: 'group-opt2', label: 'Option 2', id: 'go22' },
+      { key: 'group-opt23', label: 'Option 23' },
+      { key: 'group-opt24', label: 'Option 24' },
     ],
   },
 ]
@@ -674,7 +683,7 @@ Disabled.args = {
 export const CloseOnScroll = CloseOnScrollTemplate.bind({}) as any
 CloseOnScroll.args = {
   ...defaultArgs,
-  closeOnScroll: true
+  closeOnScroll: true,
 }
 export const WithError = Template.bind({}) as any
 WithError.args = {
