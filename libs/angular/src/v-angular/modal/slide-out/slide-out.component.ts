@@ -211,6 +211,7 @@ export class NggvSlideOutComponent implements OnInit {
   @HostListener('click', ['$event', '"host"'])
   @HostListener('document:keydown.escape', ['$event'])
   close(event?: Event, initiator?: string): void {
+    console.log('aa', event)
     console.log('asd', event?.target)
     console.log('asd2', event?.currentTarget)
     if (
