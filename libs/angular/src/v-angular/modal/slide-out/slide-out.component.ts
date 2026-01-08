@@ -216,6 +216,7 @@ export class NggvSlideOutComponent implements OnInit {
     console.log('2b', initiator === 'host')
 
     if (
+      initiator === 'host' &&
       this.slideOutRef &&
       !this.slideOutRef.nativeElement.contains(event?.target) &&
       !this.closableOutside
