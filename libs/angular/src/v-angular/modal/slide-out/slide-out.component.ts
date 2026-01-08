@@ -211,19 +211,24 @@ export class NggvSlideOutComponent implements OnInit {
   @HostListener('click', ['$event', '"host"'])
   @HostListener('document:keydown.escape', ['$event'])
   close(event?: Event, initiator?: string): void {
-    console.log('asd', event?.target)
-    console.log('ccc', this.slideOutRef && this.slideOutRef.nativeElement)
-    console.log(
-      'ccc2',
-      this.slideOutRef &&
-        this.slideOutRef.nativeElement.contains(event?.target),
-    )
     if (
       initiator === 'host' &&
       event instanceof MouseEvent &&
       event.target !== event.currentTarget
     )
       return
+
+    console.log('1', event?.target)
+    console.log('2', initiator)
+    console.log(
+      '1a',
+      this.slideOutRef &&
+        !this.slideOutRef.nativeElement.contains(event?.target),
+    )
+    console.log('2a', initiator === 'host')
+    console.log('3a', event instanceof MouseEvent)
+    console.log('4a', initiator === 'host')
+    console.log('5a', !this.closableOutside)
 
     if (
       this.slideOutRef &&
