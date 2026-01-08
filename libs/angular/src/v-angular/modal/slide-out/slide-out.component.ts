@@ -95,6 +95,8 @@ export class NggvSlideOutComponent implements OnInit {
   @Input() content?: string
   /** Sets whether it is possible to close the modal from the top right corner. */
   @Input() closable = true
+    /** Sets whether it is possible to close the modal by clicking outside the modal area (on the backdrop). */
+  @Input() closableOutside = true
   /** Allows the modal content to decide the width of the modal. */
   @Input() autoWidth = false
 
@@ -184,7 +186,8 @@ export class NggvSlideOutComponent implements OnInit {
     if (
       initiator === 'host' &&
       event instanceof MouseEvent &&
-      event.target !== event.currentTarget
+      event.target !== event.currentTarget &&
+      this.closableOutside
     )
       return
 
