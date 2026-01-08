@@ -214,6 +214,8 @@ export class NggvSlideOutComponent implements OnInit {
     console.log('aa', event)
     console.log('asd', event?.target)
     console.log('asd2', event?.currentTarget)
+    console.log('ccc', this.slideOutRef && this.slideOutRef.nativeElement)
+    console.log('ccc2', this.slideOutRef && this.slideOutRef.nativeElement.contains(event?.target))
     if (
       initiator === 'host' &&
       event instanceof MouseEvent &&
