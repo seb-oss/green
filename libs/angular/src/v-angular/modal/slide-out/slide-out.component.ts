@@ -215,12 +215,6 @@ export class NggvSlideOutComponent implements OnInit {
     console.log('2', initiator)
     console.log('2b', initiator === 'host')
     console.log('3b', event instanceof MouseEvent)
-    if (
-      initiator === 'host' &&
-      event instanceof MouseEvent &&
-      event.target !== event.currentTarget
-    )
-      return
 
     console.log(
       '1a',
@@ -235,6 +229,15 @@ export class NggvSlideOutComponent implements OnInit {
       !this.closableOutside
     ) {
       console.log('obaobaboaboaboaobaob')
+      return
+    }
+
+    if (
+      initiator === 'host' &&
+      event instanceof MouseEvent &&
+      event.target !== event.currentTarget
+    ) {
+      console.log('1111111111111111111111111')
       return
     }
 
