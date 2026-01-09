@@ -214,16 +214,7 @@ export class NggvSlideOutComponent implements OnInit {
     console.log('1', event?.target)
     console.log('2', initiator)
     console.log('2b', initiator === 'host')
-
-    if (
-      initiator === 'host' &&
-      this.slideOutRef &&
-      !this.slideOutRef.nativeElement.contains(event?.target) &&
-      !this.closableOutside
-    ) {
-      console.log('obaobaboaboaboaobaob')
-      return
-    }
+    let closableOutside = true
 
     if (
       initiator === 'host' &&
@@ -234,9 +225,18 @@ export class NggvSlideOutComponent implements OnInit {
       return
     }
 
+    if (
+      initiator === 'host' &&
+      this.slideOutRef &&
+      !this.slideOutRef.nativeElement.contains(event?.target) &&
+      !this.closableOutside
+    ) {
+      closableOutside = false
+    }
+
     this.resetOverflow()
 
-    if (this.shown && this.closable) {
+    if (this.shown && this.closable && closableOutside) {
       this.nggvCloseEvent.emit(this.shown)
       this.shown = false
       window.setTimeout(() => {
