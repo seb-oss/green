@@ -232,6 +232,7 @@ export class NggvSlideOutComponent implements OnInit {
       !this.closableOutside
     ) {
       closableOutside = false
+      console.log('aaaaaaaaaaaaaaaaaaaaa')
     }
 
     this.resetOverflow()
