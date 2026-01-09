@@ -1,5 +1,12 @@
 # Changelog
 
+## 7.2.0
+
+### Minor Changes
+
+- 3208097: V-Angular - Dropdown: Added option.id for unique option in dropdown-list
+- 6d0304c: V-Angular - Slide-out: add closable outside property logic
+
 ## 7.1.0
 
 ### Minor Changes
