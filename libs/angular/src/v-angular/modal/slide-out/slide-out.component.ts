@@ -189,9 +189,8 @@ export class NggvSlideOutComponent implements OnInit {
       initiator === 'host' &&
       event instanceof MouseEvent &&
       event.target !== event.currentTarget
-    ) {
+    )
       return
-    }
 
     if (
       this.slideOutRef &&
