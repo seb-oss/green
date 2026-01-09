@@ -226,7 +226,7 @@ export class NggvSlideOutComponent implements OnInit {
     }
 
     if (
-      initiator === 'host' &&
+      event instanceof MouseEvent &&
       this.slideOutRef &&
       !this.slideOutRef.nativeElement.contains(event?.target) &&
       !this.closableOutside
