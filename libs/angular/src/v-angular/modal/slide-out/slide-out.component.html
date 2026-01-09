@@ -27,7 +27,7 @@
         <button
           data-testid="modal-close-button"
           class="nggv-modal-slideout__close"
-          (click)="close()"
+          (click)="close(($event, 'action'))"
           [attr.aria-label]="closeButtonAriaLabel"
         >
           <i></i>
