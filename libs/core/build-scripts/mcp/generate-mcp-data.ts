@@ -11,12 +11,19 @@
  *   ├─ instructions.md        (copied from agents.md if exists)
  *   └─ index.json             (metadata about available files)
  */
-
 import { promises as fs } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { CemParser, ComponentData } from '../../src/utils/helpers/component-meta.js'
-import { kebabToCamelCase, toPascalCase, reactEventHandlerName } from '../../src/utils/helpers/casing.js'
+
+import {
+  kebabToCamelCase,
+  reactEventHandlerName,
+  toPascalCase,
+} from '../../src/utils/helpers/casing.js'
+import {
+  CemParser,
+  ComponentData,
+} from '../../src/utils/helpers/component-meta.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -156,7 +163,10 @@ function convertMdxToMarkdown(mdxContent: string): string {
   markdown = markdown.replace(/<Markdown>([\s\S]*?)<\/Markdown>/g, '$1')
 
   // Remove custom JSX components but keep their content
-  markdown = markdown.replace(/<[A-Z][a-zA-Z0-9]*[^>]*>([\s\S]*?)<\/[A-Z][a-zA-Z0-9]*>/g, '$1')
+  markdown = markdown.replace(
+    /<[A-Z][a-zA-Z0-9]*[^>]*>([\s\S]*?)<\/[A-Z][a-zA-Z0-9]*>/g,
+    '$1',
+  )
 
   // Remove self-closing custom JSX components
   markdown = markdown.replace(/<[A-Z][a-zA-Z0-9]*[^>]*\/>/g, '')
@@ -186,7 +196,7 @@ async function fetchGuidelines(): Promise<Map<string, GuidelineEntry>> {
       return new Map()
     }
 
-    const data = await response.json() as { components: GuidelineEntry[] }
+    const data = (await response.json()) as { components: GuidelineEntry[] }
     const guidelinesMap = new Map<string, GuidelineEntry>()
 
     for (const entry of data.components || []) {
@@ -205,17 +215,21 @@ async function fetchGuidelines(): Promise<Map<string, GuidelineEntry>> {
 /**
  * Fetches detailed guideline content for a specific component
  */
-async function fetchGuidelineContent(guideline: GuidelineEntry): Promise<string | null> {
+async function fetchGuidelineContent(
+  guideline: GuidelineEntry,
+): Promise<string | null> {
   try {
     const url = `${GUIDELINES_BASE_URL}${guideline.path}`
     const response = await fetch(url)
 
     if (!response.ok) {
-      console.warn(`⚠️  Failed to fetch content for ${guideline.slug}: ${response.status}`)
+      console.warn(
+        `⚠️  Failed to fetch content for ${guideline.slug}: ${response.status}`,
+      )
       return null
     }
 
-    const content = await response.json() as GuidelineContent
+    const content = (await response.json()) as GuidelineContent
     return extractGuidelineText(content, guideline)
   } catch (error) {
     console.warn(`⚠️  Error fetching content for ${guideline.slug}:`, error)
@@ -226,7 +240,10 @@ async function fetchGuidelineContent(guideline: GuidelineEntry): Promise<string 
 /**
  * Extracts meaningful text from guideline content
  */
-function extractGuidelineText(content: GuidelineContent, guideline: GuidelineEntry): string {
+function extractGuidelineText(
+  content: GuidelineContent,
+  guideline: GuidelineEntry,
+): string {
   const sections: string[] = []
 
   // Add title and summary
@@ -280,7 +297,7 @@ function extractGuidelineText(content: GuidelineContent, guideline: GuidelineEnt
     }
   }
 
-  return sections.filter(s => s.trim()).join('\n')
+  return sections.filter((s) => s.trim()).join('\n')
 }
 
 /**
@@ -317,7 +334,9 @@ function generateApiMarkdown(component: ComponentData): string {
       const defaultValue = escapeTableCell(prop.defaultValue || '-')
       const description = escapeTableCell(prop.description || '')
 
-      sections.push(`| \`${name}\` | \`${type}\` | \`${defaultValue}\` | ${description} |`)
+      sections.push(
+        `| \`${name}\` | \`${type}\` | \`${defaultValue}\` | ${description} |`,
+      )
     }
     sections.push('')
   }
@@ -345,7 +364,8 @@ function generateApiMarkdown(component: ComponentData): string {
     sections.push('|------|-------------|')
 
     for (const slot of component.slots) {
-      const name = slot.name === 'default' ? '(default)' : escapeTableCell(slot.name)
+      const name =
+        slot.name === 'default' ? '(default)' : escapeTableCell(slot.name)
       const description = escapeTableCell(slot.description || '')
 
       sections.push(`| \`${name}\` | ${description} |`)
@@ -359,7 +379,7 @@ function generateApiMarkdown(component: ComponentData): string {
 
     for (const method of component.methods) {
       const params = method.parameters
-        .map(p => `${p.name}${p.optional ? '?' : ''}: ${p.type}`)
+        .map((p) => `${p.name}${p.optional ? '?' : ''}: ${p.type}`)
         .join(', ')
 
       const returnType = method.returnType?.text || 'void'
@@ -387,7 +407,9 @@ function generateApiMarkdown(component: ComponentData): string {
   // Additional metadata
   if (component.isFormControl) {
     sections.push('\n## Form Control\n')
-    sections.push('This component is a form control and inherits form-related properties and methods.\n')
+    sections.push(
+      'This component is a form control and inherits form-related properties and methods.\n',
+    )
   }
 
   if (component.isLinkComponent) {
@@ -398,10 +420,14 @@ function generateApiMarkdown(component: ComponentData): string {
   // Subcomponents
   if (component.subcomponents && component.subcomponents.length > 0) {
     sections.push('\n## Related Components\n')
-    sections.push('This component is designed to work with the following child components:\n')
+    sections.push(
+      'This component is designed to work with the following child components:\n',
+    )
 
     for (const sub of component.subcomponents) {
-      sections.push(`- **\`${sub.tagName}\`** - ${sub.description || 'Used with this component'}`)
+      sections.push(
+        `- **\`${sub.tagName}\`** - ${sub.description || 'Used with this component'}`,
+      )
     }
     sections.push('')
 
@@ -428,34 +454,51 @@ function generateAngularMarkdown(component: ComponentData): string {
   sections.push(`# ${component.tagName} - Angular\n`)
   sections.push(`## Import\n`)
   sections.push('```typescript')
-  sections.push(`import { ${component.className}Component } from '@sebgroup/green-core-ng'`)
+  sections.push(
+    `import { ${component.className}Component } from '@sebgroup/green-core-ng'`,
+  )
   sections.push('```\n')
 
   sections.push(`## Usage\n`)
   sections.push(`Use the component in your Angular templates:\n`)
   sections.push('```html')
-  sections.push(`<${component.tagName}>`)
-  if (component.subcomponents && component.subcomponents.length > 0) {
-    for (const sub of component.subcomponents) {
-      sections.push(`  <${sub.tagName}>...</${sub.tagName}>`)
-    }
+
+  const hasSlots = component.slots.length > 0
+  const hasSubcomponents =
+    component.subcomponents && component.subcomponents.length > 0
+
+  if (!hasSlots && !hasSubcomponents) {
+    // Self-closing for components without slots or subcomponents
+    sections.push(`<${component.tagName}></${component.tagName}>`)
   } else {
-    sections.push('  <!-- content -->')
+    sections.push(`<${component.tagName}>`)
+    if (hasSubcomponents) {
+      for (const sub of component.subcomponents!) {
+        sections.push(`  <${sub.tagName}>...</${sub.tagName}>`)
+      }
+    } else if (hasSlots) {
+      sections.push('  <!-- content -->')
+    }
+    sections.push(`</${component.tagName}>`)
   }
-  sections.push(`</${component.tagName}>`)
+
   sections.push('```\n')
 
   // Event handlers
   if (component.events.length > 0) {
     sections.push(`## Event Handling\n`)
-    sections.push('Events are emitted using Angular output syntax. Event names are converted from kebab-case to camelCase:\n')
+    sections.push(
+      'Events are emitted using Angular output syntax. Event names are converted from kebab-case to camelCase:\n',
+    )
     sections.push('| Web Component Event | Angular Output | Handler Example |')
     sections.push('|---------------------|----------------|-----------------|')
 
     for (const event of component.events) {
       const angularEventName = kebabToCamelCase(event.name)
       const example = `(${angularEventName})="handler($event)"`
-      sections.push(`| \`${event.name}\` | \`${angularEventName}\` | \`${example}\` |`)
+      sections.push(
+        `| \`${event.name}\` | \`${angularEventName}\` | \`${example}\` |`,
+      )
     }
     sections.push('')
   }
@@ -472,35 +515,56 @@ function generateReactMarkdown(component: ComponentData): string {
   sections.push(`# ${component.tagName} - React\n`)
   sections.push(`## Import\n`)
   sections.push('```typescript')
-  sections.push(`import { ${component.className} } from '@sebgroup/green-core/react'`)
+  sections.push(
+    `import { ${component.className} } from '@sebgroup/green-core/react'`,
+  )
   sections.push('```\n')
 
   sections.push(`## Usage\n`)
   sections.push(`Use the component as a React JSX element:\n`)
   sections.push('```tsx')
-  sections.push(`<${component.className}>`)
-  if (component.subcomponents && component.subcomponents.length > 0) {
-    for (const sub of component.subcomponents) {
-      const subClassName = toPascalCase(sub.tagName)
-      sections.push(`  <${subClassName}>...</${subClassName}>`)
-    }
+
+  const hasSlots = component.slots.length > 0
+  const hasSubcomponents =
+    component.subcomponents && component.subcomponents.length > 0
+
+  if (!hasSlots && !hasSubcomponents) {
+    // Self-closing for components without slots or subcomponents
+    sections.push(`<${component.className} />`)
   } else {
-    sections.push('  {/* content */}')
+    sections.push(`<${component.className}>`)
+    if (hasSubcomponents) {
+      for (const sub of component.subcomponents!) {
+        const subClassName = toPascalCase(sub.tagName)
+        sections.push(`  <${subClassName}>...</${subClassName}>`)
+      }
+    } else if (hasSlots) {
+      sections.push('  {/* content */}')
+    }
+    sections.push(`</${component.className}>`)
   }
-  sections.push(`</${component.className}>`)
+
   sections.push('```\n')
 
   // Event handlers
   if (component.events.length > 0) {
     sections.push(`## Event Handling\n`)
-    sections.push('Events are handled using React event handler props. Event names are converted from kebab-case to camelCase with an "on" prefix:\n')
-    sections.push('| Web Component Event | React Handler Prop | Handler Example |')
-    sections.push('|---------------------|--------------------|-----------------|')
+    sections.push(
+      'Events are handled using React event handler props. Event names are converted from kebab-case to camelCase with an "on" prefix:\n',
+    )
+    sections.push(
+      '| Web Component Event | React Handler Prop | Handler Example |',
+    )
+    sections.push(
+      '|---------------------|--------------------|-----------------|',
+    )
 
     for (const event of component.events) {
       const reactHandlerName = reactEventHandlerName(event.name)
       const example = `${reactHandlerName}={handler}`
-      sections.push(`| \`${event.name}\` | \`${reactHandlerName}\` | \`${example}\` |`)
+      sections.push(
+        `| \`${event.name}\` | \`${reactHandlerName}\` | \`${example}\` |`,
+      )
     }
     sections.push('')
   }
@@ -513,7 +577,7 @@ function generateReactMarkdown(component: ComponentData): string {
  */
 async function processComponent(
   component: ComponentData,
-  guidelinesMap: Map<string, GuidelineEntry>
+  guidelinesMap: Map<string, GuidelineEntry>,
 ): Promise<void> {
   console.log(`\n📦 Processing: ${component.tagName}`)
 
@@ -522,7 +586,12 @@ async function processComponent(
   const outputDir = path.join(OUTPUT_DIR, dirName)
 
   // Get the directory where the component source file is located
-  const componentSourceDir = path.join(__dirname, '..', path.dirname(component.sourcePath))
+  // component.sourcePath is relative to libs/core/, e.g. 'src/components/radio/radio.ts'
+  const componentSourceDir = path.join(
+    __dirname,
+    '../..',
+    path.dirname(component.sourcePath),
+  )
 
   // Create output directory
   await fs.mkdir(outputDir, { recursive: true })
@@ -534,7 +603,7 @@ async function processComponent(
 
   // Add subcomponents to index if present
   if (component.subcomponents && component.subcomponents.length > 0) {
-    index.subcomponents = component.subcomponents.map(sub => ({
+    index.subcomponents = component.subcomponents.map((sub) => ({
       tagName: sub.tagName,
       description: sub.description,
     }))
@@ -585,7 +654,9 @@ async function processComponent(
       console.error('  ❌ Failed to fetch guidelines:', error)
     }
   } else {
-    console.log(`  ⚠️  No guideline found for normalized name: ${normalizedName}`)
+    console.log(
+      `  ⚠️  No guideline found for normalized name: ${normalizedName}`,
+    )
   }
 
   // Generate Angular documentation
@@ -623,7 +694,10 @@ async function processComponent(
 /**
  * Generates the global MCP index listing all components
  */
-async function generateGlobalIndex(processedComponents: Array<{ component: ComponentData, dirName: string }>, guides: MCPGlobalIndex['guides']): Promise<void> {
+async function generateGlobalIndex(
+  processedComponents: Array<{ component: ComponentData; dirName: string }>,
+  guides: MCPGlobalIndex['guides'],
+): Promise<void> {
   console.log('\n📋 Generating global index...')
 
   const indexComponents: MCPComponentsIndex['components'] = []
@@ -661,7 +735,7 @@ async function generateGlobalIndex(processedComponents: Array<{ component: Compo
       } else {
         indexComponents.push({
           ...entry,
-          subcomponents: componentIndex.subcomponents
+          subcomponents: componentIndex.subcomponents,
         })
       }
     } catch (error) {
@@ -679,19 +753,27 @@ async function generateGlobalIndex(processedComponents: Array<{ component: Compo
   const componentsIndex: MCPComponentsIndex = {
     version: '1.0.0',
     generatedAt: timestamp,
-    components: indexComponents
+    components: indexComponents,
   }
   const componentsIndexPath = path.join(OUTPUT_DIR, 'components.json')
-  await fs.writeFile(componentsIndexPath, JSON.stringify(componentsIndex, null, 2), 'utf-8')
+  await fs.writeFile(
+    componentsIndexPath,
+    JSON.stringify(componentsIndex, null, 2),
+    'utf-8',
+  )
 
   // Write icons index
   const iconsIndex: MCPIconsIndex = {
     version: '1.0.0',
     generatedAt: timestamp,
-    icons: indexIcons
+    icons: indexIcons,
   }
   const iconsIndexPath = path.join(OUTPUT_DIR, 'icons.json')
-  await fs.writeFile(iconsIndexPath, JSON.stringify(iconsIndex, null, 2), 'utf-8')
+  await fs.writeFile(
+    iconsIndexPath,
+    JSON.stringify(iconsIndex, null, 2),
+    'utf-8',
+  )
 
   // Write global index with references
   const globalIndex: MCPGlobalIndex = {
@@ -699,12 +781,18 @@ async function generateGlobalIndex(processedComponents: Array<{ component: Compo
     generatedAt: timestamp,
     components: './components.json',
     icons: './icons.json',
-    guides
+    guides,
   }
   const globalIndexPath = path.join(OUTPUT_DIR, 'index.json')
-  await fs.writeFile(globalIndexPath, JSON.stringify(globalIndex, null, 2), 'utf-8')
+  await fs.writeFile(
+    globalIndexPath,
+    JSON.stringify(globalIndex, null, 2),
+    'utf-8',
+  )
 
-  console.log(`✅ Generated components index with ${indexComponents.length} components`)
+  console.log(
+    `✅ Generated components index with ${indexComponents.length} components`,
+  )
   console.log(`✅ Generated icons index with ${indexIcons.length} icons`)
   console.log(`✅ Generated global index with ${guides.length} guides`)
 }
@@ -743,7 +831,7 @@ async function processGuides(): Promise<MCPGlobalIndex['guides']> {
           path: guide.output,
           category: guide.category,
           description: guide.description,
-          tags: guide.tags
+          tags: guide.tags,
         })
 
         console.log(`  ✅ ${guide.title}`)
@@ -769,7 +857,9 @@ async function main() {
   try {
     // Parse all components from custom-elements.json
     console.log('📖 Parsing component metadata...')
-    const { components } = await CemParser.parseAllComponents('../../../custom-elements.json')
+    const { components } = await CemParser.parseAllComponents(
+      '../../../custom-elements.json',
+    )
     console.log(`✅ Found ${components.length} components\n`)
 
     // Fetch guidelines
@@ -778,7 +868,10 @@ async function main() {
     // Process each component
     let successCount = 0
     let errorCount = 0
-    const processedComponents: Array<{ component: ComponentData, dirName: string }> = []
+    const processedComponents: Array<{
+      component: ComponentData
+      dirName: string
+    }> = []
 
     for (const component of components) {
       try {
@@ -820,7 +913,6 @@ async function main() {
     console.log(`   📁 Output: ${OUTPUT_DIR}`)
     console.log('='.repeat(60))
     console.log('\n✨ MCP data generation complete!\n')
-
   } catch (error) {
     console.error('💥 Fatal error:', error)
     process.exit(1)
