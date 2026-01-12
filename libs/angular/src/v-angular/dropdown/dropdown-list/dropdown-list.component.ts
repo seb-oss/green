@@ -26,10 +26,10 @@ import {
 } from '@sebgroup/green-angular/src/v-angular/core'
 
 @Component({
-    selector: 'nggv-dropdown-list',
-    templateUrl: './dropdown-list.component.html',
-    styleUrls: ['./dropdown-list.component.scss'],
-    standalone: false
+  selector: 'nggv-dropdown-list',
+  templateUrl: './dropdown-list.component.html',
+  styleUrls: ['./dropdown-list.component.scss'],
+  standalone: false,
 })
 export class NggvDropdownListComponent implements OnInit, OnChanges {
   @Input() set expanded(state: boolean) {
@@ -99,7 +99,7 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
    * Use this for post-close tasks that must run after subscriptions are torn down and resources released.
    */
   @Output() afterClose = new EventEmitter<void>()
-  
+
   /** The current active option based on numeric index. */
   public activeIndex = -1
 
@@ -367,7 +367,7 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
   scrollToResult(option: any, focusElement?: boolean) {
     if (!this.optionRefs || !option) return
     const optionRef = this.optionRefs.find(
-      (li) => li.nativeElement.id === this.id + '-option-' + option.key,
+      (li) => li.nativeElement.id === this.id + '-option-' + (option.id ?? option.key),
     )
     const offset = this.scrollOffset
     if (optionRef) {

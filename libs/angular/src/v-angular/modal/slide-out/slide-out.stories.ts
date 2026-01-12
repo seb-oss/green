@@ -97,6 +97,7 @@ export const Primary: Story = {
     <nggv-slideout-modal #slideOut
       [initiallyShown]="initiallyShown"
       [closable]="closable"
+      [closableOutside]="closableOutside"
       [content]="content"
       [title]="title"
       [buttons]="buttons"
@@ -139,6 +140,7 @@ export const Primary: Story = {
     initiallyShown: true,
     autoWidth: false,
     closable: true,
+    closableOutside: true,
     buttons: {
       negative: 'button_cancel',
       neutral: 'button_apply',

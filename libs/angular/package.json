@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/green-angular",
-  "version": "7.1.0",
+  "version": "7.2.0",
   "peerDependencies": {
     "@angular/cdk": ">=19",
     "@angular/common": ">=19",
