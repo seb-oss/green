@@ -6,6 +6,7 @@
 
 - **ALWAYS read the declarative layout guide before creating any layout**
 - **Read component-specific instructions.md when available**
+- **NEVER guess or assume component API. ALWAYS look up properties in the API docs**
 - **Verify full context understanding before writing code**
 - **Ask user for clarification if ANY requirement is unclear**
 - **For new apps, ALWAYS read the setup guide for the used framework (Angular or React)**
@@ -49,11 +50,10 @@
 
 ### Required Reading Order
 
-1. Declarative layout guide (if creating layout)
-2. Component api.md (target component)
-3. Component instructions.md (if exists)
-4. Component guidelines.md (if exists)
-5. Framework-specific guide (angular.md or react.md)
+1. Component api.md (target component)
+2. Component instructions.md (if exists)
+3. Component guidelines.md (if exists)
+4. Framework-specific guide (angular.md or react.md)
 
 ### Resource Reference
 
