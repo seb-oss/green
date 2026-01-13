@@ -432,12 +432,10 @@ export class GdsPagination extends withMarginProps(
   }
 
   #handlePageChange(newPage: number) {
-    this.dispatchEvent(
-      new CustomEvent('gds-page-change', {
-        detail: { page: newPage },
-        bubbles: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-page-change', {
+      detail: { page: newPage },
+      bubbles: true,
+    })
   }
 
   #handlePageSizeMenuClick(e: CustomEvent) {
@@ -445,12 +443,10 @@ export class GdsPagination extends withMarginProps(
     const limit = parseInt(item.dataset.value || '10')
 
     if (limit !== this.rows) {
-      this.dispatchEvent(
-        new CustomEvent('gds-rows-change', {
-          detail: { rows: limit },
-          bubbles: true,
-        }),
-      )
+      this.dispatchCustomEvent('gds-rows-change', {
+        detail: { rows: limit },
+        bubbles: true,
+      })
     }
   }
 
