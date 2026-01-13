@@ -11,7 +11,8 @@
     "*.tsx",
     "*.stories.tsx",
     "*.test.ts",
-    ".storybook/*"
+    ".storybook/*",
+    "src/bin/*"
   ],
   "overrides": [
     {
