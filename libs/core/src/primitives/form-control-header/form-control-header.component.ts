@@ -77,6 +77,14 @@ export class GdsFormControlHeader extends GdsElement {
   }
 
   #handleExtSupTxtBtnClick = () => {
+    const shouldEventHappen = this.dispatchCustomEvent('gds-ui-state', {
+      bubbles: true,
+      composed: true,
+      detail: this.showExtendedSupportingText,
+    })
+
+    if (!shouldEventHappen) return
+
     this.showExtendedSupportingText = !this.showExtendedSupportingText
 
     // Set max-height to the height of the slotted content
@@ -86,12 +94,6 @@ export class GdsFormControlHeader extends GdsElement {
         ? `${this._extendedSupportingText.scrollHeight}px`
         : '0',
     )
-
-    this.dispatchCustomEvent('gds-ui-state', {
-      bubbles: true,
-      composed: true,
-      detail: this.showExtendedSupportingText,
-    })
   }
 
   /**
