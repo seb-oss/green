@@ -2,14 +2,16 @@ import {
   ListResourcesRequestSchema,
   ReadResourceRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js'
+
 import type { Server } from '@modelcontextprotocol/sdk/server/index.js'
+
 import {
-  loadComponentsIndex,
-  loadIconsIndex,
-  loadGlobalIndex,
-  readMcpFile,
   buildResourceUri,
+  loadComponentsIndex,
+  loadGlobalIndex,
+  loadIconsIndex,
   parseResourceUri,
+  readMcpFile,
 } from './utils.js'
 
 /**
@@ -90,15 +92,20 @@ export function setupResourceHandlers(server: Server): void {
           resources.push({
             uri: 'green://instructions',
             name: 'Green Design System Instructions',
-            description: 'General instructions and guidelines for agents using the Green Design System MCP',
+            description:
+              'General instructions and guidelines for agents using the Green Design System MCP',
             mimeType: 'text/markdown',
           })
         }
 
         for (const guide of globalIndex.guides) {
           // Extract name from path (e.g., 'guides/angular.md' -> 'angular')
-          const name = guide.path.replace(/^(guides|concepts)\//, '').replace(/\.md$/, '')
-          const category = guide.path.startsWith('guides/') ? 'guides' : 'concepts'
+          const name = guide.path
+            .replace(/^(guides|concepts)\//, '')
+            .replace(/\.md$/, '')
+          const category = guide.path.startsWith('guides/')
+            ? 'guides'
+            : 'concepts'
           const uri = buildResourceUri(category as 'guides' | 'concepts', name)
 
           resources.push({

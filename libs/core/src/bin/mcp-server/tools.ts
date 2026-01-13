@@ -54,24 +54,24 @@ export function setupToolHandlers(server: Server): void {
               splitTerms: {
                 type: 'boolean',
                 description:
-                  "Split query on spaces and commas to search for multiple terms. Default: true",
+                  'Split query on spaces and commas to search for multiple terms. Default: true',
                 default: true,
               },
               matchAll: {
                 type: 'boolean',
                 description:
-                  "When splitTerms is true, require ALL terms to match (AND logic). Default: false (OR logic)",
+                  'When splitTerms is true, require ALL terms to match (AND logic). Default: false (OR logic)',
                 default: false,
               },
               useRegex: {
                 type: 'boolean',
                 description:
-                  "Treat query as a regular expression pattern. Default: false",
+                  'Treat query as a regular expression pattern. Default: false',
                 default: false,
               },
               maxResults: {
                 type: 'number',
-                description: "Maximum number of results to return. Default: 20",
+                description: 'Maximum number of results to return. Default: 20',
                 default: 20,
               },
             },
@@ -292,8 +292,10 @@ async function handleSearchComponents(input: SearchComponentsInput) {
         if (matches) {
           // Determine tier for regex matches
           if (regexPattern.test(tagName)) {
-            if (tagName === query.toLowerCase()) return { matches: true, tier: 1, matchedTerms: 1 }
-            if (tagName.startsWith(query.toLowerCase())) return { matches: true, tier: 2, matchedTerms: 1 }
+            if (tagName === query.toLowerCase())
+              return { matches: true, tier: 1, matchedTerms: 1 }
+            if (tagName.startsWith(query.toLowerCase()))
+              return { matches: true, tier: 2, matchedTerms: 1 }
             return { matches: true, tier: 3, matchedTerms: 1 }
           }
           return { matches: true, tier: 4, matchedTerms: 1 }
@@ -315,7 +317,10 @@ async function handleSearchComponents(input: SearchComponentsInput) {
           termTier = Math.min(termTier, 1)
         }
         // Check starts with
-        else if (tagName.startsWith(term) || tagName.startsWith(`gds-${term}`)) {
+        else if (
+          tagName.startsWith(term) ||
+          tagName.startsWith(`gds-${term}`)
+        ) {
           termMatched = true
           termTier = Math.min(termTier, 2)
         }
@@ -391,7 +396,11 @@ async function handleSearchComponents(input: SearchComponentsInput) {
           const resourceUris: { [key: string]: string } = {}
 
           for (const docType of icon.files) {
-            resourceUris[docType] = buildResourceUri('icons', shortName, docType)
+            resourceUris[docType] = buildResourceUri(
+              'icons',
+              shortName,
+              docType,
+            )
           }
 
           results.push({
@@ -518,6 +527,36 @@ async function handleGetComponentDocs(input: GetComponentDocsInput) {
         // Remove the title from the fetched content if it exists (we added our own)
         const contentWithoutTitle = content.replace(/^#\s+.*?\n/, '')
         sections.push(contentWithoutTitle)
+        sections.push('')
+      }
+    }
+
+    // Always include API reference for framework-specific docs
+    // This ensures agents have complete property/event/slot/method information
+    if (
+      (framework === 'angular' || framework === 'react') &&
+      found.files.includes('api')
+    ) {
+      const apiContent = await readMcpFile(`${shortName}/api.md`)
+      if (apiContent) {
+        sections.push('---')
+        sections.push('')
+        sections.push('## Component API Reference')
+        sections.push('')
+        sections.push(
+          'The following properties, events, slots, and methods are available:',
+        )
+        sections.push('')
+
+        // Remove the title and class/tag info from API content (already shown above)
+        // Keep only the Properties, Events, Slots, Methods sections
+        const apiWithoutHeader = apiContent
+          .replace(/^#\s+.*?\n/, '')
+          .replace(/\*\*Class\*\*:.*?\n/, '')
+          .replace(/\*\*Tag\*\*:.*?\n/, '')
+          .trim()
+
+        sections.push(apiWithoutHeader)
         sections.push('')
       }
     }
