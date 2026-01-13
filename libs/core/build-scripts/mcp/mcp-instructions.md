@@ -1,5 +1,7 @@
 # Green Design System - MCP Instructions
 
+Welcome to the GDS MCP! Below are essential instructions to follow when creating code for apps using GDS components. You should also query the MCP to find out which tools and resources are available. Avoid assuming tool and resource names!
+
 ## Component Architecture
 
 - All components use `gds-` prefix
@@ -13,7 +15,7 @@
 - **NEVER guess or assume component API. ALWAYS look up properties in the API docs**
 - **Verify full context understanding before writing code**
 - **Ask user for clarification if ANY requirement is unclear**
-- **ALWAYS read the declarative layout guide before creating any layout**
+- **ALWAYS read the declarative layout guide ("declarative-layout") before creating any layout**
 - **For new apps, ALWAYS read the setup guide for the used framework (Angular or React)**
 
 ### Typography Rules
@@ -25,7 +27,7 @@
 ### Layout Rules
 
 - **REQUIRED**: Use declarative layout system for all layouts
-- **REQUIRED**: Read declarative layout guide before implementing any layout
+- **REQUIRED**: Read declarative layout guide ("declarative-layout") before implementing any layout
 - **REQUIRED**: Look up property names in API for each declarative layout component
 - **PREFERRED**: Declarative layout over custom CSS
 - **FORBIDDEN**: Custom CSS for layout unless declarative system cannot support the requirement
