@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-Making gds-ui-state event preventable for extended support text show
+**Input:** Make `gds-ui-state` event cancellable for extended support text show
