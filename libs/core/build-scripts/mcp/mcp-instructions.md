@@ -18,7 +18,7 @@
 
 ### Typography Rules
 
-- **REQUIRED**: Use `gds-text` component for all headings and paragraphs. But don't use inside other components, unless explicitly called for
+- **REQUIRED**: Use `gds-text` component for all headings and paragraphs. But never use inside buttons.
 - **REQUIRED**: Use `gds-rich-text` for large bodies of text with varied formatting
 - **AVOID**: Direct HTML text elements (h1-h6, p, span), as these will be unstyled
 
