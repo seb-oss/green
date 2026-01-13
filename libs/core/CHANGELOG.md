@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.22.0
+
+### Minor Changes
+
+- b9a8c83: **Coachmarks:** Make `gds-ui-state` event cancellable
+
+### Patch Changes
+
+- bca44e8: **Input:** Make `gds-ui-state` event cancellable for extended support text show
+- 7f6ae80: **Pagination:** Dispatch React compatible events
+
 ## 2.21.0
 
 ### Minor Changes
