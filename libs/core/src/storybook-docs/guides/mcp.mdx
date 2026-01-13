@@ -1,0 +1,55 @@
+import { Meta, Markdown } from '@storybook/addon-docs/blocks'
+
+<Meta title="MCP for coding agents" />
+
+This guide helps you set up the Green Design System MCP (Model Context Protocol) server to work with GitHub Copilot in VS Code.
+
+## What is this?
+
+The Green MCP server provides AI agents like GitHub Copilot with direct access to:
+- Green component documentation
+- Framework-specific guides (Angular, React)
+- Design guidelines
+- Setup and troubleshooting documentation
+
+This helps Copilot give you accurate, up-to-date information about Green components when you're coding.
+
+## Setting up the MCP server
+
+Create a new file in `.vscode/mcp.json` in your project with the following content:
+
+```json
+{
+  "servers": {
+    "Green Core MCP": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["./node_modules/@sebgroup/green-core/bin/mcp-server"]
+    }
+  }
+}
+```
+
+This tells VS Code to start the Green MCP server whenever you open the project. You should also be able to see it listed under "MCP Servers" on the Extensions tab. From there you can also start or restart the server if needed.
+
+Now that you have the server set up, you should also add some base instrctions to tell the agent to make use of the MCP.
+
+Create a new file in `.github/copilot-instructions.md` in your project and use this template:
+
+```markdown
+# Green Design System Components
+
+This app is built in Angular using Green Design System components.
+
+When using Green components, ALWAYS refer to the Green MCP server for component documentation, guidelines, and instructions.
+
+ALWAYS start by reading the main instructions by using the `get_instructions` tool from the MCP server.
+```
+
+You can change `Angular` to `React` or whatever framework you are using, and tailor the instructions in general to fit your needs.
+
+## Troubleshooting
+
+If Copilot is not using the MCP server correctly, try restarting the MCP server from the Extensions tab in VS Code.
+
+You can also try asking the agent itself if it can access the Green MCP server or if it has trouble finding necessary documentation.
