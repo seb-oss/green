@@ -468,147 +468,143 @@ async function handleGetComponentDocs(input: GetComponentDocsInput) {
     includeInstructions = true,
   } = input
 
-  try {
-    // Load indexes
-    const [componentsIndex, iconsIndex] = await Promise.all([
-      loadComponentsIndex(),
-      loadIconsIndex(),
-    ])
+  // Load indexes
+  const [componentsIndex, iconsIndex] = await Promise.all([
+    loadComponentsIndex(),
+    loadIconsIndex(),
+  ])
 
-    if (!componentsIndex || !iconsIndex) {
-      throw new Error('Failed to load component indexes')
-    }
+  if (!componentsIndex || !iconsIndex) {
+    throw new Error('Failed to load component indexes')
+  }
 
-    // Find the component
-    const component = findComponent(componentName, componentsIndex.components)
-    const icon = component ? null : findIcon(componentName, iconsIndex.icons)
-    const found = component || icon
+  // Find the component
+  const component = findComponent(componentName, componentsIndex.components)
+  const icon = component ? null : findIcon(componentName, iconsIndex.icons)
+  const found = component || icon
 
-    if (!found) {
-      throw new Error(
-        `Component not found: ${componentName}. Try using the search_components tool to find available components.`,
-      )
-    }
+  if (!found) {
+    throw new Error(
+      `Component not found: ${componentName}. Try using the search_components tool to find available components.`,
+    )
+  }
 
-    const shortName = found.tagName.replace(/^gds-/, '')
-    const category = component ? 'components' : 'icons'
-    const sections: string[] = []
+  const shortName = found.tagName.replace(/^gds-/, '')
+  const category = component ? 'components' : 'icons'
+  const sections: string[] = []
 
-    // Determine which doc to fetch based on framework
-    let primaryDoc: string
-    if (framework === 'angular') {
-      primaryDoc = 'angular'
-    } else if (framework === 'react') {
-      primaryDoc = 'react'
-    } else {
-      primaryDoc = 'api'
-    }
+  // Determine which doc to fetch based on framework
+  let primaryDoc: string
+  if (framework === 'angular') {
+    primaryDoc = 'angular'
+  } else if (framework === 'react') {
+    primaryDoc = 'react'
+  } else {
+    primaryDoc = 'api'
+  }
 
-    // Add framework-specific header
+  // Add framework-specific header
+  sections.push(
+    `# ${found.tagName} - ${framework.charAt(0).toUpperCase() + framework.slice(1)}`,
+  )
+  sections.push('')
+
+  if (framework === 'angular' || framework === 'react') {
     sections.push(
-      `# ${found.tagName} - ${framework.charAt(0).toUpperCase() + framework.slice(1)}`,
+      `⚠️ **${framework.charAt(0).toUpperCase() + framework.slice(1)}-Specific Documentation**`,
+    )
+    sections.push(
+      `The import paths and syntax below are for ${framework.charAt(0).toUpperCase() + framework.slice(1)} applications.`,
     )
     sections.push('')
+  }
 
-    if (framework === 'angular' || framework === 'react') {
-      sections.push(
-        `⚠️ **${framework.charAt(0).toUpperCase() + framework.slice(1)}-Specific Documentation**`,
-      )
-      sections.push(
-        `The import paths and syntax below are for ${framework.charAt(0).toUpperCase() + framework.slice(1)} applications.`,
-      )
+  // Fetch primary documentation
+  if (found.files.includes(primaryDoc)) {
+    const content = await readMcpFile(`${shortName}/${primaryDoc}.md`)
+    if (content) {
+      // Remove the title from the fetched content if it exists (we added our own)
+      const contentWithoutTitle = content.replace(/^#\s+.*?\n/, '')
+      sections.push(contentWithoutTitle)
       sections.push('')
     }
+  }
 
-    // Fetch primary documentation
-    if (found.files.includes(primaryDoc)) {
-      const content = await readMcpFile(`${shortName}/${primaryDoc}.md`)
-      if (content) {
-        // Remove the title from the fetched content if it exists (we added our own)
-        const contentWithoutTitle = content.replace(/^#\s+.*?\n/, '')
-        sections.push(contentWithoutTitle)
-        sections.push('')
-      }
+  // Always include API reference for framework-specific docs
+  // This ensures agents have complete property/event/slot/method information
+  if (
+    (framework === 'angular' || framework === 'react') &&
+    found.files.includes('api')
+  ) {
+    const apiContent = await readMcpFile(`${shortName}/api.md`)
+    if (apiContent) {
+      sections.push('---')
+      sections.push('')
+      sections.push('## Component API Reference')
+      sections.push('')
+      sections.push(
+        'The following properties, events, slots, and methods are available:',
+      )
+      sections.push('')
+
+      // Remove the title and class/tag info from API content (already shown above)
+      // Keep only the Properties, Events, Slots, Methods sections
+      const apiWithoutHeader = apiContent
+        .replace(/^#\s+.*?\n/, '')
+        .replace(/\*\*Class\*\*:.*?\n/, '')
+        .replace(/\*\*Tag\*\*:.*?\n/, '')
+        .trim()
+
+      sections.push(apiWithoutHeader)
+      sections.push('')
     }
+  }
 
-    // Always include API reference for framework-specific docs
-    // This ensures agents have complete property/event/slot/method information
-    if (
-      (framework === 'angular' || framework === 'react') &&
-      found.files.includes('api')
-    ) {
-      const apiContent = await readMcpFile(`${shortName}/api.md`)
-      if (apiContent) {
-        sections.push('---')
-        sections.push('')
-        sections.push('## Component API Reference')
-        sections.push('')
-        sections.push(
-          'The following properties, events, slots, and methods are available:',
-        )
-        sections.push('')
-
-        // Remove the title and class/tag info from API content (already shown above)
-        // Keep only the Properties, Events, Slots, Methods sections
-        const apiWithoutHeader = apiContent
-          .replace(/^#\s+.*?\n/, '')
-          .replace(/\*\*Class\*\*:.*?\n/, '')
-          .replace(/\*\*Tag\*\*:.*?\n/, '')
-          .trim()
-
-        sections.push(apiWithoutHeader)
-        sections.push('')
-      }
+  // Add guidelines if requested
+  if (includeGuidelines && found.files.includes('guidelines')) {
+    const guidelines = await readMcpFile(`${shortName}/guidelines.md`)
+    if (guidelines) {
+      sections.push('---')
+      sections.push('')
+      sections.push('## Design Guidelines')
+      sections.push('')
+      sections.push(guidelines)
+      sections.push('')
     }
+  }
 
-    // Add guidelines if requested
-    if (includeGuidelines && found.files.includes('guidelines')) {
-      const guidelines = await readMcpFile(`${shortName}/guidelines.md`)
-      if (guidelines) {
-        sections.push('---')
-        sections.push('')
-        sections.push('## Design Guidelines')
-        sections.push('')
-        sections.push(guidelines)
-        sections.push('')
-      }
+  // Add instructions if requested
+  if (includeInstructions && found.files.includes('instructions')) {
+    const instructions = await readMcpFile(`${shortName}/instructions.md`)
+    if (instructions) {
+      sections.push('---')
+      sections.push('')
+      sections.push('## Usage Instructions')
+      sections.push('')
+      sections.push(instructions)
+      sections.push('')
     }
+  }
 
-    // Add instructions if requested
-    if (includeInstructions && found.files.includes('instructions')) {
-      const instructions = await readMcpFile(`${shortName}/instructions.md`)
-      if (instructions) {
-        sections.push('---')
-        sections.push('')
-        sections.push('## Usage Instructions')
-        sections.push('')
-        sections.push(instructions)
-        sections.push('')
-      }
-    }
+  // Add framework reminder
+  sections.push('---')
+  sections.push('')
+  sections.push('💡 **Using a different framework?**')
+  sections.push('Call this tool again with:')
+  if (framework !== 'angular')
+    sections.push('- `framework: "angular"` for Angular documentation')
+  if (framework !== 'react')
+    sections.push('- `framework: "react"` for React documentation')
+  if (framework !== 'web-component')
+    sections.push('- `framework: "web-component"` for vanilla JS usage')
 
-    // Add framework reminder
-    sections.push('---')
-    sections.push('')
-    sections.push('💡 **Using a different framework?**')
-    sections.push('Call this tool again with:')
-    if (framework !== 'angular')
-      sections.push('- `framework: "angular"` for Angular documentation')
-    if (framework !== 'react')
-      sections.push('- `framework: "react"` for React documentation')
-    if (framework !== 'web-component')
-      sections.push('- `framework: "web-component"` for vanilla JS usage')
-
-    return {
-      content: [
-        {
-          type: 'text',
-          text: sections.join('\n'),
-        },
-      ],
-    }
-  } catch (error) {
-    throw error
+  return {
+    content: [
+      {
+        type: 'text',
+        text: sections.join('\n'),
+      },
+    ],
   }
 }
 
