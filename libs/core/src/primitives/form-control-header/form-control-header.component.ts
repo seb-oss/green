@@ -81,7 +81,7 @@ export class GdsFormControlHeader extends GdsElement {
       bubbles: true,
       composed: true,
       detail: this.showExtendedSupportingText,
-      cancellable: true
+      cancelable: true
     })
 
     if (!shouldEventHappen) return
