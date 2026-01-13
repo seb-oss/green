@@ -113,6 +113,10 @@ export interface SearchResult {
 export interface SearchComponentsInput {
   query: string
   category?: Category
+  splitTerms?: boolean
+  matchAll?: boolean
+  useRegex?: boolean
+  maxResults?: number
 }
 
 export interface GetComponentDocsInput {

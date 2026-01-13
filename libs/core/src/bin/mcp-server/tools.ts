@@ -16,8 +16,10 @@ import {
 } from './utils.js'
 
 import type {
+  ComponentEntry,
   GetComponentDocsInput,
   GetGuideInput,
+  IconEntry,
   ListGuidesInput,
   SearchComponentsInput,
   SearchResult,
@@ -34,20 +36,43 @@ export function setupToolHandlers(server: Server): void {
         {
           name: 'search_components',
           description:
-            "Search for Green Design System components by name, description, or functionality. Use this when you don't know the exact component name or want to discover available components.",
+            "Search for Green Design System components by name, description, or functionality. Use this when you don't know the exact component name or want to discover available components. Supports multi-term searches and regex patterns.",
           inputSchema: {
             type: 'object',
             properties: {
               query: {
                 type: 'string',
                 description:
-                  "Component name or search term (e.g., 'button', 'dropdown', 'form input', 'arrow icon')",
+                  "Component name or search term. Can be multiple terms separated by spaces/commas (e.g., 'button input radio'). Use regex format (e.g., '^gds-button') if useRegex is true.",
               },
               category: {
                 type: 'string',
                 enum: ['component', 'icon', 'all'],
                 description: "Filter by type. Default: 'all'",
                 default: 'all',
+              },
+              splitTerms: {
+                type: 'boolean',
+                description:
+                  "Split query on spaces and commas to search for multiple terms. Default: true",
+                default: true,
+              },
+              matchAll: {
+                type: 'boolean',
+                description:
+                  "When splitTerms is true, require ALL terms to match (AND logic). Default: false (OR logic)",
+                default: false,
+              },
+              useRegex: {
+                type: 'boolean',
+                description:
+                  "Treat query as a regular expression pattern. Default: false",
+                default: false,
+              },
+              maxResults: {
+                type: 'number',
+                description: "Maximum number of results to return. Default: 20",
+                default: 20,
               },
             },
             required: ['query'],
@@ -193,11 +218,51 @@ export function setupToolHandlers(server: Server): void {
  * Handle search_components tool
  */
 async function handleSearchComponents(input: SearchComponentsInput) {
-  const { query, category = 'all' } = input
-  const results: SearchResult[] = []
-  const queryLower = query.toLowerCase()
+  const {
+    query,
+    category = 'all',
+    splitTerms = true,
+    matchAll = false,
+    useRegex = false,
+    maxResults = 20,
+  } = input
+
+  type ResultWithTier = SearchResult & { tier: number; matchedTerms: number }
+  const results: ResultWithTier[] = []
 
   try {
+    // Parse query into search terms
+    let searchTerms: string[]
+    let regexPattern: RegExp | null = null
+
+    if (useRegex) {
+      // Validate and create regex with safety limits
+      try {
+        // Limit regex complexity to prevent ReDoS
+        if (query.length > 100) {
+          throw new Error('Regex pattern too long (max 100 characters)')
+        }
+        regexPattern = new RegExp(query, 'i')
+        searchTerms = [query] // Keep original for display
+      } catch (error) {
+        throw new Error(
+          `Invalid regex pattern: ${error instanceof Error ? error.message : 'unknown error'}`,
+        )
+      }
+    } else if (splitTerms) {
+      // Split on spaces and commas, remove empty strings
+      searchTerms = query
+        .toLowerCase()
+        .split(/[\s,]+/)
+        .filter((term) => term.length > 0)
+    } else {
+      searchTerms = [query.toLowerCase()]
+    }
+
+    if (searchTerms.length === 0) {
+      throw new Error('Query cannot be empty')
+    }
+
     // Load indexes based on category filter
     const loadComponents = category === 'component' || category === 'all'
     const loadIcons = category === 'icon' || category === 'all'
@@ -207,14 +272,87 @@ async function handleSearchComponents(input: SearchComponentsInput) {
       loadIcons ? loadIconsIndex() : Promise.resolve(null),
     ])
 
+    // Helper function to check matches and calculate tier
+    const checkMatches = (
+      item: ComponentEntry | IconEntry,
+    ): { matches: boolean; tier: number; matchedTerms: number } => {
+      const tagName = item.tagName.toLowerCase()
+      const name = item.name.toLowerCase()
+      const className = item.className.toLowerCase()
+      const description = item.description?.toLowerCase() || ''
+
+      if (regexPattern) {
+        // Regex matching
+        const matches =
+          regexPattern.test(tagName) ||
+          regexPattern.test(name) ||
+          regexPattern.test(className) ||
+          regexPattern.test(description)
+
+        if (matches) {
+          // Determine tier for regex matches
+          if (regexPattern.test(tagName)) {
+            if (tagName === query.toLowerCase()) return { matches: true, tier: 1, matchedTerms: 1 }
+            if (tagName.startsWith(query.toLowerCase())) return { matches: true, tier: 2, matchedTerms: 1 }
+            return { matches: true, tier: 3, matchedTerms: 1 }
+          }
+          return { matches: true, tier: 4, matchedTerms: 1 }
+        }
+        return { matches: false, tier: 0, matchedTerms: 0 }
+      }
+
+      // Multi-term matching
+      let matchedTerms = 0
+      let bestTier = 999
+
+      for (const term of searchTerms) {
+        let termMatched = false
+        let termTier = 999
+
+        // Check exact match
+        if (tagName === `gds-${term}` || tagName === term) {
+          termMatched = true
+          termTier = Math.min(termTier, 1)
+        }
+        // Check starts with
+        else if (tagName.startsWith(term) || tagName.startsWith(`gds-${term}`)) {
+          termMatched = true
+          termTier = Math.min(termTier, 2)
+        }
+        // Check contains in tagName
+        else if (tagName.includes(term)) {
+          termMatched = true
+          termTier = Math.min(termTier, 3)
+        }
+        // Check contains in name or className
+        else if (name.includes(term) || className.includes(term)) {
+          termMatched = true
+          termTier = Math.min(termTier, 4)
+        }
+        // Check contains in description
+        else if (description.includes(term)) {
+          termMatched = true
+          termTier = Math.min(termTier, 5)
+        }
+
+        if (termMatched) {
+          matchedTerms++
+          bestTier = Math.min(bestTier, termTier)
+        }
+      }
+
+      // Determine if item matches based on matchAll logic
+      const matches = matchAll
+        ? matchedTerms === searchTerms.length
+        : matchedTerms > 0
+
+      return { matches, tier: matches ? bestTier : 999, matchedTerms }
+    }
+
     // Search components
     if (componentsIndex) {
       for (const component of componentsIndex.components) {
-        const matches =
-          component.tagName.toLowerCase().includes(queryLower) ||
-          component.name.toLowerCase().includes(queryLower) ||
-          component.className.toLowerCase().includes(queryLower) ||
-          component.description?.toLowerCase().includes(queryLower)
+        const { matches, tier, matchedTerms } = checkMatches(component)
 
         if (matches) {
           const shortName = component.tagName.replace(/^gds-/, '')
@@ -236,6 +374,8 @@ async function handleSearchComponents(input: SearchComponentsInput) {
             category: 'component',
             availableDocs: component.files,
             resourceUris,
+            tier,
+            matchedTerms,
           })
         }
       }
@@ -244,22 +384,14 @@ async function handleSearchComponents(input: SearchComponentsInput) {
     // Search icons
     if (iconsIndex) {
       for (const icon of iconsIndex.icons) {
-        const matches =
-          icon.tagName.toLowerCase().includes(queryLower) ||
-          icon.name.toLowerCase().includes(queryLower) ||
-          icon.className.toLowerCase().includes(queryLower) ||
-          icon.description?.toLowerCase().includes(queryLower)
+        const { matches, tier, matchedTerms } = checkMatches(icon)
 
         if (matches) {
           const shortName = icon.tagName.replace(/^gds-/, '')
           const resourceUris: { [key: string]: string } = {}
 
           for (const docType of icon.files) {
-            resourceUris[docType] = buildResourceUri(
-              'icons',
-              shortName,
-              docType,
-            )
+            resourceUris[docType] = buildResourceUri('icons', shortName, docType)
           }
 
           results.push({
@@ -270,22 +402,29 @@ async function handleSearchComponents(input: SearchComponentsInput) {
             category: 'icon',
             availableDocs: icon.files,
             resourceUris,
+            tier,
+            matchedTerms,
           })
         }
       }
     }
 
-    // Sort by relevance (exact matches first)
+    // Tiered sorting:
+    // 1. Sort by tier (lower = better)
+    // 2. Within same tier, sort by number of matched terms (more = better) when splitTerms is true
+    // 3. Within same tier and matched terms, sort alphabetically by tagName
     results.sort((a, b) => {
-      const aExact = a.tagName.toLowerCase() === queryLower
-      const bExact = b.tagName.toLowerCase() === queryLower
-      if (aExact && !bExact) return -1
-      if (!aExact && bExact) return 1
+      if (a.tier !== b.tier) return a.tier - b.tier
+      if (splitTerms && a.matchedTerms !== b.matchedTerms)
+        return b.matchedTerms - a.matchedTerms
       return a.tagName.localeCompare(b.tagName)
     })
 
-    // Limit to top 20 results
-    const limitedResults = results.slice(0, 20)
+    // Limit results and remove tier info from response
+    const limitedResults = results.slice(0, maxResults).map((r) => {
+      const { tier, matchedTerms, ...result } = r
+      return result
+    })
 
     return {
       content: [
