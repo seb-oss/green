@@ -17,8 +17,6 @@ import {
 import * as Table from './table.imports'
 import * as Types from './table.types'
 
-export * as Types from './table.types'
-
 /**
  * @element gds-table
  * @status beta
