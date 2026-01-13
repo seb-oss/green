@@ -85,6 +85,16 @@ export function setupResourceHandlers(server: Server): void {
 
       // Add guide resources
       if (globalIndex) {
+        // Add root instructions if available
+        if (globalIndex.instructions) {
+          resources.push({
+            uri: 'green://instructions',
+            name: 'Green Design System Instructions',
+            description: 'General instructions and guidelines for agents using the Green Design System MCP',
+            mimeType: 'text/markdown',
+          })
+        }
+
         for (const guide of globalIndex.guides) {
           // Extract name from path (e.g., 'guides/angular.md' -> 'angular')
           const name = guide.path.replace(/^(guides|concepts)\//, '').replace(/\.md$/, '')
@@ -112,6 +122,23 @@ export function setupResourceHandlers(server: Server): void {
     const { uri } = request.params
 
     try {
+      // Handle root instructions resource
+      if (uri === 'green://instructions') {
+        const content = await readMcpFile('INSTRUCTIONS.md')
+        if (!content) {
+          throw new Error('Instructions file not found')
+        }
+        return {
+          contents: [
+            {
+              uri,
+              mimeType: 'text/markdown',
+              text: content,
+            },
+          ],
+        }
+      }
+
       const parsed = parseResourceUri(uri)
       if (!parsed) {
         throw new Error(`Invalid resource URI: ${uri}`)

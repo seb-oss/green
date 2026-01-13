@@ -131,6 +131,16 @@ export function setupToolHandlers(server: Server): void {
             required: ['name'],
           },
         },
+        {
+          name: 'get_instructions',
+          description:
+            'Get the base instructions for using the Green Design System MCP. These instructions contain critical rules, typography guidelines, layout system requirements, and general best practices that should be read before implementing any Green components.',
+          inputSchema: {
+            type: 'object',
+            properties: {},
+            required: [],
+          },
+        },
       ],
     }
   })
@@ -156,6 +166,9 @@ export function setupToolHandlers(server: Server): void {
 
         case 'get_guide':
           return await handleGetGuide(args as unknown as GetGuideInput)
+
+        case 'get_instructions':
+          return await handleGetInstructions()
 
         default:
           throw new Error(`Unknown tool: ${name}`)
@@ -525,5 +538,42 @@ async function handleGetGuide(input: GetGuideInput) {
     }
   } catch (error) {
     throw new Error(`Failed to get guide: ${error}`)
+  }
+}
+
+/**
+ * Handle get_instructions tool
+ */
+async function handleGetInstructions() {
+  try {
+    const globalIndex = await loadGlobalIndex()
+
+    if (!globalIndex) {
+      throw new Error('Failed to load global index')
+    }
+
+    if (!globalIndex.instructions) {
+      throw new Error(
+        'Instructions not available. The MCP may not have been generated with instructions support.',
+      )
+    }
+
+    // Read the instructions file
+    const content = await readMcpFile('INSTRUCTIONS.md')
+
+    if (!content) {
+      throw new Error('Instructions file not found')
+    }
+
+    return {
+      content: [
+        {
+          type: 'text',
+          text: content,
+        },
+      ],
+    }
+  } catch (error) {
+    throw new Error(`Failed to get instructions: ${error}`)
   }
 }

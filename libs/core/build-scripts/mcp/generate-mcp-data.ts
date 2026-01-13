@@ -79,6 +79,7 @@ interface MCPIndex {
 interface MCPGlobalIndex {
   version: string
   generatedAt: string
+  instructions?: string // Reference to general instructions file
   components: string // Reference to components.json file
   icons: string // Reference to icons.json file
   guides: Array<{
@@ -697,6 +698,7 @@ async function processComponent(
 async function generateGlobalIndex(
   processedComponents: Array<{ component: ComponentData; dirName: string }>,
   guides: MCPGlobalIndex['guides'],
+  hasInstructions: boolean,
 ): Promise<void> {
   console.log('\n📋 Generating global index...')
 
@@ -779,6 +781,7 @@ async function generateGlobalIndex(
   const globalIndex: MCPGlobalIndex = {
     version: '1.0.0',
     generatedAt: timestamp,
+    ...(hasInstructions && { instructions: './INSTRUCTIONS.md' }),
     components: './components.json',
     icons: './icons.json',
     guides,
@@ -795,6 +798,26 @@ async function generateGlobalIndex(
   )
   console.log(`✅ Generated icons index with ${indexIcons.length} icons`)
   console.log(`✅ Generated global index with ${guides.length} guides`)
+}
+
+/**
+ * Generates root-level instructions file if mcp-instructions.md exists
+ */
+async function generateInstructions(): Promise<boolean> {
+  try {
+    const instructionsSourcePath = path.join(__dirname, 'mcp-instructions.md')
+    await fs.access(instructionsSourcePath)
+
+    const content = await fs.readFile(instructionsSourcePath, 'utf-8')
+    const outputPath = path.join(OUTPUT_DIR, 'INSTRUCTIONS.md')
+    await fs.writeFile(outputPath, content, 'utf-8')
+
+    console.log('✅ Generated root-level INSTRUCTIONS.md')
+    return true
+  } catch {
+    // Instructions file doesn't exist, skip
+    return false
+  }
 }
 
 /**
@@ -888,6 +911,15 @@ async function main() {
       }
     }
 
+    // Generate root-level instructions if available
+    let hasInstructions = false
+    try {
+      hasInstructions = await generateInstructions()
+    } catch (error) {
+      console.error('❌ Failed to generate instructions:', error)
+      errorCount++
+    }
+
     // Process documentation guides
     let guides: MCPGlobalIndex['guides'] = []
     try {
@@ -899,7 +931,7 @@ async function main() {
 
     // Generate global index
     try {
-      await generateGlobalIndex(processedComponents, guides)
+      await generateGlobalIndex(processedComponents, guides, hasInstructions)
     } catch (error) {
       console.error('❌ Failed to generate global index:', error)
       errorCount++

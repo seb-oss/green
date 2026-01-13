@@ -65,6 +65,7 @@ export interface IconsIndex {
 export interface GlobalIndex {
   version: string
   generatedAt: string
+  instructions?: string
   components: string
   icons: string
   guides: GuideEntry[]
