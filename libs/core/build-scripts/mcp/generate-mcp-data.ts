@@ -24,8 +24,23 @@ import {
   ComponentData,
 } from '../../src/utils/helpers/component-meta.js'
 
+import type {
+  DocsConfig,
+  GuidelineContent,
+  GuidelineEntry,
+  MCPComponentsIndex,
+  MCPGlobalIndex,
+  MCPIconsIndex,
+  MCPIndex,
+} from './generate-mcp-data.types.js'
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+const OUTPUT_DIR = path.join(__dirname, '../../src/generated/mcp')
+const GUIDELINES_API_URL = 'https://api.seb.io/components/components.json'
+const GUIDELINES_BASE_URL = 'https://api.seb.io/'
+const DOCS_CONFIG_PATH = path.join(__dirname, 'mcp-docs.config.json')
 
 /**
  * Converts an event name to React event handler convention
@@ -39,107 +54,48 @@ function reactEventHandlerName(eventName: string): string {
   return 'on' + camel.charAt(0).toUpperCase() + camel.slice(1)
 }
 
-const COMPONENTS_DIR = path.join(__dirname, '../../src/components')
-const OUTPUT_DIR = path.join(__dirname, '../../src/generated/mcp')
-const GUIDELINES_API_URL = 'https://api.seb.io/components/components.json'
-const GUIDELINES_BASE_URL = 'https://api.seb.io/'
-const DOCS_CONFIG_PATH = path.join(__dirname, 'mcp-docs.config.json')
-
-interface GuidelineEntry {
-  title: string
-  slug: string
-  summary: string
-  path: string
+/**
+ * Derives directory name from component tag name
+ * @example getComponentDirName('gds-button') => 'button'
+ */
+function getComponentDirName(tagName: string): string {
+  return tagName.replace(/^gds-/, '')
 }
 
-interface GuidelineContent {
-  overview?: Array<{
-    title?: string
-    'section-content'?: string
-    content?: string
-    columns?: Array<{
-      content?: string
-      title?: string
-    }>
-  }>
-  'ux-text'?: Array<{
-    title?: string
-    content?: string
-  }>
-}
+/**
+ * Generates usage example HTML for a component
+ */
+function generateUsageHtml(
+  tagName: string,
+  hasSlots: boolean,
+  hasSubcomponents: boolean,
+  subcomponents?: ComponentData['subcomponents'],
+  isReact?: boolean,
+): string[] {
+  const lines: string[] = []
+  const componentName = isReact ? toPascalCase(tagName) : tagName
 
-interface MCPIndex {
-  name: string
-  files: {
-    api?: string
-    guidelines?: string
-    instructions?: string
-    angular?: string
-    react?: string
+  if (!hasSlots && !hasSubcomponents) {
+    // Self-closing for components without slots or subcomponents
+    lines.push(
+      isReact
+        ? `<${componentName} />`
+        : `<${componentName}></${componentName}>`,
+    )
+  } else {
+    lines.push(`<${componentName}>`)
+    if (hasSubcomponents && subcomponents) {
+      for (const sub of subcomponents) {
+        const subName = isReact ? toPascalCase(sub.tagName) : sub.tagName
+        lines.push(`  <${subName}>...</${subName}>`)
+      }
+    } else if (hasSlots) {
+      lines.push(isReact ? '  {/* content */}' : '  <!-- content -->')
+    }
+    lines.push(`</${componentName}>`)
   }
-  subcomponents?: Array<{
-    tagName: string
-    description?: string
-  }>
-}
 
-interface MCPGlobalIndex {
-  version: string
-  generatedAt: string
-  instructions?: string // Reference to general instructions file
-  components: string // Reference to components.json file
-  icons: string // Reference to icons.json file
-  guides: Array<{
-    title: string
-    path: string
-    category: string
-    description: string
-    tags: string[]
-  }>
-}
-
-interface MCPComponentsIndex {
-  version: string
-  generatedAt: string
-  components: Array<{
-    name: string
-    tagName: string
-    className: string
-    description?: string
-    path: string
-    files: string[]
-    subcomponents?: Array<{
-      tagName: string
-      description?: string
-    }>
-  }>
-}
-
-interface MCPIconsIndex {
-  version: string
-  generatedAt: string
-  icons: Array<{
-    name: string
-    tagName: string
-    className: string
-    description?: string
-    path: string
-    files: string[]
-  }>
-}
-
-interface GuideConfig {
-  source: string
-  output: string
-  title: string
-  description: string
-  category: string
-  tags: string[]
-}
-
-interface DocsConfig {
-  guides: GuideConfig[]
-  concepts: GuideConfig[]
+  return lines
 }
 
 /**
@@ -196,7 +152,7 @@ function convertMdxToMarkdown(mdxContent: string): string {
  */
 async function fetchGuidelines(): Promise<Map<string, GuidelineEntry>> {
   try {
-    console.log('📡 Fetching guidelines from API...')
+    console.info('📡 Fetching guidelines from API...')
     const response = await fetch(GUIDELINES_API_URL)
 
     if (!response.ok) {
@@ -212,7 +168,7 @@ async function fetchGuidelines(): Promise<Map<string, GuidelineEntry>> {
       guidelinesMap.set(normalizedSlug, entry)
     }
 
-    console.log(`✅ Fetched ${guidelinesMap.size} guideline entries`)
+    console.info(`✅ Fetched ${guidelinesMap.size} guideline entries`)
     return guidelinesMap
   } catch (error) {
     console.warn('⚠️  Error fetching guidelines:', error)
@@ -472,23 +428,18 @@ function generateAngularMarkdown(component: ComponentData): string {
   sections.push('```html')
 
   const hasSlots = component.slots.length > 0
-  const hasSubcomponents =
+  const hasSubcomponents = !!(
     component.subcomponents && component.subcomponents.length > 0
-
-  if (!hasSlots && !hasSubcomponents) {
-    // Self-closing for components without slots or subcomponents
-    sections.push(`<${component.tagName}></${component.tagName}>`)
-  } else {
-    sections.push(`<${component.tagName}>`)
-    if (hasSubcomponents) {
-      for (const sub of component.subcomponents!) {
-        sections.push(`  <${sub.tagName}>...</${sub.tagName}>`)
-      }
-    } else if (hasSlots) {
-      sections.push('  <!-- content -->')
-    }
-    sections.push(`</${component.tagName}>`)
-  }
+  )
+  sections.push(
+    ...generateUsageHtml(
+      component.tagName,
+      hasSlots,
+      hasSubcomponents,
+      component.subcomponents,
+      false,
+    ),
+  )
 
   sections.push('```\n')
 
@@ -533,24 +484,18 @@ function generateReactMarkdown(component: ComponentData): string {
   sections.push('```tsx')
 
   const hasSlots = component.slots.length > 0
-  const hasSubcomponents =
+  const hasSubcomponents = !!(
     component.subcomponents && component.subcomponents.length > 0
-
-  if (!hasSlots && !hasSubcomponents) {
-    // Self-closing for components without slots or subcomponents
-    sections.push(`<${component.className} />`)
-  } else {
-    sections.push(`<${component.className}>`)
-    if (hasSubcomponents) {
-      for (const sub of component.subcomponents!) {
-        const subClassName = toPascalCase(sub.tagName)
-        sections.push(`  <${subClassName}>...</${subClassName}>`)
-      }
-    } else if (hasSlots) {
-      sections.push('  {/* content */}')
-    }
-    sections.push(`</${component.className}>`)
-  }
+  )
+  sections.push(
+    ...generateUsageHtml(
+      component.tagName,
+      hasSlots,
+      hasSubcomponents,
+      component.subcomponents,
+      true,
+    ),
+  )
 
   sections.push('```\n')
 
@@ -586,11 +531,10 @@ function generateReactMarkdown(component: ComponentData): string {
 async function processComponent(
   component: ComponentData,
   guidelinesMap: Map<string, GuidelineEntry>,
-): Promise<void> {
-  console.log(`\n📦 Processing: ${component.tagName}`)
+): Promise<string> {
+  console.info(`\n📦 Processing: ${component.tagName}`)
 
-  // Derive output directory name from tag name (e.g., 'gds-button' -> 'button')
-  const dirName = component.tagName.replace(/^gds-/, '')
+  const dirName = getComponentDirName(component.tagName)
   const outputDir = path.join(OUTPUT_DIR, dirName)
 
   // Get the directory where the component source file is located
@@ -623,7 +567,7 @@ async function processComponent(
     const apiPath = path.join(outputDir, 'api.md')
     await fs.writeFile(apiPath, apiMarkdown, 'utf-8')
     index.files.api = 'api.md'
-    console.log('  ✅ Generated api.md')
+    console.info('  ✅ Generated api.md')
   } catch (error) {
     console.error('  ❌ Failed to generate api.md:', error)
   }
@@ -637,7 +581,7 @@ async function processComponent(
     const instructionsPath = path.join(outputDir, 'instructions.md')
     await fs.writeFile(instructionsPath, content, 'utf-8')
     index.files.instructions = 'instructions.md'
-    console.log('  ✅ Copied instructions.md')
+    console.info('  ✅ Copied instructions.md')
   } catch {
     // agents.md doesn't exist, skip silently
   }
@@ -654,15 +598,15 @@ async function processComponent(
         const guidelinesPath = path.join(outputDir, 'guidelines.md')
         await fs.writeFile(guidelinesPath, guidelineContent, 'utf-8')
         index.files.guidelines = 'guidelines.md'
-        console.log('  ✅ Generated guidelines.md')
+        console.info('  ✅ Generated guidelines.md')
       } else {
-        console.log('  ⚠️  No guideline content available')
+        console.info('  ⚠️  No guideline content available')
       }
     } catch (error) {
       console.error('  ❌ Failed to fetch guidelines:', error)
     }
   } else {
-    console.log(
+    console.info(
       `  ⚠️  No guideline found for normalized name: ${normalizedName}`,
     )
   }
@@ -673,7 +617,7 @@ async function processComponent(
     const angularPath = path.join(outputDir, 'angular.md')
     await fs.writeFile(angularPath, angularMarkdown, 'utf-8')
     index.files.angular = 'angular.md'
-    console.log('  ✅ Generated angular.md')
+    console.info('  ✅ Generated angular.md')
   } catch (error) {
     console.error('  ❌ Failed to generate angular.md:', error)
   }
@@ -684,7 +628,7 @@ async function processComponent(
     const reactPath = path.join(outputDir, 'react.md')
     await fs.writeFile(reactPath, reactMarkdown, 'utf-8')
     index.files.react = 'react.md'
-    console.log('  ✅ Generated react.md')
+    console.info('  ✅ Generated react.md')
   } catch (error) {
     console.error('  ❌ Failed to generate react.md:', error)
   }
@@ -693,10 +637,12 @@ async function processComponent(
   try {
     const indexPath = path.join(outputDir, 'index.json')
     await fs.writeFile(indexPath, JSON.stringify(index, null, 2), 'utf-8')
-    console.log('  ✅ Generated index.json')
+    console.info('  ✅ Generated index.json')
   } catch (error) {
     console.error('  ❌ Failed to generate index.json:', error)
   }
+
+  return dirName
 }
 
 /**
@@ -707,7 +653,7 @@ async function generateGlobalIndex(
   guides: MCPGlobalIndex['guides'],
   hasInstructions: boolean,
 ): Promise<void> {
-  console.log('\n📋 Generating global index...')
+  console.info('\n📋 Generating global index...')
 
   const indexComponents: MCPComponentsIndex['components'] = []
   const indexIcons: MCPIconsIndex['icons'] = []
@@ -760,7 +706,6 @@ async function generateGlobalIndex(
 
   // Write components index
   const componentsIndex: MCPComponentsIndex = {
-    version: '1.0.0',
     generatedAt: timestamp,
     components: indexComponents,
   }
@@ -773,7 +718,6 @@ async function generateGlobalIndex(
 
   // Write icons index
   const iconsIndex: MCPIconsIndex = {
-    version: '1.0.0',
     generatedAt: timestamp,
     icons: indexIcons,
   }
@@ -786,7 +730,6 @@ async function generateGlobalIndex(
 
   // Write global index with references
   const globalIndex: MCPGlobalIndex = {
-    version: '1.0.0',
     generatedAt: timestamp,
     ...(hasInstructions && { instructions: './INSTRUCTIONS.md' }),
     components: './components.json',
@@ -800,11 +743,11 @@ async function generateGlobalIndex(
     'utf-8',
   )
 
-  console.log(
+  console.info(
     `✅ Generated components index with ${indexComponents.length} components`,
   )
-  console.log(`✅ Generated icons index with ${indexIcons.length} icons`)
-  console.log(`✅ Generated global index with ${guides.length} guides`)
+  console.info(`✅ Generated icons index with ${indexIcons.length} icons`)
+  console.info(`✅ Generated global index with ${guides.length} guides`)
 }
 
 /**
@@ -819,7 +762,7 @@ async function generateInstructions(): Promise<boolean> {
     const outputPath = path.join(OUTPUT_DIR, 'INSTRUCTIONS.md')
     await fs.writeFile(outputPath, content, 'utf-8')
 
-    console.log('✅ Generated root-level INSTRUCTIONS.md')
+    console.info('✅ Generated root-level INSTRUCTIONS.md')
     return true
   } catch {
     // Instructions file doesn't exist, skip
@@ -831,7 +774,7 @@ async function generateInstructions(): Promise<boolean> {
  * Processes documentation guides from MDX to Markdown
  */
 async function processGuides(): Promise<MCPGlobalIndex['guides']> {
-  console.log('\n📚 Processing documentation guides...')
+  console.info('\n📚 Processing documentation guides...')
 
   try {
     // Read the docs config
@@ -864,13 +807,13 @@ async function processGuides(): Promise<MCPGlobalIndex['guides']> {
           tags: guide.tags,
         })
 
-        console.log(`  ✅ ${guide.title}`)
+        console.info(`  ✅ ${guide.title}`)
       } catch (error) {
         console.warn(`  ⚠️  Failed to process ${guide.title}:`, error)
       }
     }
 
-    console.log(`✅ Processed ${guideMetadata.length} guides`)
+    console.info(`✅ Processed ${guideMetadata.length} guides`)
     return guideMetadata
   } catch (error) {
     console.warn('⚠️  Error processing guides:', error)
@@ -882,15 +825,15 @@ async function processGuides(): Promise<MCPGlobalIndex['guides']> {
  * Main execution
  */
 async function main() {
-  console.log('🚀 Starting MCP data generation...\n')
+  console.info('🚀 Starting MCP data generation...\n')
 
   try {
     // Parse all components from custom-elements.json
-    console.log('📖 Parsing component metadata...')
+    console.info('📖 Parsing component metadata...')
     const { components } = await CemParser.parseAllComponents(
       '../../../custom-elements.json',
     )
-    console.log(`✅ Found ${components.length} components\n`)
+    console.info(`✅ Found ${components.length} components\n`)
 
     // Fetch guidelines
     const guidelinesMap = await fetchGuidelines()
@@ -905,12 +848,8 @@ async function main() {
 
     for (const component of components) {
       try {
-        await processComponent(component, guidelinesMap)
-
-        // Derive directory name from tag name (e.g., 'gds-button' -> 'button')
-        const dirName = component.tagName.replace(/^gds-/, '')
+        const dirName = await processComponent(component, guidelinesMap)
         processedComponents.push({ component, dirName })
-
         successCount++
       } catch (error) {
         console.error(`❌ Failed to process ${component.tagName}:`, error)
@@ -945,13 +884,13 @@ async function main() {
     }
 
     // Summary
-    console.log('\n' + '='.repeat(60))
-    console.log('📊 Summary:')
-    console.log(`   ✅ Successful: ${successCount}`)
-    console.log(`   ❌ Errors: ${errorCount}`)
-    console.log(`   📁 Output: ${OUTPUT_DIR}`)
-    console.log('='.repeat(60))
-    console.log('\n✨ MCP data generation complete!\n')
+    console.info('\n' + '='.repeat(60))
+    console.info('📊 Summary:')
+    console.info(`   ✅ Successful: ${successCount}`)
+    console.info(`   ❌ Errors: ${errorCount}`)
+    console.info(`   📁 Output: ${OUTPUT_DIR}`)
+    console.info('='.repeat(60))
+    console.info('\n✨ MCP data generation complete!\n')
   } catch (error) {
     console.error('💥 Fatal error:', error)
     process.exit(1)

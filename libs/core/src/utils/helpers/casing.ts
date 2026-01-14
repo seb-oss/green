@@ -45,8 +45,21 @@ export function camelToKebabCase(str: string): string {
   return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
 }
 
+/**
+ * Capitalizes the first letter of a string
+ *
+ * @example
+ * capitalize('hello') // => 'Hello'
+ * capitalize('myString') // => 'MyString'
+ */
+export function capitalize(str: string): string {
+  if (!str) return str
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 export default {
   kebabToCamelCase,
   pascalCase: toPascalCase,
   camelToKebabCase,
+  capitalize,
 }

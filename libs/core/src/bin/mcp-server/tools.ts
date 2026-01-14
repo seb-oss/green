@@ -5,6 +5,7 @@ import {
 
 import type { Server } from '@modelcontextprotocol/sdk/server/index.js'
 
+import { capitalize } from '../../utils/helpers/casing.js'
 import {
   buildResourceUri,
   findComponent,
@@ -504,17 +505,13 @@ async function handleGetComponentDocs(input: GetComponentDocsInput) {
   }
 
   // Add framework-specific header
-  sections.push(
-    `# ${found.tagName} - ${framework.charAt(0).toUpperCase() + framework.slice(1)}`,
-  )
+  sections.push(`# ${found.tagName} - ${capitalize(framework)}`)
   sections.push('')
 
   if (framework === 'angular' || framework === 'react') {
+    sections.push(`⚠️ **${capitalize(framework)}-Specific Documentation**`)
     sections.push(
-      `⚠️ **${framework.charAt(0).toUpperCase() + framework.slice(1)}-Specific Documentation**`,
-    )
-    sections.push(
-      `The import paths and syntax below are for ${framework.charAt(0).toUpperCase() + framework.slice(1)} applications.`,
+      `The import paths and syntax below are for ${capitalize(framework)} applications.`,
     )
     sections.push('')
   }
