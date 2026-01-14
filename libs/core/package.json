@@ -6,7 +6,7 @@
   "module": "index.js",
   "type": "module",
   "bin": {
-    "green-mcp": "./bin/mcp-server/index.js"
+    "green-core-mcp": "./bin/mcp-server/index.js"
   },
   "author": "SEB Open Source <opensource@seb.se> (https://github.com/seb-oss)",
   "contributors": [],
@@ -58,8 +58,7 @@
     "./pure": "./pure.js",
     "./_primitives/*": "./primitives/*",
     "./react": "./generated/react/index.js",
-    "./patterns/*": "./patterns/*",
-    "./mcp-server": "./build-scripts/mcp/server/index.js"
+    "./patterns/*": "./patterns/*"
   },
   "customElements": "custom-elements.json"
 }
