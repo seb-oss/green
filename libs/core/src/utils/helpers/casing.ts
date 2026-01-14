@@ -45,38 +45,8 @@ export function camelToKebabCase(str: string): string {
   return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
 }
 
-/**
- * Removes a prefix from a string (commonly used to remove 'gds-' from tag names)
- */
-export function removePrefix(str: string, prefix: string): string {
-  if (!str || !prefix) return str
-  return str.startsWith(prefix) ? str.slice(prefix.length) : str
-}
-
-/**
- * Converts an event name to React event handler convention
- * Converts kebab-case to camelCase and adds 'on' prefix
- *
- * @example
- * reactEventHandlerName('gds-close') // => 'onGdsClose'
- */
-export function reactEventHandlerName(eventName: string): string {
-  const camel = kebabToCamelCase(eventName)
-  return 'on' + camel.charAt(0).toUpperCase() + camel.slice(1)
-}
-
-/**
- * Angular event name conversion (kebab-case -> camelCase)
- */
-export function angularEventName(eventName: string): string {
-  return kebabToCamelCase(eventName)
-}
-
 export default {
   kebabToCamelCase,
   pascalCase: toPascalCase,
   camelToKebabCase,
-  removePrefix,
-  reactEventHandlerName,
-  angularEventName,
 }

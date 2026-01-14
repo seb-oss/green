@@ -17,7 +17,6 @@ import { fileURLToPath } from 'url'
 
 import {
   kebabToCamelCase,
-  reactEventHandlerName,
   toPascalCase,
 } from '../../src/utils/helpers/casing.js'
 import {
@@ -27,6 +26,18 @@ import {
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+/**
+ * Converts an event name to React event handler convention
+ * Converts kebab-case to camelCase and adds 'on' prefix
+ *
+ * @example
+ * reactEventHandlerName('gds-close') // => 'onGdsClose'
+ */
+function reactEventHandlerName(eventName: string): string {
+  const camel = kebabToCamelCase(eventName)
+  return 'on' + camel.charAt(0).toUpperCase() + camel.slice(1)
+}
 
 const COMPONENTS_DIR = path.join(__dirname, '../../src/components')
 const OUTPUT_DIR = path.join(__dirname, '../../src/generated/mcp')
