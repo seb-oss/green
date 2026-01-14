@@ -60,16 +60,12 @@ interface GuidelineContent {
     columns?: Array<{
       content?: string
       title?: string
-      [key: string]: any
     }>
-    [key: string]: any
   }>
   'ux-text'?: Array<{
     title?: string
     content?: string
-    [key: string]: any
   }>
-  [key: string]: any
 }
 
 interface MCPIndex {
@@ -343,7 +339,7 @@ function generateApiMarkdown(component: ComponentData): string {
     for (const prop of component.properties) {
       const name = escapeTableCell(prop.name || '')
       const type = escapeTableCell(prop.type?.text || 'any')
-      const defaultValue = escapeTableCell(prop.defaultValue || '-')
+      const defaultValue = escapeTableCell(prop.default || '-')
       const description = escapeTableCell(prop.description || '')
 
       sections.push(
