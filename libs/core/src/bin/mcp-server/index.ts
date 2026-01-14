@@ -9,6 +9,8 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 
+import { SERVER_CONFIG } from './constants.js'
+import { logError } from './errors.js'
 import { setupResourceHandlers } from './resources.js'
 import { setupToolHandlers } from './tools.js'
 import { getPackageVersion } from './utils.js'
@@ -23,7 +25,7 @@ async function main() {
   // Create server instance
   const server = new McpServer(
     {
-      name: 'green-design-system',
+      name: SERVER_CONFIG.SERVER_NAME,
       version: packageVersion,
     },
     {
@@ -40,7 +42,7 @@ async function main() {
 
   // Set up error handling
   server.server.onerror = (error) => {
-    console.error('[MCP Error]', error)
+    logError(error, 'mcpServer')
   }
 
   process.on('SIGINT', async () => {
@@ -53,7 +55,7 @@ async function main() {
   await server.connect(transport)
 
   // Log to stderr (stdout is reserved for MCP protocol)
-  console.error('Green Core MCP Server started')
+  console.error(`Green Core MCP Server started`)
   console.error(`Version: ${packageVersion}`)
   console.error('Waiting for requests...')
 }

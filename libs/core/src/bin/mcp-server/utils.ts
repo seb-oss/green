@@ -2,6 +2,9 @@ import { promises as fs } from 'fs'
 import * as path from 'node:path'
 import { fileURLToPath } from 'url'
 
+import { PATHS, SERVER_CONFIG } from './constants.js'
+import { DataLoadError, logError } from './errors.js'
+
 import type {
   ComponentEntry,
   ComponentsIndex,
@@ -17,6 +20,7 @@ const __dirname = path.dirname(__filename)
  * Resolve the path to the MCP data directory
  * When compiled: Server is at dist/libs/core/src/bin/mcp-server/
  * When compiled: MCP data is at dist/libs/core/src/generated/mcp/
+ * @returns Absolute path to MCP data directory
  */
 export function getMcpDataPath(): string {
   return path.resolve(__dirname, '../../generated/mcp')
@@ -24,61 +28,100 @@ export function getMcpDataPath(): string {
 
 /**
  * Read the package version from package.json at runtime
+ * @returns Package version string or default version
  */
 export async function getPackageVersion(): Promise<string> {
   try {
     // When compiled, we're at dist/libs/core/src/bin/mcp-server/
     // package.json is at dist/libs/core/src/package.json
-    const packageJsonPath = path.resolve(__dirname, '../../package.json')
+    const packageJsonPath = path.resolve(
+      __dirname,
+      `../../${PATHS.PACKAGE_JSON}`,
+    )
     const content = await fs.readFile(packageJsonPath, 'utf-8')
     const pkg = JSON.parse(content)
-    return pkg.version || '0.0.0'
+    return pkg.version || SERVER_CONFIG.DEFAULT_VERSION
   } catch (error) {
-    console.error('Failed to read package version:', error)
-    return '0.0.0'
+    logError(error, 'getPackageVersion')
+    return SERVER_CONFIG.DEFAULT_VERSION
   }
 }
 
 /**
  * Load and parse a JSON file
+ * @param filePath - Path to JSON file
+ * @returns Parsed JSON data or null if failed
  */
 async function loadJsonFile<T>(filePath: string): Promise<T | null> {
   try {
     const content = await fs.readFile(filePath, 'utf-8')
     return JSON.parse(content) as T
   } catch (error) {
-    console.error(`Failed to load ${filePath}:`, error)
-    return null
+    throw new DataLoadError(
+      `Failed to load JSON file: ${error instanceof Error ? error.message : 'unknown error'}`,
+      filePath,
+    )
   }
 }
 
 /**
  * Load the components index
+ * @returns Components index or null if failed
  */
 export async function loadComponentsIndex(): Promise<ComponentsIndex | null> {
-  const dataPath = getMcpDataPath()
-  return loadJsonFile<ComponentsIndex>(path.join(dataPath, 'components.json'))
+  try {
+    const dataPath = getMcpDataPath()
+    return await loadJsonFile<ComponentsIndex>(
+      path.join(dataPath, PATHS.COMPONENTS_INDEX),
+    )
+  } catch (error) {
+    logError(error, 'loadComponentsIndex')
+    return null
+  }
 }
 
 /**
  * Load the icons index
+ * @returns Icons index or null if failed
  */
 export async function loadIconsIndex(): Promise<IconsIndex | null> {
-  const dataPath = getMcpDataPath()
-  return loadJsonFile<IconsIndex>(path.join(dataPath, 'icons.json'))
+  try {
+    const dataPath = getMcpDataPath()
+    return await loadJsonFile<IconsIndex>(
+      path.join(dataPath, PATHS.ICONS_INDEX),
+    )
+  } catch (error) {
+    logError(error, 'loadIconsIndex')
+    return null
+  }
 }
 
 /**
  * Load the global index
+ * @returns Global index or null if failed
  */
 export async function loadGlobalIndex(): Promise<GlobalIndex | null> {
-  const dataPath = getMcpDataPath()
-  return loadJsonFile<GlobalIndex>(path.join(dataPath, 'index.json'))
+  try {
+    const dataPath = getMcpDataPath()
+    return await loadJsonFile<GlobalIndex>(
+      path.join(dataPath, PATHS.GLOBAL_INDEX),
+    )
+  } catch (error) {
+    logError(error, 'loadGlobalIndex')
+    return null
+  }
 }
 
 /**
  * Normalize component name for matching
  * Handles both 'gds-button' and 'button' formats
+ * @param name - Component name to normalize
+ * @returns Normalized component name with gds- prefix
+ *
+ * @example
+ * normalizeComponentName('button') // => 'gds-button'
+ * normalizeComponentName('gds-button') // => 'gds-button'
+ * normalizeComponentName('icon-arrow') // => 'gds-icon-arrow'
  */
 export function normalizeComponentName(name: string): string {
   const lower = name.toLowerCase().trim()
@@ -95,7 +138,14 @@ export function normalizeComponentName(name: string): string {
 }
 
 /**
- * Find a component by name (flexible matching)
+ * Find a component by name with flexible matching
+ * @param name - Component name to search for
+ * @param components - Array of component entries
+ * @returns Matching component or null if not found
+ *
+ * @example
+ * findComponent('button', components) // Finds gds-button
+ * findComponent('gds-button', components) // Exact match
  */
 export function findComponent(
   name: string,
@@ -124,7 +174,14 @@ export function findComponent(
 }
 
 /**
- * Find an icon by name (flexible matching)
+ * Find an icon by name with flexible matching
+ * @param name - Icon name to search for
+ * @param icons - Array of icon entries
+ * @returns Matching icon or null if not found
+ *
+ * @example
+ * findIcon('arrow', icons) // Finds gds-icon-arrow
+ * findIcon('icon-arrow', icons) // Finds gds-icon-arrow
  */
 export function findIcon(name: string, icons: IconEntry[]): IconEntry | null {
   const normalized = normalizeComponentName(name)
@@ -151,6 +208,12 @@ export function findIcon(name: string, icons: IconEntry[]): IconEntry | null {
 
 /**
  * Read a markdown file from the MCP data directory
+ * @param relativePath - Path relative to MCP data directory
+ * @returns File contents or null if failed
+ *
+ * @example
+ * readMcpFile('button/api.md')
+ * readMcpFile('guides/angular.md')
  */
 export async function readMcpFile(
   relativePath: string,
@@ -160,13 +223,15 @@ export async function readMcpFile(
     const fullPath = path.join(dataPath, relativePath)
     return await fs.readFile(fullPath, 'utf-8')
   } catch (error) {
-    console.error(`Failed to read ${relativePath}:`, error)
+    logError(error, 'readMcpFile')
     return null
   }
 }
 
 /**
  * Check if a file exists in the MCP data directory
+ * @param relativePath - Path relative to MCP data directory
+ * @returns True if file exists, false otherwise
  */
 export async function fileExists(relativePath: string): Promise<boolean> {
   try {
@@ -181,6 +246,14 @@ export async function fileExists(relativePath: string): Promise<boolean> {
 
 /**
  * Build a resource URI for a component/icon documentation file
+ * @param category - Resource category
+ * @param name - Component/icon/guide name
+ * @param docType - Optional documentation type
+ * @returns Resource URI
+ *
+ * @example
+ * buildResourceUri('components', 'button', 'api') // => 'green://components/button/api'
+ * buildResourceUri('guides', 'angular') // => 'green://guides/angular'
  */
 export function buildResourceUri(
   category: 'components' | 'icons' | 'guides' | 'concepts',
@@ -195,6 +268,12 @@ export function buildResourceUri(
 
 /**
  * Parse a resource URI into its components
+ * @param uri - Resource URI to parse
+ * @returns Parsed URI components or null if invalid
+ *
+ * @example
+ * parseResourceUri('green://components/button/api')
+ * // => { category: 'components', name: 'button', docType: 'api' }
  */
 export function parseResourceUri(uri: string): {
   category: string

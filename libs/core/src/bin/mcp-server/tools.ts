@@ -6,6 +6,9 @@ import {
 import type { Server } from '@modelcontextprotocol/sdk/server/index.js'
 
 import { capitalize } from '../../utils/helpers/casing.js'
+import { DOC_TYPES, SEARCH_CONFIG } from './constants.js'
+import { formatErrorResponse, logError, NotFoundError } from './errors.js'
+import { parseSearchQuery, performSearch } from './search.js'
 import {
   buildResourceUri,
   findComponent,
@@ -15,6 +18,12 @@ import {
   loadIconsIndex,
   readMcpFile,
 } from './utils.js'
+import {
+  validateGetComponentDocsInput,
+  validateGetGuideInput,
+  validateListGuidesInput,
+  validateSearchComponentsInput,
+} from './validation.js'
 
 import type {
   ComponentEntry,
@@ -72,8 +81,10 @@ export function setupToolHandlers(server: Server): void {
               },
               maxResults: {
                 type: 'number',
-                description: 'Maximum number of results to return. Default: 20',
-                default: 20,
+                description: `Maximum number of results to return (1-100). Default: ${SEARCH_CONFIG.DEFAULT_MAX_RESULTS}`,
+                default: SEARCH_CONFIG.DEFAULT_MAX_RESULTS,
+                minimum: 1,
+                maximum: 100,
               },
             },
             required: ['query'],
@@ -178,20 +189,16 @@ export function setupToolHandlers(server: Server): void {
     try {
       switch (name) {
         case 'search_components':
-          return await handleSearchComponents(
-            args as unknown as SearchComponentsInput,
-          )
+          return await handleSearchComponents(args)
 
         case 'get_component_docs':
-          return await handleGetComponentDocs(
-            args as unknown as GetComponentDocsInput,
-          )
+          return await handleGetComponentDocs(args)
 
         case 'list_guides':
-          return await handleListGuides(args as unknown as ListGuidesInput)
+          return await handleListGuides(args)
 
         case 'get_guide':
-          return await handleGetGuide(args as unknown as GetGuideInput)
+          return await handleGetGuide(args)
 
         case 'get_instructions':
           return await handleGetInstructions()
@@ -200,274 +207,109 @@ export function setupToolHandlers(server: Server): void {
           throw new Error(`Unknown tool: ${name}`)
       }
     } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : 'Unknown error'
-      return {
-        content: [
-          {
-            type: 'text',
-            text: `Error: ${errorMessage}`,
-          },
-        ],
-        isError: true,
-      }
+      logError(error, `handleToolCall:${name}`)
+      return formatErrorResponse(error)
     }
   })
 }
 
 /**
  * Handle search_components tool
+ * @param input - Search input (will be validated)
+ * @returns Search results
  */
-async function handleSearchComponents(input: SearchComponentsInput) {
+async function handleSearchComponents(input: unknown) {
+  // Validate input
+  const validatedInput = validateSearchComponentsInput(input)
   const {
     query,
     category = 'all',
     splitTerms = true,
     matchAll = false,
     useRegex = false,
-    maxResults = 20,
-  } = input
+    maxResults = SEARCH_CONFIG.DEFAULT_MAX_RESULTS,
+  } = validatedInput
 
-  type ResultWithTier = SearchResult & { tier: number; matchedTerms: number }
-  const results: ResultWithTier[] = []
+  // Load indexes based on category filter
+  const loadComponents = category === 'component' || category === 'all'
+  const loadIcons = category === 'icon' || category === 'all'
 
-  try {
-    // Parse query into search terms
-    let searchTerms: string[]
-    let regexPattern: RegExp | null = null
+  const [componentsIndex, iconsIndex] = await Promise.all([
+    loadComponents ? loadComponentsIndex() : Promise.resolve(null),
+    loadIcons ? loadIconsIndex() : Promise.resolve(null),
+  ])
 
-    if (useRegex) {
-      // Validate and create regex with safety limits
-      try {
-        // Limit regex complexity to prevent ReDoS
-        if (query.length > 100) {
-          throw new Error('Regex pattern too long (max 100 characters)')
-        }
-        regexPattern = new RegExp(query, 'i')
-        searchTerms = [query] // Keep original for display
-      } catch (error) {
-        throw new Error(
-          `Invalid regex pattern: ${error instanceof Error ? error.message : 'unknown error'}`,
-        )
-      }
-    } else if (splitTerms) {
-      // Split on spaces and commas, remove empty strings
-      searchTerms = query
-        .toLowerCase()
-        .split(/[\s,]+/)
-        .filter((term) => term.length > 0)
-    } else {
-      searchTerms = [query.toLowerCase()]
+  const components = componentsIndex?.components || []
+  const icons = iconsIndex?.icons || []
+
+  // Parse search query
+  const { searchTerms, regexPattern } = parseSearchQuery(
+    query,
+    splitTerms,
+    useRegex,
+  )
+
+  // Build resource URIs helper
+  const buildUris = (
+    item: ComponentEntry | IconEntry,
+    cat: 'component' | 'icon',
+  ): { [key: string]: string } => {
+    const shortName = item.tagName.replace(/^gds-/, '')
+    const resourceCategory = cat === 'component' ? 'components' : 'icons'
+    const uris: { [key: string]: string } = {}
+
+    for (const docType of item.files) {
+      uris[docType] = buildResourceUri(resourceCategory, shortName, docType)
     }
 
-    if (searchTerms.length === 0) {
-      throw new Error('Query cannot be empty')
-    }
+    return uris
+  }
 
-    // Load indexes based on category filter
-    const loadComponents = category === 'component' || category === 'all'
-    const loadIcons = category === 'icon' || category === 'all'
+  // Perform search
+  const results = performSearch(
+    components,
+    icons,
+    query,
+    searchTerms,
+    regexPattern,
+    matchAll,
+    splitTerms,
+    maxResults,
+    buildUris,
+  )
 
-    const [componentsIndex, iconsIndex] = await Promise.all([
-      loadComponents ? loadComponentsIndex() : Promise.resolve(null),
-      loadIcons ? loadIconsIndex() : Promise.resolve(null),
-    ])
-
-    // Helper function to check matches and calculate tier
-    const checkMatches = (
-      item: ComponentEntry | IconEntry,
-    ): { matches: boolean; tier: number; matchedTerms: number } => {
-      const tagName = item.tagName.toLowerCase()
-      const name = item.name.toLowerCase()
-      const className = item.className.toLowerCase()
-      const description = item.description?.toLowerCase() || ''
-
-      if (regexPattern) {
-        // Regex matching
-        const matches =
-          regexPattern.test(tagName) ||
-          regexPattern.test(name) ||
-          regexPattern.test(className) ||
-          regexPattern.test(description)
-
-        if (matches) {
-          // Determine tier for regex matches
-          if (regexPattern.test(tagName)) {
-            if (tagName === query.toLowerCase())
-              return { matches: true, tier: 1, matchedTerms: 1 }
-            if (tagName.startsWith(query.toLowerCase()))
-              return { matches: true, tier: 2, matchedTerms: 1 }
-            return { matches: true, tier: 3, matchedTerms: 1 }
-          }
-          return { matches: true, tier: 4, matchedTerms: 1 }
-        }
-        return { matches: false, tier: 0, matchedTerms: 0 }
-      }
-
-      // Multi-term matching
-      let matchedTerms = 0
-      let bestTier = 999
-
-      for (const term of searchTerms) {
-        let termMatched = false
-        let termTier = 999
-
-        // Check exact match
-        if (tagName === `gds-${term}` || tagName === term) {
-          termMatched = true
-          termTier = Math.min(termTier, 1)
-        }
-        // Check starts with
-        else if (
-          tagName.startsWith(term) ||
-          tagName.startsWith(`gds-${term}`)
-        ) {
-          termMatched = true
-          termTier = Math.min(termTier, 2)
-        }
-        // Check contains in tagName
-        else if (tagName.includes(term)) {
-          termMatched = true
-          termTier = Math.min(termTier, 3)
-        }
-        // Check contains in name or className
-        else if (name.includes(term) || className.includes(term)) {
-          termMatched = true
-          termTier = Math.min(termTier, 4)
-        }
-        // Check contains in description
-        else if (description.includes(term)) {
-          termMatched = true
-          termTier = Math.min(termTier, 5)
-        }
-
-        if (termMatched) {
-          matchedTerms++
-          bestTier = Math.min(bestTier, termTier)
-        }
-      }
-
-      // Determine if item matches based on matchAll logic
-      const matches = matchAll
-        ? matchedTerms === searchTerms.length
-        : matchedTerms > 0
-
-      return { matches, tier: matches ? bestTier : 999, matchedTerms }
-    }
-
-    // Search components
-    if (componentsIndex) {
-      for (const component of componentsIndex.components) {
-        const { matches, tier, matchedTerms } = checkMatches(component)
-
-        if (matches) {
-          const shortName = component.tagName.replace(/^gds-/, '')
-          const resourceUris: { [key: string]: string } = {}
-
-          for (const docType of component.files) {
-            resourceUris[docType] = buildResourceUri(
-              'components',
-              shortName,
-              docType,
-            )
-          }
-
-          results.push({
-            name: component.name,
-            tagName: component.tagName,
-            className: component.className,
-            description: component.description,
-            category: 'component',
-            availableDocs: component.files,
-            resourceUris,
-            tier,
-            matchedTerms,
-          })
-        }
-      }
-    }
-
-    // Search icons
-    if (iconsIndex) {
-      for (const icon of iconsIndex.icons) {
-        const { matches, tier, matchedTerms } = checkMatches(icon)
-
-        if (matches) {
-          const shortName = icon.tagName.replace(/^gds-/, '')
-          const resourceUris: { [key: string]: string } = {}
-
-          for (const docType of icon.files) {
-            resourceUris[docType] = buildResourceUri(
-              'icons',
-              shortName,
-              docType,
-            )
-          }
-
-          results.push({
-            name: icon.name,
-            tagName: icon.tagName,
-            className: icon.className,
-            description: icon.description,
-            category: 'icon',
-            availableDocs: icon.files,
-            resourceUris,
-            tier,
-            matchedTerms,
-          })
-        }
-      }
-    }
-
-    // Tiered sorting:
-    // 1. Sort by tier (lower = better)
-    // 2. Within same tier, sort by number of matched terms (more = better) when splitTerms is true
-    // 3. Within same tier and matched terms, sort alphabetically by tagName
-    results.sort((a, b) => {
-      if (a.tier !== b.tier) return a.tier - b.tier
-      if (splitTerms && a.matchedTerms !== b.matchedTerms)
-        return b.matchedTerms - a.matchedTerms
-      return a.tagName.localeCompare(b.tagName)
-    })
-
-    // Limit results and remove tier info from response
-    const limitedResults = results.slice(0, maxResults).map((r) => {
-      const { tier, matchedTerms, ...result } = r
-      return result
-    })
-
-    return {
-      content: [
-        {
-          type: 'text',
-          text: JSON.stringify(
-            {
-              query,
-              resultCount: limitedResults.length,
-              totalMatches: results.length,
-              results: limitedResults,
-            },
-            null,
-            2,
-          ),
-        },
-      ],
-    }
-  } catch (error) {
-    throw new Error(`Search failed: ${error}`)
+  return {
+    content: [
+      {
+        type: 'text',
+        text: JSON.stringify(
+          {
+            query,
+            resultCount: results.length,
+            results,
+          },
+          null,
+          2,
+        ),
+      },
+    ],
   }
 }
 
 /**
  * Handle get_component_docs tool
+ * @param input - Component docs input (will be validated)
+ * @returns Component documentation
  */
-async function handleGetComponentDocs(input: GetComponentDocsInput) {
+async function handleGetComponentDocs(input: unknown) {
+  // Validate input
+  const validatedInput = validateGetComponentDocsInput(input)
   const {
     componentName,
     framework,
     includeGuidelines = true,
     includeInstructions = true,
-  } = input
+  } = validatedInput
 
   // Load indexes
   const [componentsIndex, iconsIndex] = await Promise.all([
@@ -476,7 +318,11 @@ async function handleGetComponentDocs(input: GetComponentDocsInput) {
   ])
 
   if (!componentsIndex || !iconsIndex) {
-    throw new Error('Failed to load component indexes')
+    throw new NotFoundError(
+      'Failed to load component indexes',
+      'index',
+      'components/icons',
+    )
   }
 
   // Find the component
@@ -485,23 +331,24 @@ async function handleGetComponentDocs(input: GetComponentDocsInput) {
   const found = component || icon
 
   if (!found) {
-    throw new Error(
+    throw new NotFoundError(
       `Component not found: ${componentName}. Try using the search_components tool to find available components.`,
+      'component',
+      componentName,
     )
   }
 
   const shortName = found.tagName.replace(/^gds-/, '')
-  const category = component ? 'components' : 'icons'
   const sections: string[] = []
 
   // Determine which doc to fetch based on framework
   let primaryDoc: string
   if (framework === 'angular') {
-    primaryDoc = 'angular'
+    primaryDoc = DOC_TYPES.ANGULAR
   } else if (framework === 'react') {
-    primaryDoc = 'react'
+    primaryDoc = DOC_TYPES.REACT
   } else {
-    primaryDoc = 'api'
+    primaryDoc = DOC_TYPES.API
   }
 
   // Add framework-specific header
@@ -531,9 +378,9 @@ async function handleGetComponentDocs(input: GetComponentDocsInput) {
   // This ensures agents have complete property/event/slot/method information
   if (
     (framework === 'angular' || framework === 'react') &&
-    found.files.includes('api')
+    found.files.includes(DOC_TYPES.API)
   ) {
-    const apiContent = await readMcpFile(`${shortName}/api.md`)
+    const apiContent = await readMcpFile(`${shortName}/${DOC_TYPES.API}.md`)
     if (apiContent) {
       sections.push('---')
       sections.push('')
@@ -558,8 +405,10 @@ async function handleGetComponentDocs(input: GetComponentDocsInput) {
   }
 
   // Add guidelines if requested
-  if (includeGuidelines && found.files.includes('guidelines')) {
-    const guidelines = await readMcpFile(`${shortName}/guidelines.md`)
+  if (includeGuidelines && found.files.includes(DOC_TYPES.GUIDELINES)) {
+    const guidelines = await readMcpFile(
+      `${shortName}/${DOC_TYPES.GUIDELINES}.md`,
+    )
     if (guidelines) {
       sections.push('---')
       sections.push('')
@@ -571,8 +420,10 @@ async function handleGetComponentDocs(input: GetComponentDocsInput) {
   }
 
   // Add instructions if requested
-  if (includeInstructions && found.files.includes('instructions')) {
-    const instructions = await readMcpFile(`${shortName}/instructions.md`)
+  if (includeInstructions && found.files.includes(DOC_TYPES.INSTRUCTIONS)) {
+    const instructions = await readMcpFile(
+      `${shortName}/${DOC_TYPES.INSTRUCTIONS}.md`,
+    )
     if (instructions) {
       sections.push('---')
       sections.push('')
@@ -607,144 +458,157 @@ async function handleGetComponentDocs(input: GetComponentDocsInput) {
 
 /**
  * Handle list_guides tool
+ * @param input - List guides input (will be validated)
+ * @returns List of available guides
  */
-async function handleListGuides(input: ListGuidesInput) {
-  const { category = 'all', framework } = input
+async function handleListGuides(input: unknown) {
+  // Validate input
+  const validatedInput = validateListGuidesInput(input)
+  const { category = 'all', framework } = validatedInput
 
-  try {
-    const globalIndex = await loadGlobalIndex()
+  const globalIndex = await loadGlobalIndex()
 
-    if (!globalIndex) {
-      throw new Error('Failed to load global index')
-    }
+  if (!globalIndex) {
+    throw new NotFoundError('Failed to load global index', 'index', 'global')
+  }
 
-    let guides = globalIndex.guides
+  let guides = globalIndex.guides
 
-    // Filter by category
-    if (category !== 'all') {
-      guides = guides.filter((g) => g.category === category)
-    }
+  // Filter by category
+  if (category !== 'all') {
+    guides = guides.filter((g) => g.category === category)
+  }
 
-    // Filter by framework if specified
-    if (framework && framework !== 'all') {
-      guides = guides.filter((g) => g.tags.includes(framework))
-    }
+  // Filter by framework if specified
+  if (framework && framework !== 'all') {
+    guides = guides.filter((g) => g.tags.includes(framework))
+  }
 
-    // Build response with resource URIs
-    const guidesWithUris = guides.map((guide) => {
-      const name = guide.path
-        .replace(/^(guides|concepts)\//, '')
-        .replace(/\.md$/, '')
-      const guideCategory = guide.path.startsWith('guides/')
-        ? 'guides'
-        : 'concepts'
-      const uri = buildResourceUri(guideCategory as 'guides' | 'concepts', name)
-
-      return {
-        title: guide.title,
-        category: guide.category,
-        description: guide.description,
-        tags: guide.tags,
-        resourceUri: uri,
-      }
-    })
+  // Build response with resource URIs
+  const guidesWithUris = guides.map((guide) => {
+    const name = guide.path
+      .replace(/^(guides|concepts)\//, '')
+      .replace(/\.md$/, '')
+    const guideCategory = guide.path.startsWith('guides/')
+      ? 'guides'
+      : 'concepts'
+    const uri = buildResourceUri(guideCategory as 'guides' | 'concepts', name)
 
     return {
-      content: [
-        {
-          type: 'text',
-          text: JSON.stringify(
-            {
-              guideCount: guidesWithUris.length,
-              guides: guidesWithUris,
-            },
-            null,
-            2,
-          ),
-        },
-      ],
+      title: guide.title,
+      category: guide.category,
+      description: guide.description,
+      tags: guide.tags,
+      resourceUri: uri,
     }
-  } catch (error) {
-    throw new Error(`Failed to list guides: ${error}`)
+  })
+
+  return {
+    content: [
+      {
+        type: 'text',
+        text: JSON.stringify(
+          {
+            guideCount: guidesWithUris.length,
+            guides: guidesWithUris,
+          },
+          null,
+          2,
+        ),
+      },
+    ],
   }
 }
 
 /**
  * Handle get_guide tool
+ * @param input - Get guide input (will be validated)
+ * @returns Guide content
  */
-async function handleGetGuide(input: GetGuideInput) {
-  const { name } = input
+async function handleGetGuide(input: unknown) {
+  // Validate input
+  const validatedInput = validateGetGuideInput(input)
+  const { name } = validatedInput
 
-  try {
-    const globalIndex = await loadGlobalIndex()
+  const globalIndex = await loadGlobalIndex()
 
-    if (!globalIndex) {
-      throw new Error('Failed to load global index')
-    }
+  if (!globalIndex) {
+    throw new NotFoundError('Failed to load global index', 'index', 'global')
+  }
 
-    // Find the guide in the index
-    const guide = globalIndex.guides.find((g) => {
-      const guideName = g.path
-        .replace(/^(guides|concepts)\//, '')
-        .replace(/\.md$/, '')
-      return guideName === name
-    })
+  // Find the guide in the index
+  const guide = globalIndex.guides.find((g) => {
+    const guideName = g.path
+      .replace(/^(guides|concepts)\//, '')
+      .replace(/\.md$/, '')
+    return guideName === name
+  })
 
-    if (!guide) {
-      throw new Error(
-        `Guide not found: ${name}. Use list_guides to see available guides.`,
-      )
-    }
+  if (!guide) {
+    throw new NotFoundError(
+      `Guide not found: ${name}. Use list_guides to see available guides.`,
+      'guide',
+      name,
+    )
+  }
 
-    // Read the guide content
-    const content = await readMcpFile(guide.path)
+  // Read the guide content
+  const content = await readMcpFile(guide.path)
 
-    return {
-      content: [
-        {
-          type: 'text',
-          text: `# ${guide.title}\n\n${content}`,
-        },
-      ],
-    }
-  } catch (error) {
-    throw new Error(`Failed to get guide: ${error}`)
+  if (!content) {
+    throw new NotFoundError(
+      `Guide file not found: ${guide.path}`,
+      'file',
+      guide.path,
+    )
+  }
+
+  return {
+    content: [
+      {
+        type: 'text',
+        text: `# ${guide.title}\n\n${content}`,
+      },
+    ],
   }
 }
 
 /**
  * Handle get_instructions tool
+ * @returns Instructions content
  */
 async function handleGetInstructions() {
-  try {
-    const globalIndex = await loadGlobalIndex()
+  const globalIndex = await loadGlobalIndex()
 
-    if (!globalIndex) {
-      throw new Error('Failed to load global index')
-    }
+  if (!globalIndex) {
+    throw new NotFoundError('Failed to load global index', 'index', 'global')
+  }
 
-    if (!globalIndex.instructions) {
-      throw new Error(
-        'Instructions not available. The MCP may not have been generated with instructions support.',
-      )
-    }
+  if (!globalIndex.instructions) {
+    throw new NotFoundError(
+      'Instructions not available. The MCP may not have been generated with instructions support.',
+      'file',
+      'INSTRUCTIONS.md',
+    )
+  }
 
-    // Read the instructions file
-    const content = await readMcpFile('INSTRUCTIONS.md')
+  // Read the instructions file
+  const content = await readMcpFile('INSTRUCTIONS.md')
 
-    if (!content) {
-      throw new Error('Instructions file not found')
-    }
+  if (!content) {
+    throw new NotFoundError(
+      'Instructions file not found',
+      'file',
+      'INSTRUCTIONS.md',
+    )
+  }
 
-    return {
-      content: [
-        {
-          type: 'text',
-          text: content,
-        },
-      ],
-    }
-  } catch (error) {
-    throw new Error(`Failed to get instructions: ${error}`)
+  return {
+    content: [
+      {
+        type: 'text',
+        text: content,
+      },
+    ],
   }
 }

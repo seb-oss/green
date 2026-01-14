@@ -5,6 +5,8 @@ import {
 
 import type { Server } from '@modelcontextprotocol/sdk/server/index.js'
 
+import { PATHS, URI_SCHEME } from './constants.js'
+import { formatErrorResponse, logError, NotFoundError } from './errors.js'
 import {
   buildResourceUri,
   loadComponentsIndex,
@@ -90,7 +92,7 @@ export function setupResourceHandlers(server: Server): void {
         // Add root instructions if available
         if (globalIndex.instructions) {
           resources.push({
-            uri: 'green://instructions',
+            uri: URI_SCHEME.INSTRUCTIONS,
             name: 'Green Design System Instructions',
             description:
               'General instructions and guidelines for agents using the Green Design System MCP',
@@ -119,7 +121,7 @@ export function setupResourceHandlers(server: Server): void {
 
       return { resources }
     } catch (error) {
-      console.error('Error listing resources:', error)
+      logError(error, 'listResources')
       return { resources: [] }
     }
   })
@@ -130,10 +132,14 @@ export function setupResourceHandlers(server: Server): void {
 
     try {
       // Handle root instructions resource
-      if (uri === 'green://instructions') {
-        const content = await readMcpFile('INSTRUCTIONS.md')
+      if (uri === URI_SCHEME.INSTRUCTIONS) {
+        const content = await readMcpFile(PATHS.INSTRUCTIONS_FILE)
         if (!content) {
-          throw new Error('Instructions file not found')
+          throw new NotFoundError(
+            'Instructions file not found',
+            'file',
+            PATHS.INSTRUCTIONS_FILE,
+          )
         }
         return {
           contents: [
@@ -148,7 +154,7 @@ export function setupResourceHandlers(server: Server): void {
 
       const parsed = parseResourceUri(uri)
       if (!parsed) {
-        throw new Error(`Invalid resource URI: ${uri}`)
+        throw new NotFoundError(`Invalid resource URI format`, 'uri', uri)
       }
 
       const { category, name, docType } = parsed
@@ -157,7 +163,11 @@ export function setupResourceHandlers(server: Server): void {
 
       if (category === 'components' || category === 'icons') {
         if (!docType) {
-          throw new Error(`Document type required for ${category}`)
+          throw new NotFoundError(
+            `Document type required for ${category}`,
+            'docType',
+            uri,
+          )
         }
         // Path: button/api.md or icon-arrow/api.md
         filePath = `${name}/${docType}.md`
@@ -165,13 +175,17 @@ export function setupResourceHandlers(server: Server): void {
         // Path: guides/angular.md or concepts/tokens.md
         filePath = `${category}/${name}.md`
       } else {
-        throw new Error(`Unknown category: ${category}`)
+        throw new NotFoundError(
+          `Unknown category: ${category}`,
+          'category',
+          uri,
+        )
       }
 
       const content = await readMcpFile(filePath)
 
       if (!content) {
-        throw new Error(`Resource not found: ${uri}`)
+        throw new NotFoundError(`Resource not found`, 'file', filePath, { uri })
       }
 
       return {
@@ -184,9 +198,8 @@ export function setupResourceHandlers(server: Server): void {
         ],
       }
     } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : 'Unknown error'
-      throw new Error(`Failed to read resource: ${errorMessage}`)
+      logError(error, 'readResource')
+      throw error
     }
   })
 }
