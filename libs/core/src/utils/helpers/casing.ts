@@ -1,18 +1,5 @@
 /**
  * Small casing utilities used across the core library.
- * Keep these minimal and well-tested — many places in the repo
- * have ad-hoc casing conversions and this centralizes them.
- */
-
-/**
- * Convert a kebab-case string to camelCase.
- * Example: 'gds-close' -> 'gdsClose'
- */
-/**
- * String casing utilities for the Green Design System
- *
- * This module provides standardized case conversion functions used across
- * the codebase for component names, event names, and other identifiers.
  */
 
 /**
@@ -37,7 +24,12 @@ export function kebabToCamelCase(str: string): string {
 export function toPascalCase(str: string): string {
   if (!str) return str
   // If kebab-case, transform first
-  const normalized = str.includes('-') ? str.split('-').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join('') : str.charAt(0).toUpperCase() + str.slice(1)
+  const normalized = str.includes('-')
+    ? str
+        .split('-')
+        .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
+        .join('')
+    : str.charAt(0).toUpperCase() + str.slice(1)
   return normalized
 }
 
