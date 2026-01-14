@@ -25,15 +25,7 @@ import {
   validateSearchComponentsInput,
 } from './validation.js'
 
-import type {
-  ComponentEntry,
-  GetComponentDocsInput,
-  GetGuideInput,
-  IconEntry,
-  ListGuidesInput,
-  SearchComponentsInput,
-  SearchResult,
-} from './types.js'
+import type { ComponentEntry, IconEntry } from './types.js'
 
 /**
  * Register tool handlers on the MCP server
