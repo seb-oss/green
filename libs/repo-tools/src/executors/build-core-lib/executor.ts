@@ -209,7 +209,14 @@ export default async function runExecutor(
 ) {
   removeSync(options.outputPath)
 
+  // Silence asset copying logs by suppressing stdout temporarily
+  const originalStdoutWrite = process.stdout.write.bind(process.stdout)
+  process.stdout.write = () => true
+
   await copyAssets(options, context)
+
+  // Restore stdout
+  process.stdout.write = originalStdoutWrite
 
   await esbuild.build({
     entryPoints: [
