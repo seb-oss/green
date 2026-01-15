@@ -706,7 +706,7 @@ export const TableStyles = css`
       }
 
       .data {
-        overflow-x: scroll;
+        overflow-x: auto;
         mask: linear-gradient(
           to right,
           #0000,
