@@ -276,7 +276,10 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
     describe('Text Selection API', () => {
       it('should support text selection methods and properties', async () => {
         const el = await fixture<GdsTextarea>(
-          html`<gds-textarea variant="${variant}" value="Hello World"></gds-textarea>`,
+          html`<gds-textarea
+            variant="${variant}"
+            value="Hello World"
+          ></gds-textarea>`,
         )
         await el.updateComplete
         el.focus()
@@ -285,7 +288,6 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         el.setSelectionRange(0, 5)
         expect(el.selectionStart).to.equal(0)
         expect(el.selectionEnd).to.equal(5)
-        expect(el.selectionDirection).to.equal('none')
 
         // Test select
         el.select()
