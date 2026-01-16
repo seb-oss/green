@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.22.1
+
+### Patch Changes
+
+- 31e72ca: **Table:** Remove double types import
+
 ## 2.22.0
 
 ### Minor Changes
