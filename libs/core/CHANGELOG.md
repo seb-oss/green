@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.23.0
+
+### Minor Changes
+
+- 033fb22: **Input & Textarea**: Add support for text selection APIs
+
+### Patch Changes
+
+- 033fb22: **React**: Fix potential input event issue by not stopping propagation
+- 8b321ba: **Table:** Scrollbar fix for windows when not in use
+
 ## 2.22.1
 
 ### Patch Changes
