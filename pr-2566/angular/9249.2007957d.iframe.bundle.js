@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[9249],{49249:(e,r,n)=>{n.r(r),n.d(r,{formatter:()=>f});var t=n(17198),u=n(88230),a=n(11546),f=(0,(0,n(58234).f1)((0,u.a)(),1).default)(2)(function(){var e=(0,t.A)(function*(e,r){return!1===e?r:(0,a.T)(r)});return function(r,n){return e.apply(this,arguments)}}())}}]);
