@@ -1,8 +1,6 @@
-import { css } from 'lit'
 import { ifDefined } from 'lit/directives/if-defined.js'
 
 import { tokens } from '../../tokens.style'
-import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import {
   gdsCustomElement,
   html,
