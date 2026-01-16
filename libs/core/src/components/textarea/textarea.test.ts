@@ -272,5 +272,38 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         ).to.be.greaterThan(4)
       })
     })
+
+    describe('Text Selection API', () => {
+      it('should support text selection methods and properties', async () => {
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea variant="${variant}" value="Hello World"></gds-textarea>`,
+        )
+        await el.updateComplete
+        el.focus()
+
+        // Test setSelectionRange
+        el.setSelectionRange(0, 5)
+        expect(el.selectionStart).to.equal(0)
+        expect(el.selectionEnd).to.equal(5)
+        expect(el.selectionDirection).to.equal('none')
+
+        // Test select
+        el.select()
+        expect(el.selectionStart).to.equal(0)
+        expect(el.selectionEnd).to.equal(11)
+
+        // Test setRangeText
+        el.setRangeText('Goodbye', 0, 5)
+        expect(el.value).to.equal('Goodbye World')
+
+        // Test selection properties getters/setters
+        el.selectionStart = 8
+        el.selectionEnd = 13
+        el.selectionDirection = 'forward'
+        expect(el.selectionStart).to.equal(8)
+        expect(el.selectionEnd).to.equal(13)
+        expect(el.selectionDirection).to.equal('forward')
+      })
+    })
   })
 }

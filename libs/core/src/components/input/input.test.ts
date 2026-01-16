@@ -277,5 +277,38 @@ for (const variant of ['default'] as const) {
         await expect(el).to.be.accessible()
       })
     })
+
+    describe('Text Selection API', () => {
+      it('should support text selection methods and properties', async () => {
+        const el = await fixture<GdsInput>(
+          html`<gds-input variant="${variant}" value="Hello World"></gds-input>`,
+        )
+        await el.updateComplete
+        el.focus()
+
+        // Test setSelectionRange
+        el.setSelectionRange(0, 5)
+        expect(el.selectionStart).to.equal(0)
+        expect(el.selectionEnd).to.equal(5)
+        expect(el.selectionDirection).to.equal('none')
+
+        // Test select
+        el.select()
+        expect(el.selectionStart).to.equal(0)
+        expect(el.selectionEnd).to.equal(11)
+
+        // Test setRangeText
+        el.setRangeText('Goodbye', 0, 5)
+        expect(el.value).to.equal('Goodbye World')
+
+        // Test selection properties getters/setters
+        el.selectionStart = 8
+        el.selectionEnd = 13
+        el.selectionDirection = 'forward'
+        expect(el.selectionStart).to.equal(8)
+        expect(el.selectionEnd).to.equal(13)
+        expect(el.selectionDirection).to.equal('forward')
+      })
+    })
   })
 }
