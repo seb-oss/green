@@ -22,6 +22,7 @@ export const Default: Story = {
     rows: 10,
     total: 2000,
     options: [5, 10, 20, 50, 100],
+    hideOptions: false,
   },
   render: (args) => {
     const handlePageChange = (e: CustomEvent) => {
@@ -65,6 +66,7 @@ export const Default: Story = {
           rows="${args.rows}"
           .total=${args.total}
           .options=${args.options}
+          .hide-options="${args.hideOptions}"
           @gds-page-change=${handlePageChange}
           @gds-rows-change=${handleRowsChange}
         ></gds-pagination>

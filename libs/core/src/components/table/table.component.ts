@@ -1050,7 +1050,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  #renderTitle() {
+  #renderHeadline() {
     if (this.headline || this.summary) {
       return html`
         <div class="headline">
@@ -1075,7 +1075,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return html`
       <div class="${classMap(classes)}">
         ${[
-          this.#renderTitle(),
+          this.#renderHeadline(),
           this.#renderHeaderControls(),
           when(
             this._error,

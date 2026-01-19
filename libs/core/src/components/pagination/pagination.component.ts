@@ -128,6 +128,16 @@ export class GdsPagination extends withMarginProps(
   jump = false
 
   /**
+   * Hide options
+   */
+  @property({
+    attribute: 'hide-options',
+    type: Boolean,
+    reflect: false,
+  })
+  hideOptions = false
+
+  /**
    * Controls density mode on pagination
    * Accepts: `comfortable`, `compact`, `spacious`
    */
@@ -369,7 +379,7 @@ export class GdsPagination extends withMarginProps(
   }
 
   #renderPageSizeMenu() {
-    if (this._isMobile) return null
+    if (this._isMobile || this.hideOptions) return null
     const rowsLabel = `${msg('Rows per page')}, ${this.rows} ${msg('selected')}`
 
     return html`

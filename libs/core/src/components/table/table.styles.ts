@@ -280,8 +280,6 @@ export const TableStyles = css`
   .headline {
     display: flex;
     flex-direction: column;
-    gap: 0;
-    margin-bottom: calc(var(--table-gap) / 2);
   }
 
   .header {
