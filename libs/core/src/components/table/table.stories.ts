@@ -85,6 +85,8 @@ export const Overview: Story = {
   },
   render: (args) =>
     html` <gds-table
+      headline="User Management"
+      summary="Overview of all users in the system"
       density="${args.density}"
       variant="${args.variant}"
       ?searchable="${args.searchable}"

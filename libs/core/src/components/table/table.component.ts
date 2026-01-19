@@ -44,6 +44,12 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   #cacheDuration = 5 * 60 * 1000
   #templateCache = new Map<string, HTMLTemplateElement>()
 
+  @property()
+  headline?: string
+
+  @property()
+  summary?: string
+
   /**
    * Configurable options for rows per page.
    * Accepts: number array (e.g., `[5, 10, 20, 50, 100]`)
@@ -1044,6 +1050,21 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
+  #renderTitle() {
+    if (this.headline || this.summary) {
+      return html`
+        <div class="headline">
+          <slot name="headline">
+            <gds-text tag="h2">${this.headline}</gds-text>
+            <gds-text tag="p" font="detail-book-s" color="neutral-02">
+              ${this.summary}
+            </gds-text>
+          </slot>
+        </div>
+      `
+    }
+  }
+
   render() {
     const classes = {
       table: true,
@@ -1054,6 +1075,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return html`
       <div class="${classMap(classes)}">
         ${[
+          this.#renderTitle(),
           this.#renderHeaderControls(),
           when(
             this._error,

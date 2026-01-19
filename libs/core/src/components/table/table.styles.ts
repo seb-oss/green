@@ -277,6 +277,13 @@ export const TableStyles = css`
   }
 
   /* Header & Footer Layout */
+  .headline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: calc(var(--table-gap) / 2);
+  }
+
   .header {
     display: flex;
     justify-content: space-between;
