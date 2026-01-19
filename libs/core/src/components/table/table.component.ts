@@ -47,6 +47,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   @property()
   headline?: string
 
+  @property({ type: String })
+  headlineTag: string = 'h2'
+
   @property()
   summary?: string
 
@@ -1057,7 +1060,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       return html`
         <gds-flex flex-direction="column" gap="4xs">
           <gds-text
-            tag="h2"
+            tag="${this.headlineTag}"
             font="heading-s"
             text-wrap="balance"
             max-width="80ch"

@@ -420,6 +420,7 @@ export const Headline: Story = {
     columns: Users.Columns,
     data: Users.Data,
     headline: 'User Management',
+    headlineTag: 'h2',
     summary: 'Overview of all users in the system',
   },
   parameters: {
@@ -434,6 +435,7 @@ When the \`headline\` and \`summary\` properties are set, they will be displayed
   render: (args) => html`
     <gds-table
       headline="${args.headline}"
+      headlineTag="${args.headlineTag}"
       summary="${args.summary}"
       .columns="${args.columns}"
       .data="${args.data}"
