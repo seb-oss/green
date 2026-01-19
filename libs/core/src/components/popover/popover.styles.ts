@@ -47,7 +47,6 @@ const style = css`
         position: fixed;
         bottom: 0;
         left: 0;
-        overflow: auto;
 
         padding-bottom: 0;
 
