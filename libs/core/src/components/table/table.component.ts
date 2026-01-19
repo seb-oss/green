@@ -45,6 +45,28 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   #templateCache = new Map<string, HTMLTemplateElement>()
 
   /**
+   * The main headline text displayed at the top of the table.
+   */
+  @property()
+  headline?: string
+
+  /**
+   * The HTML tag to use for the headline (e.g., 'h1', 'h2', etc.).
+   */
+  @property({
+    attribute: 'headline-tag',
+    type: String,
+    reflect: true,
+  })
+  headlineTag = 'h2'
+
+  /**
+   * A brief description or summary displayed below the headline.
+   */
+  @property()
+  summary?: string
+
+  /**
    * Configurable options for rows per page.
    * Accepts: number array (e.g., `[5, 10, 20, 50, 100]`)
    */
@@ -944,7 +966,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       loading: this._loading,
       loaded: !this._loading && !this._loaded,
     })
-    const caption = `${msg('Data table with')} ${this._total} ${msg('rows')}`
+    const caption = `${this.summary}, ${msg('Data table with')} ${this._total} ${msg('rows')}`
 
     return html`
       <gds-card
@@ -1026,7 +1048,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     const start = (this._view.page - 1) * this._view.rows + 1
     const end = Math.min(this._view.page * this._view.rows, this._total)
-    const summaryString = `${start} - ${end} ${msg('of')} ${this._total}`
+    const summaryString = `${start}–${end} ${msg('of')} ${this._total}`
 
     return html`
       <gds-pagination
@@ -1044,6 +1066,40 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
+  #renderHeadline() {
+    if (this.plain) return null
+
+    if (this.headline || this.summary) {
+      return html`
+        <gds-flex flex-direction="column" gap="4xs">
+          <gds-text
+            tag="${this.headlineTag}"
+            font="heading-s"
+            text-wrap="balance"
+            max-width="80ch"
+          >
+            ${this.headline}
+          </gds-text>
+          <gds-text
+            tag="p"
+            font=${this.density === 'compact'
+              ? 'body-regular-s'
+              : 'body-regular-m'}
+            text-wrap="balance"
+            max-width="80ch"
+          >
+            ${this.summary}
+          </gds-text>
+        </gds-flex>
+        ${when(
+          this.searchable || this.settings,
+          () => html`<gds-divider color="subtle-01"></gds-divider>`,
+          () => html``,
+        )}
+      `
+    }
+  }
+
   render() {
     const classes = {
       table: true,
@@ -1054,6 +1110,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return html`
       <div class="${classMap(classes)}">
         ${[
+          this.#renderHeadline(),
           this.#renderHeaderControls(),
           when(
             this._error,
