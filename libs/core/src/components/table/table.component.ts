@@ -1032,7 +1032,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     const start = (this._view.page - 1) * this._view.rows + 1
     const end = Math.min(this._view.page * this._view.rows, this._total)
-    const summaryString = `${start} - ${end} ${msg('of')} ${this._total}`
+    const summaryString = `${start} – ${end} ${msg('of')} ${this._total}`
 
     return html`
       <gds-pagination
