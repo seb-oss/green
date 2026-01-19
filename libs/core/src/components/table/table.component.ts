@@ -47,7 +47,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   @property()
   headline?: string
 
-  @property({ type: String })
+  @property({
+    attribute: 'headline-tag',
+    type: String,
+    reflect: true,
+  })
   headlineTag: string = 'h2'
 
   @property()

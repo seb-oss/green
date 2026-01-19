@@ -427,7 +427,9 @@ export const Headline: Story = {
     docs: {
       description: {
         story: `
-When the \`headline\` and \`summary\` properties are set, they will be displayed at the top of the table. 
+When the \`headline\` and \`summary\` properties are set, they will be displayed at the top of the table.
+
+You can change the \`headline-tag\` to any valid heading tag (e.g., 'h1-h5') to customize the semantic structure without altering the appearance.
         `,
       },
     },
@@ -435,7 +437,7 @@ When the \`headline\` and \`summary\` properties are set, they will be displayed
   render: (args) => html`
     <gds-table
       headline="${args.headline}"
-      headlineTag="${args.headlineTag}"
+      headline-tag="${args.headlineTag}"
       summary="${args.summary}"
       .columns="${args.columns}"
       .data="${args.data}"
