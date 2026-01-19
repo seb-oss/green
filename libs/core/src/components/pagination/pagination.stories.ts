@@ -66,7 +66,7 @@ export const Default: Story = {
           rows="${args.rows}"
           .total=${args.total}
           .options=${args.options}
-          .hide-options="${args.hideOptions}"
+          ?hide-options="${args.hideOptions}"
           @gds-page-change=${handlePageChange}
           @gds-rows-change=${handleRowsChange}
         ></gds-pagination>
