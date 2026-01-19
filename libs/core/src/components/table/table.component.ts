@@ -950,7 +950,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       loading: this._loading,
       loaded: !this._loading && !this._loaded,
     })
-    const caption = `${msg('Data table with')} ${this._total} ${msg('rows')}`
+    const caption = `${this.summary}, ${msg('Data table with')} ${this._total} ${msg('rows')}`
 
     return html`
       <gds-card
