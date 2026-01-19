@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.24.0
+
+### Minor Changes
+
+- 718f72f: **Table:** Add headline and summary
+- 718f72f: **Pagination:** Add `hideOptions` boolean
+
+### Patch Changes
+
+- 308056d: **Datepicker:** Fix last-day-of-month overshoot when stepping though months. Fixes #2099
+- 308056d: **Datepicker:** Fix focus visibility issue
+
 ## 2.23.0
 
 ### Minor Changes
