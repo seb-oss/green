@@ -44,9 +44,15 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   #cacheDuration = 5 * 60 * 1000
   #templateCache = new Map<string, HTMLTemplateElement>()
 
+  /**
+   * The main headline text displayed at the top of the table.
+   */
   @property()
   headline?: string
 
+  /**
+   * The HTML tag to use for the headline (e.g., 'h1', 'h2', etc.).
+   */
   @property({
     attribute: 'headline-tag',
     type: String,
@@ -54,6 +60,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   })
   headlineTag: string = 'h2'
 
+  /**
+   * A brief description or summary displayed below the headline.
+   */
   @property()
   summary?: string
 
