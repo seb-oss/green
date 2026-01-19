@@ -1056,26 +1056,24 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     if (this.headline || this.summary) {
       return html`
         <gds-flex flex-direction="column" gap="4xs">
-          <slot name="headline">
-            <gds-text
-              tag="h2"
-              font="heading-s"
-              text-wrap="balance"
-              max-width="80ch"
-            >
-              ${this.headline}
-            </gds-text>
-            <gds-text
-              tag="p"
-              font=${this.density === 'compact'
-                ? 'body-regular-s'
-                : 'body-regular-m'}
-              text-wrap="balance"
-              max-width="80ch"
-            >
-              ${this.summary}
-            </gds-text>
-          </slot>
+          <gds-text
+            tag="h2"
+            font="heading-s"
+            text-wrap="balance"
+            max-width="80ch"
+          >
+            ${this.headline}
+          </gds-text>
+          <gds-text
+            tag="p"
+            font=${this.density === 'compact'
+              ? 'body-regular-s'
+              : 'body-regular-m'}
+            text-wrap="balance"
+            max-width="80ch"
+          >
+            ${this.summary}
+          </gds-text>
         </gds-flex>
         ${when(
           this.searchable || this.settings,
