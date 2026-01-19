@@ -15,6 +15,7 @@ const style = css`
       opacity: 1;
       box-sizing: border-box;
       visibility: visible;
+      overflow: auto;
     }
 
     dialog {
@@ -46,6 +47,7 @@ const style = css`
         position: fixed;
         bottom: 0;
         left: 0;
+        overflow: auto;
 
         padding-bottom: 0;
 
