@@ -522,6 +522,8 @@ export const Density: Story = {
     columns: Users.Columns,
     data: Users.Data,
     density: 'compact',
+    headline: 'User Management',
+    summary: 'Overview of all users in the system',
   },
   parameters: {
     docs: {
@@ -538,6 +540,10 @@ The \`density\` property allows customizing the table's visual spacing with thes
   },
   render: (args) => html`
     <gds-table
+      headline="${args.headline}"
+      summary="${args.summary}"
+      searchable
+      settings
       .density="${args.density}"
       .columns="${args.columns}"
       .data="${args.data}"

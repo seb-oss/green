@@ -34,7 +34,7 @@ export const TableStyles = css`
     --table-header-padding-x: var(--gds-sys-space-m);
     --table-row-min-height: var(--gds-sys-space-4xl);
     --table-font-size: var(--gds-sys-text-detail-book-s);
-    --table-gap: var(--gds-sys-space-xl);
+    --table-gap: var(--gds-sys-space-l);
     --table-border-spacing: 0 var(--gds-sys-space-4xs);
     --table-data-padding: var(--gds-sys-space-3xs) var(--gds-sys-space-2xs);
   }
@@ -47,7 +47,7 @@ export const TableStyles = css`
     --table-header-padding-x: var(--gds-sys-space-l);
     --table-row-min-height: var(--gds-sys-space-5xl);
     --table-font-size: var(--gds-sys-text-detail-book-m);
-    --table-gap: var(--gds-sys-space-2xl);
+    --table-gap: var(--gds-sys-space-xl);
     --table-border-spacing: 0 var(--gds-sys-space-3xs);
     --table-data-padding: var(--gds-sys-space-3xs) var(--gds-sys-space-xs);
   }
@@ -276,11 +276,6 @@ export const TableStyles = css`
   }
 
   /* Header & Footer Layout */
-  .headline {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gds-sys-space-4xs);
-  }
 
   .header {
     display: flex;
