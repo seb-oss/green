@@ -58,7 +58,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     type: String,
     reflect: true,
   })
-  headlineTag: string = 'h2'
+  headlineTag = 'h2'
 
   /**
    * A brief description or summary displayed below the headline.
