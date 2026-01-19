@@ -37,7 +37,7 @@ const style = css`
       margin: calc(-1 * var(--gds-sys-space-4xs));
       border-radius: var(--gds-sys-radius-3xs);
 
-      &:focus-visible {
+      &:focus {
         background-color: var(--gds-sys-color-l3-neutral-01);
         color: var(--gds-sys-color-content-inversed);
       }
