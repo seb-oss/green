@@ -415,6 +415,43 @@ Supports all cell types (button, link, context-menu, badge, etc.) and can contai
 // STYLING - Plain
 // ============================================================================
 
+export const Headline: Story = {
+  args: {
+    columns: Users.Columns,
+    data: Users.Data,
+    headline: 'User Management',
+    headlineTag: 'h2',
+    summary: 'Overview of all users in the system',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+When the \`headline\` and \`summary\` properties are set, they will be displayed at the top of the table.
+
+You can change the \`headline-tag\` to any valid heading tag (e.g., 'h1-h5') to customize the semantic structure without altering the appearance.
+        `,
+      },
+    },
+  },
+  render: (args) => html`
+    <gds-table
+      headline="${args.headline}"
+      headline-tag="${args.headlineTag}"
+      summary="${args.summary}"
+      .columns="${args.columns}"
+      .data="${args.data}"
+    >
+      <template name="email-copy">
+        <gds-icon-copy></gds-icon-copy>
+      </template>
+      <template name="download-image">
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
+      </template>
+    </gds-table>
+  `,
+}
+
 export const Plain: Story = {
   args: {
     columns: Users.Columns,
@@ -489,6 +526,8 @@ export const Density: Story = {
     columns: Users.Columns,
     data: Users.Data,
     density: 'compact',
+    headline: 'User Management',
+    summary: 'Overview of all users in the system',
   },
   parameters: {
     docs: {
@@ -505,6 +544,10 @@ The \`density\` property allows customizing the table's visual spacing with thes
   },
   render: (args) => html`
     <gds-table
+      headline="${args.headline}"
+      summary="${args.summary}"
+      searchable
+      settings
       .density="${args.density}"
       .columns="${args.columns}"
       .data="${args.data}"

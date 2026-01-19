@@ -199,6 +199,69 @@ class Textarea extends GdsFormControlElement<string> {
     this._getValidityAnchor()?.focus(options)
   }
 
+  /**
+   * Selects all the text in the textarea element.
+   */
+  select(): void {
+    this._getValidityAnchor()?.select()
+  }
+
+  /**
+   * Sets the value of the textarea element, replacing a range of text.
+   */
+  setRangeText(...args: Parameters<HTMLTextAreaElement['setRangeText']>): void {
+    this._getValidityAnchor()?.setRangeText(...args)
+    this.value = this._getValidityAnchor()?.value || ''
+  }
+
+  /**
+   * Sets the start and end positions of a selection in the textarea element.
+   */
+  setSelectionRange(
+    ...args: Parameters<HTMLTextAreaElement['setSelectionRange']>
+  ): void {
+    this._getValidityAnchor()?.setSelectionRange(...args)
+  }
+
+  /** The position of the start of the current text selection in the textarea element. */
+  get selectionStart() {
+    return this._getValidityAnchor()?.selectionStart
+  }
+
+  /** Sets the position of the start of the current text selection in the textarea element. */
+  set selectionStart(value) {
+    const anchor = this._getValidityAnchor()
+    if (anchor) {
+      anchor.selectionStart = value
+    }
+  }
+
+  /** The position of the end of the current text selection in the textarea element. */
+  get selectionEnd() {
+    return this._getValidityAnchor()?.selectionEnd
+  }
+
+  /** Sets the position of the end of the current text selection in the textarea element. */
+  set selectionEnd(value) {
+    const anchor = this._getValidityAnchor()
+    if (anchor) {
+      anchor.selectionEnd = value
+    }
+  }
+
+  /** The direction of the current text selection in the textarea element. */
+  get selectionDirection() {
+    return this._getValidityAnchor()?.selectionDirection
+  }
+
+  /** Sets the direction of the current text selection in the textarea element. */
+  set selectionDirection(value) {
+    const anchor = this._getValidityAnchor()
+    if (anchor) {
+      anchor.selectionDirection = value
+    }
+  }
+
   @resizeObserver()
   private _handleResize() {
     if (!this.fieldBase) return

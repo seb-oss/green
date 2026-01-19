@@ -138,5 +138,31 @@ describe('<gds-coachmark>', () => {
 
       await eventPromise
     })
+
+    it('should prevent closing when gds-ui-state event is cancelled', async () => {
+      const el = await fixture<GdsCoachmark>(
+        html`<gds-coachmark .target=${['#target']}>
+          <div>Content</div>
+        </gds-coachmark>`,
+      )
+
+      el._isVisible = true
+
+      await el.updateComplete
+
+      el.addEventListener(
+        'gds-ui-state',
+        (event: CustomEvent) => {
+          event.preventDefault()
+        },
+        { once: true },
+      )
+
+      document.body.click()
+
+      await aTimeout(100)
+
+      expect(el._isVisible).to.be.true
+    })
   })
 })

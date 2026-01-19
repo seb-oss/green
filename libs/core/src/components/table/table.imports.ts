@@ -3,6 +3,7 @@ import {
   GdsButton,
   GdsCard,
   GdsContextMenu,
+  GdsDivider,
   GdsDropdown,
   GdsFlex,
   GdsImg,
@@ -37,6 +38,7 @@ export const Styles = [tokens, checkboxStyles, TableStyles]
 export const Dependencies = [
   GdsButton,
   GdsCard,
+  GdsDivider,
   GdsImg,
   GdsContextMenu,
   GdsMenuItem,

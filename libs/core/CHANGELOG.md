@@ -1,5 +1,53 @@
 # Changelog
 
+## 2.24.0
+
+### Minor Changes
+
+- 718f72f: **Table:** Add headline and summary
+- 718f72f: **Pagination:** Add `hideOptions` boolean
+
+### Patch Changes
+
+- 308056d: **Datepicker:** Fix last-day-of-month overshoot when stepping though months. Fixes #2099
+- 308056d: **Datepicker:** Fix focus visibility issue
+
+## 2.23.0
+
+### Minor Changes
+
+- 033fb22: **Input & Textarea**: Add support for text selection APIs
+
+### Patch Changes
+
+- 033fb22: **React**: Fix potential input event issue by not stopping propagation
+- 8b321ba: **Table:** Scrollbar fix for windows when not in use
+
+## 2.22.1
+
+### Patch Changes
+
+- 31e72ca: **Table:** Remove double types import
+
+## 2.22.0
+
+### Minor Changes
+
+- b9a8c83: **Coachmarks:** Make `gds-ui-state` event cancellable
+
+### Patch Changes
+
+- bca44e8: **Input:** Make `gds-ui-state` event cancellable for extended support text show
+- 7f6ae80: **Pagination:** Dispatch React compatible events
+
+## 2.21.0
+
+### Minor Changes
+
+- 727a4c0: **React:** Add Typescript support for custom events
+- 727a4c0: **React:** Implement controlled behaviour for form controls
+- 727a4c0: **React:** Add `displayName` to all components
+
 ## 2.20.0
 
 ### Minor Changes

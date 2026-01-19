@@ -68,9 +68,6 @@ export function useControlledValue<TElement extends HTMLElement = HTMLElement>(
 
     // Intercept input events to implement controlled component behavior
     const handleInput = (e: Event) => {
-      // Stop propagation to prevent React's event delegation from handling it
-      e.stopPropagation()
-
       // Call the consumer's onChange handler (React idiom: onChange fires on every input)
       if (onChange) {
         onChange(e)
@@ -135,9 +132,6 @@ export function useControlledChecked<
 
     // Intercept input events to implement controlled component behavior
     const handleInput = (e: Event) => {
-      // Stop propagation to prevent React's event delegation from handling it
-      e.stopPropagation()
-
       // Call the consumer's onChange handler (React idiom: onChange fires on every input)
       if (onChange) {
         onChange(e)

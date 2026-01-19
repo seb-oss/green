@@ -15,6 +15,15 @@ import type { ExecutorContext } from '@nx/devkit'
 
 import { BuildCoreLibExecutorSchema } from './schema'
 
+const EXTENSIONS_TO_EXCLUDE = [
+  '.types',
+  '.imports',
+  '.component',
+  '.styles',
+  '.style',
+  '.template',
+]
+
 // Rewrite style imports, and add explicit .js extensions
 const rewriteImports: esbuild.Plugin = {
   name: 'rewrite-imports',
@@ -31,9 +40,7 @@ const rewriteImports: esbuild.Plugin = {
         .replace(/from\s+['"](\..*?)['"]/g, (match, importPath) => {
           if (
             path.extname(importPath) &&
-            !['.component', '.styles', '.style', '.template'].includes(
-              path.extname(importPath),
-            )
+            !EXTENSIONS_TO_EXCLUDE.includes(path.extname(importPath))
           )
             return match // Skip if it already has an extension
 
@@ -68,7 +75,7 @@ const rewriteImports: esbuild.Plugin = {
           (match, exportPath) => {
             if (
               path.extname(exportPath) &&
-              path.extname(exportPath) !== '.component'
+              !EXTENSIONS_TO_EXCLUDE.includes(path.extname(exportPath))
             )
               return match // Skip if it already has an extension
 
@@ -102,9 +109,7 @@ const rewriteImports: esbuild.Plugin = {
         .replace(/import\s+['"](\..*?)['"]/g, (match, importPath) => {
           if (
             path.extname(importPath) &&
-            !['.component', '.styles', '.style', '.template'].includes(
-              path.extname(importPath),
-            )
+            !EXTENSIONS_TO_EXCLUDE.includes(path.extname(importPath))
           )
             return match // Skip if it already has an extension
           const fullPath = path.resolve(path.dirname(args.path), importPath)
@@ -204,7 +209,14 @@ export default async function runExecutor(
 ) {
   removeSync(options.outputPath)
 
+  // Silence asset copying logs by suppressing stdout temporarily
+  const originalStdoutWrite = process.stdout.write.bind(process.stdout)
+  process.stdout.write = () => true
+
   await copyAssets(options, context)
+
+  // Restore stdout
+  process.stdout.write = originalStdoutWrite
 
   await esbuild.build({
     entryPoints: [

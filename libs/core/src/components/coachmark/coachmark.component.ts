@@ -25,7 +25,7 @@ import CoachmarkStyles from './coachmark.styles'
  *
  * @slot - placeholder for the content of the tooltip.
  *
- * @event gds-ui-state - dispatched when the tooltip is closed
+ * @event gds-ui-state - dispatched when the tooltip is about to be closed. Can be cancelled to prevent closing.
  *
  * @status beta
  */
@@ -122,14 +122,18 @@ export class GdsCoachmark extends GdsElement {
 
   #closeCoachMark() {
     if (!this._isVisible) return
-    this._isVisible = false
-    this.#cardRef.value?.remove()
-    this.#autoUpdateCleanupFn?.()
-    this.dispatchCustomEvent('gds-ui-state', {
+
+    const shouldClose = this.dispatchCustomEvent('gds-ui-state', {
       detail: { open: this._isVisible, reason: 'closed' },
       bubbles: false,
       composed: false,
+      cancelable: true,
     })
+    if (!shouldClose) return
+
+    this._isVisible = false
+    this.#cardRef.value?.remove()
+    this.#autoUpdateCleanupFn?.()
   }
 
   #findTarget(selectors: string[]): HTMLElement | undefined {
