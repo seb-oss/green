@@ -268,7 +268,6 @@ export const TableStyles = css`
 
   /* Striped */
   .striped tbody tr:not(.selected, :hover):nth-child(even) td {
-    /*  background-color: var(--gds-sys-color-l2-neutral-01); */
     background-color: var(--_table-row-striped);
   }
 
@@ -280,6 +279,7 @@ export const TableStyles = css`
   .headline {
     display: flex;
     flex-direction: column;
+    gap: var(--gds-sys-space-4xs);
   }
 
   .header {

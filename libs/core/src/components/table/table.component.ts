@@ -1051,16 +1051,21 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   #renderHeadline() {
+    if (this.plain) return null
+
     if (this.headline || this.summary) {
       return html`
         <div class="headline">
           <slot name="headline">
-            <gds-text tag="h2">${this.headline}</gds-text>
-            <gds-text tag="p" font="detail-book-s" color="neutral-02">
-              ${this.summary}
-            </gds-text>
+            <gds-text tag="h2" font="heading-s">${this.headline}</gds-text>
+            <gds-text tag="p" font="body-regular-m">${this.summary}</gds-text>
           </slot>
         </div>
+        ${when(
+          this.searchable || this.settings,
+          () => html`<gds-divider color="subtle-01"></gds-divider>`,
+          () => html``,
+        )}
       `
     }
   }

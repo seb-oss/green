@@ -85,8 +85,6 @@ export const Overview: Story = {
   },
   render: (args) =>
     html` <gds-table
-      headline="User Management"
-      summary="Overview of all users in the system"
       density="${args.density}"
       variant="${args.variant}"
       ?searchable="${args.searchable}"
@@ -416,6 +414,39 @@ Supports all cell types (button, link, context-menu, badge, etc.) and can contai
 // ============================================================================
 // STYLING - Plain
 // ============================================================================
+
+export const Headline: Story = {
+  args: {
+    columns: Users.Columns,
+    data: Users.Data,
+    headline: 'User Management',
+    summary: 'Overview of all users in the system',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+When the \`headline\` and \`summary\` properties are set, they will be displayed at the top of the table. 
+        `,
+      },
+    },
+  },
+  render: (args) => html`
+    <gds-table
+      headline="${args.headline}"
+      summary="${args.summary}"
+      .columns="${args.columns}"
+      .data="${args.data}"
+    >
+      <template name="email-copy">
+        <gds-icon-copy></gds-icon-copy>
+      </template>
+      <template name="download-image">
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
+      </template>
+    </gds-table>
+  `,
+}
 
 export const Plain: Story = {
   args: {
