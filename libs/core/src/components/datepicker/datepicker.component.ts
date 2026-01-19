@@ -7,6 +7,7 @@ import { repeat } from 'lit/directives/repeat.js'
 import { until } from 'lit/directives/until.js'
 import { when } from 'lit/directives/when.js'
 import { isSameDay } from 'date-fns'
+import lastDayOfMonth from 'date-fns/lastDayOfMonth'
 
 import { GdsButton } from '../../components/button/button.component'
 import { GdsDropdown } from '../../components/dropdown/dropdown.component'
@@ -832,11 +833,19 @@ class Datepicker extends GdsFormControlElement<Date> {
   #handleSpinnerChange = (val: string, name: DatePart) => {
     this.#spinnerState[name] = val
 
-    const newDate = new Date()
-    newDate.setFullYear(parseInt(this.#spinnerState.year))
-    newDate.setMonth(parseInt(this.#spinnerState.month) - 1)
-    newDate.setDate(parseInt(this.#spinnerState.day))
+    const newDate = new Date('0000-01-01')
     newDate.setUTCHours(this.utcHours, 0, 0, 0)
+    newDate.setUTCFullYear(parseInt(this.#spinnerState.year))
+    newDate.setUTCMonth(parseInt(this.#spinnerState.month) - 1)
+
+    // Before setting the day, we need to check that we're not overshooting the last day of the month and clamp it if so
+    const lastOfMonth = lastDayOfMonth(newDate).getDate()
+    const setDay =
+      lastOfMonth < parseInt(this.#spinnerState.day)
+        ? lastOfMonth
+        : parseInt(this.#spinnerState.day)
+
+    newDate.setUTCDate(isNaN(setDay) ? 1 : setDay)
 
     if (newDate.toString() === 'Invalid Date') return
 
