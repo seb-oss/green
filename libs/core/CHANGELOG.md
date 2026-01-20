@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.25.0
+
+### Minor Changes
+
+- 5bd1a3c: **Popover:** Add `disalbeScrollClose` boolean to prevent closing the popover on scroll
+
+### Patch Changes
+
+- 6424ae4: **Table:** Font size fix to align with design
+
 ## 2.24.1
 
 ### Patch Changes
