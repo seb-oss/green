@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.24.1
+
+### Patch Changes
+
+- 3661970: **Datepicker:** Fix ES import issue
+
 ## 2.24.0
 
 ### Minor Changes
