@@ -20,7 +20,7 @@ export const TableStyles = css`
     --table-header-padding-y: var(--gds-sys-space-xs);
     --table-header-padding-x: var(--gds-sys-space-s);
     --table-row-min-height: var(--gds-sys-space-xl);
-    --table-font-size: var(--gds-sys-text-detail-book-xs);
+    --table-font-size: var(--gds-sys-text-detail-book-s);
     --table-gap: var(--gds-sys-space-m);
     --table-border-spacing: 0 var(--gds-sys-space-5xs);
     --table-data-padding: var(--gds-sys-space-5xs) var(--gds-sys-space-4xs);
