@@ -29,10 +29,14 @@ export interface ComponentData {
   methods: MethodInfo[]
   /** Whether this component is a form control (extends GdsFormControlElement) */
   isFormControl?: boolean
+  /** Whether this component is an icon (extends GdsIcon) */
+  isIconComponent?: boolean
   /** Whether this component supports routing (has an href property) */
   isLinkComponent?: boolean
   /** Whether this component is a checkbox (gds-checkbox) that needs special boolean handling */
   isCheckboxComponent?: boolean
+  /** Child components that are designed to be used with this component */
+  subcomponents?: SubcomponentInfo[]
 }
 
 export interface ComponentEvent {
@@ -48,6 +52,13 @@ export interface SlotInfo {
   /** Slot name (empty string for default slot) */
   name: string
   /** Slot description */
+  description?: string
+}
+
+export interface SubcomponentInfo {
+  /** Tag name of the subcomponent (e.g., 'gds-segment') */
+  tagName: string
+  /** Description of how the subcomponent is used */
   description?: string
 }
 

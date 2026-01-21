@@ -11,7 +11,7 @@
       "outputs": ["{workspaceRoot}/dist/libs/core/src"],
       "options": {
         "quiet": true,
-        "command": "nx run core:generate-jsx-components && nx run core:build-with-types-and-scoping"
+        "command": "nx run core:generate-jsx-components && nx run core:generate-mcp-data && nx run core:build-with-types-and-scoping"
       }
     },
     "build-src": {
@@ -31,6 +31,11 @@
             "glob": "**/*.svg",
             "input": "libs/core/src/components/icon/assets",
             "output": "assets/icons"
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/core/src/generated/mcp",
+            "output": "generated/mcp"
           }
         ]
       }
@@ -122,6 +127,14 @@
       "dependsOn": ["build-custom-elements-json"],
       "options": {
         "command": "tsx libs/core/build-scripts/generate-react.ts"
+      }
+    },
+    "generate-mcp-data": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build-custom-elements-json"],
+      "outputs": ["{workspaceRoot}/libs/core/src/generated/mcp"],
+      "options": {
+        "command": "tsx libs/core/build-scripts/mcp/generate-mcp-data.ts"
       }
     },
     "test": {
