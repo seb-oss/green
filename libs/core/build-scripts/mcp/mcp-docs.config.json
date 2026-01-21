@@ -1,0 +1,94 @@
+{
+  "guides": [
+    {
+      "source": "src/storybook-docs/guides/angular.mdx",
+      "output": "guides/angular.md",
+      "title": "Angular Setup Guide",
+      "description": "Complete setup for Angular projects including wrappers, scoping, forms, and routing integration",
+      "category": "framework-setup",
+      "tags": ["angular", "setup", "forms", "routing", "wrapper-library", "scoping"]
+    },
+    {
+      "source": "src/storybook-docs/guides/react.mdx",
+      "output": "guides/react.md",
+      "title": "React Setup Guide",
+      "description": "Using Green Core with React 19 and legacy versions, including event handling and transitional styles",
+      "category": "framework-setup",
+      "tags": ["react", "setup", "react-19", "lit-react", "events"]
+    },
+    {
+      "source": "src/storybook-docs/guides/installing.mdx",
+      "output": "guides/installing.md",
+      "title": "Installation & Basic Usage",
+      "description": "General installation instructions, tree-shaking, scoping, and framework-agnostic usage patterns",
+      "category": "getting-started",
+      "tags": ["installation", "setup", "scoping", "tree-shaking", "angular", "react", "lit"]
+    },
+    {
+      "source": "src/storybook-docs/guides/troubleshooting.mdx",
+      "output": "guides/troubleshooting.md",
+      "title": "Troubleshooting Guide",
+      "description": "Common issues and solutions when using Green Core components",
+      "category": "troubleshooting",
+      "tags": ["troubleshooting", "debugging", "common-issues"]
+    },
+    {
+      "source": "src/storybook-docs/guides/migration-guide.mdx",
+      "output": "guides/migration.md",
+      "title": "Migration Guide",
+      "description": "Guide for migrating between versions and upgrading projects",
+      "category": "migration",
+      "tags": ["migration", "upgrade", "breaking-changes"]
+    }
+  ],
+  "concepts": [
+    {
+      "source": "src/storybook-docs/concepts/architecture.mdx",
+      "output": "concepts/architecture.md",
+      "title": "Architecture Overview",
+      "description": "Understanding Green's component hierarchy, primitives, composition patterns, and public API boundaries",
+      "category": "concepts",
+      "tags": ["architecture", "web-components", "primitives", "composition"]
+    },
+    {
+      "source": "src/storybook-docs/concepts/tokens.mdx",
+      "output": "concepts/tokens.md",
+      "title": "Design Tokens",
+      "description": "Token-based design approach covering colors, spacing, typography, shadows, and CSS variable usage",
+      "category": "concepts",
+      "tags": ["tokens", "theming", "css-variables", "design-system"]
+    },
+    {
+      "source": "src/storybook-docs/concepts/scoping.mdx",
+      "output": "concepts/scoping.md",
+      "title": "Element Name Scoping",
+      "description": "Understanding versioned element names and scoping strategies for microfrontends",
+      "category": "concepts",
+      "tags": ["scoping", "versioning", "microfrontends"]
+    },
+    {
+      "source": "src/storybook-docs/concepts/localization.mdx",
+      "output": "concepts/localization.md",
+      "title": "Localization",
+      "description": "Internationalization and localization support in Green components",
+      "category": "concepts",
+      "tags": ["localization", "i18n", "internationalization"]
+    },
+    {
+      "source": "src/storybook-docs/concepts/declarative-layout.mdx",
+      "output": "concepts/declarative-layout.md",
+      "title": "Declarative Layout",
+      "description": "Using declarative layout components for responsive designs",
+      "category": "concepts",
+      "tags": ["layout", "responsive", "container", "flex", "grid"]
+    },
+    {
+      "source": "src/storybook-docs/concepts/transitional-styles.mdx",
+      "output": "concepts/transitional-styles.md",
+      "title": "Transitional Styles",
+      "description": "Supporting legacy 2016 design with transitional styles",
+      "category": "concepts",
+      "tags": ["transitional-styles", "legacy", "2016-design"]
+    }
+  ]
+}

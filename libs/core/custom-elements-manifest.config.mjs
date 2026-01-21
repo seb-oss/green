@@ -24,6 +24,56 @@ export default {
       },
     },
     {
+      name: 'web-components-subcomponent-extractor',
+      analyzePhase({ ts, node, moduleDoc }) {
+        // Only process class declarations
+        if (!ts.isClassDeclaration(node)) {
+          return
+        }
+
+        // Get JSDoc tags
+        const jsDocs = ts.getJSDocTags(node)
+        const subcomponents = []
+
+        // Look for @subcomponent tags
+        for (const tag of jsDocs) {
+          if (tag.tagName.text === 'subcomponent') {
+            // Parse the tag text: "@subcomponent gds-segment - Description here"
+            const commentText = tag.comment || ''
+            const text = typeof commentText === 'string'
+              ? commentText
+              : commentText.map(part => part.text || part).join('')
+
+            // Extract tag name and description
+            // Format: "gds-segment - Description of the subcomponent"
+            const match = text.match(/^([\w-]+)\s*-?\s*(.*)/)
+
+            if (match) {
+              subcomponents.push({
+                tagName: match[1].trim(),
+                description: match[2].trim() || ''
+              })
+            }
+          }
+        }
+
+        // If we found subcomponents, add them to the declaration
+        if (subcomponents.length > 0) {
+          const className = node.name?.getText()
+
+          // Find the class declaration in the module
+          const classDeclaration = moduleDoc?.declarations?.find(
+            declaration => declaration.name === className
+          )
+
+          if (classDeclaration) {
+            // Add subcomponents array to the declaration
+            classDeclaration.subcomponents = subcomponents
+          }
+        }
+      }
+    },
+    {
       name: 'web-components-section-categorizer',
       analyzePhase({ moduleDoc }) {
         if (!moduleDoc?.declarations) return

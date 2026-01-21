@@ -2,17 +2,11 @@ import { LitElement } from 'lit'
 import { state } from 'lit/decorators.js'
 
 import { DynamicStylesController } from './utils/controllers/dynamic-styles-controller'
+import { toPascalCase } from './utils/helpers/casing'
 
 // This nis needed to support legacy decorators. Once we upgrade to TC39 standard decorators across the lib, we can remove this.
 // More info: https://lit.dev/Components/decorators/#decorator-versions
 import 'reflect-metadata'
-
-function toPascalCase(str: string): string {
-  return str
-    .split('-')
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join('')
-}
 
 /**
  * Base class for Green Core elements.

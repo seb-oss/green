@@ -1,0 +1,3 @@
+- Radio buttons should always be placed inside a radio group.
+- The visible label for radio buttons should be added in the `label` attribute.
+- The radio button element cannot have any children, including text nodes.

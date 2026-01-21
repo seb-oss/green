@@ -294,6 +294,204 @@ describe('component-meta', () => {
         expect(componentData.className).to.equal('GdsOption')
         expect(componentData.description).to.equal('A listbox option primitive')
       })
+
+      it('should detect form control components', () => {
+        const module = {
+          kind: 'javascript-module' as const,
+          path: 'src/components/input/input.ts',
+          declarations: [],
+          exports: [],
+        }
+        const declaration = {
+          kind: 'class' as const,
+          name: 'GdsInput',
+          tagName: 'gds-input',
+          customElement: true,
+          description: 'An input component',
+          members: [
+            {
+              kind: 'field' as const,
+              name: 'value',
+              inheritedFrom: {
+                name: 'GdsFormControlElement',
+                module: 'src/components/form/form-control.ts',
+              },
+            },
+          ],
+        }
+
+        const componentData = CemParser.extractComponentData(
+          module,
+          declaration as any,
+        )
+
+        expect(componentData.isFormControl).to.be.true
+        expect(componentData.isIconComponent).to.be.false
+      })
+
+      it('should detect icon components', () => {
+        const module = {
+          kind: 'javascript-module' as const,
+          path: 'src/components/icon/icons/ai.ts',
+          declarations: [],
+          exports: [],
+        }
+        const declaration = {
+          kind: 'class' as const,
+          name: 'IconAi',
+          tagName: 'gds-icon-ai',
+          customElement: true,
+          description: 'AI icon',
+          members: [
+            {
+              kind: 'field' as const,
+              name: 'size',
+              inheritedFrom: {
+                name: 'GdsIcon',
+                module: 'src/components/icon/icon.component.ts',
+              },
+            },
+          ],
+        }
+
+        const componentData = CemParser.extractComponentData(
+          module,
+          declaration as any,
+        )
+
+        expect(componentData.isIconComponent).to.be.true
+        expect(componentData.isFormControl).to.be.false
+      })
+
+      it('should detect link components', () => {
+        const module = {
+          kind: 'javascript-module' as const,
+          path: 'src/components/link/link.ts',
+          declarations: [],
+          exports: [],
+        }
+        const declaration = {
+          kind: 'class' as const,
+          name: 'GdsLink',
+          tagName: 'gds-link',
+          customElement: true,
+          description: 'A link component',
+          members: [
+            {
+              kind: 'field' as const,
+              name: 'href',
+              privacy: undefined,
+            },
+          ],
+        }
+
+        const componentData = CemParser.extractComponentData(
+          module,
+          declaration as any,
+        )
+
+        expect(componentData.isLinkComponent).to.be.true
+      })
+
+      it('should not detect component types when inheritance is missing', () => {
+        const module = {
+          kind: 'javascript-module' as const,
+          path: 'src/components/button/button.ts',
+          declarations: [],
+          exports: [],
+        }
+        const declaration = {
+          kind: 'class' as const,
+          name: 'GdsButton',
+          tagName: 'gds-button',
+          customElement: true,
+          description: 'A button component',
+          members: [
+            {
+              kind: 'field' as const,
+              name: 'variant',
+              privacy: undefined,
+            },
+          ],
+        }
+
+        const componentData = CemParser.extractComponentData(
+          module,
+          declaration as any,
+        )
+
+        expect(componentData.isFormControl).to.be.false
+        expect(componentData.isIconComponent).to.be.false
+        expect(componentData.isLinkComponent).to.be.false
+      })
+
+      it('should handle components with no members', () => {
+        const module = {
+          kind: 'javascript-module' as const,
+          path: 'src/components/divider/divider.ts',
+          declarations: [],
+          exports: [],
+        }
+        const declaration = {
+          kind: 'class' as const,
+          name: 'GdsDivider',
+          tagName: 'gds-divider',
+          customElement: true,
+          description: 'A divider component',
+          members: [],
+        }
+
+        const componentData = CemParser.extractComponentData(
+          module,
+          declaration as any,
+        )
+
+        expect(componentData.isFormControl).to.be.false
+        expect(componentData.isIconComponent).to.be.false
+        expect(componentData.isLinkComponent).to.be.false
+      })
+
+      it('should detect subcomponents from CEM plugin', () => {
+        const module = {
+          kind: 'javascript-module' as const,
+          path: 'src/components/dropdown/dropdown.ts',
+          declarations: [],
+          exports: [],
+        }
+        const declaration = {
+          kind: 'class' as const,
+          name: 'GdsDropdown',
+          tagName: 'gds-dropdown',
+          customElement: true,
+          description: 'A dropdown component',
+          members: [],
+          subcomponents: [
+            {
+              tagName: 'gds-option',
+              description: 'Dropdown option',
+            },
+            {
+              tagName: 'gds-menu-heading',
+              description: 'Menu heading',
+            },
+          ],
+        }
+
+        const componentData = CemParser.extractComponentData(
+          module,
+          declaration as any,
+        )
+
+        expect(componentData.subcomponents).to.be.an('array')
+        expect(componentData.subcomponents).to.have.lengthOf(2)
+        expect(componentData.subcomponents![0].tagName).to.equal('gds-option')
+        expect(componentData.subcomponents![0].description).to.equal(
+          'Dropdown option',
+        )
+        expect(componentData.subcomponents![1].tagName).to.equal(
+          'gds-menu-heading',
+        )
+      })
     })
 
     describe('parseAllComponents', () => {
