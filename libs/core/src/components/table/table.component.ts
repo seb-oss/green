@@ -324,20 +324,16 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       this._selected.clear()
       this._loaded = false
 
-      this.dispatchEvent(
-        new CustomEvent('gds-table-data-loaded', {
-          detail: response,
-          bubbles: true,
-        }),
-      )
+      this.dispatchCustomEvent('gds-table-data-loaded', {
+        detail: response,
+        bubbles: true,
+      })
     } catch (error) {
       this._error = error as Error
-      this.dispatchEvent(
-        new CustomEvent('gds-table-data-error', {
-          detail: error,
-          bubbles: true,
-        }),
-      )
+      this.dispatchCustomEvent('gds-table-data-error', {
+        detail: error,
+        bubbles: true,
+      })
     } finally {
       this._loading = false
     }
@@ -1176,16 +1172,13 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     }
 
     // Dispatch event for external listeners
-    this.dispatchEvent(
-      new CustomEvent('gds-sort-change', {
-        detail: {
-          sortColumn: columnKey,
-          sortDirection: newDirection,
-        },
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-sort-change', {
+      detail: {
+        sortColumn: columnKey,
+        sortDirection: newDirection,
+      },
+      bubbles: true,
+    })
 
     await this.#loadData()
   }
@@ -1199,13 +1192,10 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       page: e.detail.page,
     }
     // Re-dispatch event for external listeners
-    this.dispatchEvent(
-      new CustomEvent('gds-page-change', {
-        detail: e.detail,
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-page-change', {
+      detail: e.detail,
+      bubbles: true,
+    })
     await this.#loadData()
   }
 
@@ -1220,13 +1210,10 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       page: 1,
     }
     // Re-dispatch event for external listeners
-    this.dispatchEvent(
-      new CustomEvent('gds-rows-change', {
-        detail: e.detail,
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-rows-change', {
+      detail: e.detail,
+      bubbles: true,
+    })
     await this.#loadData()
   }
 
@@ -1292,18 +1279,14 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Emits selection change event with current selection details
    */
   #emitSelectionChange(): void {
-    this.dispatchEvent(
-      new CustomEvent('gds-table-selection', {
-        detail: {
-          selectedIndices: Array.from(this._selected),
-          selectedData: Array.from(this._selected).map(
-            (i) => this._rowsState[i],
-          ),
-          count: this._selected.size,
-        },
-        bubbles: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-table-selection', {
+      detail: {
+        selectedIndices: Array.from(this._selected),
+        selectedData: Array.from(this._selected).map((i) => this._rowsState[i]),
+        count: this._selected.size,
+      },
+      bubbles: true,
+    })
   }
 
   /**
