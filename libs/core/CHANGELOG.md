@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.26.1
+
+### Patch Changes
+
+- 0ebdd77: **Component Meta**: Fix import paths for public primitives – Should be the component that re-exports them
+
 ## 2.26.0
 
 ### Minor Changes
