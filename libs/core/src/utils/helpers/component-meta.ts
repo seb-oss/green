@@ -293,6 +293,7 @@ export class CemParser {
    * Design choices:
    * - Only considers *.component.ts files, not index.ts files, to ensure imports
    *   point to the actual component file (e.g., dropdown.component.js not index.js)
+   *   because index.ts paths are not tree-shakable
    * - First occurrence wins when a primitive is re-exported by multiple components
    */
   static findReExportedPrimitives(manifest: Package): ReExportedPrimitive[] {
@@ -309,7 +310,7 @@ export class CemParser {
 
       // Skip index.ts files - we want to import from the component file, not the index
       // This ensures imports like @sebgroup/green-core/components/dropdown/dropdown.component.js
-      // instead of @sebgroup/green-core/components/dropdown/index.js
+      // instead of @sebgroup/green-core/components/dropdown/index.js (not tree-shakable)
       if (JavaScriptModule.path.endsWith('/index.ts')) {
         continue
       }
