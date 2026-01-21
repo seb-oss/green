@@ -31,6 +31,7 @@ import * as Types from './table.types'
  *
  * @event gds-page-change - Fired when the active page changes. Detail: `{ page: number }`
  * @event gds-rows-change - Fired when the rows per page value changes. Detail: `{ rows: number }`
+ * @event gds-sort-change - Fired when sorting changes. Detail: `{ sortColumn: string, sortDirection: 'asc' | 'desc' }`
  * @event gds-table-data-loaded - Fired when data is successfully loaded.
  * @event gds-table-data-error - Fired when data loading fails.
  * @event gds-table-selection - Fired when row selection changes.
@@ -1162,16 +1163,30 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Toggles sort direction if same column, otherwise sets new sort column
    */
   async #handleSort(columnKey: string) {
+    const newDirection =
+      this._view.sortColumn === columnKey && this._view.sortDirection === 'asc'
+        ? 'desc'
+        : 'asc'
+
     this._view = {
       ...this._view,
       sortColumn: columnKey,
-      sortDirection:
-        this._view.sortColumn === columnKey &&
-        this._view.sortDirection === 'asc'
-          ? 'desc'
-          : 'asc',
+      sortDirection: newDirection,
       page: 1,
     }
+
+    // Dispatch event for external listeners
+    this.dispatchEvent(
+      new CustomEvent('gds-sort-change', {
+        detail: {
+          sortColumn: columnKey,
+          sortDirection: newDirection,
+        },
+        bubbles: true,
+        composed: true,
+      }),
+    )
+
     await this.#loadData()
   }
 

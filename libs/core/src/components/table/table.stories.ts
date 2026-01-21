@@ -905,22 +905,30 @@ export const Events: Story = {
         story: `
 The table component dispatches events for various user interactions. 
 
-**Pagination Events** (bubbled from internal pagination component)
-- **gds-page-change**: Fired when the active page changes. Detail contains \`{ page: number }\`
-- **gds-rows-change**: Fired when the rows per page value changes. Detail contains \`{ rows: number }\`
+**Pagination Events**
+- **gds-page-change**: Fired when the active page changes. Detail: \`{ page: number }\`
+- **gds-rows-change**: Fired when the rows per page value changes. Detail: \`{ rows: number }\`
+
+**Sorting Events**
+- **gds-sort-change**: Fired when sorting changes. Detail: \`{ sortColumn: string, sortDirection: 'asc' | 'desc' }\`
 
 **Data Events**
 - **gds-table-data-loaded**: Fired when data is successfully loaded
 - **gds-table-data-error**: Fired when data loading fails
 - **gds-table-selection**: Fired when row selection changes
 
-This example demonstrates listening to pagination events and displaying the current page information.
+This example demonstrates listening to pagination and sorting events and displaying the current state.
         `,
       },
     },
   },
   render: (args) => {
-    const state = { currentPage: 1, currentRows: 10 }
+    const state = {
+      currentPage: 1,
+      currentRows: 10,
+      sortColumn: '',
+      sortDirection: 'asc',
+    }
 
     const handlePageChange = (e: CustomEvent) => {
       console.log('🔔 Page change event:', e.detail)
@@ -937,6 +945,16 @@ This example demonstrates listening to pagination events and displaying the curr
       const rowsEl = document.querySelector('#rows-status')
       if (rowsEl) {
         rowsEl.textContent = `Rows: ${state.currentRows}`
+      }
+    }
+
+    const handleSortChange = (e: CustomEvent) => {
+      console.log('🔔 Sort change event:', e.detail)
+      state.sortColumn = e.detail.sortColumn
+      state.sortDirection = e.detail.sortDirection
+      const sortEl = document.querySelector('#sort-status')
+      if (sortEl) {
+        sortEl.textContent = `${state.sortColumn} (${state.sortDirection})`
       }
     }
 
@@ -974,6 +992,20 @@ This example demonstrates listening to pagination events and displaying the curr
                     Rows: ${state.currentRows}
                   </gds-text>
                 </gds-flex>
+                <gds-flex flex-direction="column" gap="xs" flex="1">
+                  <gds-text font="detail-book-s" color="neutral-01">
+                    Sort Column
+                  </gds-text>
+                  <gds-text
+                    id="sort-status"
+                    font="body-regular-m"
+                    color="primary"
+                  >
+                    ${state.sortColumn
+                      ? `${state.sortColumn} (${state.sortDirection})`
+                      : 'None'}
+                  </gds-text>
+                </gds-flex>
               </gds-flex>
             </gds-flex>
           </gds-card>
@@ -988,6 +1020,7 @@ This example demonstrates listening to pagination events and displaying the curr
           settings
           @gds-page-change=${(e: CustomEvent) => handlePageChange(e)}
           @gds-rows-change=${(e: CustomEvent) => handleRowsChange(e)}
+          @gds-sort-change=${(e: CustomEvent) => handleSortChange(e)}
         >
           <template name="email-copy">
             <gds-icon-copy></gds-icon-copy>
