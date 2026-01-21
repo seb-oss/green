@@ -128,6 +128,16 @@ export class GdsPagination extends withMarginProps(
   jump = false
 
   /**
+   * Hide options
+   */
+  @property({
+    attribute: 'hide-options',
+    type: Boolean,
+    reflect: false,
+  })
+  hideOptions = false
+
+  /**
    * Controls density mode on pagination
    * Accepts: `comfortable`, `compact`, `spacious`
    */
@@ -369,7 +379,7 @@ export class GdsPagination extends withMarginProps(
   }
 
   #renderPageSizeMenu() {
-    if (this._isMobile) return null
+    if (this._isMobile || this.hideOptions) return null
     const rowsLabel = `${msg('Rows per page')}, ${this.rows} ${msg('selected')}`
 
     return html`
@@ -432,12 +442,10 @@ export class GdsPagination extends withMarginProps(
   }
 
   #handlePageChange(newPage: number) {
-    this.dispatchEvent(
-      new CustomEvent('gds-page-change', {
-        detail: { page: newPage },
-        bubbles: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-page-change', {
+      detail: { page: newPage },
+      bubbles: true,
+    })
   }
 
   #handlePageSizeMenuClick(e: CustomEvent) {
@@ -445,12 +453,10 @@ export class GdsPagination extends withMarginProps(
     const limit = parseInt(item.dataset.value || '10')
 
     if (limit !== this.rows) {
-      this.dispatchEvent(
-        new CustomEvent('gds-rows-change', {
-          detail: { rows: limit },
-          bubbles: true,
-        }),
-      )
+      this.dispatchCustomEvent('gds-rows-change', {
+        detail: { rows: limit },
+        bubbles: true,
+      })
     }
   }
 

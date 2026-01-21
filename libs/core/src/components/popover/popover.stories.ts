@@ -108,6 +108,25 @@ export const CancelEvent: Story = {
 }
 
 /**
+ * By default, the popover closes when the page is scrolled (on desktop viewports wider than 767px).
+ * This behavior can be disabled by setting the `disableScrollClose` property to `true`.
+ */
+export const DisableScrollClose: Story = {
+  ...DefaultParams,
+  render: () => html`
+    <gds-popover disableScrollClose>
+      <gds-button rank="secondary" slot="trigger">
+        Open popover
+        <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+      </gds-button>
+      <gds-flex padding="xl">
+        This popover will stay open when you scroll the page!
+      </gds-flex>
+    </gds-popover>
+  `,
+}
+
+/**
  * Here is an example of how the popover can be customized with sizing, placement and backdrop.
  */
 export const Customization: Story = {

@@ -128,6 +128,12 @@ export class GdsPopover extends GdsElement {
   disableMobileStyles = false
 
   /**
+   * Whether to disable closing the popover when the page is scrolled.
+   */
+  @property({ type: Boolean })
+  disableScrollClose = false
+
+  /**
    * Whether the popover should autofocus the first slotted child when opened.
    */
   @property({ type: Boolean })
@@ -542,6 +548,7 @@ export class GdsPopover extends GdsElement {
   #handlePageScroll = () => {
     if (
       this.open &&
+      !this.disableScrollClose &&
       window.innerWidth > 767 &&
       this.#dispatchUiStateEvent('close')
     ) {

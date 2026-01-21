@@ -177,6 +177,97 @@ class Input extends GdsFormControlElement<string> {
   private elInput!: HTMLInputElement
 
   /**
+   * Move focus to the input element.
+   */
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
+  /**
+   * Selects all the text in the input element.
+   */
+  select(): void {
+    this._getValidityAnchor()?.select()
+  }
+
+  /**
+   * Sets the value of the input element, replacing a range of text.
+   */
+  setRangeText(...args: Parameters<HTMLInputElement['setRangeText']>): void {
+    this._getValidityAnchor()?.setRangeText(...args)
+    this.value = this._getValidityAnchor()?.value || ''
+  }
+
+  /**
+   * Sets the start and end positions of a selection in the input element.
+   */
+  setSelectionRange(
+    ...args: Parameters<HTMLInputElement['setSelectionRange']>
+  ): void {
+    this._getValidityAnchor()?.setSelectionRange(...args)
+  }
+
+  /**
+   * Opens the browser's picker interface for inputs that support it (e.g., date picker for date inputs).
+   */
+  showPicker(): void {
+    this._getValidityAnchor()?.showPicker()
+  }
+
+  /**
+   * Decreases the value of the input element by the specified step.
+   */
+  stepDown(n?: number): void {
+    this._getValidityAnchor()?.stepDown(n)
+  }
+
+  /**
+   * Increases the value of the input element by the specified step.
+   */
+  stepUp(n?: number): void {
+    this._getValidityAnchor()?.stepUp(n)
+  }
+
+  /** The position of the start of the current text selection in the input element. */
+  get selectionStart() {
+    return this._getValidityAnchor()?.selectionStart
+  }
+
+  /** Sets the position of the start of the current text selection in the input element. */
+  set selectionStart(value) {
+    const anchor = this._getValidityAnchor()
+    if (anchor) {
+      anchor.selectionStart = value
+    }
+  }
+
+  /** The position of the end of the current text selection in the input element. */
+  get selectionEnd() {
+    return this._getValidityAnchor()?.selectionEnd
+  }
+
+  /** Sets the position of the end of the current text selection in the input element. */
+  set selectionEnd(value) {
+    const anchor = this._getValidityAnchor()
+    if (anchor) {
+      anchor.selectionEnd = value
+    }
+  }
+
+  /** The direction of the current text selection in the input element. */
+  get selectionDirection() {
+    return this._getValidityAnchor()?.selectionDirection
+  }
+
+  /** Sets the direction of the current text selection in the input element. */
+  set selectionDirection(value) {
+    const anchor = this._getValidityAnchor()
+    if (anchor) {
+      anchor.selectionDirection = value
+    }
+  }
+
+  /**
    * A reference to the clear button element. Returns null if there is no clear button.
    * Intended for use in integration tests.
    */
@@ -196,10 +287,6 @@ class Input extends GdsFormControlElement<string> {
   constructor() {
     super()
     this.value = ''
-  }
-
-  focus(options?: FocusOptions): void {
-    this._getValidityAnchor()?.focus(options)
   }
 
   render() {

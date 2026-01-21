@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.2
+
+### Patch Changes
+
+- 53947c2: Fix billboard.js import paths
+
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
 ## [2.1.1](https://github.com/seb-oss/green/compare/@sebgroup/green-charts@2.1.0...@sebgroup/green-charts@2.1.1) (2023-11-29)
