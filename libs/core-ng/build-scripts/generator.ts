@@ -1,4 +1,5 @@
 import { CustomElementField } from 'custom-elements-manifest'
+
 import {
   ComponentData,
   ComponentEvent,
@@ -92,9 +93,7 @@ export class AngularGenerator {
 
     // Add forms import for form controls
     if (isFormControl) {
-      imports.push(
-        `import { NG_VALUE_ACCESSOR } from '@angular/forms';`,
-      )
+      imports.push(`import { NG_VALUE_ACCESSOR } from '@angular/forms';`)
     }
 
     // Add router imports for link components
@@ -239,8 +238,8 @@ export class AngularGenerator {
       implementsClause: isFormControl
         ? '' // Base class already implements the interfaces
         : hasInputs
-        ? ' implements OnInit, OnChanges, AfterViewInit'
-        : ' implements OnInit',
+          ? ' implements OnInit, OnChanges, AfterViewInit'
+          : ' implements OnInit',
 
       // Properties and methods
       inputProperties: this.generateInputs(
@@ -519,7 +518,7 @@ ${componentData.isLinkComponent ? `    if (changes['routerLink']) {\n      this.
 ${componentData.isLinkComponent ? `    this.updateHref();${isMenuButton ? `\n    this.setActive();\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}` : ''}
   }`
       : componentData.isLinkComponent
-      ? `
+        ? `
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['routerLink']) {
@@ -530,7 +529,7 @@ ${componentData.isLinkComponent ? `    this.updateHref();${isMenuButton ? `\n   
   ngAfterViewInit(): void {
     this.updateHref();${isMenuButton ? `\n    this.setActive();\n    this.routerLinkActive?.isActiveChange.subscribe(() => this.setActive());` : ''}
   }`
-      : ''
+        : ''
   }`
 
     return {

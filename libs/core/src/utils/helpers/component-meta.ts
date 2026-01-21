@@ -334,7 +334,21 @@ export class CemParser {
   }
 
   /**
-   * Finds primitives that are re-exported by component modules
+   * Finds primitives that are re-exported by component modules.
+   * 
+   * Primitives (like GdsOption, GdsMenuHeading) are internal implementation details
+   * but some are re-exported by specific components for public use. For example:
+   * - GdsOption is re-exported by GdsDropdown
+   * - GdsMenuHeading is re-exported by GdsContextMenu
+   * 
+   * This method identifies these re-exports and returns the component file path
+   * (not the primitive path) so imports point to the re-exporting component.
+   * 
+   * Design choices:
+   * - Only considers *.component.ts files, not index.ts files, to ensure imports
+   *   point to the actual component file (e.g., dropdown.component.js not index.js)
+   *   because index.ts paths are not tree-shakable
+   * - First occurrence wins when a primitive is re-exported by multiple components
    */
   static findReExportedPrimitives(manifest: Package): ReExportedPrimitive[] {
     const reExportedPrimitives: ReExportedPrimitive[] = []
@@ -348,21 +362,35 @@ export class CemParser {
         continue
       }
 
+      // Skip index.ts files - we want to import from the component file, not the index
+      // This ensures imports like @sebgroup/green-core/components/dropdown/dropdown.component.js
+      // instead of @sebgroup/green-core/components/dropdown/index.js (not tree-shakable)
+      if (JavaScriptModule.path.endsWith('/index.ts')) {
+        continue
+      }
+
       for (const exportDecl of JavaScriptModule.exports) {
-        // Look for wildcard exports that point to primitives
+        // Look for exports (both wildcard and named) that point to primitives
         if (exportDecl.declaration?.module?.includes('primitives/')) {
           const primitivePackage = exportDecl.declaration.module
 
+          // Normalize the primitive path to an absolute path for module lookup
+          // Handle relative paths like "../../primitives/..." or "./primitives/..."
+          let normalizedPath = primitivePackage
+          if (normalizedPath.startsWith('../')) {
+            // Remove all leading "../" segments and prefix with "src/"
+            normalizedPath = normalizedPath.replace(/^(\.\.\/)+/, 'src/')
+          } else if (normalizedPath.startsWith('./')) {
+            // For relative paths starting with "./", resolve relative to the component module
+            normalizedPath = normalizedPath.replace(
+              /^\.\//,
+              JavaScriptModule.path.replace(/\/[^/]+$/, '/'),
+            )
+          }
+
           // Find the primitive JavaScriptModule to get class information
           const primitiveModule = manifest.modules.find((m) =>
-            m.path.includes(
-              primitivePackage
-                .replace(/^\.\.\//, 'src/')
-                .replace(
-                  /^\.\//,
-                  JavaScriptModule.path.replace(/\/[^/]+$/, '/'),
-                ),
-            ),
+            m.path.includes(normalizedPath),
           )
 
           if (primitiveModule?.declarations) {
@@ -442,7 +470,10 @@ export class CemParser {
             primitiveModule,
             primitiveDecl,
           )
-          // Override the source path to point to the re-export JavaScriptModule
+          // Override the source path to use the component that re-exports this primitive.
+          // This makes imports point to the re-exporting component (e.g., dropdown.component.js)
+          // instead of the primitive's original location (e.g., primitives/listbox/option.component.js)
+          // since primitives are internal implementation details not meant for direct import.
           componentData.sourcePath = reExported.reExportModule
           primitiveMap.set(reExported.primitiveClass, componentData)
         }

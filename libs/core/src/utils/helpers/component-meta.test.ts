@@ -73,19 +73,28 @@ describe('component-meta', () => {
         ],
         exports: [],
       },
-      // Component index that re-exports both the component and primitives
-      // This mimics real-world structure from custom-elements.json
+      // Component file that re-exports primitives (mimics dropdown.component.ts)
+      // This mimics real-world structure where *.component.ts files re-export primitives
       {
         kind: 'javascript-module',
-        path: 'src/components/dropdown/index.ts',
-        declarations: [],
+        path: 'src/components/dropdown/dropdown.component.ts',
+        declarations: [
+          {
+            kind: 'class',
+            name: 'GdsDropdown',
+            tagName: 'gds-dropdown',
+            customElement: true,
+            description: 'A dropdown component',
+            members: [],
+          },
+        ],
         exports: [
           {
             kind: 'js',
-            name: '*',
+            name: 'GdsDropdown',
             declaration: {
-              name: '*',
-              module: 'src/components/dropdown/dropdown',
+              name: 'GdsDropdown',
+              module: 'src/components/dropdown/dropdown.component.ts',
             },
           },
           {
@@ -173,9 +182,9 @@ describe('component-meta', () => {
         expect(option).to.exist
         expect(option!.primitiveName).to.equal('gds-option')
         expect(option!.reExportModule).to.equal(
-          'src/components/dropdown/index.ts',
+          'src/components/dropdown/dropdown.component.ts',
         )
-        expect(option!.reExportPath).to.equal('components/dropdown/index.js')
+        expect(option!.reExportPath).to.equal('components/dropdown/dropdown.component.js')
 
         // Check second primitive (GdsMenuItem)
         const menuItem = reExportedPrimitives.find(
@@ -184,7 +193,7 @@ describe('component-meta', () => {
         expect(menuItem).to.exist
         expect(menuItem!.primitiveName).to.equal('gds-menu-item')
         expect(menuItem!.reExportModule).to.equal(
-          'src/components/dropdown/index.ts',
+          'src/components/dropdown/dropdown.component.ts',
         )
       })
 
@@ -516,7 +525,7 @@ describe('component-meta', () => {
           )
           expect(optionComponent).to.exist
           expect(optionComponent!.sourcePath).to.equal(
-            'src/components/dropdown/index.ts',
+            'src/components/dropdown/dropdown.component.ts',
           )
 
           const menuItemComponent = components.find(
@@ -554,7 +563,7 @@ describe('component-meta', () => {
             // Component 1 that re-exports the primitive
             {
               kind: 'javascript-module',
-              path: 'src/components/dropdown/dropdown.ts',
+              path: 'src/components/dropdown/dropdown.component.ts',
               declarations: [
                 {
                   kind: 'class',
@@ -564,13 +573,15 @@ describe('component-meta', () => {
                   members: [],
                 },
               ],
-              exports: [],
-            },
-            {
-              kind: 'javascript-module',
-              path: 'src/components/dropdown/index.ts',
-              declarations: [],
               exports: [
+                {
+                  kind: 'js',
+                  name: 'GdsDropdown',
+                  declaration: {
+                    name: 'GdsDropdown',
+                    module: 'src/components/dropdown/dropdown.component.ts',
+                  },
+                },
                 {
                   kind: 'js',
                   name: '*',
@@ -584,7 +595,7 @@ describe('component-meta', () => {
             // Component 2 that also re-exports the same primitive
             {
               kind: 'javascript-module',
-              path: 'src/components/select/select.ts',
+              path: 'src/components/select/select.component.ts',
               declarations: [
                 {
                   kind: 'class',
@@ -594,29 +605,15 @@ describe('component-meta', () => {
                   members: [],
                 },
               ],
-              exports: [],
-            },
-            {
-              kind: 'javascript-module',
-              path: 'src/components/select/index.ts',
-              declarations: [],
               exports: [
                 {
                   kind: 'js',
-                  name: '*',
+                  name: 'GdsSelect',
                   declaration: {
-                    name: '*',
-                    module: 'src/primitives/listbox/option',
+                    name: 'GdsSelect',
+                    module: 'src/components/select/select.component.ts',
                   },
                 },
-              ],
-            },
-            // Root components index that also re-exports the primitive
-            {
-              kind: 'javascript-module',
-              path: 'src/components/index.ts',
-              declarations: [],
-              exports: [
                 {
                   kind: 'js',
                   name: '*',
@@ -637,8 +634,9 @@ describe('component-meta', () => {
           const { components, reExportedPrimitives } =
             await CemParser.parseAllComponents()
 
-          // Should find 3 re-export declarations (from dropdown, select, and root index)
-          expect(reExportedPrimitives).to.have.lengthOf(3)
+          // Should find 2 re-export declarations (from dropdown.component.ts and select.component.ts)
+          // index.ts files are filtered out
+          expect(reExportedPrimitives).to.have.lengthOf(2)
 
           // But should only include GdsOption ONCE in components array (deduplicated)
           const optionComponents = components.filter(
