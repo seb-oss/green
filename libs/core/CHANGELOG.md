@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.26.0
+
+### Minor Changes
+
+- bec1b5e: **MCP:** Add experimental local MCP server
+- 6e84c22: **Table:** Add sorting and page change events
+
 ## 2.25.0
 
 ### Minor Changes
