@@ -889,3 +889,114 @@ See Developer Guide for complete documentation.
     </gds-table>
   `,
 }
+
+// ============================================================================
+// EVENTS
+// ============================================================================
+
+export const Events: Story = {
+  args: {
+    columns: Users.Columns,
+    data: Users.Data,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+The table component dispatches events for various user interactions. 
+
+**Pagination Events** (bubbled from internal pagination component)
+- **gds-page-change**: Fired when the active page changes. Detail contains \`{ page: number }\`
+- **gds-rows-change**: Fired when the rows per page value changes. Detail contains \`{ rows: number }\`
+
+**Data Events**
+- **gds-table-data-loaded**: Fired when data is successfully loaded
+- **gds-table-data-error**: Fired when data loading fails
+- **gds-table-selection**: Fired when row selection changes
+
+This example demonstrates listening to pagination events and displaying the current page information.
+        `,
+      },
+    },
+  },
+  render: (args) => {
+    const state = { currentPage: 1, currentRows: 10 }
+
+    const handlePageChange = (e: CustomEvent) => {
+      console.log('🔔 Page change event:', e.detail)
+      state.currentPage = e.detail.page
+      const pageEl = document.querySelector('#page-status')
+      if (pageEl) {
+        pageEl.textContent = `Page: ${state.currentPage}`
+      }
+    }
+
+    const handleRowsChange = (e: CustomEvent) => {
+      console.log('🔔 Rows change event:', e.detail)
+      state.currentRows = e.detail.rows
+      const rowsEl = document.querySelector('#rows-status')
+      if (rowsEl) {
+        rowsEl.textContent = `Rows: ${state.currentRows}`
+      }
+    }
+
+    return html`
+      <gds-flex flex-direction="column" gap="l">
+        <gds-flex flex-direction="column" gap="m">
+          <gds-card variant="secondary" padding="m" border-radius="m">
+            <gds-flex flex-direction="column" gap="s">
+              <gds-text font="heading-s">Event Monitor</gds-text>
+              <gds-text font="detail-book-s" color="neutral-01">
+                Open your browser console (F12) to see event logs
+              </gds-text>
+              <gds-flex gap="m">
+                <gds-flex flex-direction="column" gap="xs" flex="1">
+                  <gds-text font="detail-book-s" color="neutral-01">
+                    Current Page
+                  </gds-text>
+                  <gds-text
+                    id="page-status"
+                    font="body-regular-m"
+                    color="primary"
+                  >
+                    Page: ${state.currentPage}
+                  </gds-text>
+                </gds-flex>
+                <gds-flex flex-direction="column" gap="xs" flex="1">
+                  <gds-text font="detail-book-s" color="neutral-01">
+                    Rows Per Page
+                  </gds-text>
+                  <gds-text
+                    id="rows-status"
+                    font="body-regular-m"
+                    color="primary"
+                  >
+                    Rows: ${state.currentRows}
+                  </gds-text>
+                </gds-flex>
+              </gds-flex>
+            </gds-flex>
+          </gds-card>
+        </gds-flex>
+
+        <gds-table
+          .columns="${args.columns}"
+          .data="${args.data}"
+          rows="5"
+          selectable
+          searchable
+          settings
+          @gds-page-change=${(e: CustomEvent) => handlePageChange(e)}
+          @gds-rows-change=${(e: CustomEvent) => handleRowsChange(e)}
+        >
+          <template name="email-copy">
+            <gds-icon-copy></gds-icon-copy>
+          </template>
+          <template name="download-image">
+            <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
+          </template>
+        </gds-table>
+      </gds-flex>
+    `
+  },
+}

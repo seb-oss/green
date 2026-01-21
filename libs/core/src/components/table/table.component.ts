@@ -29,6 +29,8 @@ import * as Types from './table.types'
  * @slot `empty` - Custom empty state content when no data is available.
  * @slot `no-results` - Custom no results content when search returns empty.
  *
+ * @event gds-page-change - Fired when the active page changes. Detail: `{ page: number }`
+ * @event gds-rows-change - Fired when the rows per page value changes. Detail: `{ rows: number }`
  * @event gds-table-data-loaded - Fired when data is successfully loaded.
  * @event gds-table-data-error - Fired when data loading fails.
  * @event gds-table-selection - Fired when row selection changes.
@@ -1181,6 +1183,14 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       ...this._view,
       page: e.detail.page,
     }
+    // Re-dispatch event for external listeners
+    this.dispatchEvent(
+      new CustomEvent('gds-page-change', {
+        detail: e.detail,
+        bubbles: true,
+        composed: true,
+      }),
+    )
     await this.#loadData()
   }
 
@@ -1194,6 +1204,14 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       rows: e.detail.rows,
       page: 1,
     }
+    // Re-dispatch event for external listeners
+    this.dispatchEvent(
+      new CustomEvent('gds-rows-change', {
+        detail: e.detail,
+        bubbles: true,
+        composed: true,
+      }),
+    )
     await this.#loadData()
   }
 
