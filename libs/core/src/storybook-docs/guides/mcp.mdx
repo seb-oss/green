@@ -14,6 +14,14 @@ The Green MCP server provides AI agents like GitHub Copilot with direct access t
 
 This helps Copilot give you accurate, up-to-date information about Green components when you're coding.
 
+## Dependencies
+
+The MCP server depends on `@modelcontextprotocol/sdk` being installed in your project. This is specified as an optional peer dependency of Green Core, so you need to explicitly install it (as a dev dependency):
+
+```bash
+npm i -D @modelcontextprotocol/sdk
+```
+
 ## Setting up the MCP server
 
 Create a new file in `.vscode/mcp.json` in your project with the following content:
