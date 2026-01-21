@@ -1,0 +1,19 @@
+import{j as o}from"./jsx-runtime-D_zvdyIk.js";import{useMDXComponents as m}from"./index-B85nirL2.js";import{M as c,C as a}from"./blocks-DOxPIHXM.js";import{P as l,D as d}from"./popover.stories-9_TQX6Zz.js";import"./button-DTfPQ_Zd.js";import"./iconButton-B7WS9o3X.js";import"./buttonGroup-qF0sv91C.js";import"./checkbox-BlHhB85d.js";import"./text-DANUJh4r.js";import{C as h,G as i,a as n,b as p}from"./index-Cl6qd36U.js";import"./iframe-DbWx9qSi.js";import"./index-DN2XUELy.js";import"./create-component-CPRSibq9.js";import"./popover.component-CwgQ0MBG.js";import"./tokens.style-BwUmgGen.js";import"./runtime-nRyYmvPb.js";import"./watch-Bh1rs_BK.js";import"./class-map-Cb4hff4D.js";import"./icon.component-C7EKY0is.js";import"./cross-small.component-BUvK-Jx0.js";import"./transitional-styles-Hrl55WqK.js";import"./index-YVRPNxbt.js";import"./helperFunction-Cj5aMlP9.js";import"./id-D3UFNDLZ.js";import"./triangle-exclamation-CUikwwFl.js";import"./triangle-exclamation.component-DJnK-6Pq.js";import"./edit-Cs76S9LP.js";import"./index-Df8MWBBe.js";import"./alert.component-CvbZ-6UP.js";import"./unwrap-slots-C8Cai_1j.js";import"./button.component-BlSMnAdR.js";import"./when-BR7zwNJC.js";import"./dropdown.component-CmsS932o.js";import"./chevron-bottom.component-Co9-Gec3.js";import"./checkmark.component-DoL39SJh.js";import"./circle-check.component-CoW28z3O.js";import"./chevron-right.component-Cvu1YgXi.js";import"./datepicker.component-jkkIXYT7.js";import"./attribute-converters-CdI0trPX.js";import"./calender-add.component-A4RQcMxy.js";import"./index-DZweYOK9.js";import"./dot-grid-one-horizontal.component-XRpL2bSS.js";import"./context-menu.component-DBffnpFK.js";import"./filter-chips.component-61Fwjn74.js";import"./resize-observer-B9k8v2TZ.js";import"./grouped-list.component-BQsmMyhZ.js";import"./segmented-control.component-CHfxffOW.js";import"./index-C4JQZNKx.js";function s(r){const e={a:"a",code:"code",h1:"h1",h2:"h2",p:"p",pre:"pre",strong:"strong",...m(),...r.components};return h||t("Core",!1),i||t("Core.GdsAlert",!0),n||t("Core.GdsDiv",!0),p||t("Core.GdsTheme",!0),o.jsxs(o.Fragment,{children:[o.jsx(c,{of:l}),`
+`,o.jsx(p,{children:o.jsx(n,{margin:"xl 0",children:o.jsxs(i,{variant:"notice",children:[o.jsx(e.strong,{children:"Note:"})," This version of Popover is deprecated! Please use the ",o.jsx(e.a,{href:"https://storybook.seb.io/latest/core/?path=/docs/components-popover--docs",rel:"nofollow",children:"web component from Green Core"})," instead."]})})}),`
+`,o.jsx(e.h1,{id:"popover",children:"Popover"}),`
+`,o.jsx(e.p,{children:o.jsx(e.a,{href:"https://github.com/seb-oss/green/tree/main/libs/react/src/lib/popover",rel:"nofollow",children:"Source code"})}),`
+`,o.jsx(e.h2,{id:"importing-the-component",children:"Importing the component"}),`
+`,o.jsxs(e.p,{children:["To use the component, import ",o.jsx(e.code,{children:"Popover"})," like this:"]}),`
+`,o.jsx(e.pre,{children:o.jsx(e.code,{className:"language-jsx",children:`import { Popover, Button } from '@sebgroup/green-react/src/lib/popover'
+
+// Use as JSX element in your app
+return (
+  <Popover>
+    <Button slot="trigger">Open popover</Button>
+    <div style={{ padding: '1rem;' }}>Content in popover</div>
+  </Popover>
+)
+`})}),`
+`,o.jsx(a,{of:d}),`
+`,o.jsx(e.h2,{id:"more-examples",children:"More examples"}),`
+`,o.jsxs(e.p,{children:["For various examples of how to use the component, head over to the ",o.jsx(e.a,{href:"https://storybook.seb.io/latest/core/?path=/story/components-popover--page",rel:"nofollow",children:"Green Core storybook"})]})]})}function mo(r={}){const{wrapper:e}={...m(),...r.components};return e?o.jsx(e,{...r,children:o.jsx(s,{...r})}):s(r)}function t(r,e){throw new Error("Expected "+(e?"component":"object")+" `"+r+"` to be defined: you likely forgot to import, pass, or provide it.")}export{mo as default};
