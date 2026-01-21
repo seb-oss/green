@@ -9,5 +9,8 @@
     "**/app/**": "${dirname}/${filename}",
     "**/libs/core/src/components/**": "core/${dirname}/${filename}.${extname}"
   },
-  "nxConsole.generateAiAgentRules": true
+  "nxConsole.generateAiAgentRules": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
