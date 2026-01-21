@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "Green MCP": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["./dist/libs/core/src/bin/mcp-server"]
+    }
+  },
+  "inputs": []
+}
