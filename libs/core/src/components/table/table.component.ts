@@ -29,6 +29,9 @@ import * as Types from './table.types'
  * @slot `empty` - Custom empty state content when no data is available.
  * @slot `no-results` - Custom no results content when search returns empty.
  *
+ * @event gds-page-change - Fired when the active page changes. Detail: `{ page: number }`
+ * @event gds-rows-change - Fired when the rows per page value changes. Detail: `{ rows: number }`
+ * @event gds-sort-change - Fired when sorting changes. Detail: `{ sortColumn: string, sortDirection: 'asc' | 'desc' }`
  * @event gds-table-data-loaded - Fired when data is successfully loaded.
  * @event gds-table-data-error - Fired when data loading fails.
  * @event gds-table-selection - Fired when row selection changes.
@@ -321,20 +324,16 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       this._selected.clear()
       this._loaded = false
 
-      this.dispatchEvent(
-        new CustomEvent('gds-table-data-loaded', {
-          detail: response,
-          bubbles: true,
-        }),
-      )
+      this.dispatchCustomEvent('gds-table-data-loaded', {
+        detail: response,
+        bubbles: true,
+      })
     } catch (error) {
       this._error = error as Error
-      this.dispatchEvent(
-        new CustomEvent('gds-table-data-error', {
-          detail: error,
-          bubbles: true,
-        }),
-      )
+      this.dispatchCustomEvent('gds-table-data-error', {
+        detail: error,
+        bubbles: true,
+      })
     } finally {
       this._loading = false
     }
@@ -1160,16 +1159,27 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Toggles sort direction if same column, otherwise sets new sort column
    */
   async #handleSort(columnKey: string) {
+    const newDirection =
+      this._view.sortColumn === columnKey && this._view.sortDirection === 'asc'
+        ? 'desc'
+        : 'asc'
+
     this._view = {
       ...this._view,
       sortColumn: columnKey,
-      sortDirection:
-        this._view.sortColumn === columnKey &&
-        this._view.sortDirection === 'asc'
-          ? 'desc'
-          : 'asc',
+      sortDirection: newDirection,
       page: 1,
     }
+
+    // Dispatch event for external listeners
+    this.dispatchCustomEvent('gds-sort-change', {
+      detail: {
+        sortColumn: columnKey,
+        sortDirection: newDirection,
+      },
+      bubbles: true,
+    })
+
     await this.#loadData()
   }
 
@@ -1181,6 +1191,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       ...this._view,
       page: e.detail.page,
     }
+    // Re-dispatch event for external listeners
+    this.dispatchCustomEvent('gds-page-change', {
+      detail: e.detail,
+      bubbles: true,
+    })
     await this.#loadData()
   }
 
@@ -1194,6 +1209,11 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       rows: e.detail.rows,
       page: 1,
     }
+    // Re-dispatch event for external listeners
+    this.dispatchCustomEvent('gds-rows-change', {
+      detail: e.detail,
+      bubbles: true,
+    })
     await this.#loadData()
   }
 
@@ -1259,18 +1279,14 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Emits selection change event with current selection details
    */
   #emitSelectionChange(): void {
-    this.dispatchEvent(
-      new CustomEvent('gds-table-selection', {
-        detail: {
-          selectedIndices: Array.from(this._selected),
-          selectedData: Array.from(this._selected).map(
-            (i) => this._rowsState[i],
-          ),
-          count: this._selected.size,
-        },
-        bubbles: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-table-selection', {
+      detail: {
+        selectedIndices: Array.from(this._selected),
+        selectedData: Array.from(this._selected).map((i) => this._rowsState[i]),
+        count: this._selected.size,
+      },
+      bubbles: true,
+    })
   }
 
   /**
