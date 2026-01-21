@@ -1,5 +1,14 @@
 # @sebgroup/green-core-ng
 
+## 2.26.1
+
+### Patch Changes
+
+- 0ebdd77: Fix tree-shaking issue caused by incorrect import paths for some primitives
+- 0ebdd77: Add missing peerDependencies
+- Updated dependencies [0ebdd77]
+  - @sebgroup/green-core@2.26.1
+
 ## 2.26.0
 
 ### Patch Changes
