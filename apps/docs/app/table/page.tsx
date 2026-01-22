@@ -3,41 +3,82 @@
 import * as Core from '@sebgroup/green-core/react'
 
 export default function Table() {
-  const pokemonDataProvider = async (request: any) => {
-    const limit = request.pageSize
-    const offset = (request.page - 1) * request.pageSize
+  const mockData = [
+    {
+      id: 1,
+      name: 'Alice Johnson',
+      email: 'alice@example.com',
+      status: 'Active',
+      role: 'Engineer',
+      salary: 95000,
+    },
+    {
+      id: 2,
+      name: 'Bob Smith',
+      email: 'bob@example.com',
+      status: 'Active',
+      role: 'Designer',
+      salary: 85000,
+    },
+    {
+      id: 3,
+      name: 'Charlie Brown',
+      email: 'charlie@example.com',
+      status: 'Inactive',
+      role: 'Manager',
+      salary: 105000,
+    },
+    {
+      id: 4,
+      name: 'Diana Prince',
+      email: 'diana@example.com',
+      status: 'Active',
+      role: 'Engineer',
+      salary: 98000,
+    },
+    {
+      id: 5,
+      name: 'Eve Wilson',
+      email: 'eve@example.com',
+      status: 'Active',
+      role: 'Analyst',
+      salary: 78000,
+    },
+    {
+      id: 6,
+      name: 'Frank Miller',
+      email: 'frank@example.com',
+      status: 'Active',
+      role: 'Engineer',
+      salary: 92000,
+    },
+    {
+      id: 7,
+      name: 'Grace Lee',
+      email: 'grace@example.com',
+      status: 'Inactive',
+      role: 'Designer',
+      salary: 82000,
+    },
+    {
+      id: 8,
+      name: 'Henry Davis',
+      email: 'henry@example.com',
+      status: 'Active',
+      role: 'Manager',
+      salary: 110000,
+    },
+  ]
 
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
-    )
-    const data = await response.json()
-
-    const detailedData = await Promise.all(
-      data.results.map(async (pokemon: any) => {
-        const detailResponse = await fetch(pokemon.url)
-        const detail = await detailResponse.json()
-
-        return {
-          id: detail.id,
-          name: detail.name.charAt(0).toUpperCase() + detail.name.slice(1),
-          type: detail.types[0]?.type.name || 'unknown',
-          height: (detail.height / 10).toFixed(1) + ' m',
-          weight: (detail.weight / 10).toFixed(1) + ' kg',
-          abilities: detail.abilities.length,
-          sprite: detail.sprites.front_default,
-          baseExp: detail.base_experience || 0,
-        }
-      }),
-    )
-
-    let filtered = detailedData
+  const dataProvider = async (request: any) => {
+    let filtered = [...mockData]
 
     if (request.searchQuery) {
       const query = request.searchQuery.toLowerCase()
       filtered = filtered.filter(
-        (p: any) =>
-          p.name.toLowerCase().includes(query) ||
-          p.type.toLowerCase().includes(query),
+        (item: any) =>
+          item.name.toLowerCase().includes(query) ||
+          item.email.toLowerCase().includes(query),
       )
     }
 
@@ -51,62 +92,28 @@ export default function Table() {
       })
     }
 
+    const startIndex = (request.page - 1) * request.rows
+    const endIndex = startIndex + request.rows
+    const paginatedData = filtered.slice(startIndex, endIndex)
+
     return {
-      data: filtered,
-      total: data.count,
+      rows: paginatedData,
+      total: filtered.length,
     }
   }
 
   const columns: any[] = [
-    { key: 'id', label: '#', sortable: true },
+    { key: 'id', label: '#', sortable: true, width: '60px' },
+    { key: 'name', label: 'Name', sortable: true, width: '200px' },
+    { key: 'email', label: 'Email', sortable: true, width: '20px' },
+    { key: 'role', label: 'Role', sortable: true, width: '120px' },
+    { key: 'status', label: 'Status', sortable: true, width: '100px' },
     {
-      key: 'name',
-      label: 'Name',
-      sortable: true,
-      cell: {
-        lead: {
-          type: 'avatar',
-          src: (row: any) => row.sprite,
-          alt: (row: any) => row.name,
-          size: '32px',
-        },
-      },
-    },
-    {
-      key: 'type',
-      label: 'Type',
-      sortable: true,
-      cell: {
-        value: {
-          type: 'badge',
-          value: (row: any) => row.type,
-          variant: (row: any) => {
-            const typeColors: Record<string, string> = {
-              fire: 'negative',
-              water: 'information',
-              grass: 'positive',
-              electric: 'warning',
-            }
-            return typeColors[row.type] || 'notice'
-          },
-          size: 'small',
-        },
-      },
-    },
-    { key: 'height', label: 'Height', sortable: true, align: 'right' },
-    { key: 'weight', label: 'Weight', sortable: true, align: 'right' },
-    { key: 'abilities', label: 'Abilities', sortable: true, align: 'right' },
-    {
-      key: 'baseExp',
-      label: 'Base XP',
+      key: 'salary',
+      label: 'Salary',
       sortable: true,
       align: 'right',
-      cell: {
-        value: {
-          type: 'formatted-number',
-          value: (row: any) => row.baseExp,
-        },
-      },
+      width: '140px',
     },
   ]
 
@@ -117,26 +124,18 @@ export default function Table() {
       items: [
         {
           label: 'View Details',
-          onClick: (row: any) =>
-            window.open(
-              `https://pokemondb.net/pokedex/${row.name.toLowerCase()}`,
-              '_blank',
-            ),
+          onClick: (row: any) => alert(`Viewing ${row.name}`),
         },
         {
-          label: 'Add to Team',
-          onClick: (row: any) => alert(`Added ${row.name} to team!`),
-        },
-        {
-          label: 'Compare Stats',
-          onClick: (row: any) => console.log('Compare:', row.name),
+          label: 'Edit',
+          onClick: (row: any) => alert(`Editing ${row.name}`),
         },
         {
           divider: true,
-          label: 'Release',
+          label: 'Delete',
           onClick: (row: any) => {
-            if (confirm(`Release ${row.name}?`)) {
-              console.log('Released:', row.name)
+            if (confirm(`Delete ${row.name}?`)) {
+              console.log('Deleted:', row.name)
             }
           },
         },
@@ -150,12 +149,14 @@ export default function Table() {
         selectable
         density="comfortable"
         columns={columns}
-        data={pokemonDataProvider}
+        data={dataProvider}
         actions={actions}
-        options={[10, 25, 50, 100]}
+        searchable
+        height="40vh"
+        rows={5}
       >
         <Core.GdsButton slot="header-lead" size="small" rank="secondary">
-          Export Team
+          Export
         </Core.GdsButton>
         <Core.GdsButton
           slot="header-trail"
@@ -163,7 +164,7 @@ export default function Table() {
           rank="secondary"
           variant="positive"
         >
-          Catch New
+          Add New
         </Core.GdsButton>
       </Core.GdsTable>
     </Core.GdsTheme>
