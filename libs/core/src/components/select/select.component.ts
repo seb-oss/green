@@ -350,8 +350,8 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
  * element, and not on the enclosed select element. Also, state should also be handled only through the host.
  * Setting value or selected props on the select element will not work as expected.
  *
- * @fires {CustomEvent} change - Fired when the selection changes with detail: { value: string }
- * @fires {CustomEvent} input - Fired on input with detail: { value: string }
+ * @event {CustomEvent} change - Fired when the selection changes with detail: { value: string }
+ * @event {CustomEvent} input - Fired on input with detail: { value: string }
  *
  * @slot - Default slot for the native select element
  * @slot lead - Slot for leading content (e.g., icons)

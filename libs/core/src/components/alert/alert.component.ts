@@ -48,8 +48,8 @@ const PROGRESS_INTERVAL = 100
  * auto-dismiss timer, and action button support.
  *
  * @slot - Alert message content
- * @fires gds-close - Fired when alert is dismissed
- * @fires gds-action - Fired when action button is clicked
+ * @event gds-close - Fired when alert is dismissed
+ * @event gds-action - Fired when action button is clicked
  */
 @gdsCustomElement('gds-alert', {
   dependsOn: [

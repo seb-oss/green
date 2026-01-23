@@ -52,7 +52,7 @@ import styles from './spinner.styles'
  * <gds-spinner fullscreen label="Loading application..." showLabel></gds-spinner>
  * ```
  *
- * @fires gds-spinner-connected - When the spinner is connected and visible
+ * @event gds-spinner-connected - When the spinner is connected and visible
  */
 @gdsCustomElement('gds-spinner')
 @localized()
