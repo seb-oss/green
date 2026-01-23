@@ -24,7 +24,7 @@ import {
   GdsPopover,
 } from '../popover/popover.component'
 
-export { GdsMenuItem }
+export { GdsMenuItem } from '../../primitives/menu/menu-item.component'
 export { GdsMenuHeading } from '../../primitives/menu/menu-heading.component'
 
 /**
