@@ -24,7 +24,7 @@ import styles from './spinner.styles'
  *
  * A loading indicator with accessibility support and various display modes.
  *
- * @fires gds-spinner-connected - When the spinner is connected and visible
+ * @event gds-spinner-connected - When the spinner is connected and visible
  */
 @gdsCustomElement('gds-spinner')
 @localized()

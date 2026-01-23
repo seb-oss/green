@@ -62,7 +62,7 @@ export function applyTriggerAriaAttributes(
  * register a keydown listener on the trigger and listen to `ArrowDown` key presses. When the trigger is focused and
  * `ArrowDown` is pressed, the popover will open and focus the first slotted child.
  *
- * @fires gds-ui-state - Fired when the popover is opened or closed. Can be cancelled to prevent the popover from opening or closing. The `detail` object contains the `open` boolean to indicate the result of the state change, and the `reason` string which can be one of `show`, `close`, or `cancel`.
+ * @event gds-ui-state - Fired when the popover is opened or closed. Can be cancelled to prevent the popover from opening or closing. The `detail` object contains the `open` boolean to indicate the result of the state change, and the `reason` string which can be one of `show`, `close`, or `cancel`.
  *
  * @slot - Content of the popover
  * @slot trigger - Trigger element for the popover. If this slot is occupied, the popover will listen to keydown and click events on the trigger and automtaiclly open when clicked or when the trigger is focused and `ArrowDown` is pressed.

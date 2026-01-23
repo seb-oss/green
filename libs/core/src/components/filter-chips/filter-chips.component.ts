@@ -19,7 +19,7 @@ export { GdsFilterChip }
  *
  * @slot - The filter chips to display
  *
- * @fires change - When a chip is clicked
+ * @event change - When a chip is clicked
  */
 @gdsCustomElement('gds-filter-chips', { dependsOn: [GdsFilterChip] })
 export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<

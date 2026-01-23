@@ -14,7 +14,7 @@ import 'reflect-metadata'
  *
  * @internal
  *
- * @fires gds-element-disconnected - When the element is disconnected from the DOM
+ * @event gds-element-disconnected - When the element is disconnected from the DOM
  */
 export class GdsElement extends LitElement {
   /**
