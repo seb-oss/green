@@ -1,4 +1,5 @@
 import { localized, msg } from '@lit/localize'
+import { css } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
@@ -7,6 +8,7 @@ import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators/watch'
+import { GlobalStylesRegistry } from '../../utils/global-styles'
 import {
   withLayoutChildProps,
   withMarginProps,
@@ -22,36 +24,6 @@ import styles from './spinner.styles'
  *
  * A loading indicator with accessibility support and various display modes.
  *
- * @example Basic usage
- * ```html
- * <gds-spinner></gds-spinner>
- * ```
- *
- * @example With label
- * ```html
- * <gds-spinner label="Loading..." showLabel></gds-spinner>
- * ```
- *
- * @example Different sizes
- * ```html
- * <gds-spinner size="sm"></gds-spinner>
- * <gds-spinner size="md"></gds-spinner>
- * <gds-spinner size="lg"></gds-spinner>
- * ```
- *
- * @example Cover container
- * ```html
- * <div style="position: relative;">
- *   <!-- Container content -->
- *   <gds-spinner cover></gds-spinner>
- * </div>
- * ```
- *
- * @example Fullscreen
- * ```html
- * <gds-spinner fullscreen label="Loading application..." showLabel></gds-spinner>
- * ```
- *
  * @fires gds-spinner-connected - When the spinner is connected and visible
  */
 @gdsCustomElement('gds-spinner')
@@ -61,6 +33,16 @@ export class GdsSpinner extends withMarginProps(
 ) {
   /** All styles are defined in the external styles file */
   static styles = [tokens, styles]
+
+  /**
+   * Global styles for fullscreen mode
+   */
+  #fullscreenStyles = css`
+    html {
+      overflow: hidden !important;
+      overscroll-behavior: none !important;
+    }
+  `
 
   /**
    * The text to display as a label for the spinner
@@ -99,7 +81,6 @@ export class GdsSpinner extends withMarginProps(
 
   /**
    * Whether the spinner is currently animating
-   * @private
    */
   @state()
   private _isAnimating = false
@@ -125,12 +106,10 @@ export class GdsSpinner extends withMarginProps(
       this._toggleRootStyles()
     }
     this._isAnimating = false
-    super.disconnectedCallback()
   }
 
   /**
    * Updates the aria-label attribute based on the label property
-   * @private
    */
   @watch('label')
   private _updateAriaLabel(): void {
@@ -155,7 +134,6 @@ export class GdsSpinner extends withMarginProps(
 
   /**
    * Generates CSS classes for the wrapper element based on component state
-   * @private
    */
   #getWrapperClasses() {
     return {
@@ -169,34 +147,18 @@ export class GdsSpinner extends withMarginProps(
   }
 
   /**
-   * Stores original document styles before applying fullscreen mode
-   * @private
-   */
-  #originalStyles = {
-    overflow: 'visible',
-    overscrollBehavior: 'auto',
-  }
-
-  /**
    * Toggles document root styles when in fullscreen mode
    * Prevents scrolling of the document when fullscreen overlay is active
-   * @private
    */
   @watch('fullscreen')
   private _toggleRootStyles() {
-    const { style } = document.documentElement
+    const registry = GlobalStylesRegistry.instance
+    const key = `gds-spinner-fullscreen-${this.id || 'default'}`
+
     if (this.fullscreen) {
-      // Save original styles before modifying
-      this.#originalStyles = {
-        overflow: style.overflow,
-        overscrollBehavior: style.overscrollBehavior,
-      }
-      style.overflow = 'hidden'
-      style.overscrollBehavior = 'none'
+      registry.injectGlobalStyles(key, this.#fullscreenStyles)
     } else {
-      // Restore original styles
-      style.overflow = this.#originalStyles.overflow
-      style.overscrollBehavior = this.#originalStyles.overscrollBehavior
+      registry.clearGlobalStyles(key)
     }
   }
 }

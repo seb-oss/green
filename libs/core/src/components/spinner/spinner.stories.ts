@@ -192,7 +192,14 @@ export const Fullscreen: Story = {
   render: () => {
     return html`
       <gds-div height="400px">
-        <gds-spinner fullscreen showLabel></gds-spinner>
+        <gds-spinner
+          label="Click to toggle fullscreen"
+          showLabel
+          @click=${(e: Event) => {
+            const spinner = e.target as any
+            spinner.fullscreen = !spinner.fullscreen
+          }}
+        ></gds-spinner>
       </gds-div>
     `
   },
