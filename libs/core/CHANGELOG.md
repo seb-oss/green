@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.26.2
+
+### Patch Changes
+
+- 4fbe2cd: **Spinner:** Fix issue where document level styles for fullscreen mode would not get cleared when leaving fullscreen mode
+- 9705019: **Context Menu:** Fix re-export of GdsMenuItem
+
 ## 2.26.1
 
 ### Patch Changes
