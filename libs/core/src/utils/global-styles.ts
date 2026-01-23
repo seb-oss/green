@@ -10,7 +10,7 @@ declare global {
 
 function getDocumentAdoptedStylesheet() {
   if (isServer) return []
-  return document.adoptedStyleSheets || []
+  return [...document.adoptedStyleSheets] || []
 }
 
 /**
@@ -54,6 +54,23 @@ export class GlobalStylesRegistry {
     }
   }
 
+  /**
+   * Clears global styles for the given key.
+   *
+   * @param key unique identifier for the stylesheet to be removed.
+   */
+  clearGlobalStyles(key: string) {
+    if (this.#useLegacyStylesheets) {
+      const styleEl = this.#legacyStyleSheets.get(key)
+      if (styleEl && styleEl.parentNode) {
+        styleEl.parentNode.removeChild(styleEl)
+        this.#legacyStyleSheets.delete(key)
+      }
+    } else {
+      this.#clearStyles(key)
+    }
+  }
+
   #injectStylesLegacy(key: string, cssText: string) {
     if (isServer) return
 
@@ -77,5 +94,15 @@ export class GlobalStylesRegistry {
       ...this.#initialStyleSheets,
       ...Array.from(this.#styleSheets.values()),
     ]
+  }
+
+  #clearStyles(key: string) {
+    if (this.#styleSheets.has(key)) {
+      this.#styleSheets.delete(key)
+      document.adoptedStyleSheets = [
+        ...this.#initialStyleSheets,
+        ...Array.from(this.#styleSheets.values()),
+      ]
+    }
   }
 }
