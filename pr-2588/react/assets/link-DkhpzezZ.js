@@ -1,0 +1,18 @@
+import{j as o}from"./jsx-runtime-D_zvdyIk.js";import{useMDXComponents as m}from"./index-D_bTug2w.js";import{M as p,C as n,b as d}from"./blocks-D4eRE9TD.js";import{L as c}from"./link-CFLdSPdf.js";import{el as h}from"./index--CPRgisf.js";import{L as u,D as f,O as k,A as x,S as j}from"./link.stories-D6NE_BEA.js";import{C as b,G as i,a as s,b as a}from"./index-D3GaoswC.js";import"./iframe-B0xb44om.js";import"./index-4PccMhvF.js";import"./index-BeuzQTkG.js";import"./tokens.style-TCTLvSFQ.js";import"./icon.component-uuIToOO9.js";import"./index-BrLkh1wZ.js";import"./triangle-exclamation.component-CfHL4jYP.js";import"./calender-add.component-CyfcHujq.js";import"./chevron-bottom.component-DwvORoJO.js";import"./chevron-right.component-MgEhXRJb.js";import"./circle-check.component-2kjTeTUk.js";import"./cross-small.component-D-HDowrc.js";import"./dot-grid-one-horizontal.component-CjOMr7yl.js";import"./alert.component-D-i2P9Oq.js";import"./runtime-nRyYmvPb.js";import"./class-map-DR4jIqih.js";import"./unwrap-slots-BWntZpxK.js";import"./button.component-Cih7voq1.js";import"./watch-Bh1rs_BK.js";import"./when-BR7zwNJC.js";import"./transitional-styles-DgOldKCQ.js";import"./dropdown.component-DV345hIE.js";import"./popover.component-BMQzZsVt.js";import"./checkmark.component-DvPMRUE0.js";import"./datepicker.component-BEXEK6fE.js";import"./attribute-converters-CdI0trPX.js";import"./context-menu.component-BgDMWPp1.js";import"./filter-chips.component-Dc_A6xiH.js";import"./resize-observer-B9k8v2TZ.js";import"./grouped-list.component-D9-SZvem.js";import"./segmented-control.component-BLpSKAFQ.js";import"./index-BXwKHPgI.js";h.define();const io=({...e})=>o.jsx(c,{...e});function l(e){const t={a:"a",h1:"h1",h2:"h2",h3:"h3",p:"p",strong:"strong",...m(),...e.components};return b||r("Core",!1),i||r("Core.GdsAlert",!0),s||r("Core.GdsDiv",!0),a||r("Core.GdsTheme",!0),o.jsxs(o.Fragment,{children:[o.jsx(p,{of:u}),`
+`,o.jsx(a,{children:o.jsx(s,{margin:"xl 0",children:o.jsxs(i,{variant:"notice",children:[o.jsx(t.strong,{children:"Note:"})," This version of Link is deprecated! Please use the ",o.jsx(t.a,{href:"https://storybook.seb.io/latest/core/?path=/docs/components-link--docs",rel:"nofollow",children:"web component from Green Core"})," instead."]})})}),`
+`,o.jsx(t.h1,{id:"link",children:"Link"}),`
+`,o.jsx(t.p,{children:"Simple link component"}),`
+`,o.jsx(n,{of:f}),`
+`,o.jsx(t.h2,{id:"link-on-backgrounds",children:"Link on backgrounds"}),`
+`,o.jsx(t.p,{children:`Links will by default have their color adjusted and use the color which gives best contrast against background of immediate parent.
+Currently, it works with all the intent colors using the pattern *-{intent} e.g. bg-info, alert-success, alert-danger etc.`}),`
+`,o.jsx(n,{of:k}),`
+`,o.jsx(t.h2,{id:"style-links-as-button",children:"Style links as button"}),`
+`,o.jsx(t.p,{children:`Sometimes you want to use links but style them as buttons, just add the class button and optionally a variant like primary or ghost and voilà -
+now you've got a link which looks and behaves like a button!`}),`
+`,o.jsx(n,{of:x}),`
+`,o.jsx(t.h2,{id:"secondary-link-dark-grey",children:"Secondary link (Dark grey)"}),`
+`,o.jsx(t.p,{children:"The secondary link is mostly used when the link is a stand alone, but the blue link can also be used there."}),`
+`,o.jsx(n,{of:j}),`
+`,o.jsx(t.h3,{id:"available-props",children:"Available props"}),`
+`,o.jsx(d,{})]})}function so(e={}){const{wrapper:t}={...m(),...e.components};return t?o.jsx(t,{...e,children:o.jsx(l,{...e})}):l(e)}function r(e,t){throw new Error("Expected "+(t?"component":"object")+" `"+e+"` to be defined: you likely forgot to import, pass, or provide it.")}export{io as Template,so as default};
