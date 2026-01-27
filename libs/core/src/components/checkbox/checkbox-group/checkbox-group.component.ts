@@ -34,6 +34,12 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
   direction: 'row' | 'column' = 'column'
 
   /**
+   * Whether to hide the label for the checkbox group. Usable if you want a single checkbox to act as the label.
+   */
+  @property({ type: Boolean, attribute: 'hide-label' })
+  hideLabel = false
+
+  /**
    * The supporting text displayed between the label and the field.
    * This text provides additional context or information to the user.
    */
@@ -139,7 +145,7 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
   }
 
   #renderFieldControlHeader() {
-    if (this.label) {
+    if (this.label && !this.hideLabel) {
       return html`<gds-form-control-header class="size-${this.size}">
         <label id="group-label" slot="label">${this.label}</label>
         <span slot="supporting-text" id="supporting-text">
