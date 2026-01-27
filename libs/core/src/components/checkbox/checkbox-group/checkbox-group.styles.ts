@@ -61,4 +61,15 @@ export const styles = css`
   :host([size='small']) .direction-row .content {
     gap: var(--gds-sys-space-xs) var(--gds-sys-space-m);
   }
+
+  .visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
 `
