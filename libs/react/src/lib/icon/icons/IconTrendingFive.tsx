@@ -1,0 +1,1 @@
+export { IconTrendingFive } from '@sebgroup/green-core/react';
