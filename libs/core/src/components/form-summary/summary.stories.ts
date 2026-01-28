@@ -141,6 +141,24 @@ export const Usage: Story = {
             },
           }}
         ></gds-input>
+        <gds-checkbox-group
+          label="Terms and conditions"
+          .hideLabel=${true}
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value.length === 0)
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  'You must agree to the terms and conditions',
+                ]
+            },
+          }}
+        >
+          <gds-checkbox
+            value="terms-and-conditions"
+            label="I agree to the terms and conditions"
+          ></gds-checkbox>
+        </gds-checkbox-group>
         <gds-form-summary reactive></gds-form-summary>
         <gds-flex gap="m" justify-content="center" margin="s 0 0 0">
           <gds-button type="reset" rank="tertiary">Reset</gds-button>

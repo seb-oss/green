@@ -449,10 +449,19 @@ export const Indeterminate: Story = {
   `,
 }
 
+/**
+ * Sometimes you need a single checkbox that shouldn't have the checkbox group label. In this case you can hide the label with the `hide-label` attribute or `hideLabel` property.
+ * Common use cases include:
+ * - Confirming that one has read terms and conditions
+ * - Agreeing to privacy policies
+ * - Opting into newsletters or marketing communications
+ */
 export const SingleCheckbox: Story = {
   ...DefaultParams,
   name: 'Single checkbox',
   render: () => html`
-    <gds-checkbox label="Checkbox Label" value="1" checked></gds-checkbox>
+    <gds-checkbox-group label="Group Label" hide-label>
+      <gds-checkbox label="Checkbox Label" value="1" checked></gds-checkbox>
+    </gds-checkbox-group>
   `,
 }
