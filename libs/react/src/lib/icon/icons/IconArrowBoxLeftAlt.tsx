@@ -1,0 +1,1 @@
+export { IconArrowBoxLeftAlt } from '@sebgroup/green-core/react';
