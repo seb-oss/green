@@ -66,6 +66,30 @@ export class GdsCard extends GdsDiv {
           color = 'var(--gds-sys-color-content-neutral-01)'
           break
 
+        case 'neutral-01':
+          border = 'transparent'
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-neutral-01)`
+          color = 'var(--gds-sys-color-content-neutral-01)'
+          break
+
+        case 'neutral-01-2':
+          border = 'transparent'
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-neutral-01-2)`
+          color = 'var(--gds-sys-color-content-neutral-01)'
+          break
+
+        case 'neutral-02':
+          border = 'transparent'
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-neutral-02)`
+          color = 'var(--gds-sys-color-content-neutral-01)'
+          break
+
+        case 'neutral-02-2':
+          border = 'transparent'
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-neutral-02-2)`
+          color = 'var(--gds-sys-color-content-neutral-01)'
+          break
+
         case 'brand-01':
           border = 'transparent'
           background = `var(--gds-sys-color-l${(this as GdsCard).level}-brand-01)`
