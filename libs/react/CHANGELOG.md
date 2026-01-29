@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.34.0
+
+### Minor Changes
+
+- 61e9bba: **Icon:** Generate wrappers for Arrowbox and Trending
+
+### Patch Changes
+
+- Updated dependencies [61e9bba]
+  - @sebgroup/green-core@2.27.0
+
 ## 3.33.0
 
 ### Minor Changes
@@ -520,11 +531,9 @@
 ### Minor Changes
 
 - 7820e8c: **Dropdown**
-
   - Add `maxHeight` prop
 
 - bb83849: **Datepicker:** Added support for disabling dates
-
   - `disabled-weekends` will disable all weekend days in the calendar view
   - `disabled-dates` allows to specify an array of dates that should be disabled in the calendar view
 
@@ -558,7 +567,6 @@
 ### Minor Changes
 
 - 78e09aa: **Accessibility improvements:**
-
   - Checkbox. Input, Textarea: Add aria attributes for validation
   - Input: Fix bug with caret position when using formatter
   - Select:
@@ -566,7 +574,6 @@
     - Deprecate `labelInformation` in favor of `info` (like in other components)
 
 - 007f8ac: **Datepicker and Dropdown**
-
   - Add small variant
   - Add attribute for hiding label
   - Align style with Figma
