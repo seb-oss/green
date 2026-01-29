@@ -87,6 +87,7 @@ export class GdsLink extends withMarginProps(
         download=${ifDefined(this.download)}
         ping=${ifDefined(this.ping)}
         aria-label=${this.label || nothing}
+        @click=${this.#handleClick}
       >
         <slot name="lead"></slot>
         <slot></slot>
@@ -97,5 +98,16 @@ export class GdsLink extends withMarginProps(
 
   get #defaultRel() {
     return this.target === '_blank' ? 'noreferrer noopener' : undefined
+  }
+
+  #handleClick(e: MouseEvent) {
+    this.dispatchEvent(
+      new MouseEvent('click', {
+        ...e,
+        composed: true,
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
   }
 }

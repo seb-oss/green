@@ -460,6 +460,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         const target = resolve(config.target)
         const download = resolve(config.download)
         const template = resolve(config.template) as string | undefined
+        const onClick = config.onClick
         const clonedSlot = this.#getSlotContent(template)
         const content = [label, clonedSlot]
 
@@ -469,6 +470,12 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             target=${ifDefined(target)}
             .download=${download}
             text-decoration="underline"
+            @click=${onClick
+              ? (e: MouseEvent) => {
+                  e.preventDefault()
+                  onClick(row)
+                }
+              : null}
           >
             ${content}
           </gds-link>
