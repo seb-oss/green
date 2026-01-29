@@ -2,4 +2,4 @@
 '@sebgroup/green-core': minor
 ---
 
-adding hide-label attribute to checkbox-group
+**Checkbox group:** Add `hide-label` attribute for visually hiding label
