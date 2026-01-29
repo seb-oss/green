@@ -316,8 +316,9 @@ export const TableStyles = css`
     overflow-wrap: break-word;
   }
 
-  td.wrap {
-    max-width: var(--cell-width);
+  td.wrap,
+  th.wrap {
+    width: var(--cell-width);
   }
 
   /* Justify utilities */
@@ -591,13 +592,14 @@ export const TableStyles = css`
     width: 60%;
   }
 
-  /* Visually hidden */
+  /* Visually hidden - screen reader only without layout impact */
   .visually-hidden {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-    pointer-events: none;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+    white-space: nowrap;
+    height: 0px;
+    width: 0px;
   }
 
   /* Scroll driven animation */

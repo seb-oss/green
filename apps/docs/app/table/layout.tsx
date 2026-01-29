@@ -11,10 +11,10 @@ interface Item {
 
 const SIMPLE_DATA: Item[] = [
   { name: 'Item A', status: 'Active' },
-  { name: 'Item B', status: 'Inactive' },
-  { name: 'Item C', status: 'Active' },
-  { name: 'Item D', status: 'Pending' },
-  { name: 'Item E', status: 'Active' },
+  //   { name: 'Item B', status: 'Inactive' },
+  //   { name: 'Item C', status: 'Active' },
+  //   { name: 'Item D', status: 'Pending' },
+  //   { name: 'Item E', status: 'Active' },
 ]
 
 export default function Table({ children }: { children: React.ReactNode }) {
@@ -42,7 +42,7 @@ export default function Table({ children }: { children: React.ReactNode }) {
   }
 
   const columns: any[] = [
-    { key: 'name', label: 'Name', sortable: true },
+    { key: 'name', label: 'Name', sortable: true, width: '40px' },
     {
       key: 'status',
       label: 'Status',
@@ -63,7 +63,12 @@ export default function Table({ children }: { children: React.ReactNode }) {
   return (
     <div>
       <Core.GdsTheme>
-        <Core.GdsTable columns={columns} data={dataProvider} />
+        <Core.GdsTable
+          headline="Test"
+          summary="Test"
+          columns={columns}
+          data={dataProvider}
+        />
       </Core.GdsTheme>
       {children}
     </div>
