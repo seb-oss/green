@@ -450,7 +450,8 @@ export const Indeterminate: Story = {
 }
 
 /**
- * Sometimes you need a single checkbox that shouldn't have the checkbox group label. In this case you can hide the label with the `hide-label` attribute or `hideLabel` property.
+ * Sometimes you need a single checkbox where the checkbox group label should be visually hidden but still accessible to screen readers.
+ * In this case you should still provide a meaningful group label and hide it visually with the `hide-label` attribute or `hideLabel` property.
  * Common use cases include:
  * - Confirming that one has read terms and conditions
  * - Agreeing to privacy policies
