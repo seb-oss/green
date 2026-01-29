@@ -100,14 +100,16 @@ export class GdsLink extends withMarginProps(
     return this.target === '_blank' ? 'noreferrer noopener' : undefined
   }
 
+  /**
+   * Re-dispatches click events as a custom event with `composed: true` so external
+   * listeners can intercept them and call preventDefault() for custom routing logic.
+   * Without this, clicks would be trapped in the shadow DOM.
+   */
   #handleClick(e: MouseEvent) {
-    this.dispatchEvent(
-      new MouseEvent('click', {
-        ...e,
-        composed: true,
-        bubbles: true,
-        cancelable: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-link-click', {
+      bubbles: true,
+      composed: true,
+      detail: e,
+    })
   }
 }
