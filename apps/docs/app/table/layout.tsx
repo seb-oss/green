@@ -11,10 +11,10 @@ interface Item {
 
 const SIMPLE_DATA: Item[] = [
   { name: 'Item A', status: 'Active' },
-  //   { name: 'Item B', status: 'Inactive' },
-  //   { name: 'Item C', status: 'Active' },
-  //   { name: 'Item D', status: 'Pending' },
-  //   { name: 'Item E', status: 'Active' },
+  { name: 'Item B', status: 'Inactive' },
+  { name: 'Item C', status: 'Active' },
+  { name: 'Item D', status: 'Pending' },
+  { name: 'Item E', status: 'Active' },
 ]
 
 export default function Table({ children }: { children: React.ReactNode }) {

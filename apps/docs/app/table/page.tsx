@@ -2,6 +2,8 @@
 
 import { useParams } from 'next/navigation'
 
+import * as Core from '@sebgroup/green-core/react'
+
 export default function StatusDetail() {
   const params = useParams()
   const status = params.status
@@ -9,24 +11,15 @@ export default function StatusDetail() {
     : null
 
   return (
-    <div style={{ marginTop: '2rem', padding: '1rem' }}>
+    <Core.GdsCard align-items="flex-start">
       {status ? (
-        <div>
-          <h2>Selected Status</h2>
-          <div
-            style={{
-              padding: '1rem',
-              backgroundColor: '#f0f0f0',
-              borderRadius: '4px',
-            }}
-          >
-            <strong>Status: </strong>
-            <span>{status}</span>
-          </div>
-        </div>
+        <>
+          <Core.GdsText tag="h2">Selected Status</Core.GdsText>
+          <Core.GdsBadge variant="notice">{status}</Core.GdsBadge>
+        </>
       ) : (
         <p>Click a status in the table to view details</p>
       )}
-    </div>
+    </Core.GdsCard>
   )
 }
