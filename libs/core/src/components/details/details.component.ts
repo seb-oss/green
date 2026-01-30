@@ -148,7 +148,7 @@ export class GdsDetails extends withSizeXProps(
 
   #renderIconButton = () => {
     return html`
-      <div class="summary-icon" role="presentation" aria-hidden="true">
+      <div class="summary-icon" role="presentation">
         <gds-button
           rank="tertiary"
           size=${this.size === 'small' ? 'xs' : 'medium'}
