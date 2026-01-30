@@ -482,34 +482,32 @@ class Dropdown extends GdsFormControlElement implements OptionsContainer {
     characterData: true,
   })
   private _handleLightDOMChange() {
-    requestAnimationFrame(() => {
-      this.requestUpdate()
+    this.requestUpdate()
 
-      this.#optionElements = this.querySelectorAll('[gds-element=gds-option]')
+    this.#optionElements = this.querySelectorAll('[gds-element=gds-option]')
 
-      if (this.multiple) {
-        this._handleValueChange()
-        return
-      }
-
-      // Set default value if none is set
-      if (this.value === undefined) {
-        if (this.placeholder) this.value = this.placeholder.value
-        else this.value = this.options[0]?.value
-      }
-      // Make sure the value is one of the options, unless we have a placeholder or is in combobox mode
-      else if (
-        !this.combobox &&
-        !this.placeholder &&
-        this.options.find((o) => this.compareWith(o.value, this.value)) ===
-          undefined
-      ) {
-        this.options[0] && (this.options[0].selected = true)
-        this.value = this.options[0]?.value
-      }
-
+    if (this.multiple) {
       this._handleValueChange()
-    })
+      return
+    }
+
+    // Set default value if none is set
+    if (this.value === undefined) {
+      if (this.placeholder) this.value = this.placeholder.value
+      else this.value = this.options[0]?.value
+    }
+    // Make sure the value is one of the options, unless we have a placeholder or is in combobox mode
+    else if (
+      !this.combobox &&
+      !this.placeholder &&
+      this.options.find((o) => this.compareWith(o.value, this.value)) ===
+        undefined
+    ) {
+      this.options[0] && (this.options[0].selected = true)
+      this.value = this.options[0]?.value
+    }
+
+    this._handleValueChange()
   }
 
   @watch('value')
