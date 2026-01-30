@@ -1,5 +1,5 @@
-import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import { expect, describe, it } from 'vitest'
+import { fixture, html as testingHtml } from '../../../utils/testing'
 
 import type { GdsSensitiveNumber } from '@sebgroup/green-core/components/sensitive/number'
 
@@ -27,7 +27,7 @@ describe('GdsSensitiveNumber', () => {
       ></gds-sensitive-number>`,
     )
     await element.updateComplete
-    expect(element.formattedValue).not.to.equal(
+    expect(element.formattedValue).not.toBe(
       numberFormats[format](value, locale, undefined, decimals),
     )
   })

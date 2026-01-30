@@ -1,7 +1,6 @@
-import { expect } from '@esm-bundle/chai'
-import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands'
-import sinon from 'sinon'
+import { expect, describe, it, beforeEach, afterEach, vi } from 'vitest'
+import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
+import { userEvent } from '@vitest/browser/context'
 
 import type { GdsButton } from '@sebgroup/green-core/components/button'
 
@@ -25,7 +24,7 @@ describe('<gds-button>', () => {
 
       const innerButton = el.shadowRoot?.querySelector('button')
 
-      expect(innerButton).to.exist
+      expect(innerButton).toBeDefined()
     })
 
     it('should render link', async () => {
@@ -39,7 +38,7 @@ describe('<gds-button>', () => {
 
       const innerButton = el.shadowRoot?.querySelector('a')
 
-      expect(innerButton).to.exist
+      expect(innerButton).toBeDefined()
     })
 
     it('should render lead slot', async () => {
@@ -51,7 +50,7 @@ describe('<gds-button>', () => {
 
       const slot = el.shadowRoot?.querySelector('slot[name="lead"]')
 
-      expect(slot).to.exist
+      expect(slot).toBeDefined()
     })
   })
 
@@ -59,12 +58,12 @@ describe('<gds-button>', () => {
     it('should fire click event', async () => {
       const el = await fixture<GdsButton>(html`<gds-button>Button</gds-button>`)
       const button = el.shadowRoot.querySelector('button') // get the button element from the shadow dom
-      const spy = sinon.spy()
+      const spy = vi.fn()
       button.addEventListener('click', spy)
 
       await clickOnElement(button)
 
-      expect(spy.calledOnce).to.be.true
+      expect(spy).toHaveBeenCalledOnce()
     })
 
     it('should be form associated', async () => {
@@ -77,7 +76,7 @@ describe('<gds-button>', () => {
         getScopedTagName('gds-button'),
       ) as GdsButton
 
-      expect(button.form).to.equal(el)
+      expect(button.form).toBe(el)
     })
 
     it('should submit form when type is submit', async () => {
@@ -90,7 +89,7 @@ describe('<gds-button>', () => {
         getScopedTagName('gds-button'),
       ) as GdsButton
 
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('submit', spy)
 
       // Select button from the shadow DOM
@@ -101,7 +100,7 @@ describe('<gds-button>', () => {
         await clickOnElement(button)
       }
 
-      expect(spy.calledOnce).to.be.true
+      expect(spy).toHaveBeenCalledOnce()
     })
 
     it('should reset form when type is reset', async () => {
@@ -114,7 +113,7 @@ describe('<gds-button>', () => {
         getScopedTagName('gds-button'),
       ) as GdsButton
 
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('reset', spy)
 
       // Select button from the shadow DOM
@@ -125,7 +124,7 @@ describe('<gds-button>', () => {
         await clickOnElement(button)
       }
 
-      expect(spy.calledOnce).to.be.true
+      expect(spy).toHaveBeenCalledOnce()
     })
 
     it('should support value attribute', async () => {
@@ -133,7 +132,7 @@ describe('<gds-button>', () => {
         html`<gds-button value="value">Button</gds-button>`,
       )
 
-      expect(el.value).to.equal('value')
+      expect(el.value).toBe('value')
     })
 
     it('should support disabled attribute', async () => {
@@ -141,16 +140,16 @@ describe('<gds-button>', () => {
         html`<gds-button disabled>Button</gds-button>`,
       )
 
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('click', spy)
       el.focus()
 
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
 
       await aTimeout(1)
 
-      expect(spy.notCalled).to.be.true
-      expect(el.disabled).to.be.true
+      expect(spy).not.toHaveBeenCalled()
+      expect(el.disabled).toBe(true)
     })
 
     it('should support variant attribute', async () => {
@@ -160,8 +159,8 @@ describe('<gds-button>', () => {
 
       const shadowButton = el.shadowRoot?.querySelector('button')
 
-      expect(el.variant).to.equal('positive')
-      expect(shadowButton?.classList.contains('positive')).to.equal(true)
+      expect(el.variant).toBe('positive')
+      expect(shadowButton?.classList.contains('positive')).toBe(true)
     })
 
     it('should support size attribute', async () => {
@@ -171,8 +170,8 @@ describe('<gds-button>', () => {
 
       const shadowButton = el.shadowRoot?.querySelector('button')
 
-      expect(el.size).to.equal('small')
-      expect(shadowButton?.classList.contains('small')).to.equal(true)
+      expect(el.size).toBe('small')
+      expect(shadowButton?.classList.contains('small')).toBe(true)
     })
 
     it('should support rank attribute', async () => {
@@ -182,8 +181,8 @@ describe('<gds-button>', () => {
 
       const shadowButton = el.shadowRoot?.querySelector('button')
 
-      expect(shadowButton?.classList.contains('tertiary')).to.equal(true)
-      expect(el.rank).to.equal('tertiary')
+      expect(shadowButton?.classList.contains('tertiary')).toBe(true)
+      expect(el.rank).toBe('tertiary')
     })
 
     it('should support justify-content style expression', async () => {
@@ -197,8 +196,8 @@ describe('<gds-button>', () => {
         el.shadowRoot?.querySelector('button'),
       )
 
-      expect(computedStyle.justifyContent).to.equal('space-between')
-      expect(el['justify-content']).to.equal('space-between')
+      expect(computedStyle.justifyContent).toBe('space-between')
+      expect(el['justify-content']).toBe('space-between')
     })
 
     it('should support link attributes', async () => {
@@ -214,12 +213,12 @@ describe('<gds-button>', () => {
 
       const shadowButton = el.shadowRoot?.querySelector('a')
 
-      expect(shadowButton?.getAttribute('href')).to.equal(
+      expect(shadowButton?.getAttribute('href')).toBe(
         'https://github.com/seb-oss/green',
       )
-      expect(shadowButton?.getAttribute('rel')).to.equal('noopener')
-      expect(shadowButton?.getAttribute('target')).to.equal('_self')
-      expect(shadowButton?.hasAttribute('download')).to.equal(true)
+      expect(shadowButton?.getAttribute('rel')).toBe('noopener')
+      expect(shadowButton?.getAttribute('target')).toBe('_self')
+      expect(shadowButton?.hasAttribute('download')).toBe(true)
     })
 
     it('should render properly with gds-icon', async () => {
@@ -231,8 +230,8 @@ describe('<gds-button>', () => {
 
       const button = el.shadowRoot?.querySelector('button')
 
-      expect(button?.classList.contains('circle')).to.equal(true)
-      expect(button?.classList.contains('icon')).to.equal(true)
+      expect(button?.classList.contains('circle')).toBe(true)
+      expect(button?.classList.contains('icon')).toBe(true)
     })
   })
 
@@ -244,7 +243,7 @@ describe('<gds-button>', () => {
         </gds-button>`,
       )
 
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
     it('should pass axe smoketest for button link', async () => {
       const el = await fixture<GdsButton>(
@@ -253,19 +252,19 @@ describe('<gds-button>', () => {
         </gds-button>`,
       )
 
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
     it('should fire click event when pressing enter', async () => {
       const el = await fixture<GdsButton>(html`<gds-button>Button</gds-button>`)
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('click', spy)
       el.focus()
 
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
 
       await aTimeout(1)
 
-      expect(spy.calledOnce).to.be.true
+      expect(spy).toHaveBeenCalledOnce()
     })
 
     it('should be possible to tab to the button', async () => {
@@ -278,7 +277,7 @@ describe('<gds-button>', () => {
       ) as GdsButton
 
       input.focus()
-      await sendKeys({ press: 'Tab' })
+      await userEvent.tab()
 
       // skip test in webkit
       if (
@@ -288,7 +287,7 @@ describe('<gds-button>', () => {
         return
       }
 
-      expect(document.activeElement).to.equal(button)
+      expect(document.activeElement).toBe(button)
     })
   })
   describe('Security', () => {
@@ -304,7 +303,7 @@ describe('<gds-button>', () => {
 
       const shadowButton = el.shadowRoot?.querySelector('a')
 
-      expect(shadowButton?.getAttribute('rel')).to.equal('noreferrer noopener')
+      expect(shadowButton?.getAttribute('rel')).toBe('noreferrer noopener')
     })
   })
 })

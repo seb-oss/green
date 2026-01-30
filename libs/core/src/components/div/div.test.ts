@@ -1,4 +1,5 @@
-import { expect, fixture, html as testingHtml } from '@open-wc/testing'
+import { expect, describe, it, beforeEach } from 'vitest'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 

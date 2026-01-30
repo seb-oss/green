@@ -1,4 +1,5 @@
-import { expect, fixture, html as testingHtml } from '@open-wc/testing'
+import { expect, describe, it, beforeEach } from 'vitest'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
@@ -17,33 +18,33 @@ describe('<gds-card-pattern-01>', () => {
   })
 
   it('should have correct properties when initialized', async () => {
-    expect(element.variant).to.equal('neutral-01')
-    expect(element.ratio).to.equal('landscape')
+    expect(element.variant).toBe('neutral-01')
+    expect(element.ratio).toBe('landscape')
   })
 
   it('should update aspect-ratio property', async () => {
     element.ratio = 'square'
     await element.updateComplete
-    expect(element.ratio).to.equal('square')
+    expect(element.ratio).toBe('square')
   })
 
   it('should handle href property', async () => {
     element.href = '#test'
     await element.updateComplete
-    expect(element.href).to.equal('#test')
+    expect(element.href).toBe('#test')
   })
 
   it('should handle src property', async () => {
     element.src = 'test.jpg'
     await element.updateComplete
-    expect(element.src).to.equal('test.jpg')
+    expect(element.src).toBe('test.jpg')
   })
 
   it('should handle title and excerpt properties', async () => {
     element.title = 'Test Title'
     element.excerpt = 'Test Excerpt'
     await element.updateComplete
-    expect(element.title).to.equal('Test Title')
-    expect(element.excerpt).to.equal('Test Excerpt')
+    expect(element.title).toBe('Test Title')
+    expect(element.excerpt).toBe('Test Excerpt')
   })
 })

@@ -1,4 +1,5 @@
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import { expect, describe, it, beforeEach } from 'vitest'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import type { GdsBlur } from '@sebgroup/green-core/components/blur'
 

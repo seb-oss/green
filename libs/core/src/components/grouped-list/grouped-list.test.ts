@@ -1,5 +1,5 @@
-import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import { expect, describe, it } from 'vitest'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import type { GdsGroupedList } from '@sebgroup/green-core/components/grouped-list'
 
@@ -23,8 +23,8 @@ describe('<gds-context-menu>', () => {
       await el.updateComplete
 
       const label = el.shadowRoot!.querySelector('.gds-list-heading')!
-      expect(label).to.exist
-      expect(label).to.have.property('innerText', 'List')
+      expect(label).toBeDefined()
+      expect((label as HTMLElement).innerText).toBe('List')
     })
   })
 
@@ -40,7 +40,7 @@ describe('<gds-context-menu>', () => {
 
       await el.updateComplete
 
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
   })
 })

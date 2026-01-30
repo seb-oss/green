@@ -1,4 +1,5 @@
-import { expect, fixture, html as testingHtml } from '@open-wc/testing'
+import { describe, beforeEach } from 'vitest'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import type { GdsDivider } from '@sebgroup/green-core/components/divider'
 

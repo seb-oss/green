@@ -1,7 +1,6 @@
-import { expect } from '@esm-bundle/chai'
-import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands'
-import sinon from 'sinon'
+import { expect, describe, it, beforeEach, afterEach, vi } from 'vitest'
+import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
+import { userEvent } from '@vitest/browser/context'
 
 import type { GdsMenuButton } from '@sebgroup/green-core/components/menu-button'
 
@@ -27,7 +26,7 @@ describe('<gds-menu-button>', () => {
 
       const innerButton = el.shadowRoot?.querySelector('button')
 
-      expect(innerButton).to.exist
+      expect(innerButton).toBeDefined()
     })
 
     it('should render link', async () => {
@@ -41,7 +40,7 @@ describe('<gds-menu-button>', () => {
 
       const innerButton = el.shadowRoot?.querySelector('a')
 
-      expect(innerButton).to.exist
+      expect(innerButton).toBeDefined()
     })
 
     it('should render lead slot', async () => {
@@ -53,7 +52,7 @@ describe('<gds-menu-button>', () => {
 
       const slot = el.shadowRoot?.querySelector('slot[name="lead"]')
 
-      expect(slot).to.exist
+      expect(slot).toBeDefined()
     })
 
     it('should render trail slot', async () => {
@@ -65,7 +64,7 @@ describe('<gds-menu-button>', () => {
 
       const slot = el.shadowRoot?.querySelector('slot[name="trail"]')
 
-      expect(slot).to.exist
+      expect(slot).toBeDefined()
     })
   })
 
@@ -74,12 +73,12 @@ describe('<gds-menu-button>', () => {
       const el = await fixture<GdsMenuButton>(
         html`<gds-menu-button>Button</gds-menu-button>`,
       )
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('click', spy)
 
       await clickOnElement(el)
 
-      expect(spy.calledOnce).to.be.true
+      expect(spy).toHaveBeenCalledOnce()
     })
 
     it('should support disabled attribute', async () => {
@@ -87,16 +86,16 @@ describe('<gds-menu-button>', () => {
         html`<gds-menu-button disabled>Button</gds-menu-button>`,
       )
 
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('click', spy)
       el.focus()
 
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
 
       await aTimeout(1)
 
-      expect(spy.notCalled).to.be.true
-      expect(el.disabled).to.be.true
+      expect(spy).not.toHaveBeenCalled()
+      expect(el.disabled).toBe(true)
     })
 
     it('should support compact attribute', async () => {
@@ -106,8 +105,8 @@ describe('<gds-menu-button>', () => {
 
       const shadowButton = el.shadowRoot?.querySelector('button')
 
-      expect(shadowButton?.classList.contains('compact')).to.equal(true)
-      expect(el.compact).to.equal(true)
+      expect(shadowButton?.classList.contains('compact')).toBe(true)
+      expect(el.compact).toBe(true)
     })
 
     it('should support link attributes', async () => {
@@ -123,12 +122,12 @@ describe('<gds-menu-button>', () => {
 
       const shadowButton = el.shadowRoot?.querySelector('a')
 
-      expect(shadowButton?.getAttribute('href')).to.equal(
+      expect(shadowButton?.getAttribute('href')).toBe(
         'https://github.com/seb-oss/green',
       )
-      expect(shadowButton?.getAttribute('rel')).to.equal('noopener')
-      expect(shadowButton?.getAttribute('target')).to.equal('_self')
-      expect(shadowButton?.hasAttribute('download')).to.equal(true)
+      expect(shadowButton?.getAttribute('rel')).toBe('noopener')
+      expect(shadowButton?.getAttribute('target')).toBe('_self')
+      expect(shadowButton?.hasAttribute('download')).toBe(true)
     })
   })
 
@@ -140,7 +139,7 @@ describe('<gds-menu-button>', () => {
         </gds-menu-button>`,
       )
 
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
     it('should pass axe smoketest for button link', async () => {
       const el = await fixture<GdsMenuButton>(
@@ -149,21 +148,21 @@ describe('<gds-menu-button>', () => {
         </gds-menu-button>`,
       )
 
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
     it('should fire click event when pressing enter', async () => {
       const el = await fixture<GdsMenuButton>(
         html`<gds-menu-button>Button</gds-menu-button>`,
       )
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('click', spy)
       el.focus()
 
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
 
       await aTimeout(1)
 
-      expect(spy.calledOnce).to.be.true
+      expect(spy).toHaveBeenCalledOnce()
     })
 
     it('should be possible to tab to the button', async () => {
@@ -176,7 +175,7 @@ describe('<gds-menu-button>', () => {
       ) as GdsMenuButton
 
       input.focus()
-      await sendKeys({ press: 'Tab' })
+      await userEvent.tab()
 
       // skip test in webkit
       if (
@@ -186,7 +185,7 @@ describe('<gds-menu-button>', () => {
         return
       }
 
-      expect(document.activeElement).to.equal(button)
+      expect(document.activeElement).toBe(button)
     })
   })
   describe('Security', () => {
@@ -202,7 +201,7 @@ describe('<gds-menu-button>', () => {
 
       const shadowButton = el.shadowRoot?.querySelector('a')
 
-      expect(shadowButton?.getAttribute('rel')).to.equal('noreferrer noopener')
+      expect(shadowButton?.getAttribute('rel')).toBe('noreferrer noopener')
     })
   })
 })

@@ -1,12 +1,10 @@
-import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import { expect, describe, it } from 'vitest'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import type { GdsFormSummary } from '@sebgroup/green-core/components/form-summary'
 
 import '@sebgroup/green-core/components/form-summary'
 import '@sebgroup/green-core/components/dropdown'
-
-import sinon from 'sinon'
 
 import type { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 
@@ -17,7 +15,7 @@ const html = htmlTemplateTagFactory(testingHtml)
 describe('<gds-form-summary>', () => {
   it('is a GdsElement', async () => {
     const el = await fixture(html`<gds-form-summary></gds-form-summary>`)
-    expect(el.getAttribute('gds-element')).to.equal('gds-form-summary')
+    expect(el.getAttribute('gds-element')).toBe('gds-form-summary')
   })
 
   describe('Accessibility', () => {
@@ -30,7 +28,7 @@ describe('<gds-form-summary>', () => {
       )
       const summaryEl = formEl.querySelector('#summary') as GdsFormSummary
       await summaryEl.updateComplete
-      expect(summaryEl).to.be.accessible()
+      await expect(summaryEl).toBeAccessible()
     })
   })
 
@@ -40,7 +38,7 @@ describe('<gds-form-summary>', () => {
         html`<gds-form-summary></gds-form-summary>`,
       )
       await el.updateComplete
-      expect(el).to.exist
+      expect(el).toBeDefined()
     })
 
     it('should render list item in reactive mode', async () => {
@@ -61,17 +59,17 @@ describe('<gds-form-summary>', () => {
       await dropdownEl.updateComplete
       await summaryEl.updateComplete
 
-      expect(summaryEl.shadowRoot?.querySelector('li')).to.exist
+      expect(summaryEl.shadowRoot?.querySelector('li')).toBeDefined()
       expect(
         summaryEl.shadowRoot
           ?.querySelector('li div :first-child')
-          ?.textContent.trim(),
-      ).to.equal('Dropdown label')
+          ?.textContent?.trim(),
+      ).toBe('Dropdown label')
       expect(
         summaryEl.shadowRoot
           ?.querySelector('li div :nth-child(2)')
-          ?.textContent.trim(),
-      ).to.equal('Error message')
+          ?.textContent?.trim(),
+      ).toBe('Error message')
     })
 
     it('should render list items in non-reactive mode when refresh() is called', async () => {
@@ -92,16 +90,16 @@ describe('<gds-form-summary>', () => {
       await dropdownEl.updateComplete
       await summaryEl.updateComplete
 
-      expect(summaryEl.shadowRoot?.querySelector('li')).to.exist
+      expect(summaryEl.shadowRoot?.querySelector('li')).toBeDefined()
 
       dropdownEl.invalid = false
 
-      expect(summaryEl.shadowRoot?.querySelector('li')).to.exist
+      expect(summaryEl.shadowRoot?.querySelector('li')).toBeDefined()
 
       summaryEl.refresh()
       await summaryEl.updateComplete
 
-      expect(summaryEl.shadowRoot?.querySelector('li')).to.not.exist
+      expect(summaryEl.shadowRoot?.querySelector('li')).toBeNull()
     })
   })
 
@@ -124,7 +122,7 @@ describe('<gds-form-summary>', () => {
       await dropdownEl.updateComplete
       await summaryEl.updateComplete
 
-      expect(summaryEl.errorCount).to.equal(1)
+      expect(summaryEl.errorCount).toBe(1)
     })
   })
 })

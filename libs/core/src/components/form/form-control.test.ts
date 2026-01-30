@@ -1,5 +1,5 @@
-import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import { expect, describe, it } from 'vitest'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import {
   gdsCustomElement,
@@ -33,7 +33,7 @@ describe('Form controls', () => {
       )
       const formData = new FormData(formEl)
       const value = formData.get('test')
-      expect(value).to.equal('test')
+      expect(value).toBe('test')
     })
 
     it('should update the form value when the value changes', async () => {
@@ -52,7 +52,7 @@ describe('Form controls', () => {
       formControlEl.value = 'new value'
       const formData = new FormData(formEl)
       const value = formData.get('test')
-      expect(value).to.equal('new value')
+      expect(value).toBe('new value')
     })
   })
 })
