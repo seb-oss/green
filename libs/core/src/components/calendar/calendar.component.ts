@@ -293,7 +293,6 @@ export class GdsCalendar extends GdsElement {
                     // Establish final disabled state
                     const isDisabled =
                       displayOptions.disabled ||
-                      isOutsideCurrentMonth ||
                       isOutsideMinMax ||
                       (this.disabledWeekends && isWeekend)
 
