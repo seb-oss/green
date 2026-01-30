@@ -45,7 +45,12 @@ class ForwardAttributesDirective extends Directive {
     // TODO: Also remove attributes that are no longer present on the host
     Array.from(host.attributes).forEach((attr) => {
       if (filter(attr)) {
-        element.setAttribute(attr.name.replace('gds-', ''), attr.value)
+        const forwardedName = attr.name.replace('gds-', '')
+        element.setAttribute(forwardedName, attr.value)
+
+        if (forwardedName === 'tabindex' && attr.value === '-1') {
+          element.tabIndex = -1
+        }
       }
     })
   }

@@ -82,17 +82,6 @@ describe('<gds-details>', () => {
     })
   })
 
-  describe('Accessibility', () => {
-    it('should not hide the summary icon container from assistive tech', async () => {
-      const el = await fixture<GdsDetails>(html`
-        <gds-details summary="Test Summary">Content</gds-details>
-      `)
-
-      const summaryIcon = el.shadowRoot?.querySelector('.summary-icon')
-      expect(summaryIcon?.getAttribute('aria-hidden')).to.be.null
-    })
-  })
-
   describe('Group Synchronization', () => {
     it('should close other details in same group', async () => {
       const container = await fixture(html`

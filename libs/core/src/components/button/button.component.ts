@@ -22,6 +22,7 @@ import { GdsFormControlElement } from '../form/form-control'
 import ButtonStyles from './button.styles'
 
 const ariaForwards = ['aria-label', 'aria-haspopup', 'aria-expanded']
+const attributeForwards = [...ariaForwards, 'gds-tabindex']
 
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)
@@ -177,7 +178,7 @@ class Button extends GdsFormControlElement<any> {
           (attr) =>
             attr.name.startsWith('gds-aria') ||
             attr.name === 'gds-role' ||
-            ariaForwards.includes(attr.name),
+            attributeForwards.includes(attr.name),
         )}
       >
         <slot name="lead"></slot>
