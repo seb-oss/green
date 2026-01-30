@@ -48,8 +48,8 @@ class ForwardAttributesDirective extends Directive {
         const forwardedName = attr.name.replace('gds-', '')
         element.setAttribute(forwardedName, attr.value)
 
-        if (forwardedName === 'tabindex' && attr.value === '-1') {
-          element.tabIndex = -1
+        if (forwardedName === 'tabindex') {
+          element.tabIndex = Number(attr.value)
         }
       }
     })

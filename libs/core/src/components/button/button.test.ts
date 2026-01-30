@@ -244,6 +244,7 @@ describe('<gds-button>', () => {
 
       const innerButton = el.shadowRoot?.querySelector('button')
       expect(innerButton?.getAttribute('tabindex')).to.equal('-1')
+      expect(innerButton?.tabIndex).to.equal(-1)
     })
   })
 
