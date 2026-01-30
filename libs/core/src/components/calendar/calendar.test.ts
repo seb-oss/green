@@ -226,7 +226,7 @@ describe('<gds-calendar>', () => {
       await el.updateComplete
 
       // Find a date from the previous month that appears on the calendar
-      // June 2024 starts on a Saturday, so May 27-31 should be visible
+      // June 2024 starts on a Saturday, so May 26 will be in the first cell
       const mayDateCell = el.shadowRoot?.querySelector(
         'tbody tr:first-child td:first-child',
       ) as HTMLElement
