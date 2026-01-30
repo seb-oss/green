@@ -311,6 +311,7 @@ export class GdsCalendar extends GdsElement {
                               'custom-date': Boolean(customization),
                               disabled: Boolean(isDisabled),
                               today: isSameDay(currentDate, day),
+                              'outside-month': isOutsideCurrentMonth,
                             })}"
                             ?disabled=${isDisabled}
                             tabindex="${isSameDay(this.focusedDate, day)
