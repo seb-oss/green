@@ -1,5 +1,5 @@
 import * as axe from 'axe-core'
-import { expect } from 'vitest'
+import { afterEach, expect } from 'vitest'
 
 interface AccessibleOptions {
   rules?: Record<string, { enabled: boolean }>
@@ -44,6 +44,11 @@ expect.extend({
         `Expected element to be accessible, but found the following violations:\n\n${formattedViolations}`,
     }
   },
+})
+
+afterEach(() => {
+  // Reset DOM between tests to avoid leftover overlays or modal state
+  document.body.innerHTML = ''
 })
 
 // TypeScript declarations for the custom matcher
