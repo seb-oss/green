@@ -244,3 +244,19 @@ export function conditionToBeTrue(
     check()
   })
 }
+
+export function setViewportSize(width: number, height: number) {
+  const originalSize = {
+    width: window.innerWidth,
+    height: window.innerHeight,
+  }
+  if (page) {
+    page.viewport(width, height)
+  }
+
+  return () => {
+    if (page) {
+      page.viewport(originalSize.width, originalSize.height)
+    }
+  }
+}

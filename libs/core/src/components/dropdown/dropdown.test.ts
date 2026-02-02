@@ -12,6 +12,7 @@ import {
   aTimeout,
   clickOnElement,
   fixture,
+  setViewportSize,
   html as testingHtml,
   waitUntil,
 } from '../../utils/testing'
@@ -279,25 +280,30 @@ describe('<gds-dropdown>', () => {
   })
 
   it('should limit the height of the popover to max-height attribute', async () => {
-    const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown open max-height="50">
-        <gds-option value="v1">Option 1</gds-option>
-        <gds-option value="v2">Option 2</gds-option>
-        <gds-option value="v3">Option 3</gds-option>
-        <gds-option value="v4">Option 4</gds-option>
-        <gds-option value="v5">Option 5</gds-option>
-        <gds-option value="v6">Option 6</gds-option>
-        <gds-option value="v7">Option 7</gds-option>
-        <gds-option value="v8">Option 8</gds-option>
-        <gds-option value="v9">Option 9</gds-option>
-      </gds-dropdown>
-    `)
-    await el.updateComplete
-    const popover = el.shadowRoot
-      ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
-      ?.shadowRoot?.querySelector<HTMLElement>('dialog')
-    await aTimeout(50)
-    expect(popover?.clientHeight).toBeLessThanOrEqual(50)
+    const restore = setViewportSize(1024, 768)
+    try {
+      const el = await fixture<GdsDropdown>(html`
+        <gds-dropdown open max-height="50">
+          <gds-option value="v1">Option 1</gds-option>
+          <gds-option value="v2">Option 2</gds-option>
+          <gds-option value="v3">Option 3</gds-option>
+          <gds-option value="v4">Option 4</gds-option>
+          <gds-option value="v5">Option 5</gds-option>
+          <gds-option value="v6">Option 6</gds-option>
+          <gds-option value="v7">Option 7</gds-option>
+          <gds-option value="v8">Option 8</gds-option>
+          <gds-option value="v9">Option 9</gds-option>
+        </gds-dropdown>
+      `)
+      await el.updateComplete
+      const popover = el.shadowRoot
+        ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
+        ?.shadowRoot?.querySelector<HTMLElement>('dialog')
+      await aTimeout(50)
+      expect(popover?.clientHeight).toBeLessThanOrEqual(50)
+    } finally {
+      restore()
+    }
   })
 
   it('should select complex value correctly with `compareWith` callback', async () => {
@@ -310,7 +316,7 @@ describe('<gds-dropdown>', () => {
       o.innerHTML = `Test option ${num}`
       el.appendChild(o)
     })
-    el.compareWith = (a, b) => a.val === b.val
+    el.compareWith = (a: any, b: any) => a.val === b.val
     await el.updateComplete
     el.value = { val: 'test2' }
     await el.updateComplete
@@ -331,7 +337,7 @@ describe('<gds-dropdown>', () => {
       o.innerHTML = `Test option ${num}`
       el.appendChild(o)
     })
-    el.compareWith = (a, b) => a.val === b.val
+    el.compareWith = (a: any, b: any) => a.val === b.val
     await el.updateComplete
     el.value = [{ val: 'test2' }, { val: 'test4' }]
     await el.updateComplete
