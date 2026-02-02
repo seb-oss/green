@@ -13,7 +13,7 @@ const html = htmlTemplateTagFactory(testingHtml)
 @gdsCustomElement('test-dummy-form-control')
 class DummyFormControl extends GdsFormControlElement {
   protected _getValidityAnchor(): HTMLElement {
-    throw new Error('Method not implemented.')
+    return {} as HTMLElement
   }
 }
 
