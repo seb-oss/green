@@ -16,6 +16,7 @@ import {
   fixture,
   isWebKit,
   onlyDate,
+  tabNext,
   html as testingHtml,
 } from '../../utils/testing'
 import { GdsDatePartSpinner } from './date-part-spinner'
@@ -133,7 +134,7 @@ describe('<gds-datepicker>', () => {
 
       await userEvent.keyboard('20')
 
-      await userEvent.tab()
+      await tabNext()
 
       await aTimeout(0)
 
@@ -412,7 +413,7 @@ describe('<gds-datepicker>', () => {
       )!
       spinners[0].focus()
       await userEvent.keyboard('1')
-      await userEvent.tab()
+      await tabNext()
       await aTimeout(0)
       await el.updateComplete
       await expect(spinners[0].value.toString()).toBe('1900')
@@ -473,7 +474,7 @@ describe('<gds-datepicker>', () => {
       await userEvent.keyboard('2024')
       await userEvent.keyboard('05')
       await userEvent.keyboard('10')
-      await userEvent.tab()
+      await tabNext()
 
       await el.updateComplete
 

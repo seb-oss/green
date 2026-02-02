@@ -17,6 +17,7 @@ import {
   aTimeout,
   clickOnElement,
   fixture,
+  tabNext,
   html as testingHtml,
 } from '../../utils/testing'
 
@@ -208,17 +209,18 @@ describe('<gds-context-menu>', () => {
           <gds-menu-item>Item 3</gds-menu-item>
         </gds-context-menu>
       `)
-      await aTimeout(0)
 
       const item = el.querySelector<GdsMenuItem>(
         getScopedTagName('gds-menu-item'),
       )!
       item.focus()
-      await userEvent.keyboard('{Tab}')
+      await tabNext()
 
       await el.updateComplete
+      await aTimeout(50)
 
       expect(el.open).toBe(false)
+
       expect(document.activeElement).toBe(el)
     })
   })

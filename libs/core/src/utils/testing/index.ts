@@ -64,7 +64,64 @@ export async function clickOnElement(
   /** The vertical offset to apply to the position when clicking (ignored) */
   _offsetY = 0,
 ) {
-  await userEvent.click(el)
+  const rect = el.getBoundingClientRect()
+  const position = getClickPosition(rect, _position, _offsetX, _offsetY)
+  try {
+    await withTimeout(userEvent.click(el, { position }), 1000)
+  } catch (error) {
+    // Fallback to forced click to avoid pointer interception issues in browser mode
+    await withTimeout(userEvent.click(el, { position, force: true }), 1000)
+  }
+}
+
+async function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  let timeoutId: ReturnType<typeof setTimeout> | undefined
+  const timeout = new Promise<never>((_, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new Error(`click timed out after ${ms}ms`))
+    }, ms)
+  })
+  try {
+    return await Promise.race([promise, timeout])
+  } finally {
+    if (timeoutId) clearTimeout(timeoutId)
+  }
+}
+
+function getClickPosition(
+  rect: DOMRect,
+  position: 'top' | 'right' | 'bottom' | 'left' | 'center',
+  offsetX: number,
+  offsetY: number,
+): { x: number; y: number } {
+  const centerX = rect.width / 2
+  const centerY = rect.height / 2
+
+  let x = centerX
+  let y = centerY
+
+  switch (position) {
+    case 'top':
+      y = 1
+      break
+    case 'bottom':
+      y = Math.max(1, rect.height - 1)
+      break
+    case 'left':
+      x = 1
+      break
+    case 'right':
+      x = Math.max(1, rect.width - 1)
+      break
+    case 'center':
+    default:
+      break
+  }
+
+  return {
+    x: Math.max(1, x + offsetX),
+    y: Math.max(1, y + offsetY),
+  }
 }
 
 /** A testing utility that moves the mouse onto an element. */
@@ -131,6 +188,23 @@ export function isWebKit() {
     navigator.userAgent.toLowerCase().indexOf('safari') > -1 &&
     navigator.userAgent.toLowerCase().indexOf('chrome') < 0
   )
+}
+
+/**
+ * WebKit-aware Tab helper.
+ * On WebKit, use Alt+Tab to move focus
+ */
+export async function tabNext(options?: { shift?: boolean }) {
+  if (isWebKit()) {
+    if (options?.shift) {
+      await userEvent.keyboard('{Alt>}{Shift>}{Tab}{/Shift}{/Alt}')
+      return
+    }
+    await userEvent.keyboard('{Alt>}{Tab}{/Alt}')
+    return
+  }
+
+  await userEvent.tab(options)
 }
 
 export function isChromium() {

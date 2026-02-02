@@ -7,7 +7,12 @@ import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
-import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
+import {
+  aTimeout,
+  fixture,
+  tabNext,
+  html as testingHtml,
+} from '../../utils/testing'
 import { clickOnElement } from '../../utils/testing/index.js'
 
 import '@sebgroup/green-core/components/menu-button'
@@ -175,7 +180,7 @@ describe('<gds-menu-button>', () => {
       ) as GdsMenuButton
 
       input.focus()
-      await userEvent.tab()
+      await tabNext()
 
       // skip test in webkit
       if (

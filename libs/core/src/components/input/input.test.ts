@@ -8,6 +8,7 @@ import {
   aTimeout,
   clickOnElement,
   fixture,
+  tabNext,
   html as testingHtml,
 } from '../../utils/testing'
 
@@ -61,7 +62,7 @@ for (const variant of ['default'] as const) {
         el.focus()
 
         await userEvent.keyboard('a')
-        await userEvent.tab()
+        await tabNext()
 
         expect(changeSpy).toHaveBeenCalledOnce()
       })

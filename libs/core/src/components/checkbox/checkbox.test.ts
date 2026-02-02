@@ -5,6 +5,7 @@ import {
   aTimeout,
   clickOnElement,
   fixture,
+  tabNext,
   html as testingHtml,
 } from '../../utils/testing'
 
@@ -182,16 +183,20 @@ describe('<gds-checkbox-group>', () => {
         </gds-checkbox-group>`,
       )
 
-      const checkbox2 = el.checkboxes[1]
+      const checkbox1 = el.checkboxes[0]
+      const checkbox3 = el.checkboxes[2]
 
-      await userEvent.tab()
+      await clickOnElement(checkbox1, 'center')
+      await el.updateComplete
+
+      await tabNext()
       await aTimeout(1)
-      await userEvent.tab()
+      await tabNext()
       await aTimeout(1)
       await userEvent.keyboard(' ')
       await el.updateComplete
 
-      expect(checkbox2.checked).toBe(true)
+      expect(checkbox3.checked).toBe(true)
     })
   })
 })
