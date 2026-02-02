@@ -1,4 +1,4 @@
-import { expect, describe, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
 import { CATEGORIES, FRAMEWORKS, SEARCH_CONFIG } from './constants.js'
 import { RegexError, ValidationError } from './errors.js'
@@ -182,9 +182,7 @@ describe('MCP Tools', () => {
       })
 
       it('should reject missing query', () => {
-        expect(() => validateSearchComponentsInput({})).toThrow(
-          ValidationError,
-        )
+        expect(() => validateSearchComponentsInput({})).toThrow(ValidationError)
       })
 
       it('should reject invalid category', () => {

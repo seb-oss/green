@@ -1,7 +1,7 @@
-import { expect, describe, it, vi } from 'vitest'
-import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
+import { describe, expect, it, vi } from 'vitest'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
 
 import type { GdsTable } from './table.component'
 

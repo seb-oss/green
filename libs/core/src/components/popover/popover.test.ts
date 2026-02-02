@@ -1,11 +1,5 @@
-import { expect, describe, it, beforeEach, afterEach, vi } from 'vitest'
-import {
-  aTimeout,
-  fixture,
-  html as testingHtml,
-  waitUntil,
-} from '../../utils/testing'
 import { userEvent } from '@vitest/browser/context'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type {
   GdsBackdrop,
@@ -13,13 +7,40 @@ import type {
 } from '@sebgroup/green-core/components/popover'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
+import {
+  aTimeout,
+  clickOnElement,
+  fixture,
+  html as testingHtml,
+  waitUntil,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/popover'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-popover>', () => {
+  // Cleanup any open dialogs between tests to prevent modal state conflicts
+  afterEach(async () => {
+    // Close all open popovers
+    const popovers = document.querySelectorAll(
+      'gds-popover',
+    ) as NodeListOf<GdsPopover>
+    for (const popover of popovers) {
+      if (popover.open) {
+        popover.open = false
+        await popover.updateComplete
+      }
+    }
+    // Also close any dialogs that might be in modal state
+    const dialogs = document.querySelectorAll('dialog')
+    for (const dialog of dialogs) {
+      if (dialog.open) {
+        dialog.close()
+      }
+    }
+  })
+
   it('is a GdsElement', async () => {
     const el = await fixture(html`<gds-popover></gds-popover>`)
     expect(el.getAttribute('gds-element')).toBe('gds-popover')

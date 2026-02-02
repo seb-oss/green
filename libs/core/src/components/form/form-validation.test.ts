@@ -1,11 +1,13 @@
-import { expect, describe, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
+
 import {
+  clickOnElement,
+  conditionToBeTrue,
   fixture,
   html as testingHtml,
+  timeout,
   waitUntil,
 } from '../../utils/testing'
-
-import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/dropdown'
 

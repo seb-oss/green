@@ -1,10 +1,10 @@
-import { expect, describe, it, vi } from 'vitest'
-import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
+import { describe, expect, it, vi } from 'vitest'
 
 import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
+import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
 import { clickOnElement } from '../../utils/testing/index.js'
 
 import type { GdsPagination } from './pagination.component'

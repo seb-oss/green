@@ -1,11 +1,5 @@
-import { expect, describe, it, vi } from 'vitest'
-import {
-  aTimeout,
-  fixture,
-  html as testingHtml,
-  waitUntil,
-} from '../../utils/testing'
 import { userEvent } from '@vitest/browser/context'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import type { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 
@@ -14,13 +8,40 @@ import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
+import {
+  aTimeout,
+  clickOnElement,
+  fixture,
+  html as testingHtml,
+  waitUntil,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/dropdown'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-dropdown>', () => {
+  // Cleanup any open dropdowns/dialogs between tests to prevent modal state conflicts
+  afterEach(async () => {
+    // Close all open dropdowns
+    const dropdowns = document.querySelectorAll(
+      'gds-dropdown',
+    ) as NodeListOf<GdsDropdown>
+    for (const dropdown of dropdowns) {
+      if (dropdown.open) {
+        dropdown.open = false
+        await dropdown.updateComplete
+      }
+    }
+    // Also close any dialogs that might be in modal state
+    const dialogs = document.querySelectorAll('dialog')
+    for (const dialog of dialogs) {
+      if (dialog.open) {
+        dialog.close()
+      }
+    }
+  })
+
   it('should expose list of options through the `options` field', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown>
@@ -233,9 +254,7 @@ describe('<gds-dropdown>', () => {
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
     const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
     await aTimeout(50)
-    expect(popover?.clientWidth).toBeGreaterThanOrEqual(
-      trigger.clientWidth,
-    )
+    expect(popover?.clientWidth).toBeGreaterThanOrEqual(trigger.clientWidth)
   })
 
   it('should be the same width as the trigger when `sync-popover-width` attribute is set', async () => {
@@ -533,9 +552,7 @@ describe('<gds-dropdown> interactions', () => {
     expect(clearHandler).toHaveBeenCalledOnce()
     expect(changeHandler).toHaveBeenCalledOnce()
     expect(inputHandler).toHaveBeenCalledOnce()
-    expect(changeHandler.mock.calls[0][0].detail.value).toBe(
-      undefined,
-    )
+    expect(changeHandler.mock.calls[0][0].detail.value).toBe(undefined)
   })
 
   // Disabled because this test is unreliable. "sendMouse" does not produce a correct PointerEvent event.

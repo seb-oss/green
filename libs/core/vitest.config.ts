@@ -1,7 +1,7 @@
 /// <reference types="vitest" />
 /// <reference types="@vitest/browser/matchers" />
-import { defineConfig } from 'vitest/config'
 import { resolve } from 'path'
+import { defineConfig } from 'vitest/config'
 
 const root = resolve(__dirname)
 

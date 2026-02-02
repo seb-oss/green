@@ -1,5 +1,4 @@
-import { expect, describe, it, beforeEach, afterEach, vi } from 'vitest'
-import { fixture, html as testingHtml } from '../../utils/testing'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type {
   GdsFilterChip,
@@ -7,7 +6,11 @@ import type {
 } from '@sebgroup/green-core/components/filter-chips'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
+import {
+  clickOnElement,
+  fixture,
+  html as testingHtml,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/filter-chips'
 
@@ -29,7 +32,7 @@ describe('<gds-filter-chips>', () => {
         </gds-filter-chips>`,
       )
       await el.updateComplete
-      await assert.isAccessible(el, {
+      await expect(el).toBeAccessible({
         ignoredRules: ['aria-required-children'],
       })
     })

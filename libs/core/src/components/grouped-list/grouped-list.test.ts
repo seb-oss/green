@@ -1,9 +1,9 @@
-import { expect, describe, it } from 'vitest'
-import { fixture, html as testingHtml } from '../../utils/testing'
+import { describe, expect, it } from 'vitest'
 
 import type { GdsGroupedList } from '@sebgroup/green-core/components/grouped-list'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/grouped-list'
 

@@ -1,6 +1,5 @@
-import { expect, describe, it, beforeEach, afterEach, vi } from 'vitest'
-import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
 import { userEvent } from '@vitest/browser/context'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { GdsDatepicker } from '@sebgroup/green-core/components/datepicker'
 
@@ -11,7 +10,14 @@ import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
-import { clickOnElement, isWebKit, onlyDate } from '../../utils/testing'
+import {
+  aTimeout,
+  clickOnElement,
+  fixture,
+  isWebKit,
+  onlyDate,
+  html as testingHtml,
+} from '../../utils/testing'
 import { GdsDatePartSpinner } from './date-part-spinner'
 
 import '@sebgroup/green-core/components/datepicker'
@@ -20,12 +26,33 @@ import '@sebgroup/green-core/components/icon/icons/calendar'
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-datepicker>', () => {
+  // Cleanup any open datepickers/dialogs between tests to prevent modal state conflicts
+  afterEach(async () => {
+    // Close all open datepickers
+    const datepickers = document.querySelectorAll(
+      'gds-datepicker',
+    ) as NodeListOf<GdsDatepicker>
+    for (const dp of datepickers) {
+      if (dp.open) {
+        dp.open = false
+        await dp.updateComplete
+      }
+    }
+    // Also close any dialogs that might be in modal state
+    const dialogs = document.querySelectorAll('dialog')
+    for (const dialog of dialogs) {
+      if (dialog.open) {
+        dialog.close()
+      }
+    }
+  })
+
   describe('Rendering', () => {
     it('should render a datepicker', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker></gds-datepicker>`,
       )
-      await expect(el).shadowDom.toBeDefined()
+      expect(el.shadowRoot).toBeDefined()
     })
   })
 
@@ -82,17 +109,11 @@ describe('<gds-datepicker>', () => {
       const separator =
         el.shadowRoot!.querySelector<HTMLSpanElement>('.separator')!
 
-      await expect(spinners[0].getAttribute('aria-label').trim()).toBe(
-        'Day',
-      )
+      await expect(spinners[0].getAttribute('aria-label').trim()).toBe('Day')
       await expect(spinners[0].length).toBe(2)
-      await expect(spinners[1].getAttribute('aria-label').trim()).toBe(
-        'Month',
-      )
+      await expect(spinners[1].getAttribute('aria-label').trim()).toBe('Month')
       await expect(spinners[1].length).toBe(2)
-      await expect(spinners[2].getAttribute('aria-label').trim()).toBe(
-        'Year',
-      )
+      await expect(spinners[2].getAttribute('aria-label').trim()).toBe('Year')
       await expect(spinners[2].length).toBe(4)
       await expect(separator.textContent).toBe('/')
       await expect(el.dateformat).toBe('d/m/y')
@@ -193,7 +214,7 @@ describe('<gds-datepicker>', () => {
 
       const disabledDatecell = await el.test_getDateCell(13)
 
-      await expect(disabledDatecell).to.have.attribute('disabled')
+      expect(disabledDatecell).toHaveAttribute('disabled')
     })
 
     it('Setting `disabled-dates` should disable dates', async () => {
@@ -224,7 +245,7 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker hide-today-button open></gds-datepicker>`,
       )
-      expect(el.test_todayButton).not.toBeDefined()
+      expect(el.test_todayButton).toBeNull()
     })
 
     it('should show the clear button', async () => {
@@ -238,7 +259,7 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker open></gds-datepicker>`,
       )
-      expect(el.test_clearButton).not.toBeDefined()
+      expect(el.test_clearButton).toBeNull()
     })
 
     it('should always return a unique Date instance from the value property', async () => {
@@ -456,9 +477,7 @@ describe('<gds-datepicker>', () => {
 
       await el.updateComplete
 
-      await expect(onlyDate(el.value!)).toBe(
-        onlyDate(new Date('2024-05-10')),
-      )
+      await expect(onlyDate(el.value!)).toBe(onlyDate(new Date('2024-05-10')))
     })
 
     // Temporarily disabled
@@ -544,9 +563,7 @@ describe('<gds-datepicker>', () => {
       await aTimeout(0)
       await el.updateComplete
 
-      await expect(onlyDate(el.value!)).toBe(
-        onlyDate(new Date('2024-01-01')),
-      )
+      await expect(onlyDate(el.value!)).toBe(onlyDate(new Date('2024-01-01')))
     })
 
     it('should not overflow the year when trying to increase max year', async () => {

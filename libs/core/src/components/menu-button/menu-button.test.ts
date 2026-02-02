@@ -1,6 +1,5 @@
-import { expect, describe, it, beforeEach, afterEach, vi } from 'vitest'
-import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
 import { userEvent } from '@vitest/browser/context'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { GdsMenuButton } from '@sebgroup/green-core/components/menu-button'
 
@@ -8,6 +7,7 @@ import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
+import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
 import { clickOnElement } from '../../utils/testing/index.js'
 
 import '@sebgroup/green-core/components/menu-button'

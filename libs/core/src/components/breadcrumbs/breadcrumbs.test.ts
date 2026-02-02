@@ -1,7 +1,7 @@
-import { expect, describe, it, beforeEach, afterEach, vi } from 'vitest'
-import { fixture, html as testingHtml } from '../../utils/testing'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/breadcrumbs'
 import '@sebgroup/green-core/components/link'

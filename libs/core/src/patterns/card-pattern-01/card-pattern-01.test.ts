@@ -1,7 +1,7 @@
-import { expect, describe, it, beforeEach } from 'vitest'
-import { fixture, html as testingHtml } from '../../utils/testing'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import type { GdsCardPattern01 } from './card-pattern-01'
 

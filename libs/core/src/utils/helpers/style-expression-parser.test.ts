@@ -1,4 +1,4 @@
-import { expect, describe, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
 import { parse, toCss, tokenize } from './style-expression-parser'
 

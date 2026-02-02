@@ -1,13 +1,13 @@
-import { expect, describe, it, beforeEach, afterEach, vi } from 'vitest'
+import { userEvent } from '@vitest/browser/context'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+
 import {
   aTimeout,
+  clickOnElement,
   fixture,
   html as testingHtml,
   waitUntil,
 } from '../../utils/testing'
-import { userEvent } from '@vitest/browser/context'
-
-import { clickOnElement } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/dialog'
 
@@ -21,6 +21,27 @@ import {
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-dialog>', () => {
+  // Cleanup any open dialogs between tests to prevent modal state conflicts
+  afterEach(async () => {
+    // Close all open gds-dialogs
+    const dialogs = document.querySelectorAll(
+      'gds-dialog',
+    ) as NodeListOf<GdsDialog>
+    for (const dialog of dialogs) {
+      if (dialog.open) {
+        dialog.open = false
+        await dialog.updateComplete
+      }
+    }
+    // Also close any native dialogs that might be in modal state
+    const nativeDialogs = document.querySelectorAll('dialog')
+    for (const dialog of nativeDialogs) {
+      if (dialog.open) {
+        dialog.close()
+      }
+    }
+  })
+
   it('is a GdsElement', async () => {
     const el = await fixture(html`<gds-dialog></gds-dialog>`)
     expect(el.getAttribute('gds-element')).toBe('gds-dialog')

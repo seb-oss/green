@@ -1,6 +1,5 @@
-import { expect, describe, it, vi } from 'vitest'
-import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
 import { userEvent } from '@vitest/browser/context'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import type { GdsButton } from '@sebgroup/green-core/components/button'
 import type {
@@ -14,13 +13,39 @@ import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
+import {
+  aTimeout,
+  clickOnElement,
+  fixture,
+  html as testingHtml,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/context-menu'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-context-menu>', () => {
+  // Cleanup any open context menus/dialogs between tests to prevent modal state conflicts
+  afterEach(async () => {
+    // Close all open context menus
+    const menus = document.querySelectorAll(
+      'gds-context-menu',
+    ) as NodeListOf<GdsContextMenu>
+    for (const menu of menus) {
+      if (menu.open) {
+        menu.open = false
+        await menu.updateComplete
+      }
+    }
+    // Also close any dialogs that might be in modal state
+    const dialogs = document.querySelectorAll('dialog')
+    for (const dialog of dialogs) {
+      if (dialog.open) {
+        dialog.close()
+      }
+    }
+  })
+
   describe('Rendering', () => {
     it('should be visible with the open attribute', async () => {
       const el = await fixture<GdsContextMenu>(html`

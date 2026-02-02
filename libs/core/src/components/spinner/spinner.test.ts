@@ -1,7 +1,7 @@
-import { expect, describe, it, vi } from 'vitest'
-import { fixture, html as testingHtml } from '../../utils/testing'
+import { describe, expect, it, vi } from 'vitest'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import type { GdsSpinner } from './gds-spinner'
 

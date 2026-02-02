@@ -1,10 +1,10 @@
-import { expect, describe, it } from 'vitest'
-import { fixture, html as testingHtml } from '../../../utils/testing'
+import { describe, expect, it } from 'vitest'
 
 import type { GdsSensitiveNumber } from '@sebgroup/green-core/components/sensitive/number'
 
 import { numberFormats } from '@sebgroup/green-core/components/formatted-text'
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../../utils/testing'
 
 import '@sebgroup/green-core/components/sensitive/number/index.js'
 

@@ -1,5 +1,5 @@
+import * as axe from 'axe-core'
 import { expect } from 'vitest'
-import axe from 'axe-core'
 
 interface AccessibleOptions {
   rules?: Record<string, { enabled: boolean }>
@@ -48,7 +48,7 @@ expect.extend({
 
 // TypeScript declarations for the custom matcher
 declare module 'vitest' {
-  interface Assertion<T = unknown> {
+  interface Assertion {
     toBeAccessible(options?: AccessibleOptions): Promise<void>
   }
   interface AsymmetricMatchersContaining {

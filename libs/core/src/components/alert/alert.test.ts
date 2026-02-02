@@ -1,10 +1,10 @@
-import { expect, describe, it, vi } from 'vitest'
-import { fixture, html as testingHtml } from '../../utils/testing'
 import { userEvent } from '@vitest/browser/context'
+import { describe, expect, it, vi } from 'vitest'
 
 import type { GdsAlert } from '@sebgroup/green-core/components/alert'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/alert'
 

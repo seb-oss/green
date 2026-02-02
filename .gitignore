@@ -69,6 +69,9 @@ storybook.log
 # Components
 icon.list.mdx
 
+# Vitest failure screenshots
+**/__screenshots__/
+
 # Migrations
 migrations.json
 storybook-migration-summary.md

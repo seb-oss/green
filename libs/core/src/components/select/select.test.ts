@@ -1,9 +1,9 @@
-import { expect, describe, it, beforeEach, afterEach, vi } from 'vitest'
-import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { GdsSelect } from '@sebgroup/green-core/components/select/index.js'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/select/index.js'
 

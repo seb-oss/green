@@ -1,5 +1,5 @@
 import { css } from 'lit'
-import { expect, describe, it, beforeEach, afterEach } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
 import { GdsElement } from '../../gds-element'
 import { DynamicStylesController } from './dynamic-styles-controller'

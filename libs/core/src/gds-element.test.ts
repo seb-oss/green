@@ -1,8 +1,8 @@
-import { expect, describe, it, vi } from 'vitest'
-import { fixture, html as testingHtml } from './utils/testing'
+import { describe, expect, it, vi } from 'vitest'
 
 import { GdsElement } from './gds-element'
 import { gdsCustomElement, htmlTemplateTagFactory } from './scoping'
+import { fixture, html as testingHtml } from './utils/testing'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

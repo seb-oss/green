@@ -1,11 +1,15 @@
-import { expect, describe, it, vi } from 'vitest'
-import { fixture, html as testingHtml, waitUntil } from '../../utils/testing'
+import { describe, expect, it, vi } from 'vitest'
 
 import type { GdsSegmentedControl } from '@sebgroup/green-core/components/segmented-control'
 
 import { GdsSegment } from '@sebgroup/green-core/components/segmented-control/segment'
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
+import {
+  clickOnElement,
+  fixture,
+  html as testingHtml,
+  waitUntil,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/segmented-control'
 

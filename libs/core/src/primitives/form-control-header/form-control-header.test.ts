@@ -1,9 +1,9 @@
-import { expect, describe, it, vi } from 'vitest'
-import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
+import { describe, expect, it, vi } from 'vitest'
 
 import type { GdsFormControlHeader } from '@sebgroup/green-core/components/form-control-header'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
 
 import '@sebgroup/green-core/primitives/form-control-header'
 

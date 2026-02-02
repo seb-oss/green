@@ -1,4 +1,4 @@
-import { expect, describe, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
 import type { Package } from 'custom-elements-manifest'
 
@@ -184,7 +184,9 @@ describe('component-meta', () => {
         expect(option!.reExportModule).toBe(
           'src/components/dropdown/dropdown.component.ts',
         )
-        expect(option!.reExportPath).toBe('components/dropdown/dropdown.component.js')
+        expect(option!.reExportPath).toBe(
+          'components/dropdown/dropdown.component.js',
+        )
 
         // Check second primitive (GdsMenuItem)
         const menuItem = reExportedPrimitives.find(
@@ -275,12 +277,8 @@ describe('component-meta', () => {
         expect(componentData.tagName).toBe('gds-button')
         expect(componentData.className).toBe('GdsButton')
         expect(componentData.description).toBe('A button component')
-        expect(componentData.outputPath).toBe(
-          'src/components/button/button.ts',
-        )
-        expect(componentData.sourcePath).toBe(
-          'src/components/button/button.ts',
-        )
+        expect(componentData.outputPath).toBe('src/components/button/button.ts')
+        expect(componentData.sourcePath).toBe('src/components/button/button.ts')
         expect(componentData.properties).toBeInstanceOf(Array)
         expect(componentData.events).toBeInstanceOf(Array)
         expect(componentData.slots).toBeInstanceOf(Array)
@@ -497,9 +495,7 @@ describe('component-meta', () => {
         expect(componentData.subcomponents![0].description).toBe(
           'Dropdown option',
         )
-        expect(componentData.subcomponents![1].tagName).toBe(
-          'gds-menu-heading',
-        )
+        expect(componentData.subcomponents![1].tagName).toBe('gds-menu-heading')
       })
     })
 

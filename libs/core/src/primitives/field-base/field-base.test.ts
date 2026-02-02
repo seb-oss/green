@@ -1,9 +1,9 @@
-import { expect, describe, it } from 'vitest'
-import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
+import { describe, expect, it } from 'vitest'
 
 import type { GdsFieldBase } from '@sebgroup/green-core/primitives/field-base'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
 
 import '@sebgroup/green-core/primitives/field-base'
 
