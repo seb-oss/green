@@ -1079,6 +1079,8 @@ slot names (e.g. \
         slot="name:andersson:extra-slot"
       ></gds-icon-circle-check>
 
+      <gds-input slot="name:andersson:lead"></gds-input>
+
       <gds-icon-copy slot="email:1:email-icon"></gds-icon-copy>
       <gds-link slot="email:1:email-action" href="#">Send email</gds-link>
     </gds-table>
