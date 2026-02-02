@@ -343,6 +343,11 @@ export const TableStyles = css`
     justify-content: flex-end;
   }
 
+  .justify-end:not(.sortable) .column-header {
+    text-align: right;
+    justify-content: flex-end;
+  }
+
   .sortable.justify-end .column-header {
     flex-direction: row-reverse;
   }

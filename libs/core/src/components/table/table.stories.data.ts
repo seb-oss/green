@@ -154,6 +154,7 @@ export const Users = {
       key: 'status',
       label: 'Status',
       sortable: true,
+      justify: 'end',
       cell: {
         value: {
           type: 'badge',
