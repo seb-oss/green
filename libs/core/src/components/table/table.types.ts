@@ -1,18 +1,3 @@
-import type { GdsElement } from '../../gds-element'
-import type {
-  GdsBadge,
-  GdsButton,
-  GdsContextMenu,
-  GdsIcon,
-  GdsImg,
-  GdsLink,
-} from '../../pure'
-import type {
-  AccountFormats,
-  DateTimeFormat,
-  NumberFormats,
-} from '../formatted-text/formatters'
-
 /**
  * ============================================================================
  *  TABLE TYPES
@@ -27,18 +12,12 @@ export interface Column {
   justify?: 'start' | 'center' | 'space-between' | 'end'
   visible?: boolean
   width?: string
-  cell?: {
-    lead?: Cell | Cell[]
-    value?: Cell | Cell[]
-    trail?: Cell | Cell[]
-  }
 }
 
 export interface Actions {
   label?: string
   align?: 'start' | 'center' | 'stretch' | 'end'
   justify?: 'start' | 'center' | 'space-between' | 'end'
-  cell: Cell | Cell[]
 }
 
 export interface Row {
@@ -102,6 +81,154 @@ export interface Cache<T> {
   [key: string]: CacheEntry<T>
 }
 
+export namespace Slot {
+  export type Value = {
+    value?: unknown
+    slots: Array<'value' | string>
+    key?: string | number
+  }
+
+  export type Definition = {
+    value?: unknown
+    slots?: Array<'value' | string>
+    key?: string | number
+    [slotName: string]: unknown
+  }
+
+  export type Cell = string | number | Value | null | undefined
+
+  const isValue = (value: unknown): value is Value =>
+    typeof value === 'object' &&
+    value !== null &&
+    'slots' in value &&
+    ((Array.isArray((value as { slots?: unknown }).slots) &&
+      (value as { slots?: unknown }).slots !== null) ||
+      (typeof (value as { slots?: unknown }).slots === 'object' &&
+        (value as { slots?: unknown }).slots !== null))
+
+  const isDefinition = (value: unknown): value is Definition =>
+    typeof value === 'object' && value !== null
+
+  /**
+   * Create a slot-enabled cell value.
+   * - value: fallback cell content
+   * - slots: ordered array including 'value'
+   * - key: optional custom row key override
+   * - or pass slot entries directly (lead, trail, etc.) in order
+   *   - entry value: string/number -> slot id
+   *   - entry value: true/undefined -> slot id = entry key
+   */
+  export function New(config?: Definition): Value
+  export function New(
+    key?: string | number,
+    slots?: Array<'value' | string>,
+  ): Value
+  export function New(
+    value?: unknown,
+    slots?: Array<'value' | string>,
+    key?: string | number,
+  ): Value
+  export function New(
+    valueOrConfig?: unknown | Definition,
+    slots: Array<'value' | string> = [],
+    key?: string | number,
+  ): Value {
+    const buildFromEntries = (config: Definition) => {
+      const orderedSlots: Array<'value' | string> = []
+      let resolvedValue: unknown = config.value
+
+      Object.entries(config).forEach(([entryKey, entryValue]) => {
+        if (entryKey === 'key' || entryKey === 'slots') return
+        if (entryKey === 'value') {
+          orderedSlots.push('value')
+          resolvedValue = entryValue
+          return
+        }
+
+        if (typeof entryValue === 'string' || typeof entryValue === 'number') {
+          orderedSlots.push(String(entryValue))
+          return
+        }
+
+        if (entryValue === true || typeof entryValue === 'undefined') {
+          orderedSlots.push(entryKey)
+        }
+      })
+
+      return {
+        value: resolvedValue,
+        slots: orderedSlots,
+      }
+    }
+
+    if (
+      (typeof valueOrConfig === 'string' ||
+        typeof valueOrConfig === 'number' ||
+        typeof valueOrConfig === 'undefined') &&
+      Array.isArray(slots)
+    ) {
+      return {
+        slots,
+        ...(typeof valueOrConfig !== 'undefined' ? { key: valueOrConfig } : {}),
+      }
+    }
+
+    if (
+      (typeof valueOrConfig === 'string' ||
+        typeof valueOrConfig === 'number' ||
+        typeof valueOrConfig === 'undefined') &&
+      isDefinition(slots) &&
+      key === undefined
+    ) {
+      const config = slots
+      if (!Array.isArray(config.slots)) {
+        const built = buildFromEntries(config)
+        return {
+          ...built,
+          ...(typeof valueOrConfig !== 'undefined'
+            ? { key: valueOrConfig }
+            : {}),
+        }
+      }
+
+      return {
+        value: config.value,
+        slots: config.slots ?? [],
+        ...(typeof valueOrConfig !== 'undefined' ? { key: valueOrConfig } : {}),
+      }
+    }
+
+    if (isDefinition(valueOrConfig) && key === undefined) {
+      const config = valueOrConfig
+      if (!Array.isArray(config.slots)) {
+        const built = buildFromEntries(config)
+        return {
+          ...built,
+          ...(typeof config.key !== 'undefined' ? { key: config.key } : {}),
+        }
+      }
+
+      return {
+        value: config.value,
+        slots: config.slots ?? [],
+        ...(typeof config.key !== 'undefined' ? { key: config.key } : {}),
+      }
+    }
+
+    return {
+      value: valueOrConfig,
+      slots,
+      ...(typeof key !== 'undefined' ? { key } : {}),
+    }
+  }
+
+  export const getValue = (value: unknown) => {
+    if (!isValue(value)) return value
+
+    return value.value
+  }
+}
+
 export type TableActions = Actions
 export type TableColumn = Column
 export type TableRow = Row
@@ -112,89 +239,3 @@ export type TableDensity = Density
 export type TableDensityConfig = DensityConfig
 export type TableCache<T> = Cache<T>
 export type TableCacheEntry<T> = CacheEntry<T>
-
-/**
- * ============================================================================
- *  CELL COMPONENT TYPES
- * ============================================================================
- */
-type CellProps<T> = {
-  [K in keyof T]?: T[K] | ((row: any) => T[K])
-}
-
-// Different approach consideation omit or pick individually
-export interface Badge extends CellProps<Pick<GdsBadge, 'variant' | 'size'>> {
-  type: 'badge'
-  value: string | ((row: any) => string)
-}
-
-export interface Image extends CellProps<Omit<GdsImg, keyof GdsElement>> {
-  type: 'image'
-  src: string | ((row: any) => string)
-}
-
-export interface Icon extends CellProps<Omit<GdsIcon, keyof GdsElement>> {
-  type: 'icon'
-  template: string | ((row: any) => string)
-}
-
-export interface Button extends CellProps<Omit<GdsButton, keyof GdsElement>> {
-  type: 'button'
-  template?: string | ((row: any) => string)
-  onClick: (row: any) => void
-}
-
-export interface Link extends CellProps<Omit<GdsLink, keyof GdsElement>> {
-  type: 'link'
-  template?: string | ((row: any) => string)
-  onClick?: (row: any) => void
-}
-
-export interface ContextMenu
-  extends CellProps<Omit<GdsContextMenu, keyof GdsElement>> {
-  type: 'context-menu'
-  items: Array<{
-    label: string | ((row: any) => string)
-    divider?: boolean
-    onClick: (row: any) => void
-  }>
-}
-
-export interface FormattedNumber {
-  type: 'formatted-number'
-  value: number | string | ((row: any) => number | string)
-  locale?: string
-  currency?: string
-  decimals?: number
-  format?: NumberFormats
-}
-
-export interface FormattedAccount {
-  type: 'formatted-account'
-  value: string | ((row: any) => string)
-  format?: AccountFormats
-}
-
-export interface FormattedDate {
-  type: 'formatted-date'
-  value: string | Date | ((row: any) => string | Date)
-  locale?: string
-  format?: DateTimeFormat
-}
-
-export type Cell =
-  | Image
-  | Icon
-  | Button
-  | Link
-  | Badge
-  | ContextMenu
-  | FormattedNumber
-  | FormattedAccount
-  | FormattedDate
-
-export interface CellConfig {
-  lead?: Cell
-  value?: Cell
-  trail?: Cell
-}

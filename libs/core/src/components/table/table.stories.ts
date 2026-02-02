@@ -234,6 +234,7 @@ The \`nocache\` property provides direct control over data retrieval. When set t
 
 // ============================================================================
 // FEATURES - SORTING
+
 // ============================================================================
 
 export const Sorting: Story = {
@@ -1032,4 +1033,54 @@ This example demonstrates listening to pagination and sorting events and display
       </gds-flex>
     `
   },
+}
+
+// ============================================================================
+// FEATURES - SLOT COMPOSITION
+// ============================================================================
+
+export const SlotComposition: Story = {
+  args: {
+    columns: Users.Columns,
+    data: Users.Data,
+    selectable: false,
+    searchable: false,
+    settings: false,
+    density: 'comfortable',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+Demonstrates composing any number of slots per cell using
+
+\
+\`columnKey:rowKey:slotId\`\
+
+slot names (e.g. \
+\`name:andersson:lead-slot\`).
+        `,
+      },
+    },
+  },
+  render: (args) => html`
+    <gds-table
+      .columns="${args.columns}"
+      .data="${args.data}"
+      ?selectable="${args.selectable}"
+      ?searchable="${args.searchable}"
+      ?settings="${args.settings}"
+      density="${args.density}"
+      rows="5"
+    >
+      <gds-icon-buildings slot="name:andersson:lead"></gds-icon-buildings>
+      <gds-icon-pin slot="name:andersson:trail-slot"></gds-icon-pin>
+      <gds-icon-circle-check
+        slot="name:andersson:extra-slot"
+      ></gds-icon-circle-check>
+
+      <gds-icon-copy slot="email:1:email-icon"></gds-icon-copy>
+      <gds-link slot="email:1:email-action" href="#">Send email</gds-link>
+    </gds-table>
+  `,
 }

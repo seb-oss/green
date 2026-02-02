@@ -1,7 +1,6 @@
 import { localized, msg } from '@lit/localize'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { ifDefined } from 'lit/directives/if-defined.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { when } from 'lit/directives/when.js'
 
@@ -45,7 +44,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   #cache: Types.Cache<T> = {}
   #cacheDuration = 5 * 60 * 1000
-  #templateCache = new Map<string, HTMLTemplateElement>()
 
   /**
    * The main headline text displayed at the top of the table.
@@ -347,206 +345,128 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     })
   }
 
-  /**
-   * Retrieves template content for the given slot name.
-   * Uses caching to prevent repeated DOM queries for better performance in large tables.
-   */
-  #getSlotContent(slot: string | undefined) {
-    if (!slot) return null
+  #getRowSlotKeys(row: T, index: number, slotKey?: unknown) {
+    const keys: Array<string | number> = []
 
-    if (!this.#templateCache.has(slot)) {
-      const template = this.querySelector(
-        `template[name="${slot}"]`,
-      ) as HTMLTemplateElement
-      this.#templateCache.set(slot, template)
+    if (typeof slotKey === 'string' || typeof slotKey === 'number') {
+      keys.push(slotKey)
     }
 
-    return this.#templateCache.get(slot)?.content.cloneNode(true)
+    const rowId = (row as { id?: string | number })?.id
+    if (
+      (typeof rowId === 'string' || typeof rowId === 'number') &&
+      !keys.includes(rowId)
+    ) {
+      keys.push(rowId)
+    }
+
+    if (keys.length === 0) {
+      keys.push(index + 1)
+    }
+
+    return keys
   }
 
-  #renderCell(config: Types.Cell | Types.Cell[] | undefined, row: T): any {
-    if (!config) return null
-
-    if (Array.isArray(config)) {
-      return config.map((c) => this.#renderCell(c, row))
+  #getSlotId(value: unknown) {
+    if (typeof value === 'string') {
+      const trimmed = value.trim()
+      return trimmed.length > 0 ? trimmed : null
     }
 
-    const resolve = <V>(
-      value: V | ((r: any) => V) | undefined,
-    ): V | undefined =>
-      typeof value === 'function' ? (value as any)(row) : value
+    if (typeof value === 'number') {
+      return Number.isFinite(value) ? String(value) : null
+    }
 
-    switch (config.type) {
-      case 'badge': {
-        const variant = resolve(config.variant) || 'information'
-        const size = resolve(config.size) || this.#Density.badge
-        return html`
-          <gds-badge size="${size}" variant="${variant}">
-            ${resolve(config.value)}
-          </gds-badge>
-        `
-      }
+    return null
+  }
 
-      case 'image': {
-        const src = resolve(config.src)
-        if (!src) return null
+  #isSlotCell(value: unknown): value is {
+    slots: Array<'value' | string>
+    value?: unknown
+    key?: string | number
+  } {
+    return (
+      typeof value === 'object' &&
+      value !== null &&
+      'slots' in value &&
+      Array.isArray((value as { slots?: unknown }).slots)
+    )
+  }
 
-        const width = resolve(config.width) || '24px'
-        const height = resolve(config.height) || '24px'
-        const borderRadius = resolve(config['border-radius']) || 'max'
-        const objectFit = resolve(config['object-fit']) || 'cover'
-        const alt = resolve(config.alt) || ''
+  #getCellSlotName(columnKey: string, rowKey: string | number, slotId: string) {
+    return `${columnKey}:${rowKey}:${slotId}`
+  }
 
-        return html`
-          <gds-img
-            src="${src}"
-            alt="${alt}"
-            width="${width}"
-            height="${height}"
-            border-radius="${borderRadius}"
-            object-fit="${objectFit}"
-            object-position="center"
-          ></gds-img>
-        `
-      }
+  #renderCellSlots(
+    columnKey: string,
+    rowKeys: Array<string | number>,
+    slots: Array<'value' | string>,
+    value?: unknown,
+  ) {
+    const slotElements: unknown[] = []
 
-      case 'icon': {
-        const template = resolve(config.template) as string | undefined
-        const size = resolve(config.size)
-        const color = resolve(config.color)
-        const clonedSlot = this.#getSlotContent(template)
+    const pushSlot = (slotId: string) => {
+      rowKeys.forEach((rowKey) => {
+        slotElements.push(
+          html`<slot
+            name="${this.#getCellSlotName(columnKey, rowKey, slotId)}"
+          ></slot>`,
+        )
+      })
+    }
 
-        if (!clonedSlot) return null
-
-        if (clonedSlot instanceof DocumentFragment) {
-          const iconElement = clonedSlot.firstElementChild
-          if (iconElement) {
-            if (size) iconElement.setAttribute('size', size)
-            if (color) iconElement.setAttribute('color', color)
-          }
+    if (Array.isArray(slots) && slots.length > 0) {
+      slots.forEach((item) => {
+        if (item === 'value') {
+          if (value !== undefined) slotElements.push(value)
+          return
         }
 
-        return clonedSlot
-      }
+        const slotId = this.#getSlotId(item)
+        if (slotId) pushSlot(slotId)
+      })
 
-      case 'button': {
-        const size = resolve(config.size) || this.#Density.button
-        const variant = resolve(config.variant)
-        const rank = resolve(config.rank)
-        const label = resolve(config.label)
-        const template = resolve(config.template) as string | undefined
-        const clonedSlot = this.#getSlotContent(template)
-        const content = [label, clonedSlot]
-
-        return html`
-          <gds-button
-            size="${size}"
-            variant="${variant || 'neutral'}"
-            rank="${rank || 'secondary'}"
-            @click="${(e: Event) => {
-              e.stopPropagation()
-              config.onClick(row)
-            }}"
-          >
-            ${content}
-          </gds-button>
-        `
-      }
-
-      case 'link': {
-        const href = resolve(config.href)
-        if (!href) return null
-        const label = resolve(config.label)
-        const target = resolve(config.target)
-        const download = resolve(config.download)
-        const template = resolve(config.template) as string | undefined
-        const clonedSlot = this.#getSlotContent(template)
-        const content = [label, clonedSlot]
-
-        return html`
-          <gds-link
-            href=${ifDefined(href)}
-            target=${ifDefined(target)}
-            .download=${download}
-            text-decoration="underline"
-          >
-            ${content}
-          </gds-link>
-        `
-      }
-
-      case 'context-menu': {
-        const items = config.items
-        const size = this.#Density.button
-        return html`
-          <gds-context-menu>
-            <gds-button
-              slot="trigger"
-              size="${size}"
-              rank="tertiary"
-              label="${msg('Actions')}"
-            >
-              <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
-            </gds-button>
-            ${items.map((item) => {
-              const label = resolve(item.label)
-
-              return html`
-                <gds-menu-item @click="${() => item.onClick(row)}">
-                  ${label}
-                </gds-menu-item>
-              `
-            })}
-          </gds-context-menu>
-        `
-      }
-
-      case 'formatted-number': {
-        const value = resolve(config.value)
-        const formatter =
-          Table.FormatNumber[config.format || 'decimalsAndThousands']
-        return formatter(value, config.locale, config.currency, config.decimals)
-      }
-
-      case 'formatted-account': {
-        const value = resolve(config.value)
-        const formatter = Table.FormatAccount[config.format || 'seb-account']
-        return formatter(value)
-      }
-
-      case 'formatted-date': {
-        const value = resolve(config.value)
-        const formatter = Table.FormatDate[config.format || 'dateLong']
-        return formatter(value, config.locale)
-      }
-
-      default:
-        return null
+      return slotElements.length > 0 ? slotElements : null
     }
+
+    if (value !== undefined) {
+      slotElements.push(value)
+    }
+
+    return slotElements.length > 0 ? slotElements : null
   }
 
   /**
    * Renders the content of a table cell with support for custom transformations,
-   * cell types, and responsive mobile labels.
+   * cell slots, and responsive mobile labels.
    *
    * Value resolution priority:
    * 1. column.value - Direct transform function
-   * 2. cell.value - Cell type configuration (badge, button, etc.)
+   * 2. slot cell object - Row value with a `slots` object
    * 3. row[column.key] - Raw data value
    */
-  #renderCellContent(row: T, column: Types.Column) {
-    const { cell } = column
-
+  #renderCellContent(row: T, column: Types.Column, index: number) {
     let value: any
     if (column.value) {
       value = column.value(row)
-    } else if (cell?.value) {
-      value = this.#renderCell(cell.value, row)
     } else {
       value = row[column.key]
     }
 
-    const processedValue = column.justify ? html`<span>${value}</span>` : value
+    const hasSlotValue = this.#isSlotCell(value)
+    const rowKeys = this.#getRowSlotKeys(
+      row,
+      index,
+      hasSlotValue ? value.key : undefined,
+    )
+    const slotContent = hasSlotValue
+      ? this.#renderCellSlots(column.key, rowKeys, value.slots, value.value)
+      : null
+
+    const resolvedValue = hasSlotValue ? slotContent : value
+    const processedValue = column.justify
+      ? html`<span>${resolvedValue}</span>`
+      : resolvedValue
     const isResponsive = this._isMobile && this.responsive
     const mobileLabel = isResponsive
       ? html`
@@ -560,12 +480,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     return html`
       <div class="cell-content" aria-label="${ariaLabel}">
-        ${[
-          mobileLabel,
-          this.#renderCell(cell?.lead, row),
-          processedValue,
-          this.#renderCell(cell?.trail, row),
-        ]}
+        ${[mobileLabel, processedValue]}
       </div>
     `
   }
@@ -757,7 +672,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  #renderTableCell(row: T, column: Types.Column) {
+  #renderTableCell(row: T, column: Types.Column, index: number) {
     const classes = classMap({
       [`align-${column.align}`]: !!column.align,
       [`justify-${column.justify}`]: !!column.justify,
@@ -770,7 +685,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     return html`
       <td style=${style} class=${classes}>
-        ${this.#renderCellContent(row, column)}
+        ${this.#renderCellContent(row, column, index)}
       </td>
     `
   }
@@ -793,10 +708,10 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  #renderRowCells(row: T) {
+  #renderRowCells(row: T, index: number) {
     return this.columns
       .filter((column) => this._view.visibleColumns.has(column.key))
-      .map((column) => this.#renderTableCell(row, column))
+      .map((column) => this.#renderTableCell(row, column, index))
   }
 
   #renderActionsCell(row: T, index: number) {
@@ -810,8 +725,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       `
     }
 
-    const content = this.#renderCell(this.actions.cell, row)
-
     const classes = classMap({
       'actions-cell': true,
       [`align-${this.actions.align}`]: !!this.actions.align,
@@ -820,7 +733,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     return html`
       <td class="${classes}">
-        <div class="cell-content">${content}</div>
+        <div class="cell-content">ACTIONS</div>
       </td>
     `
   }
@@ -835,7 +748,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       >
         ${[
           this.#renderSelectableCell(index),
-          this.#renderRowCells(row),
+          this.#renderRowCells(row, index),
           this.#renderActionsCell(row, index),
         ]}
       </tr>

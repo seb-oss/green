@@ -1,9 +1,9 @@
-import { TableColumn, TableRequest, TableResponse } from './table.types'
+import { Slot, TableColumn, TableRequest, TableResponse } from './table.types'
 
 interface UserData {
   id: number
-  name: string
-  email: string
+  name: Slot.Cell
+  email: Slot.Cell
   role: 'Admin' | 'User' | 'Editor'
   status: 'Active' | 'Inactive'
   amount: number
@@ -16,8 +16,8 @@ interface UserData {
 
 interface FeedbackData {
   id: number
-  name: string
-  email: string
+  name: Slot.Cell
+  email: Slot.Cell
   feedback: string
   notes: string
   status: 'Active' | 'Inactive'
@@ -51,8 +51,17 @@ const generateUserRecord = (index: number): UserData => {
 
   return {
     id,
-    name: `${firstName} ${lastName}`,
-    email: `${firstName.toLowerCase()}@domain.tld`,
+    name: Slot.New(lastName.toLowerCase(), {
+      lead: true,
+      value: `${firstName} ${lastName}`,
+      trail: 'trail-slot',
+      extra: 'extra-slot',
+    }),
+    email: Slot.New({
+      icon: 'email-icon',
+      value: `${firstName.toLowerCase()}@domain.tld`,
+      action: 'email-action',
+    }),
     role: USERS.ROLES[index % USERS.ROLES.length],
     status: USERS.STATUSES[index % USERS.STATUSES.length],
     department: USERS.DEPARTMENTS[index % USERS.DEPARTMENTS.length],
@@ -81,15 +90,19 @@ const userDataProvider = async (
     const query = request.searchQuery.toLowerCase()
     processedData = processedData.filter((item) =>
       Object.values(item).some((value) =>
-        String(value).toLowerCase().includes(query),
+        String(Slot.getValue(value)).toLowerCase().includes(query),
       ),
     )
   }
 
   if (request.sortColumn) {
     processedData.sort((a, b) => {
-      const aValue = String(a[request.sortColumn as keyof UserData])
-      const bValue = String(b[request.sortColumn as keyof UserData])
+      const aValue = String(
+        Slot.getValue(a[request.sortColumn as keyof UserData]),
+      )
+      const bValue = String(
+        Slot.getValue(b[request.sortColumn as keyof UserData]),
+      )
 
       return request.sortDirection === 'asc'
         ? aValue.localeCompare(bValue)
@@ -118,30 +131,12 @@ export const Users = {
       key: 'name',
       label: 'Name',
       sortable: true,
-      cell: {
-        lead: {
-          type: 'image',
-          src: (row: UserData) => row.avatarUrl,
-          alt: (row: UserData) => row.name,
-          width: 'xl',
-          height: 'xl',
-        },
-      },
     },
     {
       key: 'email',
       label: 'Email',
       sortable: true,
       justify: 'space-between',
-      cell: {
-        trail: {
-          type: 'button',
-          rank: 'tertiary',
-          value: (row: UserData) => row.email,
-          /*  size: 'xs', */
-          template: 'email-copy',
-        },
-      },
     },
     {
       key: 'role',
@@ -154,112 +149,37 @@ export const Users = {
       key: 'status',
       label: 'Status',
       sortable: true,
-      cell: {
-        value: {
-          type: 'badge',
-          value: (row: UserData) => row.status,
-          variant: (row: UserData) =>
-            row.status === 'Active' ? 'positive' : 'negative',
-        },
-      },
     },
     {
       key: 'department',
       label: 'Department',
       sortable: true,
-      cell: {
-        lead: {
-          type: 'icon',
-          template: 'department-icon',
-        },
-      },
     },
     {
       key: 'amount',
       label: 'Amount',
       sortable: true,
       justify: 'end',
-      cell: {
-        value: {
-          type: 'formatted-number',
-          value: (row: UserData) => row.amount,
-        },
-        trail: {
-          type: 'badge',
-          value: 'SEK',
-        },
-      },
     },
     {
       key: 'account',
       label: 'Account',
       sortable: true,
-      cell: {
-        value: {
-          type: 'formatted-account',
-          value: (row: UserData) => row.account,
-          format: 'seb-account',
-        },
-      },
     },
     {
       key: 'lastLogin',
       label: 'Last Login',
       sortable: true,
-      cell: {
-        value: {
-          type: 'formatted-date',
-          value: (row: UserData) => row.lastLogin,
-          locale: 'sv-SE',
-          format: 'dateLong',
-        },
-      },
     },
     {
       key: 'download',
       label: 'Download',
-      cell: {
-        value: {
-          type: 'link',
-          href: (row: UserData) => row.download,
-          download: true,
-          template: 'download-image',
-          label: 'Download file',
-        },
-      },
     },
   ] as TableColumn[],
 
   Actions: {
     label: 'Actions',
     justify: 'end',
-    cell: {
-      type: 'context-menu',
-      items: [
-        {
-          label: (row: UserData) =>
-            row.status === 'Active' ? 'Deactivate' : 'Activate',
-          /*  onClick: (row: UserData) => console.log('Toggle status', row), */
-        },
-        {
-          label: 'View Details',
-          /* onClick: (row: UserData) => console.log('View user', row), */
-        },
-        {
-          label: 'Edit Profile',
-          /* onClick: (row: UserData) => console.log('Edit user', row), */
-        },
-        {
-          divider: true,
-          label: 'Delete User',
-          /* onClick: (row: UserData) => {
-            if (confirm(`Delete ${row.name}?`)) {
-              console.log('Delete user', row)
-            }
-          }, */
-        },
-      ],
-    },
   },
   Data: userDataProvider,
 }
@@ -331,15 +251,19 @@ const feedbackDataProvider = async (
     const query = request.searchQuery.toLowerCase()
     processedData = processedData.filter((item) =>
       Object.values(item).some((value) =>
-        String(value).toLowerCase().includes(query),
+        String(Slot.getValue(value)).toLowerCase().includes(query),
       ),
     )
   }
 
   if (request.sortColumn) {
     processedData.sort((a, b) => {
-      const aValue = String(a[request.sortColumn as keyof FeedbackData])
-      const bValue = String(b[request.sortColumn as keyof FeedbackData])
+      const aValue = String(
+        Slot.getValue(a[request.sortColumn as keyof FeedbackData]),
+      )
+      const bValue = String(
+        Slot.getValue(b[request.sortColumn as keyof FeedbackData]),
+      )
 
       return request.sortDirection === 'asc'
         ? aValue.localeCompare(bValue)
@@ -389,15 +313,6 @@ export const Feedback = {
       align: 'start',
       justify: 'end',
       width: '100px',
-      cell: {
-        value: {
-          type: 'badge',
-          value: (row: FeedbackData) => row.status,
-          variant: (row: FeedbackData) =>
-            row.status === 'Active' ? 'positive' : 'negative',
-          size: 'small',
-        },
-      },
     },
   ] as TableColumn[],
 
@@ -405,19 +320,6 @@ export const Feedback = {
     label: 'Actions',
     align: 'start',
     justify: 'start',
-    cell: [
-      {
-        type: 'button',
-        size: 'xs',
-        template: 'actions-activate',
-      },
-      {
-        type: 'button',
-        size: 'xs',
-        variant: 'negative',
-        template: 'actions-delete',
-      },
-    ],
   } as any,
 
   ActionLink: {
@@ -437,35 +339,12 @@ export const Feedback = {
     label: 'Actions',
     align: 'start',
     justify: 'start',
-    cell: [
-      {
-        type: 'button',
-        label: 'Link',
-      },
-    ],
   } as any,
 
   ActionContextMenu: {
     label: 'Actions',
     align: 'start',
     justify: 'end',
-    cell: {
-      type: 'context-menu',
-      items: [
-        {
-          label: 'Activate',
-        },
-        {
-          label: 'View Details',
-        },
-        {
-          label: 'Edit Profile',
-        },
-        {
-          label: 'Delete User',
-        },
-      ],
-    },
   } as any,
   Data: feedbackDataProvider,
 }
