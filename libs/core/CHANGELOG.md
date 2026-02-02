@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.27.0
+
+### Minor Changes
+
+- 61e9bba: **Icon:** Add new icons Trending Five, Signature, Arrow box left alt
+
 ## 2.26.2
 
 ### Patch Changes

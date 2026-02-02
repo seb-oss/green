@@ -1,5 +1,12 @@
 # @sebgroup/green-core-ng
 
+## 2.27.0
+
+### Patch Changes
+
+- Updated dependencies [61e9bba]
+  - @sebgroup/green-core@2.27.0
+
 ## 2.26.2
 
 ### Patch Changes
