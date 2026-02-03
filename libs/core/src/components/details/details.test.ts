@@ -1,7 +1,4 @@
-import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands'
-import sinon from 'sinon'
+import { describe, expect, it, vi } from 'vitest'
 
 import type { GdsDetails } from '@sebgroup/green-core/components/details'
 
@@ -9,7 +6,12 @@ import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
+import {
+  clickOnElement,
+  fixture,
+  html as testingHtml,
+  waitUntil,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/details'
 
@@ -22,7 +24,7 @@ describe('<gds-details>', () => {
         <gds-details summary="Test Summary">Content</gds-details>
       `)
       const summaryLabel = el.shadowRoot?.querySelector('.summary-label')
-      expect(summaryLabel?.textContent?.trim()).to.equal('Test Summary')
+      expect(summaryLabel?.textContent?.trim()).toBe('Test Summary')
     })
 
     it('should render default summary when not provided', async () => {
@@ -30,7 +32,7 @@ describe('<gds-details>', () => {
         html`<gds-details>Content</gds-details>`,
       )
       const summaryLabel = el.shadowRoot?.querySelector('.summary-label')
-      expect(summaryLabel?.textContent?.trim()).to.equal('Summary')
+      expect(summaryLabel?.textContent?.trim()).toBe('Summary')
     })
   })
 
@@ -39,14 +41,14 @@ describe('<gds-details>', () => {
       const el = await fixture<GdsDetails>(html`
         <gds-details summary="Test Summary">Content</gds-details>
       `)
-      expect(el.getAttribute('open')).to.be.null
+      expect(el.getAttribute('open')).toBeNull()
     })
 
     it('should be open when open attribute is set', async () => {
       const el = await fixture<GdsDetails>(html`
         <gds-details summary="Test Summary" open>Content</gds-details>
       `)
-      expect(el.getAttribute('open')).to.not.be.null
+      expect(el.getAttribute('open')).not.toBeNull()
     })
 
     it('should toggle state when clicked', async () => {
@@ -57,11 +59,11 @@ describe('<gds-details>', () => {
       const summary = el.shadowRoot?.querySelector('.summary') as HTMLElement
       await clickOnElement(summary)
       await waitUntil(() => el.getAttribute('open') !== null)
-      expect(el.getAttribute('open')).to.not.be.null
+      expect(el.getAttribute('open')).not.toBeNull()
 
       await clickOnElement(summary)
       await waitUntil(() => el.getAttribute('open') === null)
-      expect(el.getAttribute('open')).to.be.null
+      expect(el.getAttribute('open')).toBeNull()
     })
   })
 
@@ -71,14 +73,14 @@ describe('<gds-details>', () => {
         <gds-details summary="Test">Content</gds-details>
       `)
 
-      const stateHandler = sinon.spy()
+      const stateHandler = vi.fn()
       el.addEventListener('gds-ui-state', stateHandler)
 
       const summary = el.shadowRoot?.querySelector('.summary') as HTMLElement
       await clickOnElement(summary)
 
-      await waitUntil(() => stateHandler.calledOnce)
-      expect(stateHandler.firstCall.args[0].detail).to.be.true
+      await waitUntil(() => stateHandler.mock.calls.length === 1)
+      expect(stateHandler.mock.calls[0][0].detail).toBe(true)
     })
   })
 
@@ -101,8 +103,8 @@ describe('<gds-details>', () => {
       await clickOnElement(summary1)
       await waitUntil(() => details[0].getAttribute('open') !== null)
 
-      expect(details[0].getAttribute('open')).to.not.be.null
-      expect(details[1].getAttribute('open')).to.be.null
+      expect(details[0].getAttribute('open')).not.toBeNull()
+      expect(details[1].getAttribute('open')).toBeNull()
 
       const summary2 = details[1].shadowRoot?.querySelector(
         '.summary',
@@ -110,8 +112,8 @@ describe('<gds-details>', () => {
       await clickOnElement(summary2)
       await waitUntil(() => details[1].getAttribute('open') !== null)
 
-      expect(details[0].getAttribute('open')).to.be.null
-      expect(details[1].getAttribute('open')).to.not.be.null
+      expect(details[0].getAttribute('open')).toBeNull()
+      expect(details[1].getAttribute('open')).not.toBeNull()
     })
 
     it('should not affect details in different groups', async () => {
@@ -138,8 +140,8 @@ describe('<gds-details>', () => {
       await clickOnElement(summary2)
       await waitUntil(() => details[1].getAttribute('open') !== null)
 
-      expect(details[0].getAttribute('open')).to.not.be.null
-      expect(details[1].getAttribute('open')).to.not.be.null
+      expect(details[0].getAttribute('open')).not.toBeNull()
+      expect(details[1].getAttribute('open')).not.toBeNull()
     })
   })
 })

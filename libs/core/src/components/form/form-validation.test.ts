@@ -1,14 +1,13 @@
-import { expect } from '@esm-bundle/chai'
+import { describe, expect, it } from 'vitest'
+
 import {
-  assert,
+  clickOnElement,
+  conditionToBeTrue,
   fixture,
   html as testingHtml,
+  timeout,
   waitUntil,
-} from '@open-wc/testing'
-import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import sinon from 'sinon'
-
-import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/dropdown'
 
@@ -47,11 +46,11 @@ describe('Form validation', () => {
       const dropdownEl = formEl.querySelector('#dropdown') as GdsDropdown
       await dropdownEl.updateComplete
 
-      expect(dropdownEl.invalid).to.be.false
+      expect(dropdownEl.invalid).toBe(false)
 
       formEl.requestSubmit()
 
-      expect(dropdownEl.invalid).to.be.true
+      expect(dropdownEl.invalid).toBe(true)
     })
   })
 })

@@ -1,7 +1,5 @@
-import { expect } from '@esm-bundle/chai'
-import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands'
-import sinon from 'sinon'
+import { userEvent } from '@vitest/browser/context'
+import { describe, expect, it, vi } from 'vitest'
 
 import type { GdsLink } from '@sebgroup/green-core/components/link'
 
@@ -9,6 +7,7 @@ import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
+import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
 import { clickOnElement } from '../../utils/testing/index.js'
 
 import '@sebgroup/green-core/components/link'
@@ -27,7 +26,7 @@ describe('<gds-link>', () => {
 
       const innerLink = el.shadowRoot?.querySelector('a')
 
-      expect(innerLink).to.exist
+      expect(innerLink).toBeDefined()
     })
 
     it('should render lead slot', async () => {
@@ -40,7 +39,7 @@ describe('<gds-link>', () => {
 
       const slot = el.shadowRoot?.querySelector('slot[name="lead"]')
 
-      expect(slot).to.exist
+      expect(slot).toBeDefined()
     })
 
     it('should render trail slot', async () => {
@@ -52,7 +51,7 @@ describe('<gds-link>', () => {
 
       const slot = el.shadowRoot?.querySelector('slot[name="trail"]')
 
-      expect(slot).to.exist
+      expect(slot).toBeDefined()
     })
   })
 
@@ -61,14 +60,14 @@ describe('<gds-link>', () => {
       const el = await fixture<GdsLink>(
         html`<gds-link href="javascript:;">Link</gds-link>`,
       )
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('click', (): void => {
         spy()
       })
 
       await clickOnElement(el)
 
-      expect(spy.calledOnce).to.be.true
+      expect(spy).toHaveBeenCalledOnce()
     })
 
     it('should support link attributes', async () => {
@@ -85,11 +84,11 @@ describe('<gds-link>', () => {
 
       const shadowLink = el.shadowRoot?.querySelector('a')
 
-      expect(shadowLink?.getAttribute('href')).to.equal('javascript:;')
-      expect(shadowLink?.getAttribute('rel')).to.equal('noopener')
-      expect(shadowLink?.getAttribute('target')).to.equal('_self')
-      expect(shadowLink?.hasAttribute('download')).to.equal(true)
-      expect(shadowLink?.getAttribute('ping')).to.equal('pingUrl')
+      expect(shadowLink?.getAttribute('href')).toBe('javascript:;')
+      expect(shadowLink?.getAttribute('rel')).toBe('noopener')
+      expect(shadowLink?.getAttribute('target')).toBe('_self')
+      expect(shadowLink?.hasAttribute('download')).toBe(true)
+      expect(shadowLink?.getAttribute('ping')).toBe('pingUrl')
     })
   })
 
@@ -99,25 +98,25 @@ describe('<gds-link>', () => {
         html`<gds-link href="javascript:;">Test link</gds-link>`,
       )
 
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
 
     it('should fire click event when pressing enter', async () => {
       const el = await fixture<GdsLink>(
         html`<gds-link href="javascript:;">Link</gds-link>`,
       )
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('click', (event: { preventDefault: () => void }) => {
         event.preventDefault()
         spy()
       })
       el.focus()
 
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
 
       await aTimeout(1)
 
-      expect(spy.calledOnce).to.be.true
+      expect(spy).toHaveBeenCalledOnce()
     })
 
     it('should be possible to tab to the link', async () => {
@@ -128,7 +127,7 @@ describe('<gds-link>', () => {
       const link = el.querySelector(getScopedTagName('gds-link')) as GdsLink
 
       input.focus()
-      await sendKeys({ press: 'Tab' })
+      await userEvent.keyboard('{Tab}')
 
       // skip test in webkit
       if (
@@ -138,7 +137,7 @@ describe('<gds-link>', () => {
         return
       }
 
-      expect(document.activeElement).to.equal(link)
+      expect(document.activeElement).toBe(link)
     })
 
     it('should pass aria-label to inner link element and not host', async () => {
@@ -150,9 +149,9 @@ describe('<gds-link>', () => {
 
       const shadowLink = el.shadowRoot?.querySelector('a')
 
-      expect(el.getAttribute('aria-label')).to.be.null
+      expect(el.getAttribute('aria-label')).toBeNull()
 
-      expect(shadowLink?.getAttribute('aria-label')).to.equal('Test label')
+      expect(shadowLink?.getAttribute('aria-label')).toBe('Test label')
     })
 
     it('should not set aria-label on inner link when label prop is not provided', async () => {
@@ -162,8 +161,8 @@ describe('<gds-link>', () => {
 
       const shadowLink = el.shadowRoot?.querySelector('a')
 
-      expect(el.getAttribute('aria-label')).to.be.null
-      expect(shadowLink?.getAttribute('aria-label')).to.be.null
+      expect(el.getAttribute('aria-label')).toBeNull()
+      expect(shadowLink?.getAttribute('aria-label')).toBeNull()
     })
   })
 
@@ -177,7 +176,7 @@ describe('<gds-link>', () => {
 
       const shadowLink = el.shadowRoot?.querySelector('a')
 
-      expect(shadowLink?.getAttribute('rel')).to.equal('noreferrer noopener')
+      expect(shadowLink?.getAttribute('rel')).toBe('noreferrer noopener')
     })
   })
 })

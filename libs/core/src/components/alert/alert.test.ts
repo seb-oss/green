@@ -1,13 +1,12 @@
-import { expect, fixture, html as testingHtml } from '@open-wc/testing'
-import sinon from 'sinon'
+import { userEvent } from '@vitest/browser/context'
+import { describe, expect, it, vi } from 'vitest'
 
 import type { GdsAlert } from '@sebgroup/green-core/components/alert'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/alert'
-
-import { sendKeys } from '@web/test-runner-commands'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -19,14 +18,14 @@ describe('<gds-alert>', () => {
       )
       await el.updateComplete
 
-      expect(el.variant).to.equal('information')
-      expect(el.dismissible).to.be.false
-      expect(el.buttonLabel).to.equal('')
+      expect(el.variant).toBe('information')
+      expect(el.dismissible).toBe(false)
+      expect(el.buttonLabel).toBe('')
       const card =
         el.shadowRoot?.querySelector('[gds-element="gds-card"]') ||
         el.querySelector('[gds-element="gds-card"]')
-      expect(card?.getAttribute('role')).to.equal('alert')
-      expect(card?.getAttribute('aria-label')).to.equal('Information alert')
+      expect(card?.getAttribute('role')).toBe('alert')
+      expect(card?.getAttribute('aria-label')).toBe('Information alert')
     })
 
     it('should render alert with custom variant and icon', async () => {
@@ -34,10 +33,10 @@ describe('<gds-alert>', () => {
         html`<gds-alert variant="positive">Success alert</gds-alert>`,
       )
       await el.updateComplete
-      expect(el.variant).to.equal('positive')
+      expect(el.variant).toBe('positive')
       const icon =
         el.shadowRoot?.querySelector('.icon') || el.querySelector('.icon')
-      expect(icon).to.exist
+      expect(icon).toBeDefined()
     })
 
     it('should render dismissible alert with close button', async () => {
@@ -47,7 +46,7 @@ describe('<gds-alert>', () => {
       await el.updateComplete
       const closeBtn =
         el.shadowRoot?.querySelector('.close') || el.querySelector('.close')
-      expect(closeBtn).to.exist
+      expect(closeBtn).toBeDefined()
     })
 
     it('should render alert with action button', async () => {
@@ -56,8 +55,8 @@ describe('<gds-alert>', () => {
       )
       await el.updateComplete
       const btn = el.shadowRoot?.querySelector('.action')
-      expect(btn).to.exist
-      expect(btn?.textContent?.trim()).to.equal('Action')
+      expect(btn).toBeDefined()
+      expect(btn?.textContent?.trim()).toBe('Action')
     })
   })
 
@@ -67,13 +66,13 @@ describe('<gds-alert>', () => {
         html`<gds-alert dismissible>Dismiss me</gds-alert>`,
       )
       await el.updateComplete
-      const closeBtn = el.shadowRoot?.querySelector('.close')
-      const closeSpy = sinon.spy()
+      const closeBtn = el.shadowRoot?.querySelector('.close') as HTMLElement
+      const closeSpy = vi.fn()
       el.addEventListener('gds-close', closeSpy)
       closeBtn.focus()
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
       await el.updateComplete
-      expect(closeSpy.calledOnce).to.be.true
+      expect(closeSpy).toHaveBeenCalledOnce()
     })
 
     it('should fire action event when action button is clicked', async () => {
@@ -81,13 +80,13 @@ describe('<gds-alert>', () => {
         html`<gds-alert button-label="Action">With action</gds-alert>`,
       )
       await el.updateComplete
-      const btn = el.shadowRoot?.querySelector('.action')
-      const actionSpy = sinon.spy()
+      const btn = el.shadowRoot?.querySelector('.action') as HTMLElement
+      const actionSpy = vi.fn()
       el.addEventListener('gds-action', actionSpy)
       btn.focus()
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
       await el.updateComplete
-      expect(actionSpy.calledOnce).to.be.true
+      expect(actionSpy).toHaveBeenCalledOnce()
     })
   })
 
@@ -98,7 +97,7 @@ describe('<gds-alert>', () => {
       )
       await el.updateComplete
 
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
     it('should have correct ARIA attributes for variant', async () => {
       const el = await fixture<GdsAlert>(
@@ -108,7 +107,7 @@ describe('<gds-alert>', () => {
       )
       await el.updateComplete
       const card = el.shadowRoot?.querySelector('[gds-element="gds-card"]')
-      expect(card?.getAttribute('aria-label')).to.equal('Negative alert')
+      expect(card?.getAttribute('aria-label')).toBe('Negative alert')
     })
     it('should allow role to be set to status', async () => {
       const el = await fixture<GdsAlert>(
@@ -118,7 +117,7 @@ describe('<gds-alert>', () => {
       const card =
         el.shadowRoot?.querySelector('[gds-element="gds-card"]') ||
         el.querySelector('[gds-element="gds-card"]')
-      expect(card?.getAttribute('role')).to.equal('status')
+      expect(card?.getAttribute('role')).toBe('status')
     })
   })
 })

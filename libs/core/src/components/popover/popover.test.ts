@@ -1,11 +1,5 @@
-import { expect } from '@esm-bundle/chai'
-import {
-  aTimeout,
-  fixture,
-  html as testingHtml,
-  waitUntil,
-} from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands'
+import { userEvent } from '@vitest/browser/context'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type {
   GdsBackdrop,
@@ -13,16 +7,44 @@ import type {
 } from '@sebgroup/green-core/components/popover'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
+import {
+  aTimeout,
+  clickOnElement,
+  fixture,
+  setViewportSize,
+  html as testingHtml,
+  waitUntil,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/popover'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-popover>', () => {
+  // Cleanup any open dialogs between tests to prevent modal state conflicts
+  afterEach(async () => {
+    // Close all open popovers
+    const popovers = document.querySelectorAll(
+      'gds-popover',
+    ) as NodeListOf<GdsPopover>
+    for (const popover of popovers) {
+      if (popover.open) {
+        popover.open = false
+        await popover.updateComplete
+      }
+    }
+    // Also close any dialogs that might be in modal state
+    const dialogs = document.querySelectorAll('dialog')
+    for (const dialog of dialogs) {
+      if (dialog.open) {
+        dialog.close()
+      }
+    }
+  })
+
   it('is a GdsElement', async () => {
     const el = await fixture(html`<gds-popover></gds-popover>`)
-    expect(el.getAttribute('gds-element')).to.equal('gds-popover')
+    expect(el.getAttribute('gds-element')).toBe('gds-popover')
   })
 
   describe('Accessibility', () => {
@@ -34,7 +56,7 @@ describe('<gds-popover>', () => {
         </gds-popover>`,
       )
       await el.updateComplete
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
 
     it('trigger should have aria-haspopup="dialog" by default', async () => {
@@ -47,7 +69,7 @@ describe('<gds-popover>', () => {
       await el.updateComplete
 
       const trigger = el.querySelector('[slot="trigger"]') as HTMLElement
-      expect(trigger.getAttribute('aria-haspopup')).to.equal('dialog')
+      expect(trigger.getAttribute('aria-haspopup')).toBe('dialog')
     })
 
     it('trigger should retain custom value of aria-haspopup', async () => {
@@ -60,7 +82,7 @@ describe('<gds-popover>', () => {
       await el.updateComplete
 
       const trigger = el.querySelector('[slot="trigger"]') as HTMLElement
-      expect(trigger.getAttribute('aria-haspopup')).to.equal('menu')
+      expect(trigger.getAttribute('aria-haspopup')).toBe('menu')
     })
 
     it('trigger should have aria-expanded="true" when open', async () => {
@@ -73,7 +95,7 @@ describe('<gds-popover>', () => {
       await el.updateComplete
 
       const trigger = el.querySelector('[slot="trigger"]') as HTMLElement
-      expect(trigger.getAttribute('aria-expanded')).to.equal('true')
+      expect(trigger.getAttribute('aria-expanded')).toBe('true')
     })
   })
 
@@ -129,7 +151,7 @@ describe('<gds-popover>', () => {
       )
       await el.updateComplete
 
-      expect(el.shadowRoot?.querySelector('dialog:modal')).to.not.be.null
+      expect(el.shadowRoot?.querySelector('dialog:modal')).not.toBeNull()
     })
 
     it('should not open dialog in modal mode when `nonmodal` is set', async () => {
@@ -141,7 +163,7 @@ describe('<gds-popover>', () => {
       )
       await el.updateComplete
 
-      expect(el.shadowRoot?.querySelector('dialog:modal')).to.be.null
+      expect(el.shadowRoot?.querySelector('dialog:modal')).toBeNull()
     })
 
     it('should be possible to cancel the `gds-ui-state` event', async () => {
@@ -162,7 +184,7 @@ describe('<gds-popover>', () => {
       await clickOnElement(document.body, 'right')
       await aTimeout(100)
 
-      expect(el.open).to.be.true
+      expect(el.open).toBe(true)
     })
   })
 
@@ -218,7 +240,7 @@ describe('<gds-popover>', () => {
       await el.updateComplete
 
       const trigger = el.querySelector('[slot="trigger"]') as HTMLElement
-      expect(trigger.getAttribute('tabindex')).to.equal('0')
+      expect(trigger.getAttribute('tabindex')).toBe('0')
     })
 
     it('should open when ArrowDown is pressed on trigger', async () => {
@@ -233,7 +255,7 @@ describe('<gds-popover>', () => {
       const trigger = el.querySelector('[slot="trigger"]') as HTMLElement
       trigger.focus()
 
-      await sendKeys({ press: 'ArrowDown' })
+      await userEvent.keyboard('{ArrowDown}')
       await waitUntil(() => el.open)
     })
 
@@ -249,7 +271,7 @@ describe('<gds-popover>', () => {
       const trigger = el.querySelector('[slot="trigger"]') as HTMLElement
       trigger.focus()
 
-      await sendKeys({ press: 'ArrowUp' })
+      await userEvent.keyboard('{ArrowUp}')
       await waitUntil(() => el.open)
     })
 
@@ -262,11 +284,13 @@ describe('<gds-popover>', () => {
       )
       await el.updateComplete
 
-      await sendKeys({ press: 'Escape' })
+      await userEvent.keyboard('{Escape}')
       await waitUntil(() => !el.open)
     })
 
     it('should close when page scrolls', async () => {
+      const restore = await setViewportSize(800, 600)
+
       const el = await fixture<GdsPopover>(
         html`<gds-popover open>
           <div slot="trigger">Trigger</div>
@@ -278,7 +302,9 @@ describe('<gds-popover>', () => {
       window.dispatchEvent(new Event('scroll'))
       await aTimeout(100) // Allow time for the scroll event to propagate
 
-      expect(el.open).to.be.false
+      expect(el.open).toBe(false)
+
+      await restore()
     })
   })
 })
