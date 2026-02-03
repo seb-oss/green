@@ -632,11 +632,11 @@ describe('<gds-dropdown> keyboard navigation', () => {
     el.focus()
     await aTimeout(0)
     await userEvent.keyboard('{ArrowDown}')
-    await aTimeout(50)
+    await waitUntil(() => el.open === true)
     await userEvent.keyboard('{ArrowDown}')
-    await aTimeout(50)
+    await waitUntil(() => document.activeElement === el.options[1])
     await userEvent.keyboard('{Enter}')
-    await aTimeout(50)
+    await el.updateComplete
 
     expect(el.value).toBe('v2')
   })
