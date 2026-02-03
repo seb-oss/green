@@ -22,27 +22,6 @@ import '@sebgroup/green-core/components/dropdown'
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-dropdown>', () => {
-  // Cleanup any open dropdowns/dialogs between tests to prevent modal state conflicts
-  afterEach(async () => {
-    // Close all open dropdowns
-    const dropdowns = document.querySelectorAll(
-      'gds-dropdown',
-    ) as NodeListOf<GdsDropdown>
-    for (const dropdown of dropdowns) {
-      if (dropdown.open) {
-        dropdown.open = false
-        await dropdown.updateComplete
-      }
-    }
-    // Also close any dialogs that might be in modal state
-    const dialogs = document.querySelectorAll('dialog')
-    for (const dialog of dialogs) {
-      if (dialog.open) {
-        dialog.close()
-      }
-    }
-  })
-
   it('should expose list of options through the `options` field', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown>
@@ -280,7 +259,7 @@ describe('<gds-dropdown>', () => {
   })
 
   it('should limit the height of the popover to max-height attribute', async () => {
-    const restore = setViewportSize(1024, 768)
+    const restore = await setViewportSize(1024, 768)
     try {
       const el = await fixture<GdsDropdown>(html`
         <gds-dropdown open max-height="50">
