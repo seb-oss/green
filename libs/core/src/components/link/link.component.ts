@@ -87,7 +87,6 @@ export class GdsLink extends withMarginProps(
         download=${ifDefined(this.download)}
         ping=${ifDefined(this.ping)}
         aria-label=${this.label || nothing}
-        @click=${this.#handleClick}
       >
         <slot name="lead"></slot>
         <slot></slot>
@@ -98,18 +97,5 @@ export class GdsLink extends withMarginProps(
 
   get #defaultRel() {
     return this.target === '_blank' ? 'noreferrer noopener' : undefined
-  }
-
-  /**
-   * Re-dispatches click events as a custom event with `composed: true` so external
-   * listeners can intercept them and call preventDefault() for custom routing logic.
-   * Without this, clicks would be trapped in the shadow DOM.
-   */
-  #handleClick(e: MouseEvent) {
-    this.dispatchCustomEvent('gds-link-click', {
-      bubbles: true,
-      composed: true,
-      detail: e,
-    })
   }
 }
