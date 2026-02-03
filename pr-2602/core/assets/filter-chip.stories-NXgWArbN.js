@@ -1,5 +1,0 @@
-import{a as e}from"./argTableProps-BmNmGI9b.js";import"./filter-chip-CPTRQKVk.js";import"./iframe-uFM-9jO7.js";import"./filter-chips.component-ClHQPtWh.js";import"./resize-observer-B9k8v2TZ.js";import"./attribute-converters-CdI0trPX.js";import"./checkmark.component-DZs5g4lF.js";import"./icon.component-Bdewz2mt.js";const m={title:"Components/Filter Chips/Filter Chip",component:"gds-filter-chip",parameters:{layout:"centered",docs:{description:{component:`[Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/filter-chips)
-&nbsp;|&nbsp;
-[Usage guidelines](https://designlibrary.sebgroup.com/components/component-filter-chip)
-
-The filter chip is a sub-component of the filter chips component, and should generally not be used on its own.`}}},tags:["autodocs"],argTypes:{...e("gds-filter-chip"),size:{options:["small","large"],control:{type:"select"}}}},t={parameters:{docs:{source:{format:!0,type:"dynamic"}},controls:{expanded:!0}},args:{innerText:"Filter chip"}},l={...t},d=["Basic"];export{l as Basic,d as __namedExportsOrder,m as default};
