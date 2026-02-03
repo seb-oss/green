@@ -1,5 +1,17 @@
 # @sebgroup/green-core-ng
 
+## 2.28.2
+
+### Patch Changes
+
+- Updated dependencies [ae7789f]
+- Updated dependencies [a2cf0b8]
+- Updated dependencies [14a300c]
+- Updated dependencies [ae7789f]
+- Updated dependencies [ae7789f]
+- Updated dependencies [ae7789f]
+  - @sebgroup/green-core@2.28.2
+
 ## 2.28.1
 
 ### Patch Changes
