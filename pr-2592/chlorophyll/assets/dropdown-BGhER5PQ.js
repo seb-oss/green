@@ -1,6 +1,0 @@
-import{j as o,M as s}from"./blocks--uo8Vprr.js";import{useMDXComponents as r}from"./index-BYoxYqaN.js";import"./iframe-D06iXPVv.js";function t(n){const e={h1:"h1",p:"p",...r(),...n.components};return o.jsxs(o.Fragment,{children:[o.jsx(s,{title:"Components/Dropdown",parameters:{componentIds:["component-dropdown"]}}),`
-`,o.jsx(e.h1,{id:"dropdown",children:"Dropdown"}),`
-`,o.jsx("div",{role:"alert",class:"warning mb-7 mt-5 w-100",children:o.jsxs("main",{children:[o.jsx("h3",{children:"Not available in Chlorophyll!"}),o.jsx("p",{children:o.jsx(e.p,{children:`This component component requires a Javascript implementation, and cannot
-be used with only CSS. Check out one of Greens framework implmentations
-instead!`})}),o.jsx("p",{children:o.jsxs(e.p,{children:["Dropdown is available for ",o.jsx("a",{href:"https://storybook.seb.io/latest/angular/?path=/docs/components-dropdown--custom-option#dropdown",children:"Angular"}),`,
-`,o.jsx("a",{href:"https://storybook.seb.io/latest/react/?path=/docs/components-dropdown--dropdown#dropdown",children:"React"})," or ",o.jsx("a",{href:"https://storybook.seb.io/latest/core/?path=/docs/components-dropdown--page#dropdown",children:"as a web component"})]})})]})})]})}function i(n={}){const{wrapper:e}={...r(),...n.components};return e?o.jsx(e,{...n,children:o.jsx(t,{...n})}):t(n)}export{i as default};
