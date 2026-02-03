@@ -1,9 +1,13 @@
-import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
-import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import sinon from 'sinon'
+import { describe, expect, it } from 'vitest'
 
-import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
+import {
+  clickOnElement,
+  conditionToBeTrue,
+  fixture,
+  html as testingHtml,
+  timeout,
+  waitUntil,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/primitives/form-control-footer'
 
@@ -18,7 +22,7 @@ describe('<gds-form-control-footer>', () => {
     const el = await fixture(
       html`<gds-form-control-footer></gds-form-control-footer>`,
     )
-    expect(el.getAttribute('gds-element')).to.equal('gds-form-control-footer')
+    expect(el.getAttribute('gds-element')).toBe('gds-form-control-footer')
   })
 
   it('is visually hidden when no error message or char counter is set', async () => {
@@ -26,7 +30,7 @@ describe('<gds-form-control-footer>', () => {
       html`<gds-form-control-footer></gds-form-control-footer>`,
     )
     await el.updateComplete
-    expect(el.classList.contains('visually-hidden')).to.be.true
+    expect(el.classList.contains('visually-hidden')).toBe(true)
   })
 
   it('is visually hidden when char counter visibility is set to false', async () => {
@@ -36,7 +40,7 @@ describe('<gds-form-control-footer>', () => {
       ></gds-form-control-footer>`,
     )
     await el.updateComplete
-    expect(el.classList.contains('visually-hidden')).to.be.true
+    expect(el.classList.contains('visually-hidden')).toBe(true)
   })
 
   it('is visible when error message is set', async () => {
@@ -46,7 +50,7 @@ describe('<gds-form-control-footer>', () => {
       ></gds-form-control-footer>`,
     )
     await el.updateComplete
-    expect(el.classList.contains('visually-hidden')).to.be.false
+    expect(el.classList.contains('visually-hidden')).toBe(false)
   })
 
   it('is visible when char counter is set', async () => {
@@ -56,7 +60,7 @@ describe('<gds-form-control-footer>', () => {
       ></gds-form-control-footer>`,
     )
     await el.updateComplete
-    expect(el.classList.contains('visually-hidden')).to.be.false
+    expect(el.classList.contains('visually-hidden')).toBe(false)
   })
 
   describe('Accessibility', () => {
@@ -68,7 +72,7 @@ describe('<gds-form-control-footer>', () => {
         ></gds-form-control-footer>`,
       )
       await el.updateComplete
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
 
     it('is a polite live region', async () => {
@@ -80,7 +84,7 @@ describe('<gds-form-control-footer>', () => {
       )
       await el.updateComplete
       const liveRegion = el.shadowRoot?.querySelector('[aria-live="polite"]')
-      expect(liveRegion).to.exist
+      expect(liveRegion).toBeDefined()
     })
   })
 })

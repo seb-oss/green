@@ -1,10 +1,10 @@
-import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import { describe, expect, it } from 'vitest'
 
 import type { NumberFormats } from '@sebgroup/green-core/components/formatted-text'
 import type { GdsFormattedNumber } from '@sebgroup/green-core/components/formatted-text/number'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../../utils/testing'
 
 import '@sebgroup/green-core/components/formatted-text/number'
 
@@ -61,7 +61,7 @@ describe('GdsFormattedNumber', () => {
               )
               await element.updateComplete
 
-              expect(element.formattedValue).to.equal(
+              expect(element.formattedValue).toBe(
                 expected[locale][currencyLabel],
               )
             })

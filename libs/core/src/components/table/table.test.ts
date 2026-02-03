@@ -1,8 +1,7 @@
-import { expect } from '@esm-bundle/chai'
-import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
-import sinon from 'sinon'
+import { describe, expect, it, vi } from 'vitest'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
 
 import type { GdsTable } from './table.component'
 
@@ -34,7 +33,7 @@ describe('<gds-table>', () => {
 
       await el.updateComplete
       const table = el.shadowRoot?.querySelector('table')
-      expect(table).to.exist
+      expect(table).toBeDefined()
     })
 
     it('should render table headers', async () => {
@@ -44,7 +43,7 @@ describe('<gds-table>', () => {
 
       await el.updateComplete
       const headers = el.shadowRoot?.querySelectorAll('thead th')
-      expect(headers?.length).to.be.greaterThan(0)
+      expect(headers?.length).toBeGreaterThan(0)
     })
 
     it('should render table rows', async () => {
@@ -54,13 +53,13 @@ describe('<gds-table>', () => {
 
       await el.updateComplete
       const rows = el.shadowRoot?.querySelectorAll('tbody tr')
-      expect(rows?.length).to.equal(3)
+      expect(rows?.length).toBe(3)
     })
   })
 
   describe('API', () => {
     it('should load data on connect', async () => {
-      const dataSpy = sinon.spy()
+      const dataSpy = vi.fn()
       const wrappedData = async (request: any) => {
         dataSpy(request)
         return mockData(request)
@@ -71,7 +70,7 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      expect(dataSpy.called).to.be.true
+      expect(dataSpy).toHaveBeenCalled()
     })
 
     it('should support selectable attribute', async () => {
@@ -85,7 +84,7 @@ describe('<gds-table>', () => {
 
       await el.updateComplete
       const checkboxes = el.shadowRoot?.querySelectorAll('.rbcb-wrapper')
-      expect(checkboxes?.length).to.be.greaterThan(0)
+      expect(checkboxes?.length).toBeGreaterThan(0)
     })
 
     it('should support striped attribute', async () => {
@@ -98,7 +97,7 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      expect(el.striped).to.be.true
+      expect(el.striped).toBe(true)
     })
 
     it('should emit selection change event', async () => {
@@ -111,13 +110,13 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('gds-table-selection', spy)
 
       el.selectAll()
       await el.updateComplete
 
-      expect(spy.called).to.be.true
+      expect(spy).toHaveBeenCalled()
     })
   })
 
@@ -128,13 +127,13 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
   })
 
   describe('Caching', () => {
     it('should cache data requests with same parameters', async () => {
-      const dataSpy = sinon.spy()
+      const dataSpy = vi.fn()
       const wrappedData = async (request: any) => {
         dataSpy(request)
         return mockData(request)
@@ -145,16 +144,16 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      expect(dataSpy.callCount).to.equal(1)
+      expect(dataSpy).toHaveBeenCalledTimes(1)
 
       // Trigger render with same parameters - should use cache
       el.requestUpdate()
       await el.updateComplete
-      expect(dataSpy.callCount).to.equal(1)
+      expect(dataSpy).toHaveBeenCalledTimes(1)
     })
 
     it('should not cache when nocache is true', async () => {
-      const dataSpy = sinon.spy()
+      const dataSpy = vi.fn()
       const wrappedData = async (request: any) => {
         dataSpy(request)
         return mockData(request)
@@ -169,16 +168,16 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      expect(dataSpy.callCount).to.equal(1)
+      expect(dataSpy).toHaveBeenCalledTimes(1)
 
       // Trigger another load with nocache - should call data again even with same params
       el.dataLoadKey = 'trigger-reload'
       await el.updateComplete
-      expect(dataSpy.callCount).to.equal(2)
+      expect(dataSpy).toHaveBeenCalledTimes(2)
     })
 
     it('should clear cache when dataLoadKey changes', async () => {
-      const dataSpy = sinon.spy()
+      const dataSpy = vi.fn()
       const wrappedData = async (request: any) => {
         dataSpy(request)
         return mockData(request)
@@ -189,18 +188,18 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      expect(dataSpy.callCount).to.equal(1)
+      expect(dataSpy).toHaveBeenCalledTimes(1)
 
       // Change dataLoadKey to force cache clear
       el.dataLoadKey = 'new-key'
       await el.updateComplete
-      expect(dataSpy.callCount).to.equal(2)
+      expect(dataSpy).toHaveBeenCalledTimes(2)
     })
   })
 
   describe('Filtering', () => {
     it('should filter data when search query changes', async () => {
-      const dataSpy = sinon.spy()
+      const dataSpy = vi.fn()
       const wrappedData = async (request: any) => {
         dataSpy(request)
         return mockData(request)
@@ -215,7 +214,7 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      expect(dataSpy.callCount).to.equal(1)
+      expect(dataSpy).toHaveBeenCalledTimes(1)
 
       // Simulate search input - get the input element
       const searchInput = el.shadowRoot?.querySelector(
@@ -227,14 +226,14 @@ describe('<gds-table>', () => {
         await el.updateComplete
 
         // Should call data with search query
-        expect(dataSpy.lastCall.args[0].searchQuery).to.equal('Item 1')
+        expect(dataSpy.mock.lastCall[0].searchQuery).toBe('Item 1')
       }
     })
   })
 
   describe('Sorting', () => {
     it('should sort by column when header clicked', async () => {
-      const dataSpy = sinon.spy()
+      const dataSpy = vi.fn()
       const wrappedData = async (request: any) => {
         dataSpy(request)
         return mockData(request)
@@ -254,14 +253,14 @@ describe('<gds-table>', () => {
         await el.updateComplete
 
         // Should have called data with sort parameters
-        const lastCall = dataSpy.lastCall.args[0]
-        expect(lastCall.sortColumn).to.equal('id')
-        expect(lastCall.sortDirection).to.equal('asc')
+        const lastCall = dataSpy.mock.lastCall[0]
+        expect(lastCall.sortColumn).toBe('id')
+        expect(lastCall.sortDirection).toBe('asc')
       }
     })
 
     it('should toggle sort direction on repeated clicks', async () => {
-      const dataSpy = sinon.spy()
+      const dataSpy = vi.fn()
       const wrappedData = async (request: any) => {
         dataSpy(request)
         return mockData(request)
@@ -280,19 +279,19 @@ describe('<gds-table>', () => {
         // First click - ascending
         header.click()
         await el.updateComplete
-        expect(dataSpy.lastCall.args[0].sortDirection).to.equal('asc')
+        expect(dataSpy.mock.lastCall[0].sortDirection).toBe('asc')
 
         // Second click - descending
         header.click()
         await el.updateComplete
-        expect(dataSpy.lastCall.args[0].sortDirection).to.equal('desc')
+        expect(dataSpy.mock.lastCall[0].sortDirection).toBe('desc')
       }
     })
   })
 
   describe('Data Changes', () => {
     it('should reload data when data function changes', async () => {
-      const dataSpy1 = sinon.spy()
+      const dataSpy1 = vi.fn()
       const wrappedData1 = async (request: any) => {
         dataSpy1(request)
         return mockData(request)
@@ -303,10 +302,10 @@ describe('<gds-table>', () => {
       )
 
       await el.updateComplete
-      expect(dataSpy1.callCount).to.equal(1)
+      expect(dataSpy1).toHaveBeenCalledTimes(1)
 
       // Change data function
-      const dataSpy2 = sinon.spy()
+      const dataSpy2 = vi.fn()
       const wrappedData2 = async (request: any) => {
         dataSpy2(request)
         return mockData(request)
@@ -314,7 +313,7 @@ describe('<gds-table>', () => {
 
       el.data = wrappedData2
       await el.updateComplete
-      expect(dataSpy2.callCount).to.equal(1)
+      expect(dataSpy2).toHaveBeenCalledTimes(1)
     })
 
     it('should update visible columns when columns change', async () => {
@@ -336,7 +335,7 @@ describe('<gds-table>', () => {
 
       // Table should still be renderable (no errors)
       const table = el.shadowRoot?.querySelector('table')
-      expect(table).to.exist
+      expect(table).toBeDefined()
     })
   })
 })
