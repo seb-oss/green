@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.28.0
+
+### Minor Changes
+
+- bea5481: **Checkbox group:** Add `hide-label` attribute for visually hiding label
+
 ## 2.27.0
 
 ### Minor Changes
