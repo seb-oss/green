@@ -154,252 +154,15 @@ const columns: TableColumn[] = [
 ```
 
 ### Column with Cell Configuration
-
-```typescript
-{
-  key: 'status',
-  label: 'Status',
-  sortable: true,
-  cell: {
-    value: {
-      type: 'badge',
-      value: (row: DataRow) => row.status,
-      variant: (row: DataRow) => 
-        row.status === 'Active' ? 'positive' : 'negative',
-    }
-  }
-}
-```
+{/* TODO: ⚠️ THE PREVIOUS METHOD NO LONGER VALID */}
 
 ### Cell Slots
-
-Cell configuration supports three slots: `lead`, `value`, and `trail`. Each slot accepts any of the predefined cell types (badge, button, link, image, context-menu, formatted values) and can contain single or multiple cell definitions.
-
-Cell types correspond to Green Design System components (`gds-badge`, `gds-button`, `gds-link`, `gds-img`, etc.). Most component properties are available in the cell configuration, with the exception of layout and positioning properties which are handled by the table.
-
-**Structure:**
-
-```typescript
-cell: {
-  lead?: Cell | Cell[]    // Content before main value
-  value?: Cell | Cell[]   // Main cell content
-  trail?: Cell | Cell[]   // Content after main value
-}
-```
-
-**Example with trail slot:**
-```typescript
-{
-  key: 'description',
-  label: 'Description',
-  cell: {
-    trail: {
-      type: 'button',
-      size: 'xs',
-      rank: 'tertiary',
-      template: 'copy-icon',
-      onClick: (row) => navigator.clipboard.writeText(row.description),
-    }
-  }
-}
-```
-
-**Example with multiple slots:**
-```typescript
-{
-  key: 'email',
-  label: 'Email',
-  cell: {
-    lead: {
-      type: 'image',
-      src: (row) => row.avatar,
-      width: '32px',
-      height: '32px',
-    },
-    value: (row) => row.email,  // Plain text
-    trail: {
-      type: 'badge',
-      value: (row) => row.verified ? 'Verified' : 'Pending',
-      variant: (row) => row.verified ? 'positive' : 'information',
-    }
-  }
-}
-```
-
-> The same cell slot structure applies to the `actions` configuration.
-
-### Cell Types
-
-#### Badge
-```typescript
-cell: {
-  value: {
-    type: 'badge',
-    value: (row) => row.status,
-    variant: (row) => 'positive' | 'negative' | 'information',
-  }
-}
-```
-
-#### Image
-```typescript
-cell: {
-  value: {
-    type: 'image',
-    src: (row) => row.imageUrl,
-    alt: (row) => row.title,
-    width: '48px', // supports all sizing tokens
-    height: '48px', // supports all sizing tokens
-  }
-}
-```
-
-#### Button
-```typescript
-cell: {
-  value: {
-    type: 'button',
-    label: 'Edit',
-    size: 'small',
-    rank: 'secondary',
-    onClick: (row) => console.log('Edit', row),
-  }
-}
-```
-
-#### Link
-```typescript
-cell: {
-  value: {
-    type: 'link',
-    label: 'View',
-    href: (row) => `/items/${row.id}`,
-  }
-}
-```
-
-#### Context Menu
-```typescript
-cell: {
-  value: {
-    type: 'context-menu',
-    items: [
-      {
-        label: 'Edit',
-        onClick: (row) => console.log('Edit', row),
-      },
-      {
-        label: 'Delete',
-        onClick: (row) => console.log('Delete', row),
-      },
-    ]
-  }
-}
-```
-
-#### Formatted Number
-```typescript
-cell: {
-  value: {
-    type: 'formatted-number',
-    value: (row) => row.amount,
-    format: 'decimalsAndThousands',
-    locale: 'sv-SE',
-  }
-}
-```
-
-#### Formatted Account
-```typescript
-cell: {
-  value: {
-    type: 'formatted-account',
-    value: (row) => row.accountNumber,
-    format: 'seb-account',
-  }
-}
-```
-
-#### Formatted Date
-```typescript
-cell: {
-  value: {
-    type: 'formatted-date',
-    value: (row) => row.date,
-    format: 'dateLong',
-    locale: 'sv-SE',
-  }
-}
-```
-
-#### Dynamic Content
-
-- Templates can be defined within the table to provide custom content for specific cell types
-- Templates are referenced using `name` attribute
-- Can be used to inject for example icons into cell types such as button on `main`, `lead` or `trail` slot.
-
-```typescript
-{
-  key: 'email',
-  label: 'Email',
-  sortable: true,
-  justify: 'space-between',
-  cell: {
-    trail: {
-      type: 'button',
-      value: (row: UserData) => row.email,
-      size: 'xs',
-      template: 'email-copy',  // References template content
-    },
-  },
-}
-```
-
-#### Icon
-
-Icons can be used in any cell slot (lead, value, trail) via templates.
-
-```typescript
-cell: {
-  lead: {
-    type: 'icon',
-    template: 'department-icon',
-    size: 'm',        // All the sizing tokens
-    color: 'neutral-02', // Optional: Any valid color token
-  }
-}
-
-
-**Template definition**
-
-```html
-<!-- Used as icon button -->
-<template name="email-copy">
-  <gds-icon-copy></gds-icon-copy>
-</template>
-
-<!-- Used as trail icon on link -->
-<template name="download-image">
-  <gds-icon-cloud-download
-    slot="trail" <!-- Slots can be defined here -->
-></gds-icon-cloud-download>
-</template>
-
-<template name="department-icon">
-  <gds-icon-cloud-download></gds-icon-cloud-download>
-</template>
-
-<!-- Or with default size/color in template -->
-<template name="status-icon">
-  <gds-icon-check size="l" color="positive"></gds-icon-check>
-</template>
-
-```
-
----
+{/* TODO: ⚠️ COMPLETE RE WRITE THIS WITH NEW SLOT COMPOSITION */}
 
 ## Framework Integration
-Coming soon...
+{/* TODO: ⚠️ Have concrete examples for angular react */}
+
+
 ### Lit
 
 ```typescript
@@ -457,67 +220,23 @@ const columns: TableColumn[] = [
     key: 'status',
     label: 'Status',
     sortable: true,
-    cell: {
-      value: {
-        type: 'badge',
-        value: (row: DataRow) => row.status,
-        variant: (row: DataRow) =>
-          row.status === 'Active' ? 'positive' : 'negative',
-      }
-    }
   },
   {
     key: 'amount',
     label: 'Amount',
     sortable: true,
     justify: 'end',
-    cell: {
-      value: {
-        type: 'formatted-number',
-        value: (row: DataRow) => row.amount,
-      }
-    }
   },
   {
     key: 'date',
     label: 'Date',
     sortable: true,
-    cell: {
-      value: {
-        type: 'formatted-date',
-        value: (row: DataRow) => row.date,
-        locale: 'sv-SE',
-        format: 'dateLong',
-      }
-    }
   },
 ]
 
 const actions = {
   label: 'Actions',
   justify: 'end',
-  cell: {
-    type: 'context-menu',
-    items: [
-      {
-        label: 'Edit',
-        onClick: (row: DataRow) => console.log('Edit', row),
-      },
-      {
-        label: 'View Details',
-        onClick: (row: DataRow) => console.log('View', row),
-      },
-      {
-        divider: true,
-        label: 'Delete',
-        onClick: (row: DataRow) => {
-          if (confirm(`Delete ${row.title}?`)) {
-            console.log('Delete', row)
-          }
-        },
-      },
-    ]
-  }
 }
 
 const dataProvider = async (
