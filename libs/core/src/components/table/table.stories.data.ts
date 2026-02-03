@@ -1,9 +1,17 @@
-import { Slot, TableColumn, TableRequest, TableResponse } from './table.types'
+import {
+  Slot,
+  SlotValue,
+  TableColumn,
+  TableRequest,
+  TableResponse,
+} from './table.types'
+
+type CellValue = SlotValue | string | number | null | undefined
 
 interface UserData {
   id: number
-  name: Slot.Cell
-  email: Slot.Cell
+  name: CellValue
+  email: CellValue
   role: 'Admin' | 'User' | 'Editor'
   status: 'Active' | 'Inactive'
   amount: number
@@ -16,8 +24,8 @@ interface UserData {
 
 interface FeedbackData {
   id: number
-  name: Slot.Cell
-  email: Slot.Cell
+  name: CellValue
+  email: CellValue
   feedback: string
   notes: string
   status: 'Active' | 'Inactive'
@@ -51,17 +59,16 @@ const generateUserRecord = (index: number): UserData => {
 
   return {
     id,
-    name: Slot.New(lastName.toLowerCase(), {
-      lead: true,
-      value: `${firstName} ${lastName}`,
-      trail: 'trail-slot',
-      extra: 'extra-slot',
-    }),
-    email: Slot.New({
-      icon: 'email-icon',
-      value: `${firstName.toLowerCase()}@domain.tld`,
-      action: 'email-action',
-    }),
+    name: Slot(
+      `${firstName} ${lastName}`,
+      ['lead', 'value', 'trail-slot', 'extra-slot'],
+      lastName.toLowerCase(),
+    ),
+    email: Slot(`${firstName.toLowerCase()}@domain.tld`, [
+      'email-icon',
+      'value',
+      'email-action',
+    ]),
     role: USERS.ROLES[index % USERS.ROLES.length],
     status: USERS.STATUSES[index % USERS.STATUSES.length],
     department: USERS.DEPARTMENTS[index % USERS.DEPARTMENTS.length],
@@ -90,19 +97,15 @@ const userDataProvider = async (
     const query = request.searchQuery.toLowerCase()
     processedData = processedData.filter((item) =>
       Object.values(item).some((value) =>
-        String(Slot.getValue(value)).toLowerCase().includes(query),
+        String(value).toLowerCase().includes(query),
       ),
     )
   }
 
   if (request.sortColumn) {
     processedData.sort((a, b) => {
-      const aValue = String(
-        Slot.getValue(a[request.sortColumn as keyof UserData]),
-      )
-      const bValue = String(
-        Slot.getValue(b[request.sortColumn as keyof UserData]),
-      )
+      const aValue = String(a[request.sortColumn as keyof UserData])
+      const bValue = String(b[request.sortColumn as keyof UserData])
 
       return request.sortDirection === 'asc'
         ? aValue.localeCompare(bValue)
@@ -251,19 +254,15 @@ const feedbackDataProvider = async (
     const query = request.searchQuery.toLowerCase()
     processedData = processedData.filter((item) =>
       Object.values(item).some((value) =>
-        String(Slot.getValue(value)).toLowerCase().includes(query),
+        String(value).toLowerCase().includes(query),
       ),
     )
   }
 
   if (request.sortColumn) {
     processedData.sort((a, b) => {
-      const aValue = String(
-        Slot.getValue(a[request.sortColumn as keyof FeedbackData]),
-      )
-      const bValue = String(
-        Slot.getValue(b[request.sortColumn as keyof FeedbackData]),
-      )
+      const aValue = String(a[request.sortColumn as keyof FeedbackData])
+      const bValue = String(b[request.sortColumn as keyof FeedbackData])
 
       return request.sortDirection === 'asc'
         ? aValue.localeCompare(bValue)

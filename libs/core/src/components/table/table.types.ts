@@ -81,151 +81,58 @@ export interface Cache<T> {
   [key: string]: CacheEntry<T>
 }
 
-export namespace Slot {
-  export type Value = {
-    value?: unknown
-    slots: Array<'value' | string>
-    key?: string | number
-  }
+export type SlotValue = {
+  value?: unknown
+  slots: string[]
+  key?: string | number
+  toString(): string
+  valueOf(): unknown
+  [Symbol.toPrimitive](hint: string): string | number
+}
 
-  export type Definition = {
-    value?: unknown
-    slots?: Array<'value' | string>
-    key?: string | number
-    [slotName: string]: unknown
-  }
+export const isSlotValue = (value: unknown): value is SlotValue =>
+  typeof value === 'object' &&
+  value !== null &&
+  Array.isArray((value as { slots?: unknown }).slots)
 
-  export type Cell = string | number | Value | null | undefined
+/**
+ * Create a slot-enabled cell value.
+ * - value: fallback cell content
+ * - slots: ordered array including 'value'
+ * - key: optional custom row key override
+ * - or pass slot entries directly (lead, trail, etc.) in order
+ *   - entry value: string/number -> slot id
+ *   - entry value: true/undefined -> slot id = entry key
+ */
+export function Slot(config: SlotValue): SlotValue
+export function Slot(
+  value?: unknown,
+  slots?: string[],
+  key?: string | number,
+): SlotValue
+export function Slot(
+  valueOrConfig?: unknown | SlotValue,
+  slots: string[] = ['value'],
+  key?: string | number,
+): SlotValue {
+  if (isSlotValue(valueOrConfig)) return valueOrConfig
 
-  const isValue = (value: unknown): value is Value =>
-    typeof value === 'object' &&
-    value !== null &&
-    'slots' in value &&
-    ((Array.isArray((value as { slots?: unknown }).slots) &&
-      (value as { slots?: unknown }).slots !== null) ||
-      (typeof (value as { slots?: unknown }).slots === 'object' &&
-        (value as { slots?: unknown }).slots !== null))
+  const rawValue = valueOrConfig
 
-  const isDefinition = (value: unknown): value is Definition =>
-    typeof value === 'object' && value !== null
-
-  /**
-   * Create a slot-enabled cell value.
-   * - value: fallback cell content
-   * - slots: ordered array including 'value'
-   * - key: optional custom row key override
-   * - or pass slot entries directly (lead, trail, etc.) in order
-   *   - entry value: string/number -> slot id
-   *   - entry value: true/undefined -> slot id = entry key
-   */
-  export function New(config?: Definition): Value
-  export function New(
-    key?: string | number,
-    slots?: Array<'value' | string>,
-  ): Value
-  export function New(
-    value?: unknown,
-    slots?: Array<'value' | string>,
-    key?: string | number,
-  ): Value
-  export function New(
-    valueOrConfig?: unknown | Definition,
-    slots: Array<'value' | string> = [],
-    key?: string | number,
-  ): Value {
-    const buildFromEntries = (config: Definition) => {
-      const orderedSlots: Array<'value' | string> = []
-      let resolvedValue: unknown = config.value
-
-      Object.entries(config).forEach(([entryKey, entryValue]) => {
-        if (entryKey === 'key' || entryKey === 'slots') return
-        if (entryKey === 'value') {
-          orderedSlots.push('value')
-          resolvedValue = entryValue
-          return
-        }
-
-        if (typeof entryValue === 'string' || typeof entryValue === 'number') {
-          orderedSlots.push(String(entryValue))
-          return
-        }
-
-        if (entryValue === true || typeof entryValue === 'undefined') {
-          orderedSlots.push(entryKey)
-        }
-      })
-
-      return {
-        value: resolvedValue,
-        slots: orderedSlots,
-      }
-    }
-
-    if (
-      (typeof valueOrConfig === 'string' ||
-        typeof valueOrConfig === 'number' ||
-        typeof valueOrConfig === 'undefined') &&
-      Array.isArray(slots)
-    ) {
-      return {
-        slots,
-        ...(typeof valueOrConfig !== 'undefined' ? { key: valueOrConfig } : {}),
-      }
-    }
-
-    if (
-      (typeof valueOrConfig === 'string' ||
-        typeof valueOrConfig === 'number' ||
-        typeof valueOrConfig === 'undefined') &&
-      isDefinition(slots) &&
-      key === undefined
-    ) {
-      const config = slots
-      if (!Array.isArray(config.slots)) {
-        const built = buildFromEntries(config)
-        return {
-          ...built,
-          ...(typeof valueOrConfig !== 'undefined'
-            ? { key: valueOrConfig }
-            : {}),
-        }
-      }
-
-      return {
-        value: config.value,
-        slots: config.slots ?? [],
-        ...(typeof valueOrConfig !== 'undefined' ? { key: valueOrConfig } : {}),
-      }
-    }
-
-    if (isDefinition(valueOrConfig) && key === undefined) {
-      const config = valueOrConfig
-      if (!Array.isArray(config.slots)) {
-        const built = buildFromEntries(config)
-        return {
-          ...built,
-          ...(typeof config.key !== 'undefined' ? { key: config.key } : {}),
-        }
-      }
-
-      return {
-        value: config.value,
-        slots: config.slots ?? [],
-        ...(typeof config.key !== 'undefined' ? { key: config.key } : {}),
-      }
-    }
-
-    return {
-      value: valueOrConfig,
-      slots,
-      ...(typeof key !== 'undefined' ? { key } : {}),
-    }
-  }
-
-  export const getValue = (value: unknown) => {
-    if (!isValue(value)) return value
-
-    return value.value
+  return {
+    value: rawValue,
+    slots,
+    ...(typeof key !== 'undefined' ? { key } : {}),
+    toString() {
+      return String(rawValue ?? '')
+    },
+    valueOf() {
+      return rawValue as unknown
+    },
+    [Symbol.toPrimitive](hint: string) {
+      if (hint === 'number') return Number(rawValue)
+      return String(rawValue ?? '')
+    },
   }
 }
 
@@ -239,3 +146,4 @@ export type TableDensity = Density
 export type TableDensityConfig = DensityConfig
 export type TableCache<T> = Cache<T>
 export type TableCacheEntry<T> = CacheEntry<T>
+export type TableSlotValue = SlotValue

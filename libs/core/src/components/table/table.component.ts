@@ -380,19 +380,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return null
   }
 
-  #isSlotCell(value: unknown): value is {
-    slots: Array<'value' | string>
-    value?: unknown
-    key?: string | number
-  } {
-    return (
-      typeof value === 'object' &&
-      value !== null &&
-      'slots' in value &&
-      Array.isArray((value as { slots?: unknown }).slots)
-    )
-  }
-
   #getCellSlotName(columnKey: string, rowKey: string | number, slotId: string) {
     return `${columnKey}:${rowKey}:${slotId}`
   }
@@ -453,7 +440,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       value = row[column.key]
     }
 
-    const hasSlotValue = this.#isSlotCell(value)
+    const hasSlotValue = Types.isSlotValue(value)
     const rowKeys = this.#getRowSlotKeys(
       row,
       index,
