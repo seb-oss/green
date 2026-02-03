@@ -1,15 +1,23 @@
-import { describe, expect, it, vi } from 'vitest'
+import { userEvent } from '@vitest/browser/context'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
-import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
+import {
+  aTimeout,
+  fixture,
+  setViewportSize,
+  html as testingHtml,
+} from '../../utils/testing'
 import { clickOnElement } from '../../utils/testing/index.js'
 
 import type { GdsPagination } from './pagination.component'
 
 import '@sebgroup/green-core/components/pagination'
+
+import { size } from '@floating-ui/dom'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -143,6 +151,8 @@ describe('<gds-pagination>', () => {
 
   describe('Page Size Selection', () => {
     it('should emit rows change event on page size selection', async () => {
+      const restore = await setViewportSize(1024, 768)
+
       const el = await fixture<GdsPagination>(
         html`<gds-pagination
           page="1"
@@ -154,8 +164,8 @@ describe('<gds-pagination>', () => {
 
       await el.updateComplete
 
-      const spy = vi.fn()
-      el.addEventListener('gds-rows-change', spy)
+      const rowChangeSpy = vi.fn()
+      el.addEventListener('gds-rows-change', rowChangeSpy)
 
       const menuItems = el.shadowRoot?.querySelectorAll(
         getScopedTagName('gds-menu-item'),
@@ -164,17 +174,12 @@ describe('<gds-pagination>', () => {
         (item: Element) => (item as HTMLElement).textContent?.trim() === '25',
       ) as HTMLElement | undefined
 
-      if (sizeItem) {
-        sizeItem.dispatchEvent(
-          new CustomEvent('gds-menu-item-click', {
-            detail: { value: '25' },
-            bubbles: true,
-          }),
-        )
-      }
+      sizeItem?.click()
 
       await el.updateComplete
-      expect(spy).toHaveBeenCalled()
+      expect(rowChangeSpy).toHaveBeenCalled()
+
+      await restore()
     })
 
     it('should emit rows change with correct row count', async () => {

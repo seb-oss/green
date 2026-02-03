@@ -245,18 +245,19 @@ export function conditionToBeTrue(
   })
 }
 
-export function setViewportSize(width: number, height: number) {
+export async function setViewportSize(width: number, height: number) {
   const originalSize = {
     width: window.innerWidth,
     height: window.innerHeight,
   }
+
   if (page) {
-    page.viewport(width, height)
+    await page.viewport(width, height)
   }
 
-  return () => {
+  return async () => {
     if (page) {
-      page.viewport(originalSize.width, originalSize.height)
+      await page.viewport(originalSize.width, originalSize.height)
     }
   }
 }
