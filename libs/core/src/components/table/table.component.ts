@@ -114,6 +114,16 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   selectable = false
 
   /**
+   * Disables select all checkbox in header.
+   */
+  @property({
+    attribute: 'disable-select-all',
+    type: Boolean,
+    reflect: false,
+  })
+  disableSelectAll = false
+
+  /**
    * Transforms table layout for mobile screens.
    */
   @property({ type: Boolean, reflect: false })
@@ -627,6 +637,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           indeterminate: this.#isPartialSelection,
           ariaLabel: msg('Select all rows'),
           onToggle: () => this.#handleSelectAll({} as CustomEvent),
+          skip: this.disableSelectAll,
         })}
       </th>
     `
@@ -741,13 +752,17 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     disabled = false,
     ariaLabel,
     onToggle,
+    skip = false,
   }: {
     checked: boolean
     indeterminate?: boolean
     disabled?: boolean
     ariaLabel: string
     onToggle: () => void
+    skip?: boolean
   }) {
+    if (skip) return null
+
     const toggle = (e: Event) => {
       e.stopPropagation()
       if (disabled) return

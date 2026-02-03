@@ -1043,9 +1043,11 @@ export const SlotComposition: Story = {
   args: {
     columns: Users.Columns,
     data: Users.Data,
-    selectable: false,
-    searchable: false,
-    settings: false,
+    headline: 'User Management',
+    summary: 'Overview of all users in the system',
+    selectable: true,
+    searchable: true,
+    settings: true,
     density: 'comfortable',
   },
   parameters: {
@@ -1067,11 +1069,14 @@ slot names (e.g. \
     <gds-table
       .columns="${args.columns}"
       .data="${args.data}"
+      .headline="${args.headline}"
+      .summary="${args.summary}"
       ?selectable="${args.selectable}"
       ?searchable="${args.searchable}"
       ?settings="${args.settings}"
       density="${args.density}"
       responsive
+      disable-select-all
       rows="5"
     >
       <gds-icon-buildings slot="name:andersson:lead"></gds-icon-buildings>
