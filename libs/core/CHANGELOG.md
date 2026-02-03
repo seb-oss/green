@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.28.1
+
+### Patch Changes
+
+- 9babdf5: **Popover:** Remove redundant `showModal()` call which could throw errors in mobile view callback
+- 9babdf5: **Checkbox:** Make hidden `input` have non-zero dimensions for a11y compatibility reasons
+
 ## 2.28.0
 
 ### Minor Changes
