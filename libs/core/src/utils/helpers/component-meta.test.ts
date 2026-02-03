@@ -1,4 +1,4 @@
-import { expect } from '@esm-bundle/chai'
+import { describe, expect, it } from 'vitest'
 
 import type { Package } from 'custom-elements-manifest'
 
@@ -137,10 +137,10 @@ describe('component-meta', () => {
         try {
           await CemParser.loadManifest('/non/existent/path.json')
           // If we reach here, the test should fail
-          expect.fail('Should have thrown an error')
+          throw new Error('Should have thrown an error')
         } catch (error) {
           // Error is expected
-          expect(error).to.exist
+          expect(error).toBeDefined()
         }
       })
     })
@@ -150,11 +150,11 @@ describe('component-meta', () => {
         const componentModules = CemParser.getComponentModules(mockManifest)
 
         // Should find dropdown, button, and the primitive modules
-        expect(componentModules.length).to.be.greaterThan(0)
+        expect(componentModules.length).toBeGreaterThan(0)
         const hasButton = componentModules.some(
           (mod) => mod.path === 'src/components/button/button.ts',
         )
-        expect(hasButton).to.be.true
+        expect(hasButton).toBe(true)
       })
 
       it('should filter out non-component declarations', () => {
@@ -164,7 +164,7 @@ describe('component-meta', () => {
         const hasHelper = componentModules.some(
           (mod) => mod.path === 'src/utils/helper.ts',
         )
-        expect(hasHelper).to.be.false
+        expect(hasHelper).toBe(false)
       })
     })
 
@@ -173,26 +173,28 @@ describe('component-meta', () => {
         const reExportedPrimitives =
           CemParser.findReExportedPrimitives(mockManifest)
 
-        expect(reExportedPrimitives).to.have.lengthOf(2)
+        expect(reExportedPrimitives).toHaveLength(2)
 
         // Check first primitive (GdsOption)
         const option = reExportedPrimitives.find(
           (p) => p.primitiveClass === 'GdsOption',
         )
-        expect(option).to.exist
-        expect(option!.primitiveName).to.equal('gds-option')
-        expect(option!.reExportModule).to.equal(
+        expect(option).toBeDefined()
+        expect(option!.primitiveName).toBe('gds-option')
+        expect(option!.reExportModule).toBe(
           'src/components/dropdown/dropdown.component.ts',
         )
-        expect(option!.reExportPath).to.equal('components/dropdown/dropdown.component.js')
+        expect(option!.reExportPath).toBe(
+          'components/dropdown/dropdown.component.js',
+        )
 
         // Check second primitive (GdsMenuItem)
         const menuItem = reExportedPrimitives.find(
           (p) => p.primitiveClass === 'GdsMenuItem',
         )
-        expect(menuItem).to.exist
-        expect(menuItem!.primitiveName).to.equal('gds-menu-item')
-        expect(menuItem!.reExportModule).to.equal(
+        expect(menuItem).toBeDefined()
+        expect(menuItem!.primitiveName).toBe('gds-menu-item')
+        expect(menuItem!.reExportModule).toBe(
           'src/components/dropdown/dropdown.component.ts',
         )
       })
@@ -224,8 +226,8 @@ describe('component-meta', () => {
           manifestWithoutReExports,
         )
 
-        expect(reExportedPrimitives).to.be.an('array')
-        expect(reExportedPrimitives).to.have.lengthOf(0)
+        expect(reExportedPrimitives).toBeInstanceOf(Array)
+        expect(reExportedPrimitives).toHaveLength(0)
       })
 
       it('should ignore exports that are not from primitives', () => {
@@ -255,7 +257,7 @@ describe('component-meta', () => {
           manifestWithNormalExports,
         )
 
-        expect(reExportedPrimitives).to.have.lengthOf(0)
+        expect(reExportedPrimitives).toHaveLength(0)
       })
     })
 
@@ -272,19 +274,15 @@ describe('component-meta', () => {
           declaration,
         )
 
-        expect(componentData.tagName).to.equal('gds-button')
-        expect(componentData.className).to.equal('GdsButton')
-        expect(componentData.description).to.equal('A button component')
-        expect(componentData.outputPath).to.equal(
-          'src/components/button/button.ts',
-        )
-        expect(componentData.sourcePath).to.equal(
-          'src/components/button/button.ts',
-        )
-        expect(componentData.properties).to.be.an('array')
-        expect(componentData.events).to.be.an('array')
-        expect(componentData.slots).to.be.an('array')
-        expect(componentData.methods).to.be.an('array')
+        expect(componentData.tagName).toBe('gds-button')
+        expect(componentData.className).toBe('GdsButton')
+        expect(componentData.description).toBe('A button component')
+        expect(componentData.outputPath).toBe('src/components/button/button.ts')
+        expect(componentData.sourcePath).toBe('src/components/button/button.ts')
+        expect(componentData.properties).toBeInstanceOf(Array)
+        expect(componentData.events).toBeInstanceOf(Array)
+        expect(componentData.slots).toBeInstanceOf(Array)
+        expect(componentData.methods).toBeInstanceOf(Array)
       })
 
       it('should extract component data from primitives', () => {
@@ -299,9 +297,9 @@ describe('component-meta', () => {
           declaration,
         )
 
-        expect(componentData.tagName).to.equal('gds-option')
-        expect(componentData.className).to.equal('GdsOption')
-        expect(componentData.description).to.equal('A listbox option primitive')
+        expect(componentData.tagName).toBe('gds-option')
+        expect(componentData.className).toBe('GdsOption')
+        expect(componentData.description).toBe('A listbox option primitive')
       })
 
       it('should detect form control components', () => {
@@ -334,8 +332,8 @@ describe('component-meta', () => {
           declaration as any,
         )
 
-        expect(componentData.isFormControl).to.be.true
-        expect(componentData.isIconComponent).to.be.false
+        expect(componentData.isFormControl).toBe(true)
+        expect(componentData.isIconComponent).toBe(false)
       })
 
       it('should detect icon components', () => {
@@ -368,8 +366,8 @@ describe('component-meta', () => {
           declaration as any,
         )
 
-        expect(componentData.isIconComponent).to.be.true
-        expect(componentData.isFormControl).to.be.false
+        expect(componentData.isIconComponent).toBe(true)
+        expect(componentData.isFormControl).toBe(false)
       })
 
       it('should detect link components', () => {
@@ -399,7 +397,7 @@ describe('component-meta', () => {
           declaration as any,
         )
 
-        expect(componentData.isLinkComponent).to.be.true
+        expect(componentData.isLinkComponent).toBe(true)
       })
 
       it('should not detect component types when inheritance is missing', () => {
@@ -429,9 +427,9 @@ describe('component-meta', () => {
           declaration as any,
         )
 
-        expect(componentData.isFormControl).to.be.false
-        expect(componentData.isIconComponent).to.be.false
-        expect(componentData.isLinkComponent).to.be.false
+        expect(componentData.isFormControl).toBe(false)
+        expect(componentData.isIconComponent).toBe(false)
+        expect(componentData.isLinkComponent).toBe(false)
       })
 
       it('should handle components with no members', () => {
@@ -455,9 +453,9 @@ describe('component-meta', () => {
           declaration as any,
         )
 
-        expect(componentData.isFormControl).to.be.false
-        expect(componentData.isIconComponent).to.be.false
-        expect(componentData.isLinkComponent).to.be.false
+        expect(componentData.isFormControl).toBe(false)
+        expect(componentData.isIconComponent).toBe(false)
+        expect(componentData.isLinkComponent).toBe(false)
       })
 
       it('should detect subcomponents from CEM plugin', () => {
@@ -491,15 +489,13 @@ describe('component-meta', () => {
           declaration as any,
         )
 
-        expect(componentData.subcomponents).to.be.an('array')
-        expect(componentData.subcomponents).to.have.lengthOf(2)
-        expect(componentData.subcomponents![0].tagName).to.equal('gds-option')
-        expect(componentData.subcomponents![0].description).to.equal(
+        expect(componentData.subcomponents).toBeInstanceOf(Array)
+        expect(componentData.subcomponents).toHaveLength(2)
+        expect(componentData.subcomponents![0].tagName).toBe('gds-option')
+        expect(componentData.subcomponents![0].description).toBe(
           'Dropdown option',
         )
-        expect(componentData.subcomponents![1].tagName).to.equal(
-          'gds-menu-heading',
-        )
+        expect(componentData.subcomponents![1].tagName).toBe('gds-menu-heading')
       })
     })
 
@@ -514,24 +510,24 @@ describe('component-meta', () => {
             await CemParser.parseAllComponents()
 
           // Should include the dropdown component AND the re-exported primitives
-          expect(components.length).to.be.greaterThan(1)
+          expect(components.length).toBeGreaterThan(1)
 
           // Should have found the re-exported primitives
-          expect(reExportedPrimitives).to.have.lengthOf(2)
+          expect(reExportedPrimitives).toHaveLength(2)
 
           // Verify that components include the re-exported primitives
           const optionComponent = components.find(
             (c) => c.tagName === 'gds-option',
           )
-          expect(optionComponent).to.exist
-          expect(optionComponent!.sourcePath).to.equal(
+          expect(optionComponent).toBeDefined()
+          expect(optionComponent!.sourcePath).toBe(
             'src/components/dropdown/dropdown.component.ts',
           )
 
           const menuItemComponent = components.find(
             (c) => c.tagName === 'gds-menu-item',
           )
-          expect(menuItemComponent).to.exist
+          expect(menuItemComponent).toBeDefined()
         } finally {
           // Restore original method
           CemParser.loadManifest = originalLoadManifest
@@ -636,25 +632,19 @@ describe('component-meta', () => {
 
           // Should find 2 re-export declarations (from dropdown.component.ts and select.component.ts)
           // index.ts files are filtered out
-          expect(reExportedPrimitives).to.have.lengthOf(2)
+          expect(reExportedPrimitives).toHaveLength(2)
 
           // But should only include GdsOption ONCE in components array (deduplicated)
           const optionComponents = components.filter(
             (c) => c.tagName === 'gds-option',
           )
-          expect(optionComponents).to.have.lengthOf(
-            1,
-            'GdsOption should appear exactly once',
-          )
+          expect(optionComponents).toHaveLength(1)
 
           // Should also have the two regular components (dropdown and select)
-          expect(components).to.have.lengthOf(
-            3,
-            'Should have dropdown, select, and option (once)',
-          )
+          expect(components).toHaveLength(3)
 
           const componentNames = components.map((c) => c.tagName).sort()
-          expect(componentNames).to.deep.equal([
+          expect(componentNames).toEqual([
             'gds-dropdown',
             'gds-option',
             'gds-select',

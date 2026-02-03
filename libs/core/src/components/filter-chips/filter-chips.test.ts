@@ -1,6 +1,4 @@
-import { expect } from '@esm-bundle/chai'
-import { assert, fixture, html as testingHtml } from '@open-wc/testing'
-import sinon from 'sinon'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type {
   GdsFilterChip,
@@ -8,7 +6,11 @@ import type {
 } from '@sebgroup/green-core/components/filter-chips'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
+import {
+  clickOnElement,
+  fixture,
+  html as testingHtml,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/filter-chips'
 
@@ -17,7 +19,7 @@ const html = htmlTemplateTagFactory(testingHtml)
 describe('<gds-filter-chips>', () => {
   it('is a GdsElement', async () => {
     const el = await fixture(html`<gds-filter-chips></gds-filter-chips>`)
-    expect(el.getAttribute('gds-element')).to.equal('gds-filter-chips')
+    expect(el.getAttribute('gds-element')).toBe('gds-filter-chips')
   })
 
   describe('Accessibility', () => {
@@ -30,7 +32,7 @@ describe('<gds-filter-chips>', () => {
         </gds-filter-chips>`,
       )
       await el.updateComplete
-      await assert.isAccessible(el, {
+      await expect(el).toBeAccessible({
         ignoredRules: ['aria-required-children'],
       })
     })
@@ -47,7 +49,7 @@ describe('<gds-filter-chips>', () => {
       )
       await el.updateComplete
       const chip = el.querySelector('#chip') as GdsFilterChip
-      expect(chip.selected).to.be.true
+      expect(chip.selected).toBe(true)
     })
 
     it('should set the selected chip based on the value property when multiple chips are selected', async () => {
@@ -61,8 +63,8 @@ describe('<gds-filter-chips>', () => {
       await el.updateComplete
       const chip1 = el.querySelector('#chip1') as GdsFilterChip
       const chip2 = el.querySelector('#chip2') as GdsFilterChip
-      expect(chip1.selected).to.be.true
-      expect(chip2.selected).to.be.true
+      expect(chip1.selected).toBe(true)
+      expect(chip2.selected).toBe(true)
     })
 
     it('chips property should return the chips in the control', async () => {
@@ -74,9 +76,9 @@ describe('<gds-filter-chips>', () => {
       )
       await el.updateComplete
       const chips = el.chips
-      await expect(chips.length).to.equal(2)
-      await expect(chips[0].value).to.equal('1')
-      await expect(chips[1].value).to.equal('2')
+      await expect(chips.length).toBe(2)
+      await expect(chips[0].value).toBe('1')
+      await expect(chips[1].value).toBe('2')
     })
 
     it('should fire a change event when a chip is selected', async () => {
@@ -89,14 +91,14 @@ describe('<gds-filter-chips>', () => {
       await el.updateComplete
       const chip1 = el.querySelector('#chip1') as GdsFilterChip
       const chip2 = el.querySelector('#chip2') as GdsFilterChip
-      const changeSpy = sinon.spy()
+      const changeSpy = vi.fn()
       el.addEventListener('change', changeSpy)
       await clickOnElement(chip1)
-      expect(changeSpy.calledOnce).to.be.true
-      await expect(changeSpy.firstCall.args[0].detail.value).to.equal('1')
+      expect(changeSpy).toHaveBeenCalledOnce()
+      await expect(changeSpy.mock.calls[0][0].detail.value).toBe('1')
       await clickOnElement(chip2)
-      expect(changeSpy.calledTwice).to.be.true
-      await expect(changeSpy.secondCall.args[0].detail.value).to.equal('2')
+      expect(changeSpy).toHaveBeenCalledTimes(2)
+      await expect(changeSpy.mock.calls[1][0].detail.value).toBe('2')
     })
 
     it('should have a `rowCollapse` property', async () => {
@@ -107,7 +109,7 @@ describe('<gds-filter-chips>', () => {
         </gds-filter-chips>`,
       )
       await el.updateComplete
-      expect(el.rowCollapse).to.be.true
+      expect(el.rowCollapse).toBe(true)
     })
   })
 
@@ -123,8 +125,8 @@ describe('<gds-filter-chips>', () => {
       const chip1 = el.querySelector('#chip1') as GdsFilterChip
       const chip2 = el.querySelector('#chip2') as GdsFilterChip
       await clickOnElement(chip1)
-      expect(chip1.selected).to.be.true
-      expect(chip2.selected).to.be.false
+      expect(chip1.selected).toBe(true)
+      expect(chip2.selected).toBe(false)
     })
 
     it('should deselect a chip when clicked if it is already selected', async () => {
@@ -138,11 +140,11 @@ describe('<gds-filter-chips>', () => {
       const chip1 = el.querySelector('#chip1') as GdsFilterChip
       const chip2 = el.querySelector('#chip2') as GdsFilterChip
       await clickOnElement(chip1)
-      expect(chip1.selected).to.be.true
-      expect(chip2.selected).to.be.false
+      expect(chip1.selected).toBe(true)
+      expect(chip2.selected).toBe(false)
       await clickOnElement(chip1)
-      expect(chip1.selected).to.be.false
-      expect(chip2.selected).to.be.false
+      expect(chip1.selected).toBe(false)
+      expect(chip2.selected).toBe(false)
     })
 
     it('should select a chip when clicked and deselect the other chips if multiple is false', async () => {
@@ -156,11 +158,11 @@ describe('<gds-filter-chips>', () => {
       const chip1 = el.querySelector('#chip1') as GdsFilterChip
       const chip2 = el.querySelector('#chip2') as GdsFilterChip
       await clickOnElement(chip1)
-      expect(chip1.selected).to.be.true
-      expect(chip2.selected).to.be.false
+      expect(chip1.selected).toBe(true)
+      expect(chip2.selected).toBe(false)
       await clickOnElement(chip2)
-      expect(chip1.selected).to.be.false
-      expect(chip2.selected).to.be.true
+      expect(chip1.selected).toBe(false)
+      expect(chip2.selected).toBe(true)
     })
 
     it('should select a chip when clicked and keep the other chips selected if multiple is true', async () => {
@@ -174,11 +176,11 @@ describe('<gds-filter-chips>', () => {
       const chip1 = el.querySelector('#chip1') as GdsFilterChip
       const chip2 = el.querySelector('#chip2') as GdsFilterChip
       await clickOnElement(chip1)
-      expect(chip1.selected).to.be.true
-      expect(chip2.selected).to.be.false
+      expect(chip1.selected).toBe(true)
+      expect(chip2.selected).toBe(false)
       await clickOnElement(chip2)
-      expect(chip1.selected).to.be.true
-      expect(chip2.selected).to.be.true
+      expect(chip1.selected).toBe(true)
+      expect(chip2.selected).toBe(true)
     })
   })
 })

@@ -1,12 +1,15 @@
-import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
-import sinon from 'sinon'
+import { describe, expect, it, vi } from 'vitest'
 
 import type { GdsSegmentedControl } from '@sebgroup/green-core/components/segmented-control'
 
 import { GdsSegment } from '@sebgroup/green-core/components/segmented-control/segment'
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
+import {
+  clickOnElement,
+  fixture,
+  html as testingHtml,
+  waitUntil,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/segmented-control'
 
@@ -17,7 +20,7 @@ describe('<gds-segmented-control>', () => {
     const el = await fixture(
       html`<gds-segmented-control></gds-segmented-control>`,
     )
-    expect(el.getAttribute('gds-element')).to.equal('gds-segmented-control')
+    expect(el.getAttribute('gds-element')).toBe('gds-segmented-control')
   })
 
   describe('Accessibility', () => {
@@ -29,7 +32,7 @@ describe('<gds-segmented-control>', () => {
         </gds-segmented-control>`,
       )
       await el.updateComplete
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
   })
 
@@ -43,7 +46,7 @@ describe('<gds-segmented-control>', () => {
       )
       await el.updateComplete
       const seg = el.querySelector('#seg') as GdsSegment
-      expect(seg.selected).to.be.true
+      expect(seg.selected).toBe(true)
     })
 
     it('should set the value property based on the selected segment', async () => {
@@ -57,7 +60,7 @@ describe('<gds-segmented-control>', () => {
       const seg = el.querySelector('#seg') as GdsSegment
       seg.click()
       await el.updateComplete
-      expect(el.value).to.equal('2')
+      expect(el.value).toBe('2')
     })
 
     it('should select the segment when the value property is updated', async () => {
@@ -71,7 +74,7 @@ describe('<gds-segmented-control>', () => {
       el.value = '2'
       await el.updateComplete
       const seg = el.querySelector('#seg') as GdsSegment
-      expect(seg.selected).to.be.true
+      expect(seg.selected).toBe(true)
     })
 
     it('should dispatch a change event when the value property is updated', async () => {
@@ -82,12 +85,12 @@ describe('<gds-segmented-control>', () => {
         </gds-segmented-control>`,
       )
       await el.updateComplete
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('change', spy)
       const seg = el.querySelector('#seg') as GdsSegment
       seg.click()
       await el.updateComplete
-      expect(spy).to.have.been.calledOnce
+      expect(spy).toHaveBeenCalledOnce()
     })
 
     it('renders the next button when segments overflow', async () => {
@@ -136,9 +139,9 @@ describe('<gds-segmented-control>', () => {
       `)
 
       const segments = el.segments
-      expect(segments[0]['min-width']).to.equal('100px')
-      expect(segments[1]['max-width']).to.equal('200px')
-      expect(segments[2]['width']).to.equal('150px')
+      expect(segments[0]['min-width']).toBe('100px')
+      expect(segments[1]['max-width']).toBe('200px')
+      expect(segments[2]['width']).toBe('150px')
     })
   })
 })

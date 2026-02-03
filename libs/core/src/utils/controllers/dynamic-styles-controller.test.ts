@@ -1,5 +1,5 @@
 import { css } from 'lit'
-import { expect } from '@esm-bundle/chai'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
 import { GdsElement } from '../../gds-element'
 import { DynamicStylesController } from './dynamic-styles-controller'
@@ -59,7 +59,7 @@ describe('DynamicStylesController', () => {
     controller.inject('test', styles)
     expect(
       getAllStyles().some((style) => style && style.includes('color: red')),
-    ).to.be.true
+    ).toBe(true)
   })
 
   it('clears all styles', () => {
@@ -72,10 +72,10 @@ describe('DynamicStylesController', () => {
     controller.clearAll()
     expect(
       getAllStyles().some((style) => style && style.includes('color: red')),
-    ).to.be.false
+    ).toBe(false)
     expect(
       getAllStyles().some((style) => style && style.includes('display: block')),
-    ).to.be.false
+    ).toBe(false)
   })
 
   it('clears styles for a specific key', () => {
@@ -88,7 +88,7 @@ describe('DynamicStylesController', () => {
     controller.clear('test')
     expect(
       getAllStyles().some((style) => style && style.includes('color: red')),
-    ).to.be.false
+    ).toBe(false)
   })
 
   it('returns true if a key exists', () => {
@@ -98,7 +98,7 @@ describe('DynamicStylesController', () => {
       }
     `
     controller.inject('test', styles)
-    expect(controller.has('test')).to.be.true
+    expect(controller.has('test')).toBe(true)
   })
 
   it('clears initial styles', () => {
@@ -111,10 +111,10 @@ describe('DynamicStylesController', () => {
     controller.clearInitial()
     expect(
       getAllStyles().some((style) => style && style.includes('color: red')),
-    ).to.be.true
+    ).toBe(true)
     expect(
       getAllStyles().some((style) => style && style.includes('display: block')),
-    ).to.be.false
+    ).toBe(false)
   })
 
   it('restores initial styles', () => {
@@ -128,18 +128,18 @@ describe('DynamicStylesController', () => {
     controller.clearInitial()
     expect(
       getAllStyles().some((style) => style && style.includes('color: red')),
-    ).to.be.true
+    ).toBe(true)
     expect(
       getAllStyles().some((style) => style && style.includes('display: block')),
-    ).to.be.false
+    ).toBe(false)
 
     controller.restoreInitial()
 
     expect(
       getAllStyles().some((style) => style && style.includes('color: red')),
-    ).to.be.true
+    ).toBe(true)
     expect(
       getAllStyles().some((style) => style && style.includes('display: block')),
-    ).to.be.true
+    ).toBe(true)
   })
 })

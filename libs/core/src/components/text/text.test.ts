@@ -1,8 +1,9 @@
-import { expect, fixture, html as testingHtml } from '@open-wc/testing'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 import type { GdsText } from '@sebgroup/green-core/components/text'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/text'
 
@@ -13,5 +14,10 @@ describe('GdsText', () => {
   beforeEach(async () => {
     element = await fixture(html`<gds-text></gds-text>`)
     await element.updateComplete
+  })
+
+  it('should instantiate', () => {
+    expect(element).toBeDefined()
+    expect(element.tagName.toLowerCase()).toContain('gds-text')
   })
 })

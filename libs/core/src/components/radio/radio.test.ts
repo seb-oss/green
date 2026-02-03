@@ -1,6 +1,4 @@
-import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml } from '@open-wc/testing'
-import sinon from 'sinon'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type {
   GdsRadio,
@@ -8,6 +6,7 @@ import type {
 } from '@sebgroup/green-core/components/radio'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/radio/index.js'
 
@@ -25,8 +24,8 @@ describe('Radio Components', () => {
         el.checked = true
         await el.updateComplete
 
-        expect(el.checked).to.be.true
-        expect(el.getAttribute('aria-checked')).to.equal('true')
+        expect(el.checked).toBe(true)
+        expect(el.getAttribute('aria-checked')).toBe('true')
       })
     })
 
@@ -37,13 +36,13 @@ describe('Radio Components', () => {
         `)
         await el.updateComplete
 
-        const changeSpy = sinon.spy()
+        const changeSpy = vi.fn()
         el.addEventListener('change', changeSpy)
 
         el.dispatchEvent(new Event('change', { bubbles: true }))
         await el.updateComplete
 
-        expect(changeSpy).to.have.been.calledOnce
+        expect(changeSpy).toHaveBeenCalledOnce()
       })
 
       it('should not respond when disabled', async () => {
@@ -52,15 +51,15 @@ describe('Radio Components', () => {
         `)
         await el.updateComplete
 
-        const changeSpy = sinon.spy()
+        const changeSpy = vi.fn()
         el.addEventListener('change', changeSpy)
 
         el.dispatchEvent(new MouseEvent('click', { bubbles: true }))
         await el.updateComplete
 
-        expect(changeSpy).to.not.have.been.called
-        expect(el.hasAttribute('disabled')).to.be.true
-        expect(el.getAttribute('aria-disabled')).to.equal('true')
+        expect(changeSpy).not.toHaveBeenCalled()
+        expect(el.hasAttribute('disabled')).toBe(true)
+        expect(el.getAttribute('aria-disabled')).toBe('true')
       })
     })
   })
@@ -79,8 +78,8 @@ describe('Radio Components', () => {
         firstRadio.click()
         await el.updateComplete
         await new Promise((resolve) => setTimeout(resolve, 0))
-        expect(firstRadio.checked).to.be.true
-        expect(el.value).to.equal('1')
+        expect(firstRadio.checked).toBe(true)
+        expect(el.value).toBe('1')
       })
       it('should update radio states when group value changes', async () => {
         const el = await fixture<GdsRadioGroup>(html`
@@ -94,8 +93,8 @@ describe('Radio Components', () => {
         await el.updateComplete
         await new Promise((resolve) => setTimeout(resolve, 0))
         const radios = el.radios
-        expect(radios[0].checked).to.be.false
-        expect(radios[1].checked).to.be.true
+        expect(radios[0].checked).toBe(false)
+        expect(radios[1].checked).toBe(true)
       })
     })
 
@@ -129,8 +128,8 @@ describe('Radio Components', () => {
         await el.updateComplete
         await new Promise((resolve) => setTimeout(resolve, 100))
 
-        expect(el.value).to.equal('2')
-        expect(el.radios[1].checked).to.be.true
+        expect(el.value).toBe('2')
+        expect(el.radios[1].checked).toBe(true)
       })
     })
 
@@ -143,13 +142,13 @@ describe('Radio Components', () => {
           </gds-radio-group>
         `)
         await el.updateComplete
-        const changeSpy = sinon.spy()
+        const changeSpy = vi.fn()
         el.addEventListener('change', changeSpy)
         el.radios[0].click()
         await el.updateComplete
         await new Promise((resolve) => setTimeout(resolve, 0))
-        expect(changeSpy).to.have.been.called
-        expect(el.value).to.equal('1')
+        expect(changeSpy).toHaveBeenCalled()
+        expect(el.value).toBe('1')
       })
 
       it('should emit input event when radio is selected', async () => {
@@ -160,13 +159,13 @@ describe('Radio Components', () => {
           </gds-radio-group>
         `)
         await el.updateComplete
-        const inputSpy = sinon.spy()
+        const inputSpy = vi.fn()
         el.addEventListener('input', inputSpy)
         el.radios[0].click()
         await el.updateComplete
         await new Promise((resolve) => setTimeout(resolve, 0))
-        expect(inputSpy).to.have.been.called
-        expect(el.value).to.equal('1')
+        expect(inputSpy).toHaveBeenCalled()
+        expect(el.value).toBe('1')
       })
     })
   })
@@ -179,7 +178,7 @@ describe('Radio Components', () => {
           <gds-radio value="2" label="Option 2"></gds-radio>
         </gds-radio-group>
       `)
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
 
     it('should be accessible when invalid', async () => {
@@ -189,7 +188,7 @@ describe('Radio Components', () => {
           <gds-radio value="2" label="Option 2"></gds-radio>
         </gds-radio-group>
       `)
-      await expect(el).to.be.accessible
+      await expect(el).toBeAccessible()
     })
 
     it('should be accessible when disabled', async () => {
@@ -199,7 +198,7 @@ describe('Radio Components', () => {
           <gds-radio value="2" label="Option 2"></gds-radio>
         </gds-radio-group>
       `)
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
 
     it('should have accessible error message text when invalid', async () => {
@@ -217,12 +216,12 @@ describe('Radio Components', () => {
       const radios = el.shadowRoot?.querySelectorAll('gds-radio')
       radios?.forEach((radio: any) => {
         const input = radio.shadowRoot?.querySelector('div[role="radio"]')
-        expect(input?.getAttribute('aria-description')).to.contain(
+        expect(input?.getAttribute('aria-description')).toContain(
           'This is an error message',
         )
-        expect(input).to.be.accessible()
+        expect(input).toBeAccessible()
       })
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
   })
 })

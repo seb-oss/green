@@ -1,9 +1,9 @@
-import { expect } from '@esm-bundle/chai'
-import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { GdsSelect } from '@sebgroup/green-core/components/select/index.js'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/select/index.js'
 
@@ -16,8 +16,8 @@ describe('<gds-select>', () => {
         html`<gds-select label="Select Label"></gds-select>`,
       )
       const labelEl = el.shadowRoot?.querySelector('label#label-text')
-      expect(labelEl).to.exist
-      expect(labelEl?.textContent).to.contain('Select Label')
+      expect(labelEl).toBeDefined()
+      expect(labelEl?.textContent).toContain('Select Label')
     })
 
     it('should render options correctly', async () => {
@@ -36,11 +36,11 @@ describe('<gds-select>', () => {
 
       // Get the select element through the component method
       const selectElement = el.selectElement
-      expect(selectElement).to.exist
-      expect(selectElement.options.length).to.equal(3) // 1 for "Please select" + 2 options
-      expect(selectElement.options[0].text).to.equal('Please select')
-      expect(selectElement.options[1].text).to.equal('Option 1')
-      expect(selectElement.options[2].text).to.equal('Option 2')
+      expect(selectElement).toBeDefined()
+      expect(selectElement.options.length).toBe(3) // 1 for "Please select" + 2 options
+      expect(selectElement.options[0].text).toBe('Please select')
+      expect(selectElement.options[1].text).toBe('Option 1')
+      expect(selectElement.options[2].text).toBe('Option 2')
     })
   })
 
@@ -55,7 +55,7 @@ describe('<gds-select>', () => {
           </select>
         </gds-select>`,
       )
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
   })
 
@@ -81,10 +81,10 @@ describe('<gds-select>', () => {
 
       // Check if the options are rendered in the dropdown
       const options = el.shadowRoot?.querySelectorAll('option') // Adjust selector based on your implementation
-      expect(options.length).to.be.greaterThan(0) // Check if there are options available
+      expect(options.length).toBeGreaterThan(0) // Check if there are options available
 
       // Optionally, check if the first option is visible
-      expect(options[0].textContent).to.equal('Option 1') // Verify the first option's text
+      expect(options[0].textContent).toBe('Option 1') // Verify the first option's text
     })
 
     it('should select option based on value', async () => {
@@ -99,7 +99,7 @@ describe('<gds-select>', () => {
       `)
 
       await el.updateComplete
-      expect(el.displayValue).to.equal('Option 1')
+      expect(el.displayValue).toBe('Option 1')
     })
 
     it('should return a comma separated string as display value for multiple selections', async () => {
@@ -114,7 +114,7 @@ describe('<gds-select>', () => {
       `)
 
       await el.updateComplete
-      expect(el.displayValue).to.equal('Option 1, Option 2')
+      expect(el.displayValue).toBe('Option 1, Option 2')
     })
 
     it('should handle no pre-selected options', async () => {
@@ -129,7 +129,7 @@ describe('<gds-select>', () => {
       `)
 
       await el.updateComplete
-      expect(el.value).to.equal('')
+      expect(el.value).toBe('')
     })
   })
 })
