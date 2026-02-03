@@ -1071,6 +1071,7 @@ slot names (e.g. \
       ?searchable="${args.searchable}"
       ?settings="${args.settings}"
       density="${args.density}"
+      responsive
       rows="5"
     >
       <gds-icon-buildings slot="name:andersson:lead"></gds-icon-buildings>

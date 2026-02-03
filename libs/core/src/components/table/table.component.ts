@@ -424,50 +424,37 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   /**
-   * Renders the content of a table cell with support for custom transformations,
-   * cell slots, and responsive mobile labels.
+   * Resolves and renders the cell content.
    *
-   * Value resolution priority:
-   * 1. column.value - Direct transform function
-   * 2. slot cell object - Row value with a `slots` object
-   * 3. row[column.key] - Raw data value
+   * Flow:
+   * 1. Resolve the raw value (prefer `column.value(row)` if provided).
+   * 2. If the value is a slot object, expand it into one or more slots
+   *    using the column key + row key(s). Otherwise render the raw value.
    */
   #renderCellContent(row: T, column: Types.Column, index: number) {
-    let value: any
-    if (column.value) {
-      value = column.value(row)
-    } else {
-      value = row[column.key]
-    }
+    const rawValue = column.value ? column.value(row) : row[column.key]
+    const content = Types.isSlotValue(rawValue)
+      ? this.#renderCellSlots(
+          column.key,
+          this.#getRowSlotKeys(row, index, rawValue.key),
+          rawValue.slots,
+          rawValue.value,
+        )
+      : rawValue
 
-    const hasSlotValue = Types.isSlotValue(value)
-    const rowKeys = this.#getRowSlotKeys(
-      row,
-      index,
-      hasSlotValue ? value.key : undefined,
-    )
-    const slotContent = hasSlotValue
-      ? this.#renderCellSlots(column.key, rowKeys, value.slots, value.value)
-      : null
-
-    const resolvedValue = hasSlotValue ? slotContent : value
-    const processedValue = column.justify
-      ? html`<span>${resolvedValue}</span>`
-      : resolvedValue
-    const isResponsive = this._isMobile && this.responsive
-    const mobileLabel = isResponsive
-      ? html`
-          <span class="column-label" aria-hidden="true">
-            ${column.label}:
-          </span>
-        `
-      : null
-
-    const ariaLabel = isResponsive ? `${column.label}: ` : ''
+    const mobile = this._isMobile && this.responsive
+    const label = mobile ? column.label : null
 
     return html`
-      <div class="cell-content" aria-label="${ariaLabel}">
-        ${[mobileLabel, processedValue]}
+      <div class="cell-content" aria-label=${label}>
+        ${mobile
+          ? html`
+              <span class="column-label" aria-hidden="true">
+                ${column.label}:
+              </span>
+            `
+          : null}
+        ${column.justify ? html`<span>${content}</span>` : content}
       </div>
     `
   }

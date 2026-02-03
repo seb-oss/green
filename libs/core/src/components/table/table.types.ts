@@ -85,9 +85,6 @@ export type SlotValue = {
   value?: unknown
   slots: string[]
   key?: string | number
-  toString(): string
-  valueOf(): unknown
-  [Symbol.toPrimitive](hint: string): string | number
 }
 
 export const isSlotValue = (value: unknown): value is SlotValue =>
@@ -104,6 +101,19 @@ export const isSlotValue = (value: unknown): value is SlotValue =>
  *   - entry value: string/number -> slot id
  *   - entry value: true/undefined -> slot id = entry key
  */
+const slotPrototype = {
+  toString(this: SlotValue) {
+    return String(this.value ?? '')
+  },
+  valueOf(this: SlotValue) {
+    return this.value as unknown
+  },
+  [Symbol.toPrimitive](this: SlotValue, hint: string) {
+    if (hint === 'number') return Number(this.value)
+    return String(this.value ?? '')
+  },
+}
+
 export function Slot(config: SlotValue): SlotValue
 export function Slot(
   value?: unknown,
@@ -111,29 +121,39 @@ export function Slot(
   key?: string | number,
 ): SlotValue
 export function Slot(
-  valueOrConfig?: unknown | SlotValue,
-  slots: string[] = ['value'],
+  value?: unknown,
   key?: string | number,
+  slots?: string[],
+): SlotValue
+export function Slot(
+  valueOrConfig?: unknown | SlotValue,
+  slotsOrKey: string[] | string | number = ['value'],
+  keyOrSlots?: string[] | string | number,
 ): SlotValue {
   if (isSlotValue(valueOrConfig)) return valueOrConfig
 
-  const rawValue = valueOrConfig
+  let slots: string[] = ['value']
+  let key: string | number | undefined
 
-  return {
-    value: rawValue,
+  if (Array.isArray(slotsOrKey)) {
+    slots = slotsOrKey
+  } else if (typeof slotsOrKey === 'string' || typeof slotsOrKey === 'number') {
+    key = slotsOrKey
+  }
+
+  if (Array.isArray(keyOrSlots)) {
+    slots = keyOrSlots
+  } else if (typeof keyOrSlots === 'string' || typeof keyOrSlots === 'number') {
+    key = keyOrSlots
+  }
+
+  const slotValue: SlotValue = Object.assign(Object.create(slotPrototype), {
+    value: valueOrConfig,
     slots,
     ...(typeof key !== 'undefined' ? { key } : {}),
-    toString() {
-      return String(rawValue ?? '')
-    },
-    valueOf() {
-      return rawValue as unknown
-    },
-    [Symbol.toPrimitive](hint: string) {
-      if (hint === 'number') return Number(rawValue)
-      return String(rawValue ?? '')
-    },
-  }
+  })
+
+  return slotValue
 }
 
 export type TableActions = Actions
