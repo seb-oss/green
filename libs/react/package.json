@@ -2,13 +2,13 @@
   "name": "@sebgroup/green-react",
   "main": "./src/index.js",
   "module": "./src/index.js",
-  "version": "3.33.0",
+  "version": "3.34.0",
   "peerDependencies": {
     "react": "^17 || ^18 || ^19",
     "react-dom": "^17 || ^18 || ^19"
   },
   "dependencies": {
-    "@sebgroup/green-core": "^2.13.0",
+    "@sebgroup/green-core": "^2.27.0",
     "@sebgroup/chlorophyll": "^3.6.16",
     "@sebgroup/extract": "^3.0.3",
     "@lit/react": "^1.0.2",
