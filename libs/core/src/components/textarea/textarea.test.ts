@@ -1,12 +1,16 @@
-import { expect } from '@esm-bundle/chai'
-import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands'
-import sinon from 'sinon'
+import { userEvent } from '@vitest/browser/context'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { GdsTextarea } from '@sebgroup/green-core/components/textarea/index.js'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
+import {
+  aTimeout,
+  clickOnElement,
+  fixture,
+  tabNext,
+  html as testingHtml,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/textarea/index.js'
 
@@ -23,8 +27,8 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
           ></gds-textarea>`,
         )
         const labelEl = el.shadowRoot?.querySelector('label')
-        expect(labelEl).to.exist
-        expect(labelEl?.textContent).to.contain('My label')
+        expect(labelEl).toBeDefined()
+        expect(labelEl?.textContent).toContain('My label')
       })
     })
 
@@ -34,7 +38,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
           html`<gds-textarea variant="${variant}"></gds-textarea>`,
         )
         el.value = 'My value'
-        expect(el.value).to.equal('My value')
+        expect(el.value).toBe('My value')
       })
 
       it('should set the name', async () => {
@@ -44,31 +48,31 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
             name="my-name"
           ></gds-textarea>`,
         )
-        expect(el.name).to.equal('my-name')
+        expect(el.name).toBe('my-name')
       })
 
       it('should fire a change event when the value has changed and focus has shifted away', async () => {
         const el = await fixture<Ht>(
           html`<gds-textarea variant="${variant}"></gds-textarea><input />`,
         )
-        const changeSpy = sinon.spy()
+        const changeSpy = vi.fn()
         el.addEventListener('change', changeSpy)
         el.focus()
-        await sendKeys({ press: 'a' })
-        await sendKeys({ press: 'Tab' })
-        expect(changeSpy).to.have.been.calledOnce
+        await userEvent.keyboard('a')
+        await tabNext()
+        expect(changeSpy).toHaveBeenCalledOnce()
       })
 
       it('should fire an input event when the value changes', async () => {
         const el = await fixture<GdsTextarea>(
           html`<gds-textarea variant="${variant}"></gds-textarea>`,
         )
-        const inputSpy = sinon.spy()
+        const inputSpy = vi.fn()
         el.addEventListener('input', inputSpy)
         el.focus()
         await el.updateComplete
-        await sendKeys({ press: 'a' })
-        expect(inputSpy).to.have.been.calledOnce
+        await userEvent.keyboard('a')
+        expect(inputSpy).toHaveBeenCalledOnce()
       })
 
       it('should show remaining characters when maxlength is set', async () => {
@@ -85,16 +89,16 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
           '[gds-element=gds-badge]',
         )
 
-        expect(remainingCharactersBadgeEl).to.exist
-        expect(remainingCharactersBadgeEl?.textContent).to.equal('10')
+        expect(remainingCharactersBadgeEl).toBeDefined()
+        expect(remainingCharactersBadgeEl?.textContent).toBe('10')
 
         el.value = 'My value'
         await el.updateComplete
-        expect(remainingCharactersBadgeEl?.textContent).to.equal('2')
+        expect(remainingCharactersBadgeEl?.textContent).toBe('2')
 
         el.value = 'My value longer'
         await el.updateComplete
-        expect(remainingCharactersBadgeEl?.textContent).to.equal('-5')
+        expect(remainingCharactersBadgeEl?.textContent).toBe('-5')
       })
 
       it('should render a clear button when clearable is set and value is non-empty', async () => {
@@ -106,7 +110,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
           ></gds-textarea>`,
         )
         const clearButtonEl = el.test_getClearButton()
-        expect(clearButtonEl).to.exist
+        expect(clearButtonEl).toBeDefined()
       })
 
       it('should forward standard attributes', async () => {
@@ -124,13 +128,13 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         )
 
         const textareaEl = el.shadowRoot?.querySelector('textarea')
-        expect(textareaEl?.getAttribute('autocapitalize')).to.equal('on')
-        expect(textareaEl?.getAttribute('autocomplete')).to.equal('on')
-        expect(textareaEl?.getAttribute('autocorrect')).to.equal('true')
-        expect(textareaEl?.getAttribute('spellcheck')).to.equal('true')
-        expect(textareaEl?.getAttribute('inputmode')).to.equal('numeric')
-        expect(textareaEl?.getAttribute('autofocus')).to.equal('')
-        expect(textareaEl?.getAttribute('enterkeyhint')).to.equal('enter')
+        expect(textareaEl?.getAttribute('autocapitalize')).toBe('on')
+        expect(textareaEl?.getAttribute('autocomplete')).toBe('on')
+        expect(textareaEl?.getAttribute('autocorrect')).toBe('true')
+        expect(textareaEl?.getAttribute('spellcheck')).toBe('true')
+        expect(textareaEl?.getAttribute('inputmode')).toBe('numeric')
+        expect(textareaEl?.getAttribute('autofocus')).toBe('')
+        expect(textareaEl?.getAttribute('enterkeyhint')).toBe('enter')
       })
 
       it('should support customized character counter badge', async () => {
@@ -156,16 +160,16 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
           '[gds-element=gds-badge]',
         )
 
-        expect(remainingCharactersBadgeEl).to.exist
-        expect(remainingCharactersBadgeEl?.textContent).to.equal('5')
-        expect(remainingCharactersBadgeEl?.getAttribute('variant')).to.equal(
+        expect(remainingCharactersBadgeEl).toBeDefined()
+        expect(remainingCharactersBadgeEl?.textContent).toBe('5')
+        expect(remainingCharactersBadgeEl?.getAttribute('variant')).toBe(
           'positive',
         )
 
         el.value = '12345678901'
         await el.updateComplete
-        expect(remainingCharactersBadgeEl?.textContent).to.equal('-1')
-        expect(remainingCharactersBadgeEl?.getAttribute('variant')).to.equal(
+        expect(remainingCharactersBadgeEl?.textContent).toBe('-1')
+        expect(remainingCharactersBadgeEl?.getAttribute('variant')).toBe(
           'negative',
         )
       })
@@ -182,7 +186,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         )
         const clearButtonEl = el.test_getClearButton()
         clearButtonEl.click()
-        expect(el.value).to.equal('')
+        expect(el.value).toBe('')
       })
     })
 
@@ -205,7 +209,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
             </span>
           </gds-textarea>`,
         )
-        await expect(el).to.be.accessible()
+        await expect(el).toBeAccessible()
       })
 
       it('label should have a for attribute that matches the input id', async () => {
@@ -217,7 +221,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         )
         const labelEl = el.shadowRoot?.querySelector('label')
         const inputEl = el.shadowRoot?.querySelector('textarea')
-        expect(labelEl?.getAttribute('for')).to.equal(inputEl?.id)
+        expect(labelEl?.getAttribute('for')).toBe(inputEl?.id)
       })
 
       it('should focus when clicking on the field', async () => {
@@ -225,7 +229,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
           html`<gds-textarea variant="${variant}"></gds-textarea>`,
         )
         await clickOnElement(el.test_getFieldElement())
-        expect(document.activeElement).to.equal(el)
+        expect(document.activeElement).toBe(el)
       })
 
       it('should focus when clicking on the label', async () => {
@@ -236,7 +240,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
           ></gds-textarea>`,
         )
         await clickOnElement(el.shadowRoot?.querySelector('label') as Element)
-        expect(document.activeElement).to.equal(el)
+        expect(document.activeElement).toBe(el)
       })
 
       it('should focus when calling focus()', async () => {
@@ -244,7 +248,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
           html`<gds-textarea variant="${variant}"></gds-textarea>`,
         )
         el.focus()
-        expect(document.activeElement).to.equal(el)
+        expect(document.activeElement).toBe(el)
       })
 
       it('should update the rows when value is set programmatically', async () => {
@@ -254,7 +258,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         )
 
         await textareaEl.updateComplete
-        expect(parseInt(textareaEl.rows, 10)).to.equal(4)
+        expect(parseInt(textareaEl.rows, 10)).toBe(4)
 
         textareaEl.value = 'Line 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6'
 
@@ -266,10 +270,10 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
           throw new Error('Native <textarea> was not found in the shadowRoot')
         }
 
-        expect(parseInt(textareaEl.rows, 10)).to.be.greaterThan(4)
+        expect(parseInt(textareaEl.rows, 10)).toBeGreaterThan(4)
         expect(
           parseInt(nativeTextarea.style.getPropertyValue('--_lines'), 10),
-        ).to.be.greaterThan(4)
+        ).toBeGreaterThan(4)
       })
     })
 
@@ -286,25 +290,25 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
 
         // Test setSelectionRange
         el.setSelectionRange(0, 5)
-        expect(el.selectionStart).to.equal(0)
-        expect(el.selectionEnd).to.equal(5)
+        expect(el.selectionStart).toBe(0)
+        expect(el.selectionEnd).toBe(5)
 
         // Test select
         el.select()
-        expect(el.selectionStart).to.equal(0)
-        expect(el.selectionEnd).to.equal(11)
+        expect(el.selectionStart).toBe(0)
+        expect(el.selectionEnd).toBe(11)
 
         // Test setRangeText
         el.setRangeText('Goodbye', 0, 5)
-        expect(el.value).to.equal('Goodbye World')
+        expect(el.value).toBe('Goodbye World')
 
         // Test selection properties getters/setters
         el.selectionStart = 8
         el.selectionEnd = 13
         el.selectionDirection = 'forward'
-        expect(el.selectionStart).to.equal(8)
-        expect(el.selectionEnd).to.equal(13)
-        expect(el.selectionDirection).to.equal('forward')
+        expect(el.selectionStart).toBe(8)
+        expect(el.selectionEnd).toBe(13)
+        expect(el.selectionDirection).toBe('forward')
       })
     })
   })

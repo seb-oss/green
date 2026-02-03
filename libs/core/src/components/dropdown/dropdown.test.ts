@@ -1,12 +1,5 @@
-import { expect } from '@esm-bundle/chai'
-import {
-  aTimeout,
-  fixture,
-  html as testingHtml,
-  waitUntil,
-} from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands'
-import sinon from 'sinon'
+import { userEvent } from '@vitest/browser/context'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import type { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 
@@ -15,7 +8,14 @@ import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
+import {
+  aTimeout,
+  clickOnElement,
+  fixture,
+  setViewportSize,
+  html as testingHtml,
+  waitUntil,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/dropdown'
 
@@ -30,13 +30,13 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-    await expect(el.options).to.have.lengthOf(3)
-    await expect(el.options[0].textContent).to.equal('Option 1')
-    await expect(el.options[1].textContent).to.equal('Option 2')
-    await expect(el.options[2].textContent).to.equal('Option 3')
-    await expect(el.options[0].value).to.equal('v1')
-    await expect(el.options[1].value).to.equal('v2')
-    await expect(el.options[2].value).to.equal('v3')
+    await expect(el.options).toHaveLength(3)
+    expect(el.options[0].textContent).toBe('Option 1')
+    expect(el.options[1].textContent).toBe('Option 2')
+    expect(el.options[2].textContent).toBe('Option 3')
+    expect(el.options[0].value).toBe('v1')
+    expect(el.options[1].value).toBe('v2')
+    expect(el.options[2].value).toBe('v3')
   })
 
   it('should be visible with the open attribute', async () => {
@@ -50,7 +50,7 @@ describe('<gds-dropdown>', () => {
     const popover = el.shadowRoot!.querySelector<HTMLElement>(
       getScopedTagName('gds-popover'),
     )!
-    await expect(popover.hidden).to.be.false
+    expect(popover.hidden).toBe(false)
   })
 
   it('should have the value of the first option by default', async () => {
@@ -61,8 +61,8 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-    await expect(el.value).to.equal('v1')
-    await expect(el.displayValue).to.equal('Option 1')
+    expect(el.value).toBe('v1')
+    expect(el.displayValue).toBe('Option 1')
   })
 
   it('should select the correct option based on value', async () => {
@@ -75,7 +75,7 @@ describe('<gds-dropdown>', () => {
     `)
     el.value = 'v2'
     await el.updateComplete
-    await expect(el.value).to.equal('v2')
+    expect(el.value).toBe('v2')
     await waitUntil(() => el.displayValue === 'Option 2')
   })
 
@@ -89,9 +89,9 @@ describe('<gds-dropdown>', () => {
     `)
     const label = el.shadowRoot!.querySelector<HTMLElement>('label')!
     const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
-    await expect(label).to.not.be.null
-    await expect(label.textContent).to.equal('DD Label')
-    await expect(label.getAttribute('for')).to.equal(trigger.id)
+    expect(label).not.toBeNull()
+    expect(label.textContent).toBe('DD Label')
+    expect(label.getAttribute('for')).toBe(trigger.id)
   })
 
   it('options marked `isPlaceholder` overrides default value', async () => {
@@ -102,8 +102,8 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-    await expect(el.value).to.equal('v2')
-    await expect(el.displayValue).to.equal('Option 2')
+    expect(el.value).toBe('v2')
+    expect(el.displayValue).toBe('Option 2')
   })
 
   it('should expose isPlaceholder through `placeholder` field', async () => {
@@ -114,8 +114,8 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-    await expect(el.placeholder).to.not.be.null
-    await expect(el.placeholder!.textContent).to.equal('Option 2')
+    expect(el.placeholder).not.toBeNull()
+    expect(el.placeholder!.textContent).toBe('Option 2')
   })
   it('should have undefined `isPlaceholder` if none is specified', async () => {
     const el = await fixture<GdsDropdown>(html`
@@ -125,7 +125,7 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-    await expect(el.placeholder).to.be.undefined
+    expect(el.placeholder).toBeUndefined()
   })
 
   it('should not show the placeholder in the list of options when opened', async () => {
@@ -139,11 +139,11 @@ describe('<gds-dropdown>', () => {
     el.open = true
     await el.updateComplete
 
-    await expect(el.options.length).to.equal(2)
-    await expect(el.options[0].value).to.equal('v1')
-    await expect(el.options[1].value).to.equal('v3')
-    expect(el.placeholder).to.have.attribute('inert')
-    expect(el.placeholder).to.have.attribute('hidden')
+    expect(el.options.length).toBe(2)
+    expect(el.options[0].value).toBe('v1')
+    expect(el.options[1].value).toBe('v3')
+    expect(el.placeholder).toHaveAttribute('inert')
+    expect(el.placeholder).toHaveAttribute('hidden')
   })
 
   it('should support custom trigger content', async () => {
@@ -158,7 +158,7 @@ describe('<gds-dropdown>', () => {
     const triggerSlot =
       el.shadowRoot!.querySelector<HTMLSlotElement>(`button slot`)!
     const triggerContent = triggerSlot.assignedNodes()[0] as HTMLElement
-    await expect(triggerContent.textContent).to.equal('Custom trigger')
+    expect(triggerContent.textContent).toBe('Custom trigger')
   })
 
   it('should emit `gds-ui-state` when opened and closed', async () => {
@@ -169,19 +169,19 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-    const uiStateHandler = sinon.spy()
+    const uiStateHandler = vi.fn()
     el.addEventListener('gds-ui-state', uiStateHandler)
 
     //click to open
     clickOnElement(el)
 
-    await waitUntil(() => uiStateHandler.calledOnce)
+    await waitUntil(() => uiStateHandler.mock.calls.length === 1)
 
     // Hit escape to close
-    await sendKeys({ press: 'Escape' })
+    await userEvent.keyboard('{Escape}')
 
-    await waitUntil(() => uiStateHandler.calledTwice)
-    await expect(uiStateHandler).to.have.been.calledTwice
+    await waitUntil(() => uiStateHandler.mock.calls.length === 2)
+    expect(uiStateHandler).toHaveBeenCalledTimes(2)
   })
 
   it('should react to changes in contained light DOM', async () => {
@@ -195,10 +195,10 @@ describe('<gds-dropdown>', () => {
     const option1 = el.querySelectorAll(getScopedTagName('gds-option'))[0]
     el.removeChild(option1)
     await el.updateComplete
-    await expect(el.options.length).to.equal(2)
-    await expect(el.options[0].value).to.equal('v2')
-    await expect(el.value).to.equal('v2')
-    await expect(el.displayValue).to.equal('Option 2')
+    expect(el.options.length).toBe(2)
+    expect(el.options[0].value).toBe('v2')
+    expect(el.value).toBe('v2')
+    expect(el.displayValue).toBe('Option 2')
   })
 
   it('should register as a form control and have a FormData value', async () => {
@@ -213,8 +213,8 @@ describe('<gds-dropdown>', () => {
     `)
     const form = document.getElementById('test-form')! as HTMLFormElement
     const formData = new FormData(form)
-    await expect((form.elements[0] as GdsDropdown).value).to.equal('v1')
-    await expect(formData.get('test-dropdown')).to.equal('v1')
+    expect((form.elements[0] as GdsDropdown).value).toBe('v1')
+    expect(formData.get('test-dropdown')).toBe('v1')
   })
 
   it('popover should not be narrower than trigger', async () => {
@@ -234,9 +234,7 @@ describe('<gds-dropdown>', () => {
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
     const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
     await aTimeout(50)
-    await expect(popover?.clientWidth).to.be.greaterThanOrEqual(
-      trigger.clientWidth,
-    )
+    expect(popover?.clientWidth).toBeGreaterThanOrEqual(trigger.clientWidth)
   })
 
   it('should be the same width as the trigger when `sync-popover-width` attribute is set', async () => {
@@ -257,29 +255,34 @@ describe('<gds-dropdown>', () => {
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
     const field = el.test_getFieldElement()
     await aTimeout(50)
-    expect(popover?.offsetWidth).to.equal(field.offsetWidth)
+    expect(popover?.offsetWidth).toBe(field.offsetWidth)
   })
 
   it('should limit the height of the popover to max-height attribute', async () => {
-    const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown open max-height="50">
-        <gds-option value="v1">Option 1</gds-option>
-        <gds-option value="v2">Option 2</gds-option>
-        <gds-option value="v3">Option 3</gds-option>
-        <gds-option value="v4">Option 4</gds-option>
-        <gds-option value="v5">Option 5</gds-option>
-        <gds-option value="v6">Option 6</gds-option>
-        <gds-option value="v7">Option 7</gds-option>
-        <gds-option value="v8">Option 8</gds-option>
-        <gds-option value="v9">Option 9</gds-option>
-      </gds-dropdown>
-    `)
-    await el.updateComplete
-    const popover = el.shadowRoot
-      ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
-      ?.shadowRoot?.querySelector<HTMLElement>('dialog')
-    await aTimeout(50)
-    await expect(popover?.clientHeight).to.be.lessThanOrEqual(50)
+    const restore = await setViewportSize(1024, 768)
+    try {
+      const el = await fixture<GdsDropdown>(html`
+        <gds-dropdown open max-height="50">
+          <gds-option value="v1">Option 1</gds-option>
+          <gds-option value="v2">Option 2</gds-option>
+          <gds-option value="v3">Option 3</gds-option>
+          <gds-option value="v4">Option 4</gds-option>
+          <gds-option value="v5">Option 5</gds-option>
+          <gds-option value="v6">Option 6</gds-option>
+          <gds-option value="v7">Option 7</gds-option>
+          <gds-option value="v8">Option 8</gds-option>
+          <gds-option value="v9">Option 9</gds-option>
+        </gds-dropdown>
+      `)
+      await el.updateComplete
+      const popover = el.shadowRoot
+        ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
+        ?.shadowRoot?.querySelector<HTMLElement>('dialog')
+      await aTimeout(50)
+      expect(popover?.clientHeight).toBeLessThanOrEqual(50)
+    } finally {
+      restore()
+    }
   })
 
   it('should select complex value correctly with `compareWith` callback', async () => {
@@ -292,13 +295,13 @@ describe('<gds-dropdown>', () => {
       o.innerHTML = `Test option ${num}`
       el.appendChild(o)
     })
-    el.compareWith = (a, b) => a.val === b.val
+    el.compareWith = (a: any, b: any) => a.val === b.val
     await el.updateComplete
     el.value = { val: 'test2' }
     await el.updateComplete
-    await expect(el.options[0].selected).equal(false)
-    await expect(el.options[1].selected).equal(true)
-    await expect(el.options[2].selected).equal(false)
+    expect(el.options[0].selected).toBe(false)
+    expect(el.options[1].selected).toBe(true)
+    expect(el.options[2].selected).toBe(false)
   })
 
   it('should select multiple complex values correctly with `compareWith` callback', async () => {
@@ -313,14 +316,14 @@ describe('<gds-dropdown>', () => {
       o.innerHTML = `Test option ${num}`
       el.appendChild(o)
     })
-    el.compareWith = (a, b) => a.val === b.val
+    el.compareWith = (a: any, b: any) => a.val === b.val
     await el.updateComplete
     el.value = [{ val: 'test2' }, { val: 'test4' }]
     await el.updateComplete
-    await expect(el.options[0].selected).equal(false)
-    await expect(el.options[1].selected).equal(true)
-    await expect(el.options[2].selected).equal(false)
-    await expect(el.options[3].selected).equal(true)
+    expect(el.options[0].selected).toBe(false)
+    expect(el.options[1].selected).toBe(true)
+    expect(el.options[2].selected).toBe(false)
+    expect(el.options[3].selected).toBe(true)
   })
 
   it('should pre-select correct option when options where added dynamically', async () => {
@@ -355,7 +358,7 @@ describe('<gds-dropdown>', () => {
     option3.textContent = 'Option 3 (updated)'
     await el.updateComplete
     await aTimeout(0)
-    await expect(el.displayValue).to.equal('Option 3 (updated)')
+    expect(el.displayValue).toBe('Option 3 (updated)')
   })
 
   it('should set gds-form-control-header class based on size', async () => {
@@ -366,8 +369,7 @@ describe('<gds-dropdown>', () => {
       '[gds-element=gds-form-control-header]',
     )!
 
-    await expect(gdsFormControlHeader.classList.contains('size-small')).to.be
-      .true
+    expect(gdsFormControlHeader.classList.contains('size-small')).toBe(true)
   })
 
   it('should set gds-form-control-header class based on default size', async () => {
@@ -378,8 +380,7 @@ describe('<gds-dropdown>', () => {
       '[gds-element=gds-form-control-header]',
     )!
 
-    await expect(gdsFormControlHeader.classList.contains('size-medium')).to.be
-      .true
+    expect(gdsFormControlHeader.classList.contains('size-medium')).toBe(true)
   })
 
   it('should set gds-form-control-footer class based on size', async () => {
@@ -391,8 +392,7 @@ describe('<gds-dropdown>', () => {
       '[gds-element=gds-form-control-footer]',
     )!
 
-    await expect(gdsFormControlFooter.classList.contains('size-small')).to.be
-      .true
+    expect(gdsFormControlFooter.classList.contains('size-small')).toBe(true)
   })
 
   it('should set gds-form-control-footer class based on default size', async () => {
@@ -403,8 +403,7 @@ describe('<gds-dropdown>', () => {
       '[gds-element=gds-form-control-footer]',
     )!
 
-    await expect(gdsFormControlFooter.classList.contains('size-medium')).to.be
-      .true
+    expect(gdsFormControlFooter.classList.contains('size-medium')).toBe(true)
   })
 
   it('field height should adapt to content in trigger', async () => {
@@ -417,7 +416,7 @@ describe('<gds-dropdown>', () => {
       </gds-dropdown>
     `)
     const field = el.test_getFieldElement()
-    await expect(field.clientHeight).to.be.greaterThan(
+    expect(field.clientHeight).toBeGreaterThan(
       parseInt(
         getComputedStyle(document.documentElement).getPropertyValue(
           '--gds-sys-space-3xl',
@@ -442,7 +441,7 @@ describe('<gds-dropdown> interactions', () => {
     await clickOnElement(trigger, 'center')
     await el.updateComplete
 
-    await expect(el.open).to.be.true
+    expect(el.open).toBe(true)
   })
 
   it('should select option on click', async () => {
@@ -458,9 +457,9 @@ describe('<gds-dropdown> interactions', () => {
     const option2 = document.getElementById('option2')!
 
     el.focus()
-    await sendKeys({ press: 'ArrowDown' })
+    await userEvent.keyboard('{ArrowDown}')
     await el.updateComplete
-    await sendKeys({ press: 'Enter' })
+    await userEvent.keyboard('{Enter}')
     await el.updateComplete
 
     await waitUntil(() => el.value === 'v2')
@@ -476,19 +475,19 @@ describe('<gds-dropdown> interactions', () => {
     `)
     await aTimeout(0)
 
-    const changeHandler = sinon.spy()
+    const changeHandler = vi.fn()
     el.addEventListener('change', changeHandler)
 
     el.focus()
-    await sendKeys({ press: 'ArrowDown' })
+    await userEvent.keyboard('{ArrowDown}')
     await el.updateComplete
-    await sendKeys({ press: 'Enter' })
+    await userEvent.keyboard('{Enter}')
     await el.updateComplete
 
-    await waitUntil(() => changeHandler.calledOnce)
+    await waitUntil(() => changeHandler.mock.calls.length === 1)
 
-    expect(changeHandler).to.have.been.calledOnce
-    await expect(changeHandler.firstCall.args[0].detail.value).to.equal('v2')
+    expect(changeHandler).toHaveBeenCalledOnce()
+    expect(changeHandler.mock.calls[0][0].detail.value).toBe('v2')
   })
 
   it('should clear when clear button is clicked', async () => {
@@ -520,9 +519,9 @@ describe('<gds-dropdown> interactions', () => {
     `)
     await aTimeout(0)
 
-    const clearHandler = sinon.spy()
-    const changeHandler = sinon.spy()
-    const inputHandler = sinon.spy()
+    const clearHandler = vi.fn()
+    const changeHandler = vi.fn()
+    const inputHandler = vi.fn()
     el.addEventListener('gds-input-cleared', clearHandler)
     el.addEventListener('change', changeHandler)
     el.addEventListener('input', inputHandler)
@@ -531,16 +530,14 @@ describe('<gds-dropdown> interactions', () => {
       el.shadowRoot!.querySelector<HTMLElement>('[id="clear-btn"]')!
     await clickOnElement(clearButton)
 
-    await waitUntil(() => clearHandler.calledOnce)
-    await waitUntil(() => changeHandler.calledOnce)
-    await waitUntil(() => inputHandler.calledOnce)
+    await waitUntil(() => clearHandler.mock.calls.length === 1)
+    await waitUntil(() => changeHandler.mock.calls.length === 1)
+    await waitUntil(() => inputHandler.mock.calls.length === 1)
 
-    expect(clearHandler).to.have.been.calledOnce
-    expect(changeHandler).to.have.been.calledOnce
-    expect(inputHandler).to.have.been.calledOnce
-    await expect(changeHandler.firstCall.args[0].detail.value).to.equal(
-      undefined,
-    )
+    expect(clearHandler).toHaveBeenCalledOnce()
+    expect(changeHandler).toHaveBeenCalledOnce()
+    expect(inputHandler).toHaveBeenCalledOnce()
+    expect(changeHandler.mock.calls[0][0].detail.value).toBe(undefined)
   })
 
   // Disabled because this test is unreliable. "sendMouse" does not produce a correct PointerEvent event.
@@ -572,10 +569,10 @@ describe('<gds-dropdown> keyboard navigation', () => {
     `)
 
     el.focus()
-    await sendKeys({ press: 'ArrowDown' })
+    await userEvent.keyboard('{ArrowDown}')
     await el.updateComplete
 
-    await expect(el.open).to.be.true
+    expect(el.open).toBe(true)
   })
 
   it('should focus option using keyboard navigation', async () => {
@@ -590,12 +587,12 @@ describe('<gds-dropdown> keyboard navigation', () => {
     const secondOption = el.querySelectorAll(getScopedTagName('gds-option'))[1]
 
     el.focus()
-    await sendKeys({ press: 'ArrowDown' })
+    await userEvent.keyboard('{ArrowDown}')
     await aTimeout(50)
-    await sendKeys({ press: 'ArrowDown' })
+    await userEvent.keyboard('{ArrowDown}')
     await aTimeout(50)
 
-    await expect(document.activeElement).to.equal(secondOption)
+    expect(document.activeElement).toBe(secondOption)
   })
 
   it('should focus option using keyboard navigation when opened with click', async () => {
@@ -612,15 +609,15 @@ describe('<gds-dropdown> keyboard navigation', () => {
     await clickOnElement(trigger, 'center')
     await el.updateComplete
 
-    await expect(el.open).to.be.true
+    expect(el.open).toBe(true)
 
-    await sendKeys({ press: 'ArrowDown' })
+    await userEvent.keyboard('{ArrowDown}')
     await aTimeout(50)
-    await sendKeys({ press: 'Enter' })
+    await userEvent.keyboard('{Enter}')
     await aTimeout(50)
 
-    await expect(el.value).to.equal('v2')
-    await expect(el.open).to.be.false
+    expect(el.value).toBe('v2')
+    expect(el.open).toBe(false)
   })
 
   it('should select option with Enter key', async () => {
@@ -634,14 +631,14 @@ describe('<gds-dropdown> keyboard navigation', () => {
 
     el.focus()
     await aTimeout(0)
-    await sendKeys({ press: 'ArrowDown' })
+    await userEvent.keyboard('{ArrowDown}')
     await aTimeout(50)
-    await sendKeys({ press: 'ArrowDown' })
+    await userEvent.keyboard('{ArrowDown}')
     await aTimeout(50)
-    await sendKeys({ press: 'Enter' })
+    await userEvent.keyboard('{Enter}')
     await aTimeout(50)
 
-    await expect(el.value).to.equal('v2')
+    expect(el.value).toBe('v2')
   })
 
   it('should select option with Space key', async () => {
@@ -654,14 +651,14 @@ describe('<gds-dropdown> keyboard navigation', () => {
     `)
 
     el.focus()
-    await sendKeys({ press: 'ArrowDown' })
+    await userEvent.keyboard('{ArrowDown}')
     await aTimeout(50)
-    await sendKeys({ press: 'ArrowDown' })
+    await userEvent.keyboard('{ArrowDown}')
     await aTimeout(50)
-    await sendKeys({ press: 'Space' })
+    await userEvent.keyboard(' ')
     await aTimeout(50)
 
-    await expect(el.value).to.equal('v2')
+    expect(el.value).toBe('v2')
   })
 
   it('should close on ESC', async () => {
@@ -674,10 +671,10 @@ describe('<gds-dropdown> keyboard navigation', () => {
     `)
 
     el.focus()
-    await sendKeys({ press: 'Escape' })
+    await userEvent.keyboard('{Escape}')
     await el.updateComplete
 
-    await expect(el.open).to.be.false
+    expect(el.open).toBe(false)
   })
 })
 
@@ -693,7 +690,7 @@ describe('<gds-dropdown searchable>', () => {
     const searchField =
       el.shadowRoot!.querySelector<HTMLElement>('input[type=text]')!
 
-    await expect(searchField).to.not.be.null
+    expect(searchField).not.toBeNull()
   })
 
   it('should filter options when typing in search field', async () => {
@@ -708,15 +705,15 @@ describe('<gds-dropdown searchable>', () => {
       el.shadowRoot!.querySelector<HTMLInputElement>('input[type=text]')!
 
     searchField.focus()
-    await sendKeys({ type: '2' })
+    await userEvent.keyboard('2')
     await el.updateComplete
 
     const options = el.querySelectorAll(
       `${getScopedTagName('gds-option')}:not([inert])`,
     )
 
-    await expect(options.length).to.equal(1)
-    await expect(options[0].textContent).to.equal('Option 2')
+    expect(options.length).toBe(1)
+    expect(options[0].textContent).toBe('Option 2')
   })
 
   it('should should support custom `searchFilter`callback', async () => {
@@ -737,15 +734,15 @@ describe('<gds-dropdown searchable>', () => {
       el.shadowRoot!.querySelector<HTMLInputElement>('input[type=text]')!
 
     searchField.focus()
-    await sendKeys({ type: 'qux thud' })
+    await userEvent.keyboard('qux thud')
     await el.updateComplete
 
     const options = el.querySelectorAll(
       `${getScopedTagName('gds-option')}:not([inert])`,
     )
 
-    await expect(options.length).to.equal(1)
-    await expect(options[0].textContent).to.equal('qux fred thud')
+    expect(options.length).toBe(1)
+    expect(options[0].textContent).toBe('qux fred thud')
   })
 })
 
@@ -760,19 +757,19 @@ describe('<gds-dropdown multiple>', () => {
     `)
 
     el.focus()
-    await sendKeys({ press: 'ArrowDown' })
+    await userEvent.keyboard('{ArrowDown}')
     await aTimeout(50)
-    await sendKeys({ press: 'ArrowDown' })
+    await userEvent.keyboard('{ArrowDown}')
     await el.updateComplete
-    await sendKeys({ press: 'Space' })
+    await userEvent.keyboard(' ')
     await el.updateComplete
-    await sendKeys({ press: 'ArrowDown' })
+    await userEvent.keyboard('{ArrowDown}')
     await el.updateComplete
-    await sendKeys({ press: 'Space' })
+    await userEvent.keyboard(' ')
     await el.updateComplete
 
-    await expect(el.value.toString()).to.equal(['v2', 'v3'].toString())
-    await expect(el.displayValue).to.equal('Option 2, Option 3')
+    expect(el.value.toString()).toBe(['v2', 'v3'].toString())
+    expect(el.displayValue).toBe('Option 2, Option 3')
   })
 
   // Disable for now because of flakiness in CI
@@ -819,7 +816,7 @@ describe('<gds-dropdown multiple>', () => {
     await clickOnElement(option2, 'center')
     await el.updateComplete
 
-    await expect(el.open).to.equal(true)
+    expect(el.open).toBe(true)
   })
 
   it('should not have a default selection', async () => {
@@ -831,7 +828,7 @@ describe('<gds-dropdown multiple>', () => {
       </gds-dropdown>
     `)
 
-    await expect(el.displayValue).to.equal('')
+    expect(el.displayValue).toBe('')
   })
 
   it('should support isPlaceholder option', async () => {
@@ -844,7 +841,7 @@ describe('<gds-dropdown multiple>', () => {
       </gds-dropdown>
     `)
 
-    await expect(el.displayValue).to.equal('Select values')
+    expect(el.displayValue).toBe('Select values')
   })
 })
 
@@ -862,8 +859,8 @@ describe('<gds-dropdown combobox>', () => {
       'input[role=combobox]',
     )
 
-    await expect(el.combobox).to.be.true
-    await expect(comboInputEl).to.not.be.null
+    expect(el.combobox).toBe(true)
+    expect(comboInputEl).not.toBeNull()
   })
 
   it('should update value on input', async () => {
@@ -882,7 +879,7 @@ describe('<gds-dropdown combobox>', () => {
     comboInputEl!.value = 'v2'
     comboInputEl!.dispatchEvent(new Event('input'))
 
-    await expect(el.value).to.equal('v2')
+    expect(el.value).toBe('v2')
   })
 
   it('should emit `input` event on input', async () => {
@@ -898,14 +895,14 @@ describe('<gds-dropdown combobox>', () => {
       'input[role=combobox]',
     )
 
-    const inputHandler = sinon.spy()
+    const inputHandler = vi.fn()
     el.addEventListener('input', inputHandler)
 
     comboInputEl!.value = 'v2'
     comboInputEl!.dispatchEvent(new Event('input'))
 
-    await waitUntil(() => inputHandler.calledOnce)
-    await expect(inputHandler).to.have.been.calledOnce
+    await waitUntil(() => inputHandler.mock.calls.length === 1)
+    expect(inputHandler).toHaveBeenCalledOnce()
   })
 
   it('should update displayValue on input', async () => {
@@ -926,7 +923,7 @@ describe('<gds-dropdown combobox>', () => {
 
     await aTimeout(0)
 
-    await expect(el.displayValue).to.equal('Option 2')
+    expect(el.displayValue).toBe('Option 2')
   })
 
   it('should filter options on input', async () => {
@@ -949,8 +946,8 @@ describe('<gds-dropdown combobox>', () => {
       `${getScopedTagName('gds-option')}:not([inert])`,
     )
 
-    await expect(options.length).to.equal(1)
-    await expect(options[0].textContent).to.equal('Option 2')
+    expect(options.length).toBe(1)
+    expect(options[0].textContent).toBe('Option 2')
   })
 
   it('should be possible to cancel the gds-filter-input event to customize filtering', async () => {
@@ -981,7 +978,7 @@ describe('<gds-dropdown combobox>', () => {
       `${getScopedTagName('gds-option')}:not([inert])`,
     )
 
-    await expect(options.length).to.equal(1)
+    expect(options.length).toBe(1)
   })
 })
 
@@ -994,7 +991,7 @@ describe('<gds-dropdown> accessibility', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-    await expect(el).to.be.accessible()
+    await expect(el).toBeAccessible()
   })
 
   it('should have a label for the trigger', async () => {
@@ -1008,6 +1005,6 @@ describe('<gds-dropdown> accessibility', () => {
     const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
     const label = el.shadowRoot!.querySelector<HTMLElement>('label')!
 
-    await expect(label.getAttribute('for')).to.equal(trigger.id)
+    expect(label.getAttribute('for')).toBe(trigger.id)
   })
 })

@@ -1,16 +1,16 @@
-import { expect } from '@esm-bundle/chai'
-import {
-  aTimeout,
-  fixture,
-  html as testingHtml,
-  waitUntil,
-} from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands'
+import { userEvent } from '@vitest/browser/context'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { GdsCoachmark } from '@sebgroup/green-core/components/coachmark'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
+import {
+  aTimeout,
+  clickOnElement,
+  fixture,
+  html as testingHtml,
+  waitUntil,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/coachmark'
 
@@ -20,7 +20,7 @@ describe('<gds-coachmark>', () => {
   describe('Rendering', () => {
     it('is a GdsElement', async () => {
       const el = await fixture(html`<gds-coachmark></gds-coachmark>`)
-      expect(el.getAttribute('gds-element')).to.equal('gds-coachmark')
+      expect(el.getAttribute('gds-element')).toBe('gds-coachmark')
     })
 
     it('should render coachmark', async () => {
@@ -28,7 +28,7 @@ describe('<gds-coachmark>', () => {
         html`<gds-coachmark></gds-coachmark>`,
       )
 
-      expect(el.shadowRoot).to.exist
+      expect(el.shadowRoot).toBeDefined()
     })
 
     it('should render slot', async () => {
@@ -39,7 +39,7 @@ describe('<gds-coachmark>', () => {
       )
 
       const slotEl = el.shadowRoot?.querySelector('slot')
-      expect(slotEl).to.exist
+      expect(slotEl).toBeDefined()
     })
 
     it('should render arrow div', async () => {
@@ -49,7 +49,7 @@ describe('<gds-coachmark>', () => {
 
       const arrow = el.shadowRoot?.querySelector('#arrow')
 
-      expect(arrow).to.exist
+      expect(arrow).toBeDefined()
     })
   })
 
@@ -63,7 +63,7 @@ describe('<gds-coachmark>', () => {
 
       await el.updateComplete
 
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
   })
 
@@ -94,7 +94,7 @@ describe('<gds-coachmark>', () => {
 
       await el.updateComplete
 
-      await sendKeys({ press: 'Escape' })
+      await userEvent.keyboard('{Escape}')
       await waitUntil(() => !el._isVisible)
     })
   })
@@ -116,7 +116,7 @@ describe('<gds-coachmark>', () => {
 
       const target = el.querySelector('#target')
 
-      expect(coachmark.targetElement).to.equal(target)
+      expect(coachmark.targetElement).toBe(target)
     })
 
     it('should fire gds-ui-state event when closing', async () => {
@@ -162,7 +162,7 @@ describe('<gds-coachmark>', () => {
 
       await aTimeout(100)
 
-      expect(el._isVisible).to.be.true
+      expect(el._isVisible).toBe(true)
     })
   })
 })

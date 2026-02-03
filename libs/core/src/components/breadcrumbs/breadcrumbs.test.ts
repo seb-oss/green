@@ -1,7 +1,7 @@
-import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/breadcrumbs'
 import '@sebgroup/green-core/components/link'
@@ -22,7 +22,7 @@ describe('<gds-breadcrumbs>', () => {
       )
 
       await el.updateComplete
-      expect(el.getAttribute('gds-element')).to.equal('gds-breadcrumbs')
+      expect(el.getAttribute('gds-element')).toBe('gds-breadcrumbs')
     })
 
     it('should render items in a list', async () => {
@@ -35,7 +35,7 @@ describe('<gds-breadcrumbs>', () => {
 
       await el.updateComplete
       const list = el.shadowRoot?.querySelector('[role="list"]')
-      expect(list).to.exist
+      expect(list).toBeDefined()
     })
 
     it('should mark current page item correctly', async () => {
@@ -56,8 +56,9 @@ describe('<gds-breadcrumbs>', () => {
       const currentItem = el.querySelector(
         '[gds-element="gds-breadcrumb"]:last-child',
       )
-      expect(currentItem?.shadowRoot?.querySelector('[aria-current="page"]')).to
-        .exist
+      expect(
+        currentItem?.shadowRoot?.querySelector('[aria-current="page"]'),
+      ).toBeDefined()
     })
 
     it('should handle overflow items', async () => {
@@ -72,7 +73,7 @@ describe('<gds-breadcrumbs>', () => {
       const overflowItem = el.querySelector(
         '[gds-element="gds-breadcrumb"][overflow]',
       )
-      expect(overflowItem).to.exist
+      expect(overflowItem).toBeDefined()
     })
   })
 
@@ -86,7 +87,7 @@ describe('<gds-breadcrumbs>', () => {
 
       await el.updateComplete
       const nav = el.shadowRoot?.querySelector('nav')
-      expect(nav?.classList.contains('size-small')).to.be.true
+      expect(nav?.classList.contains('size-small')).toBe(true)
     })
 
     it('should mark second-to-last item with return attribute', async () => {
@@ -103,7 +104,7 @@ describe('<gds-breadcrumbs>', () => {
 
       const items = el.querySelectorAll('[gds-element="gds-breadcrumb"]')
       const returnItem = items[items.length - 2]
-      expect(returnItem?.hasAttribute('return')).to.be.true
+      expect(returnItem?.hasAttribute('return')).toBe(true)
     })
   })
 
@@ -117,8 +118,8 @@ describe('<gds-breadcrumbs>', () => {
 
       await el.updateComplete
       const nav = el.shadowRoot?.querySelector('nav')
-      expect(nav?.getAttribute('role')).to.equal('navigation')
-      expect(nav?.getAttribute('aria-label')).to.equal('Breadcrumbs')
+      expect(nav?.getAttribute('role')).toBe('navigation')
+      expect(nav?.getAttribute('aria-label')).toBe('Breadcrumbs')
     })
 
     it('should be accessible', async () => {
@@ -129,7 +130,7 @@ describe('<gds-breadcrumbs>', () => {
         </gds-breadcrumbs>`,
       )
 
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
   })
 })

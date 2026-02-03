@@ -1,10 +1,10 @@
-import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import { describe, expect, it } from 'vitest'
 
 import type { AccountFormats } from '@sebgroup/green-core/components/formatted-text'
 import type { GdsFormattedAccount } from '@sebgroup/green-core/components/formatted-text/account'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../../utils/testing'
 
 import '@sebgroup/green-core/components/formatted-text/account'
 
@@ -36,7 +36,7 @@ describe('GdsFormattedAccount', () => {
           )
           await element.updateComplete
 
-          expect(element.formattedValue).to.equal(expected)
+          expect(element.formattedValue).toBe(expected)
         })
       }
     }

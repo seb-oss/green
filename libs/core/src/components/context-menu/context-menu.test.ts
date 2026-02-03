@@ -1,7 +1,5 @@
-import { expect } from '@esm-bundle/chai'
-import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands'
-import sinon from 'sinon'
+import { userEvent } from '@vitest/browser/context'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import type { GdsButton } from '@sebgroup/green-core/components/button'
 import type {
@@ -15,13 +13,40 @@ import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
+import {
+  aTimeout,
+  clickOnElement,
+  fixture,
+  tabNext,
+  html as testingHtml,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/context-menu'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-context-menu>', () => {
+  // Cleanup any open context menus/dialogs between tests to prevent modal state conflicts
+  afterEach(async () => {
+    // Close all open context menus
+    const menus = document.querySelectorAll(
+      'gds-context-menu',
+    ) as NodeListOf<GdsContextMenu>
+    for (const menu of menus) {
+      if (menu.open) {
+        menu.open = false
+        await menu.updateComplete
+      }
+    }
+    // Also close any dialogs that might be in modal state
+    const dialogs = document.querySelectorAll('dialog')
+    for (const dialog of dialogs) {
+      if (dialog.open) {
+        dialog.close()
+      }
+    }
+  })
+
   describe('Rendering', () => {
     it('should be visible with the open attribute', async () => {
       const el = await fixture<GdsContextMenu>(html`
@@ -35,7 +60,7 @@ describe('<gds-context-menu>', () => {
         getScopedTagName('gds-popover'),
       )!
 
-      await expect(popover.hidden).to.be.false
+      expect(popover.hidden).toBe(false)
     })
   })
 
@@ -50,14 +75,14 @@ describe('<gds-context-menu>', () => {
       `)
       await aTimeout(0)
 
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('gds-menu-item-click', spy)
 
       const item = el.querySelector(getScopedTagName('gds-menu-item'))!
       await clickOnElement(item, 'center')
 
-      await expect(spy).to.have.been.calledOnce
-      await expect(spy.firstCall.args[0].target).to.equal(item)
+      expect(spy).toHaveBeenCalledOnce()
+      expect(spy.mock.calls[0][0].target).toBe(item)
     })
 
     it('"gds-menu-item" should fire "click" event on click', async () => {
@@ -70,7 +95,7 @@ describe('<gds-context-menu>', () => {
       `)
       await aTimeout(0)
 
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('click', spy)
 
       const item = el.querySelector<GdsMenuItem>(
@@ -78,8 +103,8 @@ describe('<gds-context-menu>', () => {
       )!
       await clickOnElement(item)
 
-      await expect(spy).to.have.been.calledOnce
-      await expect(spy.firstCall.args[0].target).to.equal(item)
+      expect(spy).toHaveBeenCalledOnce()
+      expect(spy.mock.calls[0][0].target).toBe(item)
     })
 
     it('should support custom slotted trigger', async () => {
@@ -100,7 +125,7 @@ describe('<gds-context-menu>', () => {
 
       await el.updateComplete
 
-      await expect(el.open).to.be.true
+      expect(el.open).toBe(true)
     })
   })
 
@@ -125,9 +150,9 @@ describe('<gds-context-menu>', () => {
       )!
       const button = el.shadowRoot!.querySelector<GdsButton>('#trigger')!
 
-      await expect(button.getAttribute('label')).to.equal('Button label')
-      await expect(popover.label).to.equal('Context label')
-      await expect(menu.getAttribute('aria-label')).to.equal('Context label')
+      expect(button.getAttribute('label')).toBe('Button label')
+      expect(popover.label).toBe('Context label')
+      expect(menu.getAttribute('aria-label')).toBe('Context label')
     })
 
     it('should active click action on enter', async () => {
@@ -140,17 +165,17 @@ describe('<gds-context-menu>', () => {
       `)
       await aTimeout(0)
 
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('gds-menu-item-click', spy)
 
       const item = el.querySelector<GdsMenuItem>(
         getScopedTagName('gds-menu-item'),
       )!
       item.focus()
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
 
-      await expect(spy).to.have.been.calledOnce
-      await expect(spy.firstCall.args[0].target).to.equal(item)
+      expect(spy).toHaveBeenCalledOnce()
+      expect(spy.mock.calls[0][0].target).toBe(item)
     })
 
     it('should active click action on space', async () => {
@@ -163,17 +188,17 @@ describe('<gds-context-menu>', () => {
       `)
       await aTimeout(0)
 
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('gds-menu-item-click', spy)
 
       const item = el.querySelector<GdsMenuItem>(
         getScopedTagName('gds-menu-item'),
       )!
       item.focus()
-      await sendKeys({ press: 'Space' })
+      await userEvent.keyboard('{Space}')
 
-      await expect(spy).to.have.been.calledOnce
-      await expect(spy.firstCall.args[0].target).to.equal(item)
+      expect(spy).toHaveBeenCalledOnce()
+      expect(spy.mock.calls[0][0].target).toBe(item)
     })
 
     it('should close on tab and focus trigger', async () => {
@@ -184,18 +209,19 @@ describe('<gds-context-menu>', () => {
           <gds-menu-item>Item 3</gds-menu-item>
         </gds-context-menu>
       `)
-      await aTimeout(0)
 
       const item = el.querySelector<GdsMenuItem>(
         getScopedTagName('gds-menu-item'),
       )!
       item.focus()
-      await sendKeys({ press: 'Tab' })
+      await tabNext()
 
       await el.updateComplete
+      await aTimeout(50)
 
-      await expect(el.open).to.be.false
-      await expect(document.activeElement).to.equal(el)
+      expect(el.open).toBe(false)
+
+      expect(document.activeElement).toBe(el)
     })
   })
 })

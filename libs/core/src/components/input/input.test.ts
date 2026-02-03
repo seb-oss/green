@@ -1,12 +1,16 @@
-import { expect } from '@esm-bundle/chai'
-import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands'
-import sinon from 'sinon'
+import { userEvent } from '@vitest/browser/context'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { GdsInput } from '@sebgroup/green-core/components/input/index.js'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
+import {
+  aTimeout,
+  clickOnElement,
+  fixture,
+  tabNext,
+  html as testingHtml,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/input/index.js'
 
@@ -20,8 +24,8 @@ for (const variant of ['default'] as const) {
           html`<gds-input variant="${variant}" label="My label"></gds-input>`,
         )
         const labelEl = el.shadowRoot?.querySelector('label')
-        expect(labelEl).to.exist
-        expect(labelEl?.textContent).to.contain('My label')
+        expect(labelEl).toBeDefined()
+        expect(labelEl?.textContent).toContain('My label')
       })
 
       it('should pass through the type attribute', async () => {
@@ -29,7 +33,7 @@ for (const variant of ['default'] as const) {
           html`<gds-input variant="${variant}" type="email"></gds-input>`,
         )
         const inputEl = el.shadowRoot?.querySelector('input')
-        expect(inputEl?.type).to.equal('email')
+        expect(inputEl?.type).toBe('email')
       })
     })
 
@@ -39,40 +43,40 @@ for (const variant of ['default'] as const) {
           html`<gds-input variant="${variant}"></gds-input>`,
         )
         el.value = 'My value'
-        expect(el.value).to.equal('My value')
+        expect(el.value).toBe('My value')
       })
 
       it('should set the name', async () => {
         const el = await fixture<GdsInput>(
           html`<gds-input variant="${variant}" name="my-name"></gds-input>`,
         )
-        expect(el.name).to.equal('my-name')
+        expect(el.name).toBe('my-name')
       })
 
       it('should fire a change event when the value has changed and focus has shifted away', async () => {
         const el = await fixture<GdsInput>(
           html`<gds-input variant="${variant}"></gds-input><input />`,
         )
-        const changeSpy = sinon.spy()
+        const changeSpy = vi.fn()
         el.addEventListener('change', changeSpy)
         el.focus()
 
-        await sendKeys({ press: 'a' })
-        await sendKeys({ press: 'Tab' })
+        await userEvent.keyboard('a')
+        await tabNext()
 
-        expect(changeSpy).to.have.been.calledOnce
+        expect(changeSpy).toHaveBeenCalledOnce()
       })
 
       it('should fire an input event when the value changes', async () => {
         const el = await fixture<GdsInput>(
           html`<gds-input variant="${variant}"></gds-input>`,
         )
-        const inputSpy = sinon.spy()
+        const inputSpy = vi.fn()
         el.addEventListener('input', inputSpy)
         el.focus()
         await el.updateComplete
-        await sendKeys({ press: 'a' })
-        expect(inputSpy).to.have.been.calledOnce
+        await userEvent.keyboard('a')
+        expect(inputSpy).toHaveBeenCalledOnce()
       })
 
       it('should show remaining characters when maxlength is set', async () => {
@@ -86,16 +90,16 @@ for (const variant of ['default'] as const) {
           '[gds-element=gds-badge]',
         )
 
-        expect(remainingCharactersBadgeEl).to.exist
-        expect(remainingCharactersBadgeEl?.textContent).to.equal('10')
+        expect(remainingCharactersBadgeEl).toBeDefined()
+        expect(remainingCharactersBadgeEl?.textContent).toBe('10')
 
         el.value = 'My value'
         await el.updateComplete
-        expect(remainingCharactersBadgeEl?.textContent).to.equal('2')
+        expect(remainingCharactersBadgeEl?.textContent).toBe('2')
 
         el.value = 'My value longer'
         await el.updateComplete
-        expect(remainingCharactersBadgeEl?.textContent).to.equal('-5')
+        expect(remainingCharactersBadgeEl?.textContent).toBe('-5')
       })
 
       it('should render a clear button when clearable is set and value is non-empty', async () => {
@@ -107,7 +111,7 @@ for (const variant of ['default'] as const) {
           ></gds-input>`,
         )
         const clearButtonEl = el.test_getClearButton()
-        expect(clearButtonEl).to.exist
+        expect(clearButtonEl).toBeDefined()
       })
       it('should fire an input event when search has been cleared', async () => {
         const el = await fixture<GdsInput>(
@@ -117,11 +121,11 @@ for (const variant of ['default'] as const) {
             value="My value"
           ></gds-input>`,
         )
-        const changeSpy = sinon.spy()
+        const changeSpy = vi.fn()
         el.addEventListener('gds-input-cleared', changeSpy)
         const clearButtonEl = el.test_getClearButton()
         clearButtonEl.click()
-        expect(changeSpy).to.have.been.calledOnce
+        expect(changeSpy).toHaveBeenCalledOnce()
       })
 
       it('should forward standard attributes', async () => {
@@ -142,16 +146,16 @@ for (const variant of ['default'] as const) {
         )
 
         const inputEl = el.shadowRoot?.querySelector('input')
-        expect(inputEl?.getAttribute('min')).to.equal('1')
-        expect(inputEl?.getAttribute('max')).to.equal('10')
-        expect(inputEl?.getAttribute('step')).to.equal('1')
-        expect(inputEl?.getAttribute('autocapitalize')).to.equal('on')
-        expect(inputEl?.getAttribute('autocomplete')).to.equal('on')
-        expect(inputEl?.getAttribute('autocorrect')).to.equal('true')
-        expect(inputEl?.getAttribute('spellcheck')).to.equal('true')
-        expect(inputEl?.getAttribute('inputmode')).to.equal('numeric')
-        expect(inputEl?.getAttribute('autofocus')).to.equal('')
-        expect(inputEl?.getAttribute('enterkeyhint')).to.equal('enter')
+        expect(inputEl?.getAttribute('min')).toBe('1')
+        expect(inputEl?.getAttribute('max')).toBe('10')
+        expect(inputEl?.getAttribute('step')).toBe('1')
+        expect(inputEl?.getAttribute('autocapitalize')).toBe('on')
+        expect(inputEl?.getAttribute('autocomplete')).toBe('on')
+        expect(inputEl?.getAttribute('autocorrect')).toBe('true')
+        expect(inputEl?.getAttribute('spellcheck')).toBe('true')
+        expect(inputEl?.getAttribute('inputmode')).toBe('numeric')
+        expect(inputEl?.getAttribute('autofocus')).toBe('')
+        expect(inputEl?.getAttribute('enterkeyhint')).toBe('enter')
       })
 
       it('should support customized character counter badge', async () => {
@@ -174,16 +178,16 @@ for (const variant of ['default'] as const) {
           '[gds-element=gds-badge]',
         )
 
-        expect(remainingCharactersBadgeEl).to.exist
-        expect(remainingCharactersBadgeEl?.textContent).to.equal('5')
-        expect(remainingCharactersBadgeEl?.getAttribute('variant')).to.equal(
+        expect(remainingCharactersBadgeEl).toBeDefined()
+        expect(remainingCharactersBadgeEl?.textContent).toBe('5')
+        expect(remainingCharactersBadgeEl?.getAttribute('variant')).toBe(
           'positive',
         )
 
         el.value = '12345678901'
         await el.updateComplete
-        expect(remainingCharactersBadgeEl?.textContent).to.equal('-1')
-        expect(remainingCharactersBadgeEl?.getAttribute('variant')).to.equal(
+        expect(remainingCharactersBadgeEl?.textContent).toBe('-1')
+        expect(remainingCharactersBadgeEl?.getAttribute('variant')).toBe(
           'negative',
         )
       })
@@ -200,7 +204,7 @@ for (const variant of ['default'] as const) {
         )
         const clearButtonEl = el.test_getClearButton()
         clearButtonEl.click()
-        expect(el.value).to.equal('')
+        expect(el.value).toBe('')
       })
     })
 
@@ -223,7 +227,7 @@ for (const variant of ['default'] as const) {
             </span>
           </gds-input>`,
         )
-        await expect(el).to.be.accessible()
+        await expect(el).toBeAccessible()
       })
 
       it('label should have a for attribute that matches the input id', async () => {
@@ -232,7 +236,7 @@ for (const variant of ['default'] as const) {
         )
         const labelEl = el.shadowRoot?.querySelector('label')
         const inputEl = el.shadowRoot?.querySelector('input')
-        expect(labelEl?.getAttribute('for')).to.equal(inputEl?.id)
+        expect(labelEl?.getAttribute('for')).toBe(inputEl?.id)
       })
 
       it('should focus when clicking on the field', async () => {
@@ -240,7 +244,7 @@ for (const variant of ['default'] as const) {
           html`<gds-input variant="${variant}"></gds-input>`,
         )
         await clickOnElement(el.test_getFieldElement())
-        expect(document.activeElement).to.equal(el)
+        expect(document.activeElement).toBe(el)
       })
 
       it('should focus when clicking on the label', async () => {
@@ -248,7 +252,7 @@ for (const variant of ['default'] as const) {
           html`<gds-input variant="${variant}" label="My label"></gds-input>`,
         )
         await clickOnElement(el.shadowRoot?.querySelector('label') as Element)
-        expect(document.activeElement).to.equal(el)
+        expect(document.activeElement).toBe(el)
       })
 
       it('should focus when calling focus()', async () => {
@@ -256,7 +260,7 @@ for (const variant of ['default'] as const) {
           html`<gds-input variant="${variant}"></gds-input>`,
         )
         el.focus()
-        expect(document.activeElement).to.equal(el)
+        expect(document.activeElement).toBe(el)
       })
 
       it('should have an associated error message when in invalid state', async () => {
@@ -271,10 +275,10 @@ for (const variant of ['default'] as const) {
         await aTimeout(0)
         const inputEl = el.shadowRoot?.querySelector('input')
         const errorMessageEl = el.shadowRoot?.querySelector('#message')
-        expect(errorMessageEl).to.exist
-        expect(inputEl?.getAttribute('aria-describedby')).to.contain('message')
-        expect(inputEl?.getAttribute('aria-invalid')).to.equal('true')
-        await expect(el).to.be.accessible()
+        expect(errorMessageEl).toBeDefined()
+        expect(inputEl?.getAttribute('aria-describedby')).toContain('message')
+        expect(inputEl?.getAttribute('aria-invalid')).toBe('true')
+        await expect(el).toBeAccessible()
       })
     })
 
@@ -291,25 +295,25 @@ for (const variant of ['default'] as const) {
 
         // Test setSelectionRange
         el.setSelectionRange(0, 5)
-        expect(el.selectionStart).to.equal(0)
-        expect(el.selectionEnd).to.equal(5)
+        expect(el.selectionStart).toBe(0)
+        expect(el.selectionEnd).toBe(5)
 
         // Test select
         el.select()
-        expect(el.selectionStart).to.equal(0)
-        expect(el.selectionEnd).to.equal(11)
+        expect(el.selectionStart).toBe(0)
+        expect(el.selectionEnd).toBe(11)
 
         // Test setRangeText
         el.setRangeText('Goodbye', 0, 5)
-        expect(el.value).to.equal('Goodbye World')
+        expect(el.value).toBe('Goodbye World')
 
         // Test selection properties getters/setters
         el.selectionStart = 8
         el.selectionEnd = 13
         el.selectionDirection = 'forward'
-        expect(el.selectionStart).to.equal(8)
-        expect(el.selectionEnd).to.equal(13)
-        expect(el.selectionDirection).to.equal('forward')
+        expect(el.selectionStart).toBe(8)
+        expect(el.selectionEnd).toBe(13)
+        expect(el.selectionDirection).toBe('forward')
       })
     })
   })

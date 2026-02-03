@@ -1,7 +1,5 @@
-import { expect } from '@esm-bundle/chai'
-import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands'
-import sinon from 'sinon'
+import { userEvent } from '@vitest/browser/context'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { GdsDatepicker } from '@sebgroup/green-core/components/datepicker'
 
@@ -12,7 +10,15 @@ import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
-import { clickOnElement, isWebKit, onlyDate } from '../../utils/testing'
+import {
+  aTimeout,
+  clickOnElement,
+  fixture,
+  isWebKit,
+  onlyDate,
+  tabNext,
+  html as testingHtml,
+} from '../../utils/testing'
 import { GdsDatePartSpinner } from './date-part-spinner'
 
 import '@sebgroup/green-core/components/datepicker'
@@ -21,12 +27,33 @@ import '@sebgroup/green-core/components/icon/icons/calendar'
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-datepicker>', () => {
+  // Cleanup any open datepickers/dialogs between tests to prevent modal state conflicts
+  afterEach(async () => {
+    // Close all open datepickers
+    const datepickers = document.querySelectorAll(
+      'gds-datepicker',
+    ) as NodeListOf<GdsDatepicker>
+    for (const dp of datepickers) {
+      if (dp.open) {
+        dp.open = false
+        await dp.updateComplete
+      }
+    }
+    // Also close any dialogs that might be in modal state
+    const dialogs = document.querySelectorAll('dialog')
+    for (const dialog of dialogs) {
+      if (dialog.open) {
+        dialog.close()
+      }
+    }
+  })
+
   describe('Rendering', () => {
     it('should render a datepicker', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker></gds-datepicker>`,
       )
-      await expect(el).shadowDom.to.exist
+      expect(el.shadowRoot).toBeDefined()
     })
   })
 
@@ -38,21 +65,21 @@ describe('<gds-datepicker>', () => {
           utc-hours="0"
         ></gds-datepicker>`,
       )
-      await expect(el.value).to.deep.equal(new Date('2024-01-01'))
+      await expect(el.value).toEqual(new Date('2024-01-01'))
     })
 
     it('should set the min', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker min="2024-01-01"></gds-datepicker>`,
       )
-      await expect(el.min).to.deep.equal(new Date('2024-01-01'))
+      await expect(el.min).toEqual(new Date('2024-01-01'))
     })
 
     it('should set the max', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker max="2024-01-01"></gds-datepicker>`,
       )
-      await expect(el.max).to.deep.equal(new Date('2024-01-01'))
+      await expect(el.max).toEqual(new Date('2024-01-01'))
     })
 
     it('should set open', async () => {
@@ -62,15 +89,15 @@ describe('<gds-datepicker>', () => {
       const popover =
         el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
 
-      await expect(popover.open).to.be.true
-      await expect(el.open).to.be.true
+      await expect(popover.open).toBe(true)
+      await expect(el.open).toBe(true)
     })
 
     it('should set the label', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker label="Date"></gds-datepicker>`,
       )
-      await expect(el.label).to.equal('Date')
+      await expect(el.label).toBe('Date')
     })
 
     it('should set the date format', async () => {
@@ -83,27 +110,21 @@ describe('<gds-datepicker>', () => {
       const separator =
         el.shadowRoot!.querySelector<HTMLSpanElement>('.separator')!
 
-      await expect(spinners[0].getAttribute('aria-label').trim()).to.equal(
-        'Day',
-      )
-      await expect(spinners[0].length).to.equal(2)
-      await expect(spinners[1].getAttribute('aria-label').trim()).to.equal(
-        'Month',
-      )
-      await expect(spinners[1].length).to.equal(2)
-      await expect(spinners[2].getAttribute('aria-label').trim()).to.equal(
-        'Year',
-      )
-      await expect(spinners[2].length).to.equal(4)
-      await expect(separator.textContent).to.equal('/')
-      await expect(el.dateformat).to.equal('d/m/y')
+      await expect(spinners[0].getAttribute('aria-label').trim()).toBe('Day')
+      await expect(spinners[0].length).toBe(2)
+      await expect(spinners[1].getAttribute('aria-label').trim()).toBe('Month')
+      await expect(spinners[1].length).toBe(2)
+      await expect(spinners[2].getAttribute('aria-label').trim()).toBe('Year')
+      await expect(spinners[2].length).toBe(4)
+      await expect(separator.textContent).toBe('/')
+      await expect(el.dateformat).toBe('d/m/y')
     })
 
     it('should dispatch a change event when the value is changed by the user', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-10"></gds-datepicker>`,
       )
-      const changeHandler = sinon.fake()
+      const changeHandler = vi.fn()
       el.addEventListener('change', changeHandler)
 
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
@@ -111,17 +132,13 @@ describe('<gds-datepicker>', () => {
       )!
       spinners[0].focus()
 
-      await sendKeys({
-        type: '20',
-      })
+      await userEvent.keyboard('20')
 
-      await sendKeys({
-        press: 'Tab',
-      })
+      await tabNext()
 
       await aTimeout(0)
 
-      await expect(changeHandler.calledOnce).to.be.true
+      await expect(changeHandler).toHaveBeenCalledOnce()
     })
 
     it('should reset when setting value to undefined', async () => {
@@ -132,12 +149,12 @@ describe('<gds-datepicker>', () => {
         getScopedTagName('gds-date-part-spinner'),
       )!
 
-      await expect(spinners[0].value.toString()).to.equal('2024')
+      await expect(spinners[0].value.toString()).toBe('2024')
 
       el.value = undefined
       await el.updateComplete
 
-      await expect(spinners[0].value.toString()).to.equal('yyyy')
+      await expect(spinners[0].value.toString()).toBe('yyyy')
     })
 
     it('should reset when form is reset', async () => {
@@ -156,13 +173,13 @@ describe('<gds-datepicker>', () => {
           getScopedTagName('gds-date-part-spinner'),
         )!
 
-      await expect(spinners[0].value.toString()).to.equal('2024')
+      await expect(spinners[0].value.toString()).toBe('2024')
 
       // Trigger reset
       resetButton.click()
       await aTimeout(0)
 
-      await expect(spinners[0].value.toString()).to.equal('yyyy')
+      await expect(spinners[0].value.toString()).toBe('yyyy')
     })
 
     it('should return a focused date', async () => {
@@ -171,7 +188,7 @@ describe('<gds-datepicker>', () => {
       )
       const focusedDate = await el.getFocusedDate()
 
-      await expect(onlyDate(focusedDate!)).to.equal(
+      await expect(onlyDate(focusedDate!)).toBe(
         onlyDate(new Date('2024-01-10')),
       )
     })
@@ -182,7 +199,7 @@ describe('<gds-datepicker>', () => {
       )
       const focusedDate = await el.getFocusedDate()
 
-      await expect(focusedDate).to.be.undefined
+      await expect(focusedDate).toBeUndefined()
     })
 
     it('Setting `disabled-weekends` should disable weekends', async () => {
@@ -198,7 +215,7 @@ describe('<gds-datepicker>', () => {
 
       const disabledDatecell = await el.test_getDateCell(13)
 
-      await expect(disabledDatecell).to.have.attribute('disabled')
+      expect(disabledDatecell).toHaveAttribute('disabled')
     })
 
     it('Setting `disabled-dates` should disable dates', async () => {
@@ -214,7 +231,7 @@ describe('<gds-datepicker>', () => {
 
       const disabledDatecell = await el.test_getDateCell(13)
 
-      await expect(disabledDatecell).to.have.attribute('disabled')
+      await expect(disabledDatecell).toHaveAttribute('disabled')
     })
 
     // Testing clear and today buttons
@@ -222,28 +239,28 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker open></gds-datepicker>`,
       )
-      expect(el.test_todayButton).to.exist
+      expect(el.test_todayButton).toBeDefined()
     })
 
     it('should not show the today button', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker hide-today-button open></gds-datepicker>`,
       )
-      expect(el.test_todayButton).to.not.exist
+      expect(el.test_todayButton).toBeNull()
     })
 
     it('should show the clear button', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker clearable open></gds-datepicker>`,
       )
-      expect(el.test_clearButton).to.exist
+      expect(el.test_clearButton).toBeDefined()
     })
 
     it('should not show the clear button', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker open></gds-datepicker>`,
       )
-      expect(el.test_clearButton).to.not.exist
+      expect(el.test_clearButton).toBeNull()
     })
 
     it('should always return a unique Date instance from the value property', async () => {
@@ -258,14 +275,12 @@ describe('<gds-datepicker>', () => {
         getScopedTagName('gds-date-part-spinner'),
       )!
       spinners[0].focus()
-      await sendKeys({
-        press: 'ArrowUp',
-      })
+      await userEvent.keyboard('{ArrowUp}')
       await el.updateComplete
 
       const date2 = el.value!
 
-      expect(onlyDate(date1)).to.not.equal(onlyDate(date2))
+      expect(onlyDate(date1)).not.toBe(onlyDate(date2))
     })
   })
 
@@ -298,10 +313,10 @@ describe('<gds-datepicker>', () => {
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
       )!
-      const focusHandler = sinon.fake()
+      const focusHandler = vi.fn()
       spinners[0].addEventListener('focus', focusHandler)
       await clickOnElement(label)
-      await expect(focusHandler.calledOnce).to.be.true
+      await expect(focusHandler).toHaveBeenCalledOnce()
     })
 
     it('should focus the first date part spinner when clicking on the element', async () => {
@@ -311,12 +326,12 @@ describe('<gds-datepicker>', () => {
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
       )!
-      const focusHandler = sinon.fake()
+      const focusHandler = vi.fn()
       spinners[0].addEventListener('focus', focusHandler)
       await clickOnElement(el)
       await aTimeout(0)
       await el.updateComplete
-      await expect(focusHandler.calledOnce).to.be.true
+      await expect(focusHandler).toHaveBeenCalledOnce()
     })
 
     it('should increment the spinner value when pressing the up arrow', async () => {
@@ -327,12 +342,10 @@ describe('<gds-datepicker>', () => {
         getScopedTagName('gds-date-part-spinner'),
       )!
       spinners[0].focus()
-      await sendKeys({
-        press: 'ArrowUp',
-      })
+      await userEvent.keyboard('{ArrowUp}')
       await aTimeout(0)
       await el.updateComplete
-      await expect(spinners[0].value.toString()).to.equal('2025')
+      await expect(spinners[0].value.toString()).toBe('2025')
     })
 
     it('should decrement the spinner value when pressing the down arrow', async () => {
@@ -343,12 +356,10 @@ describe('<gds-datepicker>', () => {
         getScopedTagName('gds-date-part-spinner'),
       )!
       spinners[0].focus()
-      await sendKeys({
-        press: 'ArrowDown',
-      })
+      await userEvent.keyboard('{ArrowDown}')
       await aTimeout(0)
       await el.updateComplete
-      await expect(spinners[0].value.toString()).to.equal('2023')
+      await expect(spinners[0].value.toString()).toBe('2023')
     })
 
     it('should focus the next spinner when pressing the right arrow', async () => {
@@ -359,12 +370,10 @@ describe('<gds-datepicker>', () => {
         getScopedTagName('gds-date-part-spinner'),
       )!
       spinners[0].focus()
-      await sendKeys({
-        press: 'ArrowRight',
-      })
+      await userEvent.keyboard('{ArrowRight}')
       await aTimeout(0)
       await el.updateComplete
-      await expect(spinners[1].value.toString()).to.equal('01')
+      await expect(spinners[1].value.toString()).toBe('01')
     })
 
     it('should focus the previous spinner when pressing the left arrow', async () => {
@@ -375,12 +384,10 @@ describe('<gds-datepicker>', () => {
         getScopedTagName('gds-date-part-spinner'),
       )!
       spinners[1].focus()
-      await sendKeys({
-        press: 'ArrowLeft',
-      })
+      await userEvent.keyboard('{ArrowLeft}')
       await aTimeout(0)
       await el.updateComplete
-      await expect(spinners[0].value.toString()).to.equal('2024')
+      await expect(spinners[0].value.toString()).toBe('2024')
     })
 
     it('should set year to 20 when typing 20 in the year spinner', async () => {
@@ -391,12 +398,10 @@ describe('<gds-datepicker>', () => {
         getScopedTagName('gds-date-part-spinner'),
       )!
       spinners[0].focus()
-      await sendKeys({
-        type: '20',
-      })
+      await userEvent.keyboard('20')
       await aTimeout(0)
       await el.updateComplete
-      await expect(spinners[0].value.toString()).to.equal('20')
+      await expect(spinners[0].value.toString()).toBe('20')
     })
 
     it('should set year to 1900 when blurring the year spinner with a value below 1900', async () => {
@@ -407,15 +412,11 @@ describe('<gds-datepicker>', () => {
         getScopedTagName('gds-date-part-spinner'),
       )!
       spinners[0].focus()
-      await sendKeys({
-        type: '1',
-      })
-      await sendKeys({
-        press: 'Tab',
-      })
+      await userEvent.keyboard('1')
+      await tabNext()
       await aTimeout(0)
       await el.updateComplete
-      await expect(spinners[0].value.toString()).to.equal('1900')
+      await expect(spinners[0].value.toString()).toBe('1900')
     })
 
     // Temporarily disabled
@@ -470,24 +471,14 @@ describe('<gds-datepicker>', () => {
       )!
       spinners[0].focus()
 
-      await sendKeys({
-        type: '2024',
-      })
-      await sendKeys({
-        type: '05',
-      })
-      await sendKeys({
-        type: '10',
-      })
-      await sendKeys({
-        press: 'Tab',
-      })
+      await userEvent.keyboard('2024')
+      await userEvent.keyboard('05')
+      await userEvent.keyboard('10')
+      await tabNext()
 
       await el.updateComplete
 
-      await expect(onlyDate(el.value!)).to.equal(
-        onlyDate(new Date('2024-05-10')),
-      )
+      await expect(onlyDate(el.value!)).toBe(onlyDate(new Date('2024-05-10')))
     })
 
     // Temporarily disabled
@@ -523,9 +514,9 @@ describe('<gds-datepicker>', () => {
       el.value = undefined
       await aTimeout(0)
       await el.updateComplete
-      await expect(spinners[0].value.toString()).to.equal('yyyy')
-      await expect(spinners[1].value.toString()).to.equal('mm')
-      await expect(spinners[2].value.toString()).to.equal('dd')
+      await expect(spinners[0].value.toString()).toBe('yyyy')
+      await expect(spinners[1].value.toString()).toBe('mm')
+      await expect(spinners[2].value.toString()).toBe('dd')
     })
 
     // Temporarily disabled
@@ -565,21 +556,15 @@ describe('<gds-datepicker>', () => {
 
       await popover.updateComplete
 
-      await sendKeys({
-        press: 'ArrowRight',
-      })
+      await userEvent.keyboard('{ArrowRight}')
       await el.updateComplete
 
-      await sendKeys({
-        press: 'Escape',
-      })
+      await userEvent.keyboard('{Escape}')
 
       await aTimeout(0)
       await el.updateComplete
 
-      await expect(onlyDate(el.value!)).to.equal(
-        onlyDate(new Date('2024-01-01')),
-      )
+      await expect(onlyDate(el.value!)).toBe(onlyDate(new Date('2024-01-01')))
     })
 
     it('should not overflow the year when trying to increase max year', async () => {
@@ -608,8 +593,8 @@ describe('<gds-datepicker>', () => {
       await aTimeout(0)
       await yearDropdown.updateComplete
 
-      await expect(monthDropdown.value).to.equal('11')
-      await expect(yearDropdown.value).to.equal('2034')
+      await expect(monthDropdown.value).toBe('11')
+      await expect(yearDropdown.value).toBe('2034')
     })
 
     it('should not overflow the year when trying to decrease min year', async () => {
@@ -639,8 +624,8 @@ describe('<gds-datepicker>', () => {
       await monthDropdown.updateComplete
       await yearDropdown.updateComplete
 
-      await expect(monthDropdown.value).to.equal('0')
-      await expect(yearDropdown.value).to.equal('2014')
+      await expect(monthDropdown.value).toBe('0')
+      await expect(yearDropdown.value).toBe('2014')
     })
 
     it('should go to previous month when pressing arrow left from the first day in the month', async () => {
@@ -661,13 +646,11 @@ describe('<gds-datepicker>', () => {
         `${getScopedTagName('gds-dropdown')}[label="Year"]`,
       )!
 
-      await sendKeys({
-        press: 'ArrowLeft',
-      })
+      await userEvent.keyboard('{ArrowLeft}')
       await el.updateComplete
 
-      await expect(monthDropdown.value).to.equal('0')
-      await expect(yearDropdown.value).to.equal('2024')
+      await expect(monthDropdown.value).toBe('0')
+      await expect(yearDropdown.value).toBe('2024')
     })
 
     it('should go to next month when pressing arrow right from the last day in the month', async () => {
@@ -688,13 +671,11 @@ describe('<gds-datepicker>', () => {
         `${getScopedTagName('gds-dropdown')}[label="Year"]`,
       )!
 
-      await sendKeys({
-        press: 'ArrowRight',
-      })
+      await userEvent.keyboard('{ArrowRight}')
       await el.updateComplete
 
-      await expect(monthDropdown.value).to.equal('1')
-      await expect(yearDropdown.value).to.equal('2024')
+      await expect(monthDropdown.value).toBe('1')
+      await expect(yearDropdown.value).toBe('2024')
     })
 
     it('Setting `utc-hours` should change the hours of selected dates', async () => {
@@ -705,20 +686,20 @@ describe('<gds-datepicker>', () => {
         ></gds-datepicker>`,
       )
       await el.updateComplete
-      await expect(el.value.toISOString()).to.equal(
+      await expect(el.value.toISOString()).toBe(
         new Date('2025-07-23T10:00:00Z').toISOString(),
       )
 
       el.utcHours = 14
       await el.updateComplete
-      await expect(el.value.toISOString()).to.equal(
+      await expect(el.value.toISOString()).toBe(
         new Date('2025-07-23T14:00:00Z').toISOString(),
       )
 
       // When value property is set, it should not be altered by utc-hours
       el.value = new Date('2025-07-20')
       await el.updateComplete
-      await expect(el.value.toISOString()).to.equal(
+      await expect(el.value.toISOString()).toBe(
         new Date('2025-07-20T00:00:00Z').toISOString(),
       )
     })
@@ -738,7 +719,7 @@ describe('<gds-datepicker>', () => {
 
       await el.updateComplete
 
-      await expect(el.value.toISOString()).to.equal(
+      await expect(el.value.toISOString()).toBe(
         new Date('2025-07-10T10:00:00Z').toISOString(),
       )
     })
@@ -755,7 +736,7 @@ describe('<gds-datepicker>', () => {
         ></gds-datepicker>`,
       )
       await el.updateComplete
-      await expect(el).to.be.accessible({
+      await expect(el).toBeAccessible({
         ignoredRules: ['color-contrast'],
       })
     })
@@ -766,7 +747,7 @@ describe('<gds-datepicker>', () => {
       )
       const label =
         el.shadowRoot!.querySelector<HTMLLabelElement>('[for="spinner-0"]')!
-      expect(label).to.exist
+      expect(label).toBeDefined()
     })
   })
 })

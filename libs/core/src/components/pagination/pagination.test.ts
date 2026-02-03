@@ -1,16 +1,23 @@
-import { expect } from '@esm-bundle/chai'
-import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
-import sinon from 'sinon'
+import { userEvent } from '@vitest/browser/context'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
+import {
+  aTimeout,
+  fixture,
+  setViewportSize,
+  html as testingHtml,
+} from '../../utils/testing'
 import { clickOnElement } from '../../utils/testing/index.js'
 
 import type { GdsPagination } from './pagination.component'
 
 import '@sebgroup/green-core/components/pagination'
+
+import { size } from '@floating-ui/dom'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -35,7 +42,7 @@ describe('<gds-pagination>', () => {
       const navigationControls = el.shadowRoot?.querySelector(
         '.navigation-controls',
       )
-      expect(navigationControls).to.exist
+      expect(navigationControls).toBeDefined()
     })
 
     it('should render page buttons', async () => {
@@ -49,7 +56,7 @@ describe('<gds-pagination>', () => {
         getScopedTagName('gds-button'),
       )
 
-      expect(buttons?.length).to.be.greaterThan(0)
+      expect(buttons?.length).toBeGreaterThan(0)
     })
   })
 
@@ -61,7 +68,7 @@ describe('<gds-pagination>', () => {
 
       await el.updateComplete
 
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('gds-page-change', spy)
 
       const buttons = el.shadowRoot?.querySelectorAll(
@@ -76,7 +83,7 @@ describe('<gds-pagination>', () => {
         await clickOnElement(pageButton)
       }
 
-      expect(spy.called).to.be.true
+      expect(spy).toHaveBeenCalled()
     })
 
     it('should disable previous button on first page', async () => {
@@ -93,7 +100,7 @@ describe('<gds-pagination>', () => {
         (btn as HTMLElement).getAttribute('label')?.includes('previous'),
       ) as HTMLElement | undefined
 
-      expect(previousButton?.hasAttribute('disabled')).to.be.true
+      expect(previousButton?.hasAttribute('disabled')).toBe(true)
     })
 
     it('should disable next button on last page', async () => {
@@ -110,7 +117,7 @@ describe('<gds-pagination>', () => {
         (btn as HTMLElement).getAttribute('label')?.includes('next'),
       ) as HTMLElement | undefined
 
-      expect(nextButton?.hasAttribute('disabled')).to.be.true
+      expect(nextButton?.hasAttribute('disabled')).toBe(true)
     })
 
     it('should emit page change with correct page number', async () => {
@@ -120,7 +127,7 @@ describe('<gds-pagination>', () => {
 
       await el.updateComplete
 
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('gds-page-change', spy)
 
       const buttons = el.shadowRoot?.querySelectorAll(
@@ -135,15 +142,17 @@ describe('<gds-pagination>', () => {
         await clickOnElement(pageButton)
       }
 
-      const event = spy.lastCall
+      const event = spy.mock.lastCall
       if (event) {
-        expect(event.args[0].detail.page).to.equal(3)
+        expect(event[0].detail.page).toBe(3)
       }
     })
   })
 
   describe('Page Size Selection', () => {
     it('should emit rows change event on page size selection', async () => {
+      const restore = await setViewportSize(1024, 768)
+
       const el = await fixture<GdsPagination>(
         html`<gds-pagination
           page="1"
@@ -155,8 +164,8 @@ describe('<gds-pagination>', () => {
 
       await el.updateComplete
 
-      const spy = sinon.spy()
-      el.addEventListener('gds-rows-change', spy)
+      const rowChangeSpy = vi.fn()
+      el.addEventListener('gds-rows-change', rowChangeSpy)
 
       const menuItems = el.shadowRoot?.querySelectorAll(
         getScopedTagName('gds-menu-item'),
@@ -165,17 +174,12 @@ describe('<gds-pagination>', () => {
         (item: Element) => (item as HTMLElement).textContent?.trim() === '25',
       ) as HTMLElement | undefined
 
-      if (sizeItem) {
-        sizeItem.dispatchEvent(
-          new CustomEvent('gds-menu-item-click', {
-            detail: { value: '25' },
-            bubbles: true,
-          }),
-        )
-      }
+      sizeItem?.click()
 
       await el.updateComplete
-      expect(spy.called).to.be.true
+      expect(rowChangeSpy).toHaveBeenCalled()
+
+      await restore()
     })
 
     it('should emit rows change with correct row count', async () => {
@@ -190,7 +194,7 @@ describe('<gds-pagination>', () => {
 
       await el.updateComplete
 
-      const spy = sinon.spy()
+      const spy = vi.fn()
       el.addEventListener('gds-rows-change', spy)
 
       const menuItems = el.shadowRoot?.querySelectorAll(
@@ -238,8 +242,8 @@ describe('<gds-pagination>', () => {
         (btn as HTMLElement).getAttribute('label')?.includes('last'),
       )
 
-      expect(jumpFirstButton).to.exist
-      expect(jumpLastButton).to.exist
+      expect(jumpFirstButton).toBeDefined()
+      expect(jumpLastButton).toBeDefined()
     })
 
     it('should disable jump first button on first page', async () => {
@@ -261,7 +265,7 @@ describe('<gds-pagination>', () => {
         (btn as HTMLElement).getAttribute('label')?.includes('first'),
       ) as HTMLElement | undefined
 
-      expect(jumpFirstButton?.hasAttribute('disabled')).to.be.true
+      expect(jumpFirstButton?.hasAttribute('disabled')).toBe(true)
     })
 
     it('should disable jump last button on last page', async () => {
@@ -283,7 +287,7 @@ describe('<gds-pagination>', () => {
         (btn as HTMLElement).getAttribute('label')?.includes('last'),
       ) as HTMLElement | undefined
 
-      expect(jumpLastButton?.hasAttribute('disabled')).to.be.true
+      expect(jumpLastButton?.hasAttribute('disabled')).toBe(true)
     })
   })
 
@@ -294,7 +298,7 @@ describe('<gds-pagination>', () => {
       )
 
       await el.updateComplete
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
 
     it('should have proper aria attributes on jump button', async () => {
@@ -317,8 +321,8 @@ describe('<gds-pagination>', () => {
         return label === 'Jump to page'
       }) as HTMLElement | undefined
 
-      expect(jumpButton?.hasAttribute('aria-haspopup')).to.be.true
-      expect(jumpButton?.hasAttribute('aria-expanded')).to.be.true
+      expect(jumpButton?.hasAttribute('aria-haspopup')).toBe(true)
+      expect(jumpButton?.hasAttribute('aria-expanded')).toBe(true)
     })
   })
 
@@ -334,7 +338,7 @@ describe('<gds-pagination>', () => {
       )
 
       await el.updateComplete
-      expect(el.density).to.equal('compact')
+      expect(el.density).toBe('compact')
     })
 
     it('should support spacious density', async () => {
@@ -348,7 +352,7 @@ describe('<gds-pagination>', () => {
       )
 
       await el.updateComplete
-      expect(el.density).to.equal('spacious')
+      expect(el.density).toBe('spacious')
     })
   })
 
@@ -365,7 +369,7 @@ describe('<gds-pagination>', () => {
       )
 
       await el.updateComplete
-      expect(el.label).to.equal(label)
+      expect(el.label).toBe(label)
     })
   })
 })

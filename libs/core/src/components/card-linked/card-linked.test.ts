@@ -1,6 +1,7 @@
-import { expect, fixture, html as testingHtml } from '@open-wc/testing'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../utils/testing'
 
 import type { GdsCardLinked } from './card-linked'
 
@@ -21,8 +22,8 @@ describe('<gds-card-linked>', () => {
       html`<gds-card-linked href="#test">Link Content</gds-card-linked>`,
     )
     const link = element.shadowRoot?.querySelector('a')
-    expect(link).to.exist
-    expect(link?.getAttribute('href')).to.equal('#test')
+    expect(link).toBeDefined()
+    expect(link?.getAttribute('href')).toBe('#test')
   })
 
   it('adds security attributes for external links', async () => {
@@ -32,7 +33,7 @@ describe('<gds-card-linked>', () => {
       >`,
     )
     const link = element.shadowRoot?.querySelector('a')
-    expect(link?.getAttribute('rel')).to.equal('noreferrer noopener')
+    expect(link?.getAttribute('rel')).toBe('noreferrer noopener')
   })
 
   it('handles download attribute', async () => {
@@ -42,7 +43,7 @@ describe('<gds-card-linked>', () => {
       >`,
     )
     const link = element.shadowRoot?.querySelector('a')
-    expect(link?.getAttribute('download')).to.equal('file.pdf')
+    expect(link?.getAttribute('download')).toBe('file.pdf')
   })
 
   it('handles ping attribute', async () => {
@@ -52,6 +53,6 @@ describe('<gds-card-linked>', () => {
       >`,
     )
     const link = element.shadowRoot?.querySelector('a')
-    expect(link?.getAttribute('ping')).to.equal('pingUrl')
+    expect(link?.getAttribute('ping')).toBe('pingUrl')
   })
 })

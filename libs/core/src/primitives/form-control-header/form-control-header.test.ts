@@ -1,10 +1,9 @@
-import { expect } from '@esm-bundle/chai'
-import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
-import sinon from 'sinon'
+import { describe, expect, it, vi } from 'vitest'
 
 import type { GdsFormControlHeader } from '@sebgroup/green-core/components/form-control-header'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
 
 import '@sebgroup/green-core/primitives/form-control-header'
 
@@ -15,7 +14,7 @@ describe('<gds-form-control-header>', () => {
     const el = await fixture(
       html`<gds-form-control-header></gds-form-control-header>`,
     )
-    expect(el.getAttribute('gds-element')).to.equal('gds-form-control-header')
+    expect(el.getAttribute('gds-element')).toBe('gds-form-control-header')
   })
 
   describe('Accessibility', () => {
@@ -23,7 +22,7 @@ describe('<gds-form-control-header>', () => {
       const el = await fixture<GdsFormControlHeader>(
         html`<gds-form-control-header></gds-form-control-header>`,
       )
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
   })
 
@@ -36,12 +35,12 @@ describe('<gds-form-control-header>', () => {
         </gds-form-control-header>`,
       )
       const button = el.shadowRoot?.querySelector('[gds-element=gds-button]')
-      expect(button).to.exist
-      const eventSpy = sinon.spy()
+      expect(button).toBeDefined()
+      const eventSpy = vi.fn()
       el.addEventListener('gds-ui-state', eventSpy)
       button?.click()
       await el.updateComplete
-      expect(eventSpy).to.have.been.calledOnce
+      expect(eventSpy).toHaveBeenCalledOnce()
     })
   })
 
@@ -58,13 +57,13 @@ describe('<gds-form-control-header>', () => {
       await el.updateComplete
 
       const button = el.shadowRoot?.querySelector('[gds-element=gds-button]')
-      expect(button).to.exist
+      expect(button).toBeDefined()
       button?.click()
       await el.updateComplete
       const extSupTxt = el.shadowRoot?.querySelector(
         '#extended-supporting-text',
       )
-      expect(extSupTxt).to.exist
+      expect(extSupTxt).toBeDefined()
     })
   })
 })

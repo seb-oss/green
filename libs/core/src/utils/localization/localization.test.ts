@@ -1,5 +1,6 @@
-import { expect } from '@esm-bundle/chai'
-import { aTimeout } from '@open-wc/testing'
+import { describe, expect, it } from 'vitest'
+
+import { aTimeout } from '../testing'
 
 import '@sebgroup/green-core'
 
@@ -10,18 +11,18 @@ const { setLocale, getLocale } = gdsInitLocalization()
 describe('Localization module', () => {
   describe('gdsInitLocalization', () => {
     it('should return `setLocale` and `getLocale`', async () => {
-      expect(setLocale).to.be.a('function')
-      expect(getLocale).to.be.a('function')
+      expect(setLocale).toBeTypeOf('function')
+      expect(getLocale).toBeTypeOf('function')
     })
 
     it('should set the locale to the default locale', async () => {
-      expect(getLocale()).to.equal('en')
+      expect(getLocale()).toBe('en')
     })
 
     it('should set the locale to the specified locale', async () => {
       setLocale('sv')
       await aTimeout(0)
-      expect(getLocale()).to.equal('sv')
+      expect(getLocale()).toBe('sv')
     })
   })
 })
