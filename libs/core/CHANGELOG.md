@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.28.2
+
+### Patch Changes
+
+- ae7789f: **Table:** Extra scroll caused from the caption
+- a2cf0b8: **Calendar:** Fix date selection for dates outside current month. Dates from adjacent months visible in the calendar grid can now be selected by clicking on them.
+- 14a300c: **Dropdown:** Fix state reflection issue in displayValue when options are dynamically added
+- ae7789f: **Column:** Fix the flex end when not sortable
+- ae7789f: **Checkbox:** Add back margin to the RBCB if is not wrapped to avoid margin on table
+- ae7789f: **Table:** Caption summary fix when not defined
+
 ## 2.28.1
 
 ### Patch Changes
