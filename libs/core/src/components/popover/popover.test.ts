@@ -11,6 +11,7 @@ import {
   aTimeout,
   clickOnElement,
   fixture,
+  setViewportSize,
   html as testingHtml,
   waitUntil,
 } from '../../utils/testing'
@@ -288,6 +289,8 @@ describe('<gds-popover>', () => {
     })
 
     it('should close when page scrolls', async () => {
+      const restore = await setViewportSize(800, 600)
+
       const el = await fixture<GdsPopover>(
         html`<gds-popover open>
           <div slot="trigger">Trigger</div>
@@ -300,6 +303,8 @@ describe('<gds-popover>', () => {
       await aTimeout(100) // Allow time for the scroll event to propagate
 
       expect(el.open).toBe(false)
+
+      await restore()
     })
   })
 })
