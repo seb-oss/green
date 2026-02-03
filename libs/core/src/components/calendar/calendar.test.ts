@@ -204,6 +204,29 @@ describe('<gds-calendar>', () => {
 
       expect(onlyDate(el.focusedDate)).toBe(onlyDate(new Date('2024-02-29')))
     })
+
+    it('should select dates outside the current month when clicked', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar
+          .focusedDate=${new Date('2024-06-15')}
+        ></gds-calendar>`,
+      )
+      await el.updateComplete
+
+      // Find a date from the previous month that appears on the calendar
+      // June 2024 starts on a Saturday, so May 26 will be in the first cell
+      const mayDateCell = el.shadowRoot?.querySelector(
+        'tbody tr:first-child td:first-child',
+      ) as HTMLElement
+      mayDateCell?.click()
+      await el.updateComplete
+
+      // The value should be set to a date in May
+      expect(el.value?.getMonth()).to.equal(4) // May is month 4 (0-indexed)
+
+      // The focused date should also update to May
+      expect(el.focusedDate.getMonth()).to.equal(4)
+    })
   })
 
   describe('API', () => {

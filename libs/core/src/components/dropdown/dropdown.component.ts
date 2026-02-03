@@ -506,6 +506,8 @@ class Dropdown extends GdsFormControlElement implements OptionsContainer {
       this.options[0] && (this.options[0].selected = true)
       this.value = this.options[0]?.value
     }
+
+    this._handleValueChange()
   }
 
   @watch('value')

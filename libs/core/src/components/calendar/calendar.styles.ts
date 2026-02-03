@@ -136,6 +136,10 @@ const style = css`
         cursor: default;
       }
 
+      &.outside-month:not(.disabled) {
+        color: var(--gds-sys-color-content-neutral-02);
+      }
+
       &[aria-selected='false']:active:not(.disabled) {
         background: color-mix(
           in srgb,

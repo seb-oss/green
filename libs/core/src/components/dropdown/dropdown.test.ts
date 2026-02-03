@@ -570,9 +570,7 @@ describe('<gds-dropdown> keyboard navigation', () => {
 
     el.focus()
     await userEvent.keyboard('{ArrowDown}')
-    await el.updateComplete
-
-    expect(el.open).toBe(true)
+    await waitUntil(() => el.open === true)
   })
 
   it('should focus option using keyboard navigation', async () => {
@@ -588,11 +586,9 @@ describe('<gds-dropdown> keyboard navigation', () => {
 
     el.focus()
     await userEvent.keyboard('{ArrowDown}')
-    await aTimeout(50)
+    await waitUntil(() => el.open === true)
     await userEvent.keyboard('{ArrowDown}')
-    await aTimeout(50)
-
-    expect(document.activeElement).toBe(secondOption)
+    await waitUntil(() => document.activeElement === secondOption)
   })
 
   it('should focus option using keyboard navigation when opened with click', async () => {
@@ -607,17 +603,11 @@ describe('<gds-dropdown> keyboard navigation', () => {
     const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
 
     await clickOnElement(trigger, 'center')
-    await el.updateComplete
-
-    expect(el.open).toBe(true)
+    await waitUntil(() => el.open === true)
 
     await userEvent.keyboard('{ArrowDown}')
-    await aTimeout(50)
     await userEvent.keyboard('{Enter}')
-    await aTimeout(50)
-
-    expect(el.value).toBe('v2')
-    expect(el.open).toBe(false)
+    await waitUntil(() => el.value === 'v2' && el.open === false)
   })
 
   it('should select option with Enter key', async () => {
@@ -632,11 +622,11 @@ describe('<gds-dropdown> keyboard navigation', () => {
     el.focus()
     await aTimeout(0)
     await userEvent.keyboard('{ArrowDown}')
-    await aTimeout(50)
+    await waitUntil(() => el.open === true)
     await userEvent.keyboard('{ArrowDown}')
-    await aTimeout(50)
+    await waitUntil(() => document.activeElement === el.options[1])
     await userEvent.keyboard('{Enter}')
-    await aTimeout(50)
+    await el.updateComplete
 
     expect(el.value).toBe('v2')
   })
@@ -652,13 +642,11 @@ describe('<gds-dropdown> keyboard navigation', () => {
 
     el.focus()
     await userEvent.keyboard('{ArrowDown}')
-    await aTimeout(50)
+    await waitUntil(() => el.open === true)
     await userEvent.keyboard('{ArrowDown}')
-    await aTimeout(50)
+    await waitUntil(() => document.activeElement === el.options[1])
     await userEvent.keyboard(' ')
-    await aTimeout(50)
-
-    expect(el.value).toBe('v2')
+    await waitUntil(() => el.value === 'v2')
   })
 
   it('should close on ESC', async () => {
@@ -672,9 +660,7 @@ describe('<gds-dropdown> keyboard navigation', () => {
 
     el.focus()
     await userEvent.keyboard('{Escape}')
-    await el.updateComplete
-
-    expect(el.open).toBe(false)
+    await waitUntil(() => el.open === false)
   })
 })
 

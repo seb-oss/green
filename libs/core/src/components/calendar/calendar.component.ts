@@ -293,7 +293,6 @@ export class GdsCalendar extends GdsElement {
                     // Establish final disabled state
                     const isDisabled =
                       displayOptions.disabled ||
-                      isOutsideCurrentMonth ||
                       isOutsideMinMax ||
                       (this.disabledWeekends && isWeekend)
 
@@ -312,6 +311,7 @@ export class GdsCalendar extends GdsElement {
                               'custom-date': Boolean(customization),
                               disabled: Boolean(isDisabled),
                               today: isSameDay(currentDate, day),
+                              'outside-month': isOutsideCurrentMonth,
                             })}"
                             ?disabled=${isDisabled}
                             tabindex="${isSameDay(this.focusedDate, day)
