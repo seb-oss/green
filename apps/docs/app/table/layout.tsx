@@ -23,7 +23,7 @@ export default function Table({ children }: { children: React.ReactNode }) {
   const getStatusPath = (row: Item) => `/table/${row.status.toLowerCase()}`
 
   const dataProvider = async (request: any) => {
-    let filtered = [...SIMPLE_DATA]
+    const filtered = [...SIMPLE_DATA]
 
     if (request.sortColumn) {
       filtered.sort((a, b) => {
