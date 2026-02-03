@@ -12,12 +12,21 @@ interface PageProps {
 
 // Fetch pages at build time
 export async function generateStaticParams() {
-  const response = await fetch('https://api.seb.io/pages/pages.json')
-  const data: PageList = await response.json()
+  try {
+    const response = await fetch('https://api.seb.io/pages/pages.json', {
+      next: { revalidate: 3600 },
+    })
+    const data: PageList = await response.json()
 
-  return data.pages.map((page) => ({
-    slug: page.slug.split('/'),
-  }))
+    return data.pages
+      .filter((page) => !page.slug.startsWith('/table'))
+      .map((page) => ({
+        slug: page.slug.split('/').filter(Boolean),
+      }))
+  } catch (error) {
+    console.error('Failed to fetch pages for static generation:', error)
+    return [{ slug: [''] }]
+  }
 }
 
 export default function DynamicPage({ params }: PageProps) {

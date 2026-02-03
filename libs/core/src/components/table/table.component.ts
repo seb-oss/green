@@ -590,11 +590,17 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       'sort-desc': isSorted && sortDirection === 'desc',
       [`align-${column.align}`]: !!column.align,
       [`justify-${column.justify}`]: !!column.justify,
+      wrap: Boolean(column.width),
+    })
+
+    const style = styleMap({
+      '--cell-width': column.width,
     })
 
     return html`
       <th
         class=${classes}
+        style=${style}
         aria-sort="${isSorted
           ? sortDirection === 'asc'
             ? 'ascending'
@@ -878,7 +884,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       loading: this._loading,
       loaded: !this._loading && !this._loaded,
     })
-    const caption = `${this.summary}, ${msg('Data table with')} ${this._total} ${msg('rows')}`
+    const caption = `${this.summary ? this.summary + ', ' : ''}${msg('Data table with')} ${this._total} ${msg('rows')}`
 
     return html`
       <gds-card

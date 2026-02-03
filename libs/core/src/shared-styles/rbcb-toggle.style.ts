@@ -31,7 +31,12 @@ export default css`
     position: relative;
     width: var(--_toggle-size);
     height: var(--_toggle-size);
+
     cursor: pointer;
+  }
+
+  :not(.rbcb-wrapper) .rbcb {
+    margin-block-start: calc(var(--gds-sys-space-5xs) * 2);
   }
 
   .rbcb--radio {
