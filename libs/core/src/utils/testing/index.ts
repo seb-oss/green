@@ -41,16 +41,14 @@ export async function waitUntil(
   const { interval = 50, timeout = 1000 } = options
   const startTime = Date.now()
 
-  while (true) {
+  while (Date.now() - startTime <= timeout) {
     const result = await condition()
     if (result) return
 
-    if (Date.now() - startTime > timeout) {
-      throw new Error(message || `waitUntil timed out after ${timeout}ms`)
-    }
-
     await new Promise((resolve) => setTimeout(resolve, interval))
   }
+
+  throw new Error(message || `waitUntil timed out after ${timeout}ms`)
 }
 
 /** A testing utility that clicks on an element. */
