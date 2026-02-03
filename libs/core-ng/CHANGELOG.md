@@ -1,5 +1,12 @@
 # @sebgroup/green-core-ng
 
+## 2.28.3
+
+### Patch Changes
+
+- 28eb42c: Fix function properties incorrectly using `booleanAttribute` transform
+  - @sebgroup/green-core@2.28.3
+
 ## 2.28.2
 
 ### Patch Changes
