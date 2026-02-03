@@ -153,9 +153,8 @@ export default css`
   .visually-hidden-checkbox {
     position: absolute;
     opacity: 0;
-    width: 0;
-    height: 0;
-    pointer-events: none;
+    width: 1px;
+    height: 1px;
   }
 
   .rbcb-wrapper {

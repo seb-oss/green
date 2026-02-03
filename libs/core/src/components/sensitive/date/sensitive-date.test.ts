@@ -1,8 +1,9 @@
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 import type { GdsSensitiveDate } from '@sebgroup/green-core/components/sensitive/date'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../../utils/testing'
 
 import '@sebgroup/green-core/components/sensitive/date/index.js'
 
@@ -19,5 +20,10 @@ describe('GdsSensitiveDate', () => {
       ></gds-sensitive-date>`,
     )
     await element.updateComplete
+  })
+
+  it('should instantiate', () => {
+    expect(element).toBeDefined()
+    expect(element.tagName.toLowerCase()).toContain('gds-sensitive-date')
   })
 })

@@ -1,14 +1,13 @@
-import { expect } from '@esm-bundle/chai'
+import { userEvent } from '@vitest/browser/context'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+
 import {
   aTimeout,
+  clickOnElement,
   fixture,
   html as testingHtml,
   waitUntil,
-} from '@open-wc/testing'
-import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import sinon from 'sinon'
-
-import { clickOnElement } from '../../utils/testing'
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/dialog'
 
@@ -22,9 +21,30 @@ import {
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-dialog>', () => {
+  // Cleanup any open dialogs between tests to prevent modal state conflicts
+  afterEach(async () => {
+    // Close all open gds-dialogs
+    const dialogs = document.querySelectorAll(
+      'gds-dialog',
+    ) as NodeListOf<GdsDialog>
+    for (const dialog of dialogs) {
+      if (dialog.open) {
+        dialog.open = false
+        await dialog.updateComplete
+      }
+    }
+    // Also close any native dialogs that might be in modal state
+    const nativeDialogs = document.querySelectorAll('dialog')
+    for (const dialog of nativeDialogs) {
+      if (dialog.open) {
+        dialog.close()
+      }
+    }
+  })
+
   it('is a GdsElement', async () => {
     const el = await fixture(html`<gds-dialog></gds-dialog>`)
-    expect(el.getAttribute('gds-element')).to.equal('gds-dialog')
+    expect(el.getAttribute('gds-element')).toBe('gds-dialog')
   })
 
   describe('Accessibility', () => {
@@ -33,14 +53,14 @@ describe('<gds-dialog>', () => {
         html`<gds-dialog open heading="Test">Content</gds-dialog>`,
       )
       await el.updateComplete
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
   })
 
   describe('API', () => {
     it('should emit events when show() and close() are called with a parameter', async () => {
-      const showSpy = sinon.spy()
-      const closeSpy = sinon.spy()
+      const showSpy = vi.fn()
+      const closeSpy = vi.fn()
       const el = await fixture<GdsDialog>(
         html`<gds-dialog
           heading="Test"
@@ -52,17 +72,17 @@ describe('<gds-dialog>', () => {
       )
 
       el.show('test')
-      await waitUntil(() => showSpy.called)
-      expect(showSpy).to.have.been.called
+      await waitUntil(() => showSpy.mock.calls.length > 0)
+      expect(showSpy).toHaveBeenCalled()
 
       el.close('test')
-      await waitUntil(() => closeSpy.called)
-      expect(closeSpy).to.have.been.called
+      await waitUntil(() => closeSpy.mock.calls.length > 0)
+      expect(closeSpy).toHaveBeenCalled()
     })
 
     it('should not emit events when show() and close() are called without a parameter', async () => {
-      const showSpy = sinon.spy()
-      const closeSpy = sinon.spy()
+      const showSpy = vi.fn()
+      const closeSpy = vi.fn()
       const el = await fixture<GdsDialog>(
         html`<gds-dialog
           heading="Test"
@@ -75,16 +95,16 @@ describe('<gds-dialog>', () => {
 
       el.show()
       await waitUntil(() => el.open)
-      expect(showSpy).to.not.have.been.called
+      expect(showSpy).not.toHaveBeenCalled()
 
       el.close()
       await waitUntil(() => !el.open)
-      expect(closeSpy).to.not.have.been.called
+      expect(closeSpy).not.toHaveBeenCalled()
     })
 
     it('should fire the close event before the gds-ui-state event', async () => {
-      const closeSpy = sinon.spy()
-      const uiStateSpy = sinon.spy()
+      const closeSpy = vi.fn()
+      const uiStateSpy = vi.fn()
       const el = await fixture<GdsDialog>(
         html`<gds-dialog
           open
@@ -100,11 +120,14 @@ describe('<gds-dialog>', () => {
 
       await aTimeout(100)
 
-      expect(uiStateSpy.calledBefore(closeSpy)).to.be.true
+      // uiStateSpy should be called before closeSpy (order of invocation)
+      expect(uiStateSpy.mock.invocationCallOrder[0]).toBeLessThan(
+        closeSpy.mock.invocationCallOrder[0],
+      )
     })
 
     it('should not fire the close event if the gds-ui-state event is cancelled', async () => {
-      const closeSpy = sinon.spy()
+      const closeSpy = vi.fn()
       const el = await fixture<GdsDialog>(
         html`<gds-dialog
           open
@@ -120,11 +143,11 @@ describe('<gds-dialog>', () => {
 
       await aTimeout(100)
 
-      expect(closeSpy).to.not.have.been.called
+      expect(closeSpy).not.toHaveBeenCalled()
     })
 
     it('should not fire the show event if the gds-ui-state event is cancelled', async () => {
-      const showSpy = sinon.spy()
+      const showSpy = vi.fn()
       const el = await fixture<GdsDialog>(
         html`<gds-dialog
           open
@@ -140,7 +163,7 @@ describe('<gds-dialog>', () => {
 
       await aTimeout(100)
 
-      expect(showSpy).to.not.have.been.called
+      expect(showSpy).not.toHaveBeenCalled()
     })
 
     it('should set the heading when the heading attribute is set', async () => {
@@ -148,14 +171,14 @@ describe('<gds-dialog>', () => {
         html`<gds-dialog heading="Test" open>Content</gds-dialog>`,
       )
       const heading = el.shadowRoot?.querySelector('h2')
-      expect(heading?.textContent).to.equal('Test')
+      expect(heading?.textContent).toBe('Test')
     })
 
     it('should support the `scrollable` prop', async () => {
       const el = await fixture<GdsDialog>(
         html`<gds-dialog scrollable heading="Test">Content</gds-dialog>`,
       )
-      expect(el.scrollable).to.be.true
+      expect(el.scrollable).toBe(true)
     })
   })
 
@@ -192,10 +215,7 @@ describe('<gds-dialog>', () => {
       // Simulate clicking outside the dialog
       const dialog = el.shadowRoot?.querySelector('dialog')
       if (dialog) {
-        await sendMouse({
-          type: 'click',
-          position: [10, 10],
-        })
+        await userEvent.click(document.body, { position: { x: 10, y: 10 } })
       }
       await waitUntil(() => !el.open)
     })
@@ -210,13 +230,10 @@ describe('<gds-dialog>', () => {
       // Simulate clicking outside the dialog
       const dialog = el.shadowRoot?.querySelector('dialog')
       if (dialog) {
-        await sendMouse({
-          type: 'click',
-          position: [10, 10],
-        })
+        await userEvent.click(document.body, { position: { x: 10, y: 10 } })
       }
       await aTimeout(100) // Wait to see if the dialog closes
-      expect(el.open).to.be.true
+      expect(el.open).toBe(true)
     })
 
     it('should close dialog when pressing Escape key', async () => {
@@ -224,24 +241,26 @@ describe('<gds-dialog>', () => {
         html`<gds-dialog open heading="Test">Content</gds-dialog>`,
       )
 
-      await sendKeys({ press: 'Escape' })
+      await userEvent.keyboard('{Escape}')
       await waitUntil(() => !el.open)
     })
 
     it('should emit gds-ui-state with reason `native-close` when closed with ESC', async () => {
-      const uiStateSpy = sinon.spy()
+      const uiStateSpy = vi.fn()
       const el = await fixture<GdsDialog>(
         html`<gds-dialog open heading="Test" @gds-ui-state=${uiStateSpy}
           >Content</gds-dialog
         >`,
       )
 
-      await sendKeys({ press: 'Escape' })
+      await userEvent.keyboard('{Escape}')
       await waitUntil(() => !el.open)
 
-      expect(uiStateSpy).to.have.been.calledWithMatch({
-        detail: { reason: 'native-close' },
-      })
+      expect(uiStateSpy).toHaveBeenCalledWith(
+        expect.objectContaining({
+          detail: expect.objectContaining({ reason: 'native-close' }),
+        }),
+      )
     })
   })
 })

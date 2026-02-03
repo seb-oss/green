@@ -1,8 +1,13 @@
-import { expect } from '@esm-bundle/chai'
-import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands'
+import { userEvent } from '@vitest/browser/context'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { clickOnElement } from '../../utils/testing'
+import {
+  aTimeout,
+  clickOnElement,
+  fixture,
+  tabNext,
+  html as testingHtml,
+} from '../../utils/testing'
 
 import '@sebgroup/green-core/components/checkbox'
 
@@ -15,7 +20,7 @@ const html = htmlTemplateTagFactory(testingHtml)
 describe('<gds-checkbox>', () => {
   it('is a GdsElement', async () => {
     const el = await fixture(html`<gds-checkbox></gds-checkbox>`)
-    expect(el.getAttribute('gds-element')).to.equal('gds-checkbox')
+    expect(el.getAttribute('gds-element')).toBe('gds-checkbox')
   })
 
   describe('Accessibility', () => {
@@ -24,7 +29,7 @@ describe('<gds-checkbox>', () => {
         html`<gds-checkbox label="Checkbox label"></gds-checkbox>`,
       )
       await el.updateComplete
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
 
     it('should have an associated error message when in invalid state', async () => {
@@ -37,10 +42,10 @@ describe('<gds-checkbox>', () => {
       )
       await el.updateComplete
       const input = el.shadowRoot?.querySelector('input')
-      expect(input?.getAttribute('aria-describedby')).to.contain('message')
+      expect(input?.getAttribute('aria-describedby')).toContain('message')
       const message = el.shadowRoot?.querySelector('#message')
-      expect(message?.innerText).to.equal('This is an error message')
-      await expect(el).to.be.accessible()
+      expect(message?.innerText).toBe('This is an error message')
+      await expect(el).toBeAccessible()
     })
   })
 
@@ -49,13 +54,13 @@ describe('<gds-checkbox>', () => {
       const el = await fixture<GdsCheckbox>(
         html`<gds-checkbox label="Checkbox label" checked></gds-checkbox>`,
       )
-      expect(el.checked).to.be.true
+      expect(el.checked).toBe(true)
     })
     it('Supports disabled attribute', async () => {
       const el = await fixture<GdsCheckbox>(
         html`<gds-checkbox label="Checkbox label" disabled></gds-checkbox>`,
       )
-      expect(el.disabled).to.be.true
+      expect(el.disabled).toBe(true)
     })
   })
 
@@ -64,19 +69,19 @@ describe('<gds-checkbox>', () => {
       const el = await fixture<GdsCheckbox>(
         html`<gds-checkbox label="Checkbox label"></gds-checkbox>`,
       )
-      expect(el.checked).to.be.false
+      expect(el.checked).toBe(false)
       await clickOnElement(el)
       await el.updateComplete
-      expect(el.checked).to.be.true
+      expect(el.checked).toBe(true)
     })
     it('should not be able to click the checkbox when disabled', async () => {
       const el = await fixture<GdsCheckbox>(
         html`<gds-checkbox label="Checkbox label" disabled></gds-checkbox>`,
       )
-      expect(el.checked).to.be.false
+      expect(el.checked).toBe(false)
       await clickOnElement(el)
       await el.updateComplete
-      expect(el.checked).to.be.false
+      expect(el.checked).toBe(false)
     })
   })
 })
@@ -84,7 +89,7 @@ describe('<gds-checkbox>', () => {
 describe('<gds-checkbox-group>', () => {
   it('is a GdsElement', async () => {
     const el = await fixture(html`<gds-checkbox-group></gds-checkbox-group>`)
-    expect(el.getAttribute('gds-element')).to.equal('gds-checkbox-group')
+    expect(el.getAttribute('gds-element')).toBe('gds-checkbox-group')
   })
 
   describe('Accessibility', () => {
@@ -97,7 +102,7 @@ describe('<gds-checkbox-group>', () => {
         </gds-checkbox-group>`,
       )
       await el.updateComplete
-      await expect(el).to.be.accessible()
+      await expect(el).toBeAccessible()
     })
   })
 
@@ -112,7 +117,7 @@ describe('<gds-checkbox-group>', () => {
         </gds-checkbox-group>`,
       )
       await el.updateComplete
-      expect(el.checkboxes.length).to.equal(3)
+      expect(el.checkboxes.length).toBe(3)
     })
     it('should have a value of empty array when no boxes are checked', async () => {
       const el = await fixture<GdsCheckbox>(
@@ -123,7 +128,7 @@ describe('<gds-checkbox-group>', () => {
         </gds-checkbox-group>`,
       )
       await el.updateComplete
-      expect(el.value).to.deep.equal([])
+      expect(el.value).toEqual([])
     })
     it('should have a value of array when boxes are checked', async () => {
       const el = await fixture<GdsCheckbox>(
@@ -134,7 +139,7 @@ describe('<gds-checkbox-group>', () => {
         </gds-checkbox-group>`,
       )
       await el.updateComplete
-      expect(el.value).to.deep.equal(['2'])
+      expect(el.value).toEqual(['2'])
     })
     it('should reflect the array value back to the checkboxes', async () => {
       const el = await fixture<GdsCheckbox>(
@@ -147,9 +152,9 @@ describe('<gds-checkbox-group>', () => {
       await el.updateComplete
       el.value = ['1', '3']
       await el.updateComplete
-      expect(el.checkboxes[0].checked).to.be.true
-      expect(el.checkboxes[1].checked).to.be.false
-      expect(el.checkboxes[2].checked).to.be.true
+      expect(el.checkboxes[0].checked).toBe(true)
+      expect(el.checkboxes[1].checked).toBe(false)
+      expect(el.checkboxes[2].checked).toBe(true)
     })
   })
 
@@ -167,7 +172,7 @@ describe('<gds-checkbox-group>', () => {
       const checkbox = el.checkboxes[0]
       await clickOnElement(checkbox)
       await el.updateComplete
-      expect(el.value).to.deep.equal(['1'])
+      expect(el.value).toEqual(['1'])
     })
     it('should be possible to tab through the checkboxes', async () => {
       const el = await fixture<GdsCheckbox>(
@@ -178,16 +183,20 @@ describe('<gds-checkbox-group>', () => {
         </gds-checkbox-group>`,
       )
 
-      const checkbox2 = el.checkboxes[1]
+      const checkbox1 = el.checkboxes[0]
+      const checkbox3 = el.checkboxes[2]
 
-      await sendKeys({ press: 'Tab' })
-      await aTimeout(1)
-      await sendKeys({ press: 'Tab' })
-      await aTimeout(1)
-      await sendKeys({ press: 'Space' })
+      await clickOnElement(checkbox1, 'center')
       await el.updateComplete
 
-      expect(checkbox2.checked).to.be.true
+      await tabNext()
+      await aTimeout(1)
+      await tabNext()
+      await aTimeout(1)
+      await userEvent.keyboard(' ')
+      await el.updateComplete
+
+      expect(checkbox3.checked).toBe(true)
     })
   })
 })

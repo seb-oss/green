@@ -442,10 +442,6 @@ export class GdsPopover extends GdsElement {
       this._elDialog?.style.removeProperty('top')
       this._elDialog?.style.removeProperty('minWidth')
       this._elDialog?.style.removeProperty('min-width')
-
-      this.updateComplete.then(() => {
-        if (this.open) this._elDialog?.showModal()
-      })
     } else {
       this.updateComplete.then(() => {
         this.#registerAutoPositioning()

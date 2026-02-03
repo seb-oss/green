@@ -1,10 +1,10 @@
-import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import { describe, expect, it } from 'vitest'
 
 import type { DateTimeFormats } from '@sebgroup/green-core/components/formatted-text'
 import type { GdsFormattedDate } from '@sebgroup/green-core/components/formatted-text/date'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { fixture, html as testingHtml } from '../../../utils/testing'
 
 import '@sebgroup/green-core/components/formatted-text/date'
 
@@ -86,7 +86,7 @@ describe('GdsFormattedDate', () => {
             )
             await element.updateComplete
 
-            expect(element.formattedValue).to.satisfy((val: string) => {
+            expect(element.formattedValue).toSatisfy((val: string) => {
               return (
                 val === expected[locale as (typeof locales)[number]] ||
                 val ===

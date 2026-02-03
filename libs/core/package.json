@@ -1,7 +1,7 @@
 {
   "name": "@sebgroup/green-core",
   "description": "A carefully crafted set of Web Components, laying the foundation of the Green Design System.",
-  "version": "2.27.0",
+  "version": "2.28.0",
   "main": "index.js",
   "module": "index.js",
   "type": "module",
