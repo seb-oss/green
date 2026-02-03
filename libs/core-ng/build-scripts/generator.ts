@@ -432,7 +432,7 @@ ${standardBody}
    */
   private static isBooleanType(type?: string): boolean {
     // Check for exact 'boolean' or 'boolean | ...' or '... | boolean'
-    return /\bboolean\b/.test(type || '')
+    return type === 'boolean'
   }
 
   /**
