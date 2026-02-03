@@ -1,4 +1,4 @@
-import { expect } from '@esm-bundle/chai'
+import { describe, expect, it } from 'vitest'
 
 import { parse, toCss, tokenize } from './style-expression-parser'
 
@@ -32,7 +32,7 @@ describe('style-expression-parser', () => {
     ]
 
     expressions.forEach((expression, i) => {
-      expect(tokenize(expression)).to.deep.equal(expected[i])
+      expect(tokenize(expression)).toEqual(expected[i])
     })
   })
 
@@ -116,7 +116,7 @@ describe('style-expression-parser', () => {
     ]
 
     expressions.forEach((expression, i) => {
-      expect(parse(tokenize(expression))).to.deep.equal(expected[i])
+      expect(parse(tokenize(expression))).toEqual(expected[i])
     })
   })
 
@@ -145,7 +145,7 @@ describe('style-expression-parser', () => {
           parse(tokenize(expression)),
           (v) => `var(--gds-sys-space-${v})`,
         ),
-      ).to.equal(expected[i])
+      ).toBe(expected[i])
     })
   })
 })

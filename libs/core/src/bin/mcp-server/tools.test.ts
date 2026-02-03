@@ -1,4 +1,4 @@
-import { expect } from '@esm-bundle/chai'
+import { describe, expect, it } from 'vitest'
 
 import { CATEGORIES, FRAMEWORKS, SEARCH_CONFIG } from './constants.js'
 import { RegexError, ValidationError } from './errors.js'
@@ -158,12 +158,12 @@ describe('MCP Tools', () => {
 
         const result = validateSearchComponentsInput(input)
 
-        expect(result.query).to.equal('button')
-        expect(result.category).to.equal('component')
-        expect(result.splitTerms).to.be.true
-        expect(result.matchAll).to.be.false
-        expect(result.useRegex).to.be.false
-        expect(result.maxResults).to.equal(20)
+        expect(result.query).toBe('button')
+        expect(result.category).toBe('component')
+        expect(result.splitTerms).toBe(true)
+        expect(result.matchAll).toBe(false)
+        expect(result.useRegex).toBe(false)
+        expect(result.maxResults).toBe(20)
       })
 
       it('should use default values for optional parameters', () => {
@@ -173,34 +173,32 @@ describe('MCP Tools', () => {
 
         const result = validateSearchComponentsInput(input)
 
-        expect(result.query).to.equal('button')
-        expect(result.category).to.equal('all')
-        expect(result.splitTerms).to.be.true
-        expect(result.matchAll).to.be.false
-        expect(result.useRegex).to.be.false
-        expect(result.maxResults).to.equal(SEARCH_CONFIG.DEFAULT_MAX_RESULTS)
+        expect(result.query).toBe('button')
+        expect(result.category).toBe('all')
+        expect(result.splitTerms).toBe(true)
+        expect(result.matchAll).toBe(false)
+        expect(result.useRegex).toBe(false)
+        expect(result.maxResults).toBe(SEARCH_CONFIG.DEFAULT_MAX_RESULTS)
       })
 
       it('should reject missing query', () => {
-        expect(() => validateSearchComponentsInput({})).to.throw(
-          ValidationError,
-        )
+        expect(() => validateSearchComponentsInput({})).toThrow(ValidationError)
       })
 
       it('should reject invalid category', () => {
         expect(() =>
           validateSearchComponentsInput({ query: 'test', category: 'invalid' }),
-        ).to.throw(ValidationError)
+        ).toThrow(ValidationError)
       })
 
       it('should reject maxResults out of range', () => {
         expect(() =>
           validateSearchComponentsInput({ query: 'test', maxResults: 0 }),
-        ).to.throw(ValidationError)
+        ).toThrow(ValidationError)
 
         expect(() =>
           validateSearchComponentsInput({ query: 'test', maxResults: 101 }),
-        ).to.throw(ValidationError)
+        ).toThrow(ValidationError)
       })
     })
 
@@ -215,10 +213,10 @@ describe('MCP Tools', () => {
 
         const result = validateGetComponentDocsInput(input)
 
-        expect(result.componentName).to.equal('button')
-        expect(result.framework).to.equal('angular')
-        expect(result.includeGuidelines).to.be.true
-        expect(result.includeInstructions).to.be.false
+        expect(result.componentName).toBe('button')
+        expect(result.framework).toBe('angular')
+        expect(result.includeGuidelines).toBe(true)
+        expect(result.includeInstructions).toBe(false)
       })
 
       it('should use default values for optional parameters', () => {
@@ -229,22 +227,22 @@ describe('MCP Tools', () => {
 
         const result = validateGetComponentDocsInput(input)
 
-        expect(result.componentName).to.equal('button')
-        expect(result.framework).to.equal('react')
-        expect(result.includeGuidelines).to.be.true
-        expect(result.includeInstructions).to.be.true
+        expect(result.componentName).toBe('button')
+        expect(result.framework).toBe('react')
+        expect(result.includeGuidelines).toBe(true)
+        expect(result.includeInstructions).toBe(true)
       })
 
       it('should reject missing componentName', () => {
         expect(() =>
           validateGetComponentDocsInput({ framework: 'angular' }),
-        ).to.throw(ValidationError)
+        ).toThrow(ValidationError)
       })
 
       it('should reject missing framework', () => {
         expect(() =>
           validateGetComponentDocsInput({ componentName: 'button' }),
-        ).to.throw(ValidationError)
+        ).toThrow(ValidationError)
       })
 
       it('should reject invalid framework', () => {
@@ -253,7 +251,7 @@ describe('MCP Tools', () => {
             componentName: 'button',
             framework: 'invalid',
           }),
-        ).to.throw(ValidationError)
+        ).toThrow(ValidationError)
       })
     })
 
@@ -266,14 +264,14 @@ describe('MCP Tools', () => {
 
         const result = validateListGuidesInput(input)
 
-        expect(result.category).to.equal('framework-setup')
-        expect(result.framework).to.equal('angular')
+        expect(result.category).toBe('framework-setup')
+        expect(result.framework).toBe('angular')
       })
 
       it('should use default category when not provided', () => {
         const result = validateListGuidesInput({})
 
-        expect(result.category).to.be.undefined
+        expect(result.category).toBeUndefined()
       })
     })
 
@@ -285,33 +283,33 @@ describe('MCP Tools', () => {
 
         const result = validateGetGuideInput(input)
 
-        expect(result.name).to.equal('angular')
+        expect(result.name).toBe('angular')
       })
 
       it('should reject missing name', () => {
-        expect(() => validateGetGuideInput({})).to.throw(ValidationError)
+        expect(() => validateGetGuideInput({})).toThrow(ValidationError)
       })
     })
 
     describe('sanitizeComponentName', () => {
       it('should allow valid component names', () => {
-        expect(sanitizeComponentName('button')).to.equal('button')
-        expect(sanitizeComponentName('gds-button')).to.equal('gds-button')
-        expect(sanitizeComponentName('icon-arrow')).to.equal('icon-arrow')
+        expect(sanitizeComponentName('button')).toBe('button')
+        expect(sanitizeComponentName('gds-button')).toBe('gds-button')
+        expect(sanitizeComponentName('icon-arrow')).toBe('icon-arrow')
       })
 
       it('should sanitize path traversal attempts', () => {
-        expect(sanitizeComponentName('../button')).to.equal('button')
-        expect(sanitizeComponentName('../../etc/passwd')).to.equal('etcpasswd')
+        expect(sanitizeComponentName('../button')).toBe('button')
+        expect(sanitizeComponentName('../../etc/passwd')).toBe('etcpasswd')
       })
 
       it('should sanitize absolute paths', () => {
-        expect(sanitizeComponentName('/button')).to.equal('button')
+        expect(sanitizeComponentName('/button')).toBe('button')
       })
 
       it('should allow hyphens but strip underscores', () => {
-        expect(sanitizeComponentName('my-component')).to.equal('my-component')
-        expect(sanitizeComponentName('my_component')).to.equal('mycomponent')
+        expect(sanitizeComponentName('my-component')).toBe('my-component')
+        expect(sanitizeComponentName('my_component')).toBe('mycomponent')
       })
     })
   })
@@ -325,9 +323,9 @@ describe('MCP Tools', () => {
         category: 'all',
       })
 
-      expect(results).to.have.lengthOf(1)
-      expect(results[0].name).to.equal('Button')
-      expect(results[0].tagName).to.equal('gds-button')
+      expect(results).toHaveLength(1)
+      expect(results[0].name).toBe('Button')
+      expect(results[0].tagName).toBe('gds-button')
     })
 
     it('should find components by partial match', () => {
@@ -338,8 +336,8 @@ describe('MCP Tools', () => {
         category: 'component',
       })
 
-      expect(results).to.have.lengthOf(1)
-      expect(results[0].name).to.equal('Input')
+      expect(results).toHaveLength(1)
+      expect(results[0].name).toBe('Input')
     })
 
     it('should filter by category', () => {
@@ -350,9 +348,9 @@ describe('MCP Tools', () => {
         category: 'icon',
       })
 
-      expect(results).to.have.lengthOf(1)
-      expect(results[0].category).to.equal('icon')
-      expect(results[0].name).to.equal('Arrow')
+      expect(results).toHaveLength(1)
+      expect(results[0].category).toBe('icon')
+      expect(results[0].name).toBe('Arrow')
     })
 
     it('should support regex search', () => {
@@ -364,9 +362,9 @@ describe('MCP Tools', () => {
         useRegex: true,
       })
 
-      expect(results.length).to.be.greaterThan(0)
+      expect(results.length).toBeGreaterThan(0)
       results.forEach((result) => {
-        expect(result.tagName).to.match(/^gds-.*on$/)
+        expect(result.tagName).toMatch(/^gds-.*on$/)
       })
     })
 
@@ -379,7 +377,7 @@ describe('MCP Tools', () => {
         maxResults: 2,
       })
 
-      expect(results).to.have.lengthOf(2)
+      expect(results).toHaveLength(2)
     })
 
     it('should return empty array for no matches', () => {
@@ -390,8 +388,8 @@ describe('MCP Tools', () => {
         category: 'all',
       })
 
-      expect(results).to.be.an('array')
-      expect(results).to.have.lengthOf(0)
+      expect(results).toBeInstanceOf(Array)
+      expect(results).toHaveLength(0)
     })
 
     it('should match multiple terms when splitTerms is true', () => {
@@ -403,8 +401,8 @@ describe('MCP Tools', () => {
         splitTerms: true,
       })
 
-      expect(results).to.have.lengthOf(1)
-      expect(results[0].name).to.equal('Dropdown')
+      expect(results).toHaveLength(1)
+      expect(results[0].name).toBe('Dropdown')
     })
 
     it('should rank exact name matches higher', () => {
@@ -428,7 +426,7 @@ describe('MCP Tools', () => {
       })
 
       // Exact match "Button" should rank higher than "Button Group"
-      expect(results[0].name).to.equal('Button')
+      expect(results[0].name).toBe('Button')
     })
 
     it('should match tag names', () => {
@@ -439,8 +437,8 @@ describe('MCP Tools', () => {
         category: 'all',
       })
 
-      expect(results).to.have.lengthOf(1)
-      expect(results[0].tagName).to.equal('gds-input')
+      expect(results).toHaveLength(1)
+      expect(results[0].tagName).toBe('gds-input')
     })
 
     it('should match class names', () => {
@@ -451,8 +449,8 @@ describe('MCP Tools', () => {
         category: 'all',
       })
 
-      expect(results).to.have.lengthOf(1)
-      expect(results[0].className).to.equal('GdsDropdown')
+      expect(results).toHaveLength(1)
+      expect(results[0].className).toBe('GdsDropdown')
     })
 
     it('should match descriptions', () => {
@@ -463,8 +461,8 @@ describe('MCP Tools', () => {
         category: 'all',
       })
 
-      expect(results).to.have.lengthOf(1)
-      expect(results[0].name).to.equal('Dropdown')
+      expect(results).toHaveLength(1)
+      expect(results[0].name).toBe('Dropdown')
     })
 
     it('should sort results by relevance', () => {
@@ -488,7 +486,7 @@ describe('MCP Tools', () => {
       })
 
       // Name match should come before description match
-      expect(results[0].name).to.equal('Button')
+      expect(results[0].name).toBe('Button')
     })
 
     it('should handle broad query', () => {
@@ -501,7 +499,7 @@ describe('MCP Tools', () => {
       })
 
       // Broad query should match all items
-      expect(results.length).to.equal(5) // 3 components + 2 icons
+      expect(results.length).toBe(5) // 3 components + 2 icons
     })
 
     it('should throw error for invalid regex', () => {
@@ -513,7 +511,7 @@ describe('MCP Tools', () => {
           category: 'all',
           useRegex: true,
         }),
-      ).to.throw()
+      ).toThrow()
     })
 
     it('should throw error for regex that is too long', () => {
@@ -527,26 +525,26 @@ describe('MCP Tools', () => {
           category: 'all',
           useRegex: true,
         }),
-      ).to.throw()
+      ).toThrow()
     })
   })
 
   describe('constants', () => {
     it('should have valid frameworks', () => {
-      expect(FRAMEWORKS).to.include('angular')
-      expect(FRAMEWORKS).to.include('react')
-      expect(FRAMEWORKS).to.include('web-component')
+      expect(FRAMEWORKS).toContain('angular')
+      expect(FRAMEWORKS).toContain('react')
+      expect(FRAMEWORKS).toContain('web-component')
     })
 
     it('should have valid categories', () => {
-      expect(CATEGORIES).to.include('component')
-      expect(CATEGORIES).to.include('icon')
-      expect(CATEGORIES).to.include('all')
+      expect(CATEGORIES).toContain('component')
+      expect(CATEGORIES).toContain('icon')
+      expect(CATEGORIES).toContain('all')
     })
 
     it('should have valid search config', () => {
-      expect(SEARCH_CONFIG.MAX_REGEX_LENGTH).to.be.greaterThan(0)
-      expect(SEARCH_CONFIG.DEFAULT_MAX_RESULTS).to.be.greaterThan(0)
+      expect(SEARCH_CONFIG.MAX_REGEX_LENGTH).toBeGreaterThan(0)
+      expect(SEARCH_CONFIG.DEFAULT_MAX_RESULTS).toBeGreaterThan(0)
     })
   })
 })

@@ -1,9 +1,6 @@
-import { expect, fixture, html as testingHtml } from '@open-wc/testing'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
-import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { IconAi } from './icons/ai'
-
-const html = htmlTemplateTagFactory(testingHtml)
 
 class TestIcon extends IconAi {
   public static _regularSVG = '<path d="M5 3l14 9-14 9V3z"/>'
@@ -13,78 +10,101 @@ class TestIcon extends IconAi {
   public static _viewBox = '0 0 24 24'
 }
 
-customElements.define('gds-icon-ai', TestIcon)
+// Use unique tag name to avoid conflicts with actual icon registration
+const testTagName = `gds-icon-test-${Math.random().toString(36).slice(2, 8)}`
+customElements.define(testTagName, TestIcon)
+
+// Helper to create test icon instances with properties
+async function createTestIcon(
+  props: Partial<{
+    label: string
+    size: string
+    stroke: string
+    color: string
+    solid: boolean
+  }> = {},
+): Promise<TestIcon> {
+  const el = document.createElement(testTagName) as TestIcon
+  if (props.label) el.label = props.label
+  if (props.size) (el as any).size = props.size
+  if (props.stroke) el.stroke = props.stroke
+  if (props.color) (el as any).color = props.color
+  if (props.solid !== undefined) el.solid = props.solid
+  document.body.appendChild(el)
+  await el.updateComplete
+  return el
+}
 
 describe('IconAi', () => {
   let element: TestIcon
 
   beforeEach(async () => {
-    element = await fixture(html`<gds-icon-ai></gds-icon-ai>`)
-    await element.updateComplete
+    element = await createTestIcon()
+  })
+
+  afterEach(() => {
+    element?.remove()
   })
 
   it('should instantiate the IconAi', () => {
-    expect(element).to.be.instanceOf(IconAi)
+    expect(element).toBeInstanceOf(IconAi)
   })
 
   it('should render the regular SVG with correct attributes', async () => {
     const svg = element.shadowRoot?.querySelector('svg')
-    expect(svg).to.have.attribute('viewBox', '0 0 24 24')
-    expect(svg).to.have.attribute('role', 'presentation')
-    expect(svg?.innerHTML.trim()).to.equal(
-      '<path d="M5 3l14 9-14 9V3z"></path>',
-    )
+    expect(svg).toHaveAttribute('viewBox', '0 0 24 24')
+    expect(svg).toHaveAttribute('role', 'presentation')
+    expect(svg?.innerHTML.trim()).toBe('<path d="M5 3l14 9-14 9V3z"></path>')
   })
 
   it('should render the solid SVG when solid is true', async () => {
     element.solid = true
     await element.updateComplete
     const svg = element.shadowRoot?.querySelector('svg')
-    expect(svg?.innerHTML.trim()).to.equal(
-      '<path d="M5 3v18l14-9L5 3z"></path>',
-    )
+    expect(svg?.innerHTML.trim()).toBe('<path d="M5 3v18l14-9L5 3z"></path>')
   })
 
   it('should be accessible with label', async () => {
-    element = await fixture(html`<gds-icon-ai label="Arrow"></gds-icon-ai>`)
+    element?.remove()
+    element = await createTestIcon({ label: 'Arrow' })
     const svg = element.shadowRoot?.querySelector('svg')
-    expect(svg).to.have.attribute('aria-label', 'Arrow')
-    expect(svg).to.not.have.attribute('role')
-    expect(element).to.be.accessible()
+    expect(svg).toHaveAttribute('aria-label', 'Arrow')
+    expect(svg?.hasAttribute('role')).toBe(false)
+    await expect(element).toBeAccessible()
   })
 
   it('should apply size property correctly', async () => {
-    element = await fixture(html`<gds-icon-ai size="xl"></gds-icon-ai>`)
+    element?.remove()
+    element = await createTestIcon({ size: 'xl' })
 
     // This only checks that the style expression property got initialized.
     // Computed style never changes in the test runner environment for unknown reason.
-    expect(element._dynamicStylesController.has('sep_size')).to.be.true
-    expect((element as any).__size).to.equal('xl')
+    expect(element._dynamicStylesController.has('sep_size')).toBe(true)
+    expect((element as any).__size).toBe('xl')
   })
 
   it('should apply stroke width when specified', async () => {
-    element = await fixture(html`<gds-icon-ai stroke="2"></gds-icon-ai>`)
+    element?.remove()
+    element = await createTestIcon({ stroke: '2' })
     const path = element.shadowRoot?.querySelector('path')
-    expect(path).to.have.attribute('stroke-width', '2')
+    expect(path).toHaveAttribute('stroke-width', '2')
   })
 
   it('should be presentational when no label is provided', async () => {
     const svg = element.shadowRoot?.querySelector('svg')
-    expect(svg).to.have.attribute('role', 'presentation')
-    expect(svg).to.not.have.attribute('aria-label')
+    expect(svg).toHaveAttribute('role', 'presentation')
+    expect(svg?.hasAttribute('aria-label')).toBe(false)
   })
 
   it('should apply color property correctly', async () => {
-    element = await fixture(html`<gds-icon-ai color="primary"></gds-icon-ai>`)
-    await element.updateComplete
-    expect((element as any).__color).to.equal('primary')
+    element?.remove()
+    element = await createTestIcon({ color: 'primary' })
+    expect((element as any).__color).toBe('primary')
   })
 
   it('should apply color with transparency correctly', async () => {
-    element = await fixture(
-      html`<gds-icon-ai color="primary/0.2"></gds-icon-ai>`,
-    )
-    await element.updateComplete
-    expect((element as any).__color).to.equal('primary/0.2')
+    element?.remove()
+    element = await createTestIcon({ color: 'primary/0.2' })
+    expect((element as any).__color).toBe('primary/0.2')
   })
 })

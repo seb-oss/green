@@ -78,18 +78,18 @@
         "command": "npx stylelint \"libs/core/**/*.(scss|css)\""
       }
     },
-    "build-tests": {
+    "test": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build"],
       "options": {
-        "command": "node libs/core/build-scripts/build-tests"
+        "command": "npx vitest run --config libs/core/vitest.config.ts",
+        "cwd": "{workspaceRoot}"
       }
     },
     "test-local": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-tests"],
       "options": {
-        "command": "npx wtr --config libs/core/web-test-runner.config.mjs --playwright --browsers chromium firefox webkit"
+        "command": "npx vitest run --config libs/core/vitest.config.ts",
+        "cwd": "{workspaceRoot}"
       }
     },
     "icons-fetch": {
@@ -137,11 +137,11 @@
         "command": "tsx libs/core/build-scripts/mcp/generate-mcp-data.ts"
       }
     },
-    "test": {
+    "test-watch": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-tests"],
       "options": {
-        "command": "npx wtr --config libs/core/web-test-runner.config.mjs --playwright --browsers chromium webkit"
+        "command": "npx vitest --config libs/core/vitest.config.ts",
+        "cwd": "{workspaceRoot}"
       }
     },
     "storybook": {

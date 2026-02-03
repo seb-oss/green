@@ -1,10 +1,14 @@
-import { expect } from '@esm-bundle/chai'
-import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands'
+import { userEvent } from '@vitest/browser/context'
 import { addDays, addMonths, subMonths } from 'date-fns'
+import { describe, expect, it } from 'vitest'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-import { onlyDate } from '../../utils/testing'
+import {
+  aTimeout,
+  fixture,
+  onlyDate,
+  html as testingHtml,
+} from '../../utils/testing'
 
 import type { GdsCalendar } from './calendar'
 
@@ -16,7 +20,7 @@ describe('<gds-calendar>', () => {
   describe('Rendering', () => {
     it('should render', async () => {
       const el = await fixture<GdsCalendar>(html`<gds-calendar></gds-calendar>`)
-      expect(el).shadowDom.to.exist
+      expect(el.shadowRoot).toBeDefined()
     })
   })
 
@@ -26,14 +30,12 @@ describe('<gds-calendar>', () => {
       el.focus()
 
       await aTimeout(0)
-      await sendKeys({ press: 'ArrowDown' })
+      await userEvent.keyboard('{ArrowDown}')
       await aTimeout(0)
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
       await aTimeout(0)
 
-      await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addDays(new Date(), 7)),
-      )
+      expect(onlyDate(el.value)).toBe(onlyDate(addDays(new Date(), 7)))
     })
 
     it('should decrement by 7 days when pressing key up', async () => {
@@ -41,14 +43,12 @@ describe('<gds-calendar>', () => {
       el.focus()
 
       await aTimeout(0)
-      await sendKeys({ press: 'ArrowUp' })
+      await userEvent.keyboard('{ArrowUp}')
       await aTimeout(0)
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
       await aTimeout(0)
 
-      await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addDays(new Date(), -7)),
-      )
+      expect(onlyDate(el.value)).toBe(onlyDate(addDays(new Date(), -7)))
     })
 
     it('should increment by 1 day when pressing key right', async () => {
@@ -56,14 +56,12 @@ describe('<gds-calendar>', () => {
       el.focus()
 
       await aTimeout(0)
-      await sendKeys({ press: 'ArrowRight' })
+      await userEvent.keyboard('{ArrowRight}')
       await aTimeout(0)
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
       await aTimeout(0)
 
-      await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addDays(new Date(), 1)),
-      )
+      expect(onlyDate(el.value)).toBe(onlyDate(addDays(new Date(), 1)))
     })
 
     it('should decrement by 1 day when pressing key left', async () => {
@@ -71,14 +69,12 @@ describe('<gds-calendar>', () => {
       el.focus()
 
       await aTimeout(0)
-      await sendKeys({ press: 'ArrowLeft' })
+      await userEvent.keyboard('{ArrowLeft}')
       await aTimeout(0)
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
       await aTimeout(0)
 
-      await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addDays(new Date(), -1)),
-      )
+      expect(onlyDate(el.value)).toBe(onlyDate(addDays(new Date(), -1)))
     })
 
     it('should decrement by 1 month when pressing page up', async () => {
@@ -86,14 +82,12 @@ describe('<gds-calendar>', () => {
       el.focus()
 
       await aTimeout(0)
-      await sendKeys({ press: 'PageUp' })
+      await userEvent.keyboard('{PageUp}')
       await aTimeout(0)
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
       await aTimeout(0)
 
-      await expect(onlyDate(el.value)).to.equal(
-        onlyDate(subMonths(new Date(), 1)),
-      )
+      expect(onlyDate(el.value)).toBe(onlyDate(subMonths(new Date(), 1)))
     })
 
     it('should increment by 1 month when pressing page down', async () => {
@@ -101,14 +95,12 @@ describe('<gds-calendar>', () => {
       el.focus()
 
       await aTimeout(0)
-      await sendKeys({ press: 'PageDown' })
+      await userEvent.keyboard('{PageDown}')
       await aTimeout(0)
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
       await aTimeout(0)
 
-      await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addMonths(new Date(), 1)),
-      )
+      expect(onlyDate(el.value)).toBe(onlyDate(addMonths(new Date(), 1)))
     })
 
     it('should select first day of month when pressing home', async () => {
@@ -116,12 +108,12 @@ describe('<gds-calendar>', () => {
       el.focus()
 
       await aTimeout(0)
-      await sendKeys({ press: 'Home' })
+      await userEvent.keyboard('{Home}')
       await aTimeout(0)
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
       await aTimeout(0)
 
-      await expect(el.value!.getDate()).to.equal(1)
+      expect(el.value!.getDate()).toBe(1)
     })
 
     it('should select last day of month when pressing end', async () => {
@@ -129,12 +121,12 @@ describe('<gds-calendar>', () => {
       el.focus()
 
       await aTimeout(0)
-      await sendKeys({ press: 'End' })
+      await userEvent.keyboard('{End}')
       await aTimeout(0)
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
       await aTimeout(0)
 
-      await expect(el.value?.getDate()).to.equal(
+      expect(el.value?.getDate()).toBe(
         new Date(
           el.value!.getFullYear(),
           el.value!.getMonth() + 1,
@@ -152,10 +144,10 @@ describe('<gds-calendar>', () => {
       el.focusedDate = focusedDate
 
       await aTimeout(0)
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
       await aTimeout(0)
 
-      await expect(onlyDate(el.value)).to.equal(onlyDate(focusedDate))
+      expect(onlyDate(el.value)).toBe(onlyDate(focusedDate))
     })
 
     it('should select the focused date when pressing space', async () => {
@@ -167,10 +159,10 @@ describe('<gds-calendar>', () => {
       el.focusedDate = focusedDate
 
       await aTimeout(0)
-      await sendKeys({ press: ' ' })
+      await userEvent.keyboard(' ')
       await aTimeout(0)
 
-      await expect(onlyDate(el.value)).to.equal(onlyDate(focusedDate))
+      expect(onlyDate(el.value)).toBe(onlyDate(focusedDate))
     })
 
     it('should not select the focused date when pressing enter if it is disabled', async () => {
@@ -184,10 +176,10 @@ describe('<gds-calendar>', () => {
       await el.updateComplete
 
       await aTimeout(0)
-      await sendKeys({ press: 'Enter' })
+      await userEvent.keyboard('{Enter}')
       await aTimeout(0)
 
-      await expect(el.value).to.equal(undefined)
+      expect(el.value).toBe(undefined)
     })
 
     it('should update the focused date when value is changed', async () => {
@@ -196,9 +188,7 @@ describe('<gds-calendar>', () => {
       el.value = new Date('2024-02-01')
       await el.updateComplete
 
-      await expect(onlyDate(el.focusedDate)).to.equal(
-        onlyDate(new Date('2024-02-01')),
-      )
+      expect(onlyDate(el.focusedDate)).toBe(onlyDate(new Date('2024-02-01')))
     })
 
     it('should focus last day of month if focused date is beyond last day of current month when changing month', async () => {
@@ -212,16 +202,14 @@ describe('<gds-calendar>', () => {
       el.focusedMonth = 1
       await el.updateComplete
 
-      await expect(onlyDate(el.focusedDate)).to.equal(
-        onlyDate(new Date('2024-02-29')),
-      )
+      expect(onlyDate(el.focusedDate)).toBe(onlyDate(new Date('2024-02-29')))
     })
   })
 
   describe('API', () => {
     it('should default to undefined', async () => {
       const el = await fixture<GdsCalendar>(html`<gds-calendar></gds-calendar>`)
-      expect(el.value).to.equal(undefined)
+      expect(el.value).toBe(undefined)
     })
 
     it('respects max date', async () => {
@@ -233,9 +221,9 @@ describe('<gds-calendar>', () => {
       await el.updateComplete
 
       const cell = el.getDateCell(1)
-      expect(cell).to.have.class('disabled')
+      expect(cell?.classList.contains('disabled')).toBe(true)
 
-      expect(el.value).to.equal(undefined)
+      expect(el.value).toBe(undefined)
     })
 
     it('respects min date', async () => {
@@ -247,9 +235,9 @@ describe('<gds-calendar>', () => {
       await el.updateComplete
 
       const cell = el.getDateCell(1)
-      expect(cell).to.have.class('disabled')
+      expect(cell?.classList.contains('disabled')).toBe(true)
 
-      expect(el.value).to.equal(undefined)
+      expect(el.value).toBe(undefined)
     })
 
     it('should disable weekends when setting disabledWeekends to true', async () => {
@@ -264,8 +252,8 @@ describe('<gds-calendar>', () => {
       const cell1 = el.getDateCell(1)
       const cell2 = el.getDateCell(9)
 
-      expect(cell1).to.have.class('disabled')
-      expect(cell2).to.have.class('disabled')
+      expect(cell1?.classList.contains('disabled')).toBe(true)
+      expect(cell2?.classList.contains('disabled')).toBe(true)
     })
 
     it('should disable specific dates set in disabledDates', async () => {
@@ -285,9 +273,9 @@ describe('<gds-calendar>', () => {
       const cell2 = el.getDateCell(6)
       const cell3 = el.getDateCell(8)
 
-      expect(cell1).to.have.class('disabled')
-      expect(cell2).to.have.class('disabled')
-      expect(cell3).to.have.class('disabled')
+      expect(cell1?.classList.contains('disabled')).toBe(true)
+      expect(cell2?.classList.contains('disabled')).toBe(true)
+      expect(cell3?.classList.contains('disabled')).toBe(true)
     })
 
     it('should show week numbers when setting showWeekNumbers to true', async () => {
@@ -300,7 +288,7 @@ describe('<gds-calendar>', () => {
 
       expect(
         el.shadowRoot?.querySelector('tbody td:first-child')?.innerHTML,
-      ).to.contain('22')
+      ).toContain('22')
     })
 
     it('should correctly render customizedDates', async () => {
@@ -332,22 +320,22 @@ describe('<gds-calendar>', () => {
       const cell3 = el.getDateCell(8)
       const cell4 = el.getDateCell(5)
 
-      expect(cell1).to.have.class('custom-date')
-      expect(
-        cell1?.querySelector('span.number')?.getAttribute('style'),
-      ).to.equal('--_color: var(--intent-danger-background)')
-      expect(cell1).to.not.have.class('disabled')
+      expect(cell1?.classList.contains('custom-date')).toBe(true)
+      expect(cell1?.querySelector('span.number')?.getAttribute('style')).toBe(
+        '--_color: var(--intent-danger-background)',
+      )
+      expect(cell1?.classList.contains('disabled')).toBe(false)
 
-      expect(cell2).to.have.class('custom-date')
-      expect(
-        cell2?.querySelector('span.number')?.getAttribute('style'),
-      ).to.equal('--_color: var(--intent-danger-background)')
-      expect(cell2?.querySelector('span.indicator-dot')).to.exist
+      expect(cell2?.classList.contains('custom-date')).toBe(true)
+      expect(cell2?.querySelector('span.number')?.getAttribute('style')).toBe(
+        '--_color: var(--intent-danger-background)',
+      )
+      expect(cell2?.querySelector('span.indicator-dot')).toBeDefined()
 
-      expect(cell3).to.have.class('custom-date')
-      expect(cell3).to.have.class('disabled')
+      expect(cell3?.classList.contains('custom-date')).toBe(true)
+      expect(cell3?.classList.contains('disabled')).toBe(true)
 
-      expect(cell4).to.not.have.class('custom-date')
+      expect(cell4?.classList.contains('custom-date')).toBe(false)
     })
 
     it('should not render day names when setting hideDayNames to true', async () => {
@@ -358,7 +346,7 @@ describe('<gds-calendar>', () => {
         ></gds-calendar>`,
       )
 
-      expect(el.shadowRoot?.querySelector('thead')).to.not.exist
+      expect(el.shadowRoot?.querySelector('thead')).toBeNull()
     })
 
     it('should not render extraneous days when setting hideExtraneousDays to true', async () => {
@@ -371,7 +359,7 @@ describe('<gds-calendar>', () => {
 
       expect(
         el.shadowRoot?.querySelector('tbody td:first-child')?.innerHTML,
-      ).to.not.contain('27')
+      ).not.toContain('27')
     })
 
     it('should cancel focus action when calling `event.preventDefault()` on `gds-date-focused` event', async () => {
@@ -388,12 +376,10 @@ describe('<gds-calendar>', () => {
       el.focus()
 
       await aTimeout(0)
-      await sendKeys({ press: 'ArrowDown' })
+      await userEvent.keyboard('{ArrowDown}')
       await aTimeout(0)
 
-      expect(onlyDate(el.focusedDate)).to.equal(
-        onlyDate(new Date('2024-06-03')),
-      )
+      expect(onlyDate(el.focusedDate)).toBe(onlyDate(new Date('2024-06-03')))
     })
 
     it('should accept a custom date label template', async () => {
@@ -406,7 +392,7 @@ describe('<gds-calendar>', () => {
 
       expect(
         el.shadowRoot?.querySelector('#dateCell-3')?.getAttribute('aria-label'),
-      ).to.equal('3')
+      ).toBe('3')
     })
   })
 
@@ -421,7 +407,7 @@ describe('<gds-calendar>', () => {
       )
 
       // TODO: Remove ignoredRules when color-contrast issues are resolved
-      await expect(el).to.be.accessible({
+      await expect(el).toBeAccessible({
         ignoredRules: ['color-contrast'],
       })
     })
