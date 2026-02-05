@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.28.4
+
+### Patch Changes
+
+- ad2d6b8: **Details:** Add missing export
+
 ## 2.28.3
 
 ## 2.28.2
