@@ -13,7 +13,7 @@ interface UserData {
   name: CellValue
   email: CellValue
   role: 'Admin' | 'User' | 'Editor'
-  status: 'Active' | 'Inactive'
+  status: CellValue
   amount: number
   account: string
   lastLogin: string
@@ -70,7 +70,8 @@ const generateUserRecord = (index: number): UserData => {
       'email-action',
     ]),
     role: USERS.ROLES[index % USERS.ROLES.length],
-    status: USERS.STATUSES[index % USERS.STATUSES.length],
+    // status: USERS.STATUSES[index % USERS.STATUSES.length],
+    status: Slot(USERS.STATUSES[index % USERS.STATUSES.length], ['status']),
     department: USERS.DEPARTMENTS[index % USERS.DEPARTMENTS.length],
     amount: Math.floor(Math.random() * 500000) + 10000,
     account: `5440${String((index * 7919) % 10000000).padStart(7, '0')}`,

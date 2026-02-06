@@ -5,7 +5,6 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './table'
 import '../card'
-import '../badge'
 import '../dropdown/dropdown'
 import '../segmented-control/segmented-control'
 import '../context-menu/context-menu'
@@ -1055,25 +1054,13 @@ export const SlotComposition: Story = {
     docs: {
       description: {
         story: `
-Demonstrates dynamic slot composition for data-driven content injection into table cells.
+Demonstrates composing any number of slots per cell using
 
-**Pattern:** Generate slots using \`columnKey:rowKey:slotId\` naming convention.
+\
+\`columnKey:rowKey:slotId\`\
 
-**This Example:**
-- **Status Column**: Injects custom \`<gds-badge>\` components with variant colors based on status value
-- **Email Column**: Adds icon and action link to each row's email cell 
-- **Dynamic Values**: Calculates status from row index to match data generation logic
-
-**Framework Usage:**
-- **Web Components/Lit**: Use \`Array.from()\` with \`html\` template literals
-- **React**: Use \`.map()\` with JSX and set \`slot\` attribute
-- **Angular**: Use \`*ngFor\` with slot attribute binding
-
-**Key Points:**
-- Row keys automatically use \`row.id\` (fallback to index)
-- Any field can use \`Slot()\` by changing its type to \`CellValue\`
-- Transform values in the loop (e.g., conditional badge variants, dynamic hrefs)
-- Works with pagination - generate for full dataset, table renders only visible rows
+slot names (e.g. \
+\`name:andersson:lead-slot\`).
         `,
       },
     },
@@ -1089,34 +1076,23 @@ Demonstrates dynamic slot composition for data-driven content injection into tab
       ?settings="${args.settings}"
       density="${args.density}"
       responsive
-      rows="10"
+      disable-select-all
+      rows="5"
     >
-      ${
-        // Generate slots for all 100 users (row IDs 1-100)
-        Array.from({ length: 100 }, (_, i) => {
-          const rowId = i + 1
-          const statusIndex = i % 2
-          const statuses = ['Active', 'Inactive']
-          const statusValue = statuses[statusIndex]
-          const statusVariant = statusValue === 'Active' ? 'positive' : 'notice'
+      <gds-icon-buildings slot="name:andersson:lead"></gds-icon-buildings>
+      <gds-icon-pin slot="name:andersson:trail-slot"></gds-icon-pin>
+      <gds-icon-circle-check
+        slot="name:andersson:extra-slot"
+      ></gds-icon-circle-check>
+      <gds-input plain size="small" slot="name:andersson:lead"></gds-input>
+      <gds-icon-copy slot="email:1:email-icon"></gds-icon-copy>
+      <gds-link slot="email:1:email-action" href="#">Send email</gds-link>
 
-          return html`
-            <!-- Status badge with color variant -->
-            <gds-badge slot="status:${rowId}:status" variant="${statusVariant}">
-              ${statusValue}
-            </gds-badge>
 
-            <!-- Email column with icon and action -->
-            <gds-icon-copy slot="email:${rowId}:email-icon"></gds-icon-copy>
-            <gds-link
-              slot="email:${rowId}:email-action"
-              href="mailto:user${rowId}@domain.tld"
-            >
-              Send email
-            </gds-link>
-          `
-        })
-      }
+      ${Users.Data.map ((row: any) => html`
+        <gds-icon-copy slot="email:${row.id}:email-icon"></gds-icon-copy>
+        <gds-link slot="email:${row.id}:email-action" href="#">Send email</gds-link>
+      `)}
     </gds-table>
   `,
 }
