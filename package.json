@@ -248,7 +248,7 @@
     "vite": "6.4.1",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "3.2.4",
-    "webpack": "5.94.0",
+    "webpack": "5.104.1",
     "webpack-merge": "^5.8.0",
     "yarn-audit-fix": "^9.2.4",
     "zod": "^4.1.13"
