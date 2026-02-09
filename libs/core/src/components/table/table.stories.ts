@@ -11,6 +11,7 @@ import '../segmented-control/segmented-control'
 import '../context-menu/context-menu'
 import '../input/input'
 import '../img/img'
+import '../formatted-text/account'
 import '../pagination/pagination'
 import '../icon/icons/dot-grid-one-horizontal'
 import '../icon/icons/plus-small'
@@ -1058,22 +1059,7 @@ export const SlotComposition: Story = {
 Demonstrates dynamic slot composition for data-driven content injection into table cells.
 
 **Pattern:** Generate slots using \`columnKey:rowKey:slotId\` naming convention.
-
-**This Example:**
-- **Status Column**: Injects custom \`<gds-badge>\` components with variant colors based on status value
-- **Email Column**: Adds icon and action link to each row's email cell 
-- **Dynamic Values**: Calculates status from row index to match data generation logic
-
-**Framework Usage:**
-- **Web Components/Lit**: Use \`Array.from()\` with \`html\` template literals
-- **React**: Use \`.map()\` with JSX and set \`slot\` attribute
-- **Angular**: Use \`*ngFor\` with slot attribute binding
-
-**Key Points:**
-- Row keys automatically use \`row.id\` (fallback to index)
-- Any field can use \`Slot()\` by changing its type to \`CellValue\`
-- Transform values in the loop (e.g., conditional badge variants, dynamic hrefs)
-- Works with pagination - generate for full dataset, table renders only visible rows
+ 
         `,
       },
     },
@@ -1091,32 +1077,38 @@ Demonstrates dynamic slot composition for data-driven content injection into tab
       responsive
       rows="10"
     >
-      ${
-        // Generate slots for all 100 users (row IDs 1-100)
-        Array.from({ length: 100 }, (_, i) => {
-          const rowId = i + 1
-          const statusIndex = i % 2
-          const statuses = ['Active', 'Inactive']
-          const statusValue = statuses[statusIndex]
-          const statusVariant = statusValue === 'Active' ? 'positive' : 'notice'
+      ${Array.from({ length: 100 }, (_, i) => {
+        const rowId = i + 1
+        const statusValue = rowId % 2 ? 'Active' : 'Inactive'
+        const variant = statusValue === 'Active' ? 'positive' : 'notice'
+        const amount = ((rowId * 12345) % 500000) + 10000
+        const account = `5440${String((i * 7919) % 10000000).padStart(7, '0')}`
 
-          return html`
-            <!-- Status badge with color variant -->
-            <gds-badge slot="status:${rowId}:status" variant="${statusVariant}">
-              ${statusValue}
-            </gds-badge>
-
-            <!-- Email column with icon and action -->
-            <gds-icon-copy slot="email:${rowId}:email-icon"></gds-icon-copy>
-            <gds-link
-              slot="email:${rowId}:email-action"
-              href="mailto:user${rowId}@domain.tld"
-            >
+        return html`
+          <gds-badge
+            slot="status:${rowId}:status"
+            size="small"
+            variant="${variant}"
+          >
+            ${statusValue}
+          </gds-badge>
+          <gds-flex slot="email:${rowId}:email" gap="xs" align-items="center">
+            <gds-button>
+              <gds-icon-copy></gds-icon-copy>
+            </gds-button>
+            <gds-link href="mailto:user${rowId}@domain.tld">
               Send email
             </gds-link>
-          `
-        })
-      }
+          </gds-flex>
+          <gds-flex slot="amount:${rowId}:amount" gap="xs" align-items="center">
+            <gds-text>${amount.toLocaleString('sv-SE')}</gds-text>
+            <gds-badge variant="information" size="small">SEK</gds-badge>
+          </gds-flex>
+          <gds-formatted-account slot="account:${rowId}:main" .value=${account}
+            >${account}</gds-formatted-account
+          >
+        `
+      })}
     </gds-table>
   `,
 }

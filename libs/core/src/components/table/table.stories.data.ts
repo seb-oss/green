@@ -14,8 +14,8 @@ interface UserData {
   email: CellValue
   role: 'Admin' | 'User' | 'Editor'
   status: CellValue
-  amount: number
-  account: string
+  amount: CellValue
+  account: CellValue
   lastLogin: string
   avatarUrl?: string
   department?: string
@@ -64,17 +64,14 @@ const generateUserRecord = (index: number): UserData => {
       ['lead', 'value', 'trail-slot', 'extra-slot'],
       lastName.toLowerCase(),
     ),
-    email: Slot(`${firstName.toLowerCase()}@domain.tld`, [
-      'email-icon',
-      'value',
-      'email-action',
-    ]),
+    email: `${firstName.toLowerCase()}@domain.tld`,
     role: USERS.ROLES[index % USERS.ROLES.length],
-    // status: USERS.STATUSES[index % USERS.STATUSES.length],
     status: Slot(USERS.STATUSES[index % USERS.STATUSES.length], ['status']),
     department: USERS.DEPARTMENTS[index % USERS.DEPARTMENTS.length],
-    amount: Math.floor(Math.random() * 500000) + 10000,
-    account: `5440${String((index * 7919) % 10000000).padStart(7, '0')}`,
+    amount: Slot(Math.floor(Math.random() * 500000) + 10000, ['amount']),
+    account: Slot(`5440${String((index * 7919) % 10000000).padStart(7, '0')}`, [
+      'main',
+    ]),
     lastLogin: new Date(
       Date.now() - Math.random() * 30 * 86400000,
     ).toISOString(),
