@@ -20,8 +20,14 @@
         "neutral-01": {
           "$value": "{ref.color.grey.27}"
         },
+        "neutral-01-2": {
+          "$value": "{ref.color.grey.24}"
+        },
         "neutral-02": {
           "$value": "{ref.color.grey.27}"
+        },
+        "neutral-02-2": {
+          "$value": "{ref.color.grey.24}"
         },
         "neutral-03": {
           "$value": "{ref.color.grey.23}"
