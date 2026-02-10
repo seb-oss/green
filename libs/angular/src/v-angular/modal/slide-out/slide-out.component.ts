@@ -200,7 +200,9 @@ export class NggvSlideOutComponent implements OnInit {
       closableOutside = false
     }
 
-    this.resetOverflow()
+    if (closableOutside) {
+      this.resetOverflow()
+    }
 
     if (this.shown && this.closable && closableOutside) {
       this.nggvCloseEvent.emit(this.shown)
