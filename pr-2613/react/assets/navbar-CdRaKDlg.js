@@ -1,0 +1,16 @@
+import{j as t}from"./jsx-runtime-D_zvdyIk.js";import{useMDXComponents as p}from"./index-DMXsWXKd.js";import{M as d,C as n,b as h}from"./blocks-CyN-ueWr.js";import{N as c}from"./navbar-B2Xz4Sp6.js";import{N as l,T as x,L as f,D as j,C as b}from"./navbar.stories-BSSSq7uJ.js";import{C as u,G as e,a as s,b as a}from"./index-Cli4iAw5.js";import"./iframe-CvYMQRfi.js";import"./index-BazfhaL8.js";import"./link-C4otfURp.js";import"./index-Yfr7oqfy.js";import"./alert.component-BSCidB7R.js";import"./tokens.style-Pp7pKpta.js";import"./runtime-nRyYmvPb.js";import"./class-map-DsqPT6mB.js";import"./icon.component-oIdw6dgV.js";import"./unwrap-slots-B9NalaCj.js";import"./button.component-BidA3SMn.js";import"./watch-Bh1rs_BK.js";import"./when-BR7zwNJC.js";import"./transitional-styles-CAIvb23M.js";import"./dropdown.component-D2Cpx-9G.js";import"./popover.component-CNwShoPn.js";import"./cross-small.component-CbRqNqae.js";import"./triangle-exclamation.component-B3ct3Cr0.js";import"./chevron-bottom.component-CX3SyZWT.js";import"./checkmark.component-nYhUlJIf.js";import"./circle-check.component-BMbT8cdv.js";import"./index-C5YZabN9.js";import"./chevron-right.component-b5ZiNc8H.js";import"./datepicker.component-C3wmypVF.js";import"./attribute-converters-CdI0trPX.js";import"./calender-add.component-DMNqPobo.js";import"./index-cvA7HtGp.js";import"./dot-grid-one-horizontal.component-C_8-Ipvh.js";import"./context-menu.component-C0U-F4T5.js";import"./filter-chips.component-rANHWx45.js";import"./resize-observer-B9k8v2TZ.js";import"./grouped-list.component-CFNB5xZv.js";import"./segmented-control.component-DysPX3B6.js";import"./index-BLVVigxh.js";const et=({children:r,...o})=>t.jsx(c,{...o,children:r});function m(r){const o={a:"a",h1:"h1",h2:"h2",h3:"h3",h4:"h4",p:"p",strong:"strong",...p(),...r.components};return u||i("Core",!1),e||i("Core.GdsAlert",!0),s||i("Core.GdsDiv",!0),a||i("Core.GdsTheme",!0),t.jsxs(t.Fragment,{children:[t.jsx(o.h1,{id:"navbar",children:"Navbar"}),`
+`,t.jsx(o.p,{children:"Simple navbar component."}),`
+`,t.jsx(d,{of:l}),`
+`,t.jsx(a,{children:t.jsx(s,{margin:"xl 0",children:t.jsxs(e,{variant:"notice",children:[t.jsx(o.strong,{children:"Note:"})," This version of Navbar is deprecated! Please use the ",t.jsx(o.a,{href:"https://storybook.seb.io/latest/core/?path=/docs/components-menu-button--docs",rel:"nofollow",children:"Menu button web component from Green Core"})," instead, along with declarative layout components, to compose a nav bar."]})})}),`
+`,t.jsx(o.h2,{id:"variants",children:"Variants"}),`
+`,t.jsx(o.h3,{id:"transparent",children:"Transparent"}),`
+`,t.jsx(n,{of:x}),`
+`,t.jsx(o.h3,{id:"light",children:"Light"}),`
+`,t.jsx(n,{of:f}),`
+`,t.jsx(o.h3,{id:"dark",children:"Dark"}),`
+`,t.jsx(n,{of:j}),`
+`,t.jsx(o.h2,{id:"content",children:"Content"}),`
+`,t.jsx(o.h3,{id:"light-navbar-with-grid-and-additional-content",children:"Light navbar with grid and additional content"}),`
+`,t.jsx(n,{of:b}),`
+`,t.jsx(o.h4,{id:"available-props",children:"Available props"}),`
+`,t.jsx(h,{})]})}function st(r={}){const{wrapper:o}={...p(),...r.components};return o?t.jsx(o,{...r,children:t.jsx(m,{...r})}):m(r)}function i(r,o){throw new Error("Expected "+(o?"component":"object")+" `"+r+"` to be defined: you likely forgot to import, pass, or provide it.")}export{et as Template,st as default};
