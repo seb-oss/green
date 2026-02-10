@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.2.1
+
+### Patch Changes
+
+- 70be393: V-Angular - Slide-out: fix closable outside double scrolls
+
 ## 7.2.0
 
 ### Minor Changes
