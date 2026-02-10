@@ -67,7 +67,6 @@ export default {
     options: {
       storySort: {
         order: [
-          'Green Design System',
           'Get started',
           "What's what?",
           'Docs',
