@@ -76,7 +76,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     attribute: 'search-label',
     type: String,
   })
-  searchLabel = msg('Search table')
+  searchLabel?: string
 
   /**
    * Configurable options for rows per page.
@@ -614,7 +614,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
                 size="${this.#Density.input}"
                 plain
                 clearable
-                label="${this.searchLabel}"
+                label="${this.searchLabel || msg('Search table')}"
                 .value=${this._view.searchQuery}
                 @input=${this.#handleSearch}
                 @gds-input-cleared=${this.#handleSearchClear}
