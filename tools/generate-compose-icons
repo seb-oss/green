@@ -14,4 +14,5 @@ OUT_DIR="../dist/libs/tokens/2023/android/icons"
 find "$OUT_DIR" -name "*.kt" -exec sed -i '' 's/0xCURRENTCOLOR/0xFF000000/g' {} +
 
 ./generate-icon-manifest
+./generate-icon-enums
 

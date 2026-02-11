@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # --- Configuration ---
-MANIFEST_PACKAGE="se.seb.gds.icons"
+MANIFEST_PACKAGE="se.seb.sduiengine.uitokens"
 ICON_ROOT_DIR="../dist/libs/tokens/2023/android/icons"
 MANIFEST_FILENAME="GdsIcons.kt"
 MANIFEST_PATH="$ICON_ROOT_DIR/$MANIFEST_FILENAME"
@@ -28,7 +28,7 @@ for STYLE_DIR in $ICON_STYLES; do
     # This uses a sed trick to capitalize the first letter.
     STYLE_OBJECT=$(echo "$STYLE_DIR" | head -c 1 | tr '[:lower:]' '[:upper:]')$(echo "$STYLE_DIR" | tail -c +2)
     DIR_PATH="$ICON_ROOT_DIR/$STYLE_DIR"
-    
+
     # Define the FQN package for the icons in this directory
     ICON_FQN_PACKAGE="$MANIFEST_PACKAGE.$STYLE_DIR"
 
@@ -36,18 +36,18 @@ for STYLE_DIR in $ICON_STYLES; do
     MANIFEST_CONTENT+="
     object $STYLE_OBJECT {
 "
-    
+
     # 3. Loop through all .kt files in the subdirectory
     # We use a glob pattern here, which is standard Bash.
     for file in "$DIR_PATH"/*.kt; do
         # Check if the file exists (to handle empty directories where globbing fails)
         if [ -f "$file" ]; then
             ICON_NAME=$(basename "$file" .kt)
-            
+
             # Create the direct member reference using the Fully Qualified Name (FQN)
             MANIFEST_CONTENT+="        val $ICON_NAME = $ICON_FQN_PACKAGE.$ICON_NAME
 "
-            
+
             # Build the map content for the final 'All' property
             ALL_ICON_MAP_CONTENT+="        \"$STYLE_OBJECT.$ICON_NAME\" to $STYLE_OBJECT.$ICON_NAME,
 "
@@ -61,8 +61,10 @@ done
 
 # 4. Create the final unified 'All' map
 MANIFEST_CONTENT+="
-    val All: Map<String, ImageVector> = mapOf(
+    val allIcons: Map<String, ImageVector> = mapOf(
 $ALL_ICON_MAP_CONTENT    )
+
+    fun fromName(iconName: String): ImageVector? = allIcons[iconName]
 }
 "
 

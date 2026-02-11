@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# --- Configuration ---
+MANIFEST_PACKAGE="se.seb.gds.icons"
+ICON_ROOT_DIR="../dist/libs/tokens/2023/android/icons"
+ICON_DESTINATION_DIR="../dist/libs/tokens/2023/jvm/icons"
+ENUM_FILENAME="GdsIcons.kt"
+ENUM_PATH="$ICON_DESTINATION_DIR/$ENUM_FILENAME"
+
+# --- Main Script ---
+
+# 1. Start Enum Content
+ENUM_CONTENT="package $MANIFEST_PACKAGE
+
+/** A generated enum class to hold all GDS icons. */
+object GdsIcons {
+"
+
+# Use a compatible method to find subdirectories (e.g., solid, regular).
+# This finds directories, removes the leading path, and lists them one per line.
+ICON_STYLES=$(find "$ICON_ROOT_DIR" -maxdepth 1 -mindepth 1 -type d | sed "s|${ICON_ROOT_DIR}/||g")
+
+# 2. Loop through each style subdirectory (e.g., solid, regular)
+for STYLE_DIR in $ICON_STYLES; do
+    # Convert directory name (e.g., 'solid') to PascalCase (e.g., 'Solid') for the Kotlin enum name
+    # This uses a sed trick to capitalize the first letter.
+    STYLE_ENUM=$(echo "$STYLE_DIR" | head -c 1 | tr '[:lower:]' '[:upper:]')$(echo "$STYLE_DIR" | tail -c +2)
+    DIR_PATH="$ICON_ROOT_DIR/$STYLE_DIR"
+
+    # Start the enum definition with a value parameter
+    ENUM_CONTENT+="
+    enum class $STYLE_ENUM(val value: String) {
+"
+
+    # 3. Loop through all .kt files in the subdirectory
+    # We use a glob pattern here, which is standard Bash.
+    ICON_NAMES=()
+    for file in "$DIR_PATH"/*.kt; do
+        # Check if the file exists (to handle empty directories where globbing fails)
+        if [ -f "$file" ]; then
+            ICON_NAME=$(basename "$file" .kt)
+            ICON_NAMES+=("$ICON_NAME")
+        fi
+    done
+
+    # Sort the icon names alphabetically
+    IFS=$'\n' SORTED_NAMES=($(sort <<<"${ICON_NAMES[*]}"))
+    unset IFS
+
+    # Add each icon name to the enum with its qualified value
+    for i in "${!SORTED_NAMES[@]}"; do
+        ICON_NAME="${SORTED_NAMES[$i]}"
+        if [ $i -eq $((${#SORTED_NAMES[@]} - 1)) ]; then
+            # Last item, semicolon instead of comma
+            ENUM_CONTENT+="        $ICON_NAME(\"$STYLE_ENUM.$ICON_NAME\");
+"
+        else
+            # Add comma after each entry except the last
+            ENUM_CONTENT+="        $ICON_NAME(\"$STYLE_ENUM.$ICON_NAME\"),
+"
+        fi
+    done
+
+    # Add companion object with fromValue helper
+    ENUM_CONTENT+="
+        companion object {
+            fun fromValue(value: String): $STYLE_ENUM? = entries.find { it.value == value }
+        }
+"
+
+    # Close the enum
+    ENUM_CONTENT+="    }
+"
+done
+
+# 4. Close the object
+ENUM_CONTENT+="}
+"
+
+# 5. Write the final content
+echo -e "$ENUM_CONTENT" > "$ENUM_PATH"
+
+echo "✅ Successfully generated icon enum at $ENUM_PATH"
+
