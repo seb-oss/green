@@ -46,7 +46,6 @@ class Button extends GdsFormControlElement<any> {
   /**
    * Spread the contents of the button
    */
-
   @styleExpressionProperty({
     selector: '.button',
   })
@@ -224,11 +223,11 @@ class Button extends GdsFormControlElement<any> {
   }
 
   #handleKeyDown = (e: KeyboardEvent) => {
-    if (this.disabled) return;
+    if (this.disabled) return
     if ((e.code === 'Space' || e.key === 'Enter') && !e.repeat) {
-      const ripple = this._ripple;
+      const ripple = this._ripple
       if (ripple) {
-        ripple.triggerRipple();
+        ripple.triggerRipple()
       }
     }
   }

@@ -390,12 +390,10 @@ export const Wrapping: Story = {
     controls: { include: [] },
   },
   render: (args) => html`
-    <div style="width: 30ch">
-      <gds-button justify-content="flex-start">
-        <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-        This is a long text that will truncated
-      </gds-button>
-    </div>
+    <gds-button justify-content="flex-start">
+      <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+      This is a long text that will wrap This is a long text that will wrap
+    </gds-button>
   `,
 }
 
