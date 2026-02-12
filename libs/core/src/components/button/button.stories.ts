@@ -392,7 +392,7 @@ export const Wrapping: Story = {
   render: (args) => html`
     <gds-button justify-content="flex-start">
       <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-      This is a long text that will wrap This is a long text that will wrap
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     </gds-button>
   `,
 }
