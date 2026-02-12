@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.30.0
+
+### Minor Changes
+
+- 678801d: **Button:** Add wrapped boolean to enable wrapping
+
+### Patch Changes
+
+- 678801d: **Button:** Remove the truncating text on button
+- fbaddcb: **Radio:** Fix issue with falsy values
+
 ## 2.29.0
 
 ### Minor Changes
