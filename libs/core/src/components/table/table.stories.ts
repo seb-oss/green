@@ -43,6 +43,9 @@ const meta: Meta = {
       control: { type: 'boolean' },
       defaultValue: true,
     },
+    searchLabel: {
+      control: { type: 'text' },
+    },
     height: {
       control: { type: 'string' },
       defaultValue: false,
@@ -76,6 +79,7 @@ export const Overview: Story = {
     data: Users.Data,
     selectable: true,
     searchable: true,
+    searchLabel: 'Search users',
     settings: true,
     plain: false,
     height: '80vh',
@@ -87,6 +91,7 @@ export const Overview: Story = {
     html` <gds-table
       density="${args.density}"
       variant="${args.variant}"
+      search-label="${args.searchLabel}"
       ?searchable="${args.searchable}"
       ?settings="${args.settings}"
       ?plain="${args.plain}"

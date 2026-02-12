@@ -13,7 +13,6 @@ export default css`
     --_toggle-radius: var(--gds-sys-space-3xs);
     --_perimeter-radius: var(--gds-sys-space-xs);
     --_toggle-border-width-checked: var(--gds-sys-space-s);
-
     --_perimeter-bg-mix: color-mix(
       in srgb,
       var(--gds-sys-color-l3-neutral-02),
@@ -24,19 +23,18 @@ export default css`
       var(--gds-sys-color-l3-neutral-02),
       var(--gds-sys-color-state-neutral-04)
     );
-
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     width: var(--_toggle-size);
     height: var(--_toggle-size);
-
+    margin-block-start: calc(var(--gds-sys-space-5xs) * 2);
     cursor: pointer;
   }
 
-  :not(.rbcb-wrapper) .rbcb {
-    margin-block-start: calc(var(--gds-sys-space-5xs) * 2);
+  .rbcb-wrapper .rbcb {
+    margin-block-start: 0;
   }
 
   .rbcb--radio {

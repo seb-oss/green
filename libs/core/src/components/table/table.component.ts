@@ -70,6 +70,15 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   summary?: string
 
   /**
+   * The accessible label for the search input field.
+   */
+  @property({
+    attribute: 'search-label',
+    type: String,
+  })
+  searchLabel?: string
+
+  /**
    * Configurable options for rows per page.
    * Accepts: number array (e.g., `[5, 10, 20, 50, 100]`)
    */
@@ -605,7 +614,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
                 size="${this.#Density.input}"
                 plain
                 clearable
-                label="${msg('Search table')}"
+                label="${this.searchLabel || msg('Search table')}"
                 .value=${this._view.searchQuery}
                 @input=${this.#handleSearch}
                 @gds-input-cleared=${this.#handleSearchClear}
