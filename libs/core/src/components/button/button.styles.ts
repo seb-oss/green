@@ -69,13 +69,6 @@ const style = css`
           var(--gds-sys-color-state-neutral-02)
         );
       }
-
-      /*   &:not(.circle) slot:not([name]) {
-        display: block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      } */
     }
   }
 
