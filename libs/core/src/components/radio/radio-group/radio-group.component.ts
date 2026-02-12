@@ -18,7 +18,7 @@ import { styles } from './radio-group.styles'
 import type { GdsRadio } from '../radio'
 
 @localized()
-class RadioGroup extends GdsFormControlElement<string> {
+class RadioGroup extends GdsFormControlElement<string | boolean> {
   static styles = [tokens, styles]
 
   /**

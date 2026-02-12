@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.29.0
+
+### Minor Changes
+
+- 9e72541: **Table:** Add support for search input label
+
+### Patch Changes
+
+- 9e72541: **RBCB:** Change the margin block method
+
 ## 2.28.4
 
 ### Patch Changes

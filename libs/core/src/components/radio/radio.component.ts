@@ -32,8 +32,8 @@ export class GdsRadio extends GdsElement {
   /**
    * The value of the radio button.
    */
-  @property()
-  value = ''
+  @property({ type: String })
+  value: string | boolean = ''
 
   /**
    * Whether the radio button is checked or not.
@@ -103,7 +103,7 @@ export class GdsRadio extends GdsElement {
   }
 
   #handleClick = (e: Event) => {
-    if (this.disabled || !this.value || !this.label) return
+    if (this.disabled || !this.label) return
     e.preventDefault()
 
     this.checked = true
