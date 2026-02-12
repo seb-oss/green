@@ -81,6 +81,28 @@ describe('Radio Components', () => {
         expect(firstRadio.checked).toBe(true)
         expect(el.value).toBe('1')
       })
+
+      it('should allow boolean values to be selected', async () => {
+        const el = await fixture<GdsRadioGroup>(html`
+          <gds-radio-group label="Boolean Group">
+            <gds-radio .value=${false} label="False"></gds-radio>
+            <gds-radio .value=${true} label="True"></gds-radio>
+          </gds-radio-group>
+        `)
+        await el.updateComplete
+
+        el.radios[0].click()
+        await el.updateComplete
+        await new Promise((resolve) => setTimeout(resolve, 0))
+        expect(el.radios[0].checked).toBe(true)
+        expect(el.value).toBe(false)
+
+        el.radios[1].click()
+        await el.updateComplete
+        await new Promise((resolve) => setTimeout(resolve, 0))
+        expect(el.radios[1].checked).toBe(true)
+        expect(el.value).toBe(true)
+      })
       it('should update radio states when group value changes', async () => {
         const el = await fixture<GdsRadioGroup>(html`
           <gds-radio-group label="Test Group">

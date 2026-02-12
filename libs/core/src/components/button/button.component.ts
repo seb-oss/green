@@ -46,7 +46,6 @@ class Button extends GdsFormControlElement<any> {
   /**
    * Spread the contents of the button
    */
-
   @styleExpressionProperty({
     selector: '.button',
   })
@@ -87,6 +86,16 @@ class Button extends GdsFormControlElement<any> {
    */
   @property()
   label = ''
+
+  /**
+   * When set, adds a wrapped class to the button.
+   */
+  @property({
+    attribute: 'wrapped',
+    type: Boolean,
+    reflect: true,
+  })
+  wrapped = false
 
   /**
    * When set, the underlying button will be rendered as an anchor element.
@@ -156,6 +165,7 @@ class Button extends GdsFormControlElement<any> {
       primary: this.rank === 'primary',
       secondary: this.rank === 'secondary',
       tertiary: this.rank === 'tertiary',
+      wrapped: this.wrapped,
     }
 
     const tag = this.#isLink ? literal`a` : literal`button`
@@ -224,11 +234,11 @@ class Button extends GdsFormControlElement<any> {
   }
 
   #handleKeyDown = (e: KeyboardEvent) => {
-    if (this.disabled) return;
+    if (this.disabled) return
     if ((e.code === 'Space' || e.key === 'Enter') && !e.repeat) {
-      const ripple = this._ripple;
+      const ripple = this._ripple
       if (ripple) {
-        ripple.triggerRipple();
+        ripple.triggerRipple()
       }
     }
   }

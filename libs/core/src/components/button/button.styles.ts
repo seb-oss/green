@@ -25,10 +25,11 @@ const style = css`
       box-sizing: border-box;
       border: none;
       cursor: pointer;
-      block-size: var(--_block-size);
+      min-block-size: var(--_block-size);
+      min-width: 0;
       background-color: var(--gds-sys-color-l3-neutral-01);
       color: var(--gds-sys-color-content-neutral-03);
-      border-radius: var(--gds-sys-radius-max);
+      border-radius: calc(var(--_block-size) / 1.8);
       font-family: inherit;
       font: var(--gds-sys-text-detail-book-m);
       gap: var(--gds-sys-space-xs);
@@ -70,11 +71,12 @@ const style = css`
         );
       }
 
-      &:not(.circle) slot:not([name]) {
+      &:not(.circle, .wrapped) slot:not([name]) {
         display: block;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        min-width: 0;
       }
     }
   }
@@ -146,6 +148,7 @@ const style = css`
       gap: var(--gds-sys-space-3xs);
       font: var(--gds-sys-text-detail-book-xs);
       padding-inline: var(--gds-sys-space-s);
+      padding-block: 0;
     }
 
     :host([size='small']) .button {

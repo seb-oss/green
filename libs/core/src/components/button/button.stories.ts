@@ -381,21 +381,40 @@ export const Link: Story = {
 }
 
 /**
- * Text content will get truncated if it does not fit.
+ * Button label will be wrapped if it does not fit.
  */
-export const Length: Story = {
+export const Wrapping: Story = {
   ...DefaultParams,
   parameters: {
     ...DefaultParams.parameters,
     controls: { include: [] },
   },
   render: (args) => html`
-    <div style="width: 30ch">
-      <gds-button>
-        <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-        This is a long text that will truncated
-      </gds-button>
-    </div>
+    <gds-flex gap="xl" flex-direction="column" width="40ch" gap="2xl">
+      <gds-flex flex-direction="column" gap="m" flex="1">
+        <gds-flex flex-direction="column">
+          <gds-text>Wrapped</gds-text>
+          <gds-text color="neutral-02" tag="small">
+            Text wraps to multiple lines when exceeding container width
+          </gds-text>
+        </gds-flex>
+        <gds-button wrapped>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </gds-button>
+      </gds-flex>
+      <gds-divider></gds-divider>
+      <gds-flex flex-direction="column" gap="m" flex="1">
+        <gds-flex flex-direction="column">
+          <gds-text>Default</gds-text>
+          <gds-text color="neutral-02" tag="small">
+            Text truncates with ellipsis when exceeding container width
+          </gds-text>
+        </gds-flex>
+        <gds-button width="20ch">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </gds-button>
+      </gds-flex>
+    </gds-flex>
   `,
 }
 
