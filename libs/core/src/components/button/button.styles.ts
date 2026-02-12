@@ -26,6 +26,7 @@ const style = css`
       border: none;
       cursor: pointer;
       min-block-size: var(--_block-size);
+      min-width: 0;
       background-color: var(--gds-sys-color-l3-neutral-01);
       color: var(--gds-sys-color-content-neutral-03);
       border-radius: calc(var(--_block-size) / 1.8);
@@ -68,6 +69,14 @@ const style = css`
           var(--gds-sys-color-l3-neutral-01),
           var(--gds-sys-color-state-neutral-02)
         );
+      }
+
+      &:not(.circle, .wrapped) slot:not([name]) {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        min-width: 0;
       }
     }
   }

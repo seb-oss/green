@@ -88,6 +88,16 @@ class Button extends GdsFormControlElement<any> {
   label = ''
 
   /**
+   * When set, adds a wrapped class to the button.
+   */
+  @property({
+    attribute: 'wrapped',
+    type: Boolean,
+    reflect: true,
+  })
+  wrapped = false
+
+  /**
    * When set, the underlying button will be rendered as an anchor element.
    */
   @property()
@@ -155,6 +165,7 @@ class Button extends GdsFormControlElement<any> {
       primary: this.rank === 'primary',
       secondary: this.rank === 'secondary',
       tertiary: this.rank === 'tertiary',
+      wrapped: this.wrapped,
     }
 
     const tag = this.#isLink ? literal`a` : literal`button`

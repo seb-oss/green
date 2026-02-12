@@ -390,10 +390,31 @@ export const Wrapping: Story = {
     controls: { include: [] },
   },
   render: (args) => html`
-    <gds-button justify-content="flex-start">
-      <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    </gds-button>
+    <gds-flex gap="xl" flex-direction="column" width="40ch" gap="2xl">
+      <gds-flex flex-direction="column" gap="m" flex="1">
+        <gds-flex flex-direction="column">
+          <gds-text>Wrapped</gds-text>
+          <gds-text color="neutral-02" tag="small">
+            Text wraps to multiple lines when exceeding container width
+          </gds-text>
+        </gds-flex>
+        <gds-button wrapped>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </gds-button>
+      </gds-flex>
+      <gds-divider></gds-divider>
+      <gds-flex flex-direction="column" gap="m" flex="1">
+        <gds-flex flex-direction="column">
+          <gds-text>Default</gds-text>
+          <gds-text color="neutral-02" tag="small">
+            Text truncates with ellipsis when exceeding container width
+          </gds-text>
+        </gds-flex>
+        <gds-button width="20ch">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </gds-button>
+      </gds-flex>
+    </gds-flex>
   `,
 }
 
