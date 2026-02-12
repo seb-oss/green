@@ -70,12 +70,12 @@ const style = css`
         );
       }
 
-      &:not(.circle) slot:not([name]) {
+      /*   &:not(.circle) slot:not([name]) {
         display: block;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-      }
+      } */
     }
   }
 

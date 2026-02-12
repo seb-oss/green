@@ -381,9 +381,9 @@ export const Link: Story = {
 }
 
 /**
- * Text content will get truncated if it does not fit.
+ * Button label will be wrapped if it does not fit.
  */
-export const Length: Story = {
+export const Wrapping: Story = {
   ...DefaultParams,
   parameters: {
     ...DefaultParams.parameters,
@@ -391,7 +391,7 @@ export const Length: Story = {
   },
   render: (args) => html`
     <div style="width: 30ch">
-      <gds-button>
+      <gds-button justify-content="flex-start">
         <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
         This is a long text that will truncated
       </gds-button>
