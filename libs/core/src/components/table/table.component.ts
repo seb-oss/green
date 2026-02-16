@@ -474,7 +474,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
               </span>
             `
           : null}
-        ${column.justify ? html`<span>${content}</span>` : content}
+        ${column.justify
+          ? html`<span class="cell-wrapped-content">${content}</span>`
+          : content}
       </div>
     `
   }
