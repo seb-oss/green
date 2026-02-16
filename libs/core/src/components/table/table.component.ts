@@ -1,6 +1,7 @@
 import { localized, msg } from '@lit/localize'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { when } from 'lit/directives/when.js'
 
@@ -462,10 +463,10 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       : rawValue
 
     const mobile = this._isMobile && this.responsive
-    const label = mobile ? column.label : null
+    const label = mobile ? column.label : undefined
 
     return html`
-      <div class="cell-content" aria-label=${label}>
+      <div class="cell-content" aria-label=${ifDefined(label)}>
         ${mobile
           ? html`
               <span class="column-label" aria-hidden="true">

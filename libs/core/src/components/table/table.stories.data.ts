@@ -64,7 +64,7 @@ const generateUserRecord = (index: number): UserData => {
       ['lead', 'value', 'trail-slot', 'extra-slot'],
       lastName.toLowerCase(),
     ),
-    email: `${firstName.toLowerCase()}@domain.tld`,
+    email: `${firstName.toLowerCase()}@domain.tld Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. `,
     role: USERS.ROLES[index % USERS.ROLES.length],
     status: Slot(USERS.STATUSES[index % USERS.STATUSES.length], ['status']),
     department: USERS.DEPARTMENTS[index % USERS.DEPARTMENTS.length],
