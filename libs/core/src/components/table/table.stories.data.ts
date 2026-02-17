@@ -60,9 +60,15 @@ const generateUserRecord = (index: number): UserData => {
   const firstName = USERS.FIRST_NAMES[index % USERS.FIRST_NAMES.length]
   const lastName = USERS.LAST_NAMES[index % USERS.LAST_NAMES.length]
 
+  // Use custom key (firstName) only for first 6 rows to demonstrate feature
+  // Remaining rows use default id-based keys to avoid collisions
+  const useCustomKey = index < USERS.FIRST_NAMES.length
+
   return {
     id,
-    name: Slot(`${firstName} ${lastName}`, ['lead', 'value']),
+    name: useCustomKey
+      ? Slot(`${firstName} ${lastName}`, ['lead', 'value'], firstName)
+      : Slot(`${firstName} ${lastName}`, ['lead', 'value']),
     email: Slot(`${firstName.toLowerCase()}@domain.tld`, [
       'value',
       'copy-button',
@@ -372,6 +378,7 @@ export const generateUserSlots = (data: UserData[]) => {
     const downloadSlot = row.download as SlotValue
 
     const fullName = String(nameSlot.value)
+    const nameKey = nameSlot.key || rowId
     const email = String(emailSlot.value)
     const statusValue = String(statusSlot.value)
     const variant = statusValue === 'Active' ? 'positive' : 'notice'
@@ -381,7 +388,7 @@ export const generateUserSlots = (data: UserData[]) => {
 
     return html`
       <gds-img
-        slot="name:${rowId}:lead"
+        slot="name:${nameKey}:lead"
         src="${ifDefined(row.avatarUrl as string | undefined)}"
         alt="${fullName}"
         width="xl"
