@@ -32,7 +32,7 @@ import * as Types from './table.types'
  * @event gds-page-change - Fired when the active page changes. Detail: `{ page: number }`
  * @event gds-rows-change - Fired when the rows per page value changes. Detail: `{ rows: number }`
  * @event gds-sort-change - Fired when sorting changes. Detail: `{ sortColumn: string, sortDirection: 'asc' | 'desc' }`
- * @event gds-table-data-loaded - Fired when data is successfully loaded.
+ * @event gds-table-data-loaded - Fired when data is successfully loaded. Detail: `{ rows: T[], total: number, page: number, rowsPerPage: number, searchQuery: string, sortColumn?: string, sortDirection?: 'asc' | 'desc' }`
  * @event gds-table-data-error - Fired when data loading fails.
  * @event gds-table-selection - Fired when row selection changes.
  */
@@ -343,7 +343,14 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       this._loaded = false
 
       this.dispatchCustomEvent('gds-table-data-loaded', {
-        detail: response,
+        detail: {
+          ...response,
+          page: this._view.page,
+          rowsPerPage: this._view.rows,
+          searchQuery: this._view.searchQuery,
+          sortColumn: this._view.sortColumn,
+          sortDirection: this._view.sortDirection,
+        },
         bubbles: true,
       })
     } catch (error) {

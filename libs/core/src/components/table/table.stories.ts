@@ -1077,6 +1077,10 @@ Demonstrates dynamic slot composition for data-driven content injection into tab
   render: (args) => {
     const userData = getUserDataset()
 
+    const handleDataLoaded = (e: CustomEvent) => {
+      console.log('gds-table-data-loaded event:', e.detail)
+    }
+
     return html`
       <gds-table
         .columns="${args.columns}"
@@ -1089,6 +1093,7 @@ Demonstrates dynamic slot composition for data-driven content injection into tab
         density="${args.density}"
         responsive
         rows="10"
+        @gds-table-data-loaded="${handleDataLoaded}"
       >
         ${generateUserSlots(userData)}
       </gds-table>
