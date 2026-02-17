@@ -25,7 +25,6 @@ const style = css`
       box-sizing: border-box;
       border: none;
       cursor: pointer;
-
       min-width: 0;
       background-color: var(--gds-sys-color-l3-neutral-01);
       color: var(--gds-sys-color-content-neutral-03);
