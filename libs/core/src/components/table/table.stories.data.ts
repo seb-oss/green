@@ -9,48 +9,9 @@ import {
   TableResponse,
 } from './table.types'
 
-type CellValue = SlotValue | string | number
-
-type UserRow = {
-  id: number
-  name: string
-  email: string
-  role: 'Admin' | 'User' | 'Editor'
-  status: 'Active' | 'Inactive'
-  amount: number
-  account: string
-  lastLogin: string
-  avatarUrl?: string
-  department?: string
-  download?: string
-}
-
-type UserData = Omit<
-  UserRow,
-  'name' | 'email' | 'status' | 'amount' | 'account' | 'lastLogin' | 'download'
-> & {
-  name: CellValue
-  email: CellValue
-  status: CellValue
-  amount: CellValue
-  account: CellValue
-  lastLogin: CellValue
-  download?: CellValue
-}
-
-type FeedbackData = {
-  id: number
-  name: string
-  email: string
-  feedback: string
-  notes: string
-  status: 'Active' | 'Inactive'
-  department: string
-}
-
-// ============================================================================
+// =================
 // USERS DATA COLLECTION
-// ============================================================================
+// =================
 
 const USERS_URL = 'https://api.seb.io/components/table/table.users.json'
 const FEEDBACK_URL = 'https://api.seb.io/components/table/table.feedback.json'
@@ -60,16 +21,12 @@ let usersPromise: Promise<UserData[]> | null = null
 let feedbackCache: FeedbackData[] | null = null
 let feedbackPromise: Promise<FeedbackData[]> | null = null
 
-const normalizeUserRow = (row: UserRow, index: number): UserData => {
+const normalizeUserRow = (row: UserRow): UserData => {
   const fullName = String(row.name)
-  const firstName = fullName.split(' ')[0] || `User-${row.id}`
-  const useCustomKey = index < 6
 
   return {
     ...row,
-    name: useCustomKey
-      ? Slot(fullName, ['lead', 'value'], firstName)
-      : Slot(fullName, ['lead', 'value']),
+    name: Slot(fullName, ['avatar', 'value'], row.email),
     email: Slot(String(row.email), ['value', 'copy-button']),
     status: Slot(String(row.status), ['status']),
     amount: Slot(Number(row.amount), ['amount']),
@@ -319,101 +276,3 @@ export const Feedback = {
   } as any,
   Data: feedbackDataProvider,
 }
-
-// ============================================================================
-// USER SLOT GENERATOR
-// ============================================================================
-
-/**
- * Generates slot content for table stories from actual data records
- * @param data - Array of user data records (from API)
- * @param page - Page number from gds-page-change event
- * @returns Array of html templates with slot content
- */
-export const generateUserSlots = (data: UserData[], page?: number) => {
-  const rowsPerPage = 10
-  const currentPage = page ?? 1
-
-  // Calculate which rows to generate slots for based on page number
-  const startIndex = (currentPage - 1) * rowsPerPage
-  const endIndex = startIndex + rowsPerPage
-  const pageData = data.slice(startIndex, endIndex)
-
-  console.log(
-    `Generating slots for page ${currentPage}: rows ${startIndex + 1}-${endIndex}`,
-  )
-
-  return pageData.map((row) => {
-    const rowId = row.id
-
-    // Extract slot values from the data
-    const nameSlot = row.name as SlotValue
-    const emailSlot = row.email as SlotValue
-    const statusSlot = row.status as SlotValue
-    const amountSlot = row.amount as SlotValue
-    const accountSlot = row.account as SlotValue
-    const lastLoginSlot = row.lastLogin as SlotValue
-    const downloadSlot = row.download as SlotValue
-
-    const fullName = String(nameSlot.value)
-    const nameKey = nameSlot.key || rowId
-    const email = String(emailSlot.value)
-    const statusValue = String(statusSlot.value)
-    const variant = statusValue === 'Active' ? 'positive' : 'notice'
-    const amount = Number(amountSlot.value)
-    const account = String(accountSlot.value)
-    const lastLoginDate = String(lastLoginSlot.value)
-
-    return html`
-      <gds-img
-        slot="name:${nameKey}:lead"
-        src="${ifDefined(row.avatarUrl as string | undefined)}"
-        alt="${fullName}"
-        width="xl"
-        height="xl"
-      ></gds-img>
-      <gds-badge
-        slot="status:${rowId}:status"
-        size="small"
-        variant="${variant}"
-      >
-        ${statusValue}
-      </gds-badge>
-      <gds-text slot="email:${rowId}:value">${email}</gds-text>
-      <gds-button
-        slot="email:${rowId}:copy-button"
-        size="small"
-        rank="tertiary"
-        @click=${() => navigator.clipboard.writeText(email)}
-      >
-        <gds-icon-copy></gds-icon-copy>
-      </gds-button>
-      <gds-flex slot="amount:${rowId}:amount" gap="xs" align-items="center">
-        <gds-text>${amount.toLocaleString('sv-SE')}</gds-text>
-        <gds-badge variant="information" size="small">SEK</gds-badge>
-      </gds-flex>
-      <gds-formatted-account slot="account:${rowId}:main" .value=${account}>
-        ${account}
-      </gds-formatted-account>
-      <gds-link
-        slot="download:${rowId}:main"
-        href="#"
-        text-decoration="underline"
-        download
-      >
-        Download
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </gds-link>
-      <gds-formatted-date
-        slot="lastLogin:${rowId}:main"
-        .value=${lastLoginDate}
-        locale="sv-SE"
-        format="dateLong"
-      >
-      </gds-formatted-date>
-    `
-  })
-}
-
-// Export the dataset cache for use in stories
-export const getUserDataset = () => usersCache ?? []

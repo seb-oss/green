@@ -24,12 +24,7 @@ import '../icon/icons/circle-check'
 import '../icon/icons/cross-small'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
-import {
-  Feedback,
-  generateUserSlots,
-  getUserDataset,
-  Users,
-} from './table.stories.data'
+import { Feedback, generateUserSlots, Users } from './table.stories.data'
 
 const meta: Meta = {
   title: 'Components/Table',
@@ -1051,6 +1046,8 @@ This example demonstrates listening to pagination and sorting events and display
 // FEATURES - SLOT COMPOSITION
 // ============================================================================
 
+let slotCompositionRows: any[] = []
+
 export const SlotComposition: Story = {
   args: {
     columns: Users.Columns,
@@ -1061,6 +1058,7 @@ export const SlotComposition: Story = {
     searchable: true,
     settings: true,
     density: 'comfortable',
+    slotTick: 0,
   },
   parameters: {
     docs: {
@@ -1074,15 +1072,7 @@ Demonstrates dynamic slot composition for data-driven content injection into tab
       },
     },
   },
-  render: (args) => {
-    const userData = getUserDataset()
-    let pageNumber = 1
-
-    const handlePageChange = (e: CustomEvent) => {
-      pageNumber = e.detail.page
-      console.log('Current page number:', pageNumber)
-    }
-
+  render: (args, { updateArgs }) => {
     return html`
       <gds-table
         .columns="${args.columns}"
@@ -1095,9 +1085,14 @@ Demonstrates dynamic slot composition for data-driven content injection into tab
         density="${args.density}"
         responsive
         rows="10"
-        @gds-page-change="${handlePageChange}"
       >
-        ${generateUserSlots(userData, pageNumber)}
+        <gds-img
+          src="https://api.dicebear.com/7.x/avataaars/svg?seed=FrejaForsberg"
+          alt="User avatar"
+          slot="name:anna.andersson@example.com:avatar"
+          width="xl"
+          height="xl"
+        ></gds-img>
       </gds-table>
     `
   },
