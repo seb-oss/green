@@ -379,6 +379,25 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     return index + 1
   }
 
+  #renderCellWrapped(content: unknown) {
+    return html`<span class="cell-wrapped-content">${content}</span>`
+  }
+
+  #renderMobileLabel(column: Types.Column) {
+    return html`<span class="column-label" aria-hidden="true">
+      ${column.label}:
+    </span>`
+  }
+
+  #renderSlotElement(
+    columnKey: string,
+    rowKey: string | number,
+    slotId: string,
+  ) {
+    const slotName = `${columnKey}:${rowKey}:${slotId}`
+    return html`<slot name="${slotName}"></slot>`
+  }
+
   /**
    * Renders cell content with proper ordering and wrapping.
    *
@@ -392,45 +411,35 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    */
   #renderCellContent(row: T, column: Types.Column, index: number) {
     const rawValue = column.value ? column.value(row) : row[column.key]
-    const mobile = this._isMobile && this.responsive
+    const isMobile = this._isMobile && this.responsive
+    const shouldWrap = !!column.justify
 
     let content: unknown
 
     if (Types.isSlotValue(rawValue)) {
       const rowKey = this.#getRowKey(row, index, rawValue.key)
-      const shouldWrap = !!column.justify
 
-      // Render slots in order
-      content = rawValue.slots.map((item) => {
-        if (item === 'value') {
-          const val = rawValue.value
-          return val !== undefined && shouldWrap
-            ? html`<span class="cell-wrapped-content">${val}</span>`
-            : val
+      content = rawValue.slots.map((slotItem) => {
+        if (slotItem === 'value') {
+          if (rawValue.value === undefined) return null
+
+          return shouldWrap
+            ? this.#renderCellWrapped(rawValue.value)
+            : rawValue.value
         }
-        // Render slot element
-        const slotName = `${column.key}:${rowKey}:${item}`
-        return html`<slot name="${slotName}"></slot>`
+
+        return this.#renderSlotElement(column.key, rowKey, slotItem)
       })
     } else {
-      // Plain value
-      content = column.justify
-        ? html`<span class="cell-wrapped-content">${rawValue}</span>`
-        : rawValue
+      content = shouldWrap ? this.#renderCellWrapped(rawValue) : rawValue
     }
-
-    const mobileLabel = mobile
-      ? html`<span class="column-label" aria-hidden="true"
-          >${column.label}:</span
-        >`
-      : null
 
     return html`
       <div
         class="cell-content"
-        aria-label=${ifDefined(mobile ? column.label : undefined)}
+        aria-label=${ifDefined(isMobile ? column.label : undefined)}
       >
-        ${[mobileLabel, content]}
+        ${isMobile ? this.#renderMobileLabel(column) : null} ${content}
       </div>
     `
   }
