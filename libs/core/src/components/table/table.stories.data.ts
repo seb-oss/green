@@ -9,26 +9,39 @@ import {
   TableResponse,
 } from './table.types'
 
-type CellValue = SlotValue | string | number | null | undefined
+type CellValue = SlotValue | string | number
 
-interface UserData {
+type UserRow = {
   id: number
+  name: string
+  email: string
+  role: 'Admin' | 'User' | 'Editor'
+  status: 'Active' | 'Inactive'
+  amount: number
+  account: string
+  lastLogin: string
+  avatarUrl?: string
+  department?: string
+  download?: string
+}
+
+type UserData = Omit<
+  UserRow,
+  'name' | 'email' | 'status' | 'amount' | 'account' | 'lastLogin' | 'download'
+> & {
   name: CellValue
   email: CellValue
-  role: 'Admin' | 'User' | 'Editor'
   status: CellValue
   amount: CellValue
   account: CellValue
   lastLogin: CellValue
-  avatarUrl?: CellValue
-  department?: CellValue
   download?: CellValue
 }
 
-interface FeedbackData {
+type FeedbackData = {
   id: number
-  name: CellValue
-  email: CellValue
+  name: string
+  email: string
   feedback: string
   notes: string
   status: 'Active' | 'Inactive'
@@ -39,65 +52,54 @@ interface FeedbackData {
 // USERS DATA COLLECTION
 // ============================================================================
 
-const USERS = {
-  FIRST_NAMES: [
-    'Alexandra',
-    'Benjamin',
-    'Caroline',
-    'David',
-    'Elena',
-    'Fredrik',
-  ],
-  LAST_NAMES: ['Andersson', 'Bergström', 'Carlsson', 'Dahlström', 'Eriksson'],
-  ROLES: ['Admin', 'User', 'Editor'] as const,
-  STATUSES: ['Active', 'Inactive'] as const,
-  DEPARTMENTS: ['Engineering', 'Sales', 'Marketing', 'Support', 'HR'] as const,
-  COUNT: 100,
-}
+const USERS_URL = 'https://api.seb.io/components/table/table.users.json'
+const FEEDBACK_URL = 'https://api.seb.io/components/table/table.feedback.json'
 
-const generateUserRecord = (index: number): UserData => {
-  const id = index + 1
-  const firstName = USERS.FIRST_NAMES[index % USERS.FIRST_NAMES.length]
-  const lastName = USERS.LAST_NAMES[index % USERS.LAST_NAMES.length]
+let usersCache: UserData[] | null = null
+let usersPromise: Promise<UserData[]> | null = null
+let feedbackCache: FeedbackData[] | null = null
+let feedbackPromise: Promise<FeedbackData[]> | null = null
 
-  // Use custom key (firstName) only for first 6 rows to demonstrate feature
-  // Remaining rows use default id-based keys to avoid collisions
-  const useCustomKey = index < USERS.FIRST_NAMES.length
+const normalizeUserRow = (row: UserRow, index: number): UserData => {
+  const fullName = String(row.name)
+  const firstName = fullName.split(' ')[0] || `User-${row.id}`
+  const useCustomKey = index < 6
 
   return {
-    id,
+    ...row,
     name: useCustomKey
-      ? Slot(`${firstName} ${lastName}`, ['lead', 'value'], firstName)
-      : Slot(`${firstName} ${lastName}`, ['lead', 'value']),
-    email: Slot(`${firstName.toLowerCase()}@domain.tld`, [
-      'value',
-      'copy-button',
-    ]),
-    role: USERS.ROLES[index % USERS.ROLES.length],
-    status: Slot(USERS.STATUSES[index % USERS.STATUSES.length], ['status']),
-    department: USERS.DEPARTMENTS[index % USERS.DEPARTMENTS.length],
-    amount: Slot(Math.floor(Math.random() * 500000) + 10000, ['amount']),
-    account: Slot(`5440${String((index * 7919) % 10000000).padStart(7, '0')}`, [
-      'main',
-    ]),
-    lastLogin: Slot(
-      new Date(Date.now() - Math.random() * 30 * 86400000).toISOString(),
-      ['main'],
-    ),
-    avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${firstName}${lastName}`,
-    download: Slot('Download', ['main']),
+      ? Slot(fullName, ['lead', 'value'], firstName)
+      : Slot(fullName, ['lead', 'value']),
+    email: Slot(String(row.email), ['value', 'copy-button']),
+    status: Slot(String(row.status), ['status']),
+    amount: Slot(Number(row.amount), ['amount']),
+    account: Slot(String(row.account), ['main']),
+    lastLogin: Slot(String(row.lastLogin), ['main']),
+    download: Slot(String(row.download ?? '#'), ['main']),
   }
 }
 
-const generateUserDataset = (): UserData[] =>
-  Array.from({ length: USERS.COUNT }, (_, i) => generateUserRecord(i))
+const loadUsers = async (): Promise<UserData[]> => {
+  if (usersCache) return usersCache
+  if (usersPromise) return usersPromise
+
+  usersPromise = fetch(USERS_URL)
+    .then((response) => response.json())
+    .then((data: UserRow[]) => data.map(normalizeUserRow))
+    .then((data) => {
+      usersCache = data
+      return data
+    })
+
+  return usersPromise
+}
 
 const userDataProvider = async (
   request: TableRequest,
 ): Promise<TableResponse<UserData>> => {
   await new Promise((resolve) => setTimeout(resolve, 1000))
 
-  const allData = generateUserDataset()
+  const allData = await loadUsers()
   let processedData = [...allData]
 
   if (request.searchQuery) {
@@ -198,63 +200,26 @@ export const Users = {
 // FEEDBACK DATA COLLECTION
 // ============================================================================
 
-const FEEDBACK = {
-  FIRST_NAMES: ['Sophie', 'Marcus', 'Isabella', 'Johan', 'Emma', 'Lucas'],
-  LAST_NAMES: ['Ström', 'Nord', 'Berg', 'Gren', 'Holm'],
-  DEPARTMENTS: ['Engineering', 'Sales', 'Marketing', 'Support', 'HR'] as const,
-  STATUSES: ['Active', 'Inactive'] as const,
-  FEEDBACK_TEXTS: [
-    'Excellent user experience with intuitive interface and smooth navigation.',
-    'Performance needs improvement when handling large datasets.',
-    'Documentation is comprehensive but could benefit from more code examples.',
-    'Outstanding accessibility features and WCAG compliance implementation.',
-    'Mobile experience is good but some minor UI inconsistencies observed.',
-    'Feature request: Please add real-time collaboration capabilities.',
-    'Integration with third-party APIs works seamlessly.',
-    'User support team is responsive and helpful.',
-    'Suggest adding dark mode and customizable themes.',
-    'Security audit results are impressive and thorough.',
-  ],
-  NOTES: [
-    'Customer upgraded to premium plan. All features activated.',
-    'Q1 planning meeting scheduled for next week at 10 AM.',
-    'Bug fix deployed in production. Monitor system for 24 hours.',
-    'Account manager assigned: John Smith.',
-    'Scheduled maintenance window: Saturday 2-4 AM.',
-    'Training session completed successfully.',
-    'Custom integration request in progress.',
-    'Contract renewal due in 30 days.',
-    'Performance optimization completed.',
-    'Security certificates updated to latest version.',
-  ],
-  COUNT: 50,
+const loadFeedback = async (): Promise<FeedbackData[]> => {
+  if (feedbackCache) return feedbackCache
+  if (feedbackPromise) return feedbackPromise
+
+  feedbackPromise = fetch(FEEDBACK_URL)
+    .then((response) => response.json())
+    .then((data: FeedbackData[]) => {
+      feedbackCache = data
+      return data
+    })
+
+  return feedbackPromise
 }
-
-const generateFeedbackRecord = (index: number): FeedbackData => {
-  const id = index + 1
-  const firstName = FEEDBACK.FIRST_NAMES[index % FEEDBACK.FIRST_NAMES.length]
-  const lastName = FEEDBACK.LAST_NAMES[index % FEEDBACK.LAST_NAMES.length]
-
-  return {
-    id,
-    name: `${firstName} ${lastName}`,
-    email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@company.com`,
-    feedback: FEEDBACK.FEEDBACK_TEXTS[index % FEEDBACK.FEEDBACK_TEXTS.length],
-    notes: FEEDBACK.NOTES[index % FEEDBACK.NOTES.length],
-    status: index % 3 === 0 ? 'Inactive' : 'Active',
-    department: FEEDBACK.DEPARTMENTS[index % FEEDBACK.DEPARTMENTS.length],
-  }
-}
-
-const generateFeedbackDataset = (): FeedbackData[] =>
-  Array.from({ length: FEEDBACK.COUNT }, (_, i) => generateFeedbackRecord(i))
 
 const feedbackDataProvider = async (
   request: TableRequest,
 ): Promise<TableResponse<FeedbackData>> => {
   await new Promise((resolve) => setTimeout(resolve, 800))
 
-  const allData = generateFeedbackDataset()
+  const allData = await loadFeedback()
   let processedData = [...allData]
 
   if (request.searchQuery) {
@@ -361,7 +326,7 @@ export const Feedback = {
 
 /**
  * Generates slot content for table stories from actual data records
- * @param data - Array of user data records (from API or generateUserDataset)
+ * @param data - Array of user data records (from API)
  * @param page - Page number from gds-page-change event
  * @returns Array of html templates with slot content
  */
@@ -450,5 +415,5 @@ export const generateUserSlots = (data: UserData[], page?: number) => {
   })
 }
 
-// Export the dataset generator for use in stories
-export const getUserDataset = generateUserDataset
+// Export the dataset cache for use in stories
+export const getUserDataset = () => usersCache ?? []
