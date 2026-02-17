@@ -18,10 +18,10 @@ interface UserData {
   status: CellValue
   amount: CellValue
   account: CellValue
-  lastLogin: string
-  avatarUrl?: string
-  department?: string
-  download?: string
+  lastLogin: CellValue
+  avatarUrl?: CellValue
+  department?: CellValue
+  download?: CellValue
 }
 
 interface FeedbackData {
@@ -64,14 +64,13 @@ const generateUserRecord = (index: number): UserData => {
     name: Slot(
       `${firstName} ${lastName}`,
       ['lead', 'value', 'trail-slot', 'extra-slot'],
-      lastName.toLowerCase(),
+      // lastName.toLowerCase(),
     ),
     email: Slot(
       `${firstName.toLowerCase()}@domain.tld`,
       ['value', 'copy-button'],
-      firstName.toLowerCase(),
+      // firstName.toLowerCase(),
     ),
-
     role: USERS.ROLES[index % USERS.ROLES.length],
     status: Slot(USERS.STATUSES[index % USERS.STATUSES.length], ['status']),
     department: USERS.DEPARTMENTS[index % USERS.DEPARTMENTS.length],
@@ -79,11 +78,13 @@ const generateUserRecord = (index: number): UserData => {
     account: Slot(`5440${String((index * 7919) % 10000000).padStart(7, '0')}`, [
       'main',
     ]),
-    lastLogin: new Date(
-      Date.now() - Math.random() * 30 * 86400000,
-    ).toISOString(),
+    lastLogin: Slot(
+      new Date(Date.now() - Math.random() * 30 * 86400000).toISOString(),
+      ['main'],
+      // `lastlogin-${id}`,
+    ),
     avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${firstName}${lastName}`,
-    download: `#`,
+    download: Slot('Download', ['main'], `download-${id}`),
   }
 }
 
@@ -366,13 +367,26 @@ export const generateUserSlots = (count: number = 100) => {
   return Array.from({ length: count }, (_, i) => {
     const rowId = i + 1
     const firstName = USERS.FIRST_NAMES[i % USERS.FIRST_NAMES.length]
+    const lastName = USERS.LAST_NAMES[i % USERS.LAST_NAMES.length]
+    const fullName = `${firstName} ${lastName}`
+    const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${firstName}${lastName}`
     const email = `${firstName.toLowerCase()}@domain.tld`
     const statusValue = rowId % 2 ? 'Active' : 'Inactive'
     const variant = statusValue === 'Active' ? 'positive' : 'notice'
     const amount = ((rowId * 12345) % 500000) + 10000
     const account = `5440${String((i * 7919) % 10000000).padStart(7, '0')}`
+    const lastLoginDate = new Date(
+      Date.now() - Math.random() * 30 * 86400000,
+    ).toISOString()
 
     return html`
+      <gds-img
+        slot="name:${rowId}:lead"
+        src="${avatarUrl}"
+        alt="${fullName}"
+        width="xl"
+        height="xl"
+      ></gds-img>
       <gds-badge
         slot="status:${rowId}:status"
         size="small"
@@ -393,9 +407,25 @@ export const generateUserSlots = (count: number = 100) => {
         <gds-text>${amount.toLocaleString('sv-SE')}</gds-text>
         <gds-badge variant="information" size="small">SEK</gds-badge>
       </gds-flex>
-      <gds-formatted-account slot="account:${rowId}:main" .value=${account}
-        >${account}</gds-formatted-account
+      <gds-formatted-account slot="account:${rowId}:main" .value=${account}>
+        ${account}
+      </gds-formatted-account>
+      <gds-link
+        slot="download:${rowId}:main"
+        href="#"
+        text-decoration="underline"
+        download
       >
+        Download
+        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
+      </gds-link>
+      <gds-formatted-date
+        slot="lastLogin:${rowId}:main"
+        .value=${lastLoginDate}
+        locale="sv-SE"
+        format="dateLong"
+      >
+      </gds-formatted-date>
     `
   })
 }
