@@ -407,74 +407,106 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     rowKeys: Array<string | number>,
     slots: Array<'value' | string>,
     value?: unknown,
+    shouldWrapValue = false,
   ) {
-    const slotElements: unknown[] = []
-
-    const pushSlot = (slotId: string) => {
-      rowKeys.forEach((rowKey) => {
-        slotElements.push(
-          html`<slot
-            name="${this.#getCellSlotName(columnKey, rowKey, slotId)}"
-          ></slot>`,
-        )
-      })
-    }
+    const elements: unknown[] = []
 
     if (Array.isArray(slots) && slots.length > 0) {
+      // Render in the order specified by the slots array
       slots.forEach((item) => {
         if (item === 'value') {
-          if (value !== undefined) slotElements.push(value)
+          if (value !== undefined) {
+            // Wrap value if needed (for justify)
+            const wrappedValue = shouldWrapValue
+              ? html`<span class="cell-wrapped-content">${value}</span>`
+              : value
+            elements.push(wrappedValue)
+          }
           return
         }
 
         const slotId = this.#getSlotId(item)
-        if (slotId) pushSlot(slotId)
+        if (slotId) {
+          rowKeys.forEach((rowKey) => {
+            elements.push(
+              html`<slot
+                name="${this.#getCellSlotName(columnKey, rowKey, slotId)}"
+              ></slot>`,
+            )
+          })
+        }
       })
 
-      return slotElements.length > 0 ? slotElements : null
+      return elements
     }
 
+    // No slots array, just return the value
     if (value !== undefined) {
-      slotElements.push(value)
+      elements.push(value)
     }
 
-    return slotElements.length > 0 ? slotElements : null
+    return elements
   }
 
   /**
-   * Resolves and renders the cell content.
+   * Renders cell content with proper ordering and wrapping.
    *
-   * Flow:
-   * 1. Resolve the raw value (prefer `column.value(row)` if provided).
-   * 2. If the value is a slot object, expand it into one or more slots
-   *    using the column key + row key(s). Otherwise render the raw value.
+   * @param row - Current data row
+   * @param column - Column configuration
+   * @param index - Row index
+   *
+   * **Flow:**
+   * 1. Extract raw value from row data (using column.value() or row[column.key])
+   * 2. Check if value is a Slot configuration (has slots array)
+   *
+   * **Slot-based content** (isSlotValue = true):
+   * - Renders elements in exact order specified by slots array
+   * - Example: ['lead', 'value', 'copy-button'] → icon, text, button
+   * - Value is wrapped in span when column.justify is set (for flexbox alignment)
+   * - Slot elements stay unwrapped (complex components like buttons, badges)
+   *
+   * **Plain content** (isSlotValue = false):
+   * - Wraps entire value when column.justify is set
+   * - Otherwise renders value directly
+   *
+   * **Mobile responsive:**
+   * - Prepends column label when in mobile responsive mode
    */
   #renderCellContent(row: T, column: Types.Column, index: number) {
     const rawValue = column.value ? column.value(row) : row[column.key]
-    const content = Types.isSlotValue(rawValue)
-      ? this.#renderCellSlots(
-          column.key,
-          this.#getRowSlotKeys(row, index, rawValue.key),
-          rawValue.slots,
-          rawValue.value,
-        )
-      : rawValue
-
+    const isSlotValue = Types.isSlotValue(rawValue)
     const mobile = this._isMobile && this.responsive
-    const label = mobile ? column.label : undefined
+
+    let content: unknown
+
+    if (isSlotValue) {
+      // Has slot configuration - render in order, wrap value if justify is set
+      content = this.#renderCellSlots(
+        column.key,
+        this.#getRowSlotKeys(row, index, rawValue.key),
+        rawValue.slots,
+        rawValue.value,
+        !!column.justify,
+      )
+    } else {
+      // Plain value - wrap only if justify is set
+      content = column.justify
+        ? html`<span class="cell-wrapped-content">${rawValue}</span>`
+        : rawValue
+    }
+
+    const mobileLabel = mobile
+      ? html`<span class="column-label" aria-hidden="true">
+          ${column.label}:
+        </span>`
+      : null
 
     return html`
-      <div class="cell-content" aria-label=${ifDefined(label)}>
-        ${mobile
-          ? html`
-              <span class="column-label" aria-hidden="true">
-                ${column.label}:
-              </span>
-            `
-          : null}
-        ${column.justify
-          ? html`<span class="cell-wrapped-content">${content}</span>`
-          : content}
+      <div
+        class="cell-content"
+        aria-label=${ifDefined(mobile ? column.label : undefined)}
+      >
+        ${[mobileLabel, content]}
       </div>
     `
   }
