@@ -1,3 +1,5 @@
+import { html } from 'lit'
+
 import {
   Slot,
   SlotValue,
@@ -64,7 +66,12 @@ const generateUserRecord = (index: number): UserData => {
       ['lead', 'value', 'trail-slot', 'extra-slot'],
       lastName.toLowerCase(),
     ),
-    email: `${firstName.toLowerCase()}@domain.tld Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. `,
+    email: Slot(
+      `${firstName.toLowerCase()}@domain.tld`,
+      ['value', 'copy-button'],
+      firstName.toLowerCase(),
+    ),
+
     role: USERS.ROLES[index % USERS.ROLES.length],
     status: Slot(USERS.STATUSES[index % USERS.STATUSES.length], ['status']),
     department: USERS.DEPARTMENTS[index % USERS.DEPARTMENTS.length],
@@ -344,4 +351,51 @@ export const Feedback = {
     justify: 'end',
   } as any,
   Data: feedbackDataProvider,
+}
+
+// ============================================================================
+// USER SLOT GENERATOR
+// ============================================================================
+
+/**
+ * Generates slot content for table stories
+ * @param count - Number of rows to generate slots for
+ * @returns Array of html templates with slot content
+ */
+export const generateUserSlots = (count: number = 100) => {
+  return Array.from({ length: count }, (_, i) => {
+    const rowId = i + 1
+    const firstName = USERS.FIRST_NAMES[i % USERS.FIRST_NAMES.length]
+    const email = `${firstName.toLowerCase()}@domain.tld`
+    const statusValue = rowId % 2 ? 'Active' : 'Inactive'
+    const variant = statusValue === 'Active' ? 'positive' : 'notice'
+    const amount = ((rowId * 12345) % 500000) + 10000
+    const account = `5440${String((i * 7919) % 10000000).padStart(7, '0')}`
+
+    return html`
+      <gds-badge
+        slot="status:${rowId}:status"
+        size="small"
+        variant="${variant}"
+      >
+        ${statusValue}
+      </gds-badge>
+      <gds-text slot="email:${rowId}:value">${email}</gds-text>
+      <gds-button
+        slot="email:${rowId}:copy-button"
+        size="small"
+        rank="tertiary"
+        @click=${() => navigator.clipboard.writeText(email)}
+      >
+        <gds-icon-copy></gds-icon-copy>
+      </gds-button>
+      <gds-flex slot="amount:${rowId}:amount" gap="xs" align-items="center">
+        <gds-text>${amount.toLocaleString('sv-SE')}</gds-text>
+        <gds-badge variant="information" size="small">SEK</gds-badge>
+      </gds-flex>
+      <gds-formatted-account slot="account:${rowId}:main" .value=${account}
+        >${account}</gds-formatted-account
+      >
+    `
+  })
 }

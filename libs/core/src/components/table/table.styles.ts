@@ -477,7 +477,6 @@ export const TableStyles = css`
   }
 
   /* Medium screens: input and dropdown side by side */
-  /* Medium screens: side by side layout */
   @media (max-width: 760px) and (min-width: 480px) {
     .header {
       display: grid;

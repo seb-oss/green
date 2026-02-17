@@ -24,7 +24,7 @@ import '../icon/icons/circle-check'
 import '../icon/icons/cross-small'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
-import { Feedback, Users } from './table.stories.data'
+import { Feedback, generateUserSlots, Users } from './table.stories.data'
 
 const meta: Meta = {
   title: 'Components/Table',
@@ -1082,38 +1082,7 @@ Demonstrates dynamic slot composition for data-driven content injection into tab
       responsive
       rows="10"
     >
-      ${Array.from({ length: 100 }, (_, i) => {
-        const rowId = i + 1
-        const statusValue = rowId % 2 ? 'Active' : 'Inactive'
-        const variant = statusValue === 'Active' ? 'positive' : 'notice'
-        const amount = ((rowId * 12345) % 500000) + 10000
-        const account = `5440${String((i * 7919) % 10000000).padStart(7, '0')}`
-
-        return html`
-          <gds-badge
-            slot="status:${rowId}:status"
-            size="small"
-            variant="${variant}"
-          >
-            ${statusValue}
-          </gds-badge>
-          <gds-flex slot="email:${rowId}:email" gap="xs" align-items="center">
-            <gds-button>
-              <gds-icon-copy></gds-icon-copy>
-            </gds-button>
-            <gds-link href="mailto:user${rowId}@domain.tld">
-              Send email
-            </gds-link>
-          </gds-flex>
-          <gds-flex slot="amount:${rowId}:amount" gap="xs" align-items="center">
-            <gds-text>${amount.toLocaleString('sv-SE')}</gds-text>
-            <gds-badge variant="information" size="small">SEK</gds-badge>
-          </gds-flex>
-          <gds-formatted-account slot="account:${rowId}:main" .value=${account}
-            >${account}</gds-formatted-account
-          >
-        `
-      })}
+      ${generateUserSlots(100)}
     </gds-table>
   `,
 }
