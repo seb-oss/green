@@ -25,7 +25,7 @@ const style = css`
       box-sizing: border-box;
       border: none;
       cursor: pointer;
-      min-block-size: var(--_block-size);
+      block-size: var(--_block-size);
       min-width: 0;
       background-color: var(--gds-sys-color-l3-neutral-01);
       color: var(--gds-sys-color-content-neutral-03);
@@ -77,6 +77,10 @@ const style = css`
         text-overflow: ellipsis;
         white-space: nowrap;
         min-width: 0;
+      }
+
+      &.wrapped {
+        min-block-size: var(--_block-size);
       }
     }
   }
