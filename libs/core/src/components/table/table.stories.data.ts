@@ -362,10 +362,23 @@ export const Feedback = {
 /**
  * Generates slot content for table stories from actual data records
  * @param data - Array of user data records (from API or generateUserDataset)
+ * @param page - Page number from gds-page-change event
  * @returns Array of html templates with slot content
  */
-export const generateUserSlots = (data: UserData[]) => {
-  return data.map((row) => {
+export const generateUserSlots = (data: UserData[], page?: number) => {
+  const rowsPerPage = 10
+  const currentPage = page ?? 1
+
+  // Calculate which rows to generate slots for based on page number
+  const startIndex = (currentPage - 1) * rowsPerPage
+  const endIndex = startIndex + rowsPerPage
+  const pageData = data.slice(startIndex, endIndex)
+
+  console.log(
+    `Generating slots for page ${currentPage}: rows ${startIndex + 1}-${endIndex}`,
+  )
+
+  return pageData.map((row) => {
     const rowId = row.id
 
     // Extract slot values from the data

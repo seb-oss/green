@@ -1076,9 +1076,11 @@ Demonstrates dynamic slot composition for data-driven content injection into tab
   },
   render: (args) => {
     const userData = getUserDataset()
+    let pageNumber = 1
 
-    const handleDataLoaded = (e: CustomEvent) => {
-      console.log('gds-table-data-loaded event:', e.detail)
+    const handlePageChange = (e: CustomEvent) => {
+      pageNumber = e.detail.page
+      console.log('Current page number:', pageNumber)
     }
 
     return html`
@@ -1093,9 +1095,9 @@ Demonstrates dynamic slot composition for data-driven content injection into tab
         density="${args.density}"
         responsive
         rows="10"
-        @gds-table-data-loaded="${handleDataLoaded}"
+        @gds-page-change="${handlePageChange}"
       >
-        ${generateUserSlots(userData)}
+        ${generateUserSlots(userData, pageNumber)}
       </gds-table>
     `
   },
