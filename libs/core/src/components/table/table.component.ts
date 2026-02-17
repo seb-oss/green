@@ -368,22 +368,20 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   #getRowSlotKeys(row: T, index: number, slotKey?: unknown) {
     const keys: Array<string | number> = []
 
+    // Priority order: slotKey > rowId > index
+    // Only use ONE key to avoid duplicate slots
     if (typeof slotKey === 'string' || typeof slotKey === 'number') {
       keys.push(slotKey)
+      return keys
     }
 
     const rowId = (row as { id?: string | number })?.id
-    if (
-      (typeof rowId === 'string' || typeof rowId === 'number') &&
-      !keys.includes(rowId)
-    ) {
+    if (typeof rowId === 'string' || typeof rowId === 'number') {
       keys.push(rowId)
+      return keys
     }
 
-    if (keys.length === 0) {
-      keys.push(index + 1)
-    }
-
+    keys.push(index + 1)
     return keys
   }
 

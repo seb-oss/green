@@ -24,7 +24,12 @@ import '../icon/icons/circle-check'
 import '../icon/icons/cross-small'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
-import { Feedback, generateUserSlots, Users } from './table.stories.data'
+import {
+  Feedback,
+  generateUserSlots,
+  getUserDataset,
+  Users,
+} from './table.stories.data'
 
 const meta: Meta = {
   title: 'Components/Table',
@@ -1069,20 +1074,24 @@ Demonstrates dynamic slot composition for data-driven content injection into tab
       },
     },
   },
-  render: (args) => html`
-    <gds-table
-      .columns="${args.columns}"
-      .data="${args.data}"
-      .headline="${args.headline}"
-      .summary="${args.summary}"
-      ?selectable="${args.selectable}"
-      ?searchable="${args.searchable}"
-      ?settings="${args.settings}"
-      density="${args.density}"
-      responsive
-      rows="10"
-    >
-      ${generateUserSlots(100)}
-    </gds-table>
-  `,
+  render: (args) => {
+    const userData = getUserDataset()
+
+    return html`
+      <gds-table
+        .columns="${args.columns}"
+        .data="${args.data}"
+        .headline="${args.headline}"
+        .summary="${args.summary}"
+        ?selectable="${args.selectable}"
+        ?searchable="${args.searchable}"
+        ?settings="${args.settings}"
+        density="${args.density}"
+        responsive
+        rows="10"
+      >
+        ${generateUserSlots(userData)}
+      </gds-table>
+    `
+  },
 }

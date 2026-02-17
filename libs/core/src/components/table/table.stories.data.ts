@@ -1,4 +1,5 @@
 import { html } from 'lit'
+import { ifDefined } from 'lit/directives/if-defined.js'
 
 import {
   Slot,
@@ -61,16 +62,11 @@ const generateUserRecord = (index: number): UserData => {
 
   return {
     id,
-    name: Slot(
-      `${firstName} ${lastName}`,
-      ['lead', 'value', 'trail-slot', 'extra-slot'],
-      // lastName.toLowerCase(),
-    ),
-    email: Slot(
-      `${firstName.toLowerCase()}@domain.tld`,
-      ['value', 'copy-button'],
-      // firstName.toLowerCase(),
-    ),
+    name: Slot(`${firstName} ${lastName}`, ['lead', 'value']),
+    email: Slot(`${firstName.toLowerCase()}@domain.tld`, [
+      'value',
+      'copy-button',
+    ]),
     role: USERS.ROLES[index % USERS.ROLES.length],
     status: Slot(USERS.STATUSES[index % USERS.STATUSES.length], ['status']),
     department: USERS.DEPARTMENTS[index % USERS.DEPARTMENTS.length],
@@ -81,10 +77,9 @@ const generateUserRecord = (index: number): UserData => {
     lastLogin: Slot(
       new Date(Date.now() - Math.random() * 30 * 86400000).toISOString(),
       ['main'],
-      // `lastlogin-${id}`,
     ),
     avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${firstName}${lastName}`,
-    download: Slot('Download', ['main'], `download-${id}`),
+    download: Slot('Download', ['main']),
   }
 }
 
@@ -359,30 +354,35 @@ export const Feedback = {
 // ============================================================================
 
 /**
- * Generates slot content for table stories
- * @param count - Number of rows to generate slots for
+ * Generates slot content for table stories from actual data records
+ * @param data - Array of user data records (from API or generateUserDataset)
  * @returns Array of html templates with slot content
  */
-export const generateUserSlots = (count: number = 100) => {
-  return Array.from({ length: count }, (_, i) => {
-    const rowId = i + 1
-    const firstName = USERS.FIRST_NAMES[i % USERS.FIRST_NAMES.length]
-    const lastName = USERS.LAST_NAMES[i % USERS.LAST_NAMES.length]
-    const fullName = `${firstName} ${lastName}`
-    const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${firstName}${lastName}`
-    const email = `${firstName.toLowerCase()}@domain.tld`
-    const statusValue = rowId % 2 ? 'Active' : 'Inactive'
+export const generateUserSlots = (data: UserData[]) => {
+  return data.map((row) => {
+    const rowId = row.id
+
+    // Extract slot values from the data
+    const nameSlot = row.name as SlotValue
+    const emailSlot = row.email as SlotValue
+    const statusSlot = row.status as SlotValue
+    const amountSlot = row.amount as SlotValue
+    const accountSlot = row.account as SlotValue
+    const lastLoginSlot = row.lastLogin as SlotValue
+    const downloadSlot = row.download as SlotValue
+
+    const fullName = String(nameSlot.value)
+    const email = String(emailSlot.value)
+    const statusValue = String(statusSlot.value)
     const variant = statusValue === 'Active' ? 'positive' : 'notice'
-    const amount = ((rowId * 12345) % 500000) + 10000
-    const account = `5440${String((i * 7919) % 10000000).padStart(7, '0')}`
-    const lastLoginDate = new Date(
-      Date.now() - Math.random() * 30 * 86400000,
-    ).toISOString()
+    const amount = Number(amountSlot.value)
+    const account = String(accountSlot.value)
+    const lastLoginDate = String(lastLoginSlot.value)
 
     return html`
       <gds-img
         slot="name:${rowId}:lead"
-        src="${avatarUrl}"
+        src="${ifDefined(row.avatarUrl as string | undefined)}"
         alt="${fullName}"
         width="xl"
         height="xl"
@@ -429,3 +429,6 @@ export const generateUserSlots = (count: number = 100) => {
     `
   })
 }
+
+// Export the dataset generator for use in stories
+export const getUserDataset = generateUserDataset
