@@ -365,140 +365,64 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     })
   }
 
-  #getRowSlotKeys(row: T, index: number, slotKey?: unknown) {
-    const keys: Array<string | number> = []
-
-    // Priority order: slotKey > rowId > index
-    // Only use ONE key to avoid duplicate slots
+  /**
+   * Gets the unique key for slot naming (prioritizes: custom key > row.id > index)
+   */
+  #getRowKey(row: T, index: number, slotKey?: unknown): string | number {
     if (typeof slotKey === 'string' || typeof slotKey === 'number') {
-      keys.push(slotKey)
-      return keys
+      return slotKey
     }
-
     const rowId = (row as { id?: string | number })?.id
     if (typeof rowId === 'string' || typeof rowId === 'number') {
-      keys.push(rowId)
-      return keys
+      return rowId
     }
-
-    keys.push(index + 1)
-    return keys
-  }
-
-  #getSlotId(value: unknown) {
-    if (typeof value === 'string') {
-      const trimmed = value.trim()
-      return trimmed.length > 0 ? trimmed : null
-    }
-
-    if (typeof value === 'number') {
-      return Number.isFinite(value) ? String(value) : null
-    }
-
-    return null
-  }
-
-  #getCellSlotName(columnKey: string, rowKey: string | number, slotId: string) {
-    return `${columnKey}:${rowKey}:${slotId}`
-  }
-
-  #renderCellSlots(
-    columnKey: string,
-    rowKeys: Array<string | number>,
-    slots: Array<'value' | string>,
-    value?: unknown,
-    shouldWrapValue = false,
-  ) {
-    const elements: unknown[] = []
-
-    if (Array.isArray(slots) && slots.length > 0) {
-      // Render in the order specified by the slots array
-      slots.forEach((item) => {
-        if (item === 'value') {
-          if (value !== undefined) {
-            // Wrap value if needed (for justify)
-            const wrappedValue = shouldWrapValue
-              ? html`<span class="cell-wrapped-content">${value}</span>`
-              : value
-            elements.push(wrappedValue)
-          }
-          return
-        }
-
-        const slotId = this.#getSlotId(item)
-        if (slotId) {
-          rowKeys.forEach((rowKey) => {
-            elements.push(
-              html`<slot
-                name="${this.#getCellSlotName(columnKey, rowKey, slotId)}"
-              ></slot>`,
-            )
-          })
-        }
-      })
-
-      return elements
-    }
-
-    // No slots array, just return the value
-    if (value !== undefined) {
-      elements.push(value)
-    }
-
-    return elements
+    return index + 1
   }
 
   /**
    * Renders cell content with proper ordering and wrapping.
    *
-   * @param row - Current data row
-   * @param column - Column configuration
-   * @param index - Row index
+   * **Slot-based content:**
+   * - Renders in exact order: ['lead', 'value', 'button'] → icon, text, button
+   * - Wraps value when column.justify is set (for flexbox)
+   * - Slots stay unwrapped
    *
-   * **Flow:**
-   * 1. Extract raw value from row data (using column.value() or row[column.key])
-   * 2. Check if value is a Slot configuration (has slots array)
-   *
-   * **Slot-based content** (isSlotValue = true):
-   * - Renders elements in exact order specified by slots array
-   * - Example: ['lead', 'value', 'copy-button'] → icon, text, button
-   * - Value is wrapped in span when column.justify is set (for flexbox alignment)
-   * - Slot elements stay unwrapped (complex components like buttons, badges)
-   *
-   * **Plain content** (isSlotValue = false):
-   * - Wraps entire value when column.justify is set
-   * - Otherwise renders value directly
-   *
-   * **Mobile responsive:**
-   * - Prepends column label when in mobile responsive mode
+   * **Plain content:**
+   * - Wraps when column.justify is set, otherwise renders directly
    */
   #renderCellContent(row: T, column: Types.Column, index: number) {
     const rawValue = column.value ? column.value(row) : row[column.key]
-    const isSlotValue = Types.isSlotValue(rawValue)
     const mobile = this._isMobile && this.responsive
 
     let content: unknown
 
-    if (isSlotValue) {
-      // Has slot configuration - render in order, wrap value if justify is set
-      content = this.#renderCellSlots(
-        column.key,
-        this.#getRowSlotKeys(row, index, rawValue.key),
-        rawValue.slots,
-        rawValue.value,
-        !!column.justify,
-      )
+    if (Types.isSlotValue(rawValue)) {
+      const rowKey = this.#getRowKey(row, index, rawValue.key)
+      const shouldWrap = !!column.justify
+
+      // Render slots in order
+      content = rawValue.slots.map((item) => {
+        if (item === 'value') {
+          const val = rawValue.value
+          return val !== undefined && shouldWrap
+            ? html`<span class="cell-wrapped-content">${val}</span>`
+            : val
+        }
+        // Render slot element
+        const slotName = `${column.key}:${rowKey}:${item}`
+        return html`<slot name="${slotName}"></slot>`
+      })
     } else {
-      // Plain value - wrap only if justify is set
+      // Plain value
       content = column.justify
         ? html`<span class="cell-wrapped-content">${rawValue}</span>`
         : rawValue
     }
 
     const mobileLabel = mobile
-      ? html`<span class="column-label" aria-hidden="true">
-          ${column.label}:
-        </span>`
+      ? html`<span class="column-label" aria-hidden="true"
+          >${column.label}:</span
+        >`
       : null
 
     return html`
