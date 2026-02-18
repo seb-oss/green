@@ -133,6 +133,39 @@ green-core-context guide angular
 green-core-context guide troubleshooting | less
 ```
 
+### `get` — Fetch raw content by URI
+
+```bash
+green-core-context get <uri>
+```
+
+Resolves a `green://` URI and prints the raw content. URIs are returned by the `search` command and follow this format:
+
+| URI pattern                             | Description                    |
+| --------------------------------------- | ------------------------------ |
+| `green://components/<name>/api`         | Component API reference        |
+| `green://components/<name>/<framework>` | Framework-specific usage guide |
+| `green://icons/<name>/api`              | Icon API reference             |
+| `green://guides/<name>`                 | Guide document                 |
+| `green://concepts/<name>`               | Concept document               |
+| `green://instructions`                  | Base instructions              |
+
+**Examples:**
+
+```bash
+# Get a clean API table for button
+green-core-context get green://components/button/api
+
+# Get Angular usage guide for dropdown
+green-core-context get green://components/dropdown/angular
+
+# Fetch base instructions
+green-core-context get green://instructions
+
+# Pipe to less
+green-core-context get green://guides/angular | less
+```
+
 ### `instructions` — Get base instructions
 
 ```bash

@@ -26,6 +26,7 @@ import {
   handleGetGuide,
   handleGetInstructions,
   handleListGuides,
+  handleResolveUri,
   handleSearchComponents,
 } from '../mcp-server/handlers.js'
 import { getPackageVersion } from '../mcp-server/utils.js'
@@ -63,6 +64,7 @@ USAGE
 COMMANDS
   search <query>                    Search for components and icons
   docs <component> <framework>      Get component documentation
+  get <uri>                         Fetch raw content by green:// URI
   guides                            List available guides
   guide <name>                      Get a specific guide's content
   instructions                      Get base usage instructions
@@ -124,6 +126,35 @@ EXAMPLES
   ${PROGRAM_NAME} docs button angular
   ${PROGRAM_NAME} docs gds-dropdown react
   ${PROGRAM_NAME} docs card web-component --no-guidelines
+`.trim()
+
+const GET_HELP = `
+Fetch raw content for a green:// resource URI. Use 'search' to discover
+URIs, then use 'get' to retrieve the raw document content.
+
+USAGE
+  ${PROGRAM_NAME} get <uri>
+
+ARGUMENTS
+  uri                               A green:// resource URI (required)
+
+SUPPORTED URI FORMATS
+  green://components/{name}/{doc}   Component docs (api, angular, react,
+                                    guidelines, instructions)
+  green://icons/{name}/{doc}        Icon docs (api, angular, react)
+  green://guides/{name}             Setup and framework guides
+  green://concepts/{name}           Conceptual documentation
+  green://instructions              Base instructions document
+
+OPTIONS
+  -h, --help                        Show this help message
+
+EXAMPLES
+  ${PROGRAM_NAME} get green://components/button/api
+  ${PROGRAM_NAME} get green://components/dropdown/angular
+  ${PROGRAM_NAME} get green://guides/react
+  ${PROGRAM_NAME} get green://concepts/tokens
+  ${PROGRAM_NAME} get green://instructions
 `.trim()
 
 const GUIDES_HELP = `
@@ -333,6 +364,28 @@ async function runDocs(args: ParsedArgs): Promise<void> {
 }
 
 /**
+ * Execute the "get" command.
+ * Resolves a green:// URI to its raw content via handleResolveUri.
+ */
+async function runGet(args: ParsedArgs): Promise<void> {
+  if (args.flags['h'] || args.flags['help']) {
+    process.stdout.write(GET_HELP + '\n')
+    return
+  }
+
+  const uri = args.positional[0]
+  if (!uri) {
+    process.stderr.write('Error: get requires a <uri> argument.\n\n')
+    process.stderr.write(GET_HELP + '\n')
+    process.exitCode = 1
+    return
+  }
+
+  const result = await handleResolveUri(uri)
+  process.stdout.write(result.content[0].text + '\n')
+}
+
+/**
  * Execute the "guides" command.
  * Maps CLI flags to the handleListGuides handler input.
  */
@@ -387,7 +440,12 @@ async function runInstructions(args: ParsedArgs): Promise<void> {
   }
 
   const result = await handleGetInstructions()
-  process.stdout.write(result.content[0].text + '\n')
+  // Replace MCP-specific references with CLI-appropriate language
+  const cliText = result.content[0].text
+    .replace(/\bMCP server\b/gi, 'Context CLI')
+    .replace(/\bMCP Server\b/g, 'Context CLI')
+    .replace(/\bMCP\b/g, 'CLI')
+  process.stdout.write(cliText + '\n')
 }
 
 // ---------------------------------------------------------------------------
@@ -423,6 +481,10 @@ async function main(): Promise<void> {
 
     case 'docs':
       await runDocs(args)
+      break
+
+    case 'get':
+      await runGet(args)
       break
 
     case 'guides':

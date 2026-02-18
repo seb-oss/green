@@ -16,7 +16,7 @@
  */
 
 import { capitalize } from '../../utils/helpers/casing.js'
-import { DOC_TYPES, SEARCH_CONFIG } from './constants.js'
+import { DOC_TYPES, PATHS, SEARCH_CONFIG, URI_SCHEME } from './constants.js'
 import { NotFoundError } from './errors.js'
 import { parseSearchQuery, performSearch } from './search.js'
 import {
@@ -26,6 +26,7 @@ import {
   loadComponentsIndex,
   loadGlobalIndex,
   loadIconsIndex,
+  parseResourceUri,
   readMcpFile,
 } from './utils.js'
 import {
@@ -465,5 +466,70 @@ export async function handleGetInstructions(): Promise<HandlerResponse> {
         text: content,
       },
     ],
+  }
+}
+
+/**
+ * Handle URI resolution — read the raw content of a green:// resource URI.
+ *
+ * Supports all URI types:
+ * - green://components/{name}/{docType}  (e.g. green://components/button/api)
+ * - green://icons/{name}/{docType}       (e.g. green://icons/arrow/api)
+ * - green://guides/{name}                (e.g. green://guides/angular)
+ * - green://concepts/{name}              (e.g. green://concepts/tokens)
+ * - green://instructions                 (the root instructions document)
+ *
+ * @param uri - A green:// resource URI string
+ * @returns Raw markdown content of the resource
+ * @throws {NotFoundError} If the URI is invalid or the resource doesn't exist
+ */
+export async function handleResolveUri(uri: string): Promise<HandlerResponse> {
+  // Handle root instructions URI
+  if (uri === URI_SCHEME.INSTRUCTIONS) {
+    const content = await readMcpFile(PATHS.INSTRUCTIONS_FILE)
+    if (!content) {
+      throw new NotFoundError(
+        'Instructions file not found',
+        'file',
+        PATHS.INSTRUCTIONS_FILE,
+      )
+    }
+    return {
+      content: [{ type: 'text', text: content }],
+    }
+  }
+
+  const parsed = parseResourceUri(uri)
+  if (!parsed) {
+    throw new NotFoundError(`Invalid resource URI format: ${uri}`, 'uri', uri)
+  }
+
+  const { category, name, docType } = parsed
+
+  let filePath: string
+
+  if (category === 'components' || category === 'icons') {
+    if (!docType) {
+      throw new NotFoundError(
+        `Document type required for ${category} URIs (e.g. green://${category}/${name}/api)`,
+        'docType',
+        uri,
+      )
+    }
+    filePath = `${name}/${docType}.md`
+  } else if (category === 'guides' || category === 'concepts') {
+    filePath = `${category}/${name}.md`
+  } else {
+    throw new NotFoundError(`Unknown category: ${category}`, 'category', uri)
+  }
+
+  const content = await readMcpFile(filePath)
+
+  if (!content) {
+    throw new NotFoundError(`Resource not found: ${uri}`, 'file', filePath)
+  }
+
+  return {
+    content: [{ type: 'text', text: content }],
   }
 }

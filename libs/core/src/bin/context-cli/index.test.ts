@@ -242,6 +242,52 @@ describe('Context CLI', () => {
       expect(result.command).toBe('instructions')
       expect(result.positional).toEqual([])
     })
+
+    // -----------------------------------------------------------------------
+    // get command parsing
+    // -----------------------------------------------------------------------
+
+    it('should parse get command with a component URI', () => {
+      const result = parseArgs(['get', 'green://components/button/api'])
+
+      expect(result.command).toBe('get')
+      expect(result.positional).toEqual(['green://components/button/api'])
+    })
+
+    it('should parse get command with instructions URI', () => {
+      const result = parseArgs(['get', 'green://instructions'])
+
+      expect(result.command).toBe('get')
+      expect(result.positional).toEqual(['green://instructions'])
+    })
+
+    it('should parse get command with guide URI', () => {
+      const result = parseArgs(['get', 'green://guides/angular'])
+
+      expect(result.command).toBe('get')
+      expect(result.positional).toEqual(['green://guides/angular'])
+    })
+
+    it('should parse get command with concept URI', () => {
+      const result = parseArgs(['get', 'green://concepts/tokens'])
+
+      expect(result.command).toBe('get')
+      expect(result.positional).toEqual(['green://concepts/tokens'])
+    })
+
+    it('should parse get command with icon URI', () => {
+      const result = parseArgs(['get', 'green://icons/arrow/api'])
+
+      expect(result.command).toBe('get')
+      expect(result.positional).toEqual(['green://icons/arrow/api'])
+    })
+
+    it('should parse get command with --help flag', () => {
+      const result = parseArgs(['get', '--help'])
+
+      expect(result.command).toBe('get')
+      expect(result.flags['help']).toBe(true)
+    })
   })
 
   // -------------------------------------------------------------------------
@@ -366,6 +412,29 @@ describe('Context CLI', () => {
 
       expect(args.positional[0]).toBe('troubleshooting')
     })
+
+    it('get: maps positional URI arg', () => {
+      const args = parseArgs(['get', 'green://components/dropdown/angular'])
+
+      expect(args.command).toBe('get')
+      expect(args.positional[0]).toBe('green://components/dropdown/angular')
+    })
+
+    it('get: supports all URI types', () => {
+      const uris = [
+        'green://components/button/api',
+        'green://icons/arrow/api',
+        'green://guides/angular',
+        'green://concepts/tokens',
+        'green://instructions',
+      ]
+
+      for (const uri of uris) {
+        const args = parseArgs(['get', uri])
+        expect(args.command).toBe('get')
+        expect(args.positional[0]).toBe(uri)
+      }
+    })
   })
 
   // -------------------------------------------------------------------------
@@ -400,6 +469,12 @@ describe('Context CLI', () => {
 
       expect(Number.isNaN(Number(args.flags['max-results']))).toBe(true)
     })
+
+    it('get: requires a URI', () => {
+      const args = parseArgs(['get'])
+
+      expect(args.positional[0]).toBeUndefined()
+    })
   })
 
   // -------------------------------------------------------------------------
@@ -429,6 +504,46 @@ describe('Context CLI', () => {
 
       expect(result.command).toBe('search')
       expect(result.positional[0]).toBe(longQuery)
+    })
+  })
+
+  // -------------------------------------------------------------------------
+  // MCP → CLI replacement in instructions output
+  // -------------------------------------------------------------------------
+
+  describe('instructions MCP → CLI replacement', () => {
+    it('should replace standalone MCP with CLI', () => {
+      const input = 'Use the MCP to fetch docs'
+      const output = input
+        .replace(/\bMCP server\b/gi, 'Context CLI')
+        .replace(/\bMCP Server\b/g, 'Context CLI')
+        .replace(/\bMCP\b/g, 'CLI')
+
+      expect(output).toBe('Use the CLI to fetch docs')
+    })
+
+    it('should replace MCP server with Context CLI', () => {
+      const input =
+        'The MCP server provides documentation. The MCP Server also supports search.'
+      const output = input
+        .replace(/\bMCP server\b/gi, 'Context CLI')
+        .replace(/\bMCP Server\b/g, 'Context CLI')
+        .replace(/\bMCP\b/g, 'CLI')
+
+      expect(output).toBe(
+        'The Context CLI provides documentation. The Context CLI also supports search.',
+      )
+    })
+
+    it('should not replace MCP inside other words', () => {
+      const input = 'The AMCP protocol is different'
+      const output = input
+        .replace(/\bMCP server\b/gi, 'Context CLI')
+        .replace(/\bMCP Server\b/g, 'Context CLI')
+        .replace(/\bMCP\b/g, 'CLI')
+
+      // AMCP should not be touched — \b ensures word boundary
+      expect(output).toBe('The AMCP protocol is different')
     })
   })
 })
