@@ -1,6 +1,5 @@
-import { html } from 'lit'
+import { html, render } from 'lit'
 import { createRef, ref } from 'lit/directives/ref.js'
-import { until } from 'lit/directives/until.js'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
@@ -1067,14 +1066,44 @@ Demonstrates dynamic slot composition for data-driven content injection into tab
 
 **Pattern:** Generate slots using \`columnKey:rowKey:slotId\` naming convention.
 
-Slot content is generated from \`Users.SlotContent()\` which loops through all user data and creates per-row elements (avatars, copy icons, download icons) using raw data values.
+Slot content is generated from \`Users.SlotContent(rows)\` which receives the current page's rows from the \`gds-table-data-loaded\` event and creates per-row elements (avatars, copy icons, download icons).
+
+Only the current page's slot content is rendered — when pages change, previous slot elements are replaced with new ones for the visible rows.
         `,
       },
     },
   },
   render: (args) => {
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (!table) return
+
+      // Remove previous dynamically generated slot elements
+      table
+        .querySelectorAll('[data-slot-content]')
+        .forEach((el: Element) => el.remove())
+
+      // Create a temporary container to render the slot content
+      const fragment = document.createDocumentFragment()
+      const temp = document.createElement('div')
+      render(Users.SlotContent(e.detail.rows), temp)
+
+      // Move rendered elements as direct children of gds-table
+      while (temp.firstChild) {
+        const child = temp.firstChild
+        if (child instanceof Element) {
+          child.setAttribute('data-slot-content', '')
+        }
+        fragment.appendChild(child)
+      }
+      table.appendChild(fragment)
+    }
+
     return html`
       <gds-table
+        ${ref(tableRef)}
         .columns="${args.columns}"
         .data="${args.data}"
         .headline="${args.headline}"
@@ -1085,8 +1114,8 @@ Slot content is generated from \`Users.SlotContent()\` which loops through all u
         density="${args.density}"
         responsive
         rows="5"
+        @gds-table-data-loaded=${handleDataLoaded}
       >
-        ${until(Users.SlotContent(), html``)}
       </gds-table>
     `
   },

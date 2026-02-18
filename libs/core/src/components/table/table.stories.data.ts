@@ -1,4 +1,4 @@
-import { html, TemplateResult } from 'lit'
+import { html, nothing, TemplateResult } from 'lit'
 
 import { Slot } from './table.types'
 
@@ -159,27 +159,34 @@ export const Users = {
   Data: userDataProvider,
 
   /**
-   * Generates slot content for all user rows.
-   * Loops through raw user data and creates per-row slot elements
+   * Generates slot content for the given rows.
+   * Loops through the provided row data and creates per-row slot elements
    * using the `columnKey:rowKey:slotId` naming convention.
    *
-   * Usage: `${until(Users.SlotContent(), html``)}`
+   * Designed to be called with the current page rows from `gds-table-data-loaded`.
+   *
+   * Usage:
+   * ```ts
+   * @gds-table-data-loaded=${(e) => {
+   *   slotContent = Users.SlotContent(e.detail.rows)
+   * }}
+   * ```
    */
-  SlotContent: async (): Promise<TemplateResult> => {
-    const users = await loadUsersRaw()
+  SlotContent: (rows: any[]): TemplateResult | typeof nothing => {
+    if (!rows || rows.length === 0) return nothing
     return html`
-      ${users.map(
-        (user: any) => html`
+      ${rows.map(
+        (row: any) => html`
           <gds-img
-            src="${user.avatarUrl ?? '#'}"
-            alt="${user.name}"
-            slot="name:${user.email}:avatar"
+            src="${row.avatarUrl ?? '#'}"
+            alt="${String(row.name)}"
+            slot="name:${row.name?.key ?? row.email}:avatar"
             width="xl"
             height="xl"
           ></gds-img>
-          <gds-icon-copy slot="email:${user.id}:copy-button"></gds-icon-copy>
+          <gds-icon-copy slot="email:${row.id}:copy-button"></gds-icon-copy>
           <gds-icon-cloud-download
-            slot="download:${user.id}:main"
+            slot="download:${row.id}:main"
           ></gds-icon-cloud-download>
         `,
       )}
