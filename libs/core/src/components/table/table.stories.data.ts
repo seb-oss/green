@@ -19,12 +19,13 @@ let feedbackPromise: Promise<any[]> | null = null
 
 const normalizeUserRow = (row: any) => ({
   ...row,
-  name: Slot(row.name, ['avatar', 'value'], row.email),
+  name: Slot(row.name, ['avatar', 'value']),
+  // name: Slot(row.name, ['avatar', 'value'], row.email),
   email: Slot(row.email, ['value', 'copy-button']),
   status: Slot(row.status, ['status']),
-  amount: Slot(row.amount, ['amount']),
+  amount: Slot(row.amount, ['amount', 'currency']),
   account: Slot(row.account, ['main']),
-  lastLogin: Slot(row.lastLogin, ['main']),
+  login: Slot(row.lastLogin, ['main']),
   download: Slot(row.download ?? '#', ['main']),
 })
 
@@ -142,7 +143,7 @@ export const Users = {
       sortable: true,
     },
     {
-      key: 'lastLogin',
+      key: 'login',
       label: 'Last Login',
       sortable: true,
     },
@@ -171,17 +172,70 @@ export const Users = {
     return html`
       ${rows.map(
         (row: any) => html`
+          <!-- name: avatar -->
           <gds-img
             src="${row.avatarUrl ?? '#'}"
             alt="${String(row.name)}"
-            slot="name:${row.name?.key ?? row.email}:avatar"
+            slot="name:${row.id}:avatar"
             width="xl"
             height="xl"
           ></gds-img>
-          <gds-icon-copy slot="email:${row.id}:copy-button"></gds-icon-copy>
-          <gds-icon-cloud-download
+
+          <!-- email: copy button -->
+          <gds-button
+            slot="email:${row.id}:copy-button"
+            rank="tertiary"
+            size="small"
+          >
+            <gds-icon-copy></gds-icon-copy>
+          </gds-button>
+
+          <!-- status: badge -->
+          <gds-badge
+            slot="status:${row.id}:status"
+            variant="${String(row.status) === 'Active'
+              ? 'positive'
+              : 'negative'}"
+          >
+            ${String(row.status)}
+          </gds-badge>
+
+          <!-- amount: formatted number -->
+          <gds-formatted-number
+            slot="amount:${row.id}:amount"
+            .value=${row.amount}
+          ></gds-formatted-number>
+
+          <!-- amount: currency -->
+          <gds-badge slot="amount:${row.id}:currency" size="small">
+            SEK
+          </gds-badge>
+
+          <!-- account: formatted account -->
+          <gds-formatted-account
+            slot="account:${row.id}:main"
+            account="${row.account}"
+            format="seb-account"
+          ></gds-formatted-account>
+
+          <!-- login: formatted date -->
+          <gds-formatted-date
+            slot="login:${row.id}:main"
+            .value="${String(row.login)}"
+            locale="sv-SE"
+            format="dateLong"
+          ></gds-formatted-date>
+
+          <!-- download: link with icon -->
+          <gds-link
             slot="download:${row.id}:main"
-          ></gds-icon-cloud-download>
+            href="${row.download ?? '#'}"
+            text-decoration="underline"
+            download
+          >
+            Download file
+            <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
+          </gds-link>
         `,
       )}
     `
