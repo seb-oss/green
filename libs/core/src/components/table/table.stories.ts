@@ -1078,27 +1078,7 @@ Only the current page's slot content is rendered — when pages change, previous
 
     const handleDataLoaded = (e: CustomEvent) => {
       const table = tableRef.value
-      if (!table) return
-
-      // Remove previous dynamically generated slot elements
-      table
-        .querySelectorAll('[data-slot-content]')
-        .forEach((el: Element) => el.remove())
-
-      // Create a temporary container to render the slot content
-      const fragment = document.createDocumentFragment()
-      const temp = document.createElement('div')
-      render(Users.SlotContent(e.detail.rows), temp)
-
-      // Move rendered elements as direct children of gds-table
-      while (temp.firstChild) {
-        const child = temp.firstChild
-        if (child instanceof Element) {
-          child.setAttribute('data-slot-content', '')
-        }
-        fragment.appendChild(child)
-      }
-      table.appendChild(fragment)
+      if (table) render(Users.SlotContent(e.detail.rows), table)
     }
 
     return html`

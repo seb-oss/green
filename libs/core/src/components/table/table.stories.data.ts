@@ -1,4 +1,4 @@
-import { html, nothing, TemplateResult } from 'lit'
+import { html, TemplateResult } from 'lit'
 
 import { Slot } from './table.types'
 
@@ -159,21 +159,15 @@ export const Users = {
   Data: userDataProvider,
 
   /**
-   * Generates slot content for the given rows.
-   * Loops through the provided row data and creates per-row slot elements
-   * using the `columnKey:rowKey:slotId` naming convention.
+   * Generates slot content for the given rows (current page).
+   * Creates per-row slot elements using `columnKey:rowKey:slotId` convention.
    *
-   * Designed to be called with the current page rows from `gds-table-data-loaded`.
-   *
-   * Usage:
+   * Used with Lit's `render()` to update table light DOM on each data load:
    * ```ts
-   * @gds-table-data-loaded=${(e) => {
-   *   slotContent = Users.SlotContent(e.detail.rows)
-   * }}
+   * @gds-table-data-loaded=${(e) => render(Users.SlotContent(e.detail.rows), table)}
    * ```
    */
-  SlotContent: (rows: any[]): TemplateResult | typeof nothing => {
-    if (!rows || rows.length === 0) return nothing
+  SlotContent: (rows: any[]): TemplateResult => {
     return html`
       ${rows.map(
         (row: any) => html`
