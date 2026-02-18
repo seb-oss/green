@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.31.0
+
+### Minor Changes
+
+- 86f7d40: **Input:** Request form submit when enter key is pressed. Can be cancelled to prevent. Fixes #2625
+
+### Patch Changes
+
+- a13f86b: **Button:** Fix the height issue
+
 ## 2.30.0
 
 ### Minor Changes
