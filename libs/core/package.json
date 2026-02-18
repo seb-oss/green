@@ -6,7 +6,8 @@
   "module": "index.js",
   "type": "module",
   "bin": {
-    "green-core-mcp": "./bin/mcp-server/index.js"
+    "green-core-mcp": "./bin/mcp-server/index.js",
+    "green-core-context": "./bin/context-cli/index.js"
   },
   "author": "SEB Open Source <opensource@seb.se> (https://github.com/seb-oss)",
   "contributors": [],

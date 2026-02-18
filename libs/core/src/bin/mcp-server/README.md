@@ -20,9 +20,14 @@ The MCP server is bundled with `@sebgroup/green-core` and reads pre-generated do
 
 - **index.ts** - Main server entry point, initializes MCP server with stdio transport
 - **resources.ts** - Resource handlers for browsable documentation (URI-based access)
-- **tools.ts** - Tool handlers for search and query operations
+- **tools.ts** - MCP protocol wiring: tool schemas and request dispatch
+- **handlers.ts** - Shared tool handler logic (search, docs, guides, instructions). Consumed by both the MCP server and the [context CLI](../context-cli/README.md)
 - **types.ts** - TypeScript type definitions
 - **utils.ts** - Utility functions for data loading and path resolution
+- **search.ts** - Tiered relevance search engine for components and icons
+- **validation.ts** - Input validation and sanitization
+- **errors.ts** - Structured error hierarchy
+- **constants.ts** - Configuration constants
 
 ## User Setup
 
