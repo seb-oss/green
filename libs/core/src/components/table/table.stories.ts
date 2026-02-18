@@ -375,57 +375,78 @@ export const Actions: Story = {
         story: `
 The \`actions\` property defines row interactions shown as the last cell of each row.
 
-Supports all cell types (button, link, context-menu, badge, etc.) and can contain multiple actions. Column content justification can be controlled via the \`justify\` property.
+Supports all cell types (button, link, context-menu, badge, etc.) and can contain multiple actions.
+
+When passed as an object \`{ label, align, justify }\`, it configures the actions column header and cell layout.
+The actual action content is provided through named slots using the \`actions:rowKey:main\` convention.
 
         `,
       },
     },
   },
-  render: (args) => html`
-    <gds-table
-      plain
-      .rows=${2}
-      .page=${2}
-      .columns="${args.columns}"
-      .data="${args.data}"
-      .actions="${args.actions}"
-    >
-      <template name="actions-activate">
-        <gds-icon-pin></gds-icon-pin>
-      </template>
-      <template name="actions-delete">
-        <gds-icon-cross-small></gds-icon-cross-small>
-      </template>
-    </gds-table>
+  render: (args) => {
+    const multiRef = createRef<any>()
+    const ctxRef = createRef<any>()
+    const linkRef = createRef<any>()
 
-    <br />
-    <br />
-    <br />
+    return html`
+      <gds-table
+        ${ref(multiRef)}
+        plain
+        .rows=${2}
+        .page=${2}
+        .columns="${args.columns}"
+        .data="${args.data}"
+        .actions="${args.actions}"
+        @gds-table-data-loaded=${(e: CustomEvent) => {
+          const table = multiRef.value
+          if (table)
+            render(Feedback.MultipleActionsSlotContent(e.detail.rows), table)
+        }}
+      >
+      </gds-table>
 
-    <gds-table
-      plain
-      .rows=${2}
-      .page=${2}
-      .columns="${args.columns}"
-      .data="${args.data}"
-      .actions="${Feedback.ActionContextMenu}"
-    >
-    </gds-table>
+      <br />
+      <br />
+      <br />
 
-    <br />
-    <br />
-    <br />
+      <gds-table
+        ${ref(ctxRef)}
+        plain
+        .rows=${2}
+        .page=${2}
+        .columns="${args.columns}"
+        .data="${args.data}"
+        .actions="${Feedback.ActionContextMenu}"
+        @gds-table-data-loaded=${(e: CustomEvent) => {
+          const table = ctxRef.value
+          if (table)
+            render(Feedback.ActionContextMenuSlotContent(e.detail.rows), table)
+        }}
+      >
+      </gds-table>
 
-    <gds-table
-      plain
-      .rows=${2}
-      .page=${2}
-      .columns="${args.columns}"
-      .data="${args.data}"
-      .actions="${Feedback.ActionLink}"
-    >
-    </gds-table>
-  `,
+      <br />
+      <br />
+      <br />
+
+      <gds-table
+        ${ref(linkRef)}
+        plain
+        .rows=${2}
+        .page=${2}
+        .columns="${args.columns}"
+        .data="${args.data}"
+        .actions="${Feedback.ActionLink}"
+        @gds-table-data-loaded=${(e: CustomEvent) => {
+          const table = linkRef.value
+          if (table)
+            render(Feedback.ActionLinkSlotContent(e.detail.rows), table)
+        }}
+      >
+      </gds-table>
+    `
+  },
 }
 
 // ============================================================================

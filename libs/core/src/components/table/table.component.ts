@@ -604,7 +604,17 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   #renderActionsHeader() {
-    if (!this.actions || typeof this.actions === 'function') return null
+    if (!this.actions) return null
+
+    if (typeof this.actions === 'function') {
+      return html`
+        <th class="actions">
+          <div class="column-header">
+            <div class="column-label">${msg('Actions')}</div>
+          </div>
+        </th>
+      `
+    }
 
     const label = this.actions.label || msg('Actions')
 
@@ -712,6 +722,8 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       `
     }
 
+    const rowKey = this.#getRowKey(row, index)
+
     const classes = classMap({
       'actions-cell': true,
       [`align-${this.actions.align}`]: !!this.actions.align,
@@ -720,7 +732,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     return html`
       <td class="${classes}">
-        <div class="cell-content">ACTIONS</div>
+        <div class="cell-content">
+          ${this.#renderSlotElement('actions', rowKey, 'main')}
+        </div>
       </td>
     `
   }

@@ -157,6 +157,7 @@ export const Users = {
     label: 'Actions',
     justify: 'end',
   } as TableActions,
+
   Data: userDataProvider,
 
   /**
@@ -236,6 +237,12 @@ export const Users = {
             Download file
             <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
           </gds-link>
+
+          <!-- actions: context menu -->
+          <gds-context-menu slot="actions:${row.id}:main">
+            <gds-menu-item>Edit ${String(row.name)}</gds-menu-item>
+            <gds-menu-item>Delete</gds-menu-item>
+          </gds-context-menu>
         `,
       )}
     `
@@ -303,18 +310,54 @@ export const Feedback = {
     justify: 'start',
   } as TableActions,
 
+  /**
+   * Slot content: multiple button actions per row.
+   */
+  MultipleActionsSlotContent: (rows: any[]): TemplateResult => {
+    return html`
+      ${rows.map(
+        (row: any, i: number) => html`
+          <gds-button
+            slot="actions:${row.id ?? i + 1}:main"
+            rank="tertiary"
+            size="small"
+          >
+            <gds-icon-pin></gds-icon-pin>
+            Activate
+          </gds-button>
+          <gds-button
+            slot="actions:${row.id ?? i + 1}:main"
+            rank="tertiary"
+            size="small"
+          >
+            <gds-icon-cross-small></gds-icon-cross-small>
+            Delete
+          </gds-button>
+        `,
+      )}
+    `
+  },
+
   ActionLink: {
     label: 'Actions',
     align: 'start',
     justify: 'end',
-    cell: [
-      {
-        type: 'link',
-        href: '#',
-        label: 'Link',
-      },
-    ],
   } as TableActions & { cell: unknown[] },
+
+  /**
+   * Slot content: link action per row.
+   */
+  ActionLinkSlotContent: (rows: any[]): TemplateResult => {
+    return html`
+      ${rows.map(
+        (row: any, i: number) => html`
+          <gds-link slot="actions:${row.id ?? i + 1}:main" href="#">
+            View details
+          </gds-link>
+        `,
+      )}
+    `
+  },
 
   ActionButton: {
     label: 'Actions',
@@ -327,5 +370,26 @@ export const Feedback = {
     align: 'start',
     justify: 'end',
   } as TableActions,
+
+  /**
+   * Slot content: context menu action per row.
+   */
+  ActionContextMenuSlotContent: (rows: any[]): TemplateResult => {
+    return html`
+      ${rows.map(
+        (row: any, i: number) => html`
+          <gds-context-menu slot="actions:${row.id ?? i + 1}:main">
+            <gds-button slot="trigger" rank="secondary" size="small">
+              <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+            </gds-button>
+            <gds-menu-item>Edit</gds-menu-item>
+            <gds-menu-item>Archive</gds-menu-item>
+            <gds-menu-item>Delete</gds-menu-item>
+          </gds-context-menu>
+        `,
+      )}
+    `
+  },
+
   Data: feedbackDataProvider,
 }
