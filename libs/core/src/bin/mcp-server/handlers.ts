@@ -15,6 +15,8 @@
  * @module handlers
  */
 
+import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
+
 import { capitalize } from '../../utils/helpers/casing.js'
 import { DOC_TYPES, PATHS, SEARCH_CONFIG, URI_SCHEME } from './constants.js'
 import { NotFoundError } from './errors.js'
@@ -43,10 +45,7 @@ import type { ComponentEntry, IconEntry } from './types.js'
  * Mirrors the MCP content response format so both the MCP server
  * and the CLI can consume results uniformly.
  */
-export interface HandlerResponse {
-  content: Array<{ type: string; text: string }>
-  isError?: boolean
-}
+export type HandlerResponse = CallToolResult
 
 /**
  * Handle search_components — search for components and icons by name,

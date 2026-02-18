@@ -37,6 +37,23 @@ import { parseArgs } from './parse-args.js'
 // ---------------------------------------------------------------------------
 import type { ParsedArgs } from './parse-args.js'
 
+function getPrimaryTextContent(
+  result: Awaited<ReturnType<typeof handleSearchComponents>>,
+): string {
+  const textBlock = result.content.find(
+    (
+      block,
+    ): block is Extract<(typeof result.content)[number], { type: 'text' }> =>
+      block.type === 'text',
+  )
+
+  if (!textBlock) {
+    throw new Error('Tool response did not include a text content block')
+  }
+
+  return textBlock.text
+}
+
 export { parseArgs } from './parse-args.js'
 
 // ---------------------------------------------------------------------------
@@ -249,7 +266,7 @@ async function runSearch(args: ParsedArgs): Promise<void> {
   }
 
   const result = await handleSearchComponents(input)
-  process.stdout.write(result.content[0].text + '\n')
+  process.stdout.write(getPrimaryTextContent(result) + '\n')
 }
 
 /**
@@ -284,7 +301,7 @@ async function runDocs(args: ParsedArgs): Promise<void> {
   }
 
   const result = await handleGetComponentDocs(input)
-  process.stdout.write(result.content[0].text + '\n')
+  process.stdout.write(getPrimaryTextContent(result) + '\n')
 }
 
 /**
@@ -306,7 +323,7 @@ async function runGet(args: ParsedArgs): Promise<void> {
   }
 
   const result = await handleResolveUri(uri)
-  process.stdout.write(result.content[0].text + '\n')
+  process.stdout.write(getPrimaryTextContent(result) + '\n')
 }
 
 /**
@@ -329,7 +346,7 @@ async function runGuides(args: ParsedArgs): Promise<void> {
   }
 
   const result = await handleListGuides(input)
-  process.stdout.write(result.content[0].text + '\n')
+  process.stdout.write(getPrimaryTextContent(result) + '\n')
 }
 
 /**
@@ -351,7 +368,7 @@ async function runGuide(args: ParsedArgs): Promise<void> {
   }
 
   const result = await handleGetGuide({ name })
-  process.stdout.write(result.content[0].text + '\n')
+  process.stdout.write(getPrimaryTextContent(result) + '\n')
 }
 
 /**
@@ -365,7 +382,7 @@ async function runInstructions(args: ParsedArgs): Promise<void> {
 
   const result = await handleGetInstructions()
   // Replace MCP-specific references with CLI-appropriate language
-  const cliText = result.content[0].text
+  const cliText = getPrimaryTextContent(result)
     .replace(/\bMCP server\b/gi, 'Context CLI')
     .replace(/\bMCP Server\b/g, 'Context CLI')
     .replace(/\bMCP\b/g, 'CLI')
