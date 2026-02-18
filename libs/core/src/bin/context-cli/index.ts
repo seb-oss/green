@@ -31,12 +31,13 @@ import {
 } from '../mcp-server/handlers.js'
 import { getPackageVersion } from '../mcp-server/utils.js'
 import { parseArgs } from './parse-args.js'
-export { parseArgs } from './parse-args.js'
 
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
 import type { ParsedArgs } from './parse-args.js'
+
+export { parseArgs } from './parse-args.js'
 
 // ---------------------------------------------------------------------------
 // Constants — help text

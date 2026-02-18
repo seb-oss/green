@@ -125,3 +125,27 @@ Then you can just use `<Button />` like a regular React component.
 ## Documentation
 
 Check out the [Storybook (@sebgroup/core)](https://storybook.seb.io/latest/core/) for components and documentation.
+
+## Testing
+
+The test suite is split by runtime so Node tooling tests do not run in browser mode.
+
+- **Node tests** (`src/bin/**`) for developer tooling such as CLI and MCP server:
+
+  ```bash
+  nx run core:test:node
+  ```
+
+- **Browser tests** for web components and UI behavior (Chromium + WebKit):
+
+  ```bash
+  nx run core:test:browser
+  ```
+
+- **Full suite** (same split as CI/local default target):
+
+  ```bash
+  nx run core:test
+  ```
+
+Use `core:test:node` when working on CLI/MCP code for faster feedback, and `core:test:browser` when working on components, interactions, or rendering behavior.

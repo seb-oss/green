@@ -8,8 +8,9 @@ const root = resolve(__dirname)
 export default defineConfig({
   root,
   test: {
-    name: 'core',
+    name: 'core-browser',
     include: ['src/**/*.test.ts'],
+    exclude: ['src/bin/**/*.test.ts'],
     setupFiles: ['./src/test-setup.ts'],
     browser: {
       enabled: true,
