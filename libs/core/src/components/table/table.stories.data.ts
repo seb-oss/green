@@ -119,7 +119,6 @@ export const Users = {
       label: 'Role',
       sortable: true,
       visible: false,
-      value: (row) => `${row.role.toUpperCase()} (${row.department || 'N/A'})`,
     },
     {
       key: 'status',
@@ -240,6 +239,9 @@ export const Users = {
 
           <!-- actions: context menu -->
           <gds-context-menu slot="actions:${row.id}:main">
+            <gds-button slot="trigger" rank="tertiary" size="small">
+              <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+            </gds-button>
             <gds-menu-item>Edit ${String(row.name)}</gds-menu-item>
             <gds-menu-item>Delete</gds-menu-item>
           </gds-context-menu>

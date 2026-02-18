@@ -604,17 +604,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   #renderActionsHeader() {
-    if (!this.actions) return null
-
-    if (typeof this.actions === 'function') {
-      return html`
-        <th class="actions">
-          <div class="column-header">
-            <div class="column-label">${msg('Actions')}</div>
-          </div>
-        </th>
-      `
-    }
+    if (!this.actions || typeof this.actions === 'function') return null
 
     const label = this.actions.label || msg('Actions')
 
