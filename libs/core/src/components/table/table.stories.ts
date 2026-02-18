@@ -1038,3 +1038,23 @@ This example demonstrates listening to pagination and sorting events and display
     `
   },
 }
+
+/**
+ * A simple table with fixed pagination (single option).
+ * When options array has only one value, the page size selector is hidden.
+ */
+export const SimplePagination: Story = {
+  args: {
+    columns: Users.Columns,
+    data: Users.Data,
+    options: [8],
+  },
+  render: (args) => html`
+    <gds-table
+      .columns="${args.columns}"
+      .data="${args.data}"
+      .options="${args.options}"
+      rows="8"
+    ></gds-table>
+  `,
+}

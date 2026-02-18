@@ -379,7 +379,8 @@ export class GdsPagination extends withMarginProps(
   }
 
   #renderPageSizeMenu() {
-    if (this._isMobile || this.hideOptions) return null
+    if (this._isMobile || this.hideOptions || this.options.length <= 1)
+      return null
     const rowsLabel = `${msg('Rows per page')}, ${this.rows} ${msg('selected')}`
 
     return html`
@@ -435,7 +436,10 @@ export class GdsPagination extends withMarginProps(
       >
         ${this.#renderLabel()}
         <gds-flex aling-items="center" gap="${this.#config.gap}" flex="1">
-          ${[this.#renderNavigationControls(), this.#renderPageSizeMenu()]}
+          ${[
+            when(this.#pageCount > 1, () => this.#renderNavigationControls()),
+            this.#renderPageSizeMenu(),
+          ]}
         </gds-flex>
       </gds-flex>
     `
