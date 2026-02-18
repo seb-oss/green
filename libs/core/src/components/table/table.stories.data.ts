@@ -1,3 +1,5 @@
+import { html, TemplateResult } from 'lit'
+
 import { Slot } from './table.types'
 
 import type {
@@ -26,12 +28,28 @@ const normalizeUserRow = (row: any) => ({
   download: Slot(row.download ?? '#', ['main']),
 })
 
+let usersRawCache: any[] | null = null
+let usersRawPromise: Promise<any[]> | null = null
+
+const loadUsersRaw = async () => {
+  if (usersRawCache) return usersRawCache
+  if (usersRawPromise) return usersRawPromise
+
+  usersRawPromise = fetch(USERS_URL)
+    .then((response) => response.json())
+    .then((data: any[]) => {
+      usersRawCache = data
+      return data
+    })
+
+  return usersRawPromise
+}
+
 const loadUsers = async () => {
   if (usersCache) return usersCache
   if (usersPromise) return usersPromise
 
-  usersPromise = fetch(USERS_URL)
-    .then((response) => response.json())
+  usersPromise = loadUsersRaw()
     .then((data: any[]) => data.map(normalizeUserRow))
     .then((data) => {
       usersCache = data
@@ -139,6 +157,34 @@ export const Users = {
     justify: 'end',
   } as TableActions,
   Data: userDataProvider,
+
+  /**
+   * Generates slot content for all user rows.
+   * Loops through raw user data and creates per-row slot elements
+   * using the `columnKey:rowKey:slotId` naming convention.
+   *
+   * Usage: `${until(Users.SlotContent(), html``)}`
+   */
+  SlotContent: async (): Promise<TemplateResult> => {
+    const users = await loadUsersRaw()
+    return html`
+      ${users.map(
+        (user: any) => html`
+          <gds-img
+            src="${user.avatarUrl ?? '#'}"
+            alt="${user.name}"
+            slot="name:${user.email}:avatar"
+            width="xl"
+            height="xl"
+          ></gds-img>
+          <gds-icon-copy slot="email:${user.id}:copy-button"></gds-icon-copy>
+          <gds-icon-cloud-download
+            slot="download:${user.id}:main"
+          ></gds-icon-cloud-download>
+        `,
+      )}
+    `
+  },
 }
 
 // ============================================================================

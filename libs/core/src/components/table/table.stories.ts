@@ -1,5 +1,6 @@
 import { html } from 'lit'
 import { createRef, ref } from 'lit/directives/ref.js'
+import { until } from 'lit/directives/until.js'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
@@ -1046,9 +1047,6 @@ This example demonstrates listening to pagination and sorting events and display
 // FEATURES - SLOT COMPOSITION
 // ============================================================================
 
-let slotCompositionRows: any[] = []
-let slotCompositionPage = 1
-
 export const SlotComposition: Story = {
   args: {
     columns: Users.Columns,
@@ -1068,12 +1066,13 @@ export const SlotComposition: Story = {
 Demonstrates dynamic slot composition for data-driven content injection into table cells.
 
 **Pattern:** Generate slots using \`columnKey:rowKey:slotId\` naming convention.
- 
+
+Slot content is generated from \`Users.SlotContent()\` which loops through all user data and creates per-row elements (avatars, copy icons, download icons) using raw data values.
         `,
       },
     },
   },
-  render: (args, { updateArgs }) => {
+  render: (args) => {
     return html`
       <gds-table
         .columns="${args.columns}"
@@ -1087,6 +1086,7 @@ Demonstrates dynamic slot composition for data-driven content injection into tab
         responsive
         rows="5"
       >
+        ${until(Users.SlotContent(), html``)}
       </gds-table>
     `
   },
