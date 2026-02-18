@@ -91,31 +91,38 @@ export const Overview: Story = {
     nocache: false,
     striped: false,
   },
-  render: (args) =>
-    html` <gds-table
-      density="${args.density}"
-      variant="${args.variant}"
-      search-label="${args.searchLabel}"
-      ?searchable="${args.searchable}"
-      ?settings="${args.settings}"
-      ?plain="${args.plain}"
-      ?responsive="${args.responsive}"
-      ?nocache="${args.nocache}"
-      ?height="${args.height}"
-      ?striped="${args.striped}"
-      ?selectable="${args.selectable}"
-      .columns="${args.columns}"
-      .data="${args.data}"
-      .actions="${args.actions}"
-      rows="60"
-    >
-      <template name="email-copy">
-        <gds-icon-copy></gds-icon-copy>
-      </template>
-      <template name="download-image">
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </template>
-    </gds-table>`,
+
+  render: (args) => {
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
+
+    return html`
+      <gds-table
+        ${ref(tableRef)}
+        density="${args.density}"
+        variant="${args.variant}"
+        search-label="${args.searchLabel}"
+        ?searchable="${args.searchable}"
+        ?settings="${args.settings}"
+        ?plain="${args.plain}"
+        ?responsive="${args.responsive}"
+        ?nocache="${args.nocache}"
+        ?height="${args.height}"
+        ?striped="${args.striped}"
+        ?selectable="${args.selectable}"
+        .columns="${args.columns}"
+        .data="${args.data}"
+        .actions="${args.actions}"
+        rows="60"
+        @gds-table-data-loaded=${handleDataLoaded}
+      >
+      </gds-table>
+    `
+  },
 }
 
 // ============================================================================
