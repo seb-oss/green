@@ -1044,6 +1044,14 @@ This example demonstrates listening to pagination and sorting events and display
  * When options array has only one value, the page size selector is hidden.
  */
 export const SimplePagination: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'When the `options` array contains a single value, the page size selector is automatically hidden since there is no choice to make.',
+      },
+    },
+  },
   args: {
     columns: Users.Columns,
     data: Users.Data,
@@ -1054,7 +1062,6 @@ export const SimplePagination: Story = {
       .columns="${args.columns}"
       .data="${args.data}"
       .options="${args.options}"
-      rows="8"
     ></gds-table>
   `,
 }
