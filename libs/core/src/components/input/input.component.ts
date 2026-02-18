@@ -354,6 +354,24 @@ class Input extends GdsFormControlElement<string> {
     })
   }
 
+  #handleOnKeyDown = (e: KeyboardEvent) => {
+    if (e.key !== 'Enter') return
+    if (this.disabled) return
+    if (e.isComposing) return
+    if (e.repeat) return
+
+    const form = this.form ?? this.closest('form')
+    if (!form) return
+
+    // Defer until after event propagation to mimic native default actions,
+    // allowing preventDefault() to cancel from anywhere in the composed path.
+    queueMicrotask(() => {
+      if (e.defaultPrevented) return
+      if (this.disabled) return
+      form.requestSubmit()
+    })
+  }
+
   #handleFieldClick = () => {
     this.elInputAsync.then((el) => el.focus())
   }
@@ -394,6 +412,7 @@ class Input extends GdsFormControlElement<string> {
       <input
         class="native-control"
         @input=${this.#handleOnInput}
+        @keydown=${this.#handleOnKeyDown}
         @change=${this.#handleOnChange}
         .value=${this.value}
         id="input"
