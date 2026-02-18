@@ -24,7 +24,7 @@ import '../icon/icons/circle-check'
 import '../icon/icons/cross-small'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
-import { Feedback, generateUserSlots, Users } from './table.stories.data'
+import { Feedback, Users } from './table.stories.data'
 
 const meta: Meta = {
   title: 'Components/Table',
@@ -1047,6 +1047,7 @@ This example demonstrates listening to pagination and sorting events and display
 // ============================================================================
 
 let slotCompositionRows: any[] = []
+let slotCompositionPage = 1
 
 export const SlotComposition: Story = {
   args: {
@@ -1058,8 +1059,8 @@ export const SlotComposition: Story = {
     searchable: true,
     settings: true,
     density: 'comfortable',
-    slotTick: 0,
   },
+
   parameters: {
     docs: {
       description: {
@@ -1084,15 +1085,8 @@ Demonstrates dynamic slot composition for data-driven content injection into tab
         ?settings="${args.settings}"
         density="${args.density}"
         responsive
-        rows="10"
+        rows="5"
       >
-        <gds-img
-          src="https://api.dicebear.com/7.x/avataaars/svg?seed=FrejaForsberg"
-          alt="User avatar"
-          slot="name:anna.andersson@example.com:avatar"
-          width="xl"
-          height="xl"
-        ></gds-img>
       </gds-table>
     `
   },

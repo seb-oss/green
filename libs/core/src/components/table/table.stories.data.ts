@@ -1,48 +1,38 @@
-import { html } from 'lit'
-import { ifDefined } from 'lit/directives/if-defined.js'
+import { Slot } from './table.types'
 
-import {
-  Slot,
-  SlotValue,
+import type {
+  TableActions,
   TableColumn,
   TableRequest,
   TableResponse,
 } from './table.types'
 
-// =================
-// USERS DATA COLLECTION
-// =================
-
 const USERS_URL = 'https://api.seb.io/components/table/table.users.json'
 const FEEDBACK_URL = 'https://api.seb.io/components/table/table.feedback.json'
 
-let usersCache: UserData[] | null = null
-let usersPromise: Promise<UserData[]> | null = null
-let feedbackCache: FeedbackData[] | null = null
-let feedbackPromise: Promise<FeedbackData[]> | null = null
+let usersCache: any[] | null = null
+let usersPromise: Promise<any[]> | null = null
+let feedbackCache: any[] | null = null
+let feedbackPromise: Promise<any[]> | null = null
 
-const normalizeUserRow = (row: UserRow): UserData => {
-  const fullName = String(row.name)
+const normalizeUserRow = (row: any) => ({
+  ...row,
+  name: Slot(row.name, ['avatar', 'value'], row.email),
+  email: Slot(row.email, ['value', 'copy-button']),
+  status: Slot(row.status, ['status']),
+  amount: Slot(row.amount, ['amount']),
+  account: Slot(row.account, ['main']),
+  lastLogin: Slot(row.lastLogin, ['main']),
+  download: Slot(row.download ?? '#', ['main']),
+})
 
-  return {
-    ...row,
-    name: Slot(fullName, ['avatar', 'value'], row.email),
-    email: Slot(String(row.email), ['value', 'copy-button']),
-    status: Slot(String(row.status), ['status']),
-    amount: Slot(Number(row.amount), ['amount']),
-    account: Slot(String(row.account), ['main']),
-    lastLogin: Slot(String(row.lastLogin), ['main']),
-    download: Slot(String(row.download ?? '#'), ['main']),
-  }
-}
-
-const loadUsers = async (): Promise<UserData[]> => {
+const loadUsers = async () => {
   if (usersCache) return usersCache
   if (usersPromise) return usersPromise
 
   usersPromise = fetch(USERS_URL)
     .then((response) => response.json())
-    .then((data: UserRow[]) => data.map(normalizeUserRow))
+    .then((data: any[]) => data.map(normalizeUserRow))
     .then((data) => {
       usersCache = data
       return data
@@ -51,43 +41,41 @@ const loadUsers = async (): Promise<UserData[]> => {
   return usersPromise
 }
 
-const userDataProvider = async (
-  request: TableRequest,
-): Promise<TableResponse<UserData>> => {
-  await new Promise((resolve) => setTimeout(resolve, 1000))
+const createDataProvider =
+  (loader: () => Promise<any[]>) =>
+  async (request: TableRequest): Promise<TableResponse<any>> => {
+    let data = await loader()
 
-  const allData = await loadUsers()
-  let processedData = [...allData]
+    if (request.searchQuery) {
+      const query = request.searchQuery.toLowerCase()
+      data = data.filter((item) =>
+        Object.values(item).some((value) =>
+          value?.toString().toLowerCase().includes(query),
+        ),
+      )
+    }
 
-  if (request.searchQuery) {
-    const query = request.searchQuery.toLowerCase()
-    processedData = processedData.filter((item) =>
-      Object.values(item).some((value) =>
-        String(value).toLowerCase().includes(query),
-      ),
-    )
+    if (request.sortColumn && data.length > 0) {
+      const key = request.sortColumn
+      data = [...data].sort((a, b) => {
+        const aVal = a[key]?.toString() ?? ''
+        const bVal = b[key]?.toString() ?? ''
+        return request.sortDirection === 'asc'
+          ? aVal.localeCompare(bVal)
+          : bVal.localeCompare(aVal)
+      })
+    }
+
+    const start = (request.page - 1) * request.rows
+    const end = start + request.rows
+
+    return {
+      rows: data.slice(start, end),
+      total: data.length,
+    }
   }
 
-  if (request.sortColumn) {
-    processedData.sort((a, b) => {
-      const aValue = String(a[request.sortColumn as keyof UserData])
-      const bValue = String(b[request.sortColumn as keyof UserData])
-
-      return request.sortDirection === 'asc'
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue)
-    })
-  }
-
-  const startIndex = (request.page - 1) * request.rows
-  const endIndex = startIndex + request.rows
-  const paginatedData = processedData.slice(startIndex, endIndex)
-
-  return {
-    rows: paginatedData,
-    total: processedData.length,
-  }
-}
+const userDataProvider = createDataProvider(loadUsers)
 
 export const Users = {
   Columns: [
@@ -149,7 +137,7 @@ export const Users = {
   Actions: {
     label: 'Actions',
     justify: 'end',
-  },
+  } as TableActions,
   Data: userDataProvider,
 }
 
@@ -157,13 +145,13 @@ export const Users = {
 // FEEDBACK DATA COLLECTION
 // ============================================================================
 
-const loadFeedback = async (): Promise<FeedbackData[]> => {
+const loadFeedback = async () => {
   if (feedbackCache) return feedbackCache
   if (feedbackPromise) return feedbackPromise
 
   feedbackPromise = fetch(FEEDBACK_URL)
     .then((response) => response.json())
-    .then((data: FeedbackData[]) => {
+    .then((data: any[]) => {
       feedbackCache = data
       return data
     })
@@ -171,43 +159,7 @@ const loadFeedback = async (): Promise<FeedbackData[]> => {
   return feedbackPromise
 }
 
-const feedbackDataProvider = async (
-  request: TableRequest,
-): Promise<TableResponse<FeedbackData>> => {
-  await new Promise((resolve) => setTimeout(resolve, 800))
-
-  const allData = await loadFeedback()
-  let processedData = [...allData]
-
-  if (request.searchQuery) {
-    const query = request.searchQuery.toLowerCase()
-    processedData = processedData.filter((item) =>
-      Object.values(item).some((value) =>
-        String(value).toLowerCase().includes(query),
-      ),
-    )
-  }
-
-  if (request.sortColumn) {
-    processedData.sort((a, b) => {
-      const aValue = String(a[request.sortColumn as keyof FeedbackData])
-      const bValue = String(b[request.sortColumn as keyof FeedbackData])
-
-      return request.sortDirection === 'asc'
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue)
-    })
-  }
-
-  const startIndex = (request.page - 1) * request.rows
-  const endIndex = startIndex + request.rows
-  const paginatedData = processedData.slice(startIndex, endIndex)
-
-  return {
-    rows: paginatedData,
-    total: processedData.length,
-  }
-}
+const feedbackDataProvider = createDataProvider(loadFeedback)
 
 export const Feedback = {
   Columns: [
@@ -248,7 +200,7 @@ export const Feedback = {
     label: 'Actions',
     align: 'start',
     justify: 'start',
-  } as any,
+  } as TableActions,
 
   ActionLink: {
     label: 'Actions',
@@ -261,18 +213,18 @@ export const Feedback = {
         label: 'Link',
       },
     ],
-  } as any,
+  } as TableActions & { cell: unknown[] },
 
   ActionButton: {
     label: 'Actions',
     align: 'start',
     justify: 'start',
-  } as any,
+  } as TableActions,
 
   ActionContextMenu: {
     label: 'Actions',
     align: 'start',
     justify: 'end',
-  } as any,
+  } as TableActions,
   Data: feedbackDataProvider,
 }
