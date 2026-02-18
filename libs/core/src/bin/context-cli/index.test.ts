@@ -13,7 +13,7 @@
 
 import { describe, expect, it } from 'vitest'
 
-import { parseArgs } from './index.js'
+import { parseArgs } from './parse-args.js'
 
 // ---------------------------------------------------------------------------
 // parseArgs — argument parsing
