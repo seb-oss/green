@@ -2,9 +2,7 @@
 
 A command-line tool for accessing Green Design System documentation, component APIs, guides, and usage instructions — the same context that the [Green MCP server](../mcp-server/README.md) provides, but accessible directly from the terminal.
 
-## Why?
-
-Some environments restrict MCP access due to corporate policies, network constraints, or tooling limitations. The Context CLI provides the same documentation look-up capabilities without requiring MCP protocol support.
+CLI access is useful when MCP is not available, or when higher degrees of output filtering or manipulation is desired. Using the CLI, agents can save output in files, filter via pipes, or otherwise apply contextually relevant processing.
 
 ## Installation
 
