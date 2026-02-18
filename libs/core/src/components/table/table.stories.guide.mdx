@@ -13,6 +13,7 @@ This guide explains how to implement the table component with data handling, pag
 3. [Column Configuration](#column-configuration)
 4. [Framework Integration](#framework-integration)
 5. [Complete Example](#complete-example)
+6. [Reactive Properties](#reactive-properties)
 
 ---
 
@@ -347,6 +348,57 @@ The table provides three slots to customize empty and error states. Each slot ha
   </gds-flex>
 </gds-table>
 ```
+
+---
+
+## Reactive Properties
+
+The `page` and `rows` properties are fully reactive — changing them from outside the component (via attribute, property binding, or JavaScript) will automatically sync internal state and trigger a data fetch.
+
+### Page
+
+Setting `page` navigates to the specified page and loads the corresponding data.
+
+```html
+<!-- Attribute -->
+<gds-table page="3" .columns=${columns} .data=${dataProvider}></gds-table>
+
+<!-- Property binding (Lit) -->
+<gds-table .page=${currentPage} .columns=${columns} .data=${dataProvider}></gds-table>
+```
+
+```js
+// Programmatic
+const table = document.querySelector('gds-table')
+table.page = 5 // Navigates to page 5 and loads data
+```
+
+### Rows
+
+Setting `rows` changes the number of rows per page. This resets to page 1 since changing page size invalidates the current page position.
+
+```html
+<!-- Attribute -->
+<gds-table rows="25" .columns=${columns} .data=${dataProvider}></gds-table>
+
+<!-- Property binding (Lit) -->
+<gds-table .rows=${rowsPerPage} .columns=${columns} .data=${dataProvider}></gds-table>
+```
+
+```js
+// Programmatic
+table.rows = 50 // Shows 50 rows per page, resets to page 1
+```
+
+### Other Reactive Properties
+
+| Property | Triggers | Notes |
+|---|---|---|
+| `page` | Data fetch for the new page | — |
+| `rows` | Data fetch, resets to page 1 | Page size change invalidates position |
+| `data` | Cache clear + data fetch | New data provider |
+| `dataLoadKey` | Cache clear + data fetch | Force reload with a new key value |
+| `columns` | Cache clear + view reset | Resets visible columns and pagination |
 
 ---
 

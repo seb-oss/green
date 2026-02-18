@@ -196,6 +196,7 @@ export const Users = {
             variant="${String(row.status) === 'Active'
               ? 'positive'
               : 'negative'}"
+            size="small"
           >
             ${String(row.status)}
           </gds-badge>
