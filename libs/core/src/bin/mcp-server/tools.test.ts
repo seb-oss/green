@@ -2,7 +2,10 @@ import { describe, expect, it } from 'vitest'
 
 import { CATEGORIES, FRAMEWORKS, SEARCH_CONFIG } from './constants.js'
 import { RegexError, ValidationError } from './errors.js'
-import { performSearch as performSearchInternal } from './search.js'
+import {
+  parseSearchQuery,
+  performSearch as performSearchInternal,
+} from './search.js'
 // Import only pure functions for testing (no filesystem dependencies)
 import {
   sanitizeComponentName,
@@ -35,41 +38,16 @@ function performSearch(params: {
     maxResults = 20,
   } = params
 
-  // Parse query
-  let searchTerms: string[] | null = null
-  let regexPattern: RegExp | null = null
+  // Use the real parseSearchQuery so that all validation (length, ReDoS, etc.) is exercised
+  const { searchTerms: parsedTerms, regexPattern } = parseSearchQuery(
+    query,
+    splitTerms,
+    useRegex,
+  )
 
-  if (useRegex) {
-    // Remove regex delimiters if present
-    const pattern =
-      query.startsWith('/') && query.endsWith('/') ? query.slice(1, -1) : query
-    // Validate regex length
-    if (pattern.length > SEARCH_CONFIG.MAX_REGEX_LENGTH) {
-      throw new RegexError(
-        `Regex pattern too long (max ${SEARCH_CONFIG.MAX_REGEX_LENGTH} characters)`,
-        pattern,
-        { maxLength: SEARCH_CONFIG.MAX_REGEX_LENGTH },
-      )
-    }
-    try {
-      regexPattern = new RegExp(pattern, 'i')
-    } catch (error) {
-      throw new RegexError('Invalid regex pattern', pattern, {
-        originalError: error instanceof Error ? error.message : String(error),
-      })
-    }
-  } else if (splitTerms) {
-    // For empty query with splitTerms, treat as single term search for everything
-    searchTerms =
-      query.trim() === ''
-        ? ['gds'] // Match all gds-* components
-        : query
-            .toLowerCase()
-            .split(/[\s,]+/)
-            .filter((t) => t.length > 0)
-  } else {
-    searchTerms = [query.toLowerCase()]
-  }
+  // For empty query with splitTerms, treat as single term search for everything
+  const searchTerms =
+    !useRegex && splitTerms && query.trim() === '' ? ['gds'] : parsedTerms
 
   // Helper to build resource URIs
   const buildResourceUris = (
@@ -87,7 +65,7 @@ function performSearch(params: {
     components,
     icons,
     query,
-    searchTerms || [],
+    searchTerms,
     regexPattern,
     matchAll,
     splitTerms,
@@ -526,6 +504,22 @@ describe('MCP Tools', () => {
           useRegex: true,
         }),
       ).toThrow()
+    })
+
+    it('should throw error for regex with nested quantifiers (ReDoS)', () => {
+      const redosPatterns = ['(a+)+', '(a*)*b', '(a+){2,}', '([a-z]+)*']
+
+      for (const pattern of redosPatterns) {
+        expect(() =>
+          performSearch({
+            query: pattern,
+            components: mockComponents,
+            icons: mockIcons,
+            category: 'all',
+            useRegex: true,
+          }),
+        ).toThrow(/nested quantifiers|catastrophic backtracking/)
+      }
     })
   })
 
