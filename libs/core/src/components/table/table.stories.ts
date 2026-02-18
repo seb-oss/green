@@ -28,6 +28,39 @@ import '../icon/icons/cross-small'
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 import { Feedback, Users } from './table.stories.data'
 
+/**
+ * Defers rendering until the element scrolls into view.
+ * Only used in Docs mode where all stories render on one page.
+ */
+const _lazyObserved = new WeakSet<Element>()
+
+const lazyStory = (renderFn: () => unknown) => html`
+  <div
+    ${ref((el) => {
+      if (!el || _lazyObserved.has(el)) return
+      _lazyObserved.add(el)
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            observer.disconnect()
+            const content = renderFn()
+            render(content, el as HTMLElement)
+            // Unwrap: move children out and remove the wrapper div
+            const parent = el.parentNode
+            if (parent) {
+              while (el.firstChild) parent.insertBefore(el.firstChild, el)
+              parent.removeChild(el)
+            }
+          }
+        },
+        { rootMargin: '200px' },
+      )
+      observer.observe(el)
+    })}
+    style="min-height:200px"
+  ></div>
+`
+
 const meta: Meta = {
   title: 'Components/Table',
   component: 'gds-table',
@@ -56,6 +89,10 @@ const meta: Meta = {
     },
   },
   tags: ['autodocs'],
+  decorators: [
+    (storyFn: any, context: any) =>
+      context.viewMode === 'docs' ? lazyStory(() => storyFn()) : storyFn(),
+  ],
   parameters: {
     docs: {
       description: {

@@ -282,13 +282,14 @@ export const Feedback = {
     {
       key: 'feedback',
       label: 'Feedback',
+      align: 'start',
       width: '350px',
     },
     {
       key: 'notes',
       label: 'Notes',
       align: 'start',
-      width: '300px',
+      width: '460px',
     },
     {
       key: 'department',
