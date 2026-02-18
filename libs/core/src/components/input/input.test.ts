@@ -3,7 +3,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import type { GdsInput } from '@sebgroup/green-core/components/input/index.js'
 
-import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import {
+  getScopedTagName,
+  htmlTemplateTagFactory,
+} from '@sebgroup/green-core/scoping'
 import {
   aTimeout,
   clickOnElement,
@@ -190,6 +193,84 @@ for (const variant of ['default'] as const) {
         expect(remainingCharactersBadgeEl?.getAttribute('variant')).toBe(
           'negative',
         )
+      })
+    })
+
+    describe('Form submission', () => {
+      it('should submit the surrounding form when pressing Enter', async () => {
+        const formEl = await fixture<HTMLFormElement>(
+          html`<form>
+            <gds-input variant="${variant}" label="My label"></gds-input>
+            <button type="submit">Submit</button>
+          </form>`,
+        )
+
+        const submitSpy = vi.fn((e: Event) => e.preventDefault())
+        formEl.addEventListener('submit', submitSpy)
+
+        const el = formEl.querySelector(
+          getScopedTagName('gds-input'),
+        ) as GdsInput
+
+        await el.updateComplete
+        el.focus()
+
+        const nativeInput = el.shadowRoot?.querySelector('input') as
+          | HTMLInputElement
+          | undefined
+        nativeInput?.dispatchEvent(
+          new KeyboardEvent('keydown', {
+            key: 'Enter',
+            bubbles: true,
+            cancelable: true,
+            composed: true,
+          }),
+        )
+        await aTimeout(1)
+
+        expect(submitSpy).toHaveBeenCalledOnce()
+      })
+
+      it('should not submit the form if Enter keydown is prevented', async () => {
+        const formEl = await fixture<HTMLFormElement>(
+          html`<form>
+            <gds-input variant="${variant}" label="My label"></gds-input>
+            <button type="submit">Submit</button>
+          </form>`,
+        )
+
+        const submitSpy = vi.fn((e: Event) => e.preventDefault())
+        formEl.addEventListener('submit', submitSpy)
+
+        // Important: this listener runs later in the composed/bubbling path than
+        // the internal input's keydown listener. For native-like behavior, it must
+        // still be able to cancel the implicit submit.
+        formEl.addEventListener('keydown', (e) => {
+          const ke = e as KeyboardEvent
+          if (ke.key === 'Enter') ke.preventDefault()
+        })
+
+        const el = formEl.querySelector(
+          getScopedTagName('gds-input'),
+        ) as GdsInput
+
+        await el.updateComplete
+        el.focus()
+
+        const nativeInput = el.shadowRoot?.querySelector('input') as
+          | HTMLInputElement
+          | undefined
+        nativeInput?.dispatchEvent(
+          new KeyboardEvent('keydown', {
+            key: 'Enter',
+            bubbles: true,
+            cancelable: true,
+            composed: true,
+          }),
+        )
+        await aTimeout(1)
+
+        expect(submitSpy).not.toHaveBeenCalled()
       })
     })
 
