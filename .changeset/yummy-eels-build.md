@@ -2,4 +2,4 @@
 '@sebgroup/green-core': minor
 ---
 
-**PAgination:** Hide page switcher if single digit options
+**Pagination:** Hide page switcher if single digit options
