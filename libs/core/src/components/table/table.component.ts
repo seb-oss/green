@@ -312,6 +312,20 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         this._rowsState = cachedData.rows
         this._total = cachedData.total
         this._loaded = false
+
+        this.dispatchCustomEvent('gds-table-data-loaded', {
+          detail: {
+            rows: cachedData.rows,
+            total: cachedData.total,
+            page: this._view.page,
+            rowsPerPage: this._view.rows,
+            searchQuery: this._view.searchQuery,
+            sortColumn: this._view.sortColumn,
+            sortDirection: this._view.sortDirection,
+          },
+          bubbles: true,
+        })
+
         return
       }
     }
