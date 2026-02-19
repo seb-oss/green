@@ -34,7 +34,7 @@ interface MatchResult {
  * Compile regex pattern with safety checks
  * @param pattern - Regex pattern string
  * @returns Compiled RegExp
- * @throws RegexError if pattern is invalid or too long
+ * @throws RegexError if pattern is invalid or too long or potentially unsafe
  */
 function compileRegexPattern(pattern: string): RegExp {
   if (pattern.length > SEARCH_CONFIG.MAX_REGEX_LENGTH) {
@@ -42,6 +42,16 @@ function compileRegexPattern(pattern: string): RegExp {
       `Regex pattern too long (max ${SEARCH_CONFIG.MAX_REGEX_LENGTH} characters)`,
       pattern,
       { maxLength: SEARCH_CONFIG.MAX_REGEX_LENGTH },
+    )
+  }
+
+  // Reject patterns with constructs that can cause catastrophic backtracking (ReDoS).
+  // Nested quantifiers like (a+)+, (a*)*b, (a{2,})+, ([a-z]+)* etc.
+  // A quantifier followed by optional closing parens and another quantifier.
+  if (/([+*?]|\{\d+,?\d*\})\)*([+*?]|\{\d+,?\d*\})/.test(pattern)) {
+    throw new RegexError(
+      'Regex pattern contains nested quantifiers which could cause catastrophic backtracking',
+      pattern,
     )
   }
 
@@ -177,7 +187,10 @@ export function parseSearchQuery(
   regexPattern: RegExp | null
 } {
   if (useRegex) {
-    const regexPattern = compileRegexPattern(query)
+    // Strip regex delimiters if present (e.g. /pattern/ → pattern)
+    const pattern =
+      query.startsWith('/') && query.endsWith('/') ? query.slice(1, -1) : query
+    const regexPattern = compileRegexPattern(pattern)
     return { searchTerms: [query], regexPattern }
   }
 

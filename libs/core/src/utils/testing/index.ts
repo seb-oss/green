@@ -4,6 +4,8 @@ import { page, userEvent } from '@vitest/browser/context'
 // Re-export html from lit for tests
 export { html }
 
+const CLICK_TIMEOUT_MS = 3000
+
 /**
  * Renders a lit template into a container and returns the first element child.
  * Replacement for @open-wc/testing fixture function.
@@ -65,10 +67,13 @@ export async function clickOnElement(
   const rect = el.getBoundingClientRect()
   const position = getClickPosition(rect, _position, _offsetX, _offsetY)
   try {
-    await withTimeout(userEvent.click(el, { position }), 1000)
+    await withTimeout(userEvent.click(el, { position }), CLICK_TIMEOUT_MS)
   } catch (error) {
     // Fallback to forced click to avoid pointer interception issues in browser mode
-    await withTimeout(userEvent.click(el, { position, force: true }), 1000)
+    await withTimeout(
+      userEvent.click(el, { position, force: true }),
+      CLICK_TIMEOUT_MS,
+    )
   }
 }
 

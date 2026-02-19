@@ -1001,7 +1001,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           <gds-text
             tag="${this.headlineTag}"
             font="heading-s"
-            text-wrap="balance"
+            text-wrap="pretty"
             max-width="80ch"
           >
             ${this.headline}
@@ -1011,7 +1011,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
             font=${this.density === 'compact'
               ? 'body-regular-s'
               : 'body-regular-m'}
-            text-wrap="balance"
+            text-wrap="pretty"
             max-width="80ch"
           >
             ${this.summary}

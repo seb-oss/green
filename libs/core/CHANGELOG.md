@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.34.0
+
+### Minor Changes
+
+- ae2745f: **MCP:** Add CLI alternative to the MCP, allowing context to be accessed and filtered via terminal commands.
+
+### Patch Changes
+
+- 1a16d7c: **Table::** Summary and headline text wrapping chnaged to pretty
+
 ## 2.33.0
 
 ### Minor Changes
