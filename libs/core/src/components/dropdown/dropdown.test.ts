@@ -779,7 +779,9 @@ describe('<gds-dropdown multiple>', () => {
     await el.updateComplete
 
     expect(el.value).toEqual([])
-    expect(el.shadowRoot!.querySelector<HTMLElement>('[id="clear-btn"]')).toBeNull()
+    expect(
+      el.shadowRoot!.querySelector<HTMLElement>('[id="clear-btn"]'),
+    ).toBeNull()
   })
 
   // Disable for now because of flakiness in CI
