@@ -291,7 +291,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Without this, setting `.page` from outside (e.g. via attribute or binding)
    * would update the Lit property but not trigger a data fetch.
    */
-  @watch('page')
+  @watch('page', { waitUntilFirstUpdate: true })
   private _onPageChange() {
     this._view = { ...this._view, page: Number(this.page ?? 1) }
     this.#loadData()
@@ -301,7 +301,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    * Syncs the external `rows` property to internal view state and reloads data.
    * Resets to page 1 since changing page size invalidates the current position.
    */
-  @watch('rows')
+  @watch('rows', { waitUntilFirstUpdate: true })
   private _onRowsChange() {
     this._view = { ...this._view, rows: Number(this.rows ?? 10), page: 1 }
     this.#loadData()
