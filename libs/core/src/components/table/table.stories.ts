@@ -57,7 +57,7 @@ const lazyStory = (renderFn: () => unknown) => html`
       )
       observer.observe(el)
     })}
-    style="min-height:200px"
+    style="min-height:40vh"
   ></div>
 `
 
@@ -186,21 +186,26 @@ See Developer Guide for complete selection API documentation.
       },
     },
   },
-  render: (args) => html`
-    <gds-table
-      .density="${args.density}"
-      ?selectable="${args.selectable}"
-      .columns="${args.columns}"
-      .data="${args.data}"
-    >
-      <template name="email-copy">
-        <gds-icon-copy></gds-icon-copy>
-      </template>
-      <template name="download-image">
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </template>
-    </gds-table>
-  `,
+  render: (args) => {
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
+
+    return html`
+      <gds-table
+        ${ref(tableRef)}
+        .density="${args.density}"
+        ?selectable="${args.selectable}"
+        .columns="${args.columns}"
+        .data="${args.data}"
+        @gds-table-data-loaded=${handleDataLoaded}
+      >
+      </gds-table>
+    `
+  },
 }
 
 // ============================================================================
@@ -227,21 +232,26 @@ The \`settings\` property adds a column visibility dropdown, allowing users to s
       },
     },
   },
-  render: (args) => html`
-    <gds-table
-      ?searchable="${args.searchable}"
-      ?settings="${args.settings}"
-      .columns="${args.columns}"
-      .data="${args.data}"
-    >
-      <template name="email-copy">
-        <gds-icon-copy></gds-icon-copy>
-      </template>
-      <template name="download-image">
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </template>
-    </gds-table>
-  `,
+  render: (args) => {
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
+
+    return html`
+      <gds-table
+        ${ref(tableRef)}
+        ?searchable="${args.searchable}"
+        ?settings="${args.settings}"
+        .columns="${args.columns}"
+        .data="${args.data}"
+        @gds-table-data-loaded=${handleDataLoaded}
+      >
+      </gds-table>
+    `
+  },
 }
 
 // ============================================================================
@@ -267,22 +277,27 @@ The \`nocache\` property provides direct control over data retrieval. When set t
       },
     },
   },
-  render: (args) => html`
-    <gds-table
-      ?nocache="${args.nocache}"
-      ?searchable="${args.searchable}"
-      ?settings="${args.settings}"
-      .columns="${args.columns}"
-      .data="${args.data}"
-    >
-      <template name="email-copy">
-        <gds-icon-copy></gds-icon-copy>
-      </template>
-      <template name="download-image">
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </template>
-    </gds-table>
-  `,
+  render: (args) => {
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
+
+    return html`
+      <gds-table
+        ${ref(tableRef)}
+        ?nocache="${args.nocache}"
+        ?searchable="${args.searchable}"
+        ?settings="${args.settings}"
+        .columns="${args.columns}"
+        .data="${args.data}"
+        @gds-table-data-loaded=${handleDataLoaded}
+      >
+      </gds-table>
+    `
+  },
 }
 
 // ============================================================================
@@ -306,16 +321,24 @@ The sorting mechanism generates a unique cache key, caching sorted results for 5
       },
     },
   },
-  render: (args) => html`
-    <gds-table .columns="${args.columns}" .data="${args.data}">
-      <template name="email-copy">
-        <gds-icon-copy></gds-icon-copy>
-      </template>
-      <template name="download-image">
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </template>
-    </gds-table>
-  `,
+  render: (args) => {
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
+
+    return html`
+      <gds-table
+        ${ref(tableRef)}
+        .columns="${args.columns}"
+        .data="${args.data}"
+        @gds-table-data-loaded=${handleDataLoaded}
+      >
+      </gds-table>
+    `
+  },
 }
 
 // ============================================================================
@@ -338,16 +361,24 @@ Cell types correspond to their respective Green Design System components and acc
       },
     },
   },
-  render: (args) => html`
-    <gds-table .columns="${args.columns}" .data="${args.data}">
-      <template name="email-copy">
-        <gds-icon-copy></gds-icon-copy>
-      </template>
-      <template name="download-image">
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </template>
-    </gds-table>
-  `,
+  render: (args) => {
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
+
+    return html`
+      <gds-table
+        ${ref(tableRef)}
+        .columns="${args.columns}"
+        .data="${args.data}"
+        @gds-table-data-loaded=${handleDataLoaded}
+      >
+      </gds-table>
+    `
+  },
 }
 
 // ============================================================================
@@ -385,14 +416,7 @@ When justified to the right, sorting indicator appears on the left. Column label
     },
   },
   render: (args) => html`
-    <gds-table .columns="${args.columns}" .data="${args.data}">
-      <template name="email-copy">
-        <gds-icon-copy slot="trail"></gds-icon-copy>
-      </template>
-      <template name="role-link">
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </template>
-    </gds-table>
+    <gds-table .columns="${args.columns}" .data="${args.data}"></gds-table>
   `,
 }
 
@@ -509,22 +533,27 @@ You can change the \`headline-tag\` to any valid heading tag (e.g., 'h1-h5') to 
       },
     },
   },
-  render: (args) => html`
-    <gds-table
-      headline="${args.headline}"
-      headline-tag="${args.headlineTag}"
-      summary="${args.summary}"
-      .columns="${args.columns}"
-      .data="${args.data}"
-    >
-      <template name="email-copy">
-        <gds-icon-copy></gds-icon-copy>
-      </template>
-      <template name="download-image">
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </template>
-    </gds-table>
-  `,
+  render: (args) => {
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
+
+    return html`
+      <gds-table
+        ${ref(tableRef)}
+        headline="${args.headline}"
+        headline-tag="${args.headlineTag}"
+        summary="${args.summary}"
+        .columns="${args.columns}"
+        .data="${args.data}"
+        @gds-table-data-loaded=${handleDataLoaded}
+      >
+      </gds-table>
+    `
+  },
 }
 
 export const Plain: Story = {
@@ -542,20 +571,25 @@ When \`plain\` boolean is set, the table header and footer are removed, renderin
       },
     },
   },
-  render: (args) => html`
-    <gds-table
-      ?plain="${args.plain}"
-      .columns="${args.columns}"
-      .data="${args.data}"
-    >
-      <template name="email-copy">
-        <gds-icon-copy></gds-icon-copy>
-      </template>
-      <template name="download-image">
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </template>
-    </gds-table>
-  `,
+  render: (args) => {
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
+
+    return html`
+      <gds-table
+        ${ref(tableRef)}
+        ?plain="${args.plain}"
+        .columns="${args.columns}"
+        .data="${args.data}"
+        @gds-table-data-loaded=${handleDataLoaded}
+      >
+      </gds-table>
+    `
+  },
 }
 
 export const Striped: Story = {
@@ -574,22 +608,27 @@ When \`striped\` boolean is set, alternating row background colors are applied t
       },
     },
   },
-  render: (args) => html`
-    <gds-table
-      .density="${args.density}"
-      ?striped="${args.striped}"
-      .columns="${args.columns}"
-      .data="${args.data}"
-      rows="20"
-    >
-      <template name="email-copy">
-        <gds-icon-copy></gds-icon-copy>
-      </template>
-      <template name="download-image">
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </template>
-    </gds-table>
-  `,
+  render: (args) => {
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
+
+    return html`
+      <gds-table
+        ${ref(tableRef)}
+        .density="${args.density}"
+        ?striped="${args.striped}"
+        .columns="${args.columns}"
+        .data="${args.data}"
+        rows="20"
+        @gds-table-data-loaded=${handleDataLoaded}
+      >
+      </gds-table>
+    `
+  },
 }
 
 // ============================================================================
@@ -617,24 +656,29 @@ The \`density\` property allows customizing the table's visual spacing with thes
       },
     },
   },
-  render: (args) => html`
-    <gds-table
-      headline="${args.headline}"
-      summary="${args.summary}"
-      searchable
-      settings
-      .density="${args.density}"
-      .columns="${args.columns}"
-      .data="${args.data}"
-    >
-      <template name="email-copy">
-        <gds-icon-copy></gds-icon-copy>
-      </template>
-      <template name="download-image">
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </template>
-    </gds-table>
-  `,
+  render: (args) => {
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
+
+    return html`
+      <gds-table
+        ${ref(tableRef)}
+        headline="${args.headline}"
+        summary="${args.summary}"
+        searchable
+        settings
+        .density="${args.density}"
+        .columns="${args.columns}"
+        .data="${args.data}"
+        @gds-table-data-loaded=${handleDataLoaded}
+      >
+      </gds-table>
+    `
+  },
 }
 
 // ============================================================================
@@ -668,10 +712,17 @@ These variants can be used: \`primary\`, \`secondary\` (Default), \`tertiary\`
   },
   render: (args) => {
     const wrapperVariant = args.variant === 'tertiary' ? 'primary' : 'tertiary'
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
 
     return html`
       <gds-card variant="${wrapperVariant}" padding="l" border-radius="m">
         <gds-table
+          ${ref(tableRef)}
           .density="${args.density}"
           .variant="${args.variant}"
           .columns="${args.columns}"
@@ -680,13 +731,8 @@ These variants can be used: \`primary\`, \`secondary\` (Default), \`tertiary\`
           settings
           selectable
           rows="5"
+          @gds-table-data-loaded=${handleDataLoaded}
         >
-          <template name="email-copy">
-            <gds-icon-copy></gds-icon-copy>
-          </template>
-          <template name="download-image">
-            <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-          </template>
         </gds-table>
       </gds-card>
     `
@@ -718,21 +764,26 @@ When the \`responsive\` boolean is set to \`true\`, the table transforms its lay
       },
     },
   },
-  render: (args) => html`
-    <gds-table
-      ?responsive="${args.responsive}"
-      .columns="${args.columns}"
-      .data="${args.data}"
-      height="80vh"
-    >
-      <template name="email-copy">
-        <gds-icon-copy></gds-icon-copy>
-      </template>
-      <template name="download-image">
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </template>
-    </gds-table>
-  `,
+  render: (args) => {
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
+
+    return html`
+      <gds-table
+        ${ref(tableRef)}
+        ?responsive="${args.responsive}"
+        .columns="${args.columns}"
+        .data="${args.data}"
+        height="80vh"
+        @gds-table-data-loaded=${handleDataLoaded}
+      >
+      </gds-table>
+    `
+  },
 }
 
 // ============================================================================
@@ -759,24 +810,35 @@ Use slots to add custom controls to the table header and footer areas.
       },
     },
   },
-  render: (args) => html`
-    <gds-table
-      .columns="${args.columns}"
-      .data="${args.data}"
-      rows="4"
-      settings
-      searchable
-    >
-      <gds-dropdown size="small" slot="header-lead" plain searchable>
-        <span slot="trigger">Sorting</span>
-        <gds-option value="by-name">Sort by Name</gds-option>
-        <gds-option value="by-status">Sort by Status</gds-option>
-      </gds-dropdown>
-      <gds-button slot="header-trail" rank="secondary" size="small">
-        Export
-      </gds-button>
-    </gds-table>
-  `,
+  render: (args) => {
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
+
+    return html`
+      <gds-table
+        ${ref(tableRef)}
+        .columns="${args.columns}"
+        .data="${args.data}"
+        rows="4"
+        settings
+        searchable
+        @gds-table-data-loaded=${handleDataLoaded}
+      >
+        <gds-dropdown size="small" slot="header-lead" plain searchable>
+          <span slot="trigger">Sorting</span>
+          <gds-option value="by-name">Sort by Name</gds-option>
+          <gds-option value="by-status">Sort by Status</gds-option>
+        </gds-dropdown>
+        <gds-button slot="header-trail" rank="secondary" size="small">
+          Export
+        </gds-button>
+      </gds-table>
+    `
+  },
 }
 
 export const StateSlots: Story = {
@@ -830,6 +892,11 @@ Use the **Simulated State** control below to switch between states.
       return args.data(request)
     }
 
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
+
     const handleRetry = () => {
       args.simulatedState = 'normal'
       if (tableRef.value) {
@@ -871,6 +938,7 @@ Use the **Simulated State** control below to switch between states.
         rows="4"
         searchable
         settings
+        @gds-table-data-loaded=${handleDataLoaded}
       >
         <gds-flex
           slot="error"
@@ -927,22 +995,10 @@ export const DynamicContent: Story = {
     docs: {
       description: {
         story: `
-Templates provide reusable content for cell types. Reference them using the \`template\` property with the template's \`name\` attribute.
 
-**Icon properties:** Icon size and color can be specified either in the column configuration or directly in the template. Column configuration takes precedence.
 
-\`\`\`typescript
-{
-  cell: {
-    lead: {
-      type: 'icon',
-      template: 'department-icon',
-      size: 'm',      // Overrides template size
-      color: 'primary' // Overrides template color
-    }
-  }
-}
-\`\`\`
+
+⚠️ REWRITE FOR SLOTS
 
 See Developer Guide for complete documentation.
 
@@ -950,19 +1006,26 @@ See Developer Guide for complete documentation.
       },
     },
   },
-  render: (args) => html`
-    <gds-table .columns="${args.columns}" .data="${args.data}" rows="4" plain>
-      <template name="email-copy">
-        <gds-icon-copy></gds-icon-copy>
-      </template>
-      <template name="download-image">
-        <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-      </template>
-      <template name="department-icon">
-        <gds-icon-buildings></gds-icon-buildings>
-      </template>
-    </gds-table>
-  `,
+  render: (args) => {
+    const tableRef = createRef<any>()
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
+    }
+
+    return html`
+      <gds-table
+        ${ref(tableRef)}
+        .columns="${args.columns}"
+        .data="${args.data}"
+        rows="4"
+        plain
+        @gds-table-data-loaded=${handleDataLoaded}
+      >
+      </gds-table>
+    `
+  },
 }
 
 // ============================================================================
@@ -998,11 +1061,17 @@ This example demonstrates listening to pagination and sorting events and display
     },
   },
   render: (args) => {
+    const tableRef = createRef<any>()
     const state = {
       currentPage: 1,
       currentRows: 10,
       sortColumn: '',
       sortDirection: 'asc',
+    }
+
+    const handleDataLoaded = (e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(Users.SlotContent(e.detail.rows), table)
     }
 
     const handlePageChange = (e: CustomEvent) => {
@@ -1087,22 +1156,18 @@ This example demonstrates listening to pagination and sorting events and display
         </gds-flex>
 
         <gds-table
+          ${ref(tableRef)}
           .columns="${args.columns}"
           .data="${args.data}"
           rows="5"
           selectable
           searchable
           settings
+          @gds-table-data-loaded=${handleDataLoaded}
           @gds-page-change=${(e: CustomEvent) => handlePageChange(e)}
           @gds-rows-change=${(e: CustomEvent) => handleRowsChange(e)}
           @gds-sort-change=${(e: CustomEvent) => handleSortChange(e)}
         >
-          <template name="email-copy">
-            <gds-icon-copy></gds-icon-copy>
-          </template>
-          <template name="download-image">
-            <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
-          </template>
         </gds-table>
       </gds-flex>
     `
