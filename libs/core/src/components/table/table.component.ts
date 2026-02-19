@@ -1081,8 +1081,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   #renderHeadline() {
-    if (this.plain) return null
-
     if (this.headline || this.summary) {
       return html`
         <gds-flex flex-direction="column" gap="4xs">
