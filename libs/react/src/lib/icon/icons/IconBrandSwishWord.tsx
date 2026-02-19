@@ -1,0 +1,1 @@
+export { IconBrandSwishWord } from '@sebgroup/green-core/react';

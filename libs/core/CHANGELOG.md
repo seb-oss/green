@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.33.0
+
+### Minor Changes
+
+- 2e2fda8: **Icon:** Add Swish wordmark
+- a13e803: **Table:** Make headline show up even if plain
+
 ## 2.32.0
 
 ### Minor Changes
