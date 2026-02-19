@@ -30,6 +30,10 @@ import {
   handleSearchComponents,
 } from '../mcp-server/handlers.js'
 import { getPackageVersion } from '../mcp-server/utils.js'
+import {
+  DOCS_FRAMEWORK_CANONICAL,
+  normalizeDocsFramework,
+} from './framework.js'
 import { parseArgs } from './parse-args.js'
 
 // ---------------------------------------------------------------------------
@@ -125,8 +129,9 @@ USAGE
 ARGUMENTS
   component                         Component name, e.g. "button" or
                                     "gds-button" (required)
-  framework                         Target framework: angular, react, or
-                                    web-component (required)
+  framework                         Target framework (required)
+                                    Allowed: ${DOCS_FRAMEWORK_CANONICAL.join(', ')}
+                                    Aliases: web, webcomponent, web-components
 
 OPTIONS
   --no-guidelines                   Exclude UX/design guidelines
@@ -136,6 +141,7 @@ OPTIONS
 EXAMPLES
   ${PROGRAM_NAME} docs button angular
   ${PROGRAM_NAME} docs gds-dropdown react
+  ${PROGRAM_NAME} docs card web
   ${PROGRAM_NAME} docs card web-component --no-guidelines
 `.trim()
 
@@ -280,11 +286,24 @@ async function runDocs(args: ParsedArgs): Promise<void> {
   }
 
   const componentName = args.positional[0]
-  const framework = args.positional[1]
+  const frameworkInput = args.positional[1]
 
-  if (!componentName || !framework) {
+  if (!componentName || !frameworkInput) {
     process.stderr.write(
       'Error: docs requires <component> and <framework> arguments.\n\n',
+    )
+    process.stderr.write(DOCS_HELP + '\n')
+    process.exitCode = 1
+    return
+  }
+
+  const framework = normalizeDocsFramework(frameworkInput)
+  if (!framework) {
+    process.stderr.write(
+      `Error: Invalid framework '${frameworkInput}'. Allowed values: ${DOCS_FRAMEWORK_CANONICAL.join(', ')}.\n`,
+    )
+    process.stderr.write(
+      'Aliases accepted for web-component: web, webcomponent, web-components.\n\n',
     )
     process.stderr.write(DOCS_HELP + '\n')
     process.exitCode = 1
@@ -408,8 +427,8 @@ async function main(): Promise<void> {
     return
   }
 
-  // Global --help / -h (or no command)
-  if (!args.command || args.flags['h'] || args.flags['help']) {
+  // Global --help / -h (only when no command is provided)
+  if (!args.command) {
     process.stdout.write(HELP_TEXT + '\n')
     return
   }

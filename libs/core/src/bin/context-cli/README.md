@@ -79,6 +79,12 @@ green-core-context docs <component> <framework> [options]
 
 **Frameworks:** `angular`, `react`, `web-component`
 
+**Aliases (docs command):**
+
+- `web`
+- `webcomponent`
+- `web-components`
+
 **Examples:**
 
 ```bash
@@ -87,6 +93,9 @@ green-core-context docs button angular
 
 # React docs without guidelines
 green-core-context docs gds-dropdown react --no-guidelines
+
+# Web Component docs using alias
+green-core-context docs card web
 
 # Pipe to less for paging
 green-core-context docs card web-component | less
