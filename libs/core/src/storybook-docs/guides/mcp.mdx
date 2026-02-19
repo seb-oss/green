@@ -2,6 +2,8 @@ import { Meta, Markdown } from '@storybook/addon-docs/blocks'
 
 <Meta title="Guides/MCP for coding agents" />
 
+# Green MCP Server for Coding Agents
+
 This guide helps you set up the Green Design System MCP (Model Context Protocol) server to work with GitHub Copilot in VS Code.
 
 ## What is this?
@@ -61,3 +63,19 @@ You can change `Angular` to `React` or whatever framework you are using, and tai
 If Copilot is not using the MCP server correctly, try restarting the MCP server from the Extensions tab in VS Code.
 
 You can also try asking the agent itself if it can access the Green MCP server or if it has trouble finding necessary documentation.
+
+### MCP unavailable
+
+If the MCP server is unavailable for some reason, you can also access the same context via the [Green Context CLI](/docs/guides-green-context-cli--docs). The CLI provides the same information but without the need for an active MCP server connection.
+
+To use it, update the copilot instructions to refer to the CLI instead:
+
+```markdown
+# Green Design System Components
+
+This app is built in Angular using Green Design System components.
+
+When using Green components, ALWAYS refer to the Green Context CLI for component documentation, guidelines, and instructions.
+
+ALWAYS start by reading the main instructions by running `npx green-core-context instructions` in the terminal.
+```

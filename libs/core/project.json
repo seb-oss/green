@@ -81,14 +81,28 @@
     "test": {
       "executor": "nx:run-commands",
       "options": {
+        "command": "nx run core:test:node && nx run core:test:browser",
+        "cwd": "{workspaceRoot}"
+      }
+    },
+    "test:browser": {
+      "executor": "nx:run-commands",
+      "options": {
         "command": "npx vitest run --config libs/core/vitest.config.ts",
+        "cwd": "{workspaceRoot}"
+      }
+    },
+    "test:node": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx vitest run --config libs/core/vitest.node.config.ts",
         "cwd": "{workspaceRoot}"
       }
     },
     "test-local": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx vitest run --config libs/core/vitest.config.ts",
+        "command": "nx run core:test:node && nx run core:test:browser",
         "cwd": "{workspaceRoot}"
       }
     },
