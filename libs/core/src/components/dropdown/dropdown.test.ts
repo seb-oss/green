@@ -173,7 +173,7 @@ describe('<gds-dropdown>', () => {
     el.addEventListener('gds-ui-state', uiStateHandler)
 
     //click to open
-    clickOnElement(el)
+    await clickOnElement(el)
 
     await waitUntil(() => uiStateHandler.mock.calls.length === 1)
 

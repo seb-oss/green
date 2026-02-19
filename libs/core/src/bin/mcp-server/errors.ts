@@ -2,6 +2,8 @@
  * Error handling for the Green Design System MCP Server
  */
 
+import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
+
 /**
  * Error codes for MCP operations
  */
@@ -138,10 +140,7 @@ export class RegexError extends McpError {
  * @param error - The error to convert
  * @returns Formatted error response
  */
-export function formatErrorResponse(error: unknown): {
-  content: Array<{ type: string; text: string }>
-  isError: boolean
-} {
+export function formatErrorResponse(error: unknown): CallToolResult {
   let message: string
   let code: string | undefined
   let context: Record<string, unknown> | undefined
