@@ -758,6 +758,32 @@ describe('<gds-dropdown multiple>', () => {
     expect(el.displayValue).toBe('Option 2, Option 3')
   })
 
+  it('should hide clear button when the last selected option is deselected manually', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown multiple clearable open>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+      </gds-dropdown>
+    `)
+
+    const option1 = el.querySelectorAll(getScopedTagName('gds-option'))[0]
+
+    await clickOnElement(option1, 'center')
+    await el.updateComplete
+
+    expect(
+      el.shadowRoot!.querySelector<HTMLElement>('[id="clear-btn"]'),
+    ).not.toBeNull()
+
+    await clickOnElement(option1, 'center')
+    await el.updateComplete
+
+    expect(el.value).toEqual([])
+    expect(
+      el.shadowRoot!.querySelector<HTMLElement>('[id="clear-btn"]'),
+    ).toBeNull()
+  })
+
   // Disable for now because of flakiness in CI
   // it('should select multiple options on click', async () => {
   //   const el = await fixture<GdsDropdown>(html`
