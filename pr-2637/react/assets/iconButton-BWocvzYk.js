@@ -1,0 +1,3 @@
+import{j as o}from"./jsx-runtime-D_zvdyIk.js";import{useMDXComponents as e}from"./index-DmQdhVTs.js";import{M as s,S as m}from"./blocks-KP6KJ5Pa.js";import{I as i}from"./iconButton-CPCdUiW8.js";import{I as c,D as a}from"./iconButton.stories-DKL0wpnc.js";import"./iframe-Cxe0EI8F.js";import"./index-UMjl-2tV.js";import"./button-BapgQ0bx.js";import"./index-UHloBdPs.js";const D=({children:t,...n})=>o.jsx(i,{...n,children:t});function r(t){const n={h1:"h1",...e(),...t.components};return o.jsxs(o.Fragment,{children:[o.jsx(s,{of:c}),`
+`,o.jsx(n.h1,{id:"icon-button",children:"Icon button"}),`
+`,o.jsx(m,{of:a})]})}function I(t={}){const{wrapper:n}={...e(),...t.components};return n?o.jsx(n,{...t,children:o.jsx(r,{...t})}):r(t)}export{D as Template,I as default};
