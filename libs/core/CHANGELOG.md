@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.32.0
+
+### Minor Changes
+
+- e709ffa: **Pagination:** Hide page switcher if single digit options
+
 ## 2.31.0
 
 ### Minor Changes
