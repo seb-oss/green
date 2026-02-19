@@ -238,6 +238,18 @@ describe('<gds-button>', () => {
       expect(button?.classList.contains('circle')).toBe(true)
       expect(button?.classList.contains('icon')).toBe(true)
     })
+
+    it('should forward gds-tabindex to the inner button', async () => {
+      const el = await fixture<GdsButton>(
+        html`<gds-button gds-tabindex="-1">Button</gds-button>`,
+      )
+
+      await el.updateComplete
+
+      const innerButton = el.shadowRoot?.querySelector('button')
+      expect(innerButton?.getAttribute('tabindex')).to.equal('-1')
+      expect(innerButton?.tabIndex).to.equal(-1)
+    })
   })
 
   describe('Accessibility', () => {

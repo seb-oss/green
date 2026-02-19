@@ -153,7 +153,7 @@ export class GdsDetails extends withSizeXProps(
           rank="tertiary"
           size=${this.size === 'small' ? 'xs' : 'medium'}
           role="presentation"
-          tabindex="-1"
+          gds-tabindex="-1"
         >
           <gds-icon-details .open=${this.open}></gds-icon-details>
         </gds-button>
