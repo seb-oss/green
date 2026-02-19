@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.35.0
+
+### Minor Changes
+
+- 2e2fda8: **Icon:** Swish workmark wrapper
+
+### Patch Changes
+
+- Updated dependencies [2e2fda8]
+- Updated dependencies [a13e803]
+  - @sebgroup/green-core@2.33.0
+
 ## 3.34.0
 
 ### Minor Changes
