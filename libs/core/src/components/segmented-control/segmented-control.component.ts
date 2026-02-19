@@ -238,7 +238,10 @@ export class GdsSegmentedControl<ValueT = any> extends withLayoutChildProps(
       if (selectedSegment) {
         this.segments.forEach((s) => (s.selected = false))
         selectedSegment.selected = true
-        this._elTrack.scrollLeft = selectedSegment.offsetLeft
+        selectedSegment.scrollIntoView({
+          block: 'nearest',
+          inline: 'nearest',
+        })
       }
     })
   }
