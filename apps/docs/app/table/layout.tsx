@@ -3,13 +3,14 @@
 import React, { useCallback, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 
+import { Types as Table } from '@sebgroup/green-core/components/table'
 import * as Core from '@sebgroup/green-core/react'
 
 // ---------------------------------------------------------------------------
 // Columns — mirrors Users.Columns from table.stories.data.ts
 // ---------------------------------------------------------------------------
 
-const columns = [
+const columns: Table.Column[] = [
   { key: 'id', label: 'ID', sortable: false },
   { key: 'name', label: 'Name', sortable: true },
   { key: 'email', label: 'Email', sortable: true, justify: 'space-between' },
@@ -22,27 +23,7 @@ const columns = [
   { key: 'download', label: 'Download' },
 ]
 
-const actions = { label: 'Actions', justify: 'end' }
-
-// ---------------------------------------------------------------------------
-// Slot helper — mirrors core's Slot() with toString/valueOf prototype
-// ---------------------------------------------------------------------------
-
-const slotPrototype = {
-  toString(this: any) {
-    return String(this.value ?? '')
-  },
-  valueOf(this: any) {
-    return this.value
-  },
-  [Symbol.toPrimitive](this: any, hint: string) {
-    if (hint === 'number') return Number(this.value)
-    return String(this.value ?? '')
-  },
-}
-
-const Slot = (value: any, slots: string[]) =>
-  Object.assign(Object.create(slotPrototype), { value, slots })
+const actions: Table.Actions = { label: 'Actions', justify: 'end' }
 
 // ---------------------------------------------------------------------------
 // Normalise a raw API row into slot-annotated shape
@@ -50,13 +31,13 @@ const Slot = (value: any, slots: string[]) =>
 
 const normalizeRow = (row: any) => ({
   ...row,
-  name: Slot(row.name, ['avatar', 'value']),
-  email: Slot(row.email, ['value', 'copy-button']),
-  status: Slot(row.status, ['status']),
-  amount: Slot(row.amount, ['amount', 'currency']),
-  account: Slot(row.account, ['main']),
-  login: Slot(row.lastLogin, ['main']),
-  download: Slot(row.download ?? '#', ['main']),
+  name: Table.Slot(row.name, ['avatar', 'value']),
+  email: Table.Slot(row.email, ['value', 'copy-button']),
+  status: Table.Slot(row.status, ['status']),
+  amount: Table.Slot(row.amount, ['amount', 'currency']),
+  account: Table.Slot(row.account, ['main']),
+  login: Table.Slot(row.lastLogin, ['main']),
+  download: Table.Slot(row.download ?? '#', ['main']),
 })
 
 // ---------------------------------------------------------------------------
@@ -81,21 +62,21 @@ const loadUsers = async (): Promise<any[]> => {
   return usersPromise
 }
 
-const dataProvider = async (request: any) => {
+const dataProvider = async (
+  request: Table.Request,
+): Promise<Table.Response<any>> => {
   let data = await loadUsers()
 
   if (request.searchQuery) {
     const q = request.searchQuery.toLowerCase()
-    data = data.filter((item: any) =>
-      Object.values(item).some((v: any) =>
-        v?.toString().toLowerCase().includes(q),
-      ),
+    data = data.filter((item) =>
+      Object.values(item).some((v) => v?.toString().toLowerCase().includes(q)),
     )
   }
 
   if (request.sortColumn && data.length > 0) {
     const key = request.sortColumn
-    data = [...data].sort((a: any, b: any) => {
+    data = [...data].sort((a, b) => {
       const aVal = a[key]?.toString() ?? ''
       const bVal = b[key]?.toString() ?? ''
       return request.sortDirection === 'asc'
@@ -234,9 +215,9 @@ export default function TableLayout({
         <Core.GdsTable
           headline="Users"
           summary="All registered users"
-          columns={columns as any}
+          columns={columns}
           data={dataProvider}
-          actions={actions as any}
+          actions={actions}
           page={currentPage}
           rows={10}
           searchable
