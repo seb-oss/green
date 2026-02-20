@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.34.1
+
+### Patch Changes
+
+- 5d1e83c: **Dropdown:** Hide clear button in multiselect when all options are deselected. Fixes #2597
+
 ## 2.34.0
 
 ### Minor Changes
