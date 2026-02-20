@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.36.0
+
+### Minor Changes
+
+- 15248bf: **Icon:** Add wrappers for 4 new icons: Asterisk, settings slider vertical, credit card add and power
+
+### Patch Changes
+
+- Updated dependencies [15248bf]
+  - @sebgroup/green-core@2.35.0
+
 ## 3.35.0
 
 ### Minor Changes

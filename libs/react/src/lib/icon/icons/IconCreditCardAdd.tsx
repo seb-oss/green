@@ -1,0 +1,1 @@
+export { IconCreditCardAdd } from '@sebgroup/green-core/react';
