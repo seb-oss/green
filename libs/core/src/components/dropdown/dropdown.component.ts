@@ -327,7 +327,11 @@ class Dropdown extends GdsFormControlElement implements OptionsContainer {
               >`,
           )}
           ${when(
-            this.clearable && this.value && !this.disabled,
+            this.clearable &&
+              !this.disabled &&
+              (Array.isArray(this.value)
+                ? this.value.length > 0
+                : Boolean(this.value)),
             () =>
               html`<gds-button
                 id="clear-btn"

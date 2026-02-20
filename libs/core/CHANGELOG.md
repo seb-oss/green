@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.35.0
+
+### Minor Changes
+
+- 15248bf: **Icon::** Add Asterisk, Settings slider vertical, credit card add and power
+
+## 2.34.1
+
+### Patch Changes
+
+- 5d1e83c: **Dropdown:** Hide clear button in multiselect when all options are deselected. Fixes #2597
+
 ## 2.34.0
 
 ### Minor Changes

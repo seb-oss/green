@@ -1,0 +1,1 @@
+export { IconPower } from '@sebgroup/green-core/react';
