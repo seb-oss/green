@@ -46,30 +46,27 @@ export interface Response<T> {
   total: number
 }
 
-// The density mode content config
+/**
+ * Internal density configuration for the table's built-in UI controls
+ * (search input, column settings dropdown). Does not affect user-provided
+ * slot content — size your own components to match the chosen density.
+ */
 export const DENSITY_CONFIG = {
   compact: {
-    button: 'small',
     input: 'small',
     dropdown: 'small',
-    badge: 'small',
   },
   comfortable: {
-    button: 'small',
     input: 'small',
     dropdown: 'small',
-    badge: 'small',
   },
   spacious: {
-    button: 'medium',
     input: 'large',
     dropdown: 'medium',
-    badge: 'default',
   },
 } as const
 
 export type Density = 'comfortable' | 'compact' | 'spacious'
-export type DensityConfig = (typeof DENSITY_CONFIG)[Density]
 
 export interface CacheEntry<T> {
   rows: T[]
@@ -163,7 +160,6 @@ export type TableState = State
 export type TableRequest = Request
 export type TableResponse<T> = Response<T>
 export type TableDensity = Density
-export type TableDensityConfig = DensityConfig
 export type TableCache<T> = Cache<T>
 export type TableCacheEntry<T> = CacheEntry<T>
 export type TableSlotValue = SlotValue

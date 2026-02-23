@@ -647,11 +647,13 @@ export const Density: Story = {
     docs: {
       description: {
         story: `
-The \`density\` property allows customizing the table's visual spacing with these options:
+The \`density\` property controls the table's visual spacing and affects the table's **built-in UI** (search input, column settings dropdown, pagination).
 
 - **\`comfortable\`** (Default) · Standard spacing for balanced readability
 - **\`compact\`** · Reduced spacing to maximize information density
 - **\`spacious\`** · Increased spacing for enhanced readability
+
+> **Slot content sizing** — The density mode does **not** automatically resize components you provide via slots. When using a specific density, size your slotted components accordingly. For example, use \`size="small"\` on badges and buttons in \`compact\` or \`comfortable\` mode, and \`size="medium"\` in \`spacious\` mode to maintain visual consistency.
         `,
       },
     },
