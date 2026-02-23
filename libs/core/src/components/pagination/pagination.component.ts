@@ -470,7 +470,9 @@ export class GdsPagination extends withMarginProps(
     if (e.detail.open) {
       const popover = e.target as HTMLElement
 
-      const input = popover.querySelector('gds-input') as HTMLElement
+      const input = popover.querySelector(
+        '[gds-element="gds-input"]',
+      ) as HTMLElement
 
       if (input) {
         requestAnimationFrame(() => {
@@ -482,7 +484,9 @@ export class GdsPagination extends withMarginProps(
 
   #handleCustomPageInput(e: Event) {
     const input = e.target as HTMLInputElement
-    const pageInput = input.closest('gds-input') as HTMLInputElement
+    const pageInput = input.closest(
+      '[gds-element="gds-input"]',
+    ) as HTMLInputElement
 
     if (pageInput) {
       const pageNum = parseInt(pageInput.value, 10)
@@ -490,8 +494,8 @@ export class GdsPagination extends withMarginProps(
       if (pageNum && pageNum >= 1 && pageNum <= this.#pageCount) {
         this.#handlePageChange(pageNum)
 
-        const popover = pageInput.closest('gds-popover')
-        if (popover) (popover as any).hide()
+        const popover = pageInput.closest('[gds-element="gds-popover"]')
+        if (popover) (popover as any).open = false
       }
     }
   }
