@@ -1,111 +1,100 @@
-import { TableColumn, TableRequest, TableResponse } from './table.types'
+import { html, TemplateResult } from 'lit'
 
-interface UserData {
-  id: number
-  name: string
-  email: string
-  role: 'Admin' | 'User' | 'Editor'
-  status: 'Active' | 'Inactive'
-  amount: number
-  account: string
-  lastLogin: string
-  avatarUrl?: string
-  department?: string
-  download?: string
-}
+import { Slot } from './table.types'
 
-interface FeedbackData {
-  id: number
-  name: string
-  email: string
-  feedback: string
-  notes: string
-  status: 'Active' | 'Inactive'
-  department: string
-}
+import type {
+  TableActions,
+  TableColumn,
+  TableRequest,
+  TableResponse,
+} from './table.types'
 
-// ============================================================================
-// USERS DATA COLLECTION
-// ============================================================================
+const USERS_URL = 'https://api.seb.io/components/table/table.users.json'
+const FEEDBACK_URL = 'https://api.seb.io/components/table/table.feedback.json'
 
-const USERS = {
-  FIRST_NAMES: [
-    'Alexandra',
-    'Benjamin',
-    'Caroline',
-    'David',
-    'Elena',
-    'Fredrik',
-  ],
-  LAST_NAMES: ['Andersson', 'Bergström', 'Carlsson', 'Dahlström', 'Eriksson'],
-  ROLES: ['Admin', 'User', 'Editor'] as const,
-  STATUSES: ['Active', 'Inactive'] as const,
-  DEPARTMENTS: ['Engineering', 'Sales', 'Marketing', 'Support', 'HR'] as const,
-  COUNT: 100,
-}
+let usersCache: any[] | null = null
+let usersPromise: Promise<any[]> | null = null
+let feedbackCache: any[] | null = null
+let feedbackPromise: Promise<any[]> | null = null
 
-const generateUserRecord = (index: number): UserData => {
-  const id = index + 1
-  const firstName = USERS.FIRST_NAMES[index % USERS.FIRST_NAMES.length]
-  const lastName = USERS.LAST_NAMES[index % USERS.LAST_NAMES.length]
+const normalizeUserRow = (row: any) => ({
+  ...row,
+  name: Slot(row.name, ['avatar', 'value']),
+  // name: Slot(row.name, ['avatar', 'value'], row.email),
+  email: Slot(row.email, ['value', 'copy-button']),
+  status: Slot(row.status, ['status']),
+  amount: Slot(row.amount, ['amount', 'currency']),
+  account: Slot(row.account, ['main']),
+  login: Slot(row.lastLogin, ['main']),
+  download: Slot(row.download ?? '#', ['main']),
+})
 
-  return {
-    id,
-    name: `${firstName} ${lastName}`,
-    email: `${firstName.toLowerCase()}@domain.tld`,
-    role: USERS.ROLES[index % USERS.ROLES.length],
-    status: USERS.STATUSES[index % USERS.STATUSES.length],
-    department: USERS.DEPARTMENTS[index % USERS.DEPARTMENTS.length],
-    amount: Math.floor(Math.random() * 500000) + 10000,
-    account: `5440${String((index * 7919) % 10000000).padStart(7, '0')}`,
-    lastLogin: new Date(
-      Date.now() - Math.random() * 30 * 86400000,
-    ).toISOString(),
-    avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${firstName}${lastName}`,
-    download: `#`,
-  }
-}
+let usersRawCache: any[] | null = null
+let usersRawPromise: Promise<any[]> | null = null
 
-const generateUserDataset = (): UserData[] =>
-  Array.from({ length: USERS.COUNT }, (_, i) => generateUserRecord(i))
+const loadUsersRaw = async () => {
+  if (usersRawCache) return usersRawCache
+  if (usersRawPromise) return usersRawPromise
 
-const userDataProvider = async (
-  request: TableRequest,
-): Promise<TableResponse<UserData>> => {
-  await new Promise((resolve) => setTimeout(resolve, 1000))
-
-  const allData = generateUserDataset()
-  let processedData = [...allData]
-
-  if (request.searchQuery) {
-    const query = request.searchQuery.toLowerCase()
-    processedData = processedData.filter((item) =>
-      Object.values(item).some((value) =>
-        String(value).toLowerCase().includes(query),
-      ),
-    )
-  }
-
-  if (request.sortColumn) {
-    processedData.sort((a, b) => {
-      const aValue = String(a[request.sortColumn as keyof UserData])
-      const bValue = String(b[request.sortColumn as keyof UserData])
-
-      return request.sortDirection === 'asc'
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue)
+  usersRawPromise = fetch(USERS_URL)
+    .then((response) => response.json())
+    .then((data: any[]) => {
+      usersRawCache = data
+      return data
     })
-  }
 
-  const startIndex = (request.page - 1) * request.rows
-  const endIndex = startIndex + request.rows
-  const paginatedData = processedData.slice(startIndex, endIndex)
-
-  return {
-    rows: paginatedData,
-    total: processedData.length,
-  }
+  return usersRawPromise
 }
+
+const loadUsers = async () => {
+  if (usersCache) return usersCache
+  if (usersPromise) return usersPromise
+
+  usersPromise = loadUsersRaw()
+    .then((data: any[]) => data.map(normalizeUserRow))
+    .then((data) => {
+      usersCache = data
+      return data
+    })
+
+  return usersPromise
+}
+
+const createDataProvider =
+  (loader: () => Promise<any[]>) =>
+  async (request: TableRequest): Promise<TableResponse<any>> => {
+    let data = await loader()
+
+    if (request.searchQuery) {
+      const query = request.searchQuery.toLowerCase()
+      data = data.filter((item) =>
+        Object.values(item).some((value) =>
+          value?.toString().toLowerCase().includes(query),
+        ),
+      )
+    }
+
+    if (request.sortColumn && data.length > 0) {
+      const key = request.sortColumn
+      data = [...data].sort((a, b) => {
+        const aVal = a[key]?.toString() ?? ''
+        const bVal = b[key]?.toString() ?? ''
+        return request.sortDirection === 'asc'
+          ? aVal.localeCompare(bVal)
+          : bVal.localeCompare(aVal)
+      })
+    }
+
+    const start = (request.page - 1) * request.rows
+    const end = start + request.rows
+
+    return {
+      rows: data.slice(start, end),
+      total: data.length,
+    }
+  }
+
+const userDataProvider = createDataProvider(loadUsers)
 
 export const Users = {
   Columns: [
@@ -118,245 +107,170 @@ export const Users = {
       key: 'name',
       label: 'Name',
       sortable: true,
-      cell: {
-        lead: {
-          type: 'image',
-          src: (row: UserData) => row.avatarUrl,
-          alt: (row: UserData) => row.name,
-          width: 'xl',
-          height: 'xl',
-        },
-      },
     },
     {
       key: 'email',
       label: 'Email',
       sortable: true,
       justify: 'space-between',
-      cell: {
-        trail: {
-          type: 'button',
-          rank: 'tertiary',
-          value: (row: UserData) => row.email,
-          /*  size: 'xs', */
-          template: 'email-copy',
-        },
-      },
     },
     {
       key: 'role',
       label: 'Role',
       sortable: true,
       visible: false,
-      value: (row) => `${row.role.toUpperCase()} (${row.department || 'N/A'})`,
     },
     {
       key: 'status',
       label: 'Status',
       sortable: true,
-      justify: 'end',
-      cell: {
-        value: {
-          type: 'badge',
-          value: (row: UserData) => row.status,
-          variant: (row: UserData) =>
-            row.status === 'Active' ? 'positive' : 'negative',
-        },
-      },
     },
     {
       key: 'department',
       label: 'Department',
       sortable: true,
-      cell: {
-        lead: {
-          type: 'icon',
-          template: 'department-icon',
-        },
-      },
     },
     {
       key: 'amount',
       label: 'Amount',
       sortable: true,
       justify: 'end',
-      cell: {
-        value: {
-          type: 'formatted-number',
-          value: (row: UserData) => row.amount,
-        },
-        trail: {
-          type: 'badge',
-          value: 'SEK',
-        },
-      },
     },
     {
       key: 'account',
       label: 'Account',
       sortable: true,
-      cell: {
-        value: {
-          type: 'formatted-account',
-          value: (row: UserData) => row.account,
-          format: 'seb-account',
-        },
-      },
     },
     {
-      key: 'lastLogin',
+      key: 'login',
       label: 'Last Login',
       sortable: true,
-      cell: {
-        value: {
-          type: 'formatted-date',
-          value: (row: UserData) => row.lastLogin,
-          locale: 'sv-SE',
-          format: 'dateLong',
-        },
-      },
     },
     {
       key: 'download',
       label: 'Download',
-      cell: {
-        value: {
-          type: 'link',
-          href: (row: UserData) => row.download,
-          download: true,
-          template: 'download-image',
-          label: 'Download file',
-        },
-      },
     },
   ] as TableColumn[],
 
   Actions: {
     label: 'Actions',
     justify: 'end',
-    cell: {
-      type: 'context-menu',
-      items: [
-        {
-          label: (row: UserData) =>
-            row.status === 'Active' ? 'Deactivate' : 'Activate',
-          /*  onClick: (row: UserData) => console.log('Toggle status', row), */
-        },
-        {
-          label: 'View Details',
-          /* onClick: (row: UserData) => console.log('View user', row), */
-        },
-        {
-          label: 'Edit Profile',
-          /* onClick: (row: UserData) => console.log('Edit user', row), */
-        },
-        {
-          divider: true,
-          label: 'Delete User',
-          /* onClick: (row: UserData) => {
-            if (confirm(`Delete ${row.name}?`)) {
-              console.log('Delete user', row)
-            }
-          }, */
-        },
-      ],
-    },
-  },
+  } as TableActions,
+
   Data: userDataProvider,
+
+  /**
+   * Generates slot content for the given rows (current page).
+   * Creates per-row slot elements using `columnKey:rowKey:slotId` convention.
+   *
+   * Used with Lit's `render()` to update table light DOM on each data load:
+   * ```ts
+   * @gds-table-data-loaded=${(e) => render(Users.SlotContent(e.detail.rows), table)}
+   * ```
+   */
+  SlotContent: (rows: any[]): TemplateResult => {
+    return html`
+      ${rows.map(
+        (row: any) => html`
+          <!-- name: avatar -->
+          <gds-img
+            src="${row.avatarUrl ?? '#'}"
+            alt="${String(row.name)}"
+            slot="name:${row.id}:avatar"
+            width="xl"
+            height="xl"
+          ></gds-img>
+
+          <!-- email: copy button -->
+          <gds-button
+            slot="email:${row.id}:copy-button"
+            rank="tertiary"
+            size="small"
+          >
+            <gds-icon-copy></gds-icon-copy>
+          </gds-button>
+
+          <!-- status: badge -->
+          <gds-badge
+            slot="status:${row.id}:status"
+            variant="${String(row.status) === 'Active'
+              ? 'positive'
+              : 'negative'}"
+            size="small"
+          >
+            ${String(row.status)}
+          </gds-badge>
+
+          <!-- amount: formatted number -->
+          <gds-formatted-number
+            slot="amount:${row.id}:amount"
+            .value=${row.amount}
+          ></gds-formatted-number>
+
+          <!-- amount: currency -->
+          <gds-badge slot="amount:${row.id}:currency" size="small">
+            SEK
+          </gds-badge>
+
+          <!-- account: formatted account -->
+          <gds-formatted-account
+            slot="account:${row.id}:main"
+            account="${row.account}"
+            format="seb-account"
+          ></gds-formatted-account>
+
+          <!-- login: formatted date -->
+          <gds-formatted-date
+            slot="login:${row.id}:main"
+            .value="${String(row.login)}"
+            locale="sv-SE"
+            format="dateLong"
+          ></gds-formatted-date>
+
+          <!-- download: link with icon -->
+          <gds-link
+            slot="download:${row.id}:main"
+            href="${row.download ?? '#'}"
+            text-decoration="underline"
+            download
+          >
+            Download file
+            <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
+          </gds-link>
+
+          <!-- actions: context menu -->
+          <gds-context-menu slot="actions:${row.id}:main">
+            <gds-button slot="trigger" rank="tertiary" size="small">
+              <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+            </gds-button>
+            <gds-menu-item>Edit ${String(row.name)}</gds-menu-item>
+            <gds-menu-item>Delete</gds-menu-item>
+          </gds-context-menu>
+        `,
+      )}
+    `
+  },
 }
 
 // ============================================================================
 // FEEDBACK DATA COLLECTION
 // ============================================================================
 
-const FEEDBACK = {
-  FIRST_NAMES: ['Sophie', 'Marcus', 'Isabella', 'Johan', 'Emma', 'Lucas'],
-  LAST_NAMES: ['Ström', 'Nord', 'Berg', 'Gren', 'Holm'],
-  DEPARTMENTS: ['Engineering', 'Sales', 'Marketing', 'Support', 'HR'] as const,
-  STATUSES: ['Active', 'Inactive'] as const,
-  FEEDBACK_TEXTS: [
-    'Excellent user experience with intuitive interface and smooth navigation.',
-    'Performance needs improvement when handling large datasets.',
-    'Documentation is comprehensive but could benefit from more code examples.',
-    'Outstanding accessibility features and WCAG compliance implementation.',
-    'Mobile experience is good but some minor UI inconsistencies observed.',
-    'Feature request: Please add real-time collaboration capabilities.',
-    'Integration with third-party APIs works seamlessly.',
-    'User support team is responsive and helpful.',
-    'Suggest adding dark mode and customizable themes.',
-    'Security audit results are impressive and thorough.',
-  ],
-  NOTES: [
-    'Customer upgraded to premium plan. All features activated.',
-    'Q1 planning meeting scheduled for next week at 10 AM.',
-    'Bug fix deployed in production. Monitor system for 24 hours.',
-    'Account manager assigned: John Smith.',
-    'Scheduled maintenance window: Saturday 2-4 AM.',
-    'Training session completed successfully.',
-    'Custom integration request in progress.',
-    'Contract renewal due in 30 days.',
-    'Performance optimization completed.',
-    'Security certificates updated to latest version.',
-  ],
-  COUNT: 50,
-}
+const loadFeedback = async () => {
+  if (feedbackCache) return feedbackCache
+  if (feedbackPromise) return feedbackPromise
 
-const generateFeedbackRecord = (index: number): FeedbackData => {
-  const id = index + 1
-  const firstName = FEEDBACK.FIRST_NAMES[index % FEEDBACK.FIRST_NAMES.length]
-  const lastName = FEEDBACK.LAST_NAMES[index % FEEDBACK.LAST_NAMES.length]
-
-  return {
-    id,
-    name: `${firstName} ${lastName}`,
-    email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@company.com`,
-    feedback: FEEDBACK.FEEDBACK_TEXTS[index % FEEDBACK.FEEDBACK_TEXTS.length],
-    notes: FEEDBACK.NOTES[index % FEEDBACK.NOTES.length],
-    status: index % 3 === 0 ? 'Inactive' : 'Active',
-    department: FEEDBACK.DEPARTMENTS[index % FEEDBACK.DEPARTMENTS.length],
-  }
-}
-
-const generateFeedbackDataset = (): FeedbackData[] =>
-  Array.from({ length: FEEDBACK.COUNT }, (_, i) => generateFeedbackRecord(i))
-
-const feedbackDataProvider = async (
-  request: TableRequest,
-): Promise<TableResponse<FeedbackData>> => {
-  await new Promise((resolve) => setTimeout(resolve, 800))
-
-  const allData = generateFeedbackDataset()
-  let processedData = [...allData]
-
-  if (request.searchQuery) {
-    const query = request.searchQuery.toLowerCase()
-    processedData = processedData.filter((item) =>
-      Object.values(item).some((value) =>
-        String(value).toLowerCase().includes(query),
-      ),
-    )
-  }
-
-  if (request.sortColumn) {
-    processedData.sort((a, b) => {
-      const aValue = String(a[request.sortColumn as keyof FeedbackData])
-      const bValue = String(b[request.sortColumn as keyof FeedbackData])
-
-      return request.sortDirection === 'asc'
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue)
+  feedbackPromise = fetch(FEEDBACK_URL)
+    .then((response) => response.json())
+    .then((data: any[]) => {
+      feedbackCache = data
+      return data
     })
-  }
 
-  const startIndex = (request.page - 1) * request.rows
-  const endIndex = startIndex + request.rows
-  const paginatedData = processedData.slice(startIndex, endIndex)
-
-  return {
-    rows: paginatedData,
-    total: processedData.length,
-  }
+  return feedbackPromise
 }
+
+const feedbackDataProvider = createDataProvider(loadFeedback)
 
 export const Feedback = {
   Columns: [
@@ -369,13 +283,14 @@ export const Feedback = {
     {
       key: 'feedback',
       label: 'Feedback',
+      align: 'start',
       width: '350px',
     },
     {
       key: 'notes',
       label: 'Notes',
       align: 'start',
-      width: '300px',
+      width: '460px',
     },
     {
       key: 'department',
@@ -390,15 +305,6 @@ export const Feedback = {
       align: 'start',
       justify: 'end',
       width: '100px',
-      cell: {
-        value: {
-          type: 'badge',
-          value: (row: FeedbackData) => row.status,
-          variant: (row: FeedbackData) =>
-            row.status === 'Active' ? 'positive' : 'negative',
-          size: 'small',
-        },
-      },
     },
   ] as TableColumn[],
 
@@ -406,67 +312,88 @@ export const Feedback = {
     label: 'Actions',
     align: 'start',
     justify: 'start',
-    cell: [
-      {
-        type: 'button',
-        size: 'xs',
-        template: 'actions-activate',
-      },
-      {
-        type: 'button',
-        size: 'xs',
-        variant: 'negative',
-        template: 'actions-delete',
-      },
-    ],
-  } as any,
+  } as TableActions,
+
+  /**
+   * Slot content: multiple button actions per row.
+   */
+  MultipleActionsSlotContent: (rows: any[]): TemplateResult => {
+    return html`
+      ${rows.map(
+        (row: any, i: number) => html`
+          <gds-button
+            slot="actions:${row.id ?? i + 1}:main"
+            rank="tertiary"
+            size="small"
+          >
+            <gds-icon-pin></gds-icon-pin>
+            Activate
+          </gds-button>
+          <gds-button
+            slot="actions:${row.id ?? i + 1}:main"
+            rank="tertiary"
+            size="small"
+          >
+            <gds-icon-cross-small></gds-icon-cross-small>
+            Delete
+          </gds-button>
+        `,
+      )}
+    `
+  },
 
   ActionLink: {
     label: 'Actions',
     align: 'start',
     justify: 'end',
-    cell: [
-      {
-        type: 'link',
-        href: '#',
-        label: 'Link',
-      },
-    ],
-  } as any,
+  } as TableActions & { cell: unknown[] },
+
+  /**
+   * Slot content: link action per row.
+   */
+  ActionLinkSlotContent: (rows: any[]): TemplateResult => {
+    return html`
+      ${rows.map(
+        (row: any, i: number) => html`
+          <gds-link slot="actions:${row.id ?? i + 1}:main" href="#">
+            View details
+          </gds-link>
+        `,
+      )}
+    `
+  },
 
   ActionButton: {
     label: 'Actions',
     align: 'start',
     justify: 'start',
-    cell: [
-      {
-        type: 'button',
-        label: 'Link',
-      },
-    ],
-  } as any,
+  } as TableActions,
 
   ActionContextMenu: {
     label: 'Actions',
     align: 'start',
     justify: 'end',
-    cell: {
-      type: 'context-menu',
-      items: [
-        {
-          label: 'Activate',
-        },
-        {
-          label: 'View Details',
-        },
-        {
-          label: 'Edit Profile',
-        },
-        {
-          label: 'Delete User',
-        },
-      ],
-    },
-  } as any,
+  } as TableActions,
+
+  /**
+   * Slot content: context menu action per row.
+   */
+  ActionContextMenuSlotContent: (rows: any[]): TemplateResult => {
+    return html`
+      ${rows.map(
+        (row: any, i: number) => html`
+          <gds-context-menu slot="actions:${row.id ?? i + 1}:main">
+            <gds-button slot="trigger" rank="secondary" size="small">
+              <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+            </gds-button>
+            <gds-menu-item>Edit</gds-menu-item>
+            <gds-menu-item>Archive</gds-menu-item>
+            <gds-menu-item>Delete</gds-menu-item>
+          </gds-context-menu>
+        `,
+      )}
+    `
+  },
+
   Data: feedbackDataProvider,
 }

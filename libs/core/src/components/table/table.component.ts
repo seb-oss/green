@@ -32,7 +32,7 @@ import * as Types from './table.types'
  * @event gds-page-change - Fired when the active page changes. Detail: `{ page: number }`
  * @event gds-rows-change - Fired when the rows per page value changes. Detail: `{ rows: number }`
  * @event gds-sort-change - Fired when sorting changes. Detail: `{ sortColumn: string, sortDirection: 'asc' | 'desc' }`
- * @event gds-table-data-loaded - Fired when data is successfully loaded.
+ * @event gds-table-data-loaded - Fired when data is successfully loaded. Detail: `{ rows: T[], total: number, page: number, rowsPerPage: number, searchQuery: string, sortColumn?: string, sortDirection?: 'asc' | 'desc' }`
  * @event gds-table-data-error - Fired when data loading fails.
  * @event gds-table-selection - Fired when row selection changes.
  */
@@ -45,7 +45,6 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
   #cache: Types.Cache<T> = {}
   #cacheDuration = 5 * 60 * 1000
-  #templateCache = new Map<string, HTMLTemplateElement>()
 
   /**
    * The main headline text displayed at the top of the table.
@@ -123,6 +122,16 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
    */
   @property({ type: Boolean, reflect: false })
   selectable = false
+
+  /**
+   * Disables select all checkbox in header.
+   */
+  @property({
+    attribute: 'disable-select-all',
+    type: Boolean,
+    reflect: false,
+  })
+  disableSelectAll = false
 
   /**
    * Transforms table layout for mobile screens.
@@ -277,6 +286,27 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     this.#loadData()
   }
 
+  /**
+   * Syncs the external `page` property to internal view state and reloads data.
+   * Without this, setting `.page` from outside (e.g. via attribute or binding)
+   * would update the Lit property but not trigger a data fetch.
+   */
+  @watch('page', { waitUntilFirstUpdate: true })
+  private _onPageChange() {
+    this._view = { ...this._view, page: Number(this.page ?? 1) }
+    this.#loadData()
+  }
+
+  /**
+   * Syncs the external `rows` property to internal view state and reloads data.
+   * Resets to page 1 since changing page size invalidates the current position.
+   */
+  @watch('rows', { waitUntilFirstUpdate: true })
+  private _onRowsChange() {
+    this._view = { ...this._view, rows: Number(this.rows ?? 10), page: 1 }
+    this.#loadData()
+  }
+
   @watch('columns')
   private _onColumnsChange() {
     this.#cache = {}
@@ -303,6 +333,20 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
         this._rowsState = cachedData.rows
         this._total = cachedData.total
         this._loaded = false
+
+        this.dispatchCustomEvent('gds-table-data-loaded', {
+          detail: {
+            rows: cachedData.rows,
+            total: cachedData.total,
+            page: this._view.page,
+            rowsPerPage: this._view.rows,
+            searchQuery: this._view.searchQuery,
+            sortColumn: this._view.sortColumn,
+            sortDirection: this._view.sortDirection,
+          },
+          bubbles: true,
+        })
+
         return
       }
     }
@@ -334,7 +378,14 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       this._loaded = false
 
       this.dispatchCustomEvent('gds-table-data-loaded', {
-        detail: response,
+        detail: {
+          ...response,
+          page: this._view.page,
+          rowsPerPage: this._view.rows,
+          searchQuery: this._view.searchQuery,
+          sortColumn: this._view.sortColumn,
+          sortDirection: this._view.sortDirection,
+        },
         bubbles: true,
       })
     } catch (error) {
@@ -357,224 +408,80 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
   }
 
   /**
-   * Retrieves template content for the given slot name.
-   * Uses caching to prevent repeated DOM queries for better performance in large tables.
+   * Gets the unique key for slot naming (prioritizes: custom key > row.id > index)
    */
-  #getSlotContent(slot: string | undefined) {
-    if (!slot) return null
-
-    if (!this.#templateCache.has(slot)) {
-      const template = this.querySelector(
-        `template[name="${slot}"]`,
-      ) as HTMLTemplateElement
-      this.#templateCache.set(slot, template)
+  #getRowKey(row: T, index: number, slotKey?: unknown): string | number {
+    if (typeof slotKey === 'string' || typeof slotKey === 'number') {
+      return slotKey
     }
-
-    return this.#templateCache.get(slot)?.content.cloneNode(true)
+    const rowId = (row as { id?: string | number })?.id
+    if (typeof rowId === 'string' || typeof rowId === 'number') {
+      return rowId
+    }
+    return index + 1
   }
 
-  #renderCell(config: Types.Cell | Types.Cell[] | undefined, row: T): any {
-    if (!config) return null
+  #renderCellWrapped(content: unknown) {
+    return html`<span class="cell-wrapped-content">${content}</span>`
+  }
 
-    if (Array.isArray(config)) {
-      return config.map((c) => this.#renderCell(c, row))
-    }
+  #renderMobileLabel(column: Types.Column) {
+    return html`<span class="column-label" aria-hidden="true">
+      ${column.label}:
+    </span>`
+  }
 
-    const resolve = <V>(
-      value: V | ((r: any) => V) | undefined,
-    ): V | undefined =>
-      typeof value === 'function' ? (value as any)(row) : value
-
-    switch (config.type) {
-      case 'badge': {
-        const variant = resolve(config.variant) || 'information'
-        const size = resolve(config.size) || this.#Density.badge
-        return html`
-          <gds-badge size="${size}" variant="${variant}">
-            ${resolve(config.value)}
-          </gds-badge>
-        `
-      }
-
-      case 'image': {
-        const src = resolve(config.src)
-        if (!src) return null
-
-        const width = resolve(config.width) || '24px'
-        const height = resolve(config.height) || '24px'
-        const borderRadius = resolve(config['border-radius']) || 'max'
-        const objectFit = resolve(config['object-fit']) || 'cover'
-        const alt = resolve(config.alt) || ''
-
-        return html`
-          <gds-img
-            src="${src}"
-            alt="${alt}"
-            width="${width}"
-            height="${height}"
-            border-radius="${borderRadius}"
-            object-fit="${objectFit}"
-            object-position="center"
-          ></gds-img>
-        `
-      }
-
-      case 'icon': {
-        const template = resolve(config.template) as string | undefined
-        const size = resolve(config.size)
-        const color = resolve(config.color)
-        const clonedSlot = this.#getSlotContent(template)
-
-        if (!clonedSlot) return null
-
-        if (clonedSlot instanceof DocumentFragment) {
-          const iconElement = clonedSlot.firstElementChild
-          if (iconElement) {
-            if (size) iconElement.setAttribute('size', size)
-            if (color) iconElement.setAttribute('color', color)
-          }
-        }
-
-        return clonedSlot
-      }
-
-      case 'button': {
-        const size = resolve(config.size) || this.#Density.button
-        const variant = resolve(config.variant)
-        const rank = resolve(config.rank)
-        const label = resolve(config.label)
-        const template = resolve(config.template) as string | undefined
-        const clonedSlot = this.#getSlotContent(template)
-        const content = [label, clonedSlot]
-
-        return html`
-          <gds-button
-            size="${size}"
-            variant="${variant || 'neutral'}"
-            rank="${rank || 'secondary'}"
-            @click="${(e: Event) => {
-              e.stopPropagation()
-              config.onClick(row)
-            }}"
-          >
-            ${content}
-          </gds-button>
-        `
-      }
-
-      case 'link': {
-        const href = resolve(config.href)
-        if (!href) return null
-        const label = resolve(config.label)
-        const target = resolve(config.target)
-        const download = resolve(config.download)
-        const template = resolve(config.template) as string | undefined
-        const clonedSlot = this.#getSlotContent(template)
-        const content = [label, clonedSlot]
-
-        return html`
-          <gds-link
-            href=${ifDefined(href)}
-            target=${ifDefined(target)}
-            .download=${download}
-            text-decoration="underline"
-          >
-            ${content}
-          </gds-link>
-        `
-      }
-
-      case 'context-menu': {
-        const items = config.items
-        const size = this.#Density.button
-        return html`
-          <gds-context-menu>
-            <gds-button
-              slot="trigger"
-              size="${size}"
-              rank="tertiary"
-              label="${msg('Actions')}"
-            >
-              <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
-            </gds-button>
-            ${items.map((item) => {
-              const label = resolve(item.label)
-
-              return html`
-                <gds-menu-item @click="${() => item.onClick(row)}">
-                  ${label}
-                </gds-menu-item>
-              `
-            })}
-          </gds-context-menu>
-        `
-      }
-
-      case 'formatted-number': {
-        const value = resolve(config.value)
-        const formatter =
-          Table.FormatNumber[config.format || 'decimalsAndThousands']
-        return formatter(value, config.locale, config.currency, config.decimals)
-      }
-
-      case 'formatted-account': {
-        const value = resolve(config.value)
-        const formatter = Table.FormatAccount[config.format || 'seb-account']
-        return formatter(value)
-      }
-
-      case 'formatted-date': {
-        const value = resolve(config.value)
-        const formatter = Table.FormatDate[config.format || 'dateLong']
-        return formatter(value, config.locale)
-      }
-
-      default:
-        return null
-    }
+  #renderSlotElement(
+    columnKey: string,
+    rowKey: string | number,
+    slotId: string,
+  ) {
+    const slotName = `${columnKey}:${rowKey}:${slotId}`
+    return html`<slot name="${slotName}"></slot>`
   }
 
   /**
-   * Renders the content of a table cell with support for custom transformations,
-   * cell types, and responsive mobile labels.
+   * Renders cell content with proper ordering and wrapping.
    *
-   * Value resolution priority:
-   * 1. column.value - Direct transform function
-   * 2. cell.value - Cell type configuration (badge, button, etc.)
-   * 3. row[column.key] - Raw data value
+   * **Slot-based content:**
+   * - Renders in exact order: ['lead', 'value', 'button'] → icon, text, button
+   * - Wraps value when column.justify is set (for flexbox)
+   * - Slots stay unwrapped
+   *
+   * **Plain content:**
+   * - Wraps when column.justify is set, otherwise renders directly
    */
-  #renderCellContent(row: T, column: Types.Column) {
-    const { cell } = column
+  #renderCellContent(row: T, column: Types.Column, index: number) {
+    const rawValue = column.value ? column.value(row) : row[column.key]
+    const isMobile = this._isMobile && this.responsive
+    const shouldWrap = !!column.justify
 
-    let value: any
-    if (column.value) {
-      value = column.value(row)
-    } else if (cell?.value) {
-      value = this.#renderCell(cell.value, row)
+    let content: unknown
+
+    if (Types.isSlotValue(rawValue)) {
+      const rowKey = this.#getRowKey(row, index, rawValue.key)
+
+      content = rawValue.slots.map((slotItem) => {
+        if (slotItem === 'value') {
+          if (rawValue.value === undefined) return null
+
+          return shouldWrap
+            ? this.#renderCellWrapped(rawValue.value)
+            : rawValue.value
+        }
+
+        return this.#renderSlotElement(column.key, rowKey, slotItem)
+      })
     } else {
-      value = row[column.key]
+      content = shouldWrap ? this.#renderCellWrapped(rawValue) : rawValue
     }
 
-    const processedValue = column.justify ? html`<span>${value}</span>` : value
-    const isResponsive = this._isMobile && this.responsive
-    const mobileLabel = isResponsive
-      ? html`
-          <span class="column-label" aria-hidden="true">
-            ${column.label}:
-          </span>
-        `
-      : null
-
-    const ariaLabel = isResponsive ? `${column.label}: ` : ''
-
     return html`
-      <div class="cell-content" aria-label="${ariaLabel}">
-        ${[
-          mobileLabel,
-          this.#renderCell(cell?.lead, row),
-          processedValue,
-          this.#renderCell(cell?.trail, row),
-        ]}
+      <div
+        class="cell-content"
+        aria-label=${ifDefined(isMobile ? column.label : undefined)}
+      >
+        ${isMobile ? this.#renderMobileLabel(column) : null} ${content}
       </div>
     `
   }
@@ -747,6 +654,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
           indeterminate: this.#isPartialSelection,
           ariaLabel: msg('Select all rows'),
           onToggle: () => this.#handleSelectAll({} as CustomEvent),
+          skip: this.disableSelectAll,
         })}
       </th>
     `
@@ -772,7 +680,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  #renderTableCell(row: T, column: Types.Column) {
+  #renderTableCell(row: T, column: Types.Column, index: number) {
     const classes = classMap({
       [`align-${column.align}`]: !!column.align,
       [`justify-${column.justify}`]: !!column.justify,
@@ -785,7 +693,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     return html`
       <td style=${style} class=${classes}>
-        ${this.#renderCellContent(row, column)}
+        ${this.#renderCellContent(row, column, index)}
       </td>
     `
   }
@@ -808,10 +716,10 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     `
   }
 
-  #renderRowCells(row: T) {
+  #renderRowCells(row: T, index: number) {
     return this.columns
       .filter((column) => this._view.visibleColumns.has(column.key))
-      .map((column) => this.#renderTableCell(row, column))
+      .map((column) => this.#renderTableCell(row, column, index))
   }
 
   #renderActionsCell(row: T, index: number) {
@@ -825,7 +733,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       `
     }
 
-    const content = this.#renderCell(this.actions.cell, row)
+    const rowKey = this.#getRowKey(row, index)
 
     const classes = classMap({
       'actions-cell': true,
@@ -835,7 +743,9 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
 
     return html`
       <td class="${classes}">
-        <div class="cell-content">${content}</div>
+        <div class="cell-content">
+          ${this.#renderSlotElement('actions', rowKey, 'main')}
+        </div>
       </td>
     `
   }
@@ -850,7 +760,7 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
       >
         ${[
           this.#renderSelectableCell(index),
-          this.#renderRowCells(row),
+          this.#renderRowCells(row, index),
           this.#renderActionsCell(row, index),
         ]}
       </tr>
@@ -863,13 +773,17 @@ export class GdsTable<T extends Types.Row = Types.Row> extends GdsElement {
     disabled = false,
     ariaLabel,
     onToggle,
+    skip = false,
   }: {
     checked: boolean
     indeterminate?: boolean
     disabled?: boolean
     ariaLabel: string
     onToggle: () => void
+    skip?: boolean
   }) {
+    if (skip) return null
+
     const toggle = (e: Event) => {
       e.stopPropagation()
       if (disabled) return

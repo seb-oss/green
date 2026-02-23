@@ -400,6 +400,10 @@ export const TableStyles = css`
       display: contents;
     }
 
+    .responsive table {
+      max-width: 100%;
+    }
+
     .responsive thead {
       position: sticky;
       top: var(--gds-sys-space-s);
@@ -449,11 +453,21 @@ export const TableStyles = css`
 
     .responsive td .column-label {
       text-align: left;
-      margin-right: auto;
+      flex: 1;
+      min-width: 0;
     }
 
     .responsive td .cell-content {
+      justify-content: flex-start;
       flex: 1;
+      width: 100%;
+      gap: var(--gds-sys-space-s);
+    }
+
+    .responsive td .cell-wrapped-content {
+      flex: 1;
+      justify-content: flex-end;
+      text-align: right;
     }
 
     .responsive tr:hover,
@@ -463,7 +477,6 @@ export const TableStyles = css`
   }
 
   /* Medium screens: input and dropdown side by side */
-  /* Medium screens: side by side layout */
   @media (max-width: 760px) and (min-width: 480px) {
     .header {
       display: grid;

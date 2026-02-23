@@ -4,15 +4,22 @@ import { Meta } from '@storybook/addon-docs/blocks'
 
 # Table Developer Guide
 
-This guide explains how to implement the table component with data handling, pagination, and filtering.
+This guide explains how to implement the table component with data handling, pagination, slot-based cell composition, and filtering.
 
 ## Table of Contents
 
 1. [Data Model Structure](#data-model-structure)
 2. [Data Provider Function](#data-provider-function)
 3. [Column Configuration](#column-configuration)
-4. [Framework Integration](#framework-integration)
-5. [Complete Example](#complete-example)
+4. [Slot-Based Cell Composition](#slot-based-cell-composition)
+5. [Actions Column](#actions-column)
+6. [Framework Integration](#framework-integration)
+7. [Complete Example](#complete-example)
+8. [Selection Handling](#selection-handling)
+9. [Custom State Slots](#custom-state-slots)
+10. [Reactive Properties](#reactive-properties)
+11. [Best Practices](#best-practices)
+12. [Migration Guide: Cell Types to Slots](#migration-guide-cell-types-to-slots)
 
 ---
 
@@ -134,13 +141,12 @@ const columns: Types.Column[] = [...]
 const dataProvider = async (request: Types.Request): Promise<Types.Response<DataRow>> => {...}
 ```
 
- 
 ### Basic Column
 
 A column configuration maps data properties to table columns with display and behavior options.
 
 ```typescript
-const columns: TableColumn[] = [
+const columns: Types.Column[] = [
   {
     key: 'title',     // Property key in your data row object
     label: 'Title',   // Column header text displayed to users
@@ -153,402 +159,824 @@ const columns: TableColumn[] = [
 ]
 ```
 
-### Column with Cell Configuration
+### Custom Value Extractor
+
+The optional `value` function lets you control what raw value the table uses for display, sorting, and search. This is useful when your row data shape doesn't match a simple key lookup:
 
 ```typescript
 {
-  key: 'status',
-  label: 'Status',
+  key: 'fullName',
+  label: 'Full Name',
   sortable: true,
-  cell: {
-    value: {
-      type: 'badge',
-      value: (row: DataRow) => row.status,
-      variant: (row: DataRow) => 
-        row.status === 'Active' ? 'positive' : 'negative',
-    }
-  }
+  value: (row) => `${row.firstName} ${row.lastName}`,
 }
 ```
 
-### Cell Slots
+---
 
-Cell configuration supports three slots: `lead`, `value`, and `trail`. Each slot accepts any of the predefined cell types (badge, button, link, image, context-menu, formatted values) and can contain single or multiple cell definitions.
+## Slot-Based Cell Composition
 
-Cell types correspond to Green Design System components (`gds-badge`, `gds-button`, `gds-link`, `gds-img`, etc.). Most component properties are available in the cell configuration, with the exception of layout and positioning properties which are handled by the table.
+The table uses a **slot composition model** for rich cell content. Instead of declaring cell types in column configuration, you use the `Slot()` helper and named HTML slots to inject any Green Design System component (or custom HTML) into cells.
 
-**Structure:**
+This approach gives you full control over cell rendering any component, any layout, any interaction without the table needing to know about the content.
+
+### How It Works
+
+The slot system has three steps:
+
+1. **Wrap cell values** with `Slot()` in your data provider to declare which slots each cell uses
+2. **Listen** for the `gds-table-data-loaded` event
+3. **Render slot content** into the table's light DOM using named slot elements
+
+### The `Slot()` Helper
+
+Import the `Slot` function from the table component:
 
 ```typescript
-cell: {
-  lead?: Cell | Cell[]    // Content before main value
-  value?: Cell | Cell[]   // Main cell content
-  trail?: Cell | Cell[]   // Content after main value
-}
+import { Slot } from '@sebgroup/green-core/components/table/table.types'
 ```
 
-**Example with trail slot:**
+`Slot()` wraps a cell value and declares slot positions:
+
 ```typescript
-{
-  key: 'description',
-  label: 'Description',
-  cell: {
-    trail: {
-      type: 'button',
-      size: 'xs',
-      rank: 'tertiary',
-      template: 'copy-icon',
-      onClick: (row) => navigator.clipboard.writeText(row.description),
-    }
-  }
-}
+Slot(value, slots, key?)
 ```
 
-**Example with multiple slots:**
+| Parameter | Type | Description |
+|---|---|---|
+| `value` | `unknown` | The fallback display value (also used for sorting and search) |
+| `slots` | `string[]` | Ordered array of slot IDs that define the cell layout |
+| `key` | `string \| number` | Optional custom row key (defaults to `row.id` or row index) |
+
+The special slot ID `'value'` renders the plain text value inline. All other IDs create named `<slot>` elements.
+
 ```typescript
-{
-  key: 'email',
-  label: 'Email',
-  cell: {
-    lead: {
-      type: 'image',
-      src: (row) => row.avatar,
-      width: '32px',
-      height: '32px',
-    },
-    value: (row) => row.email,  // Plain text
-    trail: {
-      type: 'badge',
-      value: (row) => row.verified ? 'Verified' : 'Pending',
-      variant: (row) => row.verified ? 'positive' : 'information',
-    }
-  }
-}
+// Text value with a trailing copy button
+Slot(row.email, ['value', 'copy-button'])
+//    ↑ value     ↑ renders text   ↑ renders <slot name="email:{rowKey}:copy-button">
+
+// Only slotted content, no plain text
+Slot(row.status, ['status'])
+//    ↑ used for sort/search   ↑ renders <slot name="status:{rowKey}:status">
+
+// Leading image, then text value
+Slot(row.name, ['avatar', 'value'])
+//                ↑ slot        ↑ plain text
 ```
 
-> The same cell slot structure applies to the `actions` configuration.
+> `Slot()` objects transparently participate in sorting, searching, and string operations the table uses the `value` parameter for all comparisons.
 
-### Cell Types
+### Slot Naming Convention
 
-#### Badge
-```typescript
-cell: {
-  value: {
-    type: 'badge',
-    value: (row) => row.status,
-    variant: (row) => 'positive' | 'negative' | 'information',
-  }
-}
+All cell slots follow the pattern:
+
+```
+{columnKey}:{rowKey}:{slotId}
 ```
 
-#### Image
+- **columnKey** The `key` from the column configuration (e.g. `'name'`, `'email'`, `'status'`)
+- **rowKey** Resolved in order: custom `Slot` key → `row.id` → row index + 1
+- **slotId** The arbitrary string you defined in the `slots` array
+
+### Step 1: Normalize Row Data
+
+Wrap cell values that need rich content with `Slot()`:
+
 ```typescript
-cell: {
-  value: {
-    type: 'image',
-    src: (row) => row.imageUrl,
-    alt: (row) => row.title,
-    width: '48px', // supports all sizing tokens
-    height: '48px', // supports all sizing tokens
-  }
-}
+const normalizeRow = (row: any) => ({
+  ...row,
+  name:     Slot(row.name, ['avatar', 'value']),       // image + text
+  email:    Slot(row.email, ['value', 'copy-button']),  // text + button
+  status:   Slot(row.status, ['status']),               // badge only
+  amount:   Slot(row.amount, ['amount', 'currency']),   // formatted number + badge
+  account:  Slot(row.account, ['main']),                // formatted account
+  login:    Slot(row.lastLogin, ['main']),              // formatted date
+  download: Slot(row.download ?? '#', ['main']),        // link
+})
 ```
 
-#### Button
+Cells without `Slot()` render as plain text automatically.
+
+### Step 2: Listen for Data Loaded
+
+The table emits `gds-table-data-loaded` after each data fetch. The event detail contains the current page rows. Use this to render slot content into the table's light DOM:
+
 ```typescript
-cell: {
-  value: {
-    type: 'button',
-    label: 'Edit',
-    size: 'small',
-    rank: 'secondary',
-    onClick: (row) => console.log('Edit', row),
-  }
-}
+table.addEventListener('gds-table-data-loaded', (e) => {
+  render(slotContent(e.detail.rows), table)
+})
 ```
 
-#### Link
+### Step 3: Render Slot Content
+
+Create slot elements using the `{columnKey}:{rowKey}:{slotId}` naming convention:
+
 ```typescript
-cell: {
-  value: {
-    type: 'link',
-    label: 'View',
-    href: (row) => `/items/${row.id}`,
-  }
-}
+const slotContent = (rows) => html`
+  ${rows.map((row) => html`
+    <!-- name column: avatar image -->
+    <gds-img
+      slot="name:${row.id}:avatar"
+      src="${row.avatarUrl}"
+      alt="${String(row.name)}"
+      width="xl"
+      height="xl"
+    ></gds-img>
+
+    <!-- email column: copy button -->
+    <gds-button
+      slot="email:${row.id}:copy-button"
+      rank="tertiary"
+      size="small"
+    >
+      <gds-icon-copy></gds-icon-copy>
+    </gds-button>
+
+    <!-- status column: badge -->
+    <gds-badge
+      slot="status:${row.id}:status"
+      variant="${String(row.status) === 'Active' ? 'positive' : 'negative'}"
+      size="small"
+    >
+      ${String(row.status)}
+    </gds-badge>
+
+    <!-- amount column: formatted number + currency badge -->
+    <gds-formatted-number
+      slot="amount:${row.id}:amount"
+      .value=${row.amount}
+    ></gds-formatted-number>
+    <gds-badge slot="amount:${row.id}:currency" size="small">
+      SEK
+    </gds-badge>
+
+    <!-- account column: formatted account -->
+    <gds-formatted-account
+      slot="account:${row.id}:main"
+      account="${row.account}"
+      format="seb-account"
+    ></gds-formatted-account>
+
+    <!-- login column: formatted date -->
+    <gds-formatted-date
+      slot="login:${row.id}:main"
+      .value="${String(row.login)}"
+      locale="sv-SE"
+      format="dateLong"
+    ></gds-formatted-date>
+
+    <!-- download column: link with icon -->
+    <gds-link
+      slot="download:${row.id}:main"
+      href="${row.download ?? '#'}"
+      text-decoration="underline"
+      download
+    >
+      Download file
+      <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
+    </gds-link>
+  `)}
+`
 ```
 
-#### Context Menu
+### Multiple Slots in a Single Cell
+
+A cell can have multiple slot positions. The order in the `slots` array controls the layout order:
+
 ```typescript
-cell: {
-  value: {
-    type: 'context-menu',
-    items: [
-      {
-        label: 'Edit',
-        onClick: (row) => console.log('Edit', row),
-      },
-      {
-        label: 'Delete',
-        onClick: (row) => console.log('Delete', row),
-      },
-    ]
-  }
-}
+// Image on the left, text in the middle, badge on the right
+Slot(row.name, ['avatar', 'value', 'verified-badge'])
 ```
-
-#### Formatted Number
-```typescript
-cell: {
-  value: {
-    type: 'formatted-number',
-    value: (row) => row.amount,
-    format: 'decimalsAndThousands',
-    locale: 'sv-SE',
-  }
-}
-```
-
-#### Formatted Account
-```typescript
-cell: {
-  value: {
-    type: 'formatted-account',
-    value: (row) => row.accountNumber,
-    format: 'seb-account',
-  }
-}
-```
-
-#### Formatted Date
-```typescript
-cell: {
-  value: {
-    type: 'formatted-date',
-    value: (row) => row.date,
-    format: 'dateLong',
-    locale: 'sv-SE',
-  }
-}
-```
-
-#### Dynamic Content
-
-- Templates can be defined within the table to provide custom content for specific cell types
-- Templates are referenced using `name` attribute
-- Can be used to inject for example icons into cell types such as button on `main`, `lead` or `trail` slot.
-
-```typescript
-{
-  key: 'email',
-  label: 'Email',
-  sortable: true,
-  justify: 'space-between',
-  cell: {
-    trail: {
-      type: 'button',
-      value: (row: UserData) => row.email,
-      size: 'xs',
-      template: 'email-copy',  // References template content
-    },
-  },
-}
-```
-
-#### Icon
-
-Icons can be used in any cell slot (lead, value, trail) via templates.
-
-```typescript
-cell: {
-  lead: {
-    type: 'icon',
-    template: 'department-icon',
-    size: 'm',        // All the sizing tokens
-    color: 'neutral-02', // Optional: Any valid color token
-  }
-}
-
-
-**Template definition**
 
 ```html
-<!-- Used as icon button -->
-<template name="email-copy">
-  <gds-icon-copy></gds-icon-copy>
-</template>
+<gds-img slot="name:${row.id}:avatar" src="${row.avatar}" width="xl" height="xl"></gds-img>
+<gds-badge slot="name:${row.id}:verified-badge" variant="positive" size="small">Verified</gds-badge>
+```
 
-<!-- Used as trail icon on link -->
-<template name="download-image">
-  <gds-icon-cloud-download
-    slot="trail" <!-- Slots can be defined here -->
-></gds-icon-cloud-download>
-</template>
+### Multiple Elements in a Single Slot
 
-<template name="department-icon">
-  <gds-icon-cloud-download></gds-icon-cloud-download>
-</template>
+Multiple elements can share the same slot name. They render in DOM order within that slot position:
 
-<!-- Or with default size/color in template -->
-<template name="status-icon">
-  <gds-icon-check size="l" color="positive"></gds-icon-check>
-</template>
+```html
+<!-- Two buttons sharing the same slot -->
+<gds-button slot="actions:${row.id}:main" rank="tertiary" size="small">
+  <gds-icon-pin></gds-icon-pin> Activate
+</gds-button>
+<gds-button slot="actions:${row.id}:main" rank="tertiary" size="small">
+  <gds-icon-cross-small></gds-icon-cross-small> Delete
+</gds-button>
+```
 
+---
+
+## Actions Column
+
+The `actions` property defines an actions column rendered as the last cell of each row.
+
+### Configuration
+
+When passed as an object, it configures the column header. Action content is provided through slots:
+
+```typescript
+const actions: Types.Actions = {
+  label: 'Actions',
+  justify: 'end',
+}
+```
+
+### Action Slot Content
+
+The actions column uses `actions:{rowKey}:main` as its slot name:
+
+```typescript
+const actionSlotContent = (rows) => html`
+  ${rows.map((row) => html`
+    <gds-context-menu slot="actions:${row.id}:main">
+      <gds-button slot="trigger" rank="tertiary" size="small">
+        <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+      </gds-button>
+      <gds-menu-item>Edit ${String(row.name)}</gds-menu-item>
+      <gds-menu-item>Delete</gds-menu-item>
+    </gds-context-menu>
+  `)}
+`
+```
+
+### Actions as a Render Function
+
+Alternatively, pass a function that returns a template for each row. This skips the slot system entirely:
+
+```typescript
+const actions = (row, index) => html`
+  <gds-button rank="tertiary" size="small" @click=${() => edit(row)}>
+    Edit
+  </gds-button>
+`
 ```
 
 ---
 
 ## Framework Integration
-Coming soon...
-### Lit
+
+The table is a web component that works across all frameworks. The key pattern is the same everywhere:
+
+1. Configure columns and data provider
+2. Normalize rows with `Slot()`
+3. On `gds-table-data-loaded`, render slot content into the table element
+
+Below are full working examples for each framework.
+
+<details>
+<summary><strong>Lit</strong></summary>
 
 ```typescript
-```
+import { LitElement, html } from 'lit'
+import { customElement, state } from 'lit/decorators.js'
+import { createRef, ref } from 'lit/directives/ref.js'
+import { render } from 'lit'
 
-### React
+import '@sebgroup/green-core/components/table'
+import '@sebgroup/green-core/components/badge'
+import '@sebgroup/green-core/components/context-menu'
+import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal'
+import '@sebgroup/green-core/components/formatted-text/number'
+import '@sebgroup/green-core/components/formatted-text/date'
 
-```tsx
-```
+import { Slot, Types } from '@sebgroup/green-core/components/table'
 
-### Angular
-
-```typescript
- 
-```
-
----
-
-## Complete Example
-
-```typescript
-interface DataRow {
+interface UserRow {
   id: number
-  title: string
-  description: string
-  category: string
+  name: string
+  email: string
   status: 'Active' | 'Inactive'
   amount: number
   date: string
 }
 
-const columns: TableColumn[] = [
-  {
-    key: 'id',
-    label: 'ID',
-    sortable: false,
-  },
-  {
-    key: 'title',
-    label: 'Title',
-    sortable: true,
-  },
-  {
-    key: 'description',
-    label: 'Description',
-    sortable: true,
-    width: '300px',
-  },
-  {
-    key: 'category',
-    label: 'Category',
-    sortable: true,
-  },
-  {
-    key: 'status',
-    label: 'Status',
-    sortable: true,
-    cell: {
-      value: {
-        type: 'badge',
-        value: (row: DataRow) => row.status,
-        variant: (row: DataRow) =>
-          row.status === 'Active' ? 'positive' : 'negative',
-      }
-    }
-  },
-  {
-    key: 'amount',
-    label: 'Amount',
-    sortable: true,
+@customElement('my-user-table')
+export class MyUserTable extends LitElement {
+  private tableRef = createRef<any>()
+
+  private columns: Types.Column[] = [
+    { key: 'id',     label: 'ID' },
+    { key: 'name',   label: 'Name',   sortable: true },
+    { key: 'email',  label: 'Email',  sortable: true },
+    { key: 'status', label: 'Status', sortable: true },
+    { key: 'amount', label: 'Amount', sortable: true, justify: 'end' },
+    { key: 'date',   label: 'Date',   sortable: true },
+  ]
+
+  private actions: Types.Actions = {
+    label: 'Actions',
     justify: 'end',
-    cell: {
-      value: {
-        type: 'formatted-number',
-        value: (row: DataRow) => row.amount,
-      }
+  }
+
+  private normalizeRow(row: UserRow) {
+    return {
+      ...row,
+      status: Slot(row.status, ['badge']),
+      amount: Slot(row.amount, ['formatted']),
+      date:   Slot(row.date, ['formatted']),
     }
-  },
-  {
-    key: 'date',
-    label: 'Date',
-    sortable: true,
-    cell: {
-      value: {
-        type: 'formatted-date',
-        value: (row: DataRow) => row.date,
-        locale: 'sv-SE',
-        format: 'dateLong',
-      }
+  }
+
+  private dataProvider = async (
+    request: Types.Request
+  ): Promise<Types.Response<any>> => {
+    const response = await fetch('/api/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(request),
+    })
+    const data = await response.json()
+    return {
+      rows: data.items.map((row: UserRow) => this.normalizeRow(row)),
+      total: data.totalCount,
     }
-  },
+  }
+
+  private slotContent(rows: any[]) {
+    return html`
+      ${rows.map((row: any) => html`
+        <gds-badge
+          slot="status:${row.id}:badge"
+          variant="${String(row.status) === 'Active' ? 'positive' : 'negative'}"
+          size="small"
+        >${String(row.status)}</gds-badge>
+
+        <gds-formatted-number
+          slot="amount:${row.id}:formatted"
+          .value=${row.amount}
+        ></gds-formatted-number>
+
+        <gds-formatted-date
+          slot="date:${row.id}:formatted"
+          .value="${String(row.date)}"
+          locale="sv-SE"
+          format="dateLong"
+        ></gds-formatted-date>
+
+        <gds-context-menu slot="actions:${row.id}:main">
+          <gds-button slot="trigger" rank="tertiary" size="small">
+            <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+          </gds-button>
+          <gds-menu-item>Edit</gds-menu-item>
+          <gds-menu-item>Delete</gds-menu-item>
+        </gds-context-menu>
+      `)}
+    `
+  }
+
+  private handleDataLoaded(e: CustomEvent) {
+    const table = this.tableRef.value
+    if (table) render(this.slotContent(e.detail.rows), table)
+  }
+
+  render() {
+    return html`
+      <gds-table
+        ${ref(this.tableRef)}
+        .columns=${this.columns}
+        .actions=${this.actions}
+        .data=${this.dataProvider}
+        rows="10"
+        searchable
+        settings
+        selectable
+        density="comfortable"
+        @gds-table-data-loaded=${(e: CustomEvent) => this.handleDataLoaded(e)}
+      ></gds-table>
+    `
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>React</strong></summary>
+
+```tsx
+import React, { useRef, useCallback, useMemo } from 'react'
+import { render, html } from 'lit'
+
+// Import web components (side-effect registration)
+import '@sebgroup/green-core/components/table'
+import '@sebgroup/green-core/components/badge'
+import '@sebgroup/green-core/components/context-menu'
+import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal'
+import '@sebgroup/green-core/components/formatted-text/number'
+import '@sebgroup/green-core/components/formatted-text/date'
+
+import { Slot, Types } from '@sebgroup/green-core/components/table'
+
+interface UserRow {
+  id: number
+  name: string
+  email: string
+  status: 'Active' | 'Inactive'
+  amount: number
+  date: string
+}
+
+const columns: Types.Column[] = [
+  { key: 'id',     label: 'ID' },
+  { key: 'name',   label: 'Name',   sortable: true },
+  { key: 'email',  label: 'Email',  sortable: true },
+  { key: 'status', label: 'Status', sortable: true },
+  { key: 'amount', label: 'Amount', sortable: true, justify: 'end' },
+  { key: 'date',   label: 'Date',   sortable: true },
 ]
 
-const actions = {
+const actions: Types.Actions = {
   label: 'Actions',
   justify: 'end',
-  cell: {
-    type: 'context-menu',
-    items: [
-      {
-        label: 'Edit',
-        onClick: (row: DataRow) => console.log('Edit', row),
-      },
-      {
-        label: 'View Details',
-        onClick: (row: DataRow) => console.log('View', row),
-      },
-      {
-        divider: true,
-        label: 'Delete',
-        onClick: (row: DataRow) => {
-          if (confirm(`Delete ${row.title}?`)) {
-            console.log('Delete', row)
-          }
-        },
-      },
-    ]
+}
+
+function normalizeRow(row: UserRow) {
+  return {
+    ...row,
+    status: Slot(row.status, ['badge']),
+    amount: Slot(row.amount, ['formatted']),
+    date:   Slot(row.date, ['formatted']),
   }
 }
 
+function slotContent(rows: any[]) {
+  return html`
+    ${rows.map((row: any) => html`
+      <gds-badge
+        slot="status:${row.id}:badge"
+        variant="${String(row.status) === 'Active' ? 'positive' : 'negative'}"
+        size="small"
+      >${String(row.status)}</gds-badge>
+
+      <gds-formatted-number
+        slot="amount:${row.id}:formatted"
+        .value=${row.amount}
+      ></gds-formatted-number>
+
+      <gds-formatted-date
+        slot="date:${row.id}:formatted"
+        .value="${String(row.date)}"
+        locale="sv-SE"
+        format="dateLong"
+      ></gds-formatted-date>
+
+      <gds-context-menu slot="actions:${row.id}:main">
+        <gds-button slot="trigger" rank="tertiary" size="small">
+          <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+        </gds-button>
+        <gds-menu-item>Edit</gds-menu-item>
+        <gds-menu-item>Delete</gds-menu-item>
+      </gds-context-menu>
+    `)}
+  `
+}
+
 const dataProvider = async (
-  request: TableRequest
-): Promise<TableResponse<DataRow>> => {
-  const response = await fetch('/api/data', {
+  request: Types.Request
+): Promise<Types.Response<any>> => {
+  const response = await fetch('/api/users', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(request),
   })
-  
   const data = await response.json()
-  
   return {
-    rows: data.items,
+    rows: data.items.map(normalizeRow),
     total: data.totalCount,
   }
 }
 
-// Usage
-html`
+export function UserTable() {
+  const tableRef = useRef<any>(null)
+
+  const handleDataLoaded = useCallback((e: Event) => {
+    const table = tableRef.current
+    const detail = (e as CustomEvent).detail
+    if (table) render(slotContent(detail.rows), table)
+  }, [])
+
+  // Stable references for object/function props
+  const stableColumns = useMemo(() => columns, [])
+  const stableActions = useMemo(() => actions, [])
+  const stableData = useMemo(() => dataProvider, [])
+
+  return (
+    <gds-table
+      ref={tableRef}
+      columns={stableColumns}
+      actions={stableActions}
+      data={stableData}
+      rows="10"
+      searchable
+      settings
+      selectable
+      density="comfortable"
+      onGdsTableDataLoaded={handleDataLoaded}
+    />
+  )
+}
+```
+
+> **Note**: When using web components in React, object and function properties must be set via refs or with stable references (`useMemo`). The `gds-table-data-loaded` event maps to `onGdsTableDataLoaded` in React's synthetic event system, or you can use `addEventListener` via the ref. Slot content is rendered with Lit's `render()` into the table element's light DOM.
+
+</details>
+
+<details>
+<summary><strong>Angular</strong></summary>
+
+```typescript
+// user-table.component.ts
+import { Component, ViewChild, ElementRef, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { render, html } from 'lit'
+
+// Import web component registrations
+import '@sebgroup/green-core/components/table'
+import '@sebgroup/green-core/components/badge'
+import '@sebgroup/green-core/components/context-menu'
+import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal'
+import '@sebgroup/green-core/components/formatted-text/number'
+import '@sebgroup/green-core/components/formatted-text/date'
+
+import { Slot, Types } from '@sebgroup/green-core/components/table'
+
+interface UserRow {
+  id: number
+  name: string
+  email: string
+  status: 'Active' | 'Inactive'
+  amount: number
+  date: string
+}
+
+@Component({
+  selector: 'app-user-table',
+  standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `
+    <gds-table
+      #tableEl
+      [columns]="columns"
+      [actions]="actions"
+      [data]="dataProvider"
+      rows="10"
+      searchable
+      settings
+      selectable
+      density="comfortable"
+      (gds-table-data-loaded)="onDataLoaded($event)"
+    ></gds-table>
+  `,
+})
+export class UserTableComponent {
+  @ViewChild('tableEl', { static: true }) tableEl!: ElementRef
+
+  columns: Types.Column[] = [
+    { key: 'id',     label: 'ID' },
+    { key: 'name',   label: 'Name',   sortable: true },
+    { key: 'email',  label: 'Email',  sortable: true },
+    { key: 'status', label: 'Status', sortable: true },
+    { key: 'amount', label: 'Amount', sortable: true, justify: 'end' },
+    { key: 'date',   label: 'Date',   sortable: true },
+  ]
+
+  actions: Types.Actions = {
+    label: 'Actions',
+    justify: 'end',
+  }
+
+  dataProvider = async (
+    request: Types.Request
+  ): Promise<Types.Response<any>> => {
+    const response = await fetch('/api/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(request),
+    })
+    const data = await response.json()
+    return {
+      rows: data.items.map((row: UserRow) => this.normalizeRow(row)),
+      total: data.totalCount,
+    }
+  }
+
+  private normalizeRow(row: UserRow) {
+    return {
+      ...row,
+      status: Slot(row.status, ['badge']),
+      amount: Slot(row.amount, ['formatted']),
+      date:   Slot(row.date, ['formatted']),
+    }
+  }
+
+  onDataLoaded(event: Event) {
+    const detail = (event as CustomEvent).detail
+    const table = this.tableEl.nativeElement
+    render(this.slotContent(detail.rows), table)
+  }
+
+  private slotContent(rows: any[]) {
+    return html`
+      ${rows.map((row: any) => html`
+        <gds-badge
+          slot="status:${row.id}:badge"
+          variant="${String(row.status) === 'Active' ? 'positive' : 'negative'}"
+          size="small"
+        >${String(row.status)}</gds-badge>
+
+        <gds-formatted-number
+          slot="amount:${row.id}:formatted"
+          .value=${row.amount}
+        ></gds-formatted-number>
+
+        <gds-formatted-date
+          slot="date:${row.id}:formatted"
+          .value="${String(row.date)}"
+          locale="sv-SE"
+          format="dateLong"
+        ></gds-formatted-date>
+
+        <gds-context-menu slot="actions:${row.id}:main">
+          <gds-button slot="trigger" rank="tertiary" size="small">
+            <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+          </gds-button>
+          <gds-menu-item>Edit</gds-menu-item>
+          <gds-menu-item>Delete</gds-menu-item>
+        </gds-context-menu>
+      `)}
+    `
+  }
+}
+```
+
+> **Note**: The `CUSTOM_ELEMENTS_SCHEMA` allows Angular to recognize custom element tags. Property bindings like `[columns]` and `[data]` set JavaScript properties directly on the web component. Lit's `render()` is used in the data-loaded handler to populate the table's light DOM with slot content.
+
+</details>
+
+---
+
+## Complete Example
+
+A full example with row normalization, slot content, and table configuration:
+
+```typescript
+import { html, render } from 'lit'
+import { createRef, ref } from 'lit/directives/ref.js'
+
+import '@sebgroup/green-core/components/table'
+import '@sebgroup/green-core/components/badge'
+import '@sebgroup/green-core/components/img'
+import '@sebgroup/green-core/components/context-menu'
+import '@sebgroup/green-core/components/formatted-text/number'
+import '@sebgroup/green-core/components/formatted-text/date'
+import '@sebgroup/green-core/components/formatted-text/account'
+import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal'
+import '@sebgroup/green-core/components/icon/icons/copy'
+import '@sebgroup/green-core/components/icon/icons/cloud-download'
+
+import { Slot, Types } from '@sebgroup/green-core/components/table'
+
+// ── Data shape ──────────────────────────────────────────────
+interface UserRow {
+  id: number
+  name: string
+  avatarUrl: string
+  email: string
+  status: 'Active' | 'Inactive'
+  department: string
+  amount: number
+  account: string
+  lastLogin: string
+  download: string
+}
+
+// ── Columns ─────────────────────────────────────────────────
+const columns: Types.Column[] = [
+  { key: 'id',         label: 'ID' },
+  { key: 'name',       label: 'Name',       sortable: true },
+  { key: 'email',      label: 'Email',      sortable: true, justify: 'space-between' },
+  { key: 'status',     label: 'Status',     sortable: true },
+  { key: 'department', label: 'Department', sortable: true },
+  { key: 'amount',     label: 'Amount',     sortable: true, justify: 'end' },
+  { key: 'account',    label: 'Account',    sortable: true },
+  { key: 'login',      label: 'Last Login', sortable: true },
+  { key: 'download',   label: 'Download' },
+]
+
+const actions: Types.Actions = {
+  label: 'Actions',
+  justify: 'end',
+}
+
+// ── Row normalization ───────────────────────────────────────
+const normalizeRow = (row: UserRow) => ({
+  ...row,
+  name:     Slot(row.name, ['avatar', 'value']),
+  email:    Slot(row.email, ['value', 'copy-button']),
+  status:   Slot(row.status, ['status']),
+  amount:   Slot(row.amount, ['amount', 'currency']),
+  account:  Slot(row.account, ['main']),
+  login:    Slot(row.lastLogin, ['main']),
+  download: Slot(row.download ?? '#', ['main']),
+})
+
+// ── Data provider ───────────────────────────────────────────
+const dataProvider = async (
+  request: Types.Request
+): Promise<Types.Response<any>> => {
+  const response = await fetch('/api/users', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(request),
+  })
+  const data = await response.json()
+  return {
+    rows: data.items.map(normalizeRow),
+    total: data.totalCount,
+  }
+}
+
+// ── Slot content ────────────────────────────────────────────
+const slotContent = (rows: any[]) => html`
+  ${rows.map((row: any) => html`
+    <gds-img
+      slot="name:${row.id}:avatar"
+      src="${row.avatarUrl}"
+      alt="${String(row.name)}"
+      width="xl" height="xl"
+    ></gds-img>
+
+    <gds-button
+      slot="email:${row.id}:copy-button"
+      rank="tertiary" size="small"
+      @click=${() => navigator.clipboard.writeText(String(row.email))}
+    >
+      <gds-icon-copy></gds-icon-copy>
+    </gds-button>
+
+    <gds-badge
+      slot="status:${row.id}:status"
+      variant="${String(row.status) === 'Active' ? 'positive' : 'negative'}"
+      size="small"
+    >${String(row.status)}</gds-badge>
+
+    <gds-formatted-number
+      slot="amount:${row.id}:amount"
+      .value=${row.amount}
+    ></gds-formatted-number>
+    <gds-badge slot="amount:${row.id}:currency" size="small">SEK</gds-badge>
+
+    <gds-formatted-account
+      slot="account:${row.id}:main"
+      account="${row.account}"
+      format="seb-account"
+    ></gds-formatted-account>
+
+    <gds-formatted-date
+      slot="login:${row.id}:main"
+      .value="${String(row.login)}"
+      locale="sv-SE" format="dateLong"
+    ></gds-formatted-date>
+
+    <gds-link
+      slot="download:${row.id}:main"
+      href="${row.download ?? '#'}"
+      text-decoration="underline" download
+    >
+      Download file
+      <gds-icon-cloud-download slot="trail"></gds-icon-cloud-download>
+    </gds-link>
+
+    <gds-context-menu slot="actions:${row.id}:main">
+      <gds-button slot="trigger" rank="tertiary" size="small">
+        <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+      </gds-button>
+      <gds-menu-item>Edit ${String(row.name)}</gds-menu-item>
+      <gds-menu-item>Delete</gds-menu-item>
+    </gds-context-menu>
+  `)}
+`
+
+// ── Render ───────────────────────────────────────────────────
+const tableRef = createRef<any>()
+
+const template = html`
   <gds-table
+    ${ref(tableRef)}
     .columns=${columns}
     .actions=${actions}
     .data=${dataProvider}
     rows="10"
-    .options=${[5, 10, 25, 50]}
     searchable
     settings
     selectable
     density="comfortable"
+    @gds-table-data-loaded=${(e: CustomEvent) => {
+      const table = tableRef.value
+      if (table) render(slotContent(e.detail.rows), table)
+    }}
   ></gds-table>
 `
 ```
@@ -592,9 +1020,9 @@ console.log(selection.data)     // [row0, row2, row5]
 The table provides three slots to customize empty and error states. Each slot has a default fallback that displays if no custom content is provided.
 
 **Available slots:**
-- `error` - Shown when the data provider throws an error
-- `empty` - Shown when the data provider returns zero rows with no active search
-- `no-results` - Shown when the data provider returns zero rows with an active search query
+- `error` Shown when the data provider throws an error
+- `empty` Shown when the data provider returns zero rows with no active search
+- `no-results` Shown when the data provider returns zero rows with an active search query
 
 **Example:**
 ```html
@@ -629,6 +1057,67 @@ The table provides three slots to customize empty and error states. Each slot ha
 </gds-table>
 ```
 
+### Static Layout Slots
+
+| Slot Name | Purpose |
+|---|---|
+| `header-lead` | Content at the start of the table header bar (after search input) |
+| `header-trail` | Content at the end of the table header bar (before settings dropdown) |
+| `error` | Custom error state when data loading fails |
+| `empty` | Custom empty state when no data exists |
+| `no-results` | Custom empty state when search returns nothing |
+
+---
+
+## Reactive Properties
+
+The `page` and `rows` properties are fully reactive changing them from outside the component (via attribute, property binding, or JavaScript) will automatically sync internal state and trigger a data fetch.
+
+### Page
+
+Setting `page` navigates to the specified page and loads the corresponding data.
+
+```html
+<!-- Attribute -->
+<gds-table page="3" .columns=${columns} .data=${dataProvider}></gds-table>
+
+<!-- Property binding (Lit) -->
+<gds-table .page=${currentPage} .columns=${columns} .data=${dataProvider}></gds-table>
+```
+
+```js
+// Programmatic
+const table = document.querySelector('gds-table')
+table.page = 5 // Navigates to page 5 and loads data
+```
+
+### Rows
+
+Setting `rows` changes the number of rows per page. This resets to page 1 since changing page size invalidates the current page position.
+
+```html
+<!-- Attribute -->
+<gds-table rows="25" .columns=${columns} .data=${dataProvider}></gds-table>
+
+<!-- Property binding (Lit) -->
+<gds-table .rows=${rowsPerPage} .columns=${columns} .data=${dataProvider}></gds-table>
+```
+
+```js
+// Programmatic
+table.rows = 50 // Shows 50 rows per page, resets to page 1
+```
+
+### Other Reactive Properties
+
+| Property | Triggers | Notes |
+|---|---|---|
+| `page` | Data fetch for the new page | |
+| `rows` | Data fetch, resets to page 1 | Page size change invalidates position |
+| `data` | Cache clear + data fetch | New data provider |
+| `dataLoadKey` | Cache clear + data fetch | Force reload with a new key value |
+| `columns` | Cache clear + view reset | Resets visible columns and pagination |
+
 ---
 
 ## Best Practices
@@ -637,6 +1126,7 @@ The table provides three slots to customize empty and error states. Each slot ha
 - Use server-side pagination for large datasets (>1000 rows)
 - Implement debouncing for search queries
 - Cache responses when appropriate
+- The table caches data provider responses for 5 minutes by default (keyed on page/rows/sort/search). Use `nocache` to disable.
 
 ### Column Configuration
 - Keep column count reasonable (5-10 visible)
@@ -645,7 +1135,7 @@ The table provides three slots to customize empty and error states. Each slot ha
 - Use `justify="end"` for numeric columns
 
 ### User Experience
-- Use `searchable` boolean to enable search for the data.
+- Use `searchable` boolean to enable search for the data
 - Use `settings` to let users customize columns
 - Use `selectable` for bulk actions
 - Provide clear empty and error states
@@ -655,3 +1145,393 @@ The table provides three slots to customize empty and error states. Each slot ha
 ## API Reference
 
 For complete API documentation, see the main Table component documentation.
+
+---
+
+## Migration Guide: Cell Types to Slots
+
+This section helps you migrate from the **old cell type configuration** (where cell types were declared in column definitions) to the **new slot composition model**.
+
+### What Changed
+
+The old approach embedded cell rendering logic directly in column configuration using a `cell` property with predefined types (`badge`, `button`, `link`, `image`, `context-menu`, `formatted-number`, etc.). The table component itself was responsible for rendering all cell types.
+
+The new approach moves cell rendering **out of the table** and into your application via web component slots. The table only provides slot insertion points you control what components render in each cell.
+
+**Benefits of the new approach:**
+- Use **any** Green Design System component or custom HTML in cells
+- No dependency on predefined cell types the table doesn't need to know about your content
+- Compose multiple components in a single cell with full control over order
+- Simpler table internals, better tree-shaking
+
+### Quick Comparison
+
+<details>
+<summary><strong>Side-by-side: Old vs New</strong></summary>
+
+**Old cell types in column config:**
+```typescript
+const columns = [
+  {
+    key: 'status',
+    label: 'Status',
+    sortable: true,
+    cell: {
+      value: {
+        type: 'badge',
+        value: (row) => row.status,
+        variant: (row) => row.status === 'Active' ? 'positive' : 'negative',
+      }
+    }
+  }
+]
+```
+
+**New slot composition:**
+```typescript
+// 1. Column (no cell config)
+const columns = [
+  { key: 'status', label: 'Status', sortable: true }
+]
+
+// 2. Normalize row data with Slot()
+const normalizeRow = (row) => ({
+  ...row,
+  status: Slot(row.status, ['badge']),
+})
+
+// 3. Render slot content on data load
+const slotContent = (rows) => html`
+  ${rows.map((row) => html`
+    <gds-badge
+      slot="status:${row.id}:badge"
+      variant="${String(row.status) === 'Active' ? 'positive' : 'negative'}"
+      size="small"
+    >${String(row.status)}</gds-badge>
+  `)}
+`
+```
+
+</details>
+
+### Step-by-Step Migration
+
+#### 1. Remove `cell` from Column Definitions
+
+Strip the `cell` property from all column configurations. Keep `key`, `label`, `sortable`, `align`, `justify`, `visible`, and `width`.
+
+```diff
+  {
+    key: 'status',
+    label: 'Status',
+    sortable: true,
+-   cell: {
+-     value: {
+-       type: 'badge',
+-       value: (row) => row.status,
+-       variant: (row) => row.status === 'Active' ? 'positive' : 'negative',
+-     }
+-   }
+  }
+```
+
+#### 2. Add Row Normalization with `Slot()`
+
+Create a function that wraps cell values needing rich content with `Slot()`.
+
+For each column that previously had a `cell` configuration, decide which slot IDs you need:
+
+```typescript
+import { Slot } from '@sebgroup/green-core/components/table/table.types'
+
+const normalizeRow = (row) => ({
+  ...row,
+  // Previously: cell.value.type = 'badge'
+  status: Slot(row.status, ['badge']),
+
+  // Previously: cell.value.type = 'formatted-number' + trail badge
+  amount: Slot(row.amount, ['formatted', 'currency']),
+
+  // Previously: cell.lead.type = 'image', cell.value = plain text
+  name: Slot(row.name, ['avatar', 'value']),
+
+  // Previously: cell.value = plain text, cell.trail.type = 'button'
+  email: Slot(row.email, ['value', 'copy-btn']),
+})
+```
+
+#### 3. Update Your Data Provider
+
+Call `normalizeRow` on each row in your data provider response:
+
+```diff
+  const dataProvider = async (request) => {
+    const response = await fetch('/api/data', { ... })
+    const data = await response.json()
+    return {
+-     rows: data.items,
++     rows: data.items.map(normalizeRow),
+      total: data.totalCount,
+    }
+  }
+```
+
+#### 4. Create Slot Content Renderer
+
+Write a function that generates the slot HTML for each row:
+
+```typescript
+const slotContent = (rows) => html`
+  ${rows.map((row) => html`
+    <!-- Map each old cell type to its GDS component with slot attribute -->
+    ...
+  `)}
+`
+```
+
+#### 5. Wire Up the Data Loaded Event
+
+Add an event listener for `gds-table-data-loaded` and render slot content:
+
+```diff
+  <gds-table
+    .columns=${columns}
+    .data=${dataProvider}
++   @gds-table-data-loaded=${(e) => {
++     render(slotContent(e.detail.rows), tableElement)
++   }}
+  ></gds-table>
+```
+
+### Cell Type Migration Reference
+
+Below is a mapping of every old cell type to its slot-based equivalent.
+
+#### Badge
+
+```diff
+- // Old: column config
+- cell: {
+-   value: {
+-     type: 'badge',
+-     value: (row) => row.status,
+-     variant: (row) => row.status === 'Active' ? 'positive' : 'negative',
+-   }
+- }
+
++ // New: normalize
++ status: Slot(row.status, ['badge'])
++
++ // New: slot content
++ <gds-badge
++   slot="status:${row.id}:badge"
++   variant="${String(row.status) === 'Active' ? 'positive' : 'negative'}"
++   size="small"
++ >${String(row.status)}</gds-badge>
+```
+
+#### Image
+
+```diff
+- cell: {
+-   lead: {
+-     type: 'image',
+-     src: (row) => row.avatar,
+-     width: '32px',
+-     height: '32px',
+-   },
+-   value: (row) => row.name,
+- }
+
++ // New: normalize
++ name: Slot(row.name, ['avatar', 'value'])
++
++ // New: slot content
++ <gds-img
++   slot="name:${row.id}:avatar"
++   src="${row.avatarUrl}"
++   alt="${String(row.name)}"
++   width="xl" height="xl"
++ ></gds-img>
+```
+
+#### Button
+
+```diff
+- cell: {
+-   trail: {
+-     type: 'button',
+-     label: 'Copy',
+-     size: 'xs',
+-     rank: 'tertiary',
+-     onClick: (row) => navigator.clipboard.writeText(row.email),
+-   }
+- }
+
++ // New: normalize
++ email: Slot(row.email, ['value', 'copy-btn'])
++
++ // New: slot content
++ <gds-button
++   slot="email:${row.id}:copy-btn"
++   rank="tertiary" size="small"
++   @click=${() => navigator.clipboard.writeText(String(row.email))}
++ >
++   <gds-icon-copy></gds-icon-copy>
++ </gds-button>
+```
+
+#### Link
+
+```diff
+- cell: {
+-   value: {
+-     type: 'link',
+-     label: 'View',
+-     href: (row) => `/items/${row.id}`,
+-   }
+- }
+
++ // New: normalize
++ link: Slot(row.title, ['main'])
++
++ // New: slot content
++ <gds-link slot="link:${row.id}:main" href="/items/${row.id}">
++   View
++ </gds-link>
+```
+
+#### Context Menu
+
+```diff
+- // Old: actions config
+- const actions = {
+-   label: 'Actions',
+-   justify: 'end',
+-   cell: {
+-     type: 'context-menu',
+-     items: [
+-       { label: 'Edit', onClick: (row) => edit(row) },
+-       { label: 'Delete', onClick: (row) => remove(row) },
+-     ]
+-   }
+- }
+
++ // New: actions config (no cell property)
++ const actions = { label: 'Actions', justify: 'end' }
++
++ // New: slot content
++ <gds-context-menu slot="actions:${row.id}:main">
++   <gds-button slot="trigger" rank="tertiary" size="small">
++     <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
++   </gds-button>
++   <gds-menu-item @click=${() => edit(row)}>Edit</gds-menu-item>
++   <gds-menu-item @click=${() => remove(row)}>Delete</gds-menu-item>
++ </gds-context-menu>
+```
+
+#### Formatted Number
+
+```diff
+- cell: {
+-   value: {
+-     type: 'formatted-number',
+-     value: (row) => row.amount,
+-     format: 'decimalsAndThousands',
+-     locale: 'sv-SE',
+-   }
+- }
+
++ // New: normalize
++ amount: Slot(row.amount, ['formatted'])
++
++ // New: slot content
++ <gds-formatted-number
++   slot="amount:${row.id}:formatted"
++   .value=${row.amount}
++ ></gds-formatted-number>
+```
+
+#### Formatted Date
+
+```diff
+- cell: {
+-   value: {
+-     type: 'formatted-date',
+-     value: (row) => row.date,
+-     format: 'dateLong',
+-     locale: 'sv-SE',
+-   }
+- }
+
++ // New: normalize
++ date: Slot(row.date, ['main'])
++
++ // New: slot content
++ <gds-formatted-date
++   slot="date:${row.id}:main"
++   .value="${String(row.date)}"
++   locale="sv-SE" format="dateLong"
++ ></gds-formatted-date>
+```
+
+#### Formatted Account
+
+```diff
+- cell: {
+-   value: {
+-     type: 'formatted-account',
+-     value: (row) => row.accountNumber,
+-     format: 'seb-account',
+-   }
+- }
+
++ // New: normalize
++ account: Slot(row.account, ['main'])
++
++ // New: slot content
++ <gds-formatted-account
++   slot="account:${row.id}:main"
++   account="${row.account}"
++   format="seb-account"
++ ></gds-formatted-account>
+```
+
+#### Composite Cells (lead / value / trail)
+
+The old approach used `lead`, `value`, and `trail` slots within the `cell` config. The new approach lets you define any number of slot positions in any order:
+
+```diff
+- cell: {
+-   lead: { type: 'image', src: (row) => row.avatar, width: '32px', height: '32px' },
+-   value: (row) => row.email,
+-   trail: {
+-     type: 'badge',
+-     value: (row) => row.verified ? 'Verified' : 'Pending',
+-     variant: (row) => row.verified ? 'positive' : 'information',
+-   }
+- }
+
++ // New: normalize define slot order freely
++ email: Slot(row.email, ['avatar', 'value', 'verified'])
++
++ // New: slot content
++ <gds-img slot="email:${row.id}:avatar" src="${row.avatar}" width="xl" height="xl"></gds-img>
++ <gds-badge
++   slot="email:${row.id}:verified"
++   variant="${row.verified ? 'positive' : 'information'}"
++   size="small"
++ >${row.verified ? 'Verified' : 'Pending'}</gds-badge>
+```
+
+### Checklist
+
+- [ ] Remove all `cell` properties from column configurations
+- [ ] Remove `cell` from `actions` configuration
+- [ ] Import `Slot` from `@sebgroup/green-core/components/table/table.types`
+- [ ] Create a `normalizeRow` function wrapping values with `Slot()`
+- [ ] Update data provider to call `normalizeRow` on each row
+- [ ] Create a slot content renderer function
+- [ ] Add `@gds-table-data-loaded` event handler to render slot content
+- [ ] Import all Green Design System components used in slot content (`gds-badge`, `gds-button`, etc.)
+- [ ] Test sorting and search still work (they use `Slot.value` transparently)

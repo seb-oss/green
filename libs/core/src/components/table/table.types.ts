@@ -1,18 +1,3 @@
-import type { GdsElement } from '../../gds-element'
-import type {
-  GdsBadge,
-  GdsButton,
-  GdsContextMenu,
-  GdsIcon,
-  GdsImg,
-  GdsLink,
-} from '../../pure'
-import type {
-  AccountFormats,
-  DateTimeFormat,
-  NumberFormats,
-} from '../formatted-text/formatters'
-
 /**
  * ============================================================================
  *  TABLE TYPES
@@ -27,18 +12,12 @@ export interface Column {
   justify?: 'start' | 'center' | 'space-between' | 'end'
   visible?: boolean
   width?: string
-  cell?: {
-    lead?: Cell | Cell[]
-    value?: Cell | Cell[]
-    trail?: Cell | Cell[]
-  }
 }
 
 export interface Actions {
   label?: string
   align?: 'start' | 'center' | 'stretch' | 'end'
   justify?: 'start' | 'center' | 'space-between' | 'end'
-  cell: Cell | Cell[]
 }
 
 export interface Row {
@@ -67,30 +46,27 @@ export interface Response<T> {
   total: number
 }
 
-// The density mode content config
+/**
+ * Internal density configuration for the table's built-in UI controls
+ * (search input, column settings dropdown). Does not affect user-provided
+ * slot content — size your own components to match the chosen density.
+ */
 export const DENSITY_CONFIG = {
   compact: {
-    button: 'small',
     input: 'small',
     dropdown: 'small',
-    badge: 'small',
   },
   comfortable: {
-    button: 'small',
     input: 'small',
     dropdown: 'small',
-    badge: 'small',
   },
   spacious: {
-    button: 'medium',
     input: 'large',
     dropdown: 'medium',
-    badge: 'default',
   },
 } as const
 
 export type Density = 'comfortable' | 'compact' | 'spacious'
-export type DensityConfig = (typeof DENSITY_CONFIG)[Density]
 
 export interface CacheEntry<T> {
   rows: T[]
@@ -102,6 +78,81 @@ export interface Cache<T> {
   [key: string]: CacheEntry<T>
 }
 
+export type SlotValue = {
+  value?: unknown
+  slots: string[]
+  key?: string | number
+}
+
+export const isSlotValue = (value: unknown): value is SlotValue =>
+  typeof value === 'object' &&
+  value !== null &&
+  Array.isArray((value as { slots?: unknown }).slots)
+
+/**
+ * Create a slot-enabled cell value.
+ * - value: fallback cell content
+ * - slots: ordered array including 'value'
+ * - key: optional custom row key override
+ * - or pass slot entries directly (lead, trail, etc.) in order
+ *   - entry value: string/number -> slot id
+ *   - entry value: true/undefined -> slot id = entry key
+ */
+const slotPrototype = {
+  toString(this: SlotValue) {
+    return String(this.value ?? '')
+  },
+  valueOf(this: SlotValue) {
+    return this.value as unknown
+  },
+  [Symbol.toPrimitive](this: SlotValue, hint: string) {
+    if (hint === 'number') return Number(this.value)
+    return String(this.value ?? '')
+  },
+}
+
+export function Slot(config: SlotValue): SlotValue
+export function Slot(
+  value?: unknown,
+  slots?: string[],
+  key?: string | number,
+): SlotValue
+export function Slot(
+  value?: unknown,
+  key?: string | number,
+  slots?: string[],
+): SlotValue
+export function Slot(
+  valueOrConfig?: unknown | SlotValue,
+  slotsOrKey: string[] | string | number = ['value'],
+  keyOrSlots?: string[] | string | number,
+): SlotValue {
+  if (isSlotValue(valueOrConfig)) return valueOrConfig
+
+  let slots: string[] = ['value']
+  let key: string | number | undefined
+
+  if (Array.isArray(slotsOrKey)) {
+    slots = slotsOrKey
+  } else if (typeof slotsOrKey === 'string' || typeof slotsOrKey === 'number') {
+    key = slotsOrKey
+  }
+
+  if (Array.isArray(keyOrSlots)) {
+    slots = keyOrSlots
+  } else if (typeof keyOrSlots === 'string' || typeof keyOrSlots === 'number') {
+    key = keyOrSlots
+  }
+
+  const slotValue: SlotValue = Object.assign(Object.create(slotPrototype), {
+    value: valueOrConfig,
+    slots,
+    ...(typeof key !== 'undefined' ? { key } : {}),
+  })
+
+  return slotValue
+}
+
 export type TableActions = Actions
 export type TableColumn = Column
 export type TableRow = Row
@@ -109,92 +160,6 @@ export type TableState = State
 export type TableRequest = Request
 export type TableResponse<T> = Response<T>
 export type TableDensity = Density
-export type TableDensityConfig = DensityConfig
 export type TableCache<T> = Cache<T>
 export type TableCacheEntry<T> = CacheEntry<T>
-
-/**
- * ============================================================================
- *  CELL COMPONENT TYPES
- * ============================================================================
- */
-type CellProps<T> = {
-  [K in keyof T]?: T[K] | ((row: any) => T[K])
-}
-
-// Different approach consideation omit or pick individually
-export interface Badge extends CellProps<Pick<GdsBadge, 'variant' | 'size'>> {
-  type: 'badge'
-  value: string | ((row: any) => string)
-}
-
-export interface Image extends CellProps<Omit<GdsImg, keyof GdsElement>> {
-  type: 'image'
-  src: string | ((row: any) => string)
-}
-
-export interface Icon extends CellProps<Omit<GdsIcon, keyof GdsElement>> {
-  type: 'icon'
-  template: string | ((row: any) => string)
-}
-
-export interface Button extends CellProps<Omit<GdsButton, keyof GdsElement>> {
-  type: 'button'
-  template?: string | ((row: any) => string)
-  onClick: (row: any) => void
-}
-
-export interface Link extends CellProps<Omit<GdsLink, keyof GdsElement>> {
-  type: 'link'
-  template?: string | ((row: any) => string)
-  onClick?: (row: any) => void
-}
-
-export interface ContextMenu
-  extends CellProps<Omit<GdsContextMenu, keyof GdsElement>> {
-  type: 'context-menu'
-  items: Array<{
-    label: string | ((row: any) => string)
-    divider?: boolean
-    onClick: (row: any) => void
-  }>
-}
-
-export interface FormattedNumber {
-  type: 'formatted-number'
-  value: number | string | ((row: any) => number | string)
-  locale?: string
-  currency?: string
-  decimals?: number
-  format?: NumberFormats
-}
-
-export interface FormattedAccount {
-  type: 'formatted-account'
-  value: string | ((row: any) => string)
-  format?: AccountFormats
-}
-
-export interface FormattedDate {
-  type: 'formatted-date'
-  value: string | Date | ((row: any) => string | Date)
-  locale?: string
-  format?: DateTimeFormat
-}
-
-export type Cell =
-  | Image
-  | Icon
-  | Button
-  | Link
-  | Badge
-  | ContextMenu
-  | FormattedNumber
-  | FormattedAccount
-  | FormattedDate
-
-export interface CellConfig {
-  lead?: Cell
-  value?: Cell
-  trail?: Cell
-}
+export type TableSlotValue = SlotValue
