@@ -54,8 +54,7 @@ export const generateDateMatrix = (
   const matrix: Date[][] = new Array<Date[]>(minWeeks)
   matrix.fill([])
 
-  const monthStr = `${month + 1}`.padStart(2, '0')
-  const date = new Date(`${year}-${monthStr}-01`)
+  const date = new Date(year, month, 1)
   const firstDate = firstCalendarDate(date, firstDayOfWeek)
 
   // for each week in that month

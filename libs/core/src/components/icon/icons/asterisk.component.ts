@@ -1,0 +1,21 @@
+import { gdsCustomElement } from '../../../scoping'
+import { GdsIcon } from '../icon'
+
+/**
+ * @element gds-icon-asterisk
+ */
+@gdsCustomElement('gds-icon-asterisk')
+export class IconAsterisk extends GdsIcon {
+  /** @private */
+  static _regularSVG = `<path d="M12.001 2.75V21.25M3.99023 7.375L20.0117 16.625M3.9912 16.625L20.0127 7.375" stroke="black" stroke-width="1.5" stroke-linecap="round"/>`
+  /** @private */
+  static _solidSVG = `<path fill-rule="evenodd" clip-rule="evenodd" d="M12.0029 2C12.4171 2 12.7529 2.33579 12.7529 2.75V10.7015L19.6396 6.72548C19.9984 6.51837 20.457 6.64128 20.6642 7C20.8713 7.35872 20.7484 7.81741 20.3896 8.02452L13.5034 12.0003L20.3887 15.9755C20.7474 16.1826 20.8703 16.6413 20.6632 17C20.4561 17.3587 19.9974 17.4816 19.6387 17.2745L12.7529 13.299V21.25C12.7529 21.6642 12.4171 22 12.0029 22C11.5887 22 11.2529 21.6642 11.2529 21.25V13.2996L4.36816 17.2745C4.00944 17.4816 3.55075 17.3587 3.34364 17C3.13653 16.6413 3.25944 16.1826 3.61816 15.9755L10.5034 12.0003L3.61719 8.02452C3.25847 7.81741 3.13556 7.35872 3.34267 7C3.54978 6.64128 4.00847 6.51837 4.36719 6.72548L11.2529 10.701V2.75C11.2529 2.33579 11.5887 2 12.0029 2Z" fill="currentColor"/>`
+  /** @private */
+  static _name = 'asterisk'
+  /** @private */
+  static _width = 24
+  /** @private */
+  static _height = 24
+  /** @private */
+  static _viewBox = '0 0 24 24'
+}

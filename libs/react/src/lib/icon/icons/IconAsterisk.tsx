@@ -1,0 +1,1 @@
+export { IconAsterisk } from '@sebgroup/green-core/react';
