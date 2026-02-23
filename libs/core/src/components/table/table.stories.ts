@@ -997,14 +997,23 @@ export const DynamicContent: Story = {
     docs: {
       description: {
         story: `
+The table uses **slot composition** to render rich cell content. Instead of built-in cell types, you control what renders in each cell through standard web component slots.
 
+**How it works:**
 
+1. Wrap cell values with \`Slot(value, ['slotId'])\` during row normalization
+2. Listen for the \`gds-table-data-loaded\` event
+3. Render elements with \`slot="columnKey:rowKey:slotId"\` into the table's light DOM
 
-⚠️ REWRITE FOR SLOTS
+The \`value\` parameter is used for sorting and search. The \`slots\` array defines the cell layout order — use \`'value'\` to render the plain text inline alongside slotted components.
 
-See Developer Guide for complete documentation.
+\`\`\`
+Slot(row.email, ['value', 'copy-button'])
+→ renders text + <slot name="email:rowKey:copy-button">
+\`\`\`
 
-          `,
+> See the **Developer Guide** for full details on slot naming, framework integration, and migration from the old cell types.
+        `,
       },
     },
   },
