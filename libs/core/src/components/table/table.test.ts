@@ -4,6 +4,7 @@ import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { aTimeout, fixture, html as testingHtml } from '../../utils/testing'
 
 import type { GdsTable } from './table.component'
+import { Slot, isSlotValue } from './table.types'
 
 import '@sebgroup/green-core/components/table'
 
@@ -336,6 +337,337 @@ describe('<gds-table>', () => {
       // Table should still be renderable (no errors)
       const table = el.shadowRoot?.querySelector('table')
       expect(table).toBeDefined()
+    })
+  })
+
+  // ==========================================================================
+  // SLOT HELPER
+  // ==========================================================================
+
+  describe('Slot() helper', () => {
+    it('should create a SlotValue with value and slots', () => {
+      const sv = Slot('hello', ['lead', 'value'])
+      expect(isSlotValue(sv)).toBe(true)
+      expect(sv.value).toBe('hello')
+      expect(sv.slots).toEqual(['lead', 'value'])
+    })
+
+    it('should default slots to ["value"] when only value is provided', () => {
+      const sv = Slot('text')
+      expect(sv.slots).toEqual(['value'])
+    })
+
+    it('should support custom key', () => {
+      const sv = Slot('text', ['value'], 'custom-key')
+      expect(sv.key).toBe('custom-key')
+    })
+
+    it('should coerce to string using value', () => {
+      const sv = Slot('hello', ['badge'])
+      expect(String(sv)).toBe('hello')
+      expect(`${sv}`).toBe('hello')
+    })
+
+    it('should coerce to number using value', () => {
+      const sv = Slot(42, ['formatted'])
+      expect(Number(sv)).toBe(42)
+    })
+
+    it('should return the same object if already a SlotValue', () => {
+      const sv = Slot('text', ['value'])
+      const sv2 = Slot(sv)
+      expect(sv2).toBe(sv)
+    })
+  })
+
+  // ==========================================================================
+  // SLOT COMPOSITION IN TABLE
+  // ==========================================================================
+
+  describe('Slot Composition', () => {
+    const slotColumns = [
+      { key: 'id', label: 'ID' },
+      { key: 'name', label: 'Name' },
+      { key: 'status', label: 'Status' },
+    ]
+
+    const slotMockData = async () => ({
+      rows: [
+        { id: 1, name: Slot('Alice', ['avatar', 'value']), status: Slot('Active', ['badge']) },
+        { id: 2, name: Slot('Bob', ['avatar', 'value']), status: Slot('Inactive', ['badge']) },
+      ],
+      total: 2,
+    })
+
+    it('should render named slot elements for Slot() values', async () => {
+      const el = await fixture<GdsTable>(
+        html`<gds-table .columns=${slotColumns} .data=${slotMockData}></gds-table>`,
+      )
+
+      await el.updateComplete
+
+      // Should have slot elements for avatar and badge
+      const slots = el.shadowRoot?.querySelectorAll('slot[name]')
+      const slotNames = Array.from(slots || []).map((s) => s.getAttribute('name'))
+
+      // name column: avatar slots
+      expect(slotNames).toContain('name:1:avatar')
+      expect(slotNames).toContain('name:2:avatar')
+
+      // status column: badge slots
+      expect(slotNames).toContain('status:1:badge')
+      expect(slotNames).toContain('status:2:badge')
+    })
+
+    it('should render inline text for the "value" slot ID', async () => {
+      const el = await fixture<GdsTable>(
+        html`<gds-table .columns=${slotColumns} .data=${slotMockData}></gds-table>`,
+      )
+
+      await el.updateComplete
+
+      // The name column uses ['avatar', 'value'] — 'value' should render "Alice" / "Bob" as text
+      const cells = el.shadowRoot?.querySelectorAll('tbody td')
+      const nameCells = Array.from(cells || []).filter((_, i) => i % 3 === 1) // name is 2nd column
+      const textContents = nameCells.map((c) => c.textContent?.trim())
+
+      expect(textContents[0]).toContain('Alice')
+      expect(textContents[1]).toContain('Bob')
+    })
+
+    it('should NOT render a <slot> element for the "value" slot ID', async () => {
+      const el = await fixture<GdsTable>(
+        html`<gds-table .columns=${slotColumns} .data=${slotMockData}></gds-table>`,
+      )
+
+      await el.updateComplete
+
+      const slots = el.shadowRoot?.querySelectorAll('slot[name]')
+      const slotNames = Array.from(slots || []).map((s) => s.getAttribute('name'))
+
+      // Should not have name:1:value or name:2:value — those render as inline text
+      expect(slotNames).not.toContain('name:1:value')
+      expect(slotNames).not.toContain('name:2:value')
+    })
+
+    it('should render plain text for non-Slot values', async () => {
+      const el = await fixture<GdsTable>(
+        html`<gds-table .columns=${slotColumns} .data=${slotMockData}></gds-table>`,
+      )
+
+      await el.updateComplete
+
+      // ID column is plain number (not wrapped in Slot)
+      const cells = el.shadowRoot?.querySelectorAll('tbody td')
+      const idCells = Array.from(cells || []).filter((_, i) => i % 3 === 0) // id is 1st column
+      expect(idCells[0]?.textContent?.trim()).toContain('1')
+      expect(idCells[1]?.textContent?.trim()).toContain('2')
+    })
+
+    it('should emit gds-table-data-loaded with rows for slot rendering', async () => {
+      const spy = vi.fn()
+
+      const el = await fixture<GdsTable>(
+        html`<gds-table .columns=${slotColumns} .data=${slotMockData}></gds-table>`,
+      )
+
+      el.addEventListener('gds-table-data-loaded', spy)
+
+      // Trigger a reload
+      el.dataLoadKey = 'test'
+      await el.updateComplete
+
+      expect(spy).toHaveBeenCalled()
+      const detail = spy.mock.calls[0][0].detail
+      expect(detail.rows).toHaveLength(2)
+      expect(detail.rows[0].id).toBe(1)
+    })
+
+    it('should project light DOM elements into named slots', async () => {
+      const el = await fixture<GdsTable>(
+        html`<gds-table .columns=${slotColumns} .data=${slotMockData}>
+          <span slot="status:1:badge">Active Badge</span>
+          <span slot="status:2:badge">Inactive Badge</span>
+        </gds-table>`,
+      )
+
+      await el.updateComplete
+
+      // Verify the light DOM children have the right slot attributes
+      const slotted = el.querySelectorAll('[slot^="status:"]')
+      expect(slotted.length).toBe(2)
+      expect(slotted[0].getAttribute('slot')).toBe('status:1:badge')
+      expect(slotted[1].getAttribute('slot')).toBe('status:2:badge')
+
+      // Verify the shadow DOM has matching slot elements
+      const shadowSlots = el.shadowRoot?.querySelectorAll('slot[name^="status:"]')
+      expect(shadowSlots?.length).toBeGreaterThanOrEqual(2)
+    })
+  })
+
+  // ==========================================================================
+  // ACTIONS COLUMN (Slot-based)
+  // ==========================================================================
+
+  describe('Actions Column', () => {
+    const actionsColumns = [
+      { key: 'id', label: 'ID' },
+      { key: 'name', label: 'Name' },
+    ]
+
+    const actionsMockData = async () => ({
+      rows: [
+        { id: 1, name: 'Alice' },
+        { id: 2, name: 'Bob' },
+      ],
+      total: 2,
+    })
+
+    it('should render actions column header from object config', async () => {
+      const actions = { label: 'Actions', justify: 'end' as const }
+
+      const el = await fixture<GdsTable>(
+        html`<gds-table
+          .columns=${actionsColumns}
+          .data=${actionsMockData}
+          .actions=${actions}
+        ></gds-table>`,
+      )
+
+      await el.updateComplete
+
+      const headers = el.shadowRoot?.querySelectorAll('thead th')
+      const headerTexts = Array.from(headers || []).map((h) => h.textContent?.trim())
+      expect(headerTexts).toContain('Actions')
+    })
+
+    it('should render action slot elements with correct names', async () => {
+      const actions = { label: 'Actions', justify: 'end' as const }
+
+      const el = await fixture<GdsTable>(
+        html`<gds-table
+          .columns=${actionsColumns}
+          .data=${actionsMockData}
+          .actions=${actions}
+        ></gds-table>`,
+      )
+
+      await el.updateComplete
+
+      const slots = el.shadowRoot?.querySelectorAll('slot[name^="actions:"]')
+      const slotNames = Array.from(slots || []).map((s) => s.getAttribute('name'))
+
+      expect(slotNames).toContain('actions:1:main')
+      expect(slotNames).toContain('actions:2:main')
+    })
+
+    it('should project light DOM action elements into slots', async () => {
+      const actions = { label: 'Actions', justify: 'end' as const }
+
+      const el = await fixture<GdsTable>(
+        html`<gds-table
+          .columns=${actionsColumns}
+          .data=${actionsMockData}
+          .actions=${actions}
+        >
+          <button slot="actions:1:main">Edit Alice</button>
+          <button slot="actions:2:main">Edit Bob</button>
+        </gds-table>`,
+      )
+
+      await el.updateComplete
+
+      const slotted = el.querySelectorAll('[slot^="actions:"]')
+      expect(slotted.length).toBe(2)
+    })
+  })
+
+  // ==========================================================================
+  // REACTIVE PROPERTIES
+  // ==========================================================================
+
+  describe('Reactive Properties', () => {
+    it('should reload data when page is set externally', async () => {
+      const dataSpy = vi.fn()
+      const wrappedData = async (request: any) => {
+        dataSpy(request)
+        return mockData(request)
+      }
+
+      const el = await fixture<GdsTable>(
+        html`<gds-table .columns=${columns} .data=${wrappedData}></gds-table>`,
+      )
+
+      await el.updateComplete
+      expect(dataSpy).toHaveBeenCalledTimes(1)
+
+      el.page = 3
+      await el.updateComplete
+      await aTimeout(50)
+
+      expect(dataSpy.mock.lastCall[0].page).toBe(3)
+    })
+
+    it('should reload data and reset to page 1 when rows is set externally', async () => {
+      const dataSpy = vi.fn()
+      const wrappedData = async (request: any) => {
+        dataSpy(request)
+        return mockData(request)
+      }
+
+      const el = await fixture<GdsTable>(
+        html`<gds-table .columns=${columns} .data=${wrappedData}></gds-table>`,
+      )
+
+      await el.updateComplete
+
+      el.rows = 25
+      await el.updateComplete
+      await aTimeout(50)
+
+      const lastCall = dataSpy.mock.lastCall[0]
+      expect(lastCall.rows).toBe(25)
+      expect(lastCall.page).toBe(1)
+    })
+  })
+
+  // ==========================================================================
+  // DISABLE SELECT ALL
+  // ==========================================================================
+
+  describe('Disable Select All', () => {
+    it('should hide header checkbox when disable-select-all is set', async () => {
+      const el = await fixture<GdsTable>(
+        html`<gds-table
+          .columns=${columns}
+          .data=${mockData}
+          selectable
+          disable-select-all
+        ></gds-table>`,
+      )
+
+      await el.updateComplete
+
+      // The header row's checkbox cell should not have a checkbox
+      const headerRow = el.shadowRoot?.querySelector('thead tr')
+      const headerCheckbox = headerRow?.querySelector('.rbcb-wrapper')
+      expect(headerCheckbox).toBeNull()
+    })
+
+    it('should still show row checkboxes when disable-select-all is set', async () => {
+      const el = await fixture<GdsTable>(
+        html`<gds-table
+          .columns=${columns}
+          .data=${mockData}
+          selectable
+          disable-select-all
+        ></gds-table>`,
+      )
+
+      await el.updateComplete
+
+      const bodyCheckboxes = el.shadowRoot?.querySelectorAll('tbody .rbcb-wrapper')
+      expect(bodyCheckboxes?.length).toBeGreaterThan(0)
     })
   })
 })
