@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.35.1
+
+### Patch Changes
+
+- a751877: **Segmented Control:** Ensure selected segment scrolls into view with arrow-safe insets when value changes programmatically. Fixes #2621
+
 ## 2.35.0
 
 ### Minor Changes
