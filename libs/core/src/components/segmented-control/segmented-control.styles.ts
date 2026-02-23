@@ -13,10 +13,12 @@ const style = css`
       width: 100%;
       position: relative;
       overflow: hidden;
+      --_gds-segment-scroll-margin-inline: 2.75rem;
     }
 
     :host([size='small']) {
       height: 2.5rem;
+      --_gds-segment-scroll-margin-inline: 2.25rem;
     }
 
     #track {
@@ -24,6 +26,7 @@ const style = css`
       display: flex;
       flex-grow: 1;
       scroll-snap-type: inline mandatory;
+      scroll-padding-inline: var(--_gds-segment-scroll-margin-inline);
       overscroll-behavior-x: contain;
       scroll-behavior: smooth;
       overflow-x: scroll;
@@ -91,7 +94,7 @@ const style = css`
       flex-grow: 1;
       flex-shrink: 0;
       z-index: 1;
-      scroll-margin: 0 2.75rem;
+      scroll-margin-inline: var(--_gds-segment-scroll-margin-inline);
       scroll-snap-align: start;
     }
 

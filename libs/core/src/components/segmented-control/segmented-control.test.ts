@@ -143,5 +143,64 @@ describe('<gds-segmented-control>', () => {
       expect(segments[1]['max-width']).toBe('200px')
       expect(segments[2]['width']).toBe('150px')
     })
+
+    it('should use scrollIntoView with nearest alignment when selecting by value', async () => {
+      const el = await fixture<GdsSegmentedControl>(html`
+        <gds-segmented-control>
+          <gds-segment value="1">Segment 1</gds-segment>
+          <gds-segment value="2">Segment 2</gds-segment>
+          <gds-segment value="3">Segment 3</gds-segment>
+          <gds-segment value="4">Segment 4</gds-segment>
+        </gds-segmented-control>
+      `)
+
+      await el.updateComplete
+
+      const segment2 = el.segments[1]
+      const scrollIntoViewSpy = vi.fn()
+      Object.defineProperty(segment2, 'scrollIntoView', {
+        configurable: true,
+        value: scrollIntoViewSpy,
+      })
+
+      el.value = '2'
+
+      await waitUntil(() => segment2.selected)
+
+      expect(scrollIntoViewSpy).toHaveBeenCalledWith({
+        block: 'nearest',
+        inline: 'nearest',
+      })
+    })
+
+    it('should not call scrollIntoView when no matching segment exists', async () => {
+      const el = await fixture<GdsSegmentedControl>(html`
+        <gds-segmented-control>
+          <gds-segment value="1">Segment 1</gds-segment>
+          <gds-segment value="2">Segment 2</gds-segment>
+          <gds-segment value="3">Segment 3</gds-segment>
+          <gds-segment value="4">Segment 4</gds-segment>
+        </gds-segmented-control>
+      `)
+
+      await el.updateComplete
+
+      const scrollIntoViewSpies = el.segments.map((segment) => {
+        const spy = vi.fn()
+        Object.defineProperty(segment, 'scrollIntoView', {
+          configurable: true,
+          value: spy,
+        })
+        return spy
+      })
+
+      el.value = 'does-not-exist'
+
+      await el.updateComplete
+
+      scrollIntoViewSpies.forEach((spy) => {
+        expect(spy).not.toHaveBeenCalled()
+      })
+    })
   })
 })
