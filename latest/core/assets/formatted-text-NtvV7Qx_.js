@@ -1,1 +1,0 @@
-import{f}from"./iframe-CxIvAeSU.js";import{G as i}from"./text-DNJgMH5h.js";var n=Object.defineProperty,o=(r,t,a,m)=>{for(var e=void 0,s=r.length-1,d;s>=0;s--)(d=r[s])&&(e=d(t,a,e)||e);return e&&n(t,a,e),e};class p extends i{updated(t){super.updated(t),this.element&&(this.element.innerHTML=this.formattedValue)}}o([f("[tag]")],p.prototype,"element");export{p as G};
