@@ -1,0 +1,265 @@
+import{i as st,t as et,_ as n,n as u,r as E,g as it,G as rt,b as s,c as e,d as t,e as r,A as x,h as f,a as H}from"./tokens.style-B9dm16Su.js";import{l as at,m as V}from"./runtime-nRyYmvPb.js";import{e as F}from"./class-map-CH5RdcFs.js";import{e as ot,n as nt}from"./ref-DJiapoSF.js";import{s as P,u as lt,G as ct}from"./button.component-1bcRdqQh.js";import{G as dt}from"./card.component-BmZX1aP5.js";import{I as ht}from"./circle-check.component-BHjIsbFu.js";import{I as mt}from"./chevron-bottom.component-Bqbu32Ni.js";import{I as gt}from"./cross-small.component-CHZH7K3R.js";import{I as pt}from"./triangle-exclamation.component-C7oZhJUX.js";const ut=st`
+  :host {
+    box-sizing: border-box;
+    display: block;
+    max-width: 100%;
+    container-type: inline-size;
+  }
+
+  #alert-message {
+    --grid-areas: 'wrapper cta close';
+
+    &.timeout {
+      --grid-areas: 'wrapper cta close' 'progress-bar progress-bar progress-bar';
+    }
+
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas: var(--grid-areas);
+    min-width: fit-content;
+    position: relative;
+    transition:
+      opacity 0.3s ease-out,
+      transform 0.3s ease-out;
+    gap: 0;
+  }
+
+  /* Animation */
+  @media (prefers-reduced-motion: no-preference) {
+    #alert-message {
+      animation: slideIn 0.3s ease-out;
+    }
+  }
+
+  #alert-message.dismissing {
+    opacity: 0;
+    transform: translateY(-1rem);
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #alert-message.dismissing {
+      transform: none;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-0.5rem);
+    }
+  }
+
+  /* Focus styles */
+  #alert-message:focus {
+    outline: 2px solid var(--gds-focus-color, #000);
+    outline-offset: 2px;
+  }
+
+  .wrapper {
+    grid-area: wrapper;
+    display: flex;
+    gap: var(--gds-sys-space-xs);
+
+    .message {
+      max-width: 80ch;
+    }
+  }
+
+  .dismissible .wrapper {
+    margin-top: var(--gds-sys-space-3xs);
+  }
+
+  .has-action {
+    padding: var(--gds-sys-space-s) var(--gds-sys-space-m);
+  }
+
+  .has-action .wrapper {
+    margin-top: var(--gds-sys-space-xs);
+  }
+
+  .has-action.dismissible .close {
+    margin-top: var(--gds-sys-space-3xs);
+  }
+
+  .message {
+    font: var(--gds-sys-text-body-m-regular);
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+    margin-inline-end: auto;
+  }
+
+  .message-text {
+    display: inline;
+    white-space: normal;
+    padding-inline-end: var(--gds-sys-space-xs);
+  }
+
+  .message-text ::slotted(strong) {
+    font-weight: var(--gds-sys-text-weight-book, 450);
+  }
+
+  .progress-container {
+    --_fill-color: var(--gds-sys-color-border-neutral-04);
+    --_container-color: var(--gds-sys-color-l3-information-03);
+
+    &.notice {
+      --_fill-color: var(--gds-sys-color-content-notice-01);
+      --_container-color: var(--gds-sys-color-l3-notice-03);
+    }
+
+    &.warning {
+      --_fill-color: var(--gds-sys-color-content-warning-01);
+      --_container-color: var(--gds-sys-color-l3-warning-03);
+    }
+
+    &.positive {
+      --_fill-color: var(--gds-sys-color-content-positive-01);
+      --_container-color: var(--gds-sys-color-l3-positive-03);
+    }
+
+    &.negative {
+      --_fill-color: var(--gds-sys-color-content-negative-01);
+      --_container-color: var(--gds-sys-color-l3-negative-03);
+    }
+
+    grid-area: progress-bar;
+    margin-top: var(--gds-sys-space-m);
+    inset: auto var(--gds-sys-space-m) var(--gds-sys-space-m);
+    height: 0.25rem;
+    background: var(--_container-color);
+    border-radius: var(--gds-sys-radius-max);
+    overflow: hidden;
+  }
+
+  .timer-progress {
+    height: 100%;
+    transition: width 0.1s linear;
+    background: var(--_fill-color);
+    will-change: width;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .timer-progress {
+      transition: none;
+    }
+  }
+
+  @container (max-width: 600px) {
+    #alert-message {
+      --grid-areas: 'wrapper close' 'cta cta';
+
+      &.timeout {
+        --grid-areas: 'wrapper close' 'progress-bar progress-bar';
+      }
+
+      .action {
+        grid-area: cta;
+        margin-top: var(--gds-sys-space-xs);
+      }
+    }
+  }
+
+  /* Medium: inline */
+  @container (min-width: 601px) and (max-width: 1024px) {
+    #alert-message {
+      .close {
+        margin-left: var(--gds-sys-space-xs);
+      }
+    }
+  }
+
+  /* Large: centered */
+  @container (min-width: 1025px) {
+    #alert-message {
+      grid-template-columns: auto auto min-content;
+
+      &.dismissible:not(.has-action) {
+        grid-template-columns: 1fr auto;
+      }
+
+      &.dismissible:not(.has-action) .wrapper {
+        margin-inline-start: 0;
+      }
+
+      .close {
+        margin-left: var(--gds-sys-space-xs);
+      }
+
+      .icon {
+        margin-inline-start: auto;
+      }
+
+      .wrapper {
+        margin-left: auto;
+      }
+
+      .action {
+        margin-right: auto;
+      }
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .icon {
+      forced-color-adjust: none;
+    }
+  }
+`;var ft=ut,_,p,I,c,h,o,v,W,k,C,b,$,O,j,L,K,R,Y,g,w,y,S,z,U,M,q,l,m,T,J,A,Q,G,X,B,Z,D,tt;const vt={positive:{icon:"circle-check",button:"positive",border:"positive-01",background:"positive-01",color:"positive-01"},warning:{icon:"circle-info",button:"warning",border:"warning-01",background:"warning-01",color:"warning-01"},negative:{icon:"triangle-exclamation",button:"negative",border:"negative-01",background:"negative-01",color:"negative-01"},information:{icon:"circle-info",button:"neutral",border:"information-01",background:"information-01",color:"information-01"},notice:{icon:"circle-info",button:"notice",border:"notice-01",background:"notice-01",color:"notice-01"}},bt=300,_t=100;let a=class extends rt{constructor(){super(),s(this,k),s(this,b),s(this,O),s(this,L),s(this,R),s(this,g),s(this,y),s(this,z),s(this,M),s(this,l),s(this,T),s(this,A),s(this,G),s(this,B),s(this,D),this.variant="information",this.label="",this.role="alert",this.dismissible=!1,this.timeout=0,this.buttonLabel="",this._progress=100,this._isClosing=!1,this._cardHidden=!1,s(this,_,void 0),s(this,p,void 0),s(this,I,ot()),s(this,c,void 0),s(this,h,!1),s(this,o,0),s(this,v,0),s(this,W,{hostConnected:()=>{this.timeout>0&&e(this,k,C).call(this)},hostDisconnected:()=>{e(this,b,$).call(this),e(this,g,w).call(this)}}),this.addController(t(this,W))}updated(i){i.has("timeout")&&(e(this,b,$).call(this),e(this,g,w).call(this),r(this,o,Math.max(0,this.timeout)),this._progress=100,this.timeout>0&&e(this,k,C).call(this))}render(){if(this._cardHidden)return x;const i={dismissing:this._isClosing,dismissible:this.dismissible,"has-action":this.buttonLabel,timeout:this.timeout>0};return f`
+      <gds-card
+        ${nt(t(this,I))}
+        role=${this.role}
+        aria-label=${this.label}
+        border=${`5xs solid ${t(this,l,m).border}`}
+        background=${t(this,l,m).background}
+        color=${t(this,l,m).color}
+        class=${F(i)}
+        @keydown=${e(this,M,q)}
+        id="alert-message"
+        padding="m"
+      >
+        <div class="wrapper">
+          ${e(this,T,J).call(this)} ${e(this,A,Q).call(this)}
+        </div>
+        ${!this.timeout&&this.buttonLabel?e(this,G,X).call(this,this.buttonLabel):x}
+        ${e(this,B,Z).call(this)} ${e(this,D,tt).call(this)}
+      </gds-card>
+    `}};_=new WeakMap;p=new WeakMap;I=new WeakMap;c=new WeakMap;h=new WeakMap;o=new WeakMap;v=new WeakMap;W=new WeakMap;k=new WeakSet;C=function(){t(this,c)||(t(this,o)||r(this,o,Math.max(0,this.timeout)),r(this,c,new IntersectionObserver(i=>{const d=i[0],N=((d==null?void 0:d.intersectionRatio)??0)>=.1;N&&!t(this,h)?(r(this,h,!0),e(this,L,K).call(this)):!N&&t(this,h)&&(r(this,h,!1),e(this,R,Y).call(this))},{root:null,threshold:[0,.1,1]})),t(this,c).observe(this))};b=new WeakSet;$=function(){t(this,c)&&(t(this,c).disconnect(),r(this,c,void 0)),r(this,h,!1)};O=new WeakSet;j=function(){r(this,v,Date.now()),r(this,p,window.setInterval(()=>{const i=Date.now(),d=i-t(this,v);r(this,v,i),r(this,o,Math.max(0,t(this,o)-d)),this._progress=this.timeout>0?Math.max(0,t(this,o)/this.timeout*100):0,t(this,o)<=0&&e(this,y,S).call(this,"timeout")},_t))};L=new WeakSet;K=function(){t(this,o)<=0||t(this,_)||t(this,p)||e(this,O,j).call(this)};R=new WeakSet;Y=function(){e(this,g,w).call(this)};g=new WeakSet;w=function(){clearTimeout(t(this,_)),clearInterval(t(this,p)),r(this,_,r(this,p,void 0))};y=new WeakSet;S=async function(i){this._isClosing=!0,e(this,b,$).call(this),e(this,g,w).call(this),await this.updateComplete,this.dispatchCustomEvent("gds-close",{detail:{source:i},bubbles:!0,composed:!0}),await new Promise(d=>setTimeout(d,bt)),this._cardHidden=!0};z=new WeakSet;U=function(i){this.dispatchCustomEvent("gds-action",{detail:{source:"button",event:i},bubbles:!0,composed:!0})};M=new WeakSet;q=function(i){i.key==="Escape"&&this.dismissible&&(i.preventDefault(),e(this,y,S).call(this,"escape"))};l=new WeakSet;m=function(){return vt[this.variant]};T=new WeakSet;J=function(){const i=`gds-icon-${t(this,l,m).icon}`;return f`${lt`<${P(H(i))} class="icon" solid aria-hidden="true" size="24px"></${P(H(i))}>`}`};A=new WeakSet;Q=function(){return f`<div class="message">
+      <span class="message-text">
+        <slot></slot>
+      </span>
+    </div>`};G=new WeakSet;X=function(i){return f`
+      <gds-button
+        class="action"
+        .variant=${t(this,l,m).button}
+        rank="secondary"
+        @click=${e(this,z,U)}
+        aria-describedby="alert-message"
+      >
+        ${i.trim()}
+      </gds-button>
+    `};B=new WeakSet;Z=function(){return this.dismissible?f`
+          <gds-button
+            class="close"
+            .variant=${t(this,l,m).button}
+            rank="secondary"
+            size="small"
+            aria-label=${V("Dismiss alert")}
+            @click=${()=>e(this,y,S).call(this,"close")}
+          >
+            <gds-icon-cross-small size="20px"></gds-icon-cross-small>
+          </gds-button>
+        `:x};D=new WeakSet;tt=function(){return this.timeout>0?f`
+          <div
+            class=${F({"progress-container":!0,[this.variant]:!0})}
+            role="timer"
+            aria-label=${V("Auto-dismiss timer")}
+            aria-valuenow=${this._progress}
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <div class="timer-progress" style="width: ${this._progress}%"></div>
+          </div>
+        `:x};a.styles=[et,ft];n([u({type:String,reflect:!0})],a.prototype,"variant",2);n([u({type:String})],a.prototype,"label",2);n([u({type:String,reflect:!0})],a.prototype,"role",2);n([u({type:Boolean})],a.prototype,"dismissible",2);n([u({type:Number})],a.prototype,"timeout",2);n([u({type:String,attribute:"button-label"})],a.prototype,"buttonLabel",2);n([E()],a.prototype,"_progress",2);n([E()],a.prototype,"_isClosing",2);n([E()],a.prototype,"_cardHidden",2);a=n([it("gds-alert",{dependsOn:[ct,dt,ht,pt,mt,gt]}),at()],a);export{a as G};
