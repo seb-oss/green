@@ -1,0 +1,1 @@
+import{j as t}from"./jsx-runtime-u17CrQMm.js";const s=({children:e})=>t.jsx("span",{className:"gds-form-text",children:e});s.__docgenInfo={description:"@deprecated Please use the `gds-text` web component from green-core instead",methods:[],displayName:"Text",props:{children:{required:!0,tsType:{name:"ReactNode"},description:""}}};export{s as T};
