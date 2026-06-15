@@ -1,0 +1,5 @@
+import{j as t}from"./jsx-runtime-u17CrQMm.js";import{r}from"./iframe-BPZcHg85.js";import{B as n}from"./button-EDUWHIDB.js";const s=r.forwardRef((e,a)=>t.jsx(n,{...e,className:"icon",ref:a,children:e.children}));s.__docgenInfo={description:"",methods:[],displayName:"IconButton",props:{variant:{required:!1,tsType:{name:"union",raw:`| 'primary'
+| 'secondary'
+| 'ghost'
+| 'tertiary'
+| 'close'`,elements:[{name:"literal",value:"'primary'"},{name:"literal",value:"'secondary'"},{name:"literal",value:"'ghost'"},{name:"literal",value:"'tertiary'"},{name:"literal",value:"'close'"}]},description:"Button styling. Available options: 'primary', 'secondary', 'ghost' and 'tertiary'."},active:{required:!1,tsType:{name:"boolean"},description:"Styling button as active or not"},size:{required:!1,tsType:{name:"union",raw:"'small' | 'large'",elements:[{name:"literal",value:"'small'"},{name:"literal",value:"'large'"}]},description:"Button size. Available options: 'small' and 'large'."},testId:{required:!1,tsType:{name:"string"},description:"Renders as a `data-testid` attribute on the `<button>` element, useful in testing scenarios."}},composes:["DetailedHTMLProps"]};export{s as I};
