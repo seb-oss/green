@@ -1,1 +1,0 @@
-import{c as a}from"./iframe-CIFw3hwN.js";function s(t){return a.modules.find(e=>e.declarations.find(r=>r.tagName===t))?.declarations[0]?.members?.filter(e=>e.category).map(e=>({[e.name]:{control:"none",table:{category:e.category}}})).reduce((e,r)=>({...e,...r}),{})}export{s as a};
