@@ -1,6 +1,0 @@
-import{j as e}from"./jsx-runtime-u17CrQMm.js";import{B as p}from"./button-CFGwh_9x.js";import"./iconButton-KmhiRU9o.js";import"./buttonGroup-BF_H6eKQ.js";import"./checkbox-0D4IThVK.js";import"./text-lsZ75dff.js";import{e as s}from"./iframe-D-q7wj1i.js";import{o as i}from"./create-component-CVDMTe9T.js";import{G as r}from"./popover.component-Bra4yJOy.js";import{a as n}from"./transitional-styles-Ck00O2ls.js";import{a}from"./declarative-layout-mixins-CPMzlgZW.js";r.define();n();const t=i({tagName:a("gds-popover"),elementClass:r,react:s}),m={title:"Components/Popover",component:t},o=()=>e.jsxs(t,{children:[e.jsx(p,{slot:"trigger",children:"Open popover"}),e.jsx("div",{style:{padding:"1rem"},children:"Content in popover"})]});o.__docgenInfo={description:"",methods:[],displayName:"Default"};o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`() => <Popover>
-    <Button slot="trigger">Open popover</Button>
-    <div style={{
-    padding: '1rem'
-  }}>Content in popover</div>
-  </Popover>`,...o.parameters?.docs?.source}}};const d=["Default"],O=Object.freeze(Object.defineProperty({__proto__:null,Default:o,__namedExportsOrder:d,default:m},Symbol.toStringTag,{value:"Module"}));export{o as D,O as P};
