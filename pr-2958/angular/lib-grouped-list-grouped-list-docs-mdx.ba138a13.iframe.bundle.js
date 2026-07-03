@@ -1,0 +1,79 @@
+/*! For license information please see lib-grouped-list-grouped-list-docs-mdx.ba138a13.iframe.bundle.js.LICENSE.txt */
+(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[861,3586,4788],{8833(e,t,s){"use strict";s.d(t,{o:()=>g});var r=s(745),o=s(4367),n=s(3539),l=s(5073),i=s(9399),d=s(4508),a=s(7526),c=s(4987),p=s(9443).AH`
+  :host {
+    display: block;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 0;
+    border-color: var(--gds-sys-color-border-neutral-02);
+  }
+`;let g=class extends((0,c.Q8)((0,c.vi)((0,c.TM)((0,c.Md)((0,c.lt)((0,c.qC)(n.j))))))){constructor(){super(...arguments),this.level="2"}render(){return a.qy`<slot></slot>`}};g.styles=[l.LU,p],(0,r.Cc)([(0,i.F)()],g.prototype,"display",2),(0,r.Cc)([(0,o.MZ)()],g.prototype,"level",2),(0,r.Cc)([(0,i.F)((0,d.T$)("content"))],g.prototype,"color",2),(0,r.Cc)([(0,i.F)((0,d.T$)("background"))],g.prototype,"background",2),(0,r.Cc)([(0,i.F)({styleTemplate:function(e,t){const s=this,[r,o=s["border-style"]||"solid",n=s["border-color"]||"subtle-01"]=t;return`border: var(--gds-sys-space-${r}) ${o} ${(0,d.ol)(n,"border",s.level)};`}})],g.prototype,"border",2),(0,r.Cc)([(0,i.F)((0,d.T$)("border"))],g.prototype,"border-color",2),(0,r.Cc)([(0,i.F)(d.MF)],g.prototype,"border-width",2),(0,r.Cc)([(0,i.F)()],g.prototype,"border-style",2),(0,r.Cc)([(0,i.F)(d.SE)],g.prototype,"border-radius",2),(0,r.Cc)([(0,i.F)({valueTemplate:e=>`var(--gds-sys-shadow-${e}-01), var(--gds-sys-shadow-${e}-02)`})],g.prototype,"box-shadow",2),(0,r.Cc)([(0,i.F)()],g.prototype,"opacity",2),(0,r.Cc)([(0,i.F)()],g.prototype,"overflow",2),(0,r.Cc)([(0,i.F)()],g.prototype,"box-sizing",2),(0,r.Cc)([(0,i.F)()],g.prototype,"z-index",2),(0,r.Cc)([(0,i.F)({styleTemplate:(e,t)=>`font: var(--gds-sys-text-${t[0]});`})],g.prototype,"font",2),(0,r.Cc)([(0,i.F)({valueTemplate:e=>`var(--gds-sys-text-weight-${e})`})],g.prototype,"font-weight",2),(0,r.Cc)([(0,i.F)()],g.prototype,"text-align",2),(0,r.Cc)([(0,i.F)()],g.prototype,"text-wrap",2),(0,r.Cc)([(0,i.F)()],g.prototype,"overflow-wrap",2),(0,r.Cc)([(0,i.F)()],g.prototype,"white-space",2),(0,r.Cc)([(0,i.F)({...d.MF,styleTemplate:(e,t)=>{const s=t[0];return`gap: ${s} ${t[1]||s};`},cacheOverrideKey:"flex"})],g.prototype,"gap",2),(0,r.Cc)([(0,i.F)()],g.prototype,"align-items",2),(0,r.Cc)([(0,i.F)()],g.prototype,"align-content",2),(0,r.Cc)([(0,i.F)()],g.prototype,"justify-content",2),(0,r.Cc)([(0,i.F)()],g.prototype,"justify-items",2),(0,r.Cc)([(0,i.F)()],g.prototype,"flex-direction",2),(0,r.Cc)([(0,i.F)()],g.prototype,"flex-wrap",2),(0,r.Cc)([(0,i.F)()],g.prototype,"place-items",2),(0,r.Cc)([(0,i.F)()],g.prototype,"place-content",2),(0,r.Cc)([(0,i.F)()],g.prototype,"aspect-ratio",2),(0,r.Cc)([(0,i.F)()],g.prototype,"cursor",2),(0,r.Cc)([(0,i.F)()],g.prototype,"pointer-events",2),g=(0,r.Cc)([(0,a.Y$)("gds-div")],g)},6312(e,t,s){"use strict";s.d(t,{o:()=>d});var r=s(745),o=s(5073),n=s(7526),l=s(8833),i=s(9443).AH`
+  :host {
+    display: flex;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 0;
+    border-color: var(--gds-sys-color-border-neutral-02);
+  }
+`;let d=class extends l.o{render(){return n.qy`<slot></slot>`}};d.styles=[o.LU,i],d=(0,r.Cc)([(0,n.Y$)("gds-flex")],d)},8585(e,t,s){"use strict";s.d(t,{d:()=>g});var r=s(745),o=s(4367),n=s(505),l=s(3539),i=s(5073),d=s(4457),a=s(7526),c=s(9443).AH`
+  .gds-list-heading {
+    padding: var(--gds-sys-space-xs) var(--gds-sys-space-m);
+    background: var(--gds-sys-color-l3-neutral-02);
+    border-radius: var(--gds-sys-radius-s);
+  }
+
+  ::slotted([gds-element='gds-list-item']) {
+    padding: var(--gds-sys-space-xs) var(--gds-sys-space-m);
+    border-bottom-color: var(--gds-sys-color-border-neutral-03);
+    border-bottom-width: var(--gds-sys-space-5xs);
+    border-bottom-style: solid;
+    display: flex;
+    justify-content: space-between;
+    gap: var(--gds-sys-space-3xs);
+  }
+`;s(2737).j.define();var p=s(5248);p.s.define();let g=class extends l.j{constructor(){super(...arguments),this.label=""}connectedCallback(){super.connectedCallback(),d.n.instance.apply(this,"gds-grouped-list")}render(){return a.qy`${(0,n.z)(this.label,()=>a.qy`<div class="gds-list-heading" aria-hidden="true" id="label">
+            ${this.label}
+          </div>`)}
+      <div role="list" aria-labelledby="label">
+        <slot></slot>
+      </div>`}};g.styles=[i.LU,c],(0,r.Cc)([(0,o.MZ)()],g.prototype,"label",2),g=(0,r.Cc)([(0,a.Y$)("gds-grouped-list",{dependsOn:[p.s]})],g)},5248(e,t,s){"use strict";s.d(t,{s:()=>d});var r=s(745),o=s(3539),n=s(7526),l=s(5073),i=s(4987);let d=class extends((0,i.lt)(o.j)){connectedCallback(){super.connectedCallback(),this.setAttribute("role","listitem")}render(){return n.qy`<slot></slot>`}};d.styles=l.LU,d=(0,r.Cc)([(0,n.Y$)("gds-list-item")],d)},2737(e,t,s){"use strict";s.d(t,{j:()=>c});var r,o=s(745),n=s(4367),l=s(7526),i=s(5073),d=s(6312),a=s(9443).AH`
+  :host {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Use padding instead of gap on the list items to make spacing easier to control when dividers are present */
+  :host ::slotted(*:not(:last-child)) {
+    padding-bottom: var(--gds-sys-space-s);
+  }
+
+  :host([dividers]) ::slotted(*:not(:first-child)) {
+    padding-top: var(--gds-sys-space-s);
+  }
+
+  /* Navigational items handle their own spacing */
+  :host ::slotted([href]:not([selectable])) {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+  }
+
+  :host([dividers]) ::slotted(*:not(:last-child)) {
+    border-bottom: 1px solid var(--gds-sys-color-border-neutral-03);
+    border-radius: 0;
+  }
+
+  @media (pointer: fine) {
+    :host([dividers])
+      ::slotted([href]:not([selectable]):not(:last-child):hover) {
+      border-bottom-color: transparent;
+    }
+
+    :host([dividers]) ::slotted([hide-prev-border]:not(:last-child)) {
+      border-bottom-color: transparent;
+    }
+  }
+`;let c=class extends d.o{constructor(){super(...arguments),this.dividers=!1,(0,o.VK)(this,r,e=>{if(!this.dividers)return;const t=e.target.closest?.("[href]:not([selectable])");t?.parentElement===this&&t.previousElementSibling?.toggleAttribute("hide-prev-border","pointerover"===e.type)})}connectedCallback(){super.connectedCallback(),this.setAttribute("role","list"),this.addEventListener("pointerover",(0,o.S7)(this,r)),this.addEventListener("pointerout",(0,o.S7)(this,r))}disconnectedCallback(){super.disconnectedCallback(),this.removeEventListener("pointerover",(0,o.S7)(this,r)),this.removeEventListener("pointerout",(0,o.S7)(this,r))}render(){return l.qy`<slot></slot>`}};r=new WeakMap,c.styles=[i.LU,a],(0,o.Cc)([(0,n.MZ)({type:Boolean,reflect:!0})],c.prototype,"dividers",2),c=(0,o.Cc)([(0,l.Y$)("gds-list")],c)},4457(e,t,s){"use strict";s.d(t,{n:()=>c});var r,o,n,l=s(745),i=s(9443),d=s(1569),a=s(7526);r=new WeakMap,o=new WeakMap,n=new WeakMap;let c=class e{constructor(){(0,l.VK)(this,r,new Map),(0,l.VK)(this,o,new Map),(0,l.VK)(this,n,!(0,d.k)())}static get instance(){return globalThis.__gdsTransitionalStyles?.[a.M]||(globalThis.__gdsTransitionalStyles={...globalThis.__gdsTransitionalStyles,[a.M]:new e}),globalThis.__gdsTransitionalStyles[a.M]}apply(e,t){if(!e.shadowRoot)return;const s=(0,l.S7)(this,r).get(t);s&&((0,l.S7)(this,o).set(t,e),this.applyToElement(t,s))}applyToElement(e,t){const s=(0,l.S7)(this,o).get(e);if(!s||!s.shadowRoot)return;const r=()=>{s._dynamicStylesController.clearInitial(),s._dynamicStylesController.inject("t-styles",(0,i.iz)(t)),s._isUsingTransitionalStyles=!0},n=()=>{s._isUsingTransitionalStyles=!1,s._dynamicStylesController.clear("t-styles"),s._dynamicStylesController.restoreInitial()},d="[gds-element=gds-theme]";let a=s.getRootNode(),c=s.closest(d);for(;null===c&&a!==document;)c=a.host?.closest(d),a=a.host?.getRootNode();if(c){const e=c,t=()=>{"2023"===e.designVersion?n():r()};if(e.addEventListener("gds-design-version-changed",t),s.addEventListener("gds-element-disconnected",()=>e.removeEventListener("gds-design-version-changed",t)),"2023"===e.designVersion)return void n()}r()}register(e,t){let s=t;(0,l.S7)(this,n)&&(s=`@layer reset {\n        *:not(style, [gds-element]) {\n          all: revert;\n        }\n      }\n      ${t}`),(0,l.S7)(this,r).set(e,s),this.applyToElement(e,s)}}},3396(e,t,s){"use strict";s.d(t,{R:()=>l,x:()=>i});var r=s(6506);const o={},n=r.createContext(o);function l(e){const t=r.useContext(n);return r.useMemo(function(){return"function"==typeof e?e(t):{...t,...e}},[t,e])}function i(e){let t;return t=e.disableParentContext?"function"==typeof e.components?e.components(o):e.components||o:l(e.components),r.createElement(n.Provider,{value:t},e.children)}},7495(e,t,s){"use strict";s.d(t,{L:()=>d});var r=s(8674),o=s(6990),n=s(5580),l=s(368),i=s(3288);let d=class{constructor(){this.viewRef=null,this.document=(0,o.WQX)(o.qQL),this.renderer=(0,o.WQX)(l.sFG),this.vcr=(0,o.WQX)(l.c1b),this.cdr=(0,o.WQX)(n.ChangeDetectorRef),this.template=(0,o.WQX)(l.C4Q),this.scopeResolver=(0,o.WQX)(i.G)}ngOnInit(){this.vcr.clear();const e=this.renderer.createElement;this.renderer.createElement=(e,t)=>this.document.createElement(this.scopeResolver.getScopedTagName(e)),this.cdr.markForCheck(),this.viewRef=this.vcr.createEmbeddedView(this.template),this.renderer.createElement=e}};d=(0,r.Cg)([(0,l.WLR)({selector:"[nggCoreElement]",standalone:!1})],d)},2920(e,t,s){"use strict";s.d(t,{$:()=>i});var r=s(8674),o=s(3576),n=s(368),l=s(7495);let i=class{};i=(0,r.Cg)([(0,n.UQu)({declarations:[l.L],imports:[o.MD],exports:[l.L]})],i)},3288(e,t,s){"use strict";s.d(t,{G:()=>n});var r=s(6990),o=s(7526);const n=new r.nKC("SCOPE_RESOLVER (for Green Core)",{providedIn:"root",factory:()=>({getScopedTagName:o.Eq})})},505(e,t,s){"use strict";function r(e,t,s){return e?t(e):s?.(e)}s.d(t,{z:()=>r})},705(e,t,s){"use strict";s.r(t),s.d(t,{default:()=>d}),s(6506);var r=s(9250),o=s(3396),n=s(4144),l=s(7371);function i(e){const t={a:"a",code:"code",h1:"h1",h2:"h2",h3:"h3",p:"p",pre:"pre",...(0,o.R)(),...e.components};return(0,r.jsxs)(r.Fragment,{children:[(0,r.jsx)(n.W8,{of:l}),"\n",(0,r.jsx)(t.h1,{id:"grouped-list",children:"Grouped list"}),"\n",(0,r.jsxs)(t.p,{children:[(0,r.jsx)(t.a,{href:"https://github.com/seb-oss/green/tree/main/libs/core/src/components/grouped-list",rel:"nofollow",children:"Source code"}),"\n | \n",(0,r.jsx)(t.a,{href:"https://designlibrary.sebgroup.com/components/component-list",rel:"nofollow",children:"Usage guidelines"})]}),"\n",(0,r.jsx)(t.p,{children:"The Grouped List component is used to list many datapoints with labels in a structured way. They may be grouped under heading and they may have a link or button added to act on the data being displayed."}),"\n",(0,r.jsx)(t.h2,{id:"use-web-component-in-angular",children:"Use Web component in Angular"}),"\n",(0,r.jsxs)(t.p,{children:["This is a Web component that comes from the ",(0,r.jsx)(t.code,{children:"Green Core"})," library. Angular has support for using web components directly in the template. To use this webcomponent in Angular, you need to do the following:"]}),"\n",(0,r.jsxs)(t.p,{children:["Add the ",(0,r.jsx)(t.code,{children:"CUSTOM_ELEMENTS_SCHEMA"})," in the module that uses this component."]}),"\n",(0,r.jsx)(t.pre,{children:(0,r.jsx)(t.code,{className:"language-ts",children:"import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'\nimport { NggCoreWrapperModule } from '@sebgroup/green-angular/common'\n\n@NgModule({\n    // Add the NggCoreWrapperModule to the `imports` array\n    imports: [NggCoreWrapperModule],\n    // Add the CUSTOM_ELEMENTS_SCHEMA to the `schemas` array\n    schemas: [CUSTOM_ELEMENTS_SCHEMA],\n})\n"})}),"\n",(0,r.jsx)(t.p,{children:"Import dependencies in the Angular component that uses it."}),"\n",(0,r.jsx)(t.pre,{children:(0,r.jsx)(t.code,{className:"language-ts",children:"import '@sebgroup/green-core/components/grouped-list/index.js'\n\n// if you need to interact with the component through the DOM, you can also import the class type like this:\n// import type { GdsGroupedList } from '@sebgroup/green-core/components/grouped-list/index.js'\n\n// Transitional styles will make the component get 2016 design\nimport * as GroupedListTransStyles from '@sebgroup/green-core/components/grouped-list/grouped-list.trans.styles.js'\n// Call this fuction to register the transitional styles\nGroupedListTransStyles.register()\n// This will load 2016 styles for all instances of Grouped List in the current document.\n"})}),"\n",(0,r.jsxs)(t.p,{children:["Use the webcomponent in your template with the ",(0,r.jsx)(t.code,{children:"*nggCoreElement"})," directive."]}),"\n",(0,r.jsx)(t.pre,{children:(0,r.jsx)(t.code,{className:"language-html",children:'<gds-grouped-list *nggCoreElement label="Grouped list label">\n  <gds-list-item *nggCoreElement>Item 1</gds-list-item>\n  <gds-list-item *nggCoreElement>Item 2</gds-list-item>\n  <gds-list-item *nggCoreElement>Item 3</gds-list-item>\n</gds-grouped-list>\n'})}),"\n",(0,r.jsx)(t.h2,{id:"examples",children:"Examples"}),"\n",(0,r.jsx)(t.h3,{id:"default",children:"Default"}),"\n",(0,r.jsx)(n.Hl,{children:(0,r.jsx)(n.gG,{id:"components-grouped-list--default"})})]})}function d(e={}){const{wrapper:t}={...(0,o.R)(),...e.components};return t?(0,r.jsx)(t,{...e,children:(0,r.jsx)(i,{...e})}):i(e)}},3464(e){function t(e){var t=new Error("Cannot find module '"+e+"'");throw t.code="MODULE_NOT_FOUND",t}t.keys=()=>[],t.resolve=t,t.id=3464,e.exports=t},7371(e,t,s){"use strict";s.r(t),s.d(t,{Default:()=>d,__namedExportsOrder:()=>a,default:()=>i});var r=s(368),o=s(2331),n=s(2920);s(745),s(8585).d.define();var l=s(4457);l.n.instance.register("gds-grouped-list","@layer base, reset, transitional-styles;\n@layer transitional-styles {\n  @layer _base, _overrides;\n  :host {\n    display: block;\n    list-style: none;\n  }\n  @layer _base {\n    .gds-list-heading {\n      background-color: var(--gds-sys-color-base-200, #e9e9e9);\n      font-size: 0.875rem;\n      font-weight: 500;\n      padding: 0.5rem 1rem;\n    }\n    ::slotted([gds-element=gds-list-item]) {\n      all: revert;\n      border-bottom: 1px solid var(--gds-sys-color-base-200, #e9e9e9);\n      display: flex;\n      gap: 0.25rem;\n      justify-content: space-between;\n      padding: 1rem;\n    }\n  }\n}".toString());const i={title:"Components/Grouped List",decorators:[(0,o.Iz)({imports:[n.$],schemas:[r.CkJ]})],parameters:{}},d={render:e=>({template:`\n    <gds-grouped-list *nggCoreElement label="${e.label}">\n        <gds-list-item *nggCoreElement>Item 1</gds-list-item>\n        <gds-list-item *nggCoreElement>Item 2</gds-list-item>\n        <gds-list-item *nggCoreElement>Item 3</gds-list-item>\n    </gds-grouped-list>\n    `,props:e}),args:{label:"Grouped list label"}},a=["Default"];d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:"{\n  render: args => ({\n    template: `\n    <gds-grouped-list *nggCoreElement label=\"${args.label}\">\n        <gds-list-item *nggCoreElement>Item 1</gds-list-item>\n        <gds-list-item *nggCoreElement>Item 2</gds-list-item>\n        <gds-list-item *nggCoreElement>Item 3</gds-list-item>\n    </gds-grouped-list>\n    `,\n    props: args\n  }),\n  args: {\n    label: 'Grouped list label'\n  }\n}",...d.parameters?.docs?.source}}}},7628(e){function t(e){var t=new Error("Cannot find module '"+e+"'");throw t.code="MODULE_NOT_FOUND",t}t.keys=()=>[],t.resolve=t,t.id=7628,e.exports=t},2528(e){function t(e){var t=new Error("Cannot find module '"+e+"'");throw t.code="MODULE_NOT_FOUND",t}t.keys=()=>[],t.resolve=t,t.id=2528,e.exports=t}}]);
+//# sourceMappingURL=lib-grouped-list-grouped-list-docs-mdx.ba138a13.iframe.bundle.js.map
