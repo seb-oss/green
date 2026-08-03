@@ -1,0 +1,119 @@
+import{b as l}from"./iframe-C8ehJ7Np.js";import"./slider-BXjqNU1V.js";import"./flex-BVKPDbcs.js";import{a as d}from"./argTableProps-DvQqtqYJ.js";import"./preload-helper-PPVm8Dsz.js";import"./slider.component-Bwk2sdxr.js";import"./localized-decorator-xtXDorVZ.js";import"./form-control-header.component-BvMVNPHY.js";import"./badge.component-Gc7S5uci.js";import"./flex.component-ByrVVeee.js";import"./triangle-exclamation.component-uRucAgdH.js";import"./icon.component-DNwXK-Jm.js";import"./card.component-DeDZ7yIt.js";import"./circle-info.component-BasNvfsv.js";import"./form-control-host.style-BONZrnxX.js";const $={title:"Components/Slider",component:"gds-slider",parameters:{layout:"centered"},tags:["autodocs"],argTypes:{...d("gds-slider"),size:{options:["large","small"],control:{type:"select"}},ticksPosition:{options:["bottom","top"],control:{type:"select"}}}},m="Extended supporting text. Use this area for additional context and guidance.",p=e=>l`
+  <gds-slider
+    .label=${e.label}
+    .supportingText=${e.supportingText}
+    style="min-width: 400px; width: 400px;"
+    .size=${e.size}
+    .min=${e.min}
+    .max=${e.max}
+    .step=${e.step}
+    .value=${e.value}
+    .endValue=${e.endValue}
+    .minLabel=${e.minLabel}
+    .maxLabel=${e.maxLabel}
+    .ticksPosition=${e.ticksPosition}
+    ?range=${e.range}
+    ?showTicks=${e.showTicks}
+    ?showValueLabel=${e.showValueLabel}
+  >
+    <span slot="extended-supporting-text">${m}</span>
+  </gds-slider>
+`,a={parameters:{docs:{source:{format:!0,type:"dynamic"}},controls:{expanded:!0}},render:p,args:{label:"Label",supportingText:"Support text",min:0,max:100,step:1,value:32,minLabel:"Min",maxLabel:"Max"}},t={...a,name:"Single Value"},n={...a,name:"Range (Dual Thumb)",args:{...a.args,range:!0,value:24,endValue:68,minLabel:"Min",maxLabel:"Max"}},s={...a,name:"Stepper",args:{...a.args,label:"Amount stepper",supportingText:"Moves in increments of 5",min:0,max:100,step:5,value:50}},r={...a,name:"Ticks + Value Label",args:{...a.args,label:"Amount with ticks",supportingText:"Ticks enabled and shown below the line",min:0,max:100,step:5,value:75,showTicks:!0,ticksPosition:"bottom",showValueLabel:!0}},o={...a,name:"Validation",render:()=>l`
+      <form method="dialog">
+        <gds-flex flex-direction="column" align-items="flex-start" gap="m">
+          <gds-slider
+            style="min-width: 400px; width: 400px;"
+            label="Transfer amount"
+            supporting-text="Choose a value between 20 and 80"
+            min="0"
+            max="100"
+            value="10"
+            .validator=${{validate:i=>{if(i.value<20||i.value>80)return[{...i.validity,valid:!1,customError:!0},"Value must be between 20 and 80."]}}}
+          >
+            <span slot="extended-supporting-text"
+              >${m}</span
+            >
+          </gds-slider>
+          <gds-button type="submit">Submit</gds-button>
+        </gds-flex>
+      </form>
+    `};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`{
+  ...DefaultParams,
+  name: 'Single Value'
+}`,...t.parameters?.docs?.source},description:{story:`A slider lets users pick values from a bounded numeric range.
+
+Use single-value mode for selecting one point, and range mode when users need
+both a minimum and maximum value.`,...t.parameters?.docs?.description}}};n.parameters={...n.parameters,docs:{...n.parameters?.docs,source:{originalSource:`{
+  ...DefaultParams,
+  name: 'Range (Dual Thumb)',
+  args: {
+    ...DefaultParams.args,
+    range: true,
+    value: 24,
+    endValue: 68,
+    minLabel: 'Min',
+    maxLabel: 'Max'
+  }
+}`,...n.parameters?.docs?.source},description:{story:"Set `range` to render a dual-thumb slider.",...n.parameters?.docs?.description}}};s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
+  ...DefaultParams,
+  name: 'Stepper',
+  args: {
+    ...DefaultParams.args,
+    label: 'Amount stepper',
+    supportingText: 'Moves in increments of 5',
+    min: 0,
+    max: 100,
+    step: 5,
+    value: 50
+  }
+}`,...s.parameters?.docs?.source},description:{story:"Use `step` to constrain the slider to fixed increments.",...s.parameters?.docs?.description}}};r.parameters={...r.parameters,docs:{...r.parameters?.docs,source:{originalSource:`{
+  ...DefaultParams,
+  name: 'Ticks + Value Label',
+  args: {
+    ...DefaultParams.args,
+    label: 'Amount with ticks',
+    supportingText: 'Ticks enabled and shown below the line',
+    min: 0,
+    max: 100,
+    step: 5,
+    value: 75,
+    showTicks: true,
+    ticksPosition: 'bottom',
+    showValueLabel: true
+  }
+}`,...r.parameters?.docs?.source},description:{story:`Optional separator ticks can be shown below or above the slider.
+Value labels are rendered above the thumbs.`,...r.parameters?.docs?.description}}};o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`{
+  ...DefaultParams,
+  name: 'Validation',
+  render: () => {
+    const validator: GdsValidator = {
+      validate: (el: GdsSlider) => {
+        if (el.value < 20 || el.value > 80) return [{
+          ...el.validity,
+          valid: false,
+          customError: true
+        }, 'Value must be between 20 and 80.'];
+      }
+    };
+    return html\`
+      <form method="dialog">
+        <gds-flex flex-direction="column" align-items="flex-start" gap="m">
+          <gds-slider
+            style="min-width: 400px; width: 400px;"
+            label="Transfer amount"
+            supporting-text="Choose a value between 20 and 80"
+            min="0"
+            max="100"
+            value="10"
+            .validator=\${validator}
+          >
+            <span slot="extended-supporting-text"
+              >\${EXTENDED_SUPPORTING_TEXT}</span
+            >
+          </gds-slider>
+          <gds-button type="submit">Submit</gds-button>
+        </gds-flex>
+      </form>
+    \`;
+  }
+}`,...o.parameters?.docs?.source},description:{story:"Sliders support Green Core form validation via validators.",...o.parameters?.docs?.description}}};const y=["SingleValue","Range","Stepper","TicksAndValueLabel","Validation"];export{n as Range,t as SingleValue,s as Stepper,r as TicksAndValueLabel,o as Validation,y as __namedExportsOrder,$ as default};
