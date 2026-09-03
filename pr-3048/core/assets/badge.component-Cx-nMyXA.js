@@ -1,0 +1,120 @@
+import{i as b,R as m,z as x,J as z,B as S,e as w,h as l,y as O,n as c,C as y,a as k}from"./iframe-CrCFIEgk.js";import{G as E}from"./flex.component-DPNA_hsn.js";const C=b`
+  @layer tokens, core, variants, sizes, states, notification;
+
+  @layer core {
+    :host {
+      display: inline-block;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: var(--gds-sys-space-3xs);
+      padding: var(--_padding);
+      min-height: var(--_block-size);
+      border-radius: var(--_border-radius);
+      width: 100%;
+      min-width: var(--_inline-size);
+      font: var(--_font);
+      background-color: var(--_bg);
+      color: var(--_color);
+      box-sizing: border-box;
+
+      --_padding: var(--gds-sys-space-4xs) var(--gds-sys-space-xs);
+      --_block-size: var(--gds-sys-space-xs);
+      --_border-radius: var(--gds-sys-space-2xs);
+      --_inline-size: var(--gds-sys-space-l);
+      --_font: var(--gds-sys-text-detail-s-book);
+    }
+  }
+
+  @layer variants {
+    .badge.information {
+      --_bg: var(--gds-sys-color-l3-information-03);
+      --_color: var(--gds-sys-color-content-neutral-01);
+    }
+
+    .badge.notice {
+      --_bg: var(--gds-sys-color-l3-notice-03);
+      --_color: var(--gds-sys-color-content-notice-01);
+    }
+
+    .badge.positive {
+      --_bg: var(--gds-sys-color-l3-positive-03);
+      --_color: var(--gds-sys-color-content-positive-03);
+    }
+
+    .badge.warning {
+      --_bg: var(--gds-sys-color-l3-warning-03);
+      --_color: var(--gds-sys-color-content-warning-01);
+    }
+
+    .badge.negative {
+      --_bg: var(--gds-sys-color-l3-negative-03);
+      --_color: var(--gds-sys-color-content-negative-01);
+    }
+
+    .badge.disabled {
+      --_bg: var(--gds-sys-color-l3-disabled-03);
+      --_color: var(--gds-sys-color-content-disabled-01);
+    }
+  }
+
+  @layer sizes {
+    .badge.small {
+      --_padding: var(--gds-sys-space-4xs) var(--gds-sys-space-2xs);
+      --_block-size: var(--gds-sys-space-m);
+      --_border-radius: var(--gds-sys-space-3xs);
+      --_font: var(--gds-sys-text-detail-xs-book);
+    }
+  }
+
+  @layer notification {
+    .badge.notification {
+      --_padding: var(--gds-sys-space-3xs);
+      --_block-size: var(--gds-sys-space-xs);
+      --_border-radius: var(--gds-sys-space-max);
+      --_inline-size: 0;
+      justify-content: center;
+      gap: 0;
+      --_bg: var(--gds-sys-color-l3-negative-01);
+      --_font: var(--gds-sys-text-detail-xs-book);
+      --_color: var(--gds-sys-color-content-neutral-05);
+    }
+
+    .badge.notification.with-content {
+      --_padding: var(--gds-sys-space-4xs) var(--gds-sys-space-2xs);
+      --_block-size: var(--gds-sys-space-m);
+      --_inline-size: var(--gds-sys-space-l);
+    }
+  }
+
+  @layer states {
+    .badge.rounded {
+      --_border-radius: var(--gds-sys-space-max);
+      justify-content: center;
+    }
+  }
+
+  slot[name='lead']::slotted(*) {
+    line-height: var(--gds-sys-space-m);
+  }
+
+  :host([notification]) slot[name='trail']::slotted(*) {
+    line-height: var(--gds-sys-space-s);
+  }
+
+  :host([notification]) slot[name='lead']::slotted(*) {
+    line-height: var(--gds-sys-space-s);
+  }
+`;var N=Object.defineProperty,P=Object.getOwnPropertyDescriptor,h=s=>{throw TypeError(s)},n=(s,e,a,i)=>{for(var t=i>1?void 0:i?P(e,a):e,g=s.length-1,p;g>=0;g--)(p=s[g])&&(t=(i?p(e,a,t):p(t))||t);return i&&t&&N(e,a,t),t},T=(s,e,a)=>e.has(s)||h("Cannot "+a),G=(s,e,a)=>e.has(s)?h("Cannot add the same private member more than once"):e instanceof WeakSet?e.add(s):e.set(s,a),d=(s,e,a)=>(T(s,e,"access private method"),a),r,v,_,f,u;let o=class extends m(x(z(S))){constructor(){super(...arguments),G(this,r),this.variant="information",this.size="default",this.notification=!1,this.rounded=!1,this.mainSlotOccupied=!1,this.leadSlotOccupied=!1}render(){const s=w({badge:!0,[this.variant]:!0,[this.size]:this.size==="small",notification:this.notification,"with-content":this.notification&&this.mainSlotOccupied,rounded:this.rounded});return l`
+      <div class="${s}">
+        ${[d(this,r,_).call(this),d(this,r,f).call(this),d(this,r,u).call(this)]}
+      </div>
+    `}};r=new WeakSet;v=function(s,e){const i=s.target.assignedNodes({flatten:!0});this[e]=i.length>0&&i.some(t=>t.nodeType===Node.ELEMENT_NODE||t.nodeType===Node.TEXT_NODE&&t.textContent?.trim()!=="")};_=function(){if(this.size!=="small"||!this.notification)return l`<slot
+        name="lead"
+        @slotchange=${s=>d(this,r,v).call(this,s,"leadSlotOccupied")}
+      ></slot>`};f=function(){return l`<slot
+      @slotchange=${s=>d(this,r,v).call(this,s,"mainSlotOccupied")}
+    ></slot>`};u=function(){return l`<slot name="trail"></slot>`};o.styles=[O,C];n([c()],o.prototype,"variant",2);n([c({type:String})],o.prototype,"size",2);n([c({attribute:"notification",type:Boolean,reflect:!0})],o.prototype,"notification",2);n([c({attribute:"rounded",type:Boolean,reflect:!0})],o.prototype,"rounded",2);n([y()],o.prototype,"mainSlotOccupied",2);n([y()],o.prototype,"leadSlotOccupied",2);o=n([k("gds-badge",{dependsOn:[E]})],o);export{o as G};

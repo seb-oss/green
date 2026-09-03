@@ -1,0 +1,57 @@
+import"./zoom-out-ChymVvXm.js";import"./arrow-down-j8qNKAgS.js";import"./arrow-left-WS7HMrkw.js";import"./arrow-right-DgP8DFeK.js";import"./triangle-exclamation-0yBbFA1-.js";import"./arrow-up-CB5o-9OJ.js";import"./sun-D6dX3qN4.js";import"./star-BdCLw2WP.js";import"./bubbles-DtTjczhF.js";import"./zoom-out.component-B194jZUk.js";import"./chain-link-CRiZQxw_.js";import"./chevron-bottom-DP_4H5QD.js";import"./chevron-right-DJKGO-m-.js";import"./chevron-top-CwWhZBbp.js";import"./circle-check-CmcNIi_J.js";import"./circle-info-BOGOSEx8.js";import"./circles-three-raE7kmOa.js";import"./people-profile-CdNuWTyu.js";import"./cloudy-sun-C-8VyCkK.js";import"./credit-card-C2BQmNG5.js";import"./cross-large-CQeWBKKB.js";import"./cross-small-q80_nUlM.js";import"./dot-grid-one-horizontal-VObU5cMr.js";import"./folder-D1e8NJAl.js";import"./magnifying-glass-C86y6FBA.js";import"./minus-small-27XTmtMg.js";import"./arrow-rotate-counter-clockwise.component-Bd9gzWsw.js";import"./push-CdIlMzWO.js";import"./rocket-Bc-MyLjq.js";import"./square-grid-circle-BPtcdtfV.js";import"./iframe-CrCFIEgk.js";import"./card-u4O9pDxa.js";import"./badge-CUf34mCi.js";import"./flex-CXpwof3l.js";import"./divider-BxtjAwGu.js";import"./text-CNB39tPf.js";import"./calender-add.component-Dxul6KJH.js";import"./icon.component-BMiBCiXF.js";import"./checkmark.component-BWPmK5qC.js";import"./chevron-right-small.component-Co5c-gHs.js";import"./arrow-down.component-BvcrNE4F.js";import"./arrow-left.component-BpSHECsL.js";import"./arrow-right.component-DRf6Tuse.js";import"./triangle-exclamation.component-BGLz127E.js";import"./arrow-up.component-BfgKXZIS.js";import"./sun.component-D66WQHjw.js";import"./star.component-B4KQUC-C.js";import"./bubbles.component-COjM-wCe.js";import"./chevron-left.component-DDNNy6D_.js";import"./chevron-bottom.component-Dh6rofC8.js";import"./chevron-right.component-C_xfnKts.js";import"./chevron-top.component-CaxmdqWr.js";import"./circle-check.component-CJDS_qi6.js";import"./circle-info.component-DFQC7GrD.js";import"./circles-three.component-EKjx-DHZ.js";import"./cloud-upload.component-gypRoWtc.js";import"./people-profile.component-B77NMA-u.js";import"./cloudy-sun.component-CMWPBeRx.js";import"./credit-card.component-iXiU8sua.js";import"./cross-large.component-5i1j5Qup.js";import"./cross-small.component-CXIfSSzK.js";import"./folder.component-D2I9GW0_.js";import"./magnifying-glass.component-Dj8wv0T8.js";import"./minus-small.component-DbA1MygS.js";import"./push.component-SGH1MvKj.js";import"./rocket.component-Cb_9rwYt.js";import"./square-grid-circle.component-CT-YhKui.js";import"./preload-helper-PPVm8Dsz.js";import"./card.component-Bbj7tMF_.js";import"./badge.component-Cx-nMyXA.js";import"./flex.component-DPNA_hsn.js";import"./text.component-DqkCezZ1.js";import"./default-typography.styles-B22o7PuP.js";const Br={title:"Components/Icon",component:"gds-icon-bank",tags:["autodocs"],parameters:{docs:{description:{component:"An icon helps communicate meaning quickly, enhances visual hierarchy, and supports navigation or interaction."}}}},r={parameters:{docs:{source:{format:!0,type:"dynamic"}},controls:{expanded:!0}}},a={...r,args:{solid:!1,size:"xl"}},o={...r,args:{solid:!0,size:"xl"}},e={...r,args:{...r.parameters.args,size:"2xl"}},t={...r,args:{solid:!1,stroke:"2",size:"xl"}},s={...r,args:{solid:!1,color:"tertiary"}},i={...r,args:{label:"Bank"}};a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
+  ...DefaultParams,
+  args: {
+    solid: false,
+    size: 'xl'
+  }
+}`,...a.parameters?.docs?.source}}};o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`{
+  ...DefaultParams,
+  args: {
+    solid: true,
+    size: 'xl'
+  }
+}`,...o.parameters?.docs?.source},description:{story:"Toggle between outline and solid icon styles using the `solid` attribute.\nToggle between outline and solid icon styles using the `solid` attribute.",...o.parameters?.docs?.description}}};e.parameters={...e.parameters,docs:{...e.parameters?.docs,source:{originalSource:`{
+  ...DefaultParams,
+  args: {
+    ...DefaultParams.parameters!.args,
+    size: '2xl'
+  }
+}`,...e.parameters?.docs?.source},description:{story:`The default icon size is equal to 1lh (1 line height). <br>
+You can change the icon size by setting the \`size\` attribute. <br>
+The size property accepts all the size tokens and also custom value like px or lh.
+
+\`\`\`html
+<gds-icon-bank size="l"></gds-icon-bank>
+<gds-icon-bank size="2xl"></gds-icon-bank>
+<gds-icon-bank size="48px"></gds-icon-bank>
+<gds-icon-bank size="2lh"></gds-icon-bank>
+\`\`\``,...e.parameters?.docs?.description}}};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`{
+  ...DefaultParams,
+  args: {
+    solid: false,
+    stroke: '2',
+    size: 'xl'
+  }
+}`,...t.parameters?.docs?.source},description:{story:'You can change the icon stroke by setting the `stroke` attribute.\n\n```html\n<gds-icon-bank stroke="2"></gds-icon-bank>\n```',...t.parameters?.docs?.description}}};s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
+  ...DefaultParams,
+  args: {
+    solid: false,
+    color: 'tertiary'
+  }
+}`,...s.parameters?.docs?.source},description:{story:`Set icon colors using the \`color\` attribute. Supports design system tokens and transparency.
+
+\`\`\`html
+<!-- Basic color tokens -->
+<gds-icon-ai color="neutral-01"></gds-icon-ai>
+<gds-icon-ai color="negative-01"></gds-icon-ai>
+
+<!-- With transparency -->
+<gds-icon-ai color="neutral-01/0.2"></gds-icon-ai>
+<gds-icon-ai color="negative-01/0.5"></gds-icon-ai>
+
+\`\`\``,...s.parameters?.docs?.description}}};i.parameters={...i.parameters,docs:{...i.parameters?.docs,source:{originalSource:`{
+  ...DefaultParams,
+  args: {
+    label: 'Bank'
+  }
+}`,...i.parameters?.docs?.source},description:{story:"Icons have the role of `presentation`, when there is no label provided. This means that the icon will be ignored by screen readers.",...i.parameters?.docs?.description}}};const Tr=["Basic","Solid","Size","Stroke","Color","Label"];export{a as Basic,s as Color,i as Label,e as Size,o as Solid,t as Stroke,Tr as __namedExportsOrder,Br as default};
