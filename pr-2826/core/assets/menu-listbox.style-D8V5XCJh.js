@@ -1,0 +1,77 @@
+import{i as n}from"./iframe-wighnWuJ.js";const b=n`
+  @layer base, reset;
+
+  @layer base {
+    :host(:not(:last-child)) {
+      border-bottom: 1px solid var(--gds-sys-color-border-neutral-02);
+    }
+
+    :host .item {
+      display: flex;
+      align-items: center;
+      user-select: none;
+      padding-inline: var(--gds-sys-space-m);
+      padding-block: var(--gds-sys-space-s);
+      cursor: pointer;
+      font: var(--gds-sys-text-detail-m-regular);
+      gap: 1ch;
+      max-width: 100%;
+      box-sizing: border-box;
+      position: relative;
+
+      &::before {
+        content: ' ';
+        display: flex;
+        inset: var(--gds-sys-space-3xs);
+        position: absolute;
+        border: var(--gds-sys-space-4xs) solid currentColor;
+        border-radius: var(--gds-sys-space-xs);
+        opacity: 0;
+        visitility: hidden;
+        pointer-events: none;
+      }
+    }
+
+    :host([highlighted]) {
+      background-color: color-mix(
+        in srgb,
+        transparent,
+        var(--gds-sys-color-state-neutral-06)
+      );
+      color: var(--gds-sys-color-content-neutral-01);
+    }
+
+    :host(:hover:not([highlighted])) .item {
+      background-color: color-mix(
+        in srgb,
+        transparent,
+        var(--gds-sys-color-state-neutral-05)
+      );
+    }
+
+    :host(:focus-visible) {
+      outline: none;
+    }
+
+    :host(:focus-visible) div::before {
+      inset: var(--gds-sys-space-3xs);
+      opacity: 1;
+      visivility: visible;
+    }
+
+    :host([inert]) {
+      display: none;
+    }
+  }
+`,u=i=>{class e extends i{focus(t){this.setAttribute("tabindex","0"),super.focus(t)}connectedCallback(){super.connectedCallback(),this.addEventListener("blur",t=>{this.setAttribute("tabindex","-1"),this.dispatchEvent(new FocusEvent("gds-blur",{bubbles:!1,composed:!0,relatedTarget:t.relatedTarget}))}),this.addEventListener("focus",t=>{this.dispatchEvent(new FocusEvent("gds-focus",{bubbles:!1,composed:!0,relatedTarget:t.relatedTarget}))})}}return e};class g{constructor(e){(this.host=e).addController(this)}hostConnected(){this.host.addEventListener("keydown",this.#e)}hostDisconnected(){this.host.removeEventListener("keydown",this.#e)}#e=e=>{const o=e.target;if(!this.host.navigableItems.includes(o))return;let t=!1;if(e.key==="ArrowDown"){const s=this.host.navigableItems.indexOf(o)+1;this.host.navigableItems[s]?.focus(),t=!0}else if(e.key==="ArrowUp"){const s=this.host.navigableItems.indexOf(o)-1;this.host.navigableItems[s]?.focus(),t=!0}else if(e.key==="Home")this.host.navigableItems[0]?.focus(),t=!0;else if(e.key==="End")this.host.navigableItems[this.host.navigableItems.length-1]?.focus(),t=!0;else{const s=e.key.toLowerCase();if(s.length!==1)return;const r=s>="a"&&s<="z",a=s>="0"&&s<="9";(r||a)&&(this.host.navigableItems.find(l=>l.textContent?.trim().toLowerCase()?.startsWith(s))?.focus(),t=!0)}t&&(e.preventDefault(),e.stopPropagation())}}const v=n`
+  @layer base, reset, transitional-styles;
+
+  @layer base {
+    .menu-listbox {
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+  }
+`;export{u as F,g as L,v as m,b as s};
